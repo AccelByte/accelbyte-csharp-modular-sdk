@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
     ///
     /// Get a dsmc configuration.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminGetDSMCConfiguration : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -56,14 +56,14 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminGetDSMCConfiguration op = new AdminGetDSMCConfiguration(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetDSMCConfigurationBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminGetDSMCConfiguration.Response Execute(
                 string namespace_
             )
@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,12 +105,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,16 +137,16 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminGetDSMCConfiguration(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetDSMCConfiguration.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetDSMCConfiguration.Response()

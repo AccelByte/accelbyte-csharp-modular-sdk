@@ -191,7 +191,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformTokenGrantV3 op = new PlatformTokenGrantV3(this,
-                    platformId
+                    platformId                    
                 );
 
                 op.SetBaseFields<PlatformTokenGrantV3Builder>(this);
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -239,8 +239,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ClientId is not null) FormParams["client_id"] = builder.ClientId;
             if (builder.CreateHeadless != null) FormParams["createHeadless"] = Convert.ToString(builder.CreateHeadless)!;
@@ -250,9 +250,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.ServiceLabel != null) FormParams["serviceLabel"] = Convert.ToString(builder.ServiceLabel)!;
             if (builder.SkipSetCookie != null) FormParams["skipSetCookie"] = Convert.ToString(builder.SkipSetCookie)!;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -277,20 +277,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PlatformTokenGrantV3(
-            string platformId,
-            string? additionalData,
-            string? clientId,
-            bool? createHeadless,
-            string? deviceId,
-            string? macAddress,
-            string? platformToken,
-            double? serviceLabel,
-            bool? skipSetCookie
+            string platformId,            
+            string? additionalData,            
+            string? clientId,            
+            bool? createHeadless,            
+            string? deviceId,            
+            string? macAddress,            
+            string? platformToken,            
+            double? serviceLabel,            
+            bool? skipSetCookie            
         )
         {
             PathParams["platformId"] = platformId;
-
-
+            
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (createHeadless != null) FormParams["createHeadless"] = Convert.ToString(createHeadless)!;
@@ -300,9 +300,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (serviceLabel != null) FormParams["serviceLabel"] = Convert.ToString(serviceLabel)!;
             if (skipSetCookie != null) FormParams["skipSetCookie"] = Convert.ToString(skipSetCookie)!;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -314,7 +314,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PlatformTokenGrantV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PlatformTokenGrantV3.Response()

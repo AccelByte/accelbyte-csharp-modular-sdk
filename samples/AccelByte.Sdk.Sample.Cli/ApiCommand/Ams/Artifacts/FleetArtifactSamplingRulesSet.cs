@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "fleetartifactsamplingrulesset")]
-    public class FleetArtifactSamplingRulesSetCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","fleetartifactsamplingrulesset")]
+    public class FleetArtifactSamplingRulesSetCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "FleetArtifactSamplingRulesSet"; } }
+        public string OperationName{ get { return "FleetArtifactSamplingRulesSet"; } }
 
         [SdkCommandArgument("fleetID")]
         public string FleetID { get; set; } = String.Empty;
@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

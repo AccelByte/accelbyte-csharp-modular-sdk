@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc", "deletecontentbysharecode")]
-    public class DeleteContentByShareCodeCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ugc","deletecontentbysharecode")]
+    public class DeleteContentByShareCodeCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ugc"; } }
+        public string ServiceName{ get { return "Ugc"; } }
 
-        public string OperationName { get { return "DeleteContentByShareCode"; } }
+        public string OperationName{ get { return "DeleteContentByShareCode"; } }
 
         [SdkCommandArgument("channelId")]
         public string ChannelId { get; set; } = String.Empty;

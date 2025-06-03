@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session", "admindeleteglobalconfiguration")]
-    public class AdminDeleteGlobalConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("session","admindeleteglobalconfiguration")]
+    public class AdminDeleteGlobalConfigurationCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Session"; } }
+        public string ServiceName{ get { return "Session"; } }
 
-        public string OperationName { get { return "AdminDeleteGlobalConfiguration"; } }
+        public string OperationName{ get { return "AdminDeleteGlobalConfiguration"; } }
 
         public AdminDeleteGlobalConfigurationCommand(IAccelByteSdk sdk)
         {

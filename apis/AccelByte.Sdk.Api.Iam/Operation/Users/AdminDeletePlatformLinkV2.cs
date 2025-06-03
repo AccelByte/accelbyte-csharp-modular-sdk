@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Delete link of user's account with platform. 'justice' platform might have multiple accounts from different namespaces linked. platform_namespace need to be specified when the platform ID is 'justice'.
     /// Delete link of justice platform will enable password token grant and password update.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminDeletePlatformLinkV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -83,16 +83,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminDeletePlatformLinkV2 op = new AdminDeletePlatformLinkV2(this,
-                    namespace_,
-                    platformId,
-                    userId
+                    namespace_,                    
+                    platformId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminDeletePlatformLinkV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminDeletePlatformLinkV2.Response Execute(
                 string namespace_,
                 string platformId,
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,13 +146,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-
-
+            
+            
             if (builder.PlatformNamespace is not null) FormParams["platform_namespace"] = builder.PlatformNamespace;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -179,22 +179,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminDeletePlatformLinkV2(
-            string namespace_,
-            string platformId,
-            string userId,
-            string? platformNamespace
+            string namespace_,            
+            string platformId,            
+            string userId,            
+            string? platformNamespace            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-
-
+            
+            
             if (platformNamespace is not null) FormParams["platform_namespace"] = platformNamespace;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,10 +203,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { "application/x-www-form-urlencoded", "text/plain" };
+        public override List<string> Consumes => new() { "application/x-www-form-urlencoded","text/plain" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeletePlatformLinkV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeletePlatformLinkV2.Response()
@@ -217,31 +217,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error500!);

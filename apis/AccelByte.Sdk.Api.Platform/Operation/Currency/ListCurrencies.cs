@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ListCurrencies op = new ListCurrencies(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListCurrenciesBuilder>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,13 +114,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.CurrencyType is not null) QueryParams["currencyType"] = builder.CurrencyType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,18 +137,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public ListCurrencies(
-            string namespace_,
-            ListCurrenciesCurrencyType? currencyType
+            string namespace_,            
+            ListCurrenciesCurrencyType? currencyType            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (currencyType is not null) QueryParams["currencyType"] = currencyType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public ListCurrencies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListCurrencies.Response()

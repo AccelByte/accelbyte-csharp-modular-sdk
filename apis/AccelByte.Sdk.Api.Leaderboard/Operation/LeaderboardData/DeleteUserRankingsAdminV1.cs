@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 DeleteUserRankingsAdminV1 op = new DeleteUserRankingsAdminV1(this,
-                    namespace_,
-                    userId,
-                    leaderboardCode
+                    namespace_,                    
+                    userId,                    
+                    leaderboardCode                    
                 );
 
                 op.SetBaseFields<DeleteUserRankingsAdminV1Builder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,14 +120,14 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (leaderboardCode is not null) QueryParams["leaderboardCode"] = leaderboardCode;
+            
 
-
-
+            
             CollectionFormatMap["leaderboardCode"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,21 +150,21 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #endregion
 
         public DeleteUserRankingsAdminV1(
-            string namespace_,
-            string userId,
-            List<string> leaderboardCode
+            string namespace_,            
+            string userId,            
+            List<string> leaderboardCode            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (leaderboardCode is not null) QueryParams["leaderboardCode"] = leaderboardCode;
+            
 
-
-
+            
             CollectionFormatMap["leaderboardCode"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,7 +176,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeleteUserRankingsAdminV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteUserRankingsAdminV1.Response()
@@ -187,19 +187,19 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

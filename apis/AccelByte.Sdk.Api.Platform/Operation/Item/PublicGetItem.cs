@@ -102,8 +102,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetItem op = new PublicGetItem(this,
-                    itemId,
-                    namespace_
+                    itemId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetItemBuilder>(this);
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -196,17 +196,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.AutoCalcEstimatedPrice != null) QueryParams["autoCalcEstimatedPrice"] = Convert.ToString(builder.AutoCalcEstimatedPrice)!;
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
             if (builder.PopulateBundle != null) QueryParams["populateBundle"] = Convert.ToString(builder.PopulateBundle)!;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,28 +232,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetItem(
-            string itemId,
-            string namespace_,
-            bool? autoCalcEstimatedPrice,
-            string? language,
-            bool? populateBundle,
-            string? region,
-            string? storeId
+            string itemId,            
+            string namespace_,            
+            bool? autoCalcEstimatedPrice,            
+            string? language,            
+            bool? populateBundle,            
+            string? region,            
+            string? storeId            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (autoCalcEstimatedPrice != null) QueryParams["autoCalcEstimatedPrice"] = Convert.ToString(autoCalcEstimatedPrice)!;
             if (language is not null) QueryParams["language"] = language;
             if (populateBundle != null) QueryParams["populateBundle"] = Convert.ToString(populateBundle)!;
             if (region is not null) QueryParams["region"] = region;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -262,10 +262,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetItem.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetItem.Response()
@@ -303,7 +303,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo<T1, T2>>(payload, ResponseJsonOptions);
@@ -314,7 +314,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

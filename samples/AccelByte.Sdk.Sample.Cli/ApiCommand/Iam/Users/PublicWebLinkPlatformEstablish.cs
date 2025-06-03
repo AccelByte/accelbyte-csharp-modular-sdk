@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "publicweblinkplatformestablish")]
-    public class PublicWebLinkPlatformEstablishCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","publicweblinkplatformestablish")]
+    public class PublicWebLinkPlatformEstablishCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PublicWebLinkPlatformEstablish"; } }
+        public string OperationName{ get { return "PublicWebLinkPlatformEstablish"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -69,8 +69,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 if (response.Data != null)
                     return CommandResult.Success(response.Data);
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

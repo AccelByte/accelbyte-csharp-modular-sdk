@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "admingetallplayersessionattribute")]
-    public class AdminGetAllPlayerSessionAttributeCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","admingetallplayersessionattribute")]
+    public class AdminGetAllPlayerSessionAttributeCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "AdminGetAllPlayerSessionAttribute"; } }
+        public string OperationName{ get { return "AdminGetAllPlayerSessionAttribute"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
         {
             AccelByte.Sdk.Api.Lobby.Wrapper.Player wrapper = new AccelByte.Sdk.Api.Lobby.Wrapper.Player(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Lobby.Operation.AdminGetAllPlayerSessionAttribute.Builder;
 
 
@@ -54,22 +54,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 UserId
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminGetAllPlayerSessionAttribute(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

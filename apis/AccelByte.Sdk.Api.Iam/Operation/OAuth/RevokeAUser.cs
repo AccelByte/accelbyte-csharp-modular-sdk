@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/oauth/admin/namespaces/{namespace}/users/{userId}/revoke [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class RevokeAUser : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -62,14 +62,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RevokeAUser op = new RevokeAUser(this,
-                    userID
+                    userID                    
                 );
 
                 op.SetBaseFields<RevokeAUserBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public RevokeAUser.Response Execute(
                 string userID
             )
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,13 +110,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string userID
         )
         {
-
-
+            
+            
             if (userID is not null) FormParams["userID"] = userID;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,16 +137,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RevokeAUser(
-            string userID
+            string userID            
         )
         {
-
-
+            
+            
             if (userID is not null) FormParams["userID"] = userID;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public RevokeAUser.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RevokeAUser.Response()
@@ -169,13 +169,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error401!);

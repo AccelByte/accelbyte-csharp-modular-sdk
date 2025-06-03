@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 UpdateAppResourcesV2 op = new UpdateAppResourcesV2(this,
-                    body,
-                    app,
-                    namespace_
+                    body,                    
+                    app,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateAppResourcesV2Builder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,13 +120,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,20 +153,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public UpdateAppResourcesV2(
-            string app,
-            string namespace_,
-            Model.ApimodelUpdateAppResourceRequest body
+            string app,            
+            string namespace_,            
+            Model.ApimodelUpdateAppResourceRequest body            
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpdateAppResourcesV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateAppResourcesV2.Response()

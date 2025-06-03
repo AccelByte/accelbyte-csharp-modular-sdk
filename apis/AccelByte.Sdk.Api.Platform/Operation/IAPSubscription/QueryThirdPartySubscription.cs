@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryThirdPartySubscription op = new QueryThirdPartySubscription(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<QueryThirdPartySubscriptionBuilder>(this);
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.GroupId is not null) QueryParams["groupId"] = builder.GroupId;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -168,11 +168,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform.Value;
             if (builder.ProductId is not null) QueryParams["productId"] = builder.ProductId;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,18 +189,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryThirdPartySubscription(
-            string namespace_,
-            bool? activeOnly,
-            string? groupId,
-            int? limit,
-            int? offset,
-            QueryThirdPartySubscriptionPlatform? platform,
-            string? productId,
-            string? userId
+            string namespace_,            
+            bool? activeOnly,            
+            string? groupId,            
+            int? limit,            
+            int? offset,            
+            QueryThirdPartySubscriptionPlatform? platform,            
+            string? productId,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (groupId is not null) QueryParams["groupId"] = groupId;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -208,11 +208,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (platform is not null) QueryParams["platform"] = platform.Value;
             if (productId is not null) QueryParams["productId"] = productId;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,10 +221,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public QueryThirdPartySubscription.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryThirdPartySubscription.Response()

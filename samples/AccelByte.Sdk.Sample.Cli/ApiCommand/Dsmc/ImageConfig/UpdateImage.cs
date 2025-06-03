@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc", "updateimage")]
-    public class UpdateImageCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc","updateimage")]
+    public class UpdateImageCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsmc"; } }
+        public string ServiceName{ get { return "Dsmc"; } }
 
-        public string OperationName { get { return "UpdateImage"; } }
+        public string OperationName{ get { return "UpdateImage"; } }
 
         [SdkCommandData("body")]
         public ModelsImageRecordUpdate Body { get; set; } = new ModelsImageRecordUpdate();

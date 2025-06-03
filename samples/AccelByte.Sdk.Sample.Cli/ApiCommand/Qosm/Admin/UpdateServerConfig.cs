@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Qosm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
 {
-    [SdkConsoleCommand("qosm", "updateserverconfig")]
-    public class UpdateServerConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("qosm","updateserverconfig")]
+    public class UpdateServerConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Qosm"; } }
+        public string ServiceName{ get { return "Qosm"; } }
 
-        public string OperationName { get { return "UpdateServerConfig"; } }
+        public string OperationName{ get { return "UpdateServerConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

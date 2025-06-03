@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminGetItemReferences op = new AdminGetItemReferences(this,
-                    namespace_,
-                    itemId
+                    namespace_,                    
+                    itemId                    
                 );
 
                 op.SetBaseFields<AdminGetItemReferencesBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,13 +110,13 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (itemId is not null) QueryParams["itemId"] = itemId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public AdminGetItemReferences(
-            string namespace_,
-            string itemId
+            string namespace_,            
+            string itemId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (itemId is not null) QueryParams["itemId"] = itemId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,10 +161,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetItemReferences.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetItemReferences.Response()

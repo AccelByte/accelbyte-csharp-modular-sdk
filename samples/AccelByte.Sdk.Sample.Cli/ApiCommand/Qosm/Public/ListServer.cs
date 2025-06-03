@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Qosm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
 {
-    [SdkConsoleCommand("qosm", "listserver")]
-    public class ListServerCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("qosm","listserver")]
+    public class ListServerCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Qosm"; } }
+        public string ServiceName{ get { return "Qosm"; } }
 
-        public string OperationName { get { return "ListServer"; } }
+        public string OperationName{ get { return "ListServer"; } }
 
         public ListServerCommand(IAccelByteSdk sdk)
         {
@@ -52,8 +52,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Qosm
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

@@ -100,8 +100,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicUserEntitlementHistory op = new PublicUserEntitlementHistory(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUserEntitlementHistoryBuilder>(this);
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -155,17 +155,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,28 +182,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicUserEntitlementHistory(
-            string namespace_,
-            string userId,
-            string? endDate,
-            PublicUserEntitlementHistoryEntitlementClazz? entitlementClazz,
-            int? limit,
-            int? offset,
-            string? startDate
+            string namespace_,            
+            string userId,            
+            string? endDate,            
+            PublicUserEntitlementHistoryEntitlementClazz? entitlementClazz,            
+            int? limit,            
+            int? offset,            
+            string? startDate            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -212,10 +212,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicUserEntitlementHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicUserEntitlementHistory.Response()

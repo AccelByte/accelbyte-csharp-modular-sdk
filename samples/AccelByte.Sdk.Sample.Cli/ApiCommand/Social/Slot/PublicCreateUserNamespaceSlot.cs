@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Social.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 {
-    [SdkConsoleCommand("social", "publiccreateusernamespaceslot")]
-    public class PublicCreateUserNamespaceSlotCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("social","publiccreateusernamespaceslot")]
+    public class PublicCreateUserNamespaceSlotCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Social"; } }
+        public string ServiceName{ get { return "Social"; } }
 
-        public string OperationName { get { return "PublicCreateUserNamespaceSlot"; } }
+        public string OperationName{ get { return "PublicCreateUserNamespaceSlot"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
         {
             AccelByte.Sdk.Api.Social.Wrapper.Slot wrapper = new AccelByte.Sdk.Api.Social.Wrapper.Slot(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Social.Operation.PublicCreateUserNamespaceSlot.Builder;
 
             if (Label != null)
@@ -79,9 +79,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 UserId
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.PublicCreateUserNamespaceSlot(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

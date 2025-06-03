@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -99,12 +99,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         private ListItemTypeConfigs(ListItemTypeConfigsBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -123,12 +123,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public ListItemTypeConfigs(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,10 +137,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public ListItemTypeConfigs.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListItemTypeConfigs.Response()

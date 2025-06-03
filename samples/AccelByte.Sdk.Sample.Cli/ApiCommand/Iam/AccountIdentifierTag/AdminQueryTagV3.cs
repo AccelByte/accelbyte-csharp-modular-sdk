@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "adminquerytagv3")]
-    public class AdminQueryTagV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","adminquerytagv3")]
+    public class AdminQueryTagV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminQueryTagV3"; } }
+        public string OperationName{ get { return "AdminQueryTagV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
         public CommandResult Run()
         {
-            AccelByte.Sdk.Api.Iam.Wrapper.AccountIdenfifierTag wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.AccountIdenfifierTag(_SDK);
+            AccelByte.Sdk.Api.Iam.Wrapper.AccountIdentifierTag wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.AccountIdentifierTag(_SDK);
 
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminQueryTagV3.Builder;
 
@@ -71,8 +71,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

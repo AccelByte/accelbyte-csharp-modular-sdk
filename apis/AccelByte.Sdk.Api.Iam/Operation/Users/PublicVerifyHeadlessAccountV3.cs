@@ -67,8 +67,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicVerifyHeadlessAccountV3 op = new PublicVerifyHeadlessAccountV3(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicVerifyHeadlessAccountV3Builder>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,14 +121,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.NeedVerificationCode != null) QueryParams["needVerificationCode"] = Convert.ToString(builder.NeedVerificationCode)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,20 +155,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicVerifyHeadlessAccountV3(
-            string namespace_,
-            bool? needVerificationCode,
-            Model.ModelUpgradeHeadlessAccountV3Request body
+            string namespace_,            
+            bool? needVerificationCode,            
+            Model.ModelUpgradeHeadlessAccountV3Request body            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (needVerificationCode != null) QueryParams["needVerificationCode"] = Convert.ToString(needVerificationCode)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicVerifyHeadlessAccountV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicVerifyHeadlessAccountV3.Response()

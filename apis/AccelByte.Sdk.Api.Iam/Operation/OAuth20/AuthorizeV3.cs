@@ -179,8 +179,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AuthorizeV3 op = new AuthorizeV3(this,
-                    clientId,
-                    responseType
+                    clientId,                    
+                    responseType                    
                 );
 
                 op.SetBaseFields<AuthorizeV3Builder>(this);
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             AuthorizeV3ResponseType responseType
         )
         {
-
+            
             if (builder.BlockedPlatformId is not null) QueryParams["blockedPlatformId"] = builder.BlockedPlatformId;
             if (builder.CodeChallenge is not null) QueryParams["code_challenge"] = builder.CodeChallenge;
             if (builder.CodeChallengeMethod is not null) QueryParams["code_challenge_method"] = builder.CodeChallengeMethod.Value;
@@ -247,11 +247,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.UseRedirectUriAsLoginUrlWhenLocked != null) QueryParams["useRedirectUriAsLoginUrlWhenLocked"] = Convert.ToString(builder.UseRedirectUriAsLoginUrlWhenLocked)!;
             if (clientId is not null) QueryParams["client_id"] = clientId;
             if (responseType is not null) QueryParams["response_type"] = responseType.Value;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "request_id";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -271,23 +271,23 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AuthorizeV3(
-            string? blockedPlatformId,
-            string? codeChallenge,
-            AuthorizeV3CodeChallengeMethod? codeChallengeMethod,
-            bool? createHeadless,
-            bool? loginWebBased,
-            string? nonce,
-            string? oneTimeLinkCode,
-            string? redirectUri,
-            string? scope,
-            string? state,
-            string? targetAuthPage,
-            bool? useRedirectUriAsLoginUrlWhenLocked,
-            string clientId,
-            AuthorizeV3ResponseType responseType
+            string? blockedPlatformId,            
+            string? codeChallenge,            
+            AuthorizeV3CodeChallengeMethod? codeChallengeMethod,            
+            bool? createHeadless,            
+            bool? loginWebBased,            
+            string? nonce,            
+            string? oneTimeLinkCode,            
+            string? redirectUri,            
+            string? scope,            
+            string? state,            
+            string? targetAuthPage,            
+            bool? useRedirectUriAsLoginUrlWhenLocked,            
+            string clientId,            
+            AuthorizeV3ResponseType responseType            
         )
         {
-
+            
             if (blockedPlatformId is not null) QueryParams["blockedPlatformId"] = blockedPlatformId;
             if (codeChallenge is not null) QueryParams["code_challenge"] = codeChallenge;
             if (codeChallengeMethod is not null) QueryParams["code_challenge_method"] = codeChallengeMethod.Value;
@@ -302,11 +302,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (useRedirectUriAsLoginUrlWhenLocked != null) QueryParams["useRedirectUriAsLoginUrlWhenLocked"] = Convert.ToString(useRedirectUriAsLoginUrlWhenLocked)!;
             if (clientId is not null) QueryParams["client_id"] = clientId;
             if (responseType is not null) QueryParams["response_type"] = responseType.Value;
+            
 
-
-
-
-
+            
+            
+            
             LocationQuery = "request_id";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -319,7 +319,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AuthorizeV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AuthorizeV3.Response()

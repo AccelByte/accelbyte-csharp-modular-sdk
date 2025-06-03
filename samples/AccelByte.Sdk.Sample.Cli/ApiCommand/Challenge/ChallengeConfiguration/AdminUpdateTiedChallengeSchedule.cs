@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge", "adminupdatetiedchallengeschedule")]
-    public class AdminUpdateTiedChallengeScheduleCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("challenge","adminupdatetiedchallengeschedule")]
+    public class AdminUpdateTiedChallengeScheduleCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Challenge"; } }
+        public string ServiceName{ get { return "Challenge"; } }
 
-        public string OperationName { get { return "AdminUpdateTiedChallengeSchedule"; } }
+        public string OperationName{ get { return "AdminUpdateTiedChallengeSchedule"; } }
 
         [SdkCommandArgument("challengeCode")]
         public string ChallengeCode { get; set; } = String.Empty;
@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

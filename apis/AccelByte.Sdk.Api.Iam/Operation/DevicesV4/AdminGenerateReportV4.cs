@@ -72,8 +72,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGenerateReportV4 op = new AdminGenerateReportV4(this,
-                    namespace_,
-                    deviceType
+                    namespace_,                    
+                    deviceType                    
                 );
 
                 op.SetBaseFields<AdminGenerateReportV4Builder>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,15 +126,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (deviceType is not null) QueryParams["deviceType"] = deviceType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,22 +161,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGenerateReportV4(
-            string namespace_,
-            string? endDate,
-            string? startDate,
-            string deviceType
+            string namespace_,            
+            string? endDate,            
+            string? startDate,            
+            string deviceType            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (deviceType is not null) QueryParams["deviceType"] = deviceType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,7 +188,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGenerateReportV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGenerateReportV4.Response()
@@ -199,31 +199,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

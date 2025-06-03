@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminDeleteOfficialContentV2 op = new AdminDeleteOfficialContentV2(this,
-                    channelId,
-                    contentId,
-                    namespace_
+                    channelId,                    
+                    contentId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminDeleteOfficialContentV2Builder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,12 +119,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -147,20 +147,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminDeleteOfficialContentV2(
-            string channelId,
-            string contentId,
-            string namespace_
+            string channelId,            
+            string contentId,            
+            string namespace_            
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeleteOfficialContentV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteOfficialContentV2.Response()
@@ -183,19 +183,19 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

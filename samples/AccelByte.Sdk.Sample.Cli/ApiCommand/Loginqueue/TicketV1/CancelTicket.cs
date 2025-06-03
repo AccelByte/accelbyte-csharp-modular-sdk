@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Loginqueue.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Loginqueue
 {
-    [SdkConsoleCommand("loginqueue", "cancelticket")]
-    public class CancelTicketCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("loginqueue","cancelticket")]
+    public class CancelTicketCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Loginqueue"; } }
+        public string ServiceName{ get { return "Loginqueue"; } }
 
-        public string OperationName { get { return "CancelTicket"; } }
+        public string OperationName{ get { return "CancelTicket"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

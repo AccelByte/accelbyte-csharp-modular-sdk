@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2", "adminpatchupdatelogconfig")]
-    public class AdminPatchUpdateLogConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("match2","adminpatchupdatelogconfig")]
+    public class AdminPatchUpdateLogConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Match2"; } }
+        public string ServiceName{ get { return "Match2"; } }
 
-        public string OperationName { get { return "AdminPatchUpdateLogConfig"; } }
+        public string OperationName{ get { return "AdminPatchUpdateLogConfig"; } }
 
         [SdkCommandData("body")]
         public LogconfigConfiguration Body { get; set; } = new LogconfigConfiguration();
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

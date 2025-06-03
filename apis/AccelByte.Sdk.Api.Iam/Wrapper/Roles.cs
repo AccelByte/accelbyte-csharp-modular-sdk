@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoles.GetRolesBuilder GetRolesOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateRole.CreateRoleBuilder CreateRoleOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRole.GetRoleBuilder GetRoleOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateRole.UpdateRoleBuilder UpdateRoleOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteRole.DeleteRoleBuilder DeleteRoleOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleAdminStatus.GetRoleAdminStatusBuilder GetRoleAdminStatusOp
         {
             get
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SetRoleAsAdmin.SetRoleAsAdminBuilder SetRoleAsAdminOp
         {
             get
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleAdmin.RemoveRoleAdminBuilder RemoveRoleAdminOp
         {
             get
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleManagers.GetRoleManagersBuilder GetRoleManagersOp
         {
             get
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRoleManagers.AddRoleManagersBuilder AddRoleManagersOp
         {
             get
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleManagers.RemoveRoleManagersBuilder RemoveRoleManagersOp
         {
             get
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleMembers.GetRoleMembersBuilder GetRoleMembersOp
         {
             get
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRoleMembers.AddRoleMembersBuilder AddRoleMembersOp
         {
             get
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleMembers.RemoveRoleMembersBuilder RemoveRoleMembersOp
         {
             get
@@ -202,7 +202,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateRolePermissions.UpdateRolePermissionsBuilder UpdateRolePermissionsOp
         {
             get
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRolePermission.AddRolePermissionBuilder AddRolePermissionOp
         {
             get
@@ -226,7 +226,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteRolePermission.DeleteRolePermissionBuilder DeleteRolePermissionOp
         {
             get
@@ -381,7 +381,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminRemoveRoleMembersV3.AdminRemoveRoleMembersV3Builder AdminRemoveRoleMembersV3Op
         {
             get
@@ -582,8 +582,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoles.Response GetRoles(GetRoles input)
         {
             var response = _sdk.RunRequest(input);
@@ -600,9 +600,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public CreateRole.Response CreateRole(CreateRole input)
         {
             var response = _sdk.RunRequest(input);
@@ -619,9 +619,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRole.Response GetRole(GetRole input)
         {
             var response = _sdk.RunRequest(input);
@@ -638,9 +638,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateRole.Response UpdateRole(UpdateRole input)
         {
             var response = _sdk.RunRequest(input);
@@ -657,9 +657,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteRole.Response DeleteRole(DeleteRole input)
         {
             var response = _sdk.RunRequest(input);
@@ -676,9 +676,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleAdminStatus.Response GetRoleAdminStatus(GetRoleAdminStatus input)
         {
             var response = _sdk.RunRequest(input);
@@ -695,9 +695,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SetRoleAsAdmin.Response SetRoleAsAdmin(SetRoleAsAdmin input)
         {
             var response = _sdk.RunRequest(input);
@@ -714,9 +714,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleAdmin.Response RemoveRoleAdmin(RemoveRoleAdmin input)
         {
             var response = _sdk.RunRequest(input);
@@ -733,9 +733,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleManagers.Response GetRoleManagers(GetRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
@@ -752,9 +752,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRoleManagers.Response AddRoleManagers(AddRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
@@ -771,9 +771,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleManagers.Response RemoveRoleManagers(RemoveRoleManagers input)
         {
             var response = _sdk.RunRequest(input);
@@ -790,9 +790,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetRoleMembers.Response GetRoleMembers(GetRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
@@ -809,9 +809,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRoleMembers.Response AddRoleMembers(AddRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
@@ -828,9 +828,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RemoveRoleMembers.Response RemoveRoleMembers(RemoveRoleMembers input)
         {
             var response = _sdk.RunRequest(input);
@@ -847,9 +847,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateRolePermissions.Response UpdateRolePermissions(UpdateRolePermissions input)
         {
             var response = _sdk.RunRequest(input);
@@ -866,9 +866,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AddRolePermission.Response AddRolePermission(AddRolePermission input)
         {
             var response = _sdk.RunRequest(input);
@@ -885,9 +885,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteRolePermission.Response DeleteRolePermission(DeleteRolePermission input)
         {
             var response = _sdk.RunRequest(input);
@@ -904,7 +904,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public AdminGetRolesV3.Response AdminGetRolesV3(AdminGetRolesV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1113,8 +1113,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminRemoveRoleMembersV3.Response AdminRemoveRoleMembersV3(AdminRemoveRoleMembersV3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -1131,7 +1131,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public AdminUpdateRolePermissionsV3.Response AdminUpdateRolePermissionsV3(AdminUpdateRolePermissionsV3 input)
         {
             var response = _sdk.RunRequest(input);

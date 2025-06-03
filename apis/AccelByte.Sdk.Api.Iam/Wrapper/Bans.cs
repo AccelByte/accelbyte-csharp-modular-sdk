@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetBansType.GetBansTypeBuilder GetBansTypeOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetListBanReason.GetListBanReasonBuilder GetListBanReasonOp
         {
             get
@@ -126,8 +126,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetBansType.Response GetBansType(GetBansType input)
         {
             var response = _sdk.RunRequest(input);
@@ -144,9 +144,9 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetListBanReason.Response GetListBanReason(GetListBanReason input)
         {
             var response = _sdk.RunRequest(input);
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public AdminGetBansTypeV3.Response AdminGetBansTypeV3(AdminGetBansTypeV3 input)
         {
             var response = _sdk.RunRequest(input);

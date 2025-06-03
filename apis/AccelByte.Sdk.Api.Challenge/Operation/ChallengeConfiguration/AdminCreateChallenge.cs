@@ -77,8 +77,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminCreateChallenge op = new AdminCreateChallenge(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminCreateChallengeBuilder>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,13 +131,13 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,18 +166,18 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public AdminCreateChallenge(
-            string namespace_,
-            Model.ModelCreateChallengeRequest body
+            string namespace_,            
+            Model.ModelCreateChallengeRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminCreateChallenge.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminCreateChallenge.Response()

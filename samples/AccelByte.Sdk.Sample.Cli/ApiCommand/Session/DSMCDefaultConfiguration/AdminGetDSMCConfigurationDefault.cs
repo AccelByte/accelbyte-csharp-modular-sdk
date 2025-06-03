@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session", "admingetdsmcconfigurationdefault")]
-    public class AdminGetDSMCConfigurationDefaultCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("session","admingetdsmcconfigurationdefault")]
+    public class AdminGetDSMCConfigurationDefaultCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Session"; } }
+        public string ServiceName{ get { return "Session"; } }
 
-        public string OperationName { get { return "AdminGetDSMCConfigurationDefault"; } }
+        public string OperationName{ get { return "AdminGetDSMCConfigurationDefault"; } }
 
         public AdminGetDSMCConfigurationDefaultCommand(IAccelByteSdk sdk)
         {
@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         {
             AccelByte.Sdk.Api.Session.Wrapper.DSMCDefaultConfiguration wrapper = new AccelByte.Sdk.Api.Session.Wrapper.DSMCDefaultConfiguration(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Session.Operation.AdminGetDSMCConfigurationDefault.Builder;
 
 
@@ -46,22 +46,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             AdminGetDSMCConfigurationDefault operation = opBuilder.Build(
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminGetDSMCConfigurationDefault(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

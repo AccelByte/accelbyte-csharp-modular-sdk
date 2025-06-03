@@ -45,7 +45,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SaveConfig.SaveConfigBuilder SaveConfigOp
         {
             get
@@ -185,8 +185,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public SaveConfig.Response SaveConfig(SaveConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public GetConfig.Response GetConfig(GetConfig input)
         {
             var response = _sdk.RunRequest(input);

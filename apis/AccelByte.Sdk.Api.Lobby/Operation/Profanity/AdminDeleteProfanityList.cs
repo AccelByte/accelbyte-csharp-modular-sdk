@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Delete a list include all filters inside of it
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminDeleteProfanityList : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminDeleteProfanityList op = new AdminDeleteProfanityList(this,
-                    list,
-                    namespace_
+                    list,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminDeleteProfanityListBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminDeleteProfanityList.Response Execute(
                 string list,
                 string namespace_
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,12 +113,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,18 +145,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminDeleteProfanityList(
-            string list,
-            string namespace_
+            string list,            
+            string namespace_            
         )
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeleteProfanityList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteProfanityList.Response()
@@ -179,31 +179,31 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

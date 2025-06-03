@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetRoleManagersV3 op = new AdminGetRoleManagersV3(this,
-                    roleId
+                    roleId                    
                 );
 
                 op.SetBaseFields<AdminGetRoleManagersV3Builder>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,15 +128,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
-
+            
             if (builder.After is not null) QueryParams["after"] = builder.After;
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,22 +163,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetRoleManagersV3(
-            string roleId,
-            string? after,
-            string? before,
-            long? limit
+            string roleId,            
+            string? after,            
+            string? before,            
+            long? limit            
         )
         {
             PathParams["roleId"] = roleId;
-
+            
             if (after is not null) QueryParams["after"] = after;
             if (before is not null) QueryParams["before"] = before;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -187,10 +187,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetRoleManagersV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetRoleManagersV3.Response()

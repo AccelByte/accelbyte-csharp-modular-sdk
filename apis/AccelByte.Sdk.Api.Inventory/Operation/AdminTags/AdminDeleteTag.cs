@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminDeleteTag op = new AdminDeleteTag(this,
-                    namespace_,
-                    tagName
+                    namespace_,                    
+                    tagName                    
                 );
 
                 op.SetBaseFields<AdminDeleteTagBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,12 +115,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["tagName"] = tagName;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminDeleteTag(
-            string namespace_,
-            string tagName
+            string namespace_,            
+            string tagName            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["tagName"] = tagName;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,10 +161,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeleteTag.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteTag.Response()
@@ -175,13 +175,13 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             };
 
             if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

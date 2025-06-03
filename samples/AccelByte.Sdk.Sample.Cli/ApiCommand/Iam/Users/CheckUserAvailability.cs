@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "checkuseravailability")]
-    public class CheckUserAvailabilityCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","checkuseravailability")]
+    public class CheckUserAvailabilityCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "CheckUserAvailability"; } }
+        public string OperationName{ get { return "CheckUserAvailability"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

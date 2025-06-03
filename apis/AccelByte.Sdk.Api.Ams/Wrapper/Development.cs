@@ -78,6 +78,17 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     return opBuilder;
             }
         }
+        public DevelopmentServerConfigurationPatch.DevelopmentServerConfigurationPatchBuilder DevelopmentServerConfigurationPatchOp
+        {
+            get
+            {
+                var opBuilder = new Operation.DevelopmentServerConfigurationPatch.DevelopmentServerConfigurationPatchBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public DevelopmentServerConfigurationList.Response DevelopmentServerConfigurationList(DevelopmentServerConfigurationList input)
@@ -137,6 +148,22 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.Payload);
         }
         public async Task<DevelopmentServerConfigurationDelete.Response> DevelopmentServerConfigurationDeleteAsync(DevelopmentServerConfigurationDelete input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DevelopmentServerConfigurationPatch.Response DevelopmentServerConfigurationPatch(DevelopmentServerConfigurationPatch input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DevelopmentServerConfigurationPatch.Response> DevelopmentServerConfigurationPatchAsync(DevelopmentServerConfigurationPatch input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

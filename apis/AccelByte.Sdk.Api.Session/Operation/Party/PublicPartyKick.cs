@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicPartyKick op = new PublicPartyKick(this,
-                    namespace_,
-                    partyId,
-                    userId
+                    namespace_,                    
+                    partyId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicPartyKickBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,12 +119,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,20 +151,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public PublicPartyKick(
-            string namespace_,
-            string partyId,
-            string userId
+            string namespace_,            
+            string partyId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,7 +176,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicPartyKick.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicPartyKick.Response()

@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 BulkFetchOrDefaultStatItems op = new BulkFetchOrDefaultStatItems(this,
-                    namespace_,
-                    statCode,
-                    userIds
+                    namespace_,                    
+                    statCode,                    
+                    userIds                    
                 );
 
                 op.SetBaseFields<BulkFetchOrDefaultStatItemsBuilder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,15 +119,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (statCode is not null) QueryParams["statCode"] = statCode;
             if (userIds is not null) QueryParams["userIds"] = userIds;
+            
 
-
-
+            
             CollectionFormatMap["userIds"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -154,21 +154,21 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public BulkFetchOrDefaultStatItems(
-            string namespace_,
-            string statCode,
-            List<string> userIds
+            string namespace_,            
+            string statCode,            
+            List<string> userIds            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (statCode is not null) QueryParams["statCode"] = statCode;
             if (userIds is not null) QueryParams["userIds"] = userIds;
+            
 
-
-
+            
             CollectionFormatMap["userIds"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,10 +177,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public BulkFetchOrDefaultStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new BulkFetchOrDefaultStatItems.Response()

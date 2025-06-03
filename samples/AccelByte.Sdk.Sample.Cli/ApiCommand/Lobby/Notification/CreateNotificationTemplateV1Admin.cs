@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "createnotificationtemplatev1admin")]
-    public class CreateNotificationTemplateV1AdminCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","createnotificationtemplatev1admin")]
+    public class CreateNotificationTemplateV1AdminCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "CreateNotificationTemplateV1Admin"; } }
+        public string OperationName{ get { return "CreateNotificationTemplateV1Admin"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

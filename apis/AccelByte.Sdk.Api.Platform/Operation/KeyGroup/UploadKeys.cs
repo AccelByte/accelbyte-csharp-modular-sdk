@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UploadKeys op = new UploadKeys(this,
-                    keyGroupId,
-                    namespace_
+                    keyGroupId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UploadKeysBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,13 +123,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,20 +150,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UploadKeys(
-            string keyGroupId,
-            string namespace_,
-            Stream? file
+            string keyGroupId,            
+            string namespace_,            
+            Stream? file            
         )
         {
             PathParams["keyGroupId"] = keyGroupId;
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             if (file is not null) FormParams["file"] = file;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UploadKeys.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UploadKeys.Response()

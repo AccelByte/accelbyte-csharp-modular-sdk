@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "mockfulfilliapitem")]
-    public class MockFulfillIAPItemCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","mockfulfilliapitem")]
+    public class MockFulfillIAPItemCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "MockFulfillIAPItem"; } }
+        public string OperationName{ get { return "MockFulfillIAPItem"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

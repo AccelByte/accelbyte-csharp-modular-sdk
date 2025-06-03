@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "imageunmarkfordeletion")]
-    public class ImageUnmarkForDeletionCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","imageunmarkfordeletion")]
+    public class ImageUnmarkForDeletionCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "ImageUnmarkForDeletion"; } }
+        public string OperationName{ get { return "ImageUnmarkForDeletion"; } }
 
         [SdkCommandArgument("imageID")]
         public string ImageID { get; set; } = String.Empty;

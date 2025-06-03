@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 AdminValidateXboxBPCertFile op = new AdminValidateXboxBPCertFile(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminValidateXboxBPCertFileBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,13 +110,13 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,18 +143,18 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #endregion
 
         public AdminValidateXboxBPCertFile(
-            string namespace_,
-            Model.DtoXboxBPCertValidationRequest body
+            string namespace_,            
+            Model.DtoXboxBPCertValidationRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminValidateXboxBPCertFile.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminValidateXboxBPCertFile.Response()

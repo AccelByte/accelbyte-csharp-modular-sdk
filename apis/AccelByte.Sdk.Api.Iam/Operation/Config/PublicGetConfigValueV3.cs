@@ -65,8 +65,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicGetConfigValueV3 op = new PublicGetConfigValueV3(this,
-                    configKey,
-                    namespace_
+                    configKey,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetConfigValueV3Builder>(this);
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -159,12 +159,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["configKey"] = configKey;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,18 +194,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGetConfigValueV3(
-            string configKey,
-            string namespace_
+            string configKey,            
+            string namespace_            
         )
         {
             PathParams["configKey"] = configKey;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -214,10 +214,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetConfigValueV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetConfigValueV3.Response()
@@ -260,7 +260,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelConfigValueResponseV3<T1>>(payload, ResponseJsonOptions);
@@ -276,7 +276,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

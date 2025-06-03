@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 LeaveGroupPublicV1 op = new LeaveGroupPublicV1(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<LeaveGroupPublicV1Builder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,12 +109,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,16 +141,16 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public LeaveGroupPublicV1(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,10 +159,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public LeaveGroupPublicV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new LeaveGroupPublicV1.Response()

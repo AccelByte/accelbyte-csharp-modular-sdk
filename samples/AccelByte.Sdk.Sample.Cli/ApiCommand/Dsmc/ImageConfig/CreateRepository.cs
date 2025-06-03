@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc", "createrepository")]
-    public class CreateRepositoryCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc","createrepository")]
+    public class CreateRepositoryCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsmc"; } }
+        public string ServiceName{ get { return "Dsmc"; } }
 
-        public string OperationName { get { return "CreateRepository"; } }
+        public string OperationName{ get { return "CreateRepository"; } }
 
         [SdkCommandData("body")]
         public ModelsCreateRepositoryRequest Body { get; set; } = new ModelsCreateRepositoryRequest();

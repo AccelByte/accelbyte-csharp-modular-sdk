@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDecryptDeviceV4.AdminDecryptDeviceV4Builder AdminDecryptDeviceV4Op
         {
             get
@@ -313,8 +313,8 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDecryptDeviceV4.Response AdminDecryptDeviceV4(AdminDecryptDeviceV4 input)
         {
             var response = _sdk.RunRequest(input);
@@ -331,7 +331,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public AdminUnbanDeviceV4.Response AdminUnbanDeviceV4(AdminUnbanDeviceV4 input)
         {
             var response = _sdk.RunRequest(input);

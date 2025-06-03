@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Get party data in a namespace.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminGetUserPartyV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminGetUserPartyV1 op = new AdminGetUserPartyV1(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminGetUserPartyV1Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminGetUserPartyV1.Response Execute(
                 string namespace_,
                 string userId
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -152,12 +152,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,18 +199,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminGetUserPartyV1(
-            string namespace_,
-            string userId
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetUserPartyV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetUserPartyV1.Response()
@@ -280,7 +280,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ModelsPartyData<T1>>(payload, ResponseJsonOptions);
@@ -311,7 +311,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

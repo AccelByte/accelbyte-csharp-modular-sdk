@@ -104,8 +104,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryImportHistory op = new QueryImportHistory(this,
-                    namespace_,
-                    storeId
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<QueryImportHistoryBuilder>(this);
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -159,18 +159,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-
+            
             if (builder.End is not null) QueryParams["end"] = builder.End;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.Start is not null) QueryParams["start"] = builder.Start;
             if (builder.Success != null) QueryParams["success"] = Convert.ToString(builder.Success)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,30 +189,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryImportHistory(
-            string namespace_,
-            string storeId,
-            string? end,
-            int? limit,
-            int? offset,
-            string? sortBy,
-            string? start,
-            bool? success
+            string namespace_,            
+            string storeId,            
+            string? end,            
+            int? limit,            
+            int? offset,            
+            string? sortBy,            
+            string? start,            
+            bool? success            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-
+            
             if (end is not null) QueryParams["end"] = end;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (start is not null) QueryParams["start"] = start;
             if (success != null) QueryParams["success"] = Convert.ToString(success)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,10 +221,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public QueryImportHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryImportHistory.Response()

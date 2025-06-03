@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 BulkIncUserStatItem1 op = new BulkIncUserStatItem1(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<BulkIncUserStatItem1Builder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -163,13 +163,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -211,20 +211,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public BulkIncUserStatItem1(
-            string namespace_,
-            string userId,
-            List<Model.BulkStatItemInc> body
+            string namespace_,            
+            string userId,            
+            List<Model.BulkStatItemInc> body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,7 +236,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public BulkIncUserStatItem1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new BulkIncUserStatItem1.Response()
@@ -294,7 +294,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<List<Model.BulkStatOperationResult<T1>>>(payload, ResponseJsonOptions);
@@ -325,7 +325,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

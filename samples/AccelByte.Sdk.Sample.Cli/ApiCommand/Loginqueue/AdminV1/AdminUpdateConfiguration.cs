@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Loginqueue.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Loginqueue
 {
-    [SdkConsoleCommand("loginqueue", "adminupdateconfiguration")]
-    public class AdminUpdateConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("loginqueue","adminupdateconfiguration")]
+    public class AdminUpdateConfigurationCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Loginqueue"; } }
+        public string ServiceName{ get { return "Loginqueue"; } }
 
-        public string OperationName { get { return "AdminUpdateConfiguration"; } }
+        public string OperationName{ get { return "AdminUpdateConfiguration"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Loginqueue
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "upgradeandauthenticateforwardv3")]
-    public class UpgradeAndAuthenticateForwardV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","upgradeandauthenticateforwardv3")]
+    public class UpgradeAndAuthenticateForwardV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "UpgradeAndAuthenticateForwardV3"; } }
+        public string OperationName{ get { return "UpgradeAndAuthenticateForwardV3"; } }
 
         [SdkCommandArgument("client_id")]
         public string ClientId { get; set; } = String.Empty;
@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 if (response.Data != null)
                     return CommandResult.Success(response.Data);
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

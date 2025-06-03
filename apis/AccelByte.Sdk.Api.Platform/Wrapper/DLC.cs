@@ -34,6 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
+        public GetDLCItemConfigHistory.GetDLCItemConfigHistoryBuilder GetDLCItemConfigHistoryOp
+        {
+            get
+            {
+                var opBuilder = new Operation.GetDLCItemConfigHistory.GetDLCItemConfigHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public RestoreDLCItemConfigHistory.RestoreDLCItemConfigHistoryBuilder RestoreDLCItemConfigHistoryOp
+        {
+            get
+            {
+                var opBuilder = new Operation.RestoreDLCItemConfigHistory.RestoreDLCItemConfigHistoryBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GetDLCItemConfig.GetDLCItemConfigBuilder GetDLCItemConfigOp
         {
             get
@@ -212,6 +234,38 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
+        public GetDLCItemConfigHistory.Response GetDLCItemConfigHistory(GetDLCItemConfigHistory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetDLCItemConfigHistory.Response> GetDLCItemConfigHistoryAsync(GetDLCItemConfigHistory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public RestoreDLCItemConfigHistory.Response RestoreDLCItemConfigHistory(RestoreDLCItemConfigHistory input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<RestoreDLCItemConfigHistory.Response> RestoreDLCItemConfigHistoryAsync(RestoreDLCItemConfigHistory input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public GetDLCItemConfig.Response GetDLCItemConfig(GetDLCItemConfig input)
         {
             var response = _sdk.RunRequest(input);

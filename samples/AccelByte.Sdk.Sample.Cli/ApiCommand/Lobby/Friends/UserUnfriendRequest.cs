@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "userunfriendrequest")]
-    public class UserUnfriendRequestCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","userunfriendrequest")]
+    public class UserUnfriendRequestCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "UserUnfriendRequest"; } }
+        public string OperationName{ get { return "UserUnfriendRequest"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

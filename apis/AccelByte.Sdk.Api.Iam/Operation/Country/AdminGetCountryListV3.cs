@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetCountryListV3 op = new AdminGetCountryListV3(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetCountryListV3Builder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,13 +111,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.FilterBlacklist != null) QueryParams["filterBlacklist"] = Convert.ToString(builder.FilterBlacklist)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -140,18 +140,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetCountryListV3(
-            string namespace_,
-            bool? filterBlacklist
+            string namespace_,            
+            bool? filterBlacklist            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (filterBlacklist != null) QueryParams["filterBlacklist"] = Convert.ToString(filterBlacklist)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,10 +160,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetCountryListV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetCountryListV3.Response()

@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserProfiles.GetUserProfilesBuilder GetUserProfilesOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetProfile.GetProfileBuilder GetProfileOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserGameProfiles.PublicGetUserGameProfilesBuilder PublicGetUserGameProfilesOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserProfiles.PublicGetUserProfilesBuilder PublicGetUserProfilesOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicCreateProfile.PublicCreateProfileBuilder PublicCreateProfileOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetProfile.PublicGetProfileBuilder PublicGetProfileOp
         {
             get
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateProfile.PublicUpdateProfileBuilder PublicUpdateProfileOp
         {
             get
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicDeleteProfile.PublicDeleteProfileBuilder PublicDeleteProfileOp
         {
             get
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetProfileAttribute.PublicGetProfileAttributeBuilder PublicGetProfileAttributeOp
         {
             get
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateAttribute.PublicUpdateAttributeBuilder PublicUpdateAttributeOp
         {
             get
@@ -156,8 +156,8 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetUserProfiles.Response GetUserProfiles(GetUserProfiles input)
         {
             var response = _sdk.RunRequest(input);
@@ -174,9 +174,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetProfile.Response GetProfile(GetProfile input)
         {
             var response = _sdk.RunRequest(input);
@@ -193,9 +193,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserGameProfiles.Response PublicGetUserGameProfiles(PublicGetUserGameProfiles input)
         {
             var response = _sdk.RunRequest(input);
@@ -212,9 +212,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetUserProfiles.Response PublicGetUserProfiles(PublicGetUserProfiles input)
         {
             var response = _sdk.RunRequest(input);
@@ -231,9 +231,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicCreateProfile.Response PublicCreateProfile(PublicCreateProfile input)
         {
             var response = _sdk.RunRequest(input);
@@ -250,9 +250,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetProfile.Response PublicGetProfile(PublicGetProfile input)
         {
             var response = _sdk.RunRequest(input);
@@ -269,9 +269,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateProfile.Response PublicUpdateProfile(PublicUpdateProfile input)
         {
             var response = _sdk.RunRequest(input);
@@ -288,9 +288,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicDeleteProfile.Response PublicDeleteProfile(PublicDeleteProfile input)
         {
             var response = _sdk.RunRequest(input);
@@ -307,9 +307,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetProfileAttribute.Response PublicGetProfileAttribute(PublicGetProfileAttribute input)
         {
             var response = _sdk.RunRequest(input);
@@ -326,9 +326,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdateAttribute.Response PublicUpdateAttribute(PublicUpdateAttribute input)
         {
             var response = _sdk.RunRequest(input);
@@ -345,6 +345,6 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
     }
 }

@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 KickGroupMemberPublicV1 op = new KickGroupMemberPublicV1(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<KickGroupMemberPublicV1Builder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,12 +119,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,18 +151,18 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public KickGroupMemberPublicV1(
-            string namespace_,
-            string userId
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,10 +171,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public KickGroupMemberPublicV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new KickGroupMemberPublicV1.Response()

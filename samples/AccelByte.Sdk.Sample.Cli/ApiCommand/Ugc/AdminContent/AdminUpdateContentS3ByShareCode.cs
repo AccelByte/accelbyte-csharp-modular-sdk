@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ugc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
 {
-    [SdkConsoleCommand("ugc", "adminupdatecontents3bysharecode")]
-    public class AdminUpdateContentS3ByShareCodeCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ugc","adminupdatecontents3bysharecode")]
+    public class AdminUpdateContentS3ByShareCodeCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ugc"; } }
+        public string ServiceName{ get { return "Ugc"; } }
 
-        public string OperationName { get { return "AdminUpdateContentS3ByShareCode"; } }
+        public string OperationName{ get { return "AdminUpdateContentS3ByShareCode"; } }
 
         [SdkCommandArgument("channelId")]
         public string ChannelId { get; set; } = String.Empty;
@@ -72,8 +72,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ugc
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

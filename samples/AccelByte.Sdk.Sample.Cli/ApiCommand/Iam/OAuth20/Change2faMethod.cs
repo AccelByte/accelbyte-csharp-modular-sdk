@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "change2famethod")]
-    public class Change2faMethodCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","change2famethod")]
+    public class Change2faMethodCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "Change2faMethod"; } }
+        public string OperationName{ get { return "Change2faMethod"; } }
 
         [SdkCommandArgument("factor")]
         public string Factor { get; set; } = String.Empty;

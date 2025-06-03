@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminDeleteTiedChallenge op = new AdminDeleteTiedChallenge(this,
-                    challengeCode,
-                    namespace_
+                    challengeCode,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminDeleteTiedChallengeBuilder>(this);
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -112,12 +112,12 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,18 +144,18 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public AdminDeleteTiedChallenge(
-            string challengeCode,
-            string namespace_
+            string challengeCode,            
+            string namespace_            
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,10 +164,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeleteTiedChallenge.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteTiedChallenge.Response()
@@ -178,31 +178,31 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

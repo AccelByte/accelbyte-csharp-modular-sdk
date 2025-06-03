@@ -58,8 +58,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminBulkUpdateUserAccountTypeV4 op = new AdminBulkUpdateUserAccountTypeV4(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminBulkUpdateUserAccountTypeV4Builder>(this);
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -112,13 +112,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,18 +145,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminBulkUpdateUserAccountTypeV4(
-            string namespace_,
-            Model.ModelBulkAccountTypeUpdateRequestV4 body
+            string namespace_,            
+            Model.ModelBulkAccountTypeUpdateRequestV4 body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminBulkUpdateUserAccountTypeV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminBulkUpdateUserAccountTypeV4.Response()
@@ -179,31 +179,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

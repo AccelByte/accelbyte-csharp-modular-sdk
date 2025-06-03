@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindeleterolepermissionsv3")]
-    public class AdminDeleteRolePermissionsV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindeleterolepermissionsv3")]
+    public class AdminDeleteRolePermissionsV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDeleteRolePermissionsV3"; } }
+        public string OperationName{ get { return "AdminDeleteRolePermissionsV3"; } }
 
         [SdkCommandArgument("roleId")]
         public string RoleId { get; set; } = String.Empty;

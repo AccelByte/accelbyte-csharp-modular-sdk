@@ -68,9 +68,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetPaymentPublicConfig op = new GetPaymentPublicConfig(this,
-                    namespace_,
-                    paymentProvider,
-                    region
+                    namespace_,                    
+                    paymentProvider,                    
+                    region                    
                 );
 
                 op.SetBaseFields<GetPaymentPublicConfigBuilder>(this);
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,15 +128,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -152,22 +152,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetPaymentPublicConfig(
-            string namespace_,
-            bool? sandbox,
-            GetPaymentPublicConfigPaymentProvider paymentProvider,
-            string region
+            string namespace_,            
+            bool? sandbox,            
+            GetPaymentPublicConfigPaymentProvider paymentProvider,            
+            string region            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
             if (region is not null) QueryParams["region"] = region;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetPaymentPublicConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetPaymentPublicConfig.Response()

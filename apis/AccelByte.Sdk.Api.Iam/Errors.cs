@@ -191,14 +191,14 @@ namespace AccelByte.Sdk.Api.Iam
 
         public ApiError TranslateToApiError()
         {
-            string errorCode =
+            string errorCode = 
                 Error != null ? Error.ToString() :
                 "";
-
-            string errorMessage =
-                ErrorDescription != null ? ErrorDescription.ToString() :
+            
+            string errorMessage = 
+                ErrorDescription != null ? ErrorDescription.ToString() :                
                 "";
-
+            
             return new ApiError(errorCode, errorMessage);
         }
     }
@@ -222,14 +222,14 @@ namespace AccelByte.Sdk.Api.Iam
 
         public ApiError TranslateToApiError()
         {
-            string errorCode =
+            string errorCode = 
                 ErrorCode != null ? ErrorCode.Value.ToString() :
                 "";
-
-            string errorMessage =
-                ErrorMessage != null ? ErrorMessage.ToString() :
+            
+            string errorMessage = 
+                ErrorMessage != null ? ErrorMessage.ToString() :                
                 "";
-
+            
             return new ApiError(errorCode, errorMessage);
         }
     }

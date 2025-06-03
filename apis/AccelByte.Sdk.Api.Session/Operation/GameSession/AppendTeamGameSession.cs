@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
     ///
     /// Append new member or team to session. Please use patchUpdateGameSession instead
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AppendTeamGameSession : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -58,16 +58,16 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AppendTeamGameSession op = new AppendTeamGameSession(this,
-                    body,
-                    namespace_,
-                    sessionId
+                    body,                    
+                    namespace_,                    
+                    sessionId                    
                 );
 
                 op.SetBaseFields<AppendTeamGameSessionBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AppendTeamGameSession.Response Execute(
                 ApimodelsAppendTeamGameSessionRequest body,
                 string namespace_,
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -163,13 +163,13 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -207,20 +207,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AppendTeamGameSession(
-            string namespace_,
-            string sessionId,
-            Model.ApimodelsAppendTeamGameSessionRequest body
+            string namespace_,            
+            string sessionId,            
+            Model.ApimodelsAppendTeamGameSessionRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AppendTeamGameSession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AppendTeamGameSession.Response()
@@ -285,7 +285,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionResponse<T1, T2>>(payload, ResponseJsonOptions);
@@ -311,7 +311,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

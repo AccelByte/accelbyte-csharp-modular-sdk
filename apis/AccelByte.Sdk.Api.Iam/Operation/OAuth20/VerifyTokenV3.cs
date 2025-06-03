@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 VerifyTokenV3 op = new VerifyTokenV3(this,
-                    token
+                    token                    
                 );
 
                 op.SetBaseFields<VerifyTokenV3Builder>(this);
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,13 +102,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -127,16 +127,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public VerifyTokenV3(
-            string token
+            string token            
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public VerifyTokenV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new VerifyTokenV3.Response()

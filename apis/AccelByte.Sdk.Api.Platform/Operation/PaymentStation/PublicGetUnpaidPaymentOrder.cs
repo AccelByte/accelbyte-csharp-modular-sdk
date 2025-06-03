@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetUnpaidPaymentOrder op = new PublicGetUnpaidPaymentOrder(this,
-                    namespace_,
-                    paymentOrderNo
+                    namespace_,                    
+                    paymentOrderNo                    
                 );
 
                 op.SetBaseFields<PublicGetUnpaidPaymentOrderBuilder>(this);
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,12 +114,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -139,18 +139,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetUnpaidPaymentOrder(
-            string namespace_,
-            string paymentOrderNo
+            string namespace_,            
+            string paymentOrderNo            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["paymentOrderNo"] = paymentOrderNo;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
         }
 
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetUnpaidPaymentOrder.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetUnpaidPaymentOrder.Response()

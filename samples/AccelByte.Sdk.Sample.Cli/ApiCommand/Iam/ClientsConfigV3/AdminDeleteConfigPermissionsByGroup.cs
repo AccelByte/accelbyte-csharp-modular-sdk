@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindeleteconfigpermissionsbygroup")]
-    public class AdminDeleteConfigPermissionsByGroupCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindeleteconfigpermissionsbygroup")]
+    public class AdminDeleteConfigPermissionsByGroupCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDeleteConfigPermissionsByGroup"; } }
+        public string OperationName{ get { return "AdminDeleteConfigPermissionsByGroup"; } }
 
         [SdkCommandArgument("forceDelete")]
         public bool? ForceDelete { get; set; }

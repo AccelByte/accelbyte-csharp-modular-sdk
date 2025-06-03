@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "useracceptfriendrequest")]
-    public class UserAcceptFriendRequestCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","useracceptfriendrequest")]
+    public class UserAcceptFriendRequestCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "UserAcceptFriendRequest"; } }
+        public string OperationName{ get { return "UserAcceptFriendRequest"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

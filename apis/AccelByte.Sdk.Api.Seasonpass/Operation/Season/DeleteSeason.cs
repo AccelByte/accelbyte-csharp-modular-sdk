@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 DeleteSeason op = new DeleteSeason(this,
-                    namespace_,
-                    seasonId
+                    namespace_,                    
+                    seasonId                    
                 );
 
                 op.SetBaseFields<DeleteSeasonBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,18 +139,18 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public DeleteSeason(
-            string namespace_,
-            string seasonId
+            string namespace_,            
+            string seasonId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,10 +159,10 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeleteSeason.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteSeason.Response()
@@ -173,19 +173,19 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
-
+            
             {
                 response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();

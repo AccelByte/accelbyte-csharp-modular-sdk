@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Achievement.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
 {
-    [SdkConsoleCommand("achievement", "adminlistuserachievements")]
-    public class AdminListUserAchievementsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("achievement","adminlistuserachievements")]
+    public class AdminListUserAchievementsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Achievement"; } }
+        public string ServiceName{ get { return "Achievement"; } }
 
-        public string OperationName { get { return "AdminListUserAchievements"; } }
+        public string OperationName{ get { return "AdminListUserAchievements"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -85,8 +85,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Achievement
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

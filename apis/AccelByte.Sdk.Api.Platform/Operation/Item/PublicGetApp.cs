@@ -86,8 +86,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetApp op = new PublicGetApp(this,
-                    itemId,
-                    namespace_
+                    itemId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetAppBuilder>(this);
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -141,15 +141,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -167,24 +167,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetApp(
-            string itemId,
-            string namespace_,
-            string? language,
-            string? region,
-            string? storeId
+            string itemId,            
+            string namespace_,            
+            string? language,            
+            string? region,            
+            string? storeId            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (language is not null) QueryParams["language"] = language;
             if (region is not null) QueryParams["region"] = region;
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -192,10 +192,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetApp.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetApp.Response()

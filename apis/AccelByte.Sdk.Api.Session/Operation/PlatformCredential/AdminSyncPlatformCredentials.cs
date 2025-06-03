@@ -65,8 +65,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminSyncPlatformCredentials op = new AdminSyncPlatformCredentials(this,
-                    namespace_,
-                    platformId
+                    namespace_,                    
+                    platformId                    
                 );
 
                 op.SetBaseFields<AdminSyncPlatformCredentialsBuilder>(this);
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,12 +120,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId.Value;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,18 +152,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminSyncPlatformCredentials(
-            string namespace_,
-            AdminSyncPlatformCredentialsPlatformId platformId
+            string namespace_,            
+            AdminSyncPlatformCredentialsPlatformId platformId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId.Value;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,10 +172,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminSyncPlatformCredentials.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSyncPlatformCredentials.Response()

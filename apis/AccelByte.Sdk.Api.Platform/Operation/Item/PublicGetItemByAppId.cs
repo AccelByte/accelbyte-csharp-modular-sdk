@@ -86,8 +86,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetItemByAppId op = new PublicGetItemByAppId(this,
-                    namespace_,
-                    appId
+                    namespace_,                    
+                    appId                    
                 );
 
                 op.SetBaseFields<PublicGetItemByAppIdBuilder>(this);
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -179,16 +179,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Language is not null) QueryParams["language"] = builder.Language;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (appId is not null) QueryParams["appId"] = appId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -214,24 +214,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetItemByAppId(
-            string namespace_,
-            string? language,
-            string? region,
-            string? storeId,
-            string appId
+            string namespace_,            
+            string? language,            
+            string? region,            
+            string? storeId,            
+            string appId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (language is not null) QueryParams["language"] = language;
             if (region is not null) QueryParams["region"] = region;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (appId is not null) QueryParams["appId"] = appId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -240,10 +240,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetItemByAppId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetItemByAppId.Response()
@@ -281,7 +281,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ItemInfo<T1, T2>>(payload, ResponseJsonOptions);
@@ -292,7 +292,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

@@ -166,6 +166,8 @@
 ### DLC Wrapper:  [DLC](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/DLC.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
+| `/platform/admin/namespaces/{namespace}/dlc/config/history` | GET | GetDLCItemConfigHistory | [GetDLCItemConfigHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/GetDLCItemConfigHistory.cs) | [GetDLCItemConfigHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/GetDLCItemConfigHistory.cs) |
+| `/platform/admin/namespaces/{namespace}/dlc/config/history/{id}/restore` | POST | RestoreDLCItemConfigHistory | [RestoreDLCItemConfigHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/RestoreDLCItemConfigHistory.cs) | [RestoreDLCItemConfigHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/RestoreDLCItemConfigHistory.cs) |
 | `/platform/admin/namespaces/{namespace}/dlc/config/item` | GET | GetDLCItemConfig | [GetDLCItemConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/GetDLCItemConfig.cs) | [GetDLCItemConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/GetDLCItemConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/dlc/config/item` | PUT | UpdateDLCItemConfig | [UpdateDLCItemConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/UpdateDLCItemConfig.cs) | [UpdateDLCItemConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/UpdateDLCItemConfig.cs) |
 | `/platform/admin/namespaces/{namespace}/dlc/config/item` | DELETE | DeleteDLCItemConfig | [DeleteDLCItemConfig](../../apis/AccelByte.Sdk.Api.Platform/Operation/DLC/DeleteDLCItemConfig.cs) | [DeleteDLCItemConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/DLC/DeleteDLCItemConfig.cs) |
@@ -913,6 +915,8 @@
 | `Customization` | [Customization](../../apis/AccelByte.Sdk.Api.Platform/Model/Customization.cs) |
 | `DLCConfigRewardShortInfo` | [DLCConfigRewardShortInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCConfigRewardShortInfo.cs) |
 | `DLCItem` | [DLCItem](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCItem.cs) |
+| `DLCItemConfigHistoryInfo` | [DLCItemConfigHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCItemConfigHistoryInfo.cs) |
+| `DLCItemConfigHistoryResult` | [DLCItemConfigHistoryResult](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCItemConfigHistoryResult.cs) |
 | `DLCItemConfigInfo` | [DLCItemConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCItemConfigInfo.cs) |
 | `DLCItemConfigUpdate` | [DLCItemConfigUpdate](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCItemConfigUpdate.cs) |
 | `DLCRecord` | [DLCRecord](../../apis/AccelByte.Sdk.Api.Platform/Model/DLCRecord.cs) |

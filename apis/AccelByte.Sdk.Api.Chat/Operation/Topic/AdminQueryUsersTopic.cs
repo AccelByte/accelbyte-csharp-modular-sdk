@@ -96,8 +96,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminQueryUsersTopic op = new AdminQueryUsersTopic(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminQueryUsersTopicBuilder>(this);
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -151,17 +151,17 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.IncludePastTopics != null) QueryParams["includePastTopics"] = Convert.ToString(builder.IncludePastTopics)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.TopicSubType is not null) QueryParams["topicSubType"] = builder.TopicSubType.Value;
             if (builder.TopicType is not null) QueryParams["topicType"] = builder.TopicType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,28 +186,28 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminQueryUsersTopic(
-            string namespace_,
-            string userId,
-            bool? includePastTopics,
-            long? limit,
-            long? offset,
-            AdminQueryUsersTopicTopicSubType? topicSubType,
-            AdminQueryUsersTopicTopicType? topicType
+            string namespace_,            
+            string userId,            
+            bool? includePastTopics,            
+            long? limit,            
+            long? offset,            
+            AdminQueryUsersTopicTopicSubType? topicSubType,            
+            AdminQueryUsersTopicTopicType? topicType            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (includePastTopics != null) QueryParams["includePastTopics"] = Convert.ToString(includePastTopics)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (topicSubType is not null) QueryParams["topicSubType"] = topicSubType.Value;
             if (topicType is not null) QueryParams["topicType"] = topicType.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminQueryUsersTopic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminQueryUsersTopic.Response()

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "unselectrecord")]
-    public class UnselectRecordCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","unselectrecord")]
+    public class UnselectRecordCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "UnselectRecord"; } }
+        public string OperationName{ get { return "UnselectRecord"; } }
 
         [SdkCommandArgument("changeId")]
         public string ChangeId { get; set; } = String.Empty;

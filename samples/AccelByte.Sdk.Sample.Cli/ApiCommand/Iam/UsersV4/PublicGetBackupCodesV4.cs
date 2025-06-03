@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "publicgetbackupcodesv4")]
-    public class PublicGetBackupCodesV4Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","publicgetbackupcodesv4")]
+    public class PublicGetBackupCodesV4Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PublicGetBackupCodesV4"; } }
+        public string OperationName{ get { return "PublicGetBackupCodesV4"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

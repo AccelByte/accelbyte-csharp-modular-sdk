@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ---------
     /// **Substitute endpoint**: /iam/v4/public/namespaces/{namespace}/users/me/mfa/status [GET]
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicGetMyMFAStatusV4 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -58,14 +58,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicGetMyMFAStatusV4 op = new PublicGetMyMFAStatusV4(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetMyMFAStatusV4Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public PublicGetMyMFAStatusV4.Response Execute(
                 string namespace_
             )
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -107,12 +107,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,16 +137,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGetMyMFAStatusV4(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,10 +155,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetMyMFAStatusV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetMyMFAStatusV4.Response()

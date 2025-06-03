@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetPsnEntitlementOwnership op = new GetPsnEntitlementOwnership(this,
-                    body,
-                    entitlementLabel,
-                    namespace_
+                    body,                    
+                    entitlementLabel,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetPsnEntitlementOwnershipBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,13 +118,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["entitlementLabel"] = entitlementLabel;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,20 +141,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetPsnEntitlementOwnership(
-            string entitlementLabel,
-            string namespace_,
-            Model.PsnEntitlementOwnershipRequest body
+            string entitlementLabel,            
+            string namespace_,            
+            Model.PsnEntitlementOwnershipRequest body            
         )
         {
             PathParams["entitlementLabel"] = entitlementLabel;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetPsnEntitlementOwnership.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetPsnEntitlementOwnership.Response()

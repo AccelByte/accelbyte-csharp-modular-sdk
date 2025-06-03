@@ -77,8 +77,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestTokenByOneTimeLinkCodeResponseV3 op = new RequestTokenByOneTimeLinkCodeResponseV3(this,
-                    clientId,
-                    oneTimeLinkCode
+                    clientId,                    
+                    oneTimeLinkCode                    
                 );
 
                 op.SetBaseFields<RequestTokenByOneTimeLinkCodeResponseV3Builder>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,16 +130,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string oneTimeLinkCode
         )
         {
-
-
+            
+            
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.IsTransient != null) FormParams["isTransient"] = Convert.ToString(builder.IsTransient)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -155,22 +155,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RequestTokenByOneTimeLinkCodeResponseV3(
-            string? additionalData,
-            bool? isTransient,
-            string clientId,
-            string oneTimeLinkCode
+            string? additionalData,            
+            bool? isTransient,            
+            string clientId,            
+            string oneTimeLinkCode            
         )
         {
-
-
+            
+            
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (isTransient != null) FormParams["isTransient"] = Convert.ToString(isTransient)!;
             if (clientId is not null) FormParams["client_id"] = clientId;
             if (oneTimeLinkCode is not null) FormParams["oneTimeLinkCode"] = oneTimeLinkCode;
 
-
-
-
+            
+            
+            
 
         }
 
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public RequestTokenByOneTimeLinkCodeResponseV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RequestTokenByOneTimeLinkCodeResponseV3.Response()

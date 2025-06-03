@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetCountries.GetCountriesBuilder GetCountriesOp
         {
             get
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetCountries.PublicGetCountriesBuilder PublicGetCountriesOp
         {
             get
@@ -159,8 +159,8 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetCountries.Response GetCountries(GetCountries input)
         {
             var response = _sdk.RunRequest(input);
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public GetCountryGroups.Response GetCountryGroups(GetCountryGroups input)
         {
             var response = _sdk.RunRequest(input);
@@ -290,8 +290,8 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetCountries.Response PublicGetCountries(PublicGetCountries input)
         {
             var response = _sdk.RunRequest(input);
@@ -308,7 +308,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public PublicGetLanguages.Response PublicGetLanguages(PublicGetLanguages input)
         {
             var response = _sdk.RunRequest(input);

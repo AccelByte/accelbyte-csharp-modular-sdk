@@ -39,6 +39,17 @@ namespace AccelByte.Sdk.Api.Match2
         }
         private Wrapper.Config? _Config = null;
 
+        public Wrapper.PlayFeatureFlag PlayFeatureFlag
+        {
+            get
+            {
+                if (_PlayFeatureFlag == null)
+                    _PlayFeatureFlag = new Wrapper.PlayFeatureFlag(_Sdk, _CustomBasePath);
+                return _PlayFeatureFlag;
+            }
+        }
+        private Wrapper.PlayFeatureFlag? _PlayFeatureFlag = null;
+
         public Wrapper.EnvironmentVariables EnvironmentVariables
         {
             get

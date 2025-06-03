@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "admindeleteglobalconfig")]
-    public class AdminDeleteGlobalConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","admindeleteglobalconfig")]
+    public class AdminDeleteGlobalConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "AdminDeleteGlobalConfig"; } }
+        public string OperationName{ get { return "AdminDeleteGlobalConfig"; } }
 
         public AdminDeleteGlobalConfigCommand(IAccelByteSdk sdk)
         {
@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
         {
             AccelByte.Sdk.Api.Lobby.Wrapper.Admin wrapper = new AccelByte.Sdk.Api.Lobby.Wrapper.Admin(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Lobby.Operation.AdminDeleteGlobalConfig.Builder;
 
 
@@ -46,9 +46,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
             AdminDeleteGlobalConfig operation = opBuilder.Build(
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminDeleteGlobalConfig(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

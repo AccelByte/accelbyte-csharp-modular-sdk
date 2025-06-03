@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ListAdminsV3 op = new ListAdminsV3(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListAdminsV3Builder>(this);
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.After is not null) QueryParams["after"] = builder.After;
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
@@ -181,11 +181,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
             if (builder.RoleId is not null) QueryParams["roleId"] = builder.RoleId;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -208,18 +208,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public ListAdminsV3(
-            string namespace_,
-            string? after,
-            string? before,
-            string? endDate,
-            long? limit,
-            string? query,
-            string? roleId,
-            string? startDate
+            string namespace_,            
+            string? after,            
+            string? before,            
+            string? endDate,            
+            long? limit,            
+            string? query,            
+            string? roleId,            
+            string? startDate            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (after is not null) QueryParams["after"] = after;
             if (before is not null) QueryParams["before"] = before;
             if (endDate is not null) QueryParams["endDate"] = endDate;
@@ -227,11 +227,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (query is not null) QueryParams["query"] = query;
             if (roleId is not null) QueryParams["roleId"] = roleId;
             if (startDate is not null) QueryParams["startDate"] = startDate;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -240,10 +240,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public ListAdminsV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListAdminsV3.Response()

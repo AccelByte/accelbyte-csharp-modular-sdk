@@ -105,9 +105,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetUserByPlatformUserIDV3 op = new AdminGetUserByPlatformUserIDV3(this,
-                    namespace_,
-                    platformId,
-                    platformUserId
+                    namespace_,                    
+                    platformId,                    
+                    platformUserId                    
                 );
 
                 op.SetBaseFields<AdminGetUserByPlatformUserIDV3Builder>(this);
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -167,13 +167,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["platformUserId"] = platformUserId;
-
+            
             if (builder.PidType is not null) QueryParams["pidType"] = builder.PidType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -198,22 +198,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetUserByPlatformUserIDV3(
-            string namespace_,
-            string platformId,
-            string platformUserId,
-            string? pidType
+            string namespace_,            
+            string platformId,            
+            string platformUserId,            
+            string? pidType            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["platformUserId"] = platformUserId;
-
+            
             if (pidType is not null) QueryParams["pidType"] = pidType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,10 +222,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetUserByPlatformUserIDV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetUserByPlatformUserIDV3.Response()

@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminQueryParties op = new AdminQueryParties(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminQueryPartiesBuilder>(this);
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -215,7 +215,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.FromTime is not null) QueryParams["fromTime"] = builder.FromTime;
             if (builder.IsSoftDeleted is not null) QueryParams["isSoftDeleted"] = builder.IsSoftDeleted;
             if (builder.Joinability is not null) QueryParams["joinability"] = builder.Joinability;
@@ -230,11 +230,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (builder.PartyID is not null) QueryParams["partyID"] = builder.PartyID;
             if (builder.ToTime is not null) QueryParams["toTime"] = builder.ToTime;
             if (builder.Value is not null) QueryParams["value"] = builder.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -257,25 +257,25 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminQueryParties(
-            string namespace_,
-            string? fromTime,
-            string? isSoftDeleted,
-            string? joinability,
-            string? key,
-            string? leaderID,
-            long? limit,
-            string? memberID,
-            string? memberStatus,
-            long? offset,
-            string? order,
-            string? orderBy,
-            string? partyID,
-            string? toTime,
-            string? value
+            string namespace_,            
+            string? fromTime,            
+            string? isSoftDeleted,            
+            string? joinability,            
+            string? key,            
+            string? leaderID,            
+            long? limit,            
+            string? memberID,            
+            string? memberStatus,            
+            long? offset,            
+            string? order,            
+            string? orderBy,            
+            string? partyID,            
+            string? toTime,            
+            string? value            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (fromTime is not null) QueryParams["fromTime"] = fromTime;
             if (isSoftDeleted is not null) QueryParams["isSoftDeleted"] = isSoftDeleted;
             if (joinability is not null) QueryParams["joinability"] = joinability;
@@ -290,11 +290,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (partyID is not null) QueryParams["partyID"] = partyID;
             if (toTime is not null) QueryParams["toTime"] = toTime;
             if (value is not null) QueryParams["value"] = value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -306,7 +306,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminQueryParties.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminQueryParties.Response()

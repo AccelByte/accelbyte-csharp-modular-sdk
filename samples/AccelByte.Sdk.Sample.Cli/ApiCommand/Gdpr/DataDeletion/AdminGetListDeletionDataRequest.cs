@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "admingetlistdeletiondatarequest")]
-    public class AdminGetListDeletionDataRequestCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr","admingetlistdeletiondatarequest")]
+    public class AdminGetListDeletionDataRequestCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Gdpr"; } }
+        public string ServiceName{ get { return "Gdpr"; } }
 
-        public string OperationName { get { return "AdminGetListDeletionDataRequest"; } }
+        public string OperationName{ get { return "AdminGetListDeletionDataRequest"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -81,8 +81,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

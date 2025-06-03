@@ -59,9 +59,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 DeleteTemplateLocalizationV1Admin op = new DeleteTemplateLocalizationV1Admin(this,
-                    namespace_,
-                    templateLanguage,
-                    templateSlug
+                    namespace_,                    
+                    templateLanguage,                    
+                    templateSlug                    
                 );
 
                 op.SetBaseFields<DeleteTemplateLocalizationV1AdminBuilder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,12 +121,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             PathParams["namespace"] = namespace_;
             PathParams["templateLanguage"] = templateLanguage;
             PathParams["templateSlug"] = templateSlug;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -151,20 +151,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public DeleteTemplateLocalizationV1Admin(
-            string namespace_,
-            string templateLanguage,
-            string templateSlug
+            string namespace_,            
+            string templateLanguage,            
+            string templateSlug            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateLanguage"] = templateLanguage;
             PathParams["templateSlug"] = templateSlug;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,7 +176,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeleteTemplateLocalizationV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteTemplateLocalizationV1Admin.Response()
@@ -187,25 +187,25 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

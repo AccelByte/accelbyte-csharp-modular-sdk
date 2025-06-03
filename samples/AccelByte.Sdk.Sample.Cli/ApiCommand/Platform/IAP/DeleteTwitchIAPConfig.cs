@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "deletetwitchiapconfig")]
-    public class DeleteTwitchIAPConfigCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","deletetwitchiapconfig")]
+    public class DeleteTwitchIAPConfigCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "DeleteTwitchIAPConfig"; } }
+        public string OperationName{ get { return "DeleteTwitchIAPConfig"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

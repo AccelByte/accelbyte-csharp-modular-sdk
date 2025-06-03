@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsmc.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
 {
-    [SdkConsoleCommand("dsmc", "listsession")]
-    public class ListSessionCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsmc","listsession")]
+    public class ListSessionCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsmc"; } }
+        public string ServiceName{ get { return "Dsmc"; } }
 
-        public string OperationName { get { return "ListSession"; } }
+        public string OperationName{ get { return "ListSession"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -74,8 +74,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsmc
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

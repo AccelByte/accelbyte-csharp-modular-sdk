@@ -21,26 +21,26 @@ using AccelByte.Sdk.Api.Iam.Model;
 namespace AccelByte.Sdk.Api.Iam.Operation
 {
     /// <summary>
-    /// AdminCreateTagV3
+    /// AdminUpdateTagV3
     ///
-    /// Create a new Account Identifier Tag for users. This endpoint allows administrators to create tags that can be used to identify and categorize user accounts.
+    /// Update an existing Account Identifier Tag. This endpoint allows administrators to update the details of a tag that is used to identify and categorize user accounts.
     /// </summary>
-    public class AdminCreateTagV3 : AccelByte.Sdk.Core.Operation
+    public class AdminUpdateTagV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AdminCreateTagV3Builder Builder { get => new AdminCreateTagV3Builder(); }
+        public static AdminUpdateTagV3Builder Builder { get => new AdminUpdateTagV3Builder(); }
 
-        public class AdminCreateTagV3Builder
-            : OperationBuilder<AdminCreateTagV3Builder>
+        public class AdminUpdateTagV3Builder
+            : OperationBuilder<AdminUpdateTagV3Builder>
         {
 
 
 
 
 
-            internal AdminCreateTagV3Builder() { }
+            internal AdminUpdateTagV3Builder() { }
 
-            internal AdminCreateTagV3Builder(IAccelByteSdk sdk)
+            internal AdminUpdateTagV3Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -50,28 +50,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public AdminCreateTagV3 Build(
-                ModelTagCreateRequestV3 body,
-                string namespace_
+            public AdminUpdateTagV3 Build(
+                ModelTagUpdateRequestV3 body,
+                string namespace_,
+                string tagId
             )
             {
-                AdminCreateTagV3 op = new AdminCreateTagV3(this,
-                    body,
-                    namespace_
+                AdminUpdateTagV3 op = new AdminUpdateTagV3(this,
+                    body,                    
+                    namespace_,                    
+                    tagId                    
                 );
 
-                op.SetBaseFields<AdminCreateTagV3Builder>(this);
+                op.SetBaseFields<AdminUpdateTagV3Builder>(this);
                 return op;
             }
 
-            public AdminCreateTagV3.Response Execute(
-                ModelTagCreateRequestV3 body,
-                string namespace_
+            public AdminUpdateTagV3.Response Execute(
+                ModelTagUpdateRequestV3 body,
+                string namespace_,
+                string tagId
             )
             {
-                AdminCreateTagV3 op = Build(
+                AdminUpdateTagV3 op = Build(
                     body,
-                    namespace_
+                    namespace_,
+                    tagId
                 );
 
                 if (_Sdk == null)
@@ -79,18 +83,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateTagV3.Response> ExecuteAsync(
-                ModelTagCreateRequestV3 body,
-                string namespace_
+            public async Task<AdminUpdateTagV3.Response> ExecuteAsync(
+                ModelTagUpdateRequestV3 body,
+                string namespace_,
+                string tagId
             )
             {
-                AdminCreateTagV3 op = Build(
+                AdminUpdateTagV3 op = Build(
                     body,
-                    namespace_
+                    namespace_,
+                    tagId
                 );
 
                 if (_Sdk == null)
@@ -98,25 +104,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private AdminCreateTagV3(AdminCreateTagV3Builder builder,
-            ModelTagCreateRequestV3 body,
-            string namespace_
+        private AdminUpdateTagV3(AdminUpdateTagV3Builder builder,
+            ModelTagUpdateRequestV3 body,
+            string namespace_,
+            string tagId
         )
         {
             PathParams["namespace"] = namespace_;
+            PathParams["tagId"] = tagId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -128,44 +136,48 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public RestErrorResponse? Error400 { get; set; } = null;
 
+            public RestErrorResponse? Error404 { get; set; } = null;
+
             public RestErrorResponse? Error409 { get; set; } = null;
 
             public RestErrorResponse? Error500 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Iam::AccountIdenfifierTag::AdminCreateTagV3";
+            protected override string GetFullOperationId() => "Iam::AccountIdentifierTag::AdminUpdateTagV3";
         }
 
         #endregion
 
-        public AdminCreateTagV3(
-            string namespace_,
-            Model.ModelTagCreateRequestV3 body
+        public AdminUpdateTagV3(
+            string namespace_,            
+            string tagId,            
+            Model.ModelTagUpdateRequestV3 body            
         )
         {
             PathParams["namespace"] = namespace_;
+            PathParams["tagId"] = tagId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/iam/v3/admin/namespaces/{namespace}/tags";
+        public override string Path => "/iam/v3/admin/namespaces/{namespace}/tags/{tagId}";
 
-        public override HttpMethod Method => HttpMethod.Post;
+        public override HttpMethod Method => HttpMethod.Put;
 
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public AdminCreateTagV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminUpdateTagV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new AdminCreateTagV3.Response()
+            var response = new AdminUpdateTagV3.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
@@ -184,6 +196,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {

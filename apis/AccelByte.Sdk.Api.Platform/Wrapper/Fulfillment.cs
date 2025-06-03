@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public FulfillItems.FulfillItemsBuilder FulfillItemsOp
         {
             get
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RetryFulfillItems.RetryFulfillItemsBuilder RetryFulfillItemsOp
         {
             get
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RevokeItems.RevokeItemsBuilder RevokeItemsOp
         {
             get
@@ -321,8 +321,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public FulfillItems.Response FulfillItems(FulfillItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -339,9 +339,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RetryFulfillItems.Response RetryFulfillItems(RetryFulfillItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -358,9 +358,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public RevokeItems.Response RevokeItems(RevokeItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -377,7 +377,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public FulfillItemsV3.Response FulfillItemsV3(FulfillItemsV3 input)
         {
             var response = _sdk.RunRequest(input);

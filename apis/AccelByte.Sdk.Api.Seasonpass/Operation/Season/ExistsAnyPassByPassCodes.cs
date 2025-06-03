@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 ExistsAnyPassByPassCodes op = new ExistsAnyPassByPassCodes(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<ExistsAnyPassByPassCodesBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,14 +123,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.PassCodes is not null) QueryParams["passCodes"] = builder.PassCodes;
+            
 
-
-
+            
             CollectionFormatMap["passCodes"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,21 +149,21 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public ExistsAnyPassByPassCodes(
-            string namespace_,
-            string userId,
-            List<string>? passCodes
+            string namespace_,            
+            string userId,            
+            List<string>? passCodes            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (passCodes is not null) QueryParams["passCodes"] = passCodes;
+            
 
-
-
+            
             CollectionFormatMap["passCodes"] = "multi";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,10 +172,10 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public ExistsAnyPassByPassCodes.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ExistsAnyPassByPassCodes.Response()

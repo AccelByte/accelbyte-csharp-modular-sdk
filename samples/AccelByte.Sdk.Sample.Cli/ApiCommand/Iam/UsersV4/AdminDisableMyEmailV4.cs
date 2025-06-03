@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindisablemyemailv4")]
-    public class AdminDisableMyEmailV4Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindisablemyemailv4")]
+    public class AdminDisableMyEmailV4Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDisableMyEmailV4"; } }
+        public string OperationName{ get { return "AdminDisableMyEmailV4"; } }
 
         [SdkCommandData("body")]
         public ModelDisableMFARequest Body { get; set; } = new ModelDisableMFARequest();

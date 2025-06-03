@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gdpr.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
 {
-    [SdkConsoleCommand("gdpr", "s2srequestdataretrieval")]
-    public class S2SRequestDataRetrievalCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("gdpr","s2srequestdataretrieval")]
+    public class S2SRequestDataRetrievalCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Gdpr"; } }
+        public string ServiceName{ get { return "Gdpr"; } }
 
-        public string OperationName { get { return "S2SRequestDataRetrieval"; } }
+        public string OperationName{ get { return "S2SRequestDataRetrieval"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gdpr
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

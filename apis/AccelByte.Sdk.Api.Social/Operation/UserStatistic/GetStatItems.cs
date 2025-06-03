@@ -82,8 +82,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 GetStatItems op = new GetStatItems(this,
-                    namespace_,
-                    statCode
+                    namespace_,                    
+                    statCode                    
                 );
 
                 op.SetBaseFields<GetStatItemsBuilder>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,15 +137,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,24 +168,24 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public GetStatItems(
-            string namespace_,
-            string statCode,
-            int? limit,
-            int? offset,
-            string? sortBy
+            string namespace_,            
+            string statCode,            
+            int? limit,            
+            int? offset,            
+            string? sortBy            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,10 +194,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetStatItems.Response()

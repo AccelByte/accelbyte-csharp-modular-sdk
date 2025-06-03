@@ -83,8 +83,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 PublicListSchedules op = new PublicListSchedules(this,
-                    challengeCode,
-                    namespace_
+                    challengeCode,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicListSchedulesBuilder>(this);
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -138,16 +138,16 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.DateTime != null)
                 QueryParams["dateTime"] = builder.DateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,25 +174,25 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public PublicListSchedules(
-            string challengeCode,
-            string namespace_,
-            DateTime? dateTime,
-            long? limit,
-            long? offset
+            string challengeCode,            
+            string namespace_,            
+            DateTime? dateTime,            
+            long? limit,            
+            long? offset            
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (dateTime != null)
                 QueryParams["dateTime"] = dateTime.Value.ToString("O", System.Globalization.CultureInfo.InvariantCulture);
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,10 +201,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicListSchedules.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicListSchedules.Response()

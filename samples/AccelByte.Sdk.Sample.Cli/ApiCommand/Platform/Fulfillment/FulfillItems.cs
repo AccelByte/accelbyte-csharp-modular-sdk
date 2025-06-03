@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "fulfillitems")]
-    public class FulfillItemsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","fulfillitems")]
+    public class FulfillItemsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "FulfillItems"; } }
+        public string OperationName{ get { return "FulfillItems"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -48,7 +48,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
         {
             AccelByte.Sdk.Api.Platform.Wrapper.Fulfillment wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.Fulfillment(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Platform.Operation.FulfillItems.Builder;
 
 
@@ -62,22 +62,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 UserId
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.FulfillItems(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 LogoutSSOClient op = new LogoutSSOClient(this,
-                    platformId
+                    platformId                    
                 );
 
                 op.SetBaseFields<LogoutSSOClientBuilder>(this);
@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,12 +106,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -134,16 +134,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public LogoutSSOClient(
-            string platformId
+            string platformId            
         )
         {
             PathParams["platformId"] = platformId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,10 +152,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public LogoutSSOClient.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new LogoutSSOClient.Response()
@@ -166,19 +166,19 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
-
+            
             {
                 response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

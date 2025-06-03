@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory", "admindeleteinventoryconfiguration")]
-    public class AdminDeleteInventoryConfigurationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("inventory","admindeleteinventoryconfiguration")]
+    public class AdminDeleteInventoryConfigurationCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Inventory"; } }
+        public string ServiceName{ get { return "Inventory"; } }
 
-        public string OperationName { get { return "AdminDeleteInventoryConfiguration"; } }
+        public string OperationName{ get { return "AdminDeleteInventoryConfiguration"; } }
 
         [SdkCommandArgument("inventoryConfigurationId")]
         public string InventoryConfigurationId { get; set; } = String.Empty;

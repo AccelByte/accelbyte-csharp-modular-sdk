@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveAllPoliciesFromBasePolicy op = new RetrieveAllPoliciesFromBasePolicy(this,
-                    basePolicyId,
-                    namespace_
+                    basePolicyId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<RetrieveAllPoliciesFromBasePolicyBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["basePolicyId"] = basePolicyId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,18 +135,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public RetrieveAllPoliciesFromBasePolicy(
-            string basePolicyId,
-            string namespace_
+            string basePolicyId,            
+            string namespace_            
         )
         {
             PathParams["basePolicyId"] = basePolicyId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,10 +155,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public RetrieveAllPoliciesFromBasePolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveAllPoliciesFromBasePolicy.Response()

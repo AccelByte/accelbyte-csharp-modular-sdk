@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,12 +95,12 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         private AdminFindActionList(AdminFindActionListBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -123,12 +123,12 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public AdminFindActionList(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminFindActionList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminFindActionList.Response()

@@ -21,77 +21,56 @@ using AccelByte.Sdk.Api.Iam.Model;
 namespace AccelByte.Sdk.Api.Iam.Operation
 {
     /// <summary>
-    /// AdminQueryTagV3
+    /// AdminCreateTagV3
     ///
-    /// Retrieve Account Identifier Tags. This endpoint allows administrators to retrieve tags that are used to identify and categorize user accounts.
-    /// Tag Name can be used for partial content search.
+    /// Create a new Account Identifier Tag for users. This endpoint allows administrators to create tags that can be used to identify and categorize user accounts.
     /// </summary>
-    public class AdminQueryTagV3 : AccelByte.Sdk.Core.Operation
+    public class AdminCreateTagV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AdminQueryTagV3Builder Builder { get => new AdminQueryTagV3Builder(); }
+        public static AdminCreateTagV3Builder Builder { get => new AdminCreateTagV3Builder(); }
 
-        public class AdminQueryTagV3Builder
-            : OperationBuilder<AdminQueryTagV3Builder>
+        public class AdminCreateTagV3Builder
+            : OperationBuilder<AdminCreateTagV3Builder>
         {
 
-            public long? Limit { get; set; }
-
-            public long? Offset { get; set; }
-
-            public string? TagName { get; set; }
 
 
 
 
+            internal AdminCreateTagV3Builder() { }
 
-            internal AdminQueryTagV3Builder() { }
-
-            internal AdminQueryTagV3Builder(IAccelByteSdk sdk)
+            internal AdminCreateTagV3Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminQueryTagV3Builder SetLimit(long _limit)
-            {
-                Limit = _limit;
-                return this;
-            }
-
-            public AdminQueryTagV3Builder SetOffset(long _offset)
-            {
-                Offset = _offset;
-                return this;
-            }
-
-            public AdminQueryTagV3Builder SetTagName(string _tagName)
-            {
-                TagName = _tagName;
-                return this;
-            }
 
 
 
 
-
-            public AdminQueryTagV3 Build(
+            public AdminCreateTagV3 Build(
+                ModelTagCreateRequestV3 body,
                 string namespace_
             )
             {
-                AdminQueryTagV3 op = new AdminQueryTagV3(this,
-                    namespace_
+                AdminCreateTagV3 op = new AdminCreateTagV3(this,
+                    body,                    
+                    namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryTagV3Builder>(this);
+                op.SetBaseFields<AdminCreateTagV3Builder>(this);
                 return op;
             }
 
-            public AdminQueryTagV3.Response Execute(
+            public AdminCreateTagV3.Response Execute(
+                ModelTagCreateRequestV3 body,
                 string namespace_
             )
             {
-                AdminQueryTagV3 op = Build(
+                AdminCreateTagV3 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -100,15 +79,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryTagV3.Response> ExecuteAsync(
+            public async Task<AdminCreateTagV3.Response> ExecuteAsync(
+                ModelTagCreateRequestV3 body,
                 string namespace_
             )
             {
-                AdminQueryTagV3 op = Build(
+                AdminCreateTagV3 op = Build(
+                    body,
                     namespace_
                 );
 
@@ -117,75 +98,74 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
         }
 
-        private AdminQueryTagV3(AdminQueryTagV3Builder builder,
+        private AdminCreateTagV3(AdminCreateTagV3Builder builder,
+            ModelTagCreateRequestV3 body,
             string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-            if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-            if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            if (builder.TagName is not null) QueryParams["tagName"] = builder.TagName;
-
-
-
-
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.AccountcommonTagsGetResponseV3>
+        public class Response : ApiResponse<Model.AccountcommonTagResponse>
         {
+
+            public RestErrorResponse? Error400 { get; set; } = null;
+
+            public RestErrorResponse? Error409 { get; set; } = null;
 
             public RestErrorResponse? Error500 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Iam::AccountIdenfifierTag::AdminQueryTagV3";
+            protected override string GetFullOperationId() => "Iam::AccountIdentifierTag::AdminCreateTagV3";
         }
 
         #endregion
 
-        public AdminQueryTagV3(
-            string namespace_,
-            long? limit,
-            long? offset,
-            string? tagName
+        public AdminCreateTagV3(
+            string namespace_,            
+            Model.ModelTagCreateRequestV3 body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-            if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
-            if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            if (tagName is not null) QueryParams["tagName"] = tagName;
-
-
-
-
-
+            
+            
+            BodyParams = body;
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
         public override string Path => "/iam/v3/admin/namespaces/{namespace}/tags";
 
-        public override HttpMethod Method => HttpMethod.Get;
+        public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
-        public AdminQueryTagV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        
+        public AdminCreateTagV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new AdminQueryTagV3.Response()
+            var response = new AdminCreateTagV3.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
@@ -197,8 +177,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonTagsGetResponseV3>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonTagResponse>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
+            {
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)409)
+            {
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {

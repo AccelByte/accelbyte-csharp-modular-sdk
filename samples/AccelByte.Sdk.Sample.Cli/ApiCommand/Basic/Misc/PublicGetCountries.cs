@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic", "publicgetcountries")]
-    public class PublicGetCountriesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("basic","publicgetcountries")]
+    public class PublicGetCountriesCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Basic"; } }
+        public string ServiceName{ get { return "Basic"; } }
 
-        public string OperationName { get { return "PublicGetCountries"; } }
+        public string OperationName{ get { return "PublicGetCountries"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
         {
             AccelByte.Sdk.Api.Basic.Wrapper.Misc wrapper = new AccelByte.Sdk.Api.Basic.Wrapper.Misc(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Basic.Operation.PublicGetCountries.Builder;
 
             if (Lang != null)
@@ -55,22 +55,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
                 Namespace
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.PublicGetCountries(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

@@ -80,8 +80,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminGetChannel op = new AdminGetChannel(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminGetChannelBuilder>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -135,15 +135,15 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,24 +166,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminGetChannel(
-            string namespace_,
-            string userId,
-            long? limit,
-            string? name,
-            long? offset
+            string namespace_,            
+            string userId,            
+            long? limit,            
+            string? name,            
+            long? offset            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetChannel.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetChannel.Response()

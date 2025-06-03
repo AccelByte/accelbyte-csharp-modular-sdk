@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/admin/roles [GET]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetRoles : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public GetRoles.Response Execute(
             )
             {
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -107,13 +107,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         private GetRoles(GetRolesBuilder builder
         )
         {
-
+            
             if (builder.IsWildcard is not null) QueryParams["isWildcard"] = builder.IsWildcard;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -134,16 +134,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetRoles(
-            string? isWildcard
+            string? isWildcard            
         )
         {
-
+            
             if (isWildcard is not null) QueryParams["isWildcard"] = isWildcard;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetRoles.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetRoles.Response()

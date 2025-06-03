@@ -58,10 +58,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateItemPurchaseCondition op = new UpdateItemPurchaseCondition(this,
-                    body,
-                    itemId,
-                    namespace_,
-                    storeId
+                    body,                    
+                    itemId,                    
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<UpdateItemPurchaseConditionBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -172,14 +172,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -217,22 +217,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdateItemPurchaseCondition(
-            string itemId,
-            string namespace_,
-            string storeId,
-            Model.PurchaseConditionUpdate body
+            string itemId,            
+            string namespace_,            
+            string storeId,            
+            Model.PurchaseConditionUpdate body            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -244,7 +244,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpdateItemPurchaseCondition.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateItemPurchaseCondition.Response()
@@ -297,7 +297,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
@@ -323,7 +323,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

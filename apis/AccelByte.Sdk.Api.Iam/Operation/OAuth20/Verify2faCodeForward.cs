@@ -88,10 +88,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 Verify2faCodeForward op = new Verify2faCodeForward(this,
-                    clientId,
-                    code,
-                    factor,
-                    mfaToken
+                    clientId,                    
+                    code,                    
+                    factor,                    
+                    mfaToken                    
                 );
 
                 op.SetBaseFields<Verify2faCodeForwardBuilder>(this);
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -153,8 +153,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string mfaToken
         )
         {
-
-
+            
+            
             if (builder.DefaultFactor is not null) FormParams["defaultFactor"] = builder.DefaultFactor;
             if (builder.Factors is not null) FormParams["factors"] = builder.Factors;
             if (builder.RememberDevice != null) FormParams["rememberDevice"] = Convert.ToString(builder.RememberDevice)!;
@@ -163,9 +163,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -184,17 +184,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public Verify2faCodeForward(
-            string? defaultFactor,
-            string? factors,
-            bool? rememberDevice,
-            string clientId,
-            string code,
-            string factor,
-            string mfaToken
+            string? defaultFactor,            
+            string? factors,            
+            bool? rememberDevice,            
+            string clientId,            
+            string code,            
+            string factor,            
+            string mfaToken            
         )
         {
-
-
+            
+            
             if (defaultFactor is not null) FormParams["defaultFactor"] = defaultFactor;
             if (factors is not null) FormParams["factors"] = factors;
             if (rememberDevice != null) FormParams["rememberDevice"] = Convert.ToString(rememberDevice)!;
@@ -203,9 +203,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -217,7 +217,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public Verify2faCodeForward.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new Verify2faCodeForward.Response()

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "retrieveeligibilitiespublicindirect")]
-    public class RetrieveEligibilitiesPublicIndirectCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","retrieveeligibilitiespublicindirect")]
+    public class RetrieveEligibilitiesPublicIndirectCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "RetrieveEligibilitiesPublicIndirect"; } }
+        public string OperationName{ get { return "RetrieveEligibilitiesPublicIndirect"; } }
 
         [SdkCommandArgument("clientId")]
         public string ClientId { get; set; } = String.Empty;
@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

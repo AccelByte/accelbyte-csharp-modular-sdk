@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Get the list of filters that would modify the phrase
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminDebugProfanityFilters : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -57,15 +57,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminDebugProfanityFilters op = new AdminDebugProfanityFilters(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminDebugProfanityFiltersBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminDebugProfanityFilters.Response Execute(
                 ModelsDebugProfanityFilterRequest body,
                 string namespace_
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -112,13 +112,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,18 +145,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminDebugProfanityFilters(
-            string namespace_,
-            Model.ModelsDebugProfanityFilterRequest body
+            string namespace_,            
+            Model.ModelsDebugProfanityFilterRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDebugProfanityFilters.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDebugProfanityFilters.Response()

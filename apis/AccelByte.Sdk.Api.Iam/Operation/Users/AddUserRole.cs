@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles/{roleId} [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AddUserRole : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AddUserRole op = new AddUserRole(this,
-                    namespace_,
-                    roleId,
-                    userId
+                    namespace_,                    
+                    roleId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AddUserRoleBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AddUserRole.Response Execute(
                 string namespace_,
                 string roleId,
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,12 +123,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["roleId"] = roleId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,20 +155,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AddUserRole(
-            string namespace_,
-            string roleId,
-            string userId
+            string namespace_,            
+            string roleId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["roleId"] = roleId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,10 +177,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json", "text/plain" };
+        public override List<string> Consumes => new() { "application/json","text/plain" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AddUserRole.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AddUserRole.Response()
@@ -191,31 +191,31 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error403!);
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)409)
-
+            
             {
                 response.Error409 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error409!);
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error500!);

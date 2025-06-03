@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "invalidateuserinfocache")]
-    public class InvalidateUserInfoCacheCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","invalidateuserinfocache")]
+    public class InvalidateUserInfoCacheCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "InvalidateUserInfoCache"; } }
+        public string OperationName{ get { return "InvalidateUserInfoCache"; } }
 
         [SdkCommandArgument("namespace_")]
         public string? Namespace { get; set; }
@@ -39,7 +39,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
         {
             AccelByte.Sdk.Api.Legal.Wrapper.UserInfo wrapper = new AccelByte.Sdk.Api.Legal.Wrapper.UserInfo(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Legal.Operation.InvalidateUserInfoCache.Builder;
 
             if (Namespace != null)
@@ -51,9 +51,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
             InvalidateUserInfoCache operation = opBuilder.Build(
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.InvalidateUserInfoCache(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

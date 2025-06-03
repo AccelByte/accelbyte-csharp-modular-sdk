@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicGetTimeZones op = new PublicGetTimeZones(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetTimeZonesBuilder>(this);
@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,12 +106,12 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -129,16 +129,16 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public PublicGetTimeZones(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
         }
 
@@ -146,10 +146,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetTimeZones.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetTimeZones.Response()

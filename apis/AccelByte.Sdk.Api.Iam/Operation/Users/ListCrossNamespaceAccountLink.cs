@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// When platformID (device platfom ID) is specified, platform login method for that specific platform ID is removed.
     /// This means to protect account from second hand device usage.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class ListCrossNamespaceAccountLink : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -72,16 +72,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ListCrossNamespaceAccountLink op = new ListCrossNamespaceAccountLink(this,
-                    linkingToken,
-                    namespace_,
-                    userId
+                    linkingToken,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<ListCrossNamespaceAccountLinkBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public ListCrossNamespaceAccountLink.Response Execute(
                 string linkingToken,
                 string namespace_,
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -134,14 +134,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
-
+            
+            
             if (builder.PlatformId is not null) FormParams["platformId"] = builder.PlatformId;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,22 +166,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public ListCrossNamespaceAccountLink(
-            string namespace_,
-            string userId,
-            string? platformId,
-            string linkingToken
+            string namespace_,            
+            string userId,            
+            string? platformId,            
+            string linkingToken            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
-
+            
+            
             if (platformId is not null) FormParams["platformId"] = platformId;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public ListCrossNamespaceAccountLink.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListCrossNamespaceAccountLink.Response()
@@ -204,25 +204,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);

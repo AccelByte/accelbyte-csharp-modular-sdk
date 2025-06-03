@@ -75,8 +75,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdatePayPalConfig op = new UpdatePayPalConfig(this,
-                    body,
-                    id
+                    body,                    
+                    id                    
                 );
 
                 op.SetBaseFields<UpdatePayPalConfigBuilder>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -129,15 +129,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["id"] = id;
-
+            
             if (builder.Sandbox != null) QueryParams["sandbox"] = Convert.ToString(builder.Sandbox)!;
             if (builder.Validate != null) QueryParams["validate"] = Convert.ToString(builder.Validate)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,22 +156,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdatePayPalConfig(
-            string id,
-            bool? sandbox,
-            bool? validate,
-            Model.PayPalConfig body
+            string id,            
+            bool? sandbox,            
+            bool? validate,            
+            Model.PayPalConfig body            
         )
         {
             PathParams["id"] = id;
-
+            
             if (sandbox != null) QueryParams["sandbox"] = Convert.ToString(sandbox)!;
             if (validate != null) QueryParams["validate"] = Convert.ToString(validate)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpdatePayPalConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdatePayPalConfig.Response()

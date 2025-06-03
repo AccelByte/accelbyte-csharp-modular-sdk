@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Admin join a player into a party.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminJoinPartyV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -58,16 +58,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminJoinPartyV1 op = new AdminJoinPartyV1(this,
-                    namespace_,
-                    partyId,
-                    userId
+                    namespace_,                    
+                    partyId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminJoinPartyV1Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminJoinPartyV1.Response Execute(
                 string namespace_,
                 string partyId,
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,12 +121,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,20 +155,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminJoinPartyV1(
-            string namespace_,
-            string partyId,
-            string userId
+            string namespace_,            
+            string partyId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,10 +177,10 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminJoinPartyV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminJoinPartyV1.Response()
@@ -191,37 +191,37 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)412)
-
+            
             {
                 response.Error412 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error412!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

@@ -12,49 +12,45 @@ using System.Collections.Generic;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Sample.Cli.Command;
 
-using AccelByte.Sdk.Api.Iam.Wrapper;
-using AccelByte.Sdk.Api.Iam.Model;
-using AccelByte.Sdk.Api.Iam.Operation;
+using AccelByte.Sdk.Api.Match2.Wrapper;
+using AccelByte.Sdk.Api.Match2.Model;
+using AccelByte.Sdk.Api.Match2.Operation;
 
-namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
+namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("iam", "admindeletetagv3")]
-    public class AdminDeleteTagV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("match2","admindeleteplayfeatureflag")]
+    public class AdminDeletePlayFeatureFlagCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Match2"; } }
 
-        public string OperationName { get { return "AdminDeleteTagV3"; } }
+        public string OperationName{ get { return "AdminDeletePlayFeatureFlag"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandArgument("tagId")]
-        public string TagId { get; set; } = String.Empty;
-
-        public AdminDeleteTagV3Command(IAccelByteSdk sdk)
+        public AdminDeletePlayFeatureFlagCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public CommandResult Run()
         {
-            AccelByte.Sdk.Api.Iam.Wrapper.AccountIdenfifierTag wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.AccountIdenfifierTag(_SDK);
+            AccelByte.Sdk.Api.Match2.Wrapper.PlayFeatureFlag wrapper = new AccelByte.Sdk.Api.Match2.Wrapper.PlayFeatureFlag(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminDeleteTagV3.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Match2.Operation.AdminDeletePlayFeatureFlag.Builder;
 
 
 
-            AdminDeleteTagV3 operation = opBuilder.Build(
-                Namespace,
-                TagId
+
+
+            AdminDeletePlayFeatureFlag operation = opBuilder.Build(
+                Namespace
             );
 
 
-            var response = wrapper.AdminDeleteTagV3(operation);
+            var response = wrapper.AdminDeletePlayFeatureFlag(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
             else if (!response.Error.IsAvailable)

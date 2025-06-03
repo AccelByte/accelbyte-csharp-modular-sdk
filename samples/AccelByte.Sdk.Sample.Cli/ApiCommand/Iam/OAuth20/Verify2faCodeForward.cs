@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "verify2facodeforward")]
-    public class Verify2faCodeForwardCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","verify2facodeforward")]
+    public class Verify2faCodeForwardCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "Verify2faCodeForward"; } }
+        public string OperationName{ get { return "Verify2faCodeForward"; } }
 
         [SdkCommandArgument("defaultFactor")]
         public string DefaultFactor { get; set; } = String.Empty;
@@ -83,8 +83,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 if (response.Data != null)
                     return CommandResult.Success(response.Data);
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

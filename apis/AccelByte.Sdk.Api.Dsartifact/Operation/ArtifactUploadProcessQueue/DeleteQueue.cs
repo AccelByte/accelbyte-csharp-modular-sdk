@@ -61,9 +61,9 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 DeleteQueue op = new DeleteQueue(this,
-                    namespace_,
-                    nodeIP,
-                    podName
+                    namespace_,                    
+                    nodeIP,                    
+                    podName                    
                 );
 
                 op.SetBaseFields<DeleteQueueBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,14 +121,14 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
             if (podName is not null) QueryParams["podName"] = podName;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,20 +149,20 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         #endregion
 
         public DeleteQueue(
-            string namespace_,
-            string nodeIP,
-            string podName
+            string namespace_,            
+            string nodeIP,            
+            string podName            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
             if (podName is not null) QueryParams["podName"] = podName;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,8 +173,8 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json", "text/x-log" };
-
+        public override List<string> Produces => new() { "application/json","text/x-log" };
+        
         public DeleteQueue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteQueue.Response()
@@ -185,13 +185,13 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

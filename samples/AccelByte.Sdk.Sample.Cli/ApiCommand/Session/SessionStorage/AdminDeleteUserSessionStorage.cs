@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session", "admindeleteusersessionstorage")]
-    public class AdminDeleteUserSessionStorageCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("session","admindeleteusersessionstorage")]
+    public class AdminDeleteUserSessionStorageCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Session"; } }
+        public string ServiceName{ get { return "Session"; } }
 
-        public string OperationName { get { return "AdminDeleteUserSessionStorage"; } }
+        public string OperationName{ get { return "AdminDeleteUserSessionStorage"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

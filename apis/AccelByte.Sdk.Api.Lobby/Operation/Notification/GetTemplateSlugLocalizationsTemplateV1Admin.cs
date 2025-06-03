@@ -82,8 +82,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetTemplateSlugLocalizationsTemplateV1Admin op = new GetTemplateSlugLocalizationsTemplateV1Admin(this,
-                    namespace_,
-                    templateSlug
+                    namespace_,                    
+                    templateSlug                    
                 );
 
                 op.SetBaseFields<GetTemplateSlugLocalizationsTemplateV1AdminBuilder>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,15 +137,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-
+            
             if (builder.After is not null) QueryParams["after"] = builder.After;
             if (builder.Before is not null) QueryParams["before"] = builder.Before;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -170,24 +170,24 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public GetTemplateSlugLocalizationsTemplateV1Admin(
-            string namespace_,
-            string templateSlug,
-            string? after,
-            string? before,
-            long? limit
+            string namespace_,            
+            string templateSlug,            
+            string? after,            
+            string? before,            
+            long? limit            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-
+            
             if (after is not null) QueryParams["after"] = after;
             if (before is not null) QueryParams["before"] = before;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetTemplateSlugLocalizationsTemplateV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetTemplateSlugLocalizationsTemplateV1Admin.Response()

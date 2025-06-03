@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dslogmanager.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
 {
-    [SdkConsoleCommand("dslogmanager", "listmetadataservers")]
-    public class ListMetadataServersCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dslogmanager","listmetadataservers")]
+    public class ListMetadataServersCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dslogmanager"; } }
+        public string ServiceName{ get { return "Dslogmanager"; } }
 
-        public string OperationName { get { return "ListMetadataServers"; } }
+        public string OperationName{ get { return "ListMetadataServers"; } }
 
         [SdkCommandData("body")]
         public ModelsMetadataServersRequest Body { get; set; } = new ModelsMetadataServersRequest();
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dslogmanager
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

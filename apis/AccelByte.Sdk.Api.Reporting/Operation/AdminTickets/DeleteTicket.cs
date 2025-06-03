@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 DeleteTicket op = new DeleteTicket(this,
-                    namespace_,
-                    ticketId
+                    namespace_,                    
+                    ticketId                    
                 );
 
                 op.SetBaseFields<DeleteTicketBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -137,18 +137,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #endregion
 
         public DeleteTicket(
-            string namespace_,
-            string ticketId
+            string namespace_,            
+            string ticketId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeleteTicket.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteTicket.Response()
@@ -171,13 +171,13 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             };
 
             if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

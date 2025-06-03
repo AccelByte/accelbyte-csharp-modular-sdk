@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminDeleteInboxCategory op = new AdminDeleteInboxCategory(this,
-                    category,
-                    namespace_
+                    category,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminDeleteInboxCategoryBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,12 +111,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["category"] = category;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -141,18 +141,18 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminDeleteInboxCategory(
-            string category,
-            string namespace_
+            string category,            
+            string namespace_            
         )
         {
             PathParams["category"] = category;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -164,7 +164,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeleteInboxCategory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteInboxCategory.Response()
@@ -175,25 +175,25 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

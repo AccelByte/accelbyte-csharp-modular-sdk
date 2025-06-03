@@ -16,18 +16,18 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Api.Iam.Wrapper
 {
-    public class AccountIdenfifierTag
+    public class AccountIdentifierTag
     {
         private readonly IAccelByteSdk _sdk;
 
         private string _CustomBasePath = String.Empty;
 
-        public AccountIdenfifierTag(IAccelByteSdk sdk)
+        public AccountIdentifierTag(IAccelByteSdk sdk)
         {
             _sdk = sdk;
         }
 
-        public AccountIdenfifierTag(IAccelByteSdk sdk, string customBasePath)
+        public AccountIdentifierTag(IAccelByteSdk sdk, string customBasePath)
         {
             _sdk = sdk;
             _CustomBasePath = customBasePath;

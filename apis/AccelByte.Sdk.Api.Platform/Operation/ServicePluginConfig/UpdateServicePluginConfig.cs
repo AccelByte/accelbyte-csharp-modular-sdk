@@ -26,7 +26,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// Update catalog config. Other detail info:
     ///   * Returns : updated service plugin config
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpdateServicePluginConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -58,15 +58,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateServicePluginConfig op = new UpdateServicePluginConfig(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<UpdateServicePluginConfigBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public UpdateServicePluginConfig.Response Execute(
                 ServicePluginConfigUpdate body,
                 string namespace_
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -113,13 +113,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -138,18 +138,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdateServicePluginConfig(
-            string namespace_,
-            Model.ServicePluginConfigUpdate body
+            string namespace_,            
+            Model.ServicePluginConfigUpdate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpdateServicePluginConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateServicePluginConfig.Response()

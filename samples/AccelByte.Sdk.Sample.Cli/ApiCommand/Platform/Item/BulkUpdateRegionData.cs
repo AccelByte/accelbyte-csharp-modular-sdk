@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "bulkupdateregiondata")]
-    public class BulkUpdateRegionDataCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","bulkupdateregiondata")]
+    public class BulkUpdateRegionDataCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "BulkUpdateRegionData"; } }
+        public string OperationName{ get { return "BulkUpdateRegionData"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

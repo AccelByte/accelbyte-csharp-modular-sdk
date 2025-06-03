@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 1. V3 is standard OAuth2 flow and support PKCE
     /// 2. Will not support implicit flow in v3.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class Authorization : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -112,16 +112,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 Authorization op = new Authorization(this,
-                    clientId,
-                    redirectUri,
-                    responseType
+                    clientId,                    
+                    redirectUri,                    
+                    responseType                    
                 );
 
                 op.SetBaseFields<AuthorizationBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public Authorization.Response Execute(
                 string clientId,
                 string redirectUri,
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -172,8 +172,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             AuthorizationResponseType responseType
         )
         {
-
-
+            
+            
             if (builder.Login is not null) FormParams["login"] = builder.Login;
             if (builder.Password is not null) FormParams["password"] = builder.Password;
             if (builder.Scope is not null) FormParams["scope"] = builder.Scope;
@@ -182,9 +182,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (redirectUri is not null) FormParams["redirect_uri"] = redirectUri;
             if (responseType is not null) FormParams["response_type"] = responseType.Value;
 
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -204,17 +204,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public Authorization(
-            string? login,
-            string? password,
-            string? scope,
-            string? state,
-            string clientId,
-            string redirectUri,
-            AuthorizationResponseType responseType
+            string? login,            
+            string? password,            
+            string? scope,            
+            string? state,            
+            string clientId,            
+            string redirectUri,            
+            AuthorizationResponseType responseType            
         )
         {
-
-
+            
+            
             if (login is not null) FormParams["login"] = login;
             if (password is not null) FormParams["password"] = password;
             if (scope is not null) FormParams["scope"] = scope;
@@ -223,9 +223,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (redirectUri is not null) FormParams["redirect_uri"] = redirectUri;
             if (responseType is not null) FormParams["response_type"] = responseType.Value;
 
-
-
-
+            
+            
+            
             LocationQuery = "PLACEHOLDER";
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -238,7 +238,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public Authorization.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new Authorization.Response()

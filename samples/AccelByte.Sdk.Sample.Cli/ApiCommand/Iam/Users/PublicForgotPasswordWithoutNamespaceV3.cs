@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "publicforgotpasswordwithoutnamespacev3")]
-    public class PublicForgotPasswordWithoutNamespaceV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","publicforgotpasswordwithoutnamespacev3")]
+    public class PublicForgotPasswordWithoutNamespaceV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PublicForgotPasswordWithoutNamespaceV3"; } }
+        public string OperationName{ get { return "PublicForgotPasswordWithoutNamespaceV3"; } }
 
         [SdkCommandData("body")]
         public ModelForgotPasswordWithoutNamespaceRequestV3 Body { get; set; } = new ModelForgotPasswordWithoutNamespaceRequestV3();
@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

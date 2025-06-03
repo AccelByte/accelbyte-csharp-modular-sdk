@@ -38,14 +38,14 @@ namespace AccelByte.Sdk.Api.Achievement
 
         public ApiError TranslateToApiError()
         {
-            string errorCode =
+            string errorCode = 
                 ErrorCode != null ? ErrorCode.Value.ToString() :
                 "";
-
-            string errorMessage =
-                ErrorMessage != null ? ErrorMessage.ToString() :
+            
+            string errorMessage = 
+                ErrorMessage != null ? ErrorMessage.ToString() :                
                 "";
-
+            
             return new ApiError(errorCode, errorMessage);
         }
     }

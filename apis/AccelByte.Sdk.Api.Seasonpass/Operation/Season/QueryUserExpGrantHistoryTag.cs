@@ -69,8 +69,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 QueryUserExpGrantHistoryTag op = new QueryUserExpGrantHistoryTag(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<QueryUserExpGrantHistoryTagBuilder>(this);
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,13 +124,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.SeasonId is not null) QueryParams["seasonId"] = builder.SeasonId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,20 +149,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public QueryUserExpGrantHistoryTag(
-            string namespace_,
-            string userId,
-            string? seasonId
+            string namespace_,            
+            string userId,            
+            string? seasonId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (seasonId is not null) QueryParams["seasonId"] = seasonId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,10 +171,10 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public QueryUserExpGrantHistoryTag.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryUserExpGrantHistoryTag.Response()

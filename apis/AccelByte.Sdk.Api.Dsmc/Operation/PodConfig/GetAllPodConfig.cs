@@ -63,9 +63,9 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 GetAllPodConfig op = new GetAllPodConfig(this,
-                    namespace_,
-                    count,
-                    offset
+                    namespace_,                    
+                    count,                    
+                    offset                    
                 );
 
                 op.SetBaseFields<GetAllPodConfigBuilder>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,16 +123,16 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             QueryParams["count"] = Convert.ToString(count)!;
-
+            
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,22 +155,22 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         #endregion
 
         public GetAllPodConfig(
-            string namespace_,
-            long count,
-            long offset
+            string namespace_,            
+            long count,            
+            long offset            
         )
         {
             PathParams["namespace"] = namespace_;
-
-
+            
+            
             QueryParams["count"] = Convert.ToString(count)!;
-
+            
             QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,7 +182,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetAllPodConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetAllPodConfig.Response()

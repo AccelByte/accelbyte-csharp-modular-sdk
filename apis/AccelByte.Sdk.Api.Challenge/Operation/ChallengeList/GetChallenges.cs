@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 GetChallenges op = new GetChallenges(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetChallengesBuilder>(this);
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -151,19 +151,19 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -188,29 +188,29 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public GetChallenges(
-            string namespace_,
-            string? keyword,
-            long? limit,
-            long? offset,
-            GetChallengesSortBy? sortBy,
-            GetChallengesStatus? status,
-            List<string>? tags
+            string namespace_,            
+            string? keyword,            
+            long? limit,            
+            long? offset,            
+            GetChallengesSortBy? sortBy,            
+            GetChallengesStatus? status,            
+            List<string>? tags            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (status is not null) QueryParams["status"] = status.Value;
             if (tags is not null) QueryParams["tags"] = tags;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,10 +219,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetChallenges.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetChallenges.Response()

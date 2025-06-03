@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "adminsetprofanityrulefornamespace")]
-    public class AdminSetProfanityRuleForNamespaceCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","adminsetprofanityrulefornamespace")]
+    public class AdminSetProfanityRuleForNamespaceCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "AdminSetProfanityRuleForNamespace"; } }
+        public string OperationName{ get { return "AdminSetProfanityRuleForNamespace"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -42,7 +42,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
         {
             AccelByte.Sdk.Api.Lobby.Wrapper.Profanity wrapper = new AccelByte.Sdk.Api.Lobby.Wrapper.Profanity(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Lobby.Operation.AdminSetProfanityRuleForNamespace.Builder;
 
 
@@ -54,9 +54,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 Namespace
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminSetProfanityRuleForNamespace(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

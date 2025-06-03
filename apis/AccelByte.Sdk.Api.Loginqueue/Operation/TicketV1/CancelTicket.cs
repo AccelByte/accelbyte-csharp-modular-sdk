@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             )
             {
                 CancelTicket op = new CancelTicket(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<CancelTicketBuilder>(this);
@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,12 +103,12 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -129,16 +129,16 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
         #endregion
 
         public CancelTicket(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public CancelTicket.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CancelTicket.Response()
@@ -161,13 +161,13 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

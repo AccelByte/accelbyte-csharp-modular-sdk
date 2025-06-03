@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Social.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
 {
-    [SdkConsoleCommand("social", "publicincuserstatitem")]
-    public class PublicIncUserStatItemCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("social","publicincuserstatitem")]
+    public class PublicIncUserStatItemCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Social"; } }
+        public string ServiceName{ get { return "Social"; } }
 
-        public string OperationName { get { return "PublicIncUserStatItem"; } }
+        public string OperationName{ get { return "PublicIncUserStatItem"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Social
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

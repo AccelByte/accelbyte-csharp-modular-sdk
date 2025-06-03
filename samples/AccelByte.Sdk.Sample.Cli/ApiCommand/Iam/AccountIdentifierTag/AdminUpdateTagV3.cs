@@ -18,50 +18,54 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admincreatetagv3")]
-    public class AdminCreateTagV3Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","adminupdatetagv3")]
+    public class AdminUpdateTagV3Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminCreateTagV3"; } }
+        public string OperationName{ get { return "AdminUpdateTagV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandData("body")]
-        public ModelTagCreateRequestV3 Body { get; set; } = new ModelTagCreateRequestV3();
+        [SdkCommandArgument("tagId")]
+        public string TagId { get; set; } = String.Empty;
 
-        public AdminCreateTagV3Command(IAccelByteSdk sdk)
+        [SdkCommandData("body")]
+        public ModelTagUpdateRequestV3 Body { get; set; } = new ModelTagUpdateRequestV3();
+
+        public AdminUpdateTagV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public CommandResult Run()
         {
-            AccelByte.Sdk.Api.Iam.Wrapper.AccountIdenfifierTag wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.AccountIdenfifierTag(_SDK);
+            AccelByte.Sdk.Api.Iam.Wrapper.AccountIdentifierTag wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.AccountIdentifierTag(_SDK);
 
-            var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminCreateTagV3.Builder;
-
-
+            var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminUpdateTagV3.Builder;
 
 
 
-            AdminCreateTagV3 operation = opBuilder.Build(
+
+
+            AdminUpdateTagV3 operation = opBuilder.Build(
                 Body,
-                Namespace
+                Namespace,
+                TagId
             );
 
 
-            var response = wrapper.AdminCreateTagV3(operation);
+            var response = wrapper.AdminUpdateTagV3(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

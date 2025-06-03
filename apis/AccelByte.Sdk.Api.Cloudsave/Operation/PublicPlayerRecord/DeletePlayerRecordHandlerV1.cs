@@ -58,9 +58,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 DeletePlayerRecordHandlerV1 op = new DeletePlayerRecordHandlerV1(this,
-                    key,
-                    namespace_,
-                    userId
+                    key,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<DeletePlayerRecordHandlerV1Builder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,12 +120,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,20 +150,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public DeletePlayerRecordHandlerV1(
-            string key,
-            string namespace_,
-            string userId
+            string key,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeletePlayerRecordHandlerV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeletePlayerRecordHandlerV1.Response()
@@ -186,25 +186,25 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

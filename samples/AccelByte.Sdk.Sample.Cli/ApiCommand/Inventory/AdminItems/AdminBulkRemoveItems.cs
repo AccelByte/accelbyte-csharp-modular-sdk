@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Inventory.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
 {
-    [SdkConsoleCommand("inventory", "adminbulkremoveitems")]
-    public class AdminBulkRemoveItemsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("inventory","adminbulkremoveitems")]
+    public class AdminBulkRemoveItemsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Inventory"; } }
+        public string ServiceName{ get { return "Inventory"; } }
 
-        public string OperationName { get { return "AdminBulkRemoveItems"; } }
+        public string OperationName{ get { return "AdminBulkRemoveItems"; } }
 
         [SdkCommandArgument("inventoryId")]
         public string InventoryId { get; set; } = String.Empty;
@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Inventory
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

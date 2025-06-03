@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [GET]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetClient : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -58,14 +58,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetClient op = new GetClient(this,
-                    clientId
+                    clientId                    
                 );
 
                 op.SetBaseFields<GetClientBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public GetClient.Response Execute(
                 string clientId
             )
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -107,12 +107,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["clientId"] = clientId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -135,16 +135,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetClient(
-            string clientId
+            string clientId            
         )
         {
             PathParams["clientId"] = clientId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetClient.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetClient.Response()

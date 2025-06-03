@@ -86,8 +86,8 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 GetListOfDeploymentV2 op = new GetListOfDeploymentV2(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetListOfDeploymentV2Builder>(this);
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -140,15 +140,15 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -173,22 +173,22 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public GetListOfDeploymentV2(
-            string namespace_,
-            long? limit,
-            long? offset,
-            Model.ApimodelGetDeploymentListV2Request body
+            string namespace_,            
+            long? limit,            
+            long? offset,            
+            Model.ApimodelGetDeploymentListV2Request body            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,7 +200,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetListOfDeploymentV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetListOfDeploymentV2.Response()

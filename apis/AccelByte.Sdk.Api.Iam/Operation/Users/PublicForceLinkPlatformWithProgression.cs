@@ -63,9 +63,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicForceLinkPlatformWithProgression op = new PublicForceLinkPlatformWithProgression(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicForceLinkPlatformWithProgressionBuilder>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,13 +124,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -155,20 +155,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicForceLinkPlatformWithProgression(
-            string namespace_,
-            string userId,
-            Model.ModelLinkPlatformAccountWithProgressionRequest body
+            string namespace_,            
+            string userId,            
+            Model.ModelLinkPlatformAccountWithProgressionRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,7 +180,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicForceLinkPlatformWithProgression.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicForceLinkPlatformWithProgression.Response()
@@ -191,25 +191,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

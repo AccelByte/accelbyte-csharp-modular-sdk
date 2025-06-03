@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave", "listplayerrecordhandlerv1")]
-    public class ListPlayerRecordHandlerV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave","listplayerrecordhandlerv1")]
+    public class ListPlayerRecordHandlerV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Cloudsave"; } }
+        public string ServiceName{ get { return "Cloudsave"; } }
 
-        public string OperationName { get { return "ListPlayerRecordHandlerV1"; } }
+        public string OperationName{ get { return "ListPlayerRecordHandlerV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -48,7 +48,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
         {
             AccelByte.Sdk.Api.Cloudsave.Wrapper.AdminPlayerRecord wrapper = new AccelByte.Sdk.Api.Cloudsave.Wrapper.AdminPlayerRecord(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Cloudsave.Operation.ListPlayerRecordHandlerV1.Builder;
 
             if (Limit != null)
@@ -65,22 +65,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
                 Namespace
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.ListPlayerRecordHandlerV1(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

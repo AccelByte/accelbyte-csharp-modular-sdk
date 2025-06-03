@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "getuseroutgoingfriends")]
-    public class GetUserOutgoingFriendsCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","getuseroutgoingfriends")]
+    public class GetUserOutgoingFriendsCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "GetUserOutgoingFriends"; } }
+        public string OperationName{ get { return "GetUserOutgoingFriends"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

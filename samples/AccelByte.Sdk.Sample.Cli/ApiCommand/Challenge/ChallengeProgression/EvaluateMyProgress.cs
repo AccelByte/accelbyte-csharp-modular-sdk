@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge", "evaluatemyprogress")]
-    public class EvaluateMyProgressCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("challenge","evaluatemyprogress")]
+    public class EvaluateMyProgressCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Challenge"; } }
+        public string ServiceName{ get { return "Challenge"; } }
 
-        public string OperationName { get { return "EvaluateMyProgress"; } }
+        public string OperationName{ get { return "EvaluateMyProgress"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

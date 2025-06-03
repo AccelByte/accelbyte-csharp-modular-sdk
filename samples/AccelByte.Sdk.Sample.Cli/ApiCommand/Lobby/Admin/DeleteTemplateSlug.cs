@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "deletetemplateslug")]
-    public class DeleteTemplateSlugCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","deletetemplateslug")]
+    public class DeleteTemplateSlugCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "DeleteTemplateSlug"; } }
+        public string OperationName{ get { return "DeleteTemplateSlug"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

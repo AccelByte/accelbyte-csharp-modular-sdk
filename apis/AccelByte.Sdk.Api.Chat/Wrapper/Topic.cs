@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminTopicChatHistory.AdminTopicChatHistoryBuilder AdminTopicChatHistoryOp
         {
             get
@@ -576,8 +576,8 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminTopicChatHistory.Response AdminTopicChatHistory(AdminTopicChatHistory input)
         {
             var response = _sdk.RunRequest(input);
@@ -594,7 +594,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public AdminSendChat.Response AdminSendChat(AdminSendChat input)
         {
             var response = _sdk.RunRequest(input);

@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -103,13 +103,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         private RetrieveAllLegalPolicies(RetrieveAllLegalPoliciesBuilder builder
         )
         {
-
+            
             if (builder.VisibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(builder.VisibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -126,16 +126,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public RetrieveAllLegalPolicies(
-            bool? visibleOnly
+            bool? visibleOnly            
         )
         {
-
+            
             if (visibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(visibleOnly)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,10 +144,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public RetrieveAllLegalPolicies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveAllLegalPolicies.Response()

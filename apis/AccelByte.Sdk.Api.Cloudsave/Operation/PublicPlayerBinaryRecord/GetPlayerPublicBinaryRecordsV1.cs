@@ -58,9 +58,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 GetPlayerPublicBinaryRecordsV1 op = new GetPlayerPublicBinaryRecordsV1(this,
-                    key,
-                    namespace_,
-                    userId
+                    key,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<GetPlayerPublicBinaryRecordsV1Builder>(this);
@@ -84,7 +84,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,12 +120,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -150,20 +150,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public GetPlayerPublicBinaryRecordsV1(
-            string key,
-            string namespace_,
-            string userId
+            string key,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetPlayerPublicBinaryRecordsV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetPlayerPublicBinaryRecordsV1.Response()

@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetServicePluginConfig.GetServicePluginConfigBuilder GetServicePluginConfigOp
         {
             get
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateServicePluginConfig.UpdateServicePluginConfigBuilder UpdateServicePluginConfigOp
         {
             get
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteServicePluginConfig.DeleteServicePluginConfigBuilder DeleteServicePluginConfigOp
         {
             get
@@ -359,8 +359,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public GetServicePluginConfig.Response GetServicePluginConfig(GetServicePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -377,9 +377,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public UpdateServicePluginConfig.Response UpdateServicePluginConfig(UpdateServicePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -396,9 +396,9 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public DeleteServicePluginConfig.Response DeleteServicePluginConfig(DeleteServicePluginConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -415,7 +415,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public GetRevocationPluginConfig.Response GetRevocationPluginConfig(GetRevocationPluginConfig input)
         {
             var response = _sdk.RunRequest(input);

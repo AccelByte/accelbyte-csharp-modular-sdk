@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 DeletePolicy op = new DeletePolicy(this,
-                    namespace_,
-                    policyId
+                    namespace_,                    
+                    policyId                    
                 );
 
                 op.SetBaseFields<DeletePolicyBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,12 +115,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -139,18 +139,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public DeletePolicy(
-            string namespace_,
-            string policyId
+            string namespace_,            
+            string policyId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,10 +159,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeletePolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeletePolicy.Response()
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             };
 
             if (code == (HttpStatusCode)400)
-
+            
             {
                 response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();

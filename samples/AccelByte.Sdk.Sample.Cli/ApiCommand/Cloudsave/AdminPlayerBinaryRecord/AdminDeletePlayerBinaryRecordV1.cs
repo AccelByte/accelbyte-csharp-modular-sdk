@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Cloudsave.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Cloudsave
 {
-    [SdkConsoleCommand("cloudsave", "admindeleteplayerbinaryrecordv1")]
-    public class AdminDeletePlayerBinaryRecordV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("cloudsave","admindeleteplayerbinaryrecordv1")]
+    public class AdminDeletePlayerBinaryRecordV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Cloudsave"; } }
+        public string ServiceName{ get { return "Cloudsave"; } }
 
-        public string OperationName { get { return "AdminDeletePlayerBinaryRecordV1"; } }
+        public string OperationName{ get { return "AdminDeletePlayerBinaryRecordV1"; } }
 
         [SdkCommandArgument("key")]
         public string Key { get; set; } = String.Empty;

@@ -35,6 +35,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - If platformBy parameter is defined and by parameter is using thirdparty, endpoint will search users based on the platformUserId or platformDisplayName they have linked to, example value: platformUserId or platformDisplayName.
     /// - If limit is not defined, The default limit is 100.
     /// 
+    /// GraphQL-Like Querying:
+    /// - By default, the API only returns the minimum fields -> [displayName, authType, createdAt, uniqueDisplayName, deletionStatus, enabled, emailAddress, skipLoginQueue, testAccount]
+    /// - To include additional fields in the response, specify them in the request params.
+    /// - Supported fields: [country, emailVerified, avatarUrl, enabled]
+    /// - Note: If a value is not in the allowed list, the API will ignore it.
+    /// 
     /// In Multi Tenant mode :
     /// 
     /// - If super admin search in super admin namespace, the result will be all game admin user
@@ -71,6 +77,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             public string? Query { get; set; }
 
             public string? RoleIds { get; set; }
+
+            public string? SelectedFields { get; set; }
 
             public bool? SkipLoginQueue { get; set; }
 
@@ -146,6 +154,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return this;
             }
 
+            public AdminSearchUserV3Builder SetSelectedFields(string _selectedFields)
+            {
+                SelectedFields = _selectedFields;
+                return this;
+            }
+
             public AdminSearchUserV3Builder SetSkipLoginQueue(bool _skipLoginQueue)
             {
                 SkipLoginQueue = _skipLoginQueue;
@@ -179,7 +193,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminSearchUserV3 op = new AdminSearchUserV3(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminSearchUserV3Builder>(this);
@@ -199,7 +213,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -216,7 +230,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -227,7 +241,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.By is not null) QueryParams["by"] = builder.By;
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.IncludeTotal != null) QueryParams["includeTotal"] = Convert.ToString(builder.IncludeTotal)!;
@@ -237,15 +251,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (builder.PlatformId is not null) QueryParams["platformId"] = builder.PlatformId;
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
             if (builder.RoleIds is not null) QueryParams["roleIds"] = builder.RoleIds;
+            if (builder.SelectedFields is not null) QueryParams["selectedFields"] = builder.SelectedFields;
             if (builder.SkipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(builder.SkipLoginQueue)!;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.TagIds is not null) QueryParams["tagIds"] = builder.TagIds;
             if (builder.TestAccount != null) QueryParams["testAccount"] = Convert.ToString(builder.TestAccount)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -270,24 +285,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminSearchUserV3(
-            string namespace_,
-            string? by,
-            string? endDate,
-            bool? includeTotal,
-            long? limit,
-            long? offset,
-            string? platformBy,
-            string? platformId,
-            string? query,
-            string? roleIds,
-            bool? skipLoginQueue,
-            string? startDate,
-            string? tagIds,
-            bool? testAccount
+            string namespace_,            
+            string? by,            
+            string? endDate,            
+            bool? includeTotal,            
+            long? limit,            
+            long? offset,            
+            string? platformBy,            
+            string? platformId,            
+            string? query,            
+            string? roleIds,            
+            string? selectedFields,            
+            bool? skipLoginQueue,            
+            string? startDate,            
+            string? tagIds,            
+            bool? testAccount            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (by is not null) QueryParams["by"] = by;
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (includeTotal != null) QueryParams["includeTotal"] = Convert.ToString(includeTotal)!;
@@ -297,15 +313,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (platformId is not null) QueryParams["platformId"] = platformId;
             if (query is not null) QueryParams["query"] = query;
             if (roleIds is not null) QueryParams["roleIds"] = roleIds;
+            if (selectedFields is not null) QueryParams["selectedFields"] = selectedFields;
             if (skipLoginQueue != null) QueryParams["skipLoginQueue"] = Convert.ToString(skipLoginQueue)!;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (tagIds is not null) QueryParams["tagIds"] = tagIds;
             if (testAccount != null) QueryParams["testAccount"] = Convert.ToString(testAccount)!;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -317,7 +334,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminSearchUserV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSearchUserV3.Response()

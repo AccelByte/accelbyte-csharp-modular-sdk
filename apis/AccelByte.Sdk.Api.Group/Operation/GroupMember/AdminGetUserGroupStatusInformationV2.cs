@@ -57,9 +57,9 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 AdminGetUserGroupStatusInformationV2 op = new AdminGetUserGroupStatusInformationV2(this,
-                    groupId,
-                    namespace_,
-                    userId
+                    groupId,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<AdminGetUserGroupStatusInformationV2Builder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -119,12 +119,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,20 +149,20 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public AdminGetUserGroupStatusInformationV2(
-            string groupId,
-            string namespace_,
-            string userId
+            string groupId,            
+            string namespace_,            
+            string userId            
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,10 +171,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetUserGroupStatusInformationV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetUserGroupStatusInformationV2.Response()

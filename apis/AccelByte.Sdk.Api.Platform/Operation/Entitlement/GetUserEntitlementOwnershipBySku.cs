@@ -73,9 +73,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserEntitlementOwnershipBySku op = new GetUserEntitlementOwnershipBySku(this,
-                    namespace_,
-                    userId,
-                    sku
+                    namespace_,                    
+                    userId,                    
+                    sku                    
                 );
 
                 op.SetBaseFields<GetUserEntitlementOwnershipBySkuBuilder>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -134,15 +134,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (sku is not null) QueryParams["sku"] = sku;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -159,24 +159,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetUserEntitlementOwnershipBySku(
-            string namespace_,
-            string userId,
-            GetUserEntitlementOwnershipBySkuEntitlementClazz? entitlementClazz,
-            string? platform,
-            string sku
+            string namespace_,            
+            string userId,            
+            GetUserEntitlementOwnershipBySkuEntitlementClazz? entitlementClazz,            
+            string? platform,            
+            string sku            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
             if (platform is not null) QueryParams["platform"] = platform;
             if (sku is not null) QueryParams["sku"] = sku;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,10 +185,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetUserEntitlementOwnershipBySku.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserEntitlementOwnershipBySku.Response()

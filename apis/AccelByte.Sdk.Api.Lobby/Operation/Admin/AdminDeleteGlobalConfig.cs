@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Delete of global configuration data.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class AdminDeleteGlobalConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -61,7 +61,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public AdminDeleteGlobalConfig.Response Execute(
             )
             {
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -97,12 +97,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         private AdminDeleteGlobalConfig(AdminDeleteGlobalConfigBuilder builder
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -125,12 +125,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public AdminDeleteGlobalConfig(
         )
         {
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminDeleteGlobalConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteGlobalConfig.Response()

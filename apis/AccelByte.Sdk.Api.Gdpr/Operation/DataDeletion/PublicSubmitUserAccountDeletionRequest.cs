@@ -70,9 +70,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 PublicSubmitUserAccountDeletionRequest op = new PublicSubmitUserAccountDeletionRequest(this,
-                    password,
-                    namespace_,
-                    userId
+                    password,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicSubmitUserAccountDeletionRequestBuilder>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -131,14 +131,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
-
+            
+            
             if (builder.LanguageTag is not null) FormParams["languageTag"] = builder.LanguageTag;
             if (password is not null) FormParams["password"] = password;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,22 +167,22 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #endregion
 
         public PublicSubmitUserAccountDeletionRequest(
-            string namespace_,
-            string userId,
-            string? languageTag,
-            string password
+            string namespace_,            
+            string userId,            
+            string? languageTag,            
+            string password            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
-
+            
+            
             if (languageTag is not null) FormParams["languageTag"] = languageTag;
             if (password is not null) FormParams["password"] = password;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,7 +194,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicSubmitUserAccountDeletionRequest.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicSubmitUserAccountDeletionRequest.Response()

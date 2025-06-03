@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetAllPlayerSessionAttribute.AdminGetAllPlayerSessionAttributeBuilder AdminGetAllPlayerSessionAttributeOp
         {
             get
@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminSetPlayerSessionAttribute.AdminSetPlayerSessionAttributeBuilder AdminSetPlayerSessionAttributeOp
         {
             get
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetPlayerSessionAttribute.AdminGetPlayerSessionAttributeBuilder AdminGetPlayerSessionAttributeOp
         {
             get
@@ -214,8 +214,8 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetAllPlayerSessionAttribute.Response AdminGetAllPlayerSessionAttribute(AdminGetAllPlayerSessionAttribute input)
         {
             var response = _sdk.RunRequest(input);
@@ -232,9 +232,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminSetPlayerSessionAttribute.Response AdminSetPlayerSessionAttribute(AdminSetPlayerSessionAttribute input)
         {
             var response = _sdk.RunRequest(input);
@@ -251,9 +251,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetPlayerSessionAttribute.Response AdminGetPlayerSessionAttribute(AdminGetPlayerSessionAttribute input)
         {
             var response = _sdk.RunRequest(input);
@@ -270,7 +270,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public AdminGetPlayerBlockedPlayersV1.Response AdminGetPlayerBlockedPlayersV1(AdminGetPlayerBlockedPlayersV1 input)
         {
             var response = _sdk.RunRequest(input);

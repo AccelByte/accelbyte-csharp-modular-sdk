@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "publicdeleteplatformlinkv2")]
-    public class PublicDeletePlatformLinkV2Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","publicdeleteplatformlinkv2")]
+    public class PublicDeletePlatformLinkV2Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "PublicDeletePlatformLinkV2"; } }
+        public string OperationName{ get { return "PublicDeletePlatformLinkV2"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -48,7 +48,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Users wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Users(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.PublicDeletePlatformLinkV2.Builder;
 
 
@@ -63,9 +63,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 UserId
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.PublicDeletePlatformLinkV2(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

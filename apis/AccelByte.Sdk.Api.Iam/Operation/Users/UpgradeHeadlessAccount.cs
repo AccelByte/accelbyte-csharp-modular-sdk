@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/headless/verify [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpgradeHeadlessAccount : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -61,16 +61,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 UpgradeHeadlessAccount op = new UpgradeHeadlessAccount(this,
-                    body,
-                    namespace_,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<UpgradeHeadlessAccountBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public UpgradeHeadlessAccount.Response Execute(
                 ModelUpgradeHeadlessAccountRequest body,
                 string namespace_,
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,13 +123,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -152,20 +152,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public UpgradeHeadlessAccount(
-            string namespace_,
-            string userId,
-            Model.ModelUpgradeHeadlessAccountRequest body
+            string namespace_,            
+            string userId,            
+            Model.ModelUpgradeHeadlessAccountRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpgradeHeadlessAccount.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpgradeHeadlessAccount.Response()

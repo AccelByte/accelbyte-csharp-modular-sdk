@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// 
     /// Delete an environment secret.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class DeleteSecretV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -60,16 +60,16 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 DeleteSecretV1 op = new DeleteSecretV1(this,
-                    app,
-                    configId,
-                    namespace_
+                    app,                    
+                    configId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<DeleteSecretV1Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public DeleteSecretV1.Response Execute(
                 string app,
                 string configId,
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -123,12 +123,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             PathParams["app"] = app;
             PathParams["configId"] = configId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -153,20 +153,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public DeleteSecretV1(
-            string app,
-            string configId,
-            string namespace_
+            string app,            
+            string configId,            
+            string namespace_            
         )
         {
             PathParams["app"] = app;
             PathParams["configId"] = configId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeleteSecretV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteSecretV1.Response()
@@ -189,25 +189,25 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

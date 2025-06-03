@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "sendmultipleusersfreeformnotificationv1admin")]
-    public class SendMultipleUsersFreeformNotificationV1AdminCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","sendmultipleusersfreeformnotificationv1admin")]
+    public class SendMultipleUsersFreeformNotificationV1AdminCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "SendMultipleUsersFreeformNotificationV1Admin"; } }
+        public string OperationName{ get { return "SendMultipleUsersFreeformNotificationV1Admin"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

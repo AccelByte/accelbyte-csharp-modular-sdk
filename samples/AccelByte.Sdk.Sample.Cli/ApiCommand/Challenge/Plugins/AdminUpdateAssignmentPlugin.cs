@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge", "adminupdateassignmentplugin")]
-    public class AdminUpdateAssignmentPluginCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("challenge","adminupdateassignmentplugin")]
+    public class AdminUpdateAssignmentPluginCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Challenge"; } }
+        public string ServiceName{ get { return "Challenge"; } }
 
-        public string OperationName { get { return "AdminUpdateAssignmentPlugin"; } }
+        public string OperationName{ get { return "AdminUpdateAssignmentPlugin"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

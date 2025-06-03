@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **Note:**
     /// 1. difference in V3 response, format difference: Pascal case => Camel case
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class GetUserByPlatformUserID : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -63,16 +63,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetUserByPlatformUserID op = new GetUserByPlatformUserID(this,
-                    namespace_,
-                    platformID,
-                    platformUserID
+                    namespace_,                    
+                    platformID,                    
+                    platformUserID                    
                 );
 
                 op.SetBaseFields<GetUserByPlatformUserIDBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public GetUserByPlatformUserID.Response Execute(
                 string namespace_,
                 string platformID,
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,14 +124,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (platformID is not null) QueryParams["platformID"] = platformID;
             if (platformUserID is not null) QueryParams["platformUserID"] = platformUserID;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,20 +156,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetUserByPlatformUserID(
-            string namespace_,
-            string platformID,
-            string platformUserID
+            string namespace_,            
+            string platformID,            
+            string platformUserID            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (platformID is not null) QueryParams["platformID"] = platformID;
             if (platformUserID is not null) QueryParams["platformUserID"] = platformUserID;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetUserByPlatformUserID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserByPlatformUserID.Response()

@@ -68,9 +68,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetPaymentTaxValue op = new GetPaymentTaxValue(this,
-                    namespace_,
-                    paymentOrderNo,
-                    paymentProvider
+                    namespace_,                    
+                    paymentOrderNo,                    
+                    paymentProvider                    
                 );
 
                 op.SetBaseFields<GetPaymentTaxValueBuilder>(this);
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -128,15 +128,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.ZipCode is not null) QueryParams["zipCode"] = builder.ZipCode;
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -156,22 +156,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetPaymentTaxValue(
-            string namespace_,
-            string? zipCode,
-            string paymentOrderNo,
-            GetPaymentTaxValuePaymentProvider paymentProvider
+            string namespace_,            
+            string? zipCode,            
+            string paymentOrderNo,            
+            GetPaymentTaxValuePaymentProvider paymentProvider            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (zipCode is not null) QueryParams["zipCode"] = zipCode;
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
             if (paymentProvider is not null) QueryParams["paymentProvider"] = paymentProvider.Value;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -182,7 +182,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetPaymentTaxValue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetPaymentTaxValue.Response()

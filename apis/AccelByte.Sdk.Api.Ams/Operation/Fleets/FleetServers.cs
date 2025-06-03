@@ -112,8 +112,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 FleetServers op = new FleetServers(this,
-                    fleetID,
-                    namespace_
+                    fleetID,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<FleetServersBuilder>(this);
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Region is not null) QueryParams["region"] = builder.Region;
@@ -175,11 +175,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy;
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection.Value;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,20 +206,20 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         public FleetServers(
-            string fleetID,
-            string namespace_,
-            long? count,
-            long? offset,
-            string? region,
-            string? serverId,
-            string? sortBy,
-            FleetServersSortDirection? sortDirection,
-            FleetServersStatus? status
+            string fleetID,            
+            string namespace_,            
+            long? count,            
+            long? offset,            
+            string? region,            
+            string? serverId,            
+            string? sortBy,            
+            FleetServersSortDirection? sortDirection,            
+            FleetServersStatus? status            
         )
         {
             PathParams["fleetID"] = fleetID;
             PathParams["namespace"] = namespace_;
-
+            
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (region is not null) QueryParams["region"] = region;
@@ -227,11 +227,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (sortBy is not null) QueryParams["sortBy"] = sortBy;
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection.Value;
             if (status is not null) QueryParams["status"] = status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -243,7 +243,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public FleetServers.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new FleetServers.Response()

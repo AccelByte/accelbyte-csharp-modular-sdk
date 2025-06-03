@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "admindownloadmybackupcodesv4")]
-    public class AdminDownloadMyBackupCodesV4Command : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","admindownloadmybackupcodesv4")]
+    public class AdminDownloadMyBackupCodesV4Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "AdminDownloadMyBackupCodesV4"; } }
+        public string OperationName{ get { return "AdminDownloadMyBackupCodesV4"; } }
 
         public AdminDownloadMyBackupCodesV4Command(IAccelByteSdk sdk)
         {
@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.UsersV4 wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.UsersV4(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.AdminDownloadMyBackupCodesV4.Builder;
 
 
@@ -46,22 +46,22 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
             AdminDownloadMyBackupCodesV4 operation = opBuilder.Build(
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.AdminDownloadMyBackupCodesV4(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
                     return CommandResult.Success(response.Data.ReadToString());
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

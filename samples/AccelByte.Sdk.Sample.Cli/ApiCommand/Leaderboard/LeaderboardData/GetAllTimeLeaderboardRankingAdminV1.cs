@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Leaderboard.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
 {
-    [SdkConsoleCommand("leaderboard", "getalltimeleaderboardrankingadminv1")]
-    public class GetAllTimeLeaderboardRankingAdminV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("leaderboard","getalltimeleaderboardrankingadminv1")]
+    public class GetAllTimeLeaderboardRankingAdminV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Leaderboard"; } }
+        public string ServiceName{ get { return "Leaderboard"; } }
 
-        public string OperationName { get { return "GetAllTimeLeaderboardRankingAdminV1"; } }
+        public string OperationName{ get { return "GetAllTimeLeaderboardRankingAdminV1"; } }
 
         [SdkCommandArgument("leaderboardCode")]
         public string LeaderboardCode { get; set; } = String.Empty;
@@ -70,8 +70,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Leaderboard
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

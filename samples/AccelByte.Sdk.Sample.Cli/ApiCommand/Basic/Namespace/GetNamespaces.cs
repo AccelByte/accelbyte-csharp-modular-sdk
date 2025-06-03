@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic", "getnamespaces")]
-    public class GetNamespacesCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("basic","getnamespaces")]
+    public class GetNamespacesCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Basic"; } }
+        public string ServiceName{ get { return "Basic"; } }
 
-        public string OperationName { get { return "GetNamespaces"; } }
+        public string OperationName{ get { return "GetNamespaces"; } }
 
         [SdkCommandArgument("activeOnly")]
         public bool? ActiveOnly { get; set; }
@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

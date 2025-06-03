@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetPartyDataV1.AdminGetPartyDataV1Builder AdminGetPartyDataV1Op
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetUserPartyV1.AdminGetUserPartyV1Builder AdminGetUserPartyV1Op
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetPartyDataV1.PublicGetPartyDataV1Builder PublicGetPartyDataV1Op
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdatePartyAttributesV1.PublicUpdatePartyAttributesV1Builder PublicUpdatePartyAttributesV1Op
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicSetPartyLimitV1.PublicSetPartyLimitV1Builder PublicSetPartyLimitV1Op
         {
             get
@@ -96,8 +96,8 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetPartyDataV1.Response AdminGetPartyDataV1(AdminGetPartyDataV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -131,9 +131,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetUserPartyV1.Response AdminGetUserPartyV1(AdminGetUserPartyV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -167,9 +167,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicGetPartyDataV1.Response PublicGetPartyDataV1(PublicGetPartyDataV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -203,9 +203,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicUpdatePartyAttributesV1.Response PublicUpdatePartyAttributesV1(PublicUpdatePartyAttributesV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -239,9 +239,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public PublicSetPartyLimitV1.Response PublicSetPartyLimitV1(PublicSetPartyLimitV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -258,6 +258,6 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
     }
 }

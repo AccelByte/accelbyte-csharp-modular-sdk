@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminGetInventoryConfiguration op = new AdminGetInventoryConfiguration(this,
-                    inventoryConfigurationId,
-                    namespace_
+                    inventoryConfigurationId,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetInventoryConfigurationBuilder>(this);
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,12 +114,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["inventoryConfigurationId"] = inventoryConfigurationId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -142,18 +142,18 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminGetInventoryConfiguration(
-            string inventoryConfigurationId,
-            string namespace_
+            string inventoryConfigurationId,            
+            string namespace_            
         )
         {
             PathParams["inventoryConfigurationId"] = inventoryConfigurationId;
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,10 +162,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetInventoryConfiguration.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetInventoryConfiguration.Response()

@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 CreateSeason op = new CreateSeason(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<CreateSeasonBuilder>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -115,13 +115,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,18 +144,18 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public CreateSeason(
-            string namespace_,
-            Model.SeasonCreate body
+            string namespace_,            
+            Model.SeasonCreate body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public CreateSeason.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreateSeason.Response()

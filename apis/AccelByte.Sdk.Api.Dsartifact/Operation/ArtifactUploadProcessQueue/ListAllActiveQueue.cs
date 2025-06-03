@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
             )
             {
                 ListAllActiveQueue op = new ListAllActiveQueue(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ListAllActiveQueueBuilder>(this);
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -147,17 +147,17 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Next is not null) QueryParams["next"] = builder.Next;
             if (builder.NodeIP is not null) QueryParams["nodeIP"] = builder.NodeIP;
             if (builder.PodName is not null) QueryParams["podName"] = builder.PodName;
             if (builder.Previous is not null) QueryParams["previous"] = builder.Previous;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,26 +180,26 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
         #endregion
 
         public ListAllActiveQueue(
-            string namespace_,
-            long? limit,
-            string? next,
-            string? nodeIP,
-            string? podName,
-            string? previous
+            string namespace_,            
+            long? limit,            
+            string? next,            
+            string? nodeIP,            
+            string? podName,            
+            string? previous            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (next is not null) QueryParams["next"] = next;
             if (nodeIP is not null) QueryParams["nodeIP"] = nodeIP;
             if (podName is not null) QueryParams["podName"] = podName;
             if (previous is not null) QueryParams["previous"] = previous;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,8 +210,8 @@ namespace AccelByte.Sdk.Api.Dsartifact.Operation
 
         public override List<string> Consumes => new() { "application/json" };
 
-        public override List<string> Produces => new() { "application/json", "text/x-log" };
-
+        public override List<string> Produces => new() { "application/json","text/x-log" };
+        
         public ListAllActiveQueue.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListAllActiveQueue.Response()

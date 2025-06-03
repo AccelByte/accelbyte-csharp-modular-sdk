@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminGetAllConfigurationTemplatesV1 op = new AdminGetAllConfigurationTemplatesV1(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminGetAllConfigurationTemplatesV1Builder>(this);
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -143,17 +143,17 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,26 +178,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminGetAllConfigurationTemplatesV1(
-            string namespace_,
-            long? limit,
-            string? name,
-            long? offset,
-            string? order,
-            string? orderBy
+            string namespace_,            
+            long? limit,            
+            string? name,            
+            long? offset,            
+            string? order,            
+            string? orderBy            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (order is not null) QueryParams["order"] = order;
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminGetAllConfigurationTemplatesV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetAllConfigurationTemplatesV1.Response()

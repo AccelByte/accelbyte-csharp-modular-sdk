@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             )
             {
                 ClaimServer op = new ClaimServer(this,
-                    body,
-                    namespace_
+                    body,                    
+                    namespace_                    
                 );
 
                 op.SetBaseFields<ClaimServerBuilder>(this);
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,13 +114,13 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -149,18 +149,18 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         #endregion
 
         public ClaimServer(
-            string namespace_,
-            Model.ModelsClaimSessionRequest body
+            string namespace_,            
+            Model.ModelsClaimSessionRequest body            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public ClaimServer.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ClaimServer.Response()
@@ -183,37 +183,37 @@ namespace AccelByte.Sdk.Api.Dsmc.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
-
+            
             {
                 response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)425)
-
+            
             {
                 response.Error425 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error425!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)503)
-
+            
             {
                 response.Error503 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error503!.TranslateToApiError();

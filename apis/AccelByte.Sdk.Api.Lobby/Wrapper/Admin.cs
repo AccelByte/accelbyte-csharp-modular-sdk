@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetGlobalConfig.AdminGetGlobalConfigBuilder AdminGetGlobalConfigOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminUpdateGlobalConfig.AdminUpdateGlobalConfigBuilder AdminUpdateGlobalConfigOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDeleteGlobalConfig.AdminDeleteGlobalConfigBuilder AdminDeleteGlobalConfigOp
         {
             get
@@ -182,8 +182,8 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         }
         #endregion
 
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminGetGlobalConfig.Response AdminGetGlobalConfig(AdminGetGlobalConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -200,9 +200,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminUpdateGlobalConfig.Response AdminUpdateGlobalConfig(AdminUpdateGlobalConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -219,9 +219,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
-#pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+        #pragma warning restore ab_deprecated_operation
+        #pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
         public AdminDeleteGlobalConfig.Response AdminDeleteGlobalConfig(AdminDeleteGlobalConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -238,7 +238,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-#pragma warning restore ab_deprecated_operation
+        #pragma warning restore ab_deprecated_operation
         public FreeFormNotification.Response FreeFormNotification(FreeFormNotification input)
         {
             var response = _sdk.RunRequest(input);

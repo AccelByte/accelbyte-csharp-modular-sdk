@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "enableuserentitlement")]
-    public class EnableUserEntitlementCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","enableuserentitlement")]
+    public class EnableUserEntitlementCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "EnableUserEntitlement"; } }
+        public string OperationName{ get { return "EnableUserEntitlement"; } }
 
         [SdkCommandArgument("entitlementId")]
         public string EntitlementId { get; set; } = String.Empty;
@@ -64,8 +64,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

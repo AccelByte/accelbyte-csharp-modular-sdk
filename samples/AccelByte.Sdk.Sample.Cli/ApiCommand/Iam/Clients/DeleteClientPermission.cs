@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam", "deleteclientpermission")]
-    public class DeleteClientPermissionCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("iam","deleteclientpermission")]
+    public class DeleteClientPermissionCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Iam"; } }
+        public string ServiceName{ get { return "Iam"; } }
 
-        public string OperationName { get { return "DeleteClientPermission"; } }
+        public string OperationName{ get { return "DeleteClientPermission"; } }
 
         [SdkCommandArgument("action")]
         public long Action { get; set; } = 0;
@@ -45,7 +45,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         {
             AccelByte.Sdk.Api.Iam.Wrapper.Clients wrapper = new AccelByte.Sdk.Api.Iam.Wrapper.Clients(_SDK);
 
-#pragma warning disable ab_deprecated_operation
+            #pragma warning disable ab_deprecated_operation
             var opBuilder = AccelByte.Sdk.Api.Iam.Operation.DeleteClientPermission.Builder;
 
 
@@ -58,9 +58,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 Resource
             );
 
-#pragma warning restore ab_deprecated_operation
+            #pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
+            #pragma warning disable ab_deprecated_operation_wrapper
             var response = wrapper.DeleteClientPermission(operation);
             if (response.IsSuccess)
                 return CommandResult.Success("");
@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
+            #pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// 
     ///   * Returns : country code list
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicGetCountries : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,14 +67,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicGetCountries op = new PublicGetCountries(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<PublicGetCountriesBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public PublicGetCountries.Response Execute(
                 string namespace_
             )
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -116,13 +116,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.Lang is not null) QueryParams["lang"] = builder.Lang;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -140,18 +140,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public PublicGetCountries(
-            string namespace_,
-            string? lang
+            string namespace_,            
+            string? lang            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (lang is not null) QueryParams["lang"] = lang;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -159,10 +159,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicGetCountries.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetCountries.Response()

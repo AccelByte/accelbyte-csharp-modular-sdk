@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// 
     /// Deletes game profile.
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class PublicDeleteProfile : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -63,16 +63,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicDeleteProfile op = new PublicDeleteProfile(this,
-                    namespace_,
-                    profileId,
-                    userId
+                    namespace_,                    
+                    profileId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicDeleteProfileBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public PublicDeleteProfile.Response Execute(
                 string namespace_,
                 string profileId,
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -126,12 +126,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["profileId"] = profileId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -156,20 +156,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public PublicDeleteProfile(
-            string namespace_,
-            string profileId,
-            string userId
+            string namespace_,            
+            string profileId,            
+            string userId            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["profileId"] = profileId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,10 +178,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
-        public override List<string> Produces => new() { };
-
+        public override List<string> Produces => new() {  };
+        
         public PublicDeleteProfile.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicDeleteProfile.Response()
@@ -192,25 +192,25 @@ namespace AccelByte.Sdk.Api.Social.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

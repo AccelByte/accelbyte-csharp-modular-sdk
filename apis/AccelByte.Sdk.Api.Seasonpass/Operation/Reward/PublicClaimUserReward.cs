@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 PublicClaimUserReward op = new PublicClaimUserReward(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicClaimUserRewardBuilder>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -162,13 +162,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = builder.Body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,20 +202,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public PublicClaimUserReward(
-            string namespace_,
-            string userId,
-            Model.UserRewardClaim body
+            string namespace_,            
+            string userId,            
+            Model.UserRewardClaim body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicClaimUserReward.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicClaimUserReward.Response()
@@ -275,7 +275,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.ClaimableRewards<T1, T2>>(payload, ResponseJsonOptions);
@@ -296,7 +296,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                 response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

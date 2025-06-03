@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams", "developmentserverconfigurationdelete")]
-    public class DevelopmentServerConfigurationDeleteCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("ams","developmentserverconfigurationdelete")]
+    public class DevelopmentServerConfigurationDeleteCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Ams"; } }
+        public string ServiceName{ get { return "Ams"; } }
 
-        public string OperationName { get { return "DevelopmentServerConfigurationDelete"; } }
+        public string OperationName{ get { return "DevelopmentServerConfigurationDelete"; } }
 
         [SdkCommandArgument("developmentServerConfigID")]
         public string DevelopmentServerConfigID { get; set; } = String.Empty;

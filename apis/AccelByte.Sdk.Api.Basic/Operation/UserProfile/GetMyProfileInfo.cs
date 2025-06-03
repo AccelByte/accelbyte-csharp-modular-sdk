@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GetMyProfileInfo op = new GetMyProfileInfo(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetMyProfileInfoBuilder>(this);
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -148,12 +148,12 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -191,16 +191,16 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GetMyProfileInfo(
-            string namespace_
+            string namespace_            
         )
         {
             PathParams["namespace"] = namespace_;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,10 +209,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetMyProfileInfo.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetMyProfileInfo.Response()
@@ -265,7 +265,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }
+            }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Data = JsonSerializer.Deserialize<Model.UserProfilePrivateInfo<T1, T2>>(payload, ResponseJsonOptions);
@@ -291,7 +291,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-
+            
             return response;
         }
     }

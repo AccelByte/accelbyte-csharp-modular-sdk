@@ -149,10 +149,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateApp op = new UpdateApp(this,
-                    body,
-                    itemId,
-                    namespace_,
-                    storeId
+                    body,                    
+                    itemId,                    
+                    namespace_,                    
+                    storeId                    
                 );
 
                 op.SetBaseFields<UpdateAppBuilder>(this);
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -216,14 +216,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -246,22 +246,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdateApp(
-            string itemId,
-            string namespace_,
-            string storeId,
-            Model.AppUpdate body
+            string itemId,            
+            string namespace_,            
+            string storeId,            
+            Model.AppUpdate body            
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-
+            
             if (storeId is not null) QueryParams["storeId"] = storeId;
+            
 
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -273,7 +273,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpdateApp.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateApp.Response()

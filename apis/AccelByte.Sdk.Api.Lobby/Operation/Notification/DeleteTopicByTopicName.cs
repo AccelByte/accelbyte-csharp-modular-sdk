@@ -59,8 +59,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 DeleteTopicByTopicName op = new DeleteTopicByTopicName(this,
-                    namespace_,
-                    topic
+                    namespace_,                    
+                    topic                    
                 );
 
                 op.SetBaseFields<DeleteTopicByTopicNameBuilder>(this);
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,12 +114,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -144,18 +144,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public DeleteTopicByTopicName(
-            string namespace_,
-            string topic
+            string namespace_,            
+            string topic            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
+            
+            
 
-
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public DeleteTopicByTopicName.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteTopicByTopicName.Response()
@@ -178,25 +178,25 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             };
 
             if (code == (HttpStatusCode)401)
-
+            
             {
                 response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-
+            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-
+            
             {
                 response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-
+            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

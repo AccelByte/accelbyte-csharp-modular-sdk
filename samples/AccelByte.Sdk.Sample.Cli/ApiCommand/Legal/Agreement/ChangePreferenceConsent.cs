@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "changepreferenceconsent")]
-    public class ChangePreferenceConsentCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","changepreferenceconsent")]
+    public class ChangePreferenceConsentCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "ChangePreferenceConsent"; } }
+        public string OperationName{ get { return "ChangePreferenceConsent"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "defeatureitem")]
-    public class DefeatureItemCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","defeatureitem")]
+    public class DefeatureItemCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "DefeatureItem"; } }
+        public string OperationName{ get { return "DefeatureItem"; } }
 
         [SdkCommandArgument("feature")]
         public string Feature { get; set; } = String.Empty;
@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

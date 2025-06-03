@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "anonymizeuseragreement")]
-    public class AnonymizeUserAgreementCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","anonymizeuseragreement")]
+    public class AnonymizeUserAgreementCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "AnonymizeUserAgreement"; } }
+        public string OperationName{ get { return "AnonymizeUserAgreement"; } }
 
         [SdkCommandArgument("userId")]
         public string UserId { get; set; } = String.Empty;

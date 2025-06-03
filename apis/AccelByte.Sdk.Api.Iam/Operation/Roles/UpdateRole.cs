@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/admin/roles/{roleId} [PATCH]_**
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class UpdateRole : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -59,15 +59,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 UpdateRole op = new UpdateRole(this,
-                    body,
-                    roleId
+                    body,                    
+                    roleId                    
                 );
 
                 op.SetBaseFields<UpdateRoleBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public UpdateRole.Response Execute(
                 ModelRoleUpdateRequest body,
                 string roleId
@@ -83,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -114,13 +114,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -145,18 +145,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public UpdateRole(
-            string roleId,
-            Model.ModelRoleUpdateRequest body
+            string roleId,            
+            Model.ModelRoleUpdateRequest body            
         )
         {
             PathParams["roleId"] = roleId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public UpdateRole.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateRole.Response()

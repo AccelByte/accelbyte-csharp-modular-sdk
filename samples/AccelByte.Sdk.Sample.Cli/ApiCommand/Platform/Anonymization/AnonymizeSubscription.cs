@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "anonymizesubscription")]
-    public class AnonymizeSubscriptionCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform","anonymizesubscription")]
+    public class AnonymizeSubscriptionCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Platform"; } }
+        public string ServiceName{ get { return "Platform"; } }
 
-        public string OperationName { get { return "AnonymizeSubscription"; } }
+        public string OperationName{ get { return "AnonymizeSubscription"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

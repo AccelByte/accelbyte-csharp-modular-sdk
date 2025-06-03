@@ -99,8 +99,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryUserOrders op = new QueryUserOrders(this,
-                    namespace_,
-                    userId
+                    namespace_,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<QueryUserOrdersBuilder>(this);
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -154,17 +154,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Discounted != null) QueryParams["discounted"] = Convert.ToString(builder.Discounted)!;
             if (builder.ItemId is not null) QueryParams["itemId"] = builder.ItemId;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,28 +181,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryUserOrders(
-            string namespace_,
-            string userId,
-            bool? discounted,
-            string? itemId,
-            int? limit,
-            int? offset,
-            QueryUserOrdersStatus? status
+            string namespace_,            
+            string userId,            
+            bool? discounted,            
+            string? itemId,            
+            int? limit,            
+            int? offset,            
+            QueryUserOrdersStatus? status            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (discounted != null) QueryParams["discounted"] = Convert.ToString(discounted)!;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (status is not null) QueryParams["status"] = status.Value;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public QueryUserOrders.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryUserOrders.Response()

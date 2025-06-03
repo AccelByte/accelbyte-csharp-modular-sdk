@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminListContentV2 op = new AdminListContentV2(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<AdminListContentV2Builder>(this);
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.IsOfficial != null) QueryParams["isOfficial"] = Convert.ToString(builder.IsOfficial)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
@@ -192,12 +192,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (builder.SubType is not null) QueryParams["subType"] = builder.SubType;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.Type is not null) QueryParams["type"] = builder.Type;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,19 +220,19 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminListContentV2(
-            string namespace_,
-            bool? isOfficial,
-            long? limit,
-            string? name,
-            long? offset,
-            string? sortBy,
-            string? subType,
-            List<string>? tags,
-            string? type
+            string namespace_,            
+            bool? isOfficial,            
+            long? limit,            
+            string? name,            
+            long? offset,            
+            string? sortBy,            
+            string? subType,            
+            List<string>? tags,            
+            string? type            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (isOfficial != null) QueryParams["isOfficial"] = Convert.ToString(isOfficial)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (name is not null) QueryParams["name"] = name;
@@ -241,12 +241,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (subType is not null) QueryParams["subType"] = subType;
             if (tags is not null) QueryParams["tags"] = tags;
             if (type is not null) QueryParams["type"] = type;
+            
 
-
-
+            
             CollectionFormatMap["tags"] = "csv";
-
-
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -258,7 +258,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public AdminListContentV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminListContentV2.Response()

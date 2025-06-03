@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group", "creatememberroleadminv1")]
-    public class CreateMemberRoleAdminV1Command : ISdkConsoleCommand
+    [SdkConsoleCommand("group","creatememberroleadminv1")]
+    public class CreateMemberRoleAdminV1Command: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Group"; } }
+        public string ServiceName{ get { return "Group"; } }
 
-        public string OperationName { get { return "CreateMemberRoleAdminV1"; } }
+        public string OperationName{ get { return "CreateMemberRoleAdminV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

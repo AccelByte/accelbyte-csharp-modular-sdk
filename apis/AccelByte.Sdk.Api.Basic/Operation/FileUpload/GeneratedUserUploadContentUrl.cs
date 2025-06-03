@@ -27,8 +27,6 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     /// Other detail info:
     /// 
     ///   * Action code : 11102
-    ///   *  Default maximum file count per user : 10 files
-    ///   *  Default maximum file size per user : 104857600 bytes
     ///   *  Returns : URL data
     /// </summary>
     public class GeneratedUserUploadContentUrl : AccelByte.Sdk.Core.Operation
@@ -71,9 +69,9 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GeneratedUserUploadContentUrl op = new GeneratedUserUploadContentUrl(this,
-                    namespace_,
-                    userId,
-                    fileType
+                    namespace_,                    
+                    userId,                    
+                    fileType                    
                 );
 
                 op.SetBaseFields<GeneratedUserUploadContentUrlBuilder>(this);
@@ -97,7 +95,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +116,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -132,14 +130,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (builder.Category is not null) QueryParams["category"] = builder.Category;
             if (fileType is not null) QueryParams["fileType"] = fileType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,22 +164,22 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GeneratedUserUploadContentUrl(
-            string namespace_,
-            string userId,
-            string? category,
-            string fileType
+            string namespace_,            
+            string userId,            
+            string? category,            
+            string fileType            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-
+            
             if (category is not null) QueryParams["category"] = category;
             if (fileType is not null) QueryParams["fileType"] = fileType;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -190,10 +188,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GeneratedUserUploadContentUrl.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GeneratedUserUploadContentUrl.Response()

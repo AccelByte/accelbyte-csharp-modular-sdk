@@ -53,12 +53,12 @@ fi
 
 #- 2 ChangePreferenceConsent
 # body param: body
-echo '[{"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "hnyTnsTj", "policyId": "ZHbSPKnH", "policyVersionId": "M7ZwJtkg"}, {"isAccepted": true, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "P6jH42nA", "policyId": "MmSOpoLs", "policyVersionId": "Xq9hPgsC"}, {"isAccepted": true, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "Cs28cGif", "policyId": "KqGbhlaW", "policyVersionId": "n0wJRGDX"}]' > $TEMP_JSON_INPUT
+echo '[{"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "vC9DOX1k", "policyId": "DA9UxK6c", "policyVersionId": "pyFPjVOf"}, {"isAccepted": true, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "vI3DGLxz", "policyId": "TqMH0nXi", "policyVersionId": "khAhVZ2U"}, {"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "KDgNeljZ", "policyId": "xbvrFOwq", "policyVersionId": "gkI5HNi6"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op ChangePreferenceConsent \
     --namespace $AB_NAMESPACE \
-    --userId 'wVTG85MW' \
+    --userId 'km2srujk' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 2 'ChangePreferenceConsent' test.out
@@ -67,7 +67,7 @@ eval_tap $? 2 'ChangePreferenceConsent' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveAcceptedAgreements \
-    --userId 'frV8jzQo' \
+    --userId 'TL4GO5y7' \
     > test.out 2>&1
 eval_tap $? 3 'RetrieveAcceptedAgreements' test.out
 
@@ -75,10 +75,10 @@ eval_tap $? 3 'RetrieveAcceptedAgreements' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveAllUsersByPolicyVersion \
-    --keyword 'NyBlgePk' \
-    --limit '9' \
-    --offset '96' \
-    --policyVersionId 'QkIXjNWB' \
+    --keyword 'uSV0Zf2a' \
+    --limit '46' \
+    --offset '12' \
+    --policyVersionId 'Isyjrroq' \
     > test.out 2>&1
 eval_tap $? 4 'RetrieveAllUsersByPolicyVersion' test.out
 
@@ -92,7 +92,7 @@ eval_tap $? 5 'RetrieveAllLegalPolicies' test.out
 
 #- 6 CreatePolicy
 # body param: body
-echo '{"affectedClientIds": ["JSTD4nfg", "tcqvjdGp", "HWPm3aPc"], "affectedCountries": ["G2uuSf1Y", "OUHrvujb", "dYpP0RTc"], "basePolicyName": "fPQsUlxv", "countryGroupName": "QadpMxu9", "countryType": "COUNTRY", "description": "lok7DfvO", "isHidden": true, "isHiddenPublic": false, "namespace": "KO663EDL", "tags": ["oBSoFqT2", "xpXi04C2", "4uVmgIi8"], "typeId": "Cl0yZNno"}' > $TEMP_JSON_INPUT
+echo '{"affectedClientIds": ["yWMnPYxS", "D19rrlmP", "isLp1U42"], "affectedCountries": ["RJQDnGkG", "Qd3bcOFI", "VhDJzOOc"], "basePolicyName": "exg0VmV0", "countryGroupName": "tnwjQARV", "countryType": "COUNTRY", "description": "IMJGsT5E", "isHidden": true, "isHiddenPublic": false, "namespace": "pQ9BBPh3", "tags": ["7M91nHba", "5gNsxC4d", "WTeBmudu"], "typeId": "9gZ9Ddx2"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreatePolicy \
@@ -104,17 +104,17 @@ eval_tap $? 6 'CreatePolicy' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSinglePolicy \
-    --basePolicyId 'U1tqIESS' \
+    --basePolicyId 'AhOa1mMu' \
     > test.out 2>&1
 eval_tap $? 7 'RetrieveSinglePolicy' test.out
 
 #- 8 PartialUpdatePolicy
 # body param: body
-echo '{"affectedClientIds": ["UGilS5jw", "WfmYx5Vu", "fvXedg3E"], "affectedCountries": ["Y5vle4lF", "qnrY1AKH", "OIzWbeak"], "basePolicyName": "6JAxJ04C", "countryGroupName": "GOjQufbD", "countryType": "COUNTRY_GROUP", "description": "qqY0BcFF", "isHidden": true, "isHiddenPublic": true, "namespace": "Tj9sPnZz", "tags": ["1qZjrvBM", "aLGnlyU2", "cSy5WwQF"]}' > $TEMP_JSON_INPUT
+echo '{"affectedClientIds": ["PDlLHlAp", "0b0fqque", "m3HlzlGR"], "affectedCountries": ["uexURQ5d", "0EBXzqVV", "zTQMdRVr"], "basePolicyName": "81Rhigh5", "countryGroupName": "rcLAOQRO", "countryType": "COUNTRY_GROUP", "description": "uYn4po2s", "isHidden": false, "isHiddenPublic": false, "namespace": "W5DP45Bp", "tags": ["R34I1XM5", "NDPQkqJ6", "4HzVD7RQ"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op PartialUpdatePolicy \
-    --basePolicyId 'dJIHV24g' \
+    --basePolicyId '2K1RWzlV' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 8 'PartialUpdatePolicy' test.out
@@ -123,8 +123,8 @@ eval_tap $? 8 'PartialUpdatePolicy' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrievePolicyCountry \
-    --basePolicyId 'M4LPCNjE' \
-    --countryCode 'vCDRAP0x' \
+    --basePolicyId 'xXDoE8SH' \
+    --countryCode 'T413FXAe' \
     > test.out 2>&1
 eval_tap $? 9 'RetrievePolicyCountry' test.out
 
@@ -132,17 +132,17 @@ eval_tap $? 9 'RetrievePolicyCountry' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveLocalizedPolicyVersions \
-    --policyVersionId '8yj8pnUf' \
+    --policyVersionId 'm2FHBCeR' \
     > test.out 2>&1
 eval_tap $? 10 'RetrieveLocalizedPolicyVersions' test.out
 
 #- 11 CreateLocalizedPolicyVersion
 # body param: body
-echo '{"contentType": "tXI5qPsB", "description": "L02ushCr", "localeCode": "tw1RpvQ3"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "weSTN9LL", "description": "bnjU88TT", "localeCode": "GvWe9eV3"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreateLocalizedPolicyVersion \
-    --policyVersionId 'r7exSOBc' \
+    --policyVersionId 'bcsJ8wnv' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 11 'CreateLocalizedPolicyVersion' test.out
@@ -151,28 +151,28 @@ eval_tap $? 11 'CreateLocalizedPolicyVersion' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSingleLocalizedPolicyVersion \
-    --localizedPolicyVersionId '59oCwBox' \
+    --localizedPolicyVersionId 'H3nFhSb5' \
     > test.out 2>&1
 eval_tap $? 12 'RetrieveSingleLocalizedPolicyVersion' test.out
 
 #- 13 UpdateLocalizedPolicyVersion
 # body param: body
-echo '{"attachmentChecksum": "jXloQpcO", "attachmentLocation": "9rPHesYG", "attachmentVersionIdentifier": "GMZ95WtV", "contentType": "5J4Y46s7", "description": "BzhkYOYH"}' > $TEMP_JSON_INPUT
+echo '{"attachmentChecksum": "H97WGh1h", "attachmentLocation": "MoghZMJH", "attachmentVersionIdentifier": "TtIh1Vgp", "contentType": "R2I6v7Vt", "description": "NW1F8NfQ"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op UpdateLocalizedPolicyVersion \
-    --localizedPolicyVersionId 'PpXl7jHj' \
+    --localizedPolicyVersionId 'UXkptuv9' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 13 'UpdateLocalizedPolicyVersion' test.out
 
 #- 14 RequestPresignedURL
 # body param: body
-echo '{"contentMD5": "iKYbTxD9", "contentType": "9a7UgGTT"}' > $TEMP_JSON_INPUT
+echo '{"contentMD5": "KXO6IQc6", "contentType": "xSr5D1RG"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op RequestPresignedURL \
-    --localizedPolicyVersionId 'Qkuczyqs' \
+    --localizedPolicyVersionId 'wpDh83hq' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 14 'RequestPresignedURL' test.out
@@ -181,13 +181,13 @@ eval_tap $? 14 'RequestPresignedURL' test.out
 $CLI_EXE \
     --sn legal \
     --op SetDefaultPolicy \
-    --localizedPolicyVersionId '0ifl7vTQ' \
+    --localizedPolicyVersionId 'bOaK1sWe' \
     > test.out 2>&1
 eval_tap $? 15 'SetDefaultPolicy' test.out
 
 #- 16 RetrieveAcceptedAgreementsForMultiUsers
 # body param: body
-echo '{"currentPublishedOnly": true, "userIds": ["1r2eOuq0", "SsMDxYHY", "xN6wDBtJ"]}' > $TEMP_JSON_INPUT
+echo '{"currentPublishedOnly": true, "userIds": ["YyIDRRzf", "wXkx2Rvv", "vg9W2xoa"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op RetrieveAcceptedAgreementsForMultiUsers \
@@ -201,8 +201,8 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveAcceptedAgreements1 \
     --namespace $AB_NAMESPACE \
-    --userId 'AWSPj3qm' \
-    --excludeOtherNamespacesPolicies 'false' \
+    --userId 'atSuafHx' \
+    --excludeOtherNamespacesPolicies 'true' \
     > test.out 2>&1
 eval_tap $? 17 'RetrieveAcceptedAgreements1' test.out
 
@@ -211,11 +211,11 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveAllUsersByPolicyVersion1 \
     --namespace $AB_NAMESPACE \
-    --convertGameUserId 'false' \
-    --keyword 'Mua7jlDI' \
-    --limit '42' \
-    --offset '44' \
-    --policyVersionId 'QY4H9521' \
+    --convertGameUserId 'true' \
+    --keyword 'b3i6GgXi' \
+    --limit '79' \
+    --offset '18' \
+    --policyVersionId 'YWERcPYh' \
     > test.out 2>&1
 eval_tap $? 18 'RetrieveAllUsersByPolicyVersion1' test.out
 
@@ -224,7 +224,7 @@ $CLI_EXE \
     --sn legal \
     --op DownloadExportedAgreementsInCSV \
     --namespace $AB_NAMESPACE \
-    --exportId 'h3hD3XM5' \
+    --exportId 'iPmojTDy' \
     > test.out 2>&1
 eval_tap $? 19 'DownloadExportedAgreementsInCSV' test.out
 
@@ -233,9 +233,9 @@ $CLI_EXE \
     --sn legal \
     --op InitiateExportAgreementsToCSV \
     --namespace $AB_NAMESPACE \
-    --end 'gu6rAVcc' \
-    --policyVersionId 'zDEl6wOU' \
-    --start '4SnRFPjc' \
+    --end '5uESZ8Ju' \
+    --policyVersionId 'Oeg9jjAm' \
+    --start 'hDGr81xA' \
     > test.out 2>&1
 eval_tap $? 20 'InitiateExportAgreementsToCSV' test.out
 
@@ -244,13 +244,13 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveAllLegalPoliciesByNamespace \
     --namespace $AB_NAMESPACE \
-    --visibleOnly 'false' \
+    --visibleOnly 'true' \
     > test.out 2>&1
 eval_tap $? 21 'RetrieveAllLegalPoliciesByNamespace' test.out
 
 #- 22 CreatePolicy1
 # body param: body
-echo '{"affectedClientIds": ["Ih9lCtKe", "clpizdF2", "LQSEmGF2"], "affectedCountries": ["llerwHzI", "Iotale1Q", "hK98QUZk"], "basePolicyName": "5sl44X0I", "countryGroupName": "0PMlcpbE", "countryType": "COUNTRY_GROUP", "description": "aUs2zEvG", "isHidden": false, "isHiddenPublic": true, "tags": ["WFZJdn7D", "Nx6FxlYe", "LhpIfzpw"], "typeId": "VM7tFIZo"}' > $TEMP_JSON_INPUT
+echo '{"affectedClientIds": ["mopsquoH", "05tyU7BB", "dWfUlsMw"], "affectedCountries": ["EsRaUJtt", "QBBNvls2", "CSCnWUKk"], "basePolicyName": "coHFCzCX", "countryGroupName": "9vExxJkK", "countryType": "COUNTRY", "description": "TwraCw7F", "isHidden": true, "isHiddenPublic": false, "tags": ["m9J1iX6s", "xG9v7PBe", "BviNDeMa"], "typeId": "pwsu6WpL"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreatePolicy1 \
@@ -263,7 +263,7 @@ eval_tap $? 22 'CreatePolicy1' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSinglePolicy1 \
-    --basePolicyId 'eT4qui5J' \
+    --basePolicyId 'ulmR7HqZ' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 23 'RetrieveSinglePolicy1' test.out
@@ -272,18 +272,18 @@ eval_tap $? 23 'RetrieveSinglePolicy1' test.out
 $CLI_EXE \
     --sn legal \
     --op DeleteBasePolicy \
-    --basePolicyId '4hvJ4Chx' \
+    --basePolicyId '3l68B5f2' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 24 'DeleteBasePolicy' test.out
 
 #- 25 PartialUpdatePolicy1
 # body param: body
-echo '{"affectedClientIds": ["Agss4LBI", "m02cALII", "sbP83E6V"], "affectedCountries": ["tEthQVMY", "iVw7KcT2", "dtPchLAS"], "basePolicyName": "hfVh8qlC", "countryGroupName": "1LTsA82u", "countryType": "COUNTRY", "description": "Cx6NTxur", "isHidden": true, "isHiddenPublic": true, "tags": ["aTrOSl4K", "Qz8CZ2oZ", "WlUf5zez"]}' > $TEMP_JSON_INPUT
+echo '{"affectedClientIds": ["OkxeEmlt", "w6YOwwPx", "JDTwnvRb"], "affectedCountries": ["D0gSb2f4", "KMfEZG0a", "jAeSFPQS"], "basePolicyName": "GPQz5Xzi", "countryGroupName": "pRL0vV2g", "countryType": "COUNTRY", "description": "RV7iBjNL", "isHidden": false, "isHiddenPublic": true, "tags": ["6NxiD9Zb", "xE09vq2f", "Xqo7h7wk"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op PartialUpdatePolicy1 \
-    --basePolicyId 'J7Ob9oWg' \
+    --basePolicyId 'S1e3102l' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -293,8 +293,8 @@ eval_tap $? 25 'PartialUpdatePolicy1' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrievePolicyCountry1 \
-    --basePolicyId 'zbE731sK' \
-    --countryCode 'ekGriSmt' \
+    --basePolicyId '6PuwytzD' \
+    --countryCode 'nwKNiWSY' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 26 'RetrievePolicyCountry1' test.out
@@ -303,18 +303,18 @@ eval_tap $? 26 'RetrievePolicyCountry1' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveAllPoliciesFromBasePolicy \
-    --basePolicyId 'CUq5ALqs' \
+    --basePolicyId 'jKDbfooa' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 27 'RetrieveAllPoliciesFromBasePolicy' test.out
 
 #- 28 CreatePolicyUnderBasePolicy
 # body param: body
-echo '{"countries": ["OrAn7Ye7", "XDhxKil7", "0mM0UHyV"], "countryCode": "dDFsXFmK", "countryGroupName": "ppoiRCMS", "countryType": "COUNTRY", "description": "r8KIY35f", "isDefaultSelection": true, "isMandatory": true, "policyName": "v7BFdQnv", "shouldNotifyOnUpdate": true}' > $TEMP_JSON_INPUT
+echo '{"countries": ["ksSmhqWc", "yYfVFQRN", "UZYsSB3z"], "countryCode": "8J9ySQCz", "countryGroupName": "PFYR4pdw", "countryType": "COUNTRY", "description": "X8VSu5yj", "isDefaultSelection": false, "isMandatory": false, "policyName": "kUsHds6g", "shouldNotifyOnUpdate": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreatePolicyUnderBasePolicy \
-    --basePolicyId 'thdh8kfB' \
+    --basePolicyId 'pd9iwiVY' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -324,7 +324,7 @@ eval_tap $? 28 'CreatePolicyUnderBasePolicy' test.out
 $CLI_EXE \
     --sn legal \
     --op DeleteLocalizedPolicy \
-    --localizedPolicyVersionId 'LEazVJvY' \
+    --localizedPolicyVersionId 'vcY8dcFr' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 29 'DeleteLocalizedPolicy' test.out
@@ -334,18 +334,18 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveLocalizedPolicyVersions1 \
     --namespace $AB_NAMESPACE \
-    --policyVersionId 'VV7UQlTl' \
+    --policyVersionId 'tNQpXivF' \
     > test.out 2>&1
 eval_tap $? 30 'RetrieveLocalizedPolicyVersions1' test.out
 
 #- 31 CreateLocalizedPolicyVersion1
 # body param: body
-echo '{"contentType": "SRZST7tY", "description": "pnoWfeoq", "localeCode": "eZYzDt9B"}' > $TEMP_JSON_INPUT
+echo '{"contentType": "R3rE0r1X", "description": "LdT8ovvF", "localeCode": "ekazy69f"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreateLocalizedPolicyVersion1 \
     --namespace $AB_NAMESPACE \
-    --policyVersionId 'rHmU32Jj' \
+    --policyVersionId 'c5yaZc6N' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 31 'CreateLocalizedPolicyVersion1' test.out
@@ -354,18 +354,18 @@ eval_tap $? 31 'CreateLocalizedPolicyVersion1' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSingleLocalizedPolicyVersion1 \
-    --localizedPolicyVersionId 'AJWN2U7J' \
+    --localizedPolicyVersionId 'mO3Lhjpg' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 32 'RetrieveSingleLocalizedPolicyVersion1' test.out
 
 #- 33 UpdateLocalizedPolicyVersion1
 # body param: body
-echo '{"attachmentChecksum": "vNwGIpwx", "attachmentLocation": "WjZHReeN", "attachmentVersionIdentifier": "qg87mloh", "contentType": "WttljyQw", "description": "QVRMortP"}' > $TEMP_JSON_INPUT
+echo '{"attachmentChecksum": "37BG6HJc", "attachmentLocation": "C2qld9ck", "attachmentVersionIdentifier": "CKe3vALK", "contentType": "oXV4c6or", "description": "1DFdD59R"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op UpdateLocalizedPolicyVersion1 \
-    --localizedPolicyVersionId 'TS8nIdWZ' \
+    --localizedPolicyVersionId '3rIxwURp' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -373,11 +373,11 @@ eval_tap $? 33 'UpdateLocalizedPolicyVersion1' test.out
 
 #- 34 RequestPresignedURL1
 # body param: body
-echo '{"contentMD5": "EimUvZ4S", "contentType": "ICNlB4GP"}' > $TEMP_JSON_INPUT
+echo '{"contentMD5": "OQUdoQ3U", "contentType": "29arGaIv"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op RequestPresignedURL1 \
-    --localizedPolicyVersionId '3dh4zyId' \
+    --localizedPolicyVersionId 'msBm5QF1' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -387,7 +387,7 @@ eval_tap $? 34 'RequestPresignedURL1' test.out
 $CLI_EXE \
     --sn legal \
     --op SetDefaultPolicy1 \
-    --localizedPolicyVersionId 'KnUi31ev' \
+    --localizedPolicyVersionId 'LV5YmpqW' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 35 'SetDefaultPolicy1' test.out
@@ -397,18 +397,18 @@ $CLI_EXE \
     --sn legal \
     --op DeletePolicyVersion \
     --namespace $AB_NAMESPACE \
-    --policyVersionId '9zQtBdaE' \
+    --policyVersionId 'OhjLZHWJ' \
     > test.out 2>&1
 eval_tap $? 36 'DeletePolicyVersion' test.out
 
 #- 37 UpdatePolicyVersion1
 # body param: body
-echo '{"description": "g92IS6Jg", "displayVersion": "CWz0oykt", "isCommitted": false}' > $TEMP_JSON_INPUT
+echo '{"description": "1Z3xm51v", "displayVersion": "QvIdJf31", "isCommitted": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op UpdatePolicyVersion1 \
     --namespace $AB_NAMESPACE \
-    --policyVersionId 'B5uvk0qI' \
+    --policyVersionId 'Y6Vc939b' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 37 'UpdatePolicyVersion1' test.out
@@ -418,8 +418,8 @@ $CLI_EXE \
     --sn legal \
     --op PublishPolicyVersion1 \
     --namespace $AB_NAMESPACE \
-    --policyVersionId 'iq6GGrbz' \
-    --shouldNotify 'true' \
+    --policyVersionId 'b8PZWMEQ' \
+    --shouldNotify 'false' \
     > test.out 2>&1
 eval_tap $? 38 'PublishPolicyVersion1' test.out
 
@@ -428,7 +428,7 @@ $CLI_EXE \
     --sn legal \
     --op UnpublishPolicyVersion \
     --namespace $AB_NAMESPACE \
-    --policyVersionId '4rmQ1sgr' \
+    --policyVersionId 'H8AHsscE' \
     > test.out 2>&1
 eval_tap $? 39 'UnpublishPolicyVersion' test.out
 
@@ -437,18 +437,18 @@ $CLI_EXE \
     --sn legal \
     --op DeletePolicy \
     --namespace $AB_NAMESPACE \
-    --policyId 'QVi4KaiZ' \
+    --policyId 'XHo42NjY' \
     > test.out 2>&1
 eval_tap $? 40 'DeletePolicy' test.out
 
 #- 41 UpdatePolicy1
 # body param: body
-echo '{"countries": ["PgukXXXi", "oDFKvRXi", "L5HmHv01"], "countryGroupName": "UpGk9kOY", "description": "Ud7VRpNA", "isDefaultOpted": true, "isMandatory": false, "policyName": "tEk6oKdM", "readableId": "LTLqWdPX", "shouldNotifyOnUpdate": true}' > $TEMP_JSON_INPUT
+echo '{"countries": ["YnFLo6C4", "bIbU7pO6", "DGEK4iIc"], "countryGroupName": "CrCeEeCn", "description": "dQHK3D6K", "isDefaultOpted": true, "isMandatory": false, "policyName": "oQiBy9IW", "readableId": "l8zhuefD", "shouldNotifyOnUpdate": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op UpdatePolicy1 \
     --namespace $AB_NAMESPACE \
-    --policyId 'J3vEu1wS' \
+    --policyId 'SQySQiY9' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 41 'UpdatePolicy1' test.out
@@ -458,7 +458,7 @@ $CLI_EXE \
     --sn legal \
     --op SetDefaultPolicy3 \
     --namespace $AB_NAMESPACE \
-    --policyId '4nMyhPgz' \
+    --policyId 'JMt9ayJy' \
     > test.out 2>&1
 eval_tap $? 42 'SetDefaultPolicy3' test.out
 
@@ -467,19 +467,19 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveSinglePolicyVersion1 \
     --namespace $AB_NAMESPACE \
-    --policyId 'NVimYo7C' \
-    --versionId 'NVCD6Uxp' \
+    --policyId 'OFZrxnKY' \
+    --versionId 'WiTmEaR2' \
     > test.out 2>&1
 eval_tap $? 43 'RetrieveSinglePolicyVersion1' test.out
 
 #- 44 CreatePolicyVersion1
 # body param: body
-echo '{"description": "vR1lzOY2", "displayVersion": "IwugkPTW", "isCommitted": true}' > $TEMP_JSON_INPUT
+echo '{"description": "6jeqaUI0", "displayVersion": "gAEBIWCD", "isCommitted": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreatePolicyVersion1 \
     --namespace $AB_NAMESPACE \
-    --policyId '6kiU7z4g' \
+    --policyId '0vN7xCVm' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 44 'CreatePolicyVersion1' test.out
@@ -489,22 +489,22 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveAllPolicyTypes1 \
     --namespace $AB_NAMESPACE \
-    --offset '56' \
-    --limit '30' \
+    --offset '88' \
+    --limit '81' \
     > test.out 2>&1
 eval_tap $? 45 'RetrieveAllPolicyTypes1' test.out
 
 #- 46 IndirectBulkAcceptVersionedPolicy
 # body param: body
-echo '[{"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "iyQaf0iY", "policyId": "EapN6YEA", "policyVersionId": "cmG5Vqso"}, {"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "rpzMeFMM", "policyId": "6rjaQ1aT", "policyVersionId": "NGHqxOHn"}, {"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "sMfwru7z", "policyId": "UlXGoK2s", "policyVersionId": "Ux9mJTdg"}]' > $TEMP_JSON_INPUT
+echo '[{"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "THyIgiIo", "policyId": "YIhuUEAo", "policyVersionId": "FyjNMDsJ"}, {"isAccepted": true, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "B43Q0o0g", "policyId": "UEmtPaKd", "policyVersionId": "HYgFo7WO"}, {"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "HEfIzYKT", "policyId": "wqWHeAos", "policyVersionId": "DuuefyKL"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op IndirectBulkAcceptVersionedPolicy \
     --namespace $AB_NAMESPACE \
-    --userId 'cQnPq80P' \
-    --publisherUserId 'oEETVHZA' \
-    --clientId '19k3eG0H' \
-    --countryCode 'bOdU3Erc' \
+    --userId '2A3mOGK0' \
+    --publisherUserId 'UVpFq9bt' \
+    --clientId 'WeV4seOD' \
+    --countryCode 'WvObg27R' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 46 'IndirectBulkAcceptVersionedPolicy' test.out
@@ -514,10 +514,10 @@ $CLI_EXE \
     --sn legal \
     --op AdminRetrieveEligibilities \
     --namespace $AB_NAMESPACE \
-    --userId 's5WkLLey' \
-    --publisherUserId '3S49MkOq' \
-    --clientId '2RposRj9' \
-    --countryCode '0710xQ0e' \
+    --userId 'x8VK9156' \
+    --publisherUserId 'lNvnpngy' \
+    --clientId 'HGAUFtZ6' \
+    --countryCode 'Fj0MzHTy' \
     > test.out 2>&1
 eval_tap $? 47 'AdminRetrieveEligibilities' test.out
 
@@ -525,17 +525,17 @@ eval_tap $? 47 'AdminRetrieveEligibilities' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrievePolicies \
-    --countryCode '2eStSZ3R' \
+    --countryCode 'VevhkYQP' \
     > test.out 2>&1
 eval_tap $? 48 'RetrievePolicies' test.out
 
 #- 49 UpdatePolicyVersion
 # body param: body
-echo '{"description": "w2YqF6Ut", "displayVersion": "r8xEYNuz", "isCommitted": true}' > $TEMP_JSON_INPUT
+echo '{"description": "MMeYhtgL", "displayVersion": "ax8cuJRB", "isCommitted": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op UpdatePolicyVersion \
-    --policyVersionId 'RwDe5ZdB' \
+    --policyVersionId '224DIN5m' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 49 'UpdatePolicyVersion' test.out
@@ -544,18 +544,18 @@ eval_tap $? 49 'UpdatePolicyVersion' test.out
 $CLI_EXE \
     --sn legal \
     --op PublishPolicyVersion \
-    --policyVersionId '4n7RhJmC' \
-    --shouldNotify 'true' \
+    --policyVersionId '7USx1KCD' \
+    --shouldNotify 'false' \
     > test.out 2>&1
 eval_tap $? 50 'PublishPolicyVersion' test.out
 
 #- 51 UpdatePolicy
 # body param: body
-echo '{"countries": ["IweGhcHZ", "Wf4wuS9G", "rOuDfzQ1"], "countryGroupName": "Silm4DqC", "description": "AllwPt75", "isDefaultOpted": false, "isMandatory": false, "policyName": "5q5kS5qd", "readableId": "pV6vkkSF", "shouldNotifyOnUpdate": false}' > $TEMP_JSON_INPUT
+echo '{"countries": ["y8LtYXfv", "8VI6r0CK", "ZDap2bEe"], "countryGroupName": "Az0wdmKs", "description": "JbSRzYGq", "isDefaultOpted": false, "isMandatory": true, "policyName": "DMqhIZs3", "readableId": "ieDnJmJT", "shouldNotifyOnUpdate": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op UpdatePolicy \
-    --policyId 'YM3Np6r1' \
+    --policyId 'vTulsM6j' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 51 'UpdatePolicy' test.out
@@ -564,7 +564,7 @@ eval_tap $? 51 'UpdatePolicy' test.out
 $CLI_EXE \
     --sn legal \
     --op SetDefaultPolicy2 \
-    --policyId 'dsnGIhAb' \
+    --policyId '4pa8EfAI' \
     > test.out 2>&1
 eval_tap $? 52 'SetDefaultPolicy2' test.out
 
@@ -572,18 +572,18 @@ eval_tap $? 52 'SetDefaultPolicy2' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSinglePolicyVersion \
-    --policyId 'kdkgmoxC' \
-    --versionId 'Tp0fJnNb' \
+    --policyId 'xfUDvEOw' \
+    --versionId 'cK0K8giW' \
     > test.out 2>&1
 eval_tap $? 53 'RetrieveSinglePolicyVersion' test.out
 
 #- 54 CreatePolicyVersion
 # body param: body
-echo '{"description": "Ct8JsITU", "displayVersion": "EKf8kFoY", "isCommitted": true}' > $TEMP_JSON_INPUT
+echo '{"description": "EwBKoz2l", "displayVersion": "lVUh7yCO", "isCommitted": true}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op CreatePolicyVersion \
-    --policyId 'ZEauSdj4' \
+    --policyId '3sn5QQB3' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 54 'CreatePolicyVersion' test.out
@@ -592,8 +592,8 @@ eval_tap $? 54 'CreatePolicyVersion' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveAllPolicyTypes \
-    --offset '88' \
-    --limit '73' \
+    --offset '76' \
+    --limit '72' \
     > test.out 2>&1
 eval_tap $? 55 'RetrieveAllPolicyTypes' test.out
 
@@ -601,7 +601,7 @@ eval_tap $? 55 'RetrieveAllPolicyTypes' test.out
 $CLI_EXE \
     --sn legal \
     --op GetUserInfoStatus \
-    --namespaces 'RqhzOScn' \
+    --namespaces 'xqCyN0A0' \
     > test.out 2>&1
 eval_tap $? 56 'GetUserInfoStatus' test.out
 
@@ -615,13 +615,13 @@ eval_tap 0 58 'InvalidateUserInfoCache # SKIP deprecated' test.out
 $CLI_EXE \
     --sn legal \
     --op AnonymizeUserAgreement \
-    --userId 'bAhf4yk9' \
+    --userId 'UOUWIjM8' \
     > test.out 2>&1
 eval_tap $? 59 'AnonymizeUserAgreement' test.out
 
 #- 60 ChangePreferenceConsent1
 # body param: body
-echo '[{"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "i1g08mmh", "policyId": "5HFPPxKY", "policyVersionId": "3xwsZ7O0"}, {"isAccepted": true, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "mLzsKsXv", "policyId": "weuilrlp", "policyVersionId": "mH04xhiD"}, {"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "Ou4DqTmN", "policyId": "hGobenuB", "policyVersionId": "9m46bqF5"}]' > $TEMP_JSON_INPUT
+echo '[{"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "7NAY2Eur", "policyId": "4Ax39k8I", "policyVersionId": "hcr757Eo"}, {"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "pBnbV6B9", "policyId": "oLQp839x", "policyVersionId": "PvL3dONv"}, {"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "wrUiE1NB", "policyId": "VPHnzmaT", "policyVersionId": "L0q5BoDR"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op ChangePreferenceConsent1 \
@@ -633,7 +633,7 @@ eval_tap $? 60 'ChangePreferenceConsent1' test.out
 $CLI_EXE \
     --sn legal \
     --op AcceptVersionedPolicy \
-    --localizedPolicyVersionId '9QIdKVK8' \
+    --localizedPolicyVersionId 'yXJ9cx6W' \
     > test.out 2>&1
 eval_tap $? 61 'AcceptVersionedPolicy' test.out
 
@@ -646,7 +646,7 @@ eval_tap $? 62 'RetrieveAgreementsPublic' test.out
 
 #- 63 BulkAcceptVersionedPolicy
 # body param: body
-echo '[{"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "CXNJpE8W", "policyId": "KMdBvxX5", "policyVersionId": "lIYGG1N3"}, {"isAccepted": false, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "lZmdUuaP", "policyId": "lTGhfdP9", "policyVersionId": "xSONLEIj"}, {"isAccepted": true, "isNeedToSendEventMarketing": false, "localizedPolicyVersionId": "AaV7hbhI", "policyId": "V2vVqDr0", "policyVersionId": "Qt4nXR75"}]' > $TEMP_JSON_INPUT
+echo '[{"isAccepted": true, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "2MpSLF99", "policyId": "i4pZ37GE", "policyVersionId": "12fMp9CV"}, {"isAccepted": false, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "QiuH3VCH", "policyId": "Wb95KFAg", "policyVersionId": "Ak0cVE1d"}, {"isAccepted": true, "isNeedToSendEventMarketing": true, "localizedPolicyVersionId": "3vzQqYfc", "policyId": "8JO3JiZ4", "policyVersionId": "UGclhZhm"}]' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn legal \
     --op BulkAcceptVersionedPolicy \
@@ -672,10 +672,10 @@ eval_tap $? 66 'RetrieveEligibilitiesPublic' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveEligibilitiesPublicIndirect \
-    --clientId 'yBoHf8Aq' \
-    --countryCode 'u4spuRo9' \
+    --clientId 'vdLl9Vxp' \
+    --countryCode 'G1zUcwKa' \
     --namespace $AB_NAMESPACE \
-    --userId 'g7zlKBSa' \
+    --userId 'LG4M17Ei' \
     > test.out 2>&1
 eval_tap $? 67 'RetrieveEligibilitiesPublicIndirect' test.out
 
@@ -683,7 +683,7 @@ eval_tap $? 67 'RetrieveEligibilitiesPublicIndirect' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSingleLocalizedPolicyVersion2 \
-    --localizedPolicyVersionId 'HTSk2mgN' \
+    --localizedPolicyVersionId 'GGOozXac' \
     > test.out 2>&1
 eval_tap $? 68 'RetrieveSingleLocalizedPolicyVersion2' test.out
 
@@ -691,7 +691,7 @@ eval_tap $? 68 'RetrieveSingleLocalizedPolicyVersion2' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveSingleLocalizedPolicyVersion3 \
-    --localizedPolicyVersionId 'H1hZz36B' \
+    --localizedPolicyVersionId '1LSVuqnu' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 69 'RetrieveSingleLocalizedPolicyVersion3' test.out
@@ -707,10 +707,10 @@ eval_tap $? 70 'RetrieveCountryListWithPolicies' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveLatestPolicies \
-    --countryCode 'fkEDWRt0' \
-    --defaultOnEmpty 'true' \
-    --policyType 'MARKETING_PREFERENCE_TYPE' \
-    --tags 'EjXoXukJ' \
+    --countryCode 'eV7nT7Yk' \
+    --defaultOnEmpty 'false' \
+    --policyType 'LEGAL_DOCUMENT_TYPE' \
+    --tags 'bVBX4QdN' \
     --visibleOnly 'false' \
     > test.out 2>&1
 eval_tap $? 71 'RetrieveLatestPolicies' test.out
@@ -720,10 +720,10 @@ $CLI_EXE \
     --sn legal \
     --op RetrieveLatestPoliciesPublic \
     --namespace $AB_NAMESPACE \
-    --alwaysIncludeDefault 'false' \
+    --alwaysIncludeDefault 'true' \
     --defaultOnEmpty 'true' \
-    --policyType 'LEGAL_DOCUMENT_TYPE' \
-    --tags 'IZhjXApN' \
+    --policyType 'MARKETING_PREFERENCE_TYPE' \
+    --tags 't0Jt0BFX' \
     --visibleOnly 'false' \
     > test.out 2>&1
 eval_tap $? 72 'RetrieveLatestPoliciesPublic' test.out
@@ -732,12 +732,12 @@ eval_tap $? 72 'RetrieveLatestPoliciesPublic' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveLatestPoliciesByNamespaceAndCountryPublic \
-    --countryCode 'JJWXuiMW' \
+    --countryCode 'vXgjheMW' \
     --namespace $AB_NAMESPACE \
     --alwaysIncludeDefault 'true' \
-    --defaultOnEmpty 'false' \
+    --defaultOnEmpty 'true' \
     --policyType 'MARKETING_PREFERENCE_TYPE' \
-    --tags 'BOZ4iuao' \
+    --tags 'Ifxv7RUk' \
     --visibleOnly 'false' \
     > test.out 2>&1
 eval_tap $? 73 'RetrieveLatestPoliciesByNamespaceAndCountryPublic' test.out
@@ -753,9 +753,9 @@ eval_tap $? 74 'CheckReadiness' test.out
 $CLI_EXE \
     --sn legal \
     --op RetrieveLatestPoliciesByNamespaceAndCountryPublic1 \
-    --countryCode 'NbWfqfb0' \
+    --countryCode 'pHuTXTUq' \
     --namespace $AB_NAMESPACE \
-    --clientId 'iSHVMpJy' \
+    --clientId 'XrxayKxI' \
     > test.out 2>&1
 eval_tap $? 75 'RetrieveLatestPoliciesByNamespaceAndCountryPublic1' test.out
 

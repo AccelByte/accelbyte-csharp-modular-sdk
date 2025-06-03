@@ -69,10 +69,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicUpdateInsertSessionStorage op = new PublicUpdateInsertSessionStorage(this,
-                    body,
-                    namespace_,
-                    sessionId,
-                    userId
+                    body,                    
+                    namespace_,                    
+                    sessionId,                    
+                    userId                    
                 );
 
                 op.SetBaseFields<PublicUpdateInsertSessionStorageBuilder>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -137,13 +137,13 @@ namespace AccelByte.Sdk.Api.Session.Operation
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -170,22 +170,22 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public PublicUpdateInsertSessionStorage(
-            string namespace_,
-            string sessionId,
-            string userId,
-            Dictionary<string, object> body
+            string namespace_,            
+            string sessionId,            
+            string userId,            
+            Dictionary<string, object> body            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["userId"] = userId;
+            
+            
 
-
-
-
-
+            
+            
             BodyParams = body;
-
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public PublicUpdateInsertSessionStorage.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicUpdateInsertSessionStorage.Response()

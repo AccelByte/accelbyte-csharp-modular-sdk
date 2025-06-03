@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Lobby.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 {
-    [SdkConsoleCommand("lobby", "addfriendswithoutconfirmation")]
-    public class AddFriendsWithoutConfirmationCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("lobby","addfriendswithoutconfirmation")]
+    public class AddFriendsWithoutConfirmationCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Lobby"; } }
+        public string ServiceName{ get { return "Lobby"; } }
 
-        public string OperationName { get { return "AddFriendsWithoutConfirmation"; } }
+        public string OperationName{ get { return "AddFriendsWithoutConfirmation"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

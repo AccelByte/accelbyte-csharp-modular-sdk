@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Dsartifact.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Dsartifact
 {
-    [SdkConsoleCommand("dsartifact", "deletequeue")]
-    public class DeleteQueueCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("dsartifact","deletequeue")]
+    public class DeleteQueueCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Dsartifact"; } }
+        public string ServiceName{ get { return "Dsartifact"; } }
 
-        public string OperationName { get { return "DeleteQueue"; } }
+        public string OperationName{ get { return "DeleteQueue"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

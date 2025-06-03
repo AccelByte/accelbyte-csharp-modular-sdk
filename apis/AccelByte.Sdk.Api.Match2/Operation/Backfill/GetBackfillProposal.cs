@@ -56,8 +56,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 GetBackfillProposal op = new GetBackfillProposal(this,
-                    namespace_,
-                    sessionID
+                    namespace_,                    
+                    sessionID                    
                 );
 
                 op.SetBaseFields<GetBackfillProposalBuilder>(this);
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -110,13 +110,13 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (sessionID is not null) QueryParams["sessionID"] = sessionID;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -143,18 +143,18 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #endregion
 
         public GetBackfillProposal(
-            string namespace_,
-            string sessionID
+            string namespace_,            
+            string sessionID            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (sessionID is not null) QueryParams["sessionID"] = sessionID;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetBackfillProposal.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetBackfillProposal.Response()

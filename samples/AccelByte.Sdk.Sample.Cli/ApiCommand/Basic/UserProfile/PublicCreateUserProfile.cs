@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Basic.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
 {
-    [SdkConsoleCommand("basic", "publiccreateuserprofile")]
-    public class PublicCreateUserProfileCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("basic","publiccreateuserprofile")]
+    public class PublicCreateUserProfileCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Basic"; } }
+        public string ServiceName{ get { return "Basic"; } }
 
-        public string OperationName { get { return "PublicCreateUserProfile"; } }
+        public string OperationName{ get { return "PublicCreateUserProfile"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -65,8 +65,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Basic
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

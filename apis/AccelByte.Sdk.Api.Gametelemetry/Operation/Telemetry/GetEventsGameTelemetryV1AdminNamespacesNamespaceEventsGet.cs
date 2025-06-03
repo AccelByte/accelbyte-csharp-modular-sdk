@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet op = new GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(this,
-                    namespace_
+                    namespace_                    
                 );
 
                 op.SetBaseFields<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder>(this);
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (builder.DeviceType is not null) QueryParams["deviceType"] = builder.DeviceType;
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.EventId is not null) QueryParams["eventId"] = builder.EventId;
@@ -195,11 +195,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -221,21 +221,21 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(
-            string namespace_,
-            string? deviceType,
-            string? endTime,
-            string? eventId,
-            string? eventName,
-            string? eventPayload,
-            string? flightId,
-            long? limit,
-            long? offset,
-            string? startTime,
-            string? userId
+            string namespace_,            
+            string? deviceType,            
+            string? endTime,            
+            string? eventId,            
+            string? eventName,            
+            string? eventPayload,            
+            string? flightId,            
+            long? limit,            
+            long? offset,            
+            string? startTime,            
+            string? userId            
         )
         {
             PathParams["namespace"] = namespace_;
-
+            
             if (deviceType is not null) QueryParams["deviceType"] = deviceType;
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (eventId is not null) QueryParams["eventId"] = eventId;
@@ -246,11 +246,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (userId is not null) QueryParams["userId"] = userId;
+            
 
-
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -260,10 +260,10 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response()

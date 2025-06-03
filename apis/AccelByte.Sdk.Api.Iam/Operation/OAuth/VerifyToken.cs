@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **Note: difference in V3 response:**
     /// 1. format differenceï¼Pascal case => Camel case): permissions field from Action => action, Resource => resource
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
+    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
     public class VerifyToken : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 VerifyToken op = new VerifyToken(this,
-                    token
+                    token                    
                 );
 
                 op.SetBaseFields<VerifyTokenBuilder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
             public VerifyToken.Response Execute(
                 string token
             )
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -109,13 +109,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -134,16 +134,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public VerifyToken(
-            string token
+            string token            
         )
         {
-
-
+            
+            
             if (token is not null) FormParams["token"] = token;
 
-
-
-
+            
+            
+            
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public VerifyToken.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new VerifyToken.Response()

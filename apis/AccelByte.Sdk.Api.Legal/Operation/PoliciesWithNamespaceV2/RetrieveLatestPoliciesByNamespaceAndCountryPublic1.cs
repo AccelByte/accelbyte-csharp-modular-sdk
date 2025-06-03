@@ -77,9 +77,9 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RetrieveLatestPoliciesByNamespaceAndCountryPublic1 op = new RetrieveLatestPoliciesByNamespaceAndCountryPublic1(this,
-                    countryCode,
-                    namespace_,
-                    clientId
+                    countryCode,                    
+                    namespace_,                    
+                    clientId                    
                 );
 
                 op.SetBaseFields<RetrieveLatestPoliciesByNamespaceAndCountryPublic1Builder>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code,
+                    response.Code, 
                     response.ContentType,
                     response.Payload);
             }
@@ -138,13 +138,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (clientId is not null) QueryParams["clientId"] = clientId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
         #endregion
@@ -160,20 +160,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public RetrieveLatestPoliciesByNamespaceAndCountryPublic1(
-            string countryCode,
-            string namespace_,
-            string clientId
+            string countryCode,            
+            string namespace_,            
+            string clientId            
         )
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-
+            
             if (clientId is not null) QueryParams["clientId"] = clientId;
+            
 
-
-
-
-
+            
+            
+            
 
         }
 
@@ -181,10 +181,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() { };
+        public override List<string> Consumes => new() {  };
 
         public override List<string> Produces => new() { "application/json" };
-
+        
         public RetrieveLatestPoliciesByNamespaceAndCountryPublic1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RetrieveLatestPoliciesByNamespaceAndCountryPublic1.Response()

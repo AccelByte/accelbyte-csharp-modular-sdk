@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal", "indirectbulkacceptversionedpolicy")]
-    public class IndirectBulkAcceptVersionedPolicyCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("legal","indirectbulkacceptversionedpolicy")]
+    public class IndirectBulkAcceptVersionedPolicyCommand: ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName { get { return "Legal"; } }
+        public string ServiceName{ get { return "Legal"; } }
 
-        public string OperationName { get { return "IndirectBulkAcceptVersionedPolicy"; } }
+        public string OperationName{ get { return "IndirectBulkAcceptVersionedPolicy"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -78,8 +78,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-", "response data is null.");
-            }
+                    return CommandResult.Fail("-","response data is null.");
+            }   
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
