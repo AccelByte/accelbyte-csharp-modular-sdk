@@ -18,9 +18,6 @@
 		<ApiChatVersion>0.12.0</ApiChatVersion>
         <ApiCloudsaveVersion>0.14.0</ApiCloudsaveVersion>
         <ApiCsmVersion>0.5.0</ApiCsmVersion>
-        <ApiDsartifactVersion>0.3.0</ApiDsartifactVersion>
-        <ApiDslogmanagerVersion>0.6.0</ApiDslogmanagerVersion>
-        <ApiDsmcVersion>0.6.0</ApiDsmcVersion>
         <ApiEventlogVersion>0.5.0</ApiEventlogVersion>
         <ApiGametelemetryVersion>0.8.0</ApiGametelemetryVersion>
         <ApiGdprVersion>0.11.0</ApiGdprVersion>
@@ -33,7 +30,6 @@
         <ApiLoginqueueVersion>0.2.0</ApiLoginqueueVersion>
         <ApiMatch2Version>0.15.0</ApiMatch2Version>
         <ApiPlatformVersion>0.18.0</ApiPlatformVersion>
-        <ApiQosmVersion>0.5.0</ApiQosmVersion>
         <ApiReportingVersion>0.6.0</ApiReportingVersion>
         <ApiSeasonpassVersion>0.9.0</ApiSeasonpassVersion>
         <ApiSessionVersion>0.20.0</ApiSessionVersion>        

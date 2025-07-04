@@ -11,9 +11,6 @@ using AccelByte.Sdk.Api.Ams;
 using AccelByte.Sdk.Api.Basic;
 using AccelByte.Sdk.Api.Chat;
 using AccelByte.Sdk.Api.Cloudsave;
-using AccelByte.Sdk.Api.Dsartifact;
-using AccelByte.Sdk.Api.Dslogmanager;
-using AccelByte.Sdk.Api.Dsmc;
 using AccelByte.Sdk.Api.Gametelemetry;
 using AccelByte.Sdk.Api.Gdpr;
 using AccelByte.Sdk.Api.Group;
@@ -24,7 +21,6 @@ using AccelByte.Sdk.Api.Legal;
 using AccelByte.Sdk.Api.Lobby;
 using AccelByte.Sdk.Api.Match2;
 using AccelByte.Sdk.Api.Platform;
-using AccelByte.Sdk.Api.Qosm;
 using AccelByte.Sdk.Api.Reporting;
 using AccelByte.Sdk.Api.Seasonpass;
 using AccelByte.Sdk.Api.Session;
@@ -45,9 +41,6 @@ namespace AccelByte.Sdk.Core
         public BasicApi Basic { get => ((IAccelByteSdk)this).GetBasicApi(); }
         public ChatApi Chat { get => ((IAccelByteSdk)this).GetChatApi(); }
         public CloudsaveApi Cloudsave { get => ((IAccelByteSdk)this).GetCloudsaveApi(); }
-        public DsartifactApi Dsartifact { get => ((IAccelByteSdk)this).GetDsartifactApi(); }
-        public DslogmanagerApi Dslogmanager { get => ((IAccelByteSdk)this).GetDslogmanagerApi(); }
-        public DsmcApi Dsmc { get => ((IAccelByteSdk)this).GetDsmcApi(); }
         public GametelemetryApi Gametelemetry { get => ((IAccelByteSdk)this).GetGametelemetryApi(); }
         public GdprApi Gdpr { get => ((IAccelByteSdk)this).GetGdprApi(); }
         public GroupApi Group { get => ((IAccelByteSdk)this).GetGroupApi(); }
@@ -58,7 +51,6 @@ namespace AccelByte.Sdk.Core
         public LobbyApi Lobby { get => ((IAccelByteSdk)this).GetLobbyApi(); }
         public Match2Api Match2 { get => ((IAccelByteSdk)this).GetMatch2Api(); }
         public PlatformApi Platform { get => ((IAccelByteSdk)this).GetPlatformApi(); }
-        public QosmApi Qosm { get => ((IAccelByteSdk)this).GetQosmApi(); }
         public ReportingApi Reporting { get => ((IAccelByteSdk)this).GetReportingApi(); }
         public SeasonpassApi Seasonpass { get => ((IAccelByteSdk)this).GetSeasonpassApi(); }
         public SessionApi Session { get => ((IAccelByteSdk)this).GetSessionApi(); }
