@@ -267,6 +267,17 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
+        public GetMyOfflineNotifications.GetMyOfflineNotificationsBuilder GetMyOfflineNotificationsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.GetMyOfflineNotifications.GetMyOfflineNotificationsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GetTopicByNamespace.GetTopicByNamespaceBuilder GetTopicByNamespaceOp
         {
             get
@@ -681,6 +692,22 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.Payload);
         }
         public async Task<GetMyNotifications.Response> GetMyNotificationsAsync(GetMyNotifications input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public GetMyOfflineNotifications.Response GetMyOfflineNotifications(GetMyOfflineNotifications input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<GetMyOfflineNotifications.Response> GetMyOfflineNotificationsAsync(GetMyOfflineNotifications input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

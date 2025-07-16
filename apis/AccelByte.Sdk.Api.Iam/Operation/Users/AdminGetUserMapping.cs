@@ -36,6 +36,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             : OperationBuilder<AdminGetUserMappingBuilder>
         {
 
+            public bool? CreateIfNotFound { get; set; }
+
 
 
 
@@ -47,6 +49,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 _Sdk = sdk;
             }
 
+
+            public AdminGetUserMappingBuilder SetCreateIfNotFound(bool _createIfNotFound)
+            {
+                CreateIfNotFound = _createIfNotFound;
+                return this;
+            }
 
 
 
@@ -122,6 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
             
+            if (builder.CreateIfNotFound != null) QueryParams["createIfNotFound"] = Convert.ToString(builder.CreateIfNotFound)!;
             
 
             
@@ -153,13 +162,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public AdminGetUserMapping(
             string namespace_,            
             string targetNamespace,            
-            string userId            
+            string userId,            
+            bool? createIfNotFound            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
             
+            if (createIfNotFound != null) QueryParams["createIfNotFound"] = Convert.ToString(createIfNotFound)!;
             
 
             

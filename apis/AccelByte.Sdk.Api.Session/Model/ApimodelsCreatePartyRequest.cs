@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Session.Model
 {
@@ -25,7 +27,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? InviteTimeout { get; set; }
 
         [JsonPropertyName("joinability")]
-        public string? Joinability { get; set; }
+        [JsonStringEnum]
+        public ApimodelsCreatePartyRequestJoinability? Joinability { get; set; }
 
         [JsonPropertyName("maxPlayers")]
         public int? MaxPlayers { get; set; }
@@ -40,7 +43,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public bool? TextChat { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ApimodelsCreatePartyRequestType? Type { get; set; }
 
     }
 
@@ -59,7 +63,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? InviteTimeout { get; set; }
 
         [JsonPropertyName("joinability")]
-        public string? Joinability { get; set; }
+        [JsonStringEnum]
+        public ApimodelsCreatePartyRequestJoinability? Joinability { get; set; }
 
         [JsonPropertyName("maxPlayers")]
         public int? MaxPlayers { get; set; }
@@ -74,8 +79,66 @@ namespace AccelByte.Sdk.Api.Session.Model
         public bool? TextChat { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ApimodelsCreatePartyRequestType? Type { get; set; }
 
     }
 
+
+    public class ApimodelsCreatePartyRequestJoinability : StringEnum<ApimodelsCreatePartyRequestJoinability>
+    {
+        public static readonly ApimodelsCreatePartyRequestJoinability CLOSED
+            = new ApimodelsCreatePartyRequestJoinability("CLOSED");
+
+        public static readonly ApimodelsCreatePartyRequestJoinability FRIENDSOFFRIENDS
+            = new ApimodelsCreatePartyRequestJoinability("FRIENDS_OF_FRIENDS");
+
+        public static readonly ApimodelsCreatePartyRequestJoinability FRIENDSOFLEADER
+            = new ApimodelsCreatePartyRequestJoinability("FRIENDS_OF_LEADER");
+
+        public static readonly ApimodelsCreatePartyRequestJoinability FRIENDSOFMEMBERS
+            = new ApimodelsCreatePartyRequestJoinability("FRIENDS_OF_MEMBERS");
+
+        public static readonly ApimodelsCreatePartyRequestJoinability INVITEONLY
+            = new ApimodelsCreatePartyRequestJoinability("INVITE_ONLY");
+
+        public static readonly ApimodelsCreatePartyRequestJoinability OPEN
+            = new ApimodelsCreatePartyRequestJoinability("OPEN");
+
+
+        public static implicit operator ApimodelsCreatePartyRequestJoinability(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsCreatePartyRequestJoinability(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class ApimodelsCreatePartyRequestType : StringEnum<ApimodelsCreatePartyRequestType>
+    {
+        public static readonly ApimodelsCreatePartyRequestType DS
+            = new ApimodelsCreatePartyRequestType("DS");
+
+        public static readonly ApimodelsCreatePartyRequestType NONE
+            = new ApimodelsCreatePartyRequestType("NONE");
+
+        public static readonly ApimodelsCreatePartyRequestType P2P
+            = new ApimodelsCreatePartyRequestType("P2P");
+
+
+        public static implicit operator ApimodelsCreatePartyRequestType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsCreatePartyRequestType(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

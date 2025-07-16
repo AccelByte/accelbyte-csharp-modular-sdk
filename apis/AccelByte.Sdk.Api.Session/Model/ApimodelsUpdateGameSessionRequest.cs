@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Converters;
 
 namespace AccelByte.Sdk.Api.Session.Model
 {
@@ -35,7 +37,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? InviteTimeout { get; set; }
 
         [JsonPropertyName("joinability")]
-        public string? Joinability { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateGameSessionRequestJoinability? Joinability { get; set; }
 
         [JsonPropertyName("matchPool")]
         public string? MatchPool { get; set; }
@@ -64,7 +67,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public bool? TieTeamsSessionLifetime { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateGameSessionRequestType? Type { get; set; }
 
         [JsonPropertyName("version")]
         public int? Version { get; set; }
@@ -96,7 +100,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? InviteTimeout { get; set; }
 
         [JsonPropertyName("joinability")]
-        public string? Joinability { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateGameSessionRequestJoinability? Joinability { get; set; }
 
         [JsonPropertyName("matchPool")]
         public string? MatchPool { get; set; }
@@ -125,11 +130,69 @@ namespace AccelByte.Sdk.Api.Session.Model
         public bool? TieTeamsSessionLifetime { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateGameSessionRequestType? Type { get; set; }
 
         [JsonPropertyName("version")]
         public int? Version { get; set; }
 
     }
 
+
+    public class ApimodelsUpdateGameSessionRequestJoinability : StringEnum<ApimodelsUpdateGameSessionRequestJoinability>
+    {
+        public static readonly ApimodelsUpdateGameSessionRequestJoinability CLOSED
+            = new ApimodelsUpdateGameSessionRequestJoinability("CLOSED");
+
+        public static readonly ApimodelsUpdateGameSessionRequestJoinability FRIENDSOFFRIENDS
+            = new ApimodelsUpdateGameSessionRequestJoinability("FRIENDS_OF_FRIENDS");
+
+        public static readonly ApimodelsUpdateGameSessionRequestJoinability FRIENDSOFLEADER
+            = new ApimodelsUpdateGameSessionRequestJoinability("FRIENDS_OF_LEADER");
+
+        public static readonly ApimodelsUpdateGameSessionRequestJoinability FRIENDSOFMEMBERS
+            = new ApimodelsUpdateGameSessionRequestJoinability("FRIENDS_OF_MEMBERS");
+
+        public static readonly ApimodelsUpdateGameSessionRequestJoinability INVITEONLY
+            = new ApimodelsUpdateGameSessionRequestJoinability("INVITE_ONLY");
+
+        public static readonly ApimodelsUpdateGameSessionRequestJoinability OPEN
+            = new ApimodelsUpdateGameSessionRequestJoinability("OPEN");
+
+
+        public static implicit operator ApimodelsUpdateGameSessionRequestJoinability(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsUpdateGameSessionRequestJoinability(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class ApimodelsUpdateGameSessionRequestType : StringEnum<ApimodelsUpdateGameSessionRequestType>
+    {
+        public static readonly ApimodelsUpdateGameSessionRequestType DS
+            = new ApimodelsUpdateGameSessionRequestType("DS");
+
+        public static readonly ApimodelsUpdateGameSessionRequestType NONE
+            = new ApimodelsUpdateGameSessionRequestType("NONE");
+
+        public static readonly ApimodelsUpdateGameSessionRequestType P2P
+            = new ApimodelsUpdateGameSessionRequestType("P2P");
+
+
+        public static implicit operator ApimodelsUpdateGameSessionRequestType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsUpdateGameSessionRequestType(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 }

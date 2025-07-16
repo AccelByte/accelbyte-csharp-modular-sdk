@@ -74,7 +74,7 @@ eval_tap $? 4 'AdminGetLogConfig' test.out
 
 #- 5 AdminPatchUpdateLogConfig
 # body param: body
-echo '{"logLevel": "error"}' > $TEMP_JSON_INPUT
+echo '{"logLevel": "trace"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminPatchUpdateLogConfig \
@@ -101,7 +101,7 @@ eval_tap $? 8 'AdminListGlobalConfiguration' test.out
 
 #- 9 AdminUpdateGlobalConfiguration
 # body param: body
-echo '{"metricExcludedNamespaces": ["mt9zACp8", "1CmMANQt", "1imWgYBk"], "regionRetryMapping": {"2LDVv4FC": ["26LQvyGr", "lAc63ZPD", "f0QMYQ75"], "J06HOaPS": ["k0FOSZIe", "aM9Fbf1Z", "CBt4kgNI"], "0Mc5f12I": ["HIp4wtvQ", "pISZ4cLx", "6WBlKDac"]}, "regionURLMapping": ["ZFlnCe6u", "KnPMDW9J", "bkqSXkEp"], "testGameMode": "NudBzOsV", "testRegionURLMapping": ["55rTakOC", "flzFvyS2", "1gXpnyD2"], "testTargetUserIDs": ["cMwX7lIB", "1ei0OPW4", "m2MhBt7J"]}' > $TEMP_JSON_INPUT
+echo '{"metricExcludedNamespaces": ["y8qGoH2K", "Diy7ZNNp", "Ejv7x1aC"], "regionRetryMapping": {"KZauTlO4": ["CScg28D3", "kpE9xcYW", "yCRiMaTX"], "TtTXnax6": ["5T869IKj", "9iVLNHXb", "8j2lBB07"], "nnrucCQs": ["m73WVSJQ", "Oz0Udn0Y", "vvjxzo1z"]}, "regionURLMapping": ["t6jrU0Iq", "UJZ75JQB", "vGgBDI42"], "testGameMode": "YNKipJGX", "testRegionURLMapping": ["MCZkX8Hu", "a3dH7cKy", "Yq2Dwb3v"], "testTargetUserIDs": ["aETlJncq", "ugJEMq6x", "ooQ9jpjs"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminUpdateGlobalConfiguration \
@@ -126,7 +126,7 @@ eval_tap $? 11 'AdminGetConfigurationAlertV1' test.out
 
 #- 12 AdminUpdateConfigurationAlertV1
 # body param: body
-echo '{"durationDays": 28}' > $TEMP_JSON_INPUT
+echo '{"durationDays": 24}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminUpdateConfigurationAlertV1 \
@@ -137,7 +137,7 @@ eval_tap $? 12 'AdminUpdateConfigurationAlertV1' test.out
 
 #- 13 AdminCreateConfigurationAlertV1
 # body param: body
-echo '{"durationDays": 70}' > $TEMP_JSON_INPUT
+echo '{"durationDays": 97}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminCreateConfigurationAlertV1 \
@@ -159,7 +159,7 @@ eval_tap 0 15 'AdminUploadXBoxCertificate # SKIP deprecated' test.out
 
 #- 16 AdminCreateConfigurationTemplateV1
 # body param: body
-echo '{"NativeSessionSetting": {"PSNDisableSystemUIMenu": ["PROMOTE_TO_LEADER", "UPDATE_JOINABLE_USER_TYPE", "PROMOTE_TO_LEADER"], "PSNServiceLabel": 9, "PSNSupportedPlatforms": ["RQRDqndu", "xq2y5P6n", "VHjFvGiH"], "SessionTitle": "Q2Uv7dAe", "ShouldSync": false, "XboxAllowCrossPlatform": true, "XboxSandboxID": "bEreTpLH", "XboxServiceConfigID": "blZYFqKS", "XboxSessionTemplateName": "16r5nQft", "XboxTitleID": "9NXIA51t", "localizedSessionName": {"isgUkRGq": {}, "XJ2Z8GSQ": {}, "ZrZ0BHbm": {}}}, "PSNBaseUrl": "3JVlZIUk", "amsClaimTimeoutMinutes": 79, "appName": "TKcpeOQy", "asyncProcessDSRequest": {"async": true, "timeout": 44}, "attributes": {"S0cXpzOS": {}, "EWA8TqPy": {}, "XiTLEPHM": {}}, "autoJoin": true, "autoLeaveSession": true, "clientVersion": "QBQO2LQo", "customURLGRPC": "eCSTO50T", "deployment": "7PoDalwm", "disableCodeGeneration": false, "disableResendInvite": false, "dsManualSetReady": true, "dsSource": "KAt4Tp37", "enableSecret": false, "fallbackClaimKeys": ["dgxJ76iE", "mRZSRkDg", "iCPxA2AX"], "grpcSessionConfig": {"appName": "J6YrVGnL", "customURL": "26273ZSS", "functionFlag": 64}, "immutableStorage": true, "inactiveTimeout": 81, "inviteTimeout": 1, "joinability": "IyfAMRUJ", "leaderElectionGracePeriod": 41, "manualRejoin": true, "maxActiveSessions": 34, "maxPlayers": 95, "minPlayers": 25, "name": "1ubuxYBY", "persistent": true, "preferredClaimKeys": ["xLgdSGpl", "SOPZ0NyE", "LFqANDlT"], "requestedRegions": ["3fjb1Z7G", "i2tF4P9B", "Qt0w2v4z"], "textChat": false, "textChatMode": "GAME", "tieTeamsSessionLifetime": true, "ttlHours": 63, "type": "hgt4o5Ea"}' > $TEMP_JSON_INPUT
+echo '{"NativeSessionSetting": {"PSNDisableSystemUIMenu": ["KICK", "UPDATE_INVITABLE_USER_TYPE", "UPDATE_INVITABLE_USER_TYPE"], "PSNServiceLabel": 71, "PSNSupportedPlatforms": ["xpC88dGr", "oitLvhqU", "oDv73N3D"], "SessionTitle": "PlSMw31M", "ShouldSync": true, "XboxAllowCrossPlatform": true, "XboxSandboxID": "Ecs3op7z", "XboxServiceConfigID": "zzXDXqg0", "XboxSessionTemplateName": "86Z3zuE6", "XboxTitleID": "mgdAnXme", "localizedSessionName": {"0Uw4zr2G": {}, "PaapvzxA": {}, "n6pAa4sK": {}}}, "PSNBaseUrl": "abAJ0dkO", "amsClaimTimeoutMinutes": 74, "appName": "gsfxGJtM", "asyncProcessDSRequest": {"async": false, "timeout": 3}, "attributes": {"p2A2nMIv": {}, "3QZBL1cm": {}, "HUZWXYL6": {}}, "autoJoin": true, "autoLeaveSession": false, "clientVersion": "WuMuUgW1", "customURLGRPC": "boGcbqQy", "deployment": "EhoquMGu", "disableCodeGeneration": true, "disableResendInvite": true, "dsManualSetReady": false, "dsSource": "nmq4bs91", "enableSecret": false, "fallbackClaimKeys": ["NOEyIENG", "6zfbWqnV", "ND4AuP1W"], "grpcSessionConfig": {"appName": "L6Pc1K8X", "customURL": "27YDfzPr", "functionFlag": 25}, "immutableStorage": false, "inactiveTimeout": 33, "inviteTimeout": 87, "joinability": "FRIENDS_OF_LEADER", "leaderElectionGracePeriod": 55, "manualRejoin": true, "maxActiveSessions": 3, "maxPlayers": 42, "minPlayers": 24, "name": "K3ROpNPi", "persistent": false, "preferredClaimKeys": ["S4zVfG3r", "gJcukeRR", "ep2RAVcz"], "requestedRegions": ["DlHOT3Dw", "2PIUDbcx", "HgjLTdUG"], "textChat": false, "textChatMode": "NONE", "tieTeamsSessionLifetime": false, "ttlHours": 42, "type": "NONE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminCreateConfigurationTemplateV1 \
@@ -173,11 +173,11 @@ $CLI_EXE \
     --sn session \
     --op AdminGetAllConfigurationTemplatesV1 \
     --namespace $AB_NAMESPACE \
-    --limit '2' \
-    --name 'hA3rDLt2' \
-    --offset '56' \
-    --order 'AZEE0GnD' \
-    --orderBy 'JmVuRxgJ' \
+    --limit '35' \
+    --name 'OQl4utSK' \
+    --offset '57' \
+    --order 'KmjrcXPJ' \
+    --orderBy 'B2O2hmPi' \
     > test.out 2>&1
 eval_tap $? 17 'AdminGetAllConfigurationTemplatesV1' test.out
 
@@ -185,18 +185,18 @@ eval_tap $? 17 'AdminGetAllConfigurationTemplatesV1' test.out
 $CLI_EXE \
     --sn session \
     --op AdminGetConfigurationTemplateV1 \
-    --name 'qYs6JVPs' \
+    --name 'bRG2J4XR' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 18 'AdminGetConfigurationTemplateV1' test.out
 
 #- 19 AdminUpdateConfigurationTemplateV1
 # body param: body
-echo '{"NativeSessionSetting": {"PSNDisableSystemUIMenu": ["UPDATE_INVITABLE_USER_TYPE", "KICK", "UPDATE_INVITABLE_USER_TYPE"], "PSNServiceLabel": 94, "PSNSupportedPlatforms": ["kLVup5LA", "felfjLDh", "kj9Ur0Fh"], "SessionTitle": "iR0JUcKA", "ShouldSync": false, "XboxAllowCrossPlatform": true, "XboxSandboxID": "u2p2cqQb", "XboxServiceConfigID": "Od7XVPgw", "XboxSessionTemplateName": "fPjDoGGv", "XboxTitleID": "BdL9ZiQx", "localizedSessionName": {"YdZxdOWJ": {}, "ejyAHKc6": {}, "oU1bAjdI": {}}}, "PSNBaseUrl": "na6x3x28", "amsClaimTimeoutMinutes": 32, "appName": "PHvkfnPn", "asyncProcessDSRequest": {"async": true, "timeout": 88}, "attributes": {"MyV1eCP0": {}, "tB0vOPy9": {}, "ixmBCLhM": {}}, "autoJoin": true, "autoLeaveSession": false, "clientVersion": "UmGme2d4", "customURLGRPC": "KGwwfo0O", "deployment": "Jn5qwDjd", "disableCodeGeneration": false, "disableResendInvite": false, "dsManualSetReady": true, "dsSource": "VAOWAkCE", "enableSecret": false, "fallbackClaimKeys": ["uIwBkYGA", "mRNlsPPT", "d8yx1nXF"], "grpcSessionConfig": {"appName": "TIBZgEZT", "customURL": "8KtCgGWZ", "functionFlag": 62}, "immutableStorage": false, "inactiveTimeout": 89, "inviteTimeout": 75, "joinability": "RCzwYSn9", "leaderElectionGracePeriod": 81, "manualRejoin": false, "maxActiveSessions": 79, "maxPlayers": 78, "minPlayers": 15, "name": "r27Dxq0J", "persistent": true, "preferredClaimKeys": ["NmFu4t5z", "4AcFucPL", "hIfKnEIG"], "requestedRegions": ["dwNhj5I9", "L9zKhgFF", "ywDSkcUG"], "textChat": true, "textChatMode": "GAME", "tieTeamsSessionLifetime": false, "ttlHours": 57, "type": "Ncvn1jL5"}' > $TEMP_JSON_INPUT
+echo '{"NativeSessionSetting": {"PSNDisableSystemUIMenu": ["UPDATE_JOINABLE_USER_TYPE", "PROMOTE_TO_LEADER", "UPDATE_INVITABLE_USER_TYPE"], "PSNServiceLabel": 16, "PSNSupportedPlatforms": ["mdA6QB6h", "FbmBCsbi", "yVezK57r"], "SessionTitle": "4EqCuQKB", "ShouldSync": false, "XboxAllowCrossPlatform": true, "XboxSandboxID": "zBjUWTqz", "XboxServiceConfigID": "6UboL5RV", "XboxSessionTemplateName": "81t62ZbN", "XboxTitleID": "xPpF15o6", "localizedSessionName": {"WIqu0A8G": {}, "f8Z6xqCn": {}, "J8bidOeG": {}}}, "PSNBaseUrl": "yL1IyoMh", "amsClaimTimeoutMinutes": 96, "appName": "gzNthxLW", "asyncProcessDSRequest": {"async": true, "timeout": 8}, "attributes": {"C4JZtKz3": {}, "9pbL8ILC": {}, "NDiewuQ3": {}}, "autoJoin": true, "autoLeaveSession": false, "clientVersion": "Yc8Er0Yu", "customURLGRPC": "nP1hueKa", "deployment": "RnmJ8wxD", "disableCodeGeneration": false, "disableResendInvite": false, "dsManualSetReady": true, "dsSource": "Cs8g3AYE", "enableSecret": false, "fallbackClaimKeys": ["T1Fuz9gA", "c49oUivB", "TIqPSD7n"], "grpcSessionConfig": {"appName": "e0MPLkC7", "customURL": "vMMUXKLa", "functionFlag": 92}, "immutableStorage": true, "inactiveTimeout": 37, "inviteTimeout": 34, "joinability": "CLOSED", "leaderElectionGracePeriod": 49, "manualRejoin": true, "maxActiveSessions": 40, "maxPlayers": 68, "minPlayers": 9, "name": "HJBjpmrE", "persistent": false, "preferredClaimKeys": ["2jGOiv7x", "eVNeSQuo", "OeOBDqRa"], "requestedRegions": ["UB4UhWKD", "IzaYXHYW", "13HhN3EM"], "textChat": true, "textChatMode": "NONE", "tieTeamsSessionLifetime": true, "ttlHours": 94, "type": "NONE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminUpdateConfigurationTemplateV1 \
-    --name 'zoMA24bE' \
+    --name 'gdqJcZtj' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -206,7 +206,7 @@ eval_tap $? 19 'AdminUpdateConfigurationTemplateV1' test.out
 $CLI_EXE \
     --sn session \
     --op AdminDeleteConfigurationTemplateV1 \
-    --name 'cxaLQEks' \
+    --name 'D6PjsLeL' \
     --namespace $AB_NAMESPACE \
     > test.out 2>&1
 eval_tap $? 20 'AdminDeleteConfigurationTemplateV1' test.out
@@ -215,19 +215,19 @@ eval_tap $? 20 'AdminDeleteConfigurationTemplateV1' test.out
 $CLI_EXE \
     --sn session \
     --op AdminGetMemberActiveSession \
-    --name 'xXD0gVwK' \
+    --name 'fN3VyAm0' \
     --namespace $AB_NAMESPACE \
-    --userId '3xPWr8KU' \
+    --userId '1UPeG6uC' \
     > test.out 2>&1
 eval_tap $? 21 'AdminGetMemberActiveSession' test.out
 
 #- 22 AdminReconcileMaxActiveSession
 # body param: body
-echo '{"userID": "vKwy0sLz"}' > $TEMP_JSON_INPUT
+echo '{"userID": "yHCkiD3l"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminReconcileMaxActiveSession \
-    --name 'TVVF4D5r' \
+    --name 'nsKZ1myB' \
     --namespace $AB_NAMESPACE \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
@@ -244,29 +244,29 @@ $CLI_EXE \
     --sn session \
     --op AdminQueryGameSessions \
     --namespace $AB_NAMESPACE \
-    --configurationName 'L9oNVFlr' \
-    --dsPodName '0aW3WUyW' \
-    --fromTime 'IHqKXRSW' \
-    --gameMode 'maTOndCH' \
-    --isPersistent 'hBZvB3Ni' \
-    --isSoftDeleted 'MUMle6fb' \
-    --joinability 'KYfmC0hr' \
-    --limit '95' \
-    --matchPool 'infvFKK9' \
-    --memberID 'l1EDrXwM' \
-    --offset '26' \
-    --order 'xNAiheu0' \
-    --orderBy 'YarDmUoD' \
-    --sessionID 'q85YXpwy' \
-    --status '7vBIVd2m' \
-    --statusV2 'hmAsj7vn' \
-    --toTime 'BsOju0mH' \
+    --configurationName 'xo3pZnWP' \
+    --dsPodName 'JMU5V6p3' \
+    --fromTime 'QYRndGIJ' \
+    --gameMode 'To9kmYP6' \
+    --isPersistent 'xYWrMWTY' \
+    --isSoftDeleted 'nwh6C9aC' \
+    --joinability 'CLOSED' \
+    --limit '32' \
+    --matchPool 'rD79573Q' \
+    --memberID 'aYA5kkKk' \
+    --offset '95' \
+    --order '4ow2VRuN' \
+    --orderBy 'KWjrGM86' \
+    --sessionID 'oR6f0x8t' \
+    --status 'DS_ERROR' \
+    --statusV2 'AVAILABLE' \
+    --toTime 'SXOeq8kD' \
     > test.out 2>&1
 eval_tap $? 25 'AdminQueryGameSessions' test.out
 
 #- 26 AdminQueryGameSessionsByAttributes
 # body param: body
-echo '{"gEc1barC": {}, "h6PUtM1A": {}, "Gz4dbMcD": {}}' > $TEMP_JSON_INPUT
+echo '{"AOJ0gMrZ": {}, "T2ACot3q": {}, "2HyLSVY5": {}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminQueryGameSessionsByAttributes \
@@ -277,7 +277,7 @@ eval_tap $? 26 'AdminQueryGameSessionsByAttributes' test.out
 
 #- 27 AdminDeleteBulkGameSessions
 # body param: body
-echo '{"ids": ["4cwu1MIj", "LMq4ICOA", "7xIRIoV2"]}' > $TEMP_JSON_INPUT
+echo '{"ids": ["2AEvSe9K", "7tCrr68j", "iGLAwcQZ"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminDeleteBulkGameSessions \
@@ -288,24 +288,24 @@ eval_tap $? 27 'AdminDeleteBulkGameSessions' test.out
 
 #- 28 AdminSetDSReady
 # body param: body
-echo '{"ready": true}' > $TEMP_JSON_INPUT
+echo '{"ready": false}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminSetDSReady \
     --namespace $AB_NAMESPACE \
-    --sessionId 'fIi2e0W1' \
+    --sessionId '0I9KhWpl' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 28 'AdminSetDSReady' test.out
 
 #- 29 AdminUpdateDSInformation
 # body param: body
-echo '{"createdRegion": "VezT4xaX", "deployment": "jMiTrLhr", "description": "CAgycg6E", "ip": "xNbQ6nZC", "port": 36, "region": "zNNCReTP", "serverId": "0Fnk2hzv", "source": "cr6sFfrX", "status": "JlC8NuYt"}' > $TEMP_JSON_INPUT
+echo '{"createdRegion": "1EXtRZYJ", "deployment": "z0rue3vt", "description": "kbgu4nHR", "ip": "oCdDYDcz", "port": 85, "region": "s01fLW3x", "serverId": "xO9hHUBs", "source": "b8WikBH2", "status": "SuQBuOhw"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminUpdateDSInformation \
     --namespace $AB_NAMESPACE \
-    --sessionId 'c9GVsZOP' \
+    --sessionId 'BWjCKUCY' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 29 'AdminUpdateDSInformation' test.out
@@ -314,9 +314,9 @@ eval_tap $? 29 'AdminUpdateDSInformation' test.out
 $CLI_EXE \
     --sn session \
     --op AdminKickGameSessionMember \
-    --memberId '2MOL7Jhq' \
+    --memberId 'kQLJY9qe' \
     --namespace $AB_NAMESPACE \
-    --sessionId 'irDuLqXx' \
+    --sessionId '5zNZehqn' \
     > test.out 2>&1
 eval_tap $? 30 'AdminKickGameSessionMember' test.out
 
@@ -324,10 +324,10 @@ eval_tap $? 30 'AdminKickGameSessionMember' test.out
 $CLI_EXE \
     --sn session \
     --op AdminUpdateGameSessionMember \
-    --memberId 'VkHg1ANO' \
+    --memberId 'dgAcjyZr' \
     --namespace $AB_NAMESPACE \
-    --sessionId 'ehta4v1P' \
-    --statusType 'aK5Vwhfq' \
+    --sessionId 'bILLgU3o' \
+    --statusType 'R4ivPpc2' \
     > test.out 2>&1
 eval_tap $? 31 'AdminUpdateGameSessionMember' test.out
 
@@ -336,9 +336,9 @@ $CLI_EXE \
     --sn session \
     --op AdminGetListNativeSession \
     --namespace $AB_NAMESPACE \
-    --limit '51' \
-    --offset '67' \
-    --order 'bMZZFTJH' \
+    --limit '92' \
+    --offset '80' \
+    --order 'd6cRDGnZ' \
     > test.out 2>&1
 eval_tap $? 32 'AdminGetListNativeSession' test.out
 
@@ -347,26 +347,27 @@ $CLI_EXE \
     --sn session \
     --op AdminQueryParties \
     --namespace $AB_NAMESPACE \
-    --fromTime 'jvSysUHx' \
-    --isSoftDeleted 'ZdhLFH3z' \
-    --joinability 'E6B2ZOvW' \
-    --key 'xzBJW5Ep' \
-    --leaderID 'B4JJyE1V' \
-    --limit '70' \
-    --memberID '14vpeSeu' \
-    --memberStatus 'iSYfvJBD' \
-    --offset '58' \
-    --order '8AvNXoCE' \
-    --orderBy 'x9YfXQER' \
-    --partyID 'T4CPMS5R' \
-    --toTime 'tMy6MSUK' \
-    --value '1YtkQUPk' \
+    --configurationName 'eTZ7Bsnr' \
+    --fromTime 'Qz7GPzQz' \
+    --isSoftDeleted 'KF7Ljylm' \
+    --joinability 'FRIENDS_OF_LEADER' \
+    --key 'm39ieLta' \
+    --leaderID 'CSWyXZCb' \
+    --limit '92' \
+    --memberID 'zr91YuA6' \
+    --memberStatus 'DROPPED' \
+    --offset '45' \
+    --order 'FuQEw98e' \
+    --orderBy 'GrSD8Jsf' \
+    --partyID 'BBq2k90K' \
+    --toTime 'LB6R7spg' \
+    --value 'KplXsVp7' \
     > test.out 2>&1
 eval_tap $? 33 'AdminQueryParties' test.out
 
 #- 34 AdminDeleteBulkParties
 # body param: body
-echo '{"ids": ["8UMZRjUY", "Yee3OXau", "mJ6wiEcb"]}' > $TEMP_JSON_INPUT
+echo '{"ids": ["5qZa0LB6", "8bf6L6Lj", "uHiYmSwi"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminDeleteBulkParties \
@@ -380,7 +381,7 @@ $CLI_EXE \
     --sn session \
     --op AdminReadPartySessionStorage \
     --namespace $AB_NAMESPACE \
-    --partyId 'mxQ1dpFf' \
+    --partyId 'Dd6pudis' \
     > test.out 2>&1
 eval_tap $? 35 'AdminReadPartySessionStorage' test.out
 
@@ -394,7 +395,7 @@ eval_tap $? 36 'AdminGetPlatformCredentials' test.out
 
 #- 37 AdminUpdatePlatformCredentials
 # body param: body
-echo '{"psn": {"clientId": "kmnx7KV1", "clientSecret": "j1vsqJiQ", "scope": "4J1WwRul"}}' > $TEMP_JSON_INPUT
+echo '{"psn": {"clientId": "qqwkvHet", "clientSecret": "gPMrFyh9", "scope": "aSDCK0iU"}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op AdminUpdatePlatformCredentials \
@@ -434,8 +435,8 @@ $CLI_EXE \
     --sn session \
     --op AdminGetRecentPlayer \
     --namespace $AB_NAMESPACE \
-    --limit '10' \
-    --userId 'I8vGfYRB' \
+    --limit '9' \
+    --userId 'jsDrN1oK' \
     > test.out 2>&1
 eval_tap $? 41 'AdminGetRecentPlayer' test.out
 
@@ -444,8 +445,8 @@ $CLI_EXE \
     --sn session \
     --op AdminGetRecentTeamPlayer \
     --namespace $AB_NAMESPACE \
-    --limit '87' \
-    --userId 'hBZEmwcw' \
+    --limit '35' \
+    --userId 'o2vOsdT1' \
     > test.out 2>&1
 eval_tap $? 42 'AdminGetRecentTeamPlayer' test.out
 
@@ -454,7 +455,7 @@ $CLI_EXE \
     --sn session \
     --op AdminReadSessionStorage \
     --namespace $AB_NAMESPACE \
-    --sessionId 'NclIaa02' \
+    --sessionId 'bEtd2QFm' \
     > test.out 2>&1
 eval_tap $? 43 'AdminReadSessionStorage' test.out
 
@@ -463,7 +464,7 @@ $CLI_EXE \
     --sn session \
     --op AdminDeleteUserSessionStorage \
     --namespace $AB_NAMESPACE \
-    --sessionId 'nAd0wzCq' \
+    --sessionId 'XWMXnU3j' \
     > test.out 2>&1
 eval_tap $? 44 'AdminDeleteUserSessionStorage' test.out
 
@@ -472,8 +473,8 @@ $CLI_EXE \
     --sn session \
     --op AdminReadUserSessionStorage \
     --namespace $AB_NAMESPACE \
-    --sessionId 'iyUmq1cm' \
-    --userId 'iPN3ne1e' \
+    --sessionId 'oYGNqpWz' \
+    --userId 'A54kPoVA' \
     > test.out 2>&1
 eval_tap $? 45 'AdminReadUserSessionStorage' test.out
 
@@ -482,7 +483,7 @@ $CLI_EXE \
     --sn session \
     --op AdminQueryPlayerAttributes \
     --namespace $AB_NAMESPACE \
-    --users 'D1xYvTwh' \
+    --users 'g4MfPznj' \
     > test.out 2>&1
 eval_tap $? 46 'AdminQueryPlayerAttributes' test.out
 
@@ -491,7 +492,7 @@ $CLI_EXE \
     --sn session \
     --op AdminGetPlayerAttributes \
     --namespace $AB_NAMESPACE \
-    --userId '9frPlTNW' \
+    --userId 'LXcWNYy4' \
     > test.out 2>&1
 eval_tap $? 47 'AdminGetPlayerAttributes' test.out
 
@@ -500,25 +501,25 @@ $CLI_EXE \
     --sn session \
     --op AdminSyncNativeSession \
     --namespace $AB_NAMESPACE \
-    --userId 'K9w7Y2fK' \
+    --userId 'Sy89H5jm' \
     > test.out 2>&1
 eval_tap $? 48 'AdminSyncNativeSession' test.out
 
 #- 49 CreateGameSession
 # body param: body
-echo '{"appName": "c34biJA7", "attributes": {"U0MwuPiH": {}, "iF75CwRe": {}, "2WyIQOWe": {}}, "autoJoin": false, "backfillTicketID": "u2QwvDmJ", "clientVersion": "znpYasZl", "configurationName": "2kzjNRTb", "customURLGRPC": "MocqwU14", "deployment": "qQXkNNky", "dsSource": "0mWk0Rgq", "fallbackClaimKeys": ["zNom2Wjy", "hbFNlc8E", "GiugwWlY"], "inactiveTimeout": 86, "inviteTimeout": 5, "joinability": "rPe7k16I", "matchPool": "h8u77xa9", "maxPlayers": 85, "minPlayers": 97, "preferredClaimKeys": ["ChG2BUXQ", "Cn1vSyg8", "HtrSkAlq"], "requestedRegions": ["7kvApssQ", "6Iq99XzB", "B3uvMOFs"], "serverName": "yFO23tiM", "storage": {"leader": {"BlxgMmXY": {}, "iE3HKTAO": {}, "Y4oLKEpf": {}}}, "teams": [{"parties": [{"partyID": "2G8H3h3Q", "userIDs": ["C8XQTalo", "mfnZM5Bn", "DHvgSR6n"]}, {"partyID": "XaBHbi0S", "userIDs": ["beoJPjBj", "0XaGYTPW", "KFgHvdIp"]}, {"partyID": "j5gOijfO", "userIDs": ["CERrQ5RS", "QvZ1sPL4", "yVVUYDaP"]}], "teamID": "eMP2UNSJ", "userIDs": ["7D1CEMQc", "alngkS9Y", "YY0x8S3n"]}, {"parties": [{"partyID": "rJKEqtKP", "userIDs": ["qEWX2R4U", "ikiLOh0n", "mEqenbg1"]}, {"partyID": "VUhlhtjm", "userIDs": ["0AJbSJG6", "h3BamhB2", "KC0aYKVP"]}, {"partyID": "7IsQaNZu", "userIDs": ["tKkkzatD", "pcm8oll3", "7d7jiCjR"]}], "teamID": "6CTMYndS", "userIDs": ["AXl8Ol3p", "PhlQbDyJ", "aCdLau2S"]}, {"parties": [{"partyID": "ZuHY7rRD", "userIDs": ["nMbhaOsD", "nxI4CGBd", "TAgOlqvC"]}, {"partyID": "JtSVfJZd", "userIDs": ["IZaHJouT", "BIEFUd7N", "ZVZDGXMN"]}, {"partyID": "7GRM3ScF", "userIDs": ["VIoQn5wk", "0IoHDvdm", "hyJsUyDZ"]}], "teamID": "0PkF0XEL", "userIDs": ["pDQAtXMD", "B9qn6unC", "opn6XB2J"]}], "textChat": false, "textChatMode": "TEAM", "ticketIDs": ["IhYe9c7t", "p6ZI3aMm", "aVCWWAot"], "tieTeamsSessionLifetime": false, "type": "uAanscSK"}' > $TEMP_JSON_INPUT
+echo '{"appName": "Np4qMlXn", "attributes": {"IaNg3kgw": {}, "COPLDNnX": {}, "f6rR8nQ1": {}}, "autoJoin": true, "backfillTicketID": "iKjMss51", "clientVersion": "GaUNZzai", "configurationName": "kIJOsVYb", "customURLGRPC": "0A3gy5DP", "deployment": "K0CskYD1", "dsSource": "T1w8jZsh", "fallbackClaimKeys": ["HDJJ8KMb", "yYT3EplG", "a65cPZIQ"], "inactiveTimeout": 28, "inviteTimeout": 38, "joinability": "OPEN", "matchPool": "sMwqTmXx", "maxPlayers": 58, "minPlayers": 26, "preferredClaimKeys": ["y8Xo4NvJ", "f6yFonS8", "byluYw1i"], "requestedRegions": ["VoQEJMZE", "DqWgY1V4", "FUECPR5O"], "serverName": "uTrJJEno", "storage": {"leader": {"JspfFCGE": {}, "XXJvq0NZ": {}, "zOHxTtf6": {}}}, "teams": [{"parties": [{"partyID": "PR8f48NT", "userIDs": ["AOMOfzae", "y2KNWuVB", "QOlU6aUK"]}, {"partyID": "ciWqEfRb", "userIDs": ["R8TDeL7u", "5hsGzM1f", "ZeqzrGy1"]}, {"partyID": "WSU4seE5", "userIDs": ["XG5LKACS", "EwUxYSFy", "iMWF28u3"]}], "teamID": "12q6mVd6", "userIDs": ["Vcffe1Og", "iBDlxGmJ", "1LorwNk3"]}, {"parties": [{"partyID": "GB2CmIMx", "userIDs": ["o7mLeDR6", "BOIYVD7X", "97vCe1JO"]}, {"partyID": "R0dqcpWV", "userIDs": ["A9mneU07", "gEbIaACT", "IE8oddFn"]}, {"partyID": "6hAgwga8", "userIDs": ["KX3t5ycd", "eJdEJJrT", "9w2CDnsb"]}], "teamID": "qujC8OOD", "userIDs": ["jCGLyNMT", "oJDiJviP", "cLuOp7IC"]}, {"parties": [{"partyID": "iY9M8LDy", "userIDs": ["UiXZVUjF", "q7mY6PrT", "XoMKZ4nz"]}, {"partyID": "pN5JDB9C", "userIDs": ["qmYkQ55H", "RcrSKLxk", "tZoX6kDl"]}, {"partyID": "KofTDc98", "userIDs": ["KUknC2LV", "lsFZEQbu", "XsMAc9v4"]}], "teamID": "hFzHW6at", "userIDs": ["8YEV3gMI", "s5ZGPREK", "8dRBLYgu"]}], "textChat": false, "textChatMode": "TEAM", "ticketIDs": ["BWmZAsQm", "6ZTbim76", "sYzj7Trx"], "tieTeamsSessionLifetime": true, "type": "DS"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op CreateGameSession \
     --namespace $AB_NAMESPACE \
-    --resolveMaxActiveSession 'false' \
+    --resolveMaxActiveSession 'true' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 49 'CreateGameSession' test.out
 
 #- 50 PublicQueryGameSessionsByAttributes
 # body param: body
-echo '{"4y0ndYLx": {}, "F3TE98j1": {}, "nJK7U8at": {}}' > $TEMP_JSON_INPUT
+echo '{"Uk73FDpd": {}, "76ZjmFQe": {}, "X1oGRWgD": {}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicQueryGameSessionsByAttributes \
@@ -529,7 +530,7 @@ eval_tap $? 50 'PublicQueryGameSessionsByAttributes' test.out
 
 #- 51 PublicSessionJoinCode
 # body param: body
-echo '{"code": "Z7M4ilDT"}' > $TEMP_JSON_INPUT
+echo '{"code": "KF6hRLQ8"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicSessionJoinCode \
@@ -543,7 +544,7 @@ $CLI_EXE \
     --sn session \
     --op GetGameSessionByPodName \
     --namespace $AB_NAMESPACE \
-    --podName 'Ef9Yvd1U' \
+    --podName 'cpRrKBea' \
     > test.out 2>&1
 eval_tap $? 52 'GetGameSessionByPodName' test.out
 
@@ -552,18 +553,18 @@ $CLI_EXE \
     --sn session \
     --op GetGameSession \
     --namespace $AB_NAMESPACE \
-    --sessionId '0JLfy56E' \
+    --sessionId '1chlKXZJ' \
     > test.out 2>&1
 eval_tap $? 53 'GetGameSession' test.out
 
 #- 54 UpdateGameSession
 # body param: body
-echo '{"attributes": {"HR216yat": {}, "xS0TP4Fw": {}, "oQAtzs1V": {}}, "backfillTicketID": "VepT5sYl", "clientVersion": "cmu69ric", "deployment": "6aZZDqMi", "fallbackClaimKeys": ["GrfGOW5L", "KMQCqK2f", "3gQHOL4h"], "inactiveTimeout": 58, "inviteTimeout": 28, "joinability": "1eVhQTgj", "matchPool": "4QHjUaqj", "maxPlayers": 0, "minPlayers": 68, "preferredClaimKeys": ["JKgFl6e9", "U4yqDqJ7", "hdkut3ZR"], "requestedRegions": ["eTwagojz", "9ZI82610", "lBK3wM2p"], "teams": [{"parties": [{"partyID": "BHJfI7VP", "userIDs": ["qP1yq96m", "Y11y37kR", "n29VsX55"]}, {"partyID": "nfwA4wsi", "userIDs": ["DyDh7wTj", "jPf0JPRT", "46SdxVtk"]}, {"partyID": "MBbl9Xzf", "userIDs": ["KyVHXm72", "mS6frXum", "Wc4Vz4ea"]}], "teamID": "NaNiKxxi", "userIDs": ["wHNCA2gk", "6Jv7SlOb", "AYWa3lEe"]}, {"parties": [{"partyID": "yMy9wELZ", "userIDs": ["I9QnpiwW", "nFqAHtRo", "9PKco95X"]}, {"partyID": "SxQP929g", "userIDs": ["6i2BkZJ8", "KLU4xfVC", "WSSR31xi"]}, {"partyID": "wX4bUWA6", "userIDs": ["VYYylKzm", "wODNk7KZ", "nODG3xVn"]}], "teamID": "86en8wpg", "userIDs": ["DxMrL2r1", "W5YsHEWX", "HnvokPX6"]}, {"parties": [{"partyID": "2OMyhJtP", "userIDs": ["bVrayc7x", "GQpCz3zd", "3JTn82gN"]}, {"partyID": "eVz1CXhz", "userIDs": ["r9B2QfnM", "zCazjnMb", "qwH08ZmW"]}, {"partyID": "gBbH5UgS", "userIDs": ["pGONVe36", "VoXQSuzN", "GAXRmywF"]}], "teamID": "vyiR1rcv", "userIDs": ["bjRZjKVH", "P0lvvzAt", "HnxFvLyb"]}], "ticketIDs": ["HzmhRkrT", "SUY16m26", "eynPk1i2"], "tieTeamsSessionLifetime": true, "type": "ZKLmbkjJ", "version": 72}' > $TEMP_JSON_INPUT
+echo '{"attributes": {"gji3dMZ0": {}, "XcwDyOmM": {}, "ZWj2RtTb": {}}, "backfillTicketID": "W6lozEwu", "clientVersion": "TUY1qK59", "deployment": "C4rnh066", "fallbackClaimKeys": ["X7XhaSy2", "FdZtTHPf", "njKOKo6R"], "inactiveTimeout": 39, "inviteTimeout": 89, "joinability": "FRIENDS_OF_LEADER", "matchPool": "ozRzZx1c", "maxPlayers": 93, "minPlayers": 2, "preferredClaimKeys": ["x6cf3bjJ", "0IJERau9", "XLt7vgAM"], "requestedRegions": ["FJhTCXw6", "SfB9usy4", "OoSNAVkL"], "teams": [{"parties": [{"partyID": "aXV2qEnZ", "userIDs": ["QaQ2TTPx", "VwfbyiS6", "MFk9zdWO"]}, {"partyID": "b2TWZSyc", "userIDs": ["9dS39XpD", "jHSbR20h", "ZWTr9mOY"]}, {"partyID": "E160NY9e", "userIDs": ["W7ETwWUU", "mcjsHILJ", "NqqaEmVP"]}], "teamID": "UN3M9FfR", "userIDs": ["F8ZYvxxn", "NA8osHd9", "OLERfuQx"]}, {"parties": [{"partyID": "qVMVkgon", "userIDs": ["MUPwv0KI", "zpwQ2Mpi", "7mJVtsmP"]}, {"partyID": "uKmAgZRs", "userIDs": ["E1eShWir", "SwVhycjx", "nkE3daBc"]}, {"partyID": "rFR0LKWj", "userIDs": ["o7f6jRRd", "yNIDSnCV", "TuLWaRMr"]}], "teamID": "hj947CLZ", "userIDs": ["PtXB3KqX", "vvib6xru", "C0JnEuqn"]}, {"parties": [{"partyID": "q48X8lTZ", "userIDs": ["2bOjskUU", "C379kKvY", "OsZaovBs"]}, {"partyID": "XdGqcwnM", "userIDs": ["fKJQsY7X", "xFcQiUfV", "rhyUC3sI"]}, {"partyID": "bhfmLr5n", "userIDs": ["h3ZXgm3L", "WJFth9T4", "22o412U8"]}], "teamID": "ohauazll", "userIDs": ["duxpsADq", "0EakGrBV", "ozgN3DzT"]}], "ticketIDs": ["RJLkPrzk", "GPy9Fm6z", "0cBN6RNj"], "tieTeamsSessionLifetime": true, "type": "DS", "version": 40}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op UpdateGameSession \
     --namespace $AB_NAMESPACE \
-    --sessionId 'uq9hLF1i' \
+    --sessionId '68jTzp2q' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 54 'UpdateGameSession' test.out
@@ -573,30 +574,30 @@ $CLI_EXE \
     --sn session \
     --op DeleteGameSession \
     --namespace $AB_NAMESPACE \
-    --sessionId 'FWTzGG4D' \
+    --sessionId '2LTbHO9F' \
     > test.out 2>&1
 eval_tap $? 55 'DeleteGameSession' test.out
 
 #- 56 PatchUpdateGameSession
 # body param: body
-echo '{"attributes": {"AKacEosX": {}, "rRhwB4L3": {}, "svoc6T5s": {}}, "backfillTicketID": "eXaqjf6v", "clientVersion": "ch1bBn96", "deployment": "pCUtlwfN", "fallbackClaimKeys": ["taaodw3L", "OiTU0lys", "ZcWvl9V9"], "inactiveTimeout": 40, "inviteTimeout": 25, "joinability": "kDYkYnMm", "matchPool": "UWhDESgv", "maxPlayers": 60, "minPlayers": 53, "preferredClaimKeys": ["zh770OBp", "wKYKCJc9", "D50ISwCS"], "requestedRegions": ["zQ3iiXFo", "w1F38hHQ", "2pbDgS7i"], "teams": [{"parties": [{"partyID": "kBP0ov0U", "userIDs": ["4ahY4p8n", "Tj50KDiv", "Cw4TLTbX"]}, {"partyID": "IOjZW3Gl", "userIDs": ["Unti8Brg", "TPibl6HW", "olZBfJBj"]}, {"partyID": "bhmo3D9a", "userIDs": ["BTRm5BmT", "Ma8yOGc8", "rTey1HAm"]}], "teamID": "PI2faetc", "userIDs": ["mkgk0xCX", "fUzU2B6p", "mA4TTEWn"]}, {"parties": [{"partyID": "hZJ0Jy5s", "userIDs": ["kpFr5S7b", "BTJI7M2t", "Vq2OS79i"]}, {"partyID": "W2bAPtit", "userIDs": ["NDTerq7L", "e4BAbouk", "y2A8HDU1"]}, {"partyID": "n9asFe6t", "userIDs": ["2cSANrrr", "sVlyaXhn", "lrQhT361"]}], "teamID": "mAHiPgs8", "userIDs": ["WNd79CSi", "W1GmGz76", "sjG60XYf"]}, {"parties": [{"partyID": "K7TKMP90", "userIDs": ["8nCuTUx5", "3hhRBFcG", "wSweAVIq"]}, {"partyID": "GZ1WbF16", "userIDs": ["ibn0cCCl", "IsqV03pd", "0VKM6YBv"]}, {"partyID": "z3FqAk73", "userIDs": ["C92zCHEK", "iDJS9Y5J", "QHhfpCxv"]}], "teamID": "LkipYGP0", "userIDs": ["Vhmt50Wb", "1vKfGfZa", "ILwBLNyD"]}], "ticketIDs": ["ZHEsD0xh", "bKvt2A6m", "SBPCAVzi"], "tieTeamsSessionLifetime": true, "type": "Cs5FyQMZ", "version": 28}' > $TEMP_JSON_INPUT
+echo '{"attributes": {"QyUqgwxe": {}, "Ubs7hwJZ": {}, "WxDrPE7y": {}}, "backfillTicketID": "bxSlzPgn", "clientVersion": "6FtXF7vH", "deployment": "VfaXqzRc", "fallbackClaimKeys": ["wfkQ5gsU", "O1EmmpCZ", "SZE3iA4T"], "inactiveTimeout": 45, "inviteTimeout": 12, "joinability": "FRIENDS_OF_FRIENDS", "matchPool": "2zMlQqMn", "maxPlayers": 29, "minPlayers": 86, "preferredClaimKeys": ["LjlcN2GW", "IePOojJR", "G5EuWZ1o"], "requestedRegions": ["9StouPTP", "vsxB9iwO", "j3UfjEve"], "teams": [{"parties": [{"partyID": "khWAoSEc", "userIDs": ["fyE49Cd7", "KmvATPnz", "B2FtI5gC"]}, {"partyID": "SZBDpDYD", "userIDs": ["5pzob76W", "OwwkTyeR", "FP7xPN2A"]}, {"partyID": "TTdcU495", "userIDs": ["5cA3WJk7", "dZvshMIV", "FreV07Vd"]}], "teamID": "yS0huOlC", "userIDs": ["v5vYmHFh", "5URK11mi", "D7rUHEwP"]}, {"parties": [{"partyID": "cJAhlFbY", "userIDs": ["OMclcsry", "rfsOkGB0", "0mqUs18w"]}, {"partyID": "KVIX63ZM", "userIDs": ["wE4hccYU", "INgluNhp", "rNc4Q54u"]}, {"partyID": "87qVKCNz", "userIDs": ["soS2RFfa", "N1jjJGiq", "tOHcZQfF"]}], "teamID": "aBWXfy9b", "userIDs": ["mFOItQ0w", "kK3ClF6M", "Om04kQdR"]}, {"parties": [{"partyID": "ehtP77Ld", "userIDs": ["E3x4tF2R", "CDdIB058", "7xlaY8UO"]}, {"partyID": "zH0cUFfu", "userIDs": ["fnIZjtwJ", "gTdlnCwO", "izLv2Yx4"]}, {"partyID": "CwKz8A6t", "userIDs": ["A8gP7W7g", "11Wh6MXT", "pNYuQPlo"]}], "teamID": "XbKYKtQO", "userIDs": ["dcITPPnm", "ttA6cEug", "uBLPlsDy"]}], "ticketIDs": ["XBFTEynU", "f3GaQLnd", "57PdTdVO"], "tieTeamsSessionLifetime": false, "type": "DS", "version": 41}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PatchUpdateGameSession \
     --namespace $AB_NAMESPACE \
-    --sessionId 'Pi6eeh9p' \
+    --sessionId 'bNiuxAkA' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 56 'PatchUpdateGameSession' test.out
 
 #- 57 UpdateGameSessionBackfillTicketID
 # body param: body
-echo '{"backfillTicketID": "RkwWi6NY"}' > $TEMP_JSON_INPUT
+echo '{"backfillTicketID": "3DF98X6t"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op UpdateGameSessionBackfillTicketID \
     --namespace $AB_NAMESPACE \
-    --sessionId 'blA9Swk0' \
+    --sessionId 'KFZ2szZO' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 57 'UpdateGameSessionBackfillTicketID' test.out
@@ -606,7 +607,7 @@ $CLI_EXE \
     --sn session \
     --op GameSessionGenerateCode \
     --namespace $AB_NAMESPACE \
-    --sessionId 'MpmFAcpa' \
+    --sessionId 'NJUd1fH6' \
     > test.out 2>&1
 eval_tap $? 58 'GameSessionGenerateCode' test.out
 
@@ -615,18 +616,18 @@ $CLI_EXE \
     --sn session \
     --op PublicRevokeGameSessionCode \
     --namespace $AB_NAMESPACE \
-    --sessionId 'Fv2B9WEr' \
+    --sessionId 'lLC1kpHc' \
     > test.out 2>&1
 eval_tap $? 59 'PublicRevokeGameSessionCode' test.out
 
 #- 60 PublicGameSessionInvite
 # body param: body
-echo '{"metadata": {"GpDwtkDJ": "6yw5Xk4R", "dt6IGxPU": "p8UP5CdE", "QfIKL4Zv": "6KXymMuV"}, "platformID": "yiC2IrVj", "userID": "vGuyqaBr"}' > $TEMP_JSON_INPUT
+echo '{"metadata": {"QB0ZCDez": "ty0n6psm", "8f4GUUAn": "WWDaFbnY", "eioxOo9n": "xXrUIesQ"}, "platformID": "TkAA8Eei", "userID": "Q8VMSaZc"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicGameSessionInvite \
     --namespace $AB_NAMESPACE \
-    --sessionId 'dSFQ0m1r' \
+    --sessionId 'Hg2FJhBB' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 60 'PublicGameSessionInvite' test.out
@@ -636,18 +637,18 @@ $CLI_EXE \
     --sn session \
     --op JoinGameSession \
     --namespace $AB_NAMESPACE \
-    --sessionId '3v3H7Ldf' \
+    --sessionId 'Et4TqBVZ' \
     > test.out 2>&1
 eval_tap $? 61 'JoinGameSession' test.out
 
 #- 62 PublicPromoteGameSessionLeader
 # body param: body
-echo '{"leaderID": "uIoBOYsY"}' > $TEMP_JSON_INPUT
+echo '{"leaderID": "f7BqC2Fr"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicPromoteGameSessionLeader \
     --namespace $AB_NAMESPACE \
-    --sessionId 'fNObuNRu' \
+    --sessionId 'xb86ABlP' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 62 'PublicPromoteGameSessionLeader' test.out
@@ -657,7 +658,7 @@ $CLI_EXE \
     --sn session \
     --op LeaveGameSession \
     --namespace $AB_NAMESPACE \
-    --sessionId 'Ay9lcoL0' \
+    --sessionId 'vCgKCLYE' \
     > test.out 2>&1
 eval_tap $? 63 'LeaveGameSession' test.out
 
@@ -665,9 +666,9 @@ eval_tap $? 63 'LeaveGameSession' test.out
 $CLI_EXE \
     --sn session \
     --op PublicKickGameSessionMember \
-    --memberId '40LFZBoj' \
+    --memberId 'zXS3zPtK' \
     --namespace $AB_NAMESPACE \
-    --sessionId '6neE82i3' \
+    --sessionId 'HKRNL5TC' \
     > test.out 2>&1
 eval_tap $? 64 'PublicKickGameSessionMember' test.out
 
@@ -676,7 +677,7 @@ $CLI_EXE \
     --sn session \
     --op PublicGameSessionReject \
     --namespace $AB_NAMESPACE \
-    --sessionId 'mchoCBgY' \
+    --sessionId 'LArr2dla' \
     > test.out 2>&1
 eval_tap $? 65 'PublicGameSessionReject' test.out
 
@@ -685,7 +686,7 @@ $CLI_EXE \
     --sn session \
     --op GetSessionServerSecret \
     --namespace $AB_NAMESPACE \
-    --sessionId 'PyXpGIti' \
+    --sessionId 'zvp5rjKW' \
     > test.out 2>&1
 eval_tap $? 66 'GetSessionServerSecret' test.out
 
@@ -697,14 +698,14 @@ $CLI_EXE \
     --sn session \
     --op PublicGameSessionCancel \
     --namespace $AB_NAMESPACE \
-    --sessionId 'wVcwYXg9' \
-    --userId 'hnbIYFS9' \
+    --sessionId 'DGYFIBg6' \
+    --userId 'tiVmkvS1' \
     > test.out 2>&1
 eval_tap $? 68 'PublicGameSessionCancel' test.out
 
 #- 69 PublicPartyJoinCode
 # body param: body
-echo '{"code": "LE72hYpf"}' > $TEMP_JSON_INPUT
+echo '{"code": "t4vQau8M"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicPartyJoinCode \
@@ -718,30 +719,30 @@ $CLI_EXE \
     --sn session \
     --op PublicGetParty \
     --namespace $AB_NAMESPACE \
-    --partyId 'ETs8XpAl' \
+    --partyId 'xFfRkZpz' \
     > test.out 2>&1
 eval_tap $? 70 'PublicGetParty' test.out
 
 #- 71 PublicUpdateParty
 # body param: body
-echo '{"attributes": {"k90NArmu": {}, "SSxuxQ9N": {}, "c2GGlKK2": {}}, "inactiveTimeout": 51, "inviteTimeout": 21, "joinability": "f6peU7zL", "maxPlayers": 49, "minPlayers": 41, "type": "d4lsUmaP", "version": 76}' > $TEMP_JSON_INPUT
+echo '{"attributes": {"4gT3CFpa": {}, "l0uhUvAe": {}, "msgqcVnM": {}}, "inactiveTimeout": 7, "inviteTimeout": 95, "joinability": "FRIENDS_OF_FRIENDS", "maxPlayers": 39, "minPlayers": 13, "type": "P2P", "version": 59}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicUpdateParty \
     --namespace $AB_NAMESPACE \
-    --partyId 'e7iIHzhe' \
+    --partyId 'cznbwuQU' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 71 'PublicUpdateParty' test.out
 
 #- 72 PublicPatchUpdateParty
 # body param: body
-echo '{"attributes": {"91emgV59": {}, "tE7Y4mwP": {}, "Hu2R58Zs": {}}, "inactiveTimeout": 29, "inviteTimeout": 23, "joinability": "qWL6uCcB", "maxPlayers": 33, "minPlayers": 14, "type": "KM2qLsOp", "version": 25}' > $TEMP_JSON_INPUT
+echo '{"attributes": {"YQMB366U": {}, "9g2YvUBl": {}, "1lF4guOR": {}}, "inactiveTimeout": 59, "inviteTimeout": 87, "joinability": "FRIENDS_OF_MEMBERS", "maxPlayers": 36, "minPlayers": 31, "type": "DS", "version": 38}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicPatchUpdateParty \
     --namespace $AB_NAMESPACE \
-    --partyId 'EE0IPGYG' \
+    --partyId 'gszIF2a5' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 72 'PublicPatchUpdateParty' test.out
@@ -751,7 +752,7 @@ $CLI_EXE \
     --sn session \
     --op PublicGeneratePartyCode \
     --namespace $AB_NAMESPACE \
-    --partyId 'e3tIfYyO' \
+    --partyId 'KiX5dJOP' \
     > test.out 2>&1
 eval_tap $? 73 'PublicGeneratePartyCode' test.out
 
@@ -760,30 +761,30 @@ $CLI_EXE \
     --sn session \
     --op PublicRevokePartyCode \
     --namespace $AB_NAMESPACE \
-    --partyId 'Cauab8U8' \
+    --partyId 'AJaURMtP' \
     > test.out 2>&1
 eval_tap $? 74 'PublicRevokePartyCode' test.out
 
 #- 75 PublicPartyInvite
 # body param: body
-echo '{"metadata": {"9a6V0em9": "1ADDcCTi", "4vmrZcJk": "oAsFz1Fh", "y75F6632": "YvwcJMSL"}, "platformID": "FIcUA56e", "userID": "fE4EyMxL"}' > $TEMP_JSON_INPUT
+echo '{"metadata": {"wN7z9E9P": "oBmk7cDb", "s9n9zpDf": "bnSuw3vL", "k6X78bRG": "qNwXI9If"}, "platformID": "iEOeqO1j", "userID": "pi22rjXo"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicPartyInvite \
     --namespace $AB_NAMESPACE \
-    --partyId 'YJEx81mg' \
+    --partyId '1fefQkzX' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 75 'PublicPartyInvite' test.out
 
 #- 76 PublicPromotePartyLeader
 # body param: body
-echo '{"leaderID": "yaHPE1H1"}' > $TEMP_JSON_INPUT
+echo '{"leaderID": "z0qeFChB"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicPromotePartyLeader \
     --namespace $AB_NAMESPACE \
-    --partyId 'wCywyRf2' \
+    --partyId 'CB0zBClb' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 76 'PublicPromotePartyLeader' test.out
@@ -793,19 +794,19 @@ $CLI_EXE \
     --sn session \
     --op PublicReadPartySessionStorage \
     --namespace $AB_NAMESPACE \
-    --partyId 'xoVADTyP' \
+    --partyId 'oLHeyWNf' \
     > test.out 2>&1
 eval_tap $? 77 'PublicReadPartySessionStorage' test.out
 
 #- 78 PublicUpdateInsertPartySessionStorageReserved
 # body param: body
-echo '{"SY6EnwGt": {}, "scnAZFGq": {}, "EFVCnjM1": {}}' > $TEMP_JSON_INPUT
+echo '{"J0eHOHDk": {}, "oSv9WTY5": {}, "yj6WsA48": {}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicUpdateInsertPartySessionStorageReserved \
     --namespace $AB_NAMESPACE \
-    --partyId 'U5mxGXNY' \
-    --userId '5JNFJeas' \
+    --partyId '1dCsInCO' \
+    --userId 'yM44cMCj' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 78 'PublicUpdateInsertPartySessionStorageReserved' test.out
@@ -815,7 +816,7 @@ $CLI_EXE \
     --sn session \
     --op PublicPartyJoin \
     --namespace $AB_NAMESPACE \
-    --partyId 'zEYosBDJ' \
+    --partyId 'bhLLfsYW' \
     > test.out 2>&1
 eval_tap $? 79 'PublicPartyJoin' test.out
 
@@ -824,7 +825,7 @@ $CLI_EXE \
     --sn session \
     --op PublicPartyLeave \
     --namespace $AB_NAMESPACE \
-    --partyId 'DkEKqzfX' \
+    --partyId 'Z1wPuADA' \
     > test.out 2>&1
 eval_tap $? 80 'PublicPartyLeave' test.out
 
@@ -833,7 +834,7 @@ $CLI_EXE \
     --sn session \
     --op PublicPartyReject \
     --namespace $AB_NAMESPACE \
-    --partyId 'ctT28Y3K' \
+    --partyId 'I17LjrHM' \
     > test.out 2>&1
 eval_tap $? 81 'PublicPartyReject' test.out
 
@@ -842,8 +843,8 @@ $CLI_EXE \
     --sn session \
     --op PublicPartyCancel \
     --namespace $AB_NAMESPACE \
-    --partyId 'a2tmBBsl' \
-    --userId '6Mw7WuBg' \
+    --partyId 'XQ3WBSSm' \
+    --userId 'UI482dCt' \
     > test.out 2>&1
 eval_tap $? 82 'PublicPartyCancel' test.out
 
@@ -852,14 +853,14 @@ $CLI_EXE \
     --sn session \
     --op PublicPartyKick \
     --namespace $AB_NAMESPACE \
-    --partyId 'dQtWPRTd' \
-    --userId '6hgb178m' \
+    --partyId '02d0sUjH' \
+    --userId 'zVSUvYUX' \
     > test.out 2>&1
 eval_tap $? 83 'PublicPartyKick' test.out
 
 #- 84 PublicCreateParty
 # body param: body
-echo '{"attributes": {"EEg2wCKE": {}, "xpogZJ6V": {}, "X3ymQ2lh": {}}, "configurationName": "sZWL5b71", "inactiveTimeout": 38, "inviteTimeout": 11, "joinability": "hkCbWoqb", "maxPlayers": 7, "members": [{"ID": "MQtTIUKh", "PlatformID": "8M9mm18y", "PlatformUserID": "LVhSlgXg"}, {"ID": "sWiBgm5P", "PlatformID": "g5fExpjD", "PlatformUserID": "WcdOPAIY"}, {"ID": "14QT27NA", "PlatformID": "2gODA6zo", "PlatformUserID": "sLs5OFtu"}], "minPlayers": 91, "textChat": true, "type": "XnRvOQz1"}' > $TEMP_JSON_INPUT
+echo '{"attributes": {"IhjQCiEb": {}, "6rX1jUIU": {}, "sge0x1S6": {}}, "configurationName": "KWXR938Y", "inactiveTimeout": 29, "inviteTimeout": 62, "joinability": "FRIENDS_OF_LEADER", "maxPlayers": 42, "members": [{"ID": "1IJ5gkGb", "PlatformID": "JVftBzCv", "PlatformUserID": "8Hzc2a27"}, {"ID": "VXhaAHem", "PlatformID": "bLfClDtJ", "PlatformUserID": "6I0Eyitu"}, {"ID": "KtGnvKjN", "PlatformID": "ijjJFw3K", "PlatformUserID": "IyRVQ8UL"}], "minPlayers": 74, "textChat": true, "type": "NONE"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicCreateParty \
@@ -873,7 +874,7 @@ $CLI_EXE \
     --sn session \
     --op PublicGetRecentPlayer \
     --namespace $AB_NAMESPACE \
-    --limit '73' \
+    --limit '78' \
     > test.out 2>&1
 eval_tap $? 85 'PublicGetRecentPlayer' test.out
 
@@ -882,38 +883,38 @@ $CLI_EXE \
     --sn session \
     --op PublicGetRecentTeamPlayer \
     --namespace $AB_NAMESPACE \
-    --limit '24' \
+    --limit '100' \
     > test.out 2>&1
 eval_tap $? 86 'PublicGetRecentTeamPlayer' test.out
 
 #- 87 PublicUpdateInsertSessionStorageLeader
 # body param: body
-echo '{"x1dDtKY8": {}, "CxhdLgZI": {}, "WJVH2lvD": {}}' > $TEMP_JSON_INPUT
+echo '{"qvTnk4T6": {}, "E7VuQkvT": {}, "SPncyEyc": {}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicUpdateInsertSessionStorageLeader \
     --namespace $AB_NAMESPACE \
-    --sessionId 'koGhYHTF' \
+    --sessionId 'qSZUQxZm' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 87 'PublicUpdateInsertSessionStorageLeader' test.out
 
 #- 88 PublicUpdateInsertSessionStorage
 # body param: body
-echo '{"Ojjj1j2T": {}, "PMs6g1od": {}, "eoCfWRL9": {}}' > $TEMP_JSON_INPUT
+echo '{"VOFMCOdt": {}, "04XOUuzD": {}, "xgFT0lmZ": {}}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicUpdateInsertSessionStorage \
     --namespace $AB_NAMESPACE \
-    --sessionId 'EkL5drsg' \
-    --userId '2FYhSomb' \
+    --sessionId 'YZQVMWk8' \
+    --userId 'RfNd2c5E' \
     --reqfile $TEMP_JSON_INPUT \
     > test.out 2>&1
 eval_tap $? 88 'PublicUpdateInsertSessionStorage' test.out
 
 #- 89 PublicGetBulkPlayerCurrentPlatform
 # body param: body
-echo '{"userIDs": ["gs22r9r3", "Y6MFudq9", "W1LXk9f7"]}' > $TEMP_JSON_INPUT
+echo '{"userIDs": ["2XvBuCCg", "k0hIi1sL", "qYQ53uAA"]}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicGetBulkPlayerCurrentPlatform \
@@ -932,7 +933,7 @@ eval_tap $? 90 'PublicGetPlayerAttributes' test.out
 
 #- 91 PublicStorePlayerAttributes
 # body param: body
-echo '{"crossplayEnabled": false, "currentPlatform": "3NtQC4R8", "data": {"KtLY8tZv": {}, "rveCDVcN": {}, "PkQVv6om": {}}, "platforms": [{"name": "T7TYV0YV", "userID": "xvYtSjO6"}, {"name": "M9XYFPRe", "userID": "GA7rkrHs"}, {"name": "52quh8z5", "userID": "2kYc0p5l"}], "roles": ["Fb96yOBe", "HR85AfhO", "UbFEeHo9"], "simultaneousPlatform": "AC9qVc4e"}' > $TEMP_JSON_INPUT
+echo '{"crossplayEnabled": false, "currentPlatform": "aRZU1vHw", "data": {"u0RPrd1A": {}, "UYWx7jQ7": {}, "v5hkpHPk": {}}, "platforms": [{"name": "ZvpxVYJl", "userID": "Ll7xbs4N"}, {"name": "eU8CZK3u", "userID": "OQznUktZ"}, {"name": "tFQ8wnoD", "userID": "7tYxrTCU"}], "roles": ["NHxpRvPM", "FJnZkKly", "uI07MpHM"], "simultaneousPlatform": "BVMLM2cF"}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn session \
     --op PublicStorePlayerAttributes \
@@ -954,9 +955,9 @@ $CLI_EXE \
     --sn session \
     --op PublicQueryMyGameSessions \
     --namespace $AB_NAMESPACE \
-    --order 'UdGmqANv' \
-    --orderBy 'LdtBD8YV' \
-    --status 'b2D83v1j' \
+    --order 'jRBeTAqn' \
+    --orderBy '2N0SVFlz' \
+    --status '1N9cJp1u' \
     > test.out 2>&1
 eval_tap $? 93 'PublicQueryMyGameSessions' test.out
 
@@ -965,9 +966,9 @@ $CLI_EXE \
     --sn session \
     --op PublicQueryMyParties \
     --namespace $AB_NAMESPACE \
-    --order 'BmTzsohU' \
-    --orderBy 'am1EwLed' \
-    --status 'DFl30BAn' \
+    --order 'w9eEXwJS' \
+    --orderBy 'QqvcuD0s' \
+    --status 'VLfu3LMq' \
     > test.out 2>&1
 eval_tap $? 94 'PublicQueryMyParties' test.out
 

@@ -12,6 +12,9 @@ namespace AccelByte.Sdk.Api.Csm.Model
 {
     public class ApimodelSubscriberItemRequest : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("emailAddress")]
+        public string? EmailAddress { get; set; }
+
         [JsonPropertyName("userId")]
         public string? UserId { get; set; }
 

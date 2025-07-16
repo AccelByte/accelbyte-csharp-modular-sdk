@@ -23,7 +23,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// <summary>
     /// importStoreByCSV
     ///
-    /// This API is used to import a store by CSV format.
+    /// This API is used to import a store by CSV format, You must select at least one of item/section/display/category for uploading
     /// </summary>
     public class ImportStoreByCSV : AccelByte.Sdk.Core.Operation
     {
@@ -35,6 +35,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
 
 
+
+            public Stream? Category { get; set; }
+
+            public Stream? Display { get; set; }
+
+            public Stream? Item { get; set; }
+
+            public string? Notes { get; set; }
+
+            public Stream? Section { get; set; }
 
 
 
@@ -48,24 +58,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
+            public ImportStoreByCSVBuilder SetCategory(Stream _category)
+            {
+                Category = _category;
+                return this;
+            }
+
+            public ImportStoreByCSVBuilder SetDisplay(Stream _display)
+            {
+                Display = _display;
+                return this;
+            }
+
+            public ImportStoreByCSVBuilder SetItem(Stream _item)
+            {
+                Item = _item;
+                return this;
+            }
+
+            public ImportStoreByCSVBuilder SetNotes(string _notes)
+            {
+                Notes = _notes;
+                return this;
+            }
+
+            public ImportStoreByCSVBuilder SetSection(Stream _section)
+            {
+                Section = _section;
+                return this;
+            }
+
 
 
             public ImportStoreByCSV Build(
-                Stream category,
-                Stream display,
-                Stream item,
-                string notes,
-                Stream section,
                 string namespace_,
                 string storeId
             )
             {
                 ImportStoreByCSV op = new ImportStoreByCSV(this,
-                    category,                    
-                    display,                    
-                    item,                    
-                    notes,                    
-                    section,                    
                     namespace_,                    
                     storeId                    
                 );
@@ -75,21 +105,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
 
             public ImportStoreByCSV.Response Execute(
-                Stream category,
-                Stream display,
-                Stream item,
-                string notes,
-                Stream section,
                 string namespace_,
                 string storeId
             )
             {
                 ImportStoreByCSV op = Build(
-                    category,
-                    display,
-                    item,
-                    notes,
-                    section,
                     namespace_,
                     storeId
                 );
@@ -104,21 +124,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
             public async Task<ImportStoreByCSV.Response> ExecuteAsync(
-                Stream category,
-                Stream display,
-                Stream item,
-                string notes,
-                Stream section,
                 string namespace_,
                 string storeId
             )
             {
                 ImportStoreByCSV op = Build(
-                    category,
-                    display,
-                    item,
-                    notes,
-                    section,
                     namespace_,
                     storeId
                 );
@@ -135,11 +145,6 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         }
 
         private ImportStoreByCSV(ImportStoreByCSVBuilder builder,
-            Stream category,
-            Stream display,
-            Stream item,
-            string notes,
-            Stream section,
             string namespace_,
             string storeId
         )
@@ -148,11 +153,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["storeId"] = storeId;
             
             
-            if (category is not null) FormParams["category"] = category;
-            if (display is not null) FormParams["display"] = display;
-            if (item is not null) FormParams["item"] = item;
-            if (notes is not null) FormParams["notes"] = notes;
-            if (section is not null) FormParams["section"] = section;
+            if (builder.Category is not null) FormParams["category"] = builder.Category;
+            if (builder.Display is not null) FormParams["display"] = builder.Display;
+            if (builder.Item is not null) FormParams["item"] = builder.Item;
+            if (builder.Notes is not null) FormParams["notes"] = builder.Notes;
+            if (builder.Section is not null) FormParams["section"] = builder.Section;
 
             
             
@@ -181,11 +186,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public ImportStoreByCSV(
             string namespace_,            
             string storeId,            
-            Stream category,            
-            Stream display,            
-            Stream item,            
-            string notes,            
-            Stream section            
+            Stream? category,            
+            Stream? display,            
+            Stream? item,            
+            string? notes,            
+            Stream? section            
         )
         {
             PathParams["namespace"] = namespace_;

@@ -138,6 +138,17 @@ namespace AccelByte.Sdk.Api.Csm
         }
         private Wrapper.ResourcesLimits? _ResourcesLimits = null;
 
+        public Wrapper.NotificationSubscriptionV3 NotificationSubscriptionV3
+        {
+            get
+            {
+                if (_NotificationSubscriptionV3 == null)
+                    _NotificationSubscriptionV3 = new Wrapper.NotificationSubscriptionV3(_Sdk, _CustomBasePath);
+                return _NotificationSubscriptionV3;
+            }
+        }
+        private Wrapper.NotificationSubscriptionV3? _NotificationSubscriptionV3 = null;
+
         internal CsmApi(IAccelByteSdk sdk)
         {
             _Sdk = sdk;

@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("configurationName")]
+        public string? ConfigurationName { get; set; }
+
         [SdkCommandArgument("fromTime")]
         public string? FromTime { get; set; }
 
@@ -83,12 +86,14 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 
             var opBuilder = AccelByte.Sdk.Api.Session.Operation.AdminQueryParties.Builder;
 
+            if (ConfigurationName != null)
+                opBuilder.SetConfigurationName((string)ConfigurationName);
             if (FromTime != null)
                 opBuilder.SetFromTime((string)FromTime);
             if (IsSoftDeleted != null)
                 opBuilder.SetIsSoftDeleted((string)IsSoftDeleted);
             if (Joinability != null)
-                opBuilder.SetJoinability((string)Joinability);
+                opBuilder.SetJoinability(AdminQueryPartiesJoinability.NewValue(Joinability));
             if (Key != null)
                 opBuilder.SetKey((string)Key);
             if (LeaderID != null)
@@ -98,7 +103,7 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
             if (MemberID != null)
                 opBuilder.SetMemberID((string)MemberID);
             if (MemberStatus != null)
-                opBuilder.SetMemberStatus((string)MemberStatus);
+                opBuilder.SetMemberStatus(AdminQueryPartiesMemberStatus.NewValue(MemberStatus));
             if (Offset != null)
                 opBuilder.SetOffset((long)Offset);
             if (Order != null)

@@ -12,6 +12,9 @@ namespace AccelByte.Sdk.Api.Csm.Model
 {
     public class ApimodelBulkSubscribeItem : AccelByte.Sdk.Core.Model
     {
+        [JsonPropertyName("emailAddress")]
+        public string? EmailAddress { get; set; }
+
         [JsonPropertyName("notificationType")]
         public Dictionary<string, bool>? NotificationType { get; set; }
 

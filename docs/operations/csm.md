@@ -105,6 +105,12 @@
 |---|---|---|---|---|
 | `/csm/v2/admin/namespaces/{namespace}/resources/limits` | GET | GetResourcesLimits | [GetResourcesLimits](../../apis/AccelByte.Sdk.Api.Csm/Operation/ResourcesLimits/GetResourcesLimits.cs) | [GetResourcesLimits](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/ResourcesLimits/GetResourcesLimits.cs) |
 
+### Notification Subscription V3 Wrapper:  [NotificationSubscriptionV3](../../apis/AccelByte.Sdk.Api.Csm/Wrapper/NotificationSubscriptionV3.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/csm/v3/admin/namespaces/{namespace}/apps/{app}/subscriptions` | GET | GetNotificationSubscriberListV3 | [GetNotificationSubscriberListV3](../../apis/AccelByte.Sdk.Api.Csm/Operation/NotificationSubscriptionV3/GetNotificationSubscriberListV3.cs) | [GetNotificationSubscriberListV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/NotificationSubscriptionV3/GetNotificationSubscriberListV3.cs) |
+| `/csm/v3/admin/namespaces/{namespace}/apps/{app}/subscriptions` | DELETE | DeleteSubscriptionAppNotificationV3 | [DeleteSubscriptionAppNotificationV3](../../apis/AccelByte.Sdk.Api.Csm/Operation/NotificationSubscriptionV3/DeleteSubscriptionAppNotificationV3.cs) | [DeleteSubscriptionAppNotificationV3](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/NotificationSubscriptionV3/DeleteSubscriptionAppNotificationV3.cs) |
+
 
 &nbsp;
 
@@ -154,6 +160,10 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
+### Notification Subscription V3 Wrapper:  [NotificationSubscriptionV3](../../apis/AccelByte.Sdk.Api.Csm/Wrapper/NotificationSubscriptionV3.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
 
 &nbsp;
 
@@ -184,11 +194,14 @@
 | `apimodel.GetListOfConfigurationsV2DataItem` | [ApimodelGetListOfConfigurationsV2DataItem](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetListOfConfigurationsV2DataItem.cs) |
 | `apimodel.GetListOfConfigurationsV2Response` | [ApimodelGetListOfConfigurationsV2Response](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetListOfConfigurationsV2Response.cs) |
 | `apimodel.GetNotificationSubscriberItem` | [ApimodelGetNotificationSubscriberItem](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetNotificationSubscriberItem.cs) |
+| `apimodel.GetNotificationSubscriberItemV2` | [ApimodelGetNotificationSubscriberItemV2](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetNotificationSubscriberItemV2.cs) |
 | `apimodel.GetNotificationSubscriberListResponse` | [ApimodelGetNotificationSubscriberListResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetNotificationSubscriberListResponse.cs) |
+| `apimodel.GetNotificationSubscriberListResponseV2` | [ApimodelGetNotificationSubscriberListResponseV2](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetNotificationSubscriberListResponseV2.cs) |
 | `apimodel.GetNotificationSubscriberStatusResponse` | [ApimodelGetNotificationSubscriberStatusResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelGetNotificationSubscriberStatusResponse.cs) |
 | `apimodel.IncreaseLimitFormRequest` | [ApimodelIncreaseLimitFormRequest](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelIncreaseLimitFormRequest.cs) |
 | `apimodel.MemoryRequest` | [ApimodelMemoryRequest](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelMemoryRequest.cs) |
 | `apimodel.MemoryResponse` | [ApimodelMemoryResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelMemoryResponse.cs) |
+| `apimodel.NotificationType` | [ApimodelNotificationType](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelNotificationType.cs) |
 | `apimodel.ReplicaRequest` | [ApimodelReplicaRequest](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelReplicaRequest.cs) |
 | `apimodel.ReplicaResponse` | [ApimodelReplicaResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelReplicaResponse.cs) |
 | `apimodel.SaveConfigurationV2Request` | [ApimodelSaveConfigurationV2Request](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelSaveConfigurationV2Request.cs) |

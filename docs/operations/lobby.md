@@ -86,6 +86,7 @@
 | `/lobby/v1/admin/notification/namespaces/{namespace}/users/{userId}/freeform/notify` | POST | SendSpecificUserFreeformNotificationV1Admin | [SendSpecificUserFreeformNotificationV1Admin](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/SendSpecificUserFreeformNotificationV1Admin.cs) | [SendSpecificUserFreeformNotificationV1Admin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/SendSpecificUserFreeformNotificationV1Admin.cs) |
 | `/lobby/v1/admin/notification/namespaces/{namespace}/users/{userId}/templates/notify` | POST | SendSpecificUserTemplatedNotificationV1Admin | [SendSpecificUserTemplatedNotificationV1Admin](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/SendSpecificUserTemplatedNotificationV1Admin.cs) | [SendSpecificUserTemplatedNotificationV1Admin](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/SendSpecificUserTemplatedNotificationV1Admin.cs) |
 | `/notification/namespaces/{namespace}/me` | GET | GetMyNotifications | [GetMyNotifications](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetMyNotifications.cs) | [GetMyNotifications](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetMyNotifications.cs) |
+| `/notification/namespaces/{namespace}/notification/offline/me` | GET | GetMyOfflineNotifications | [GetMyOfflineNotifications](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetMyOfflineNotifications.cs) | [GetMyOfflineNotifications](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetMyOfflineNotifications.cs) |
 | `/notification/namespaces/{namespace}/topics` | GET | GetTopicByNamespace | [GetTopicByNamespace](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetTopicByNamespace.cs) | [GetTopicByNamespace](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetTopicByNamespace.cs) |
 | `/notification/namespaces/{namespace}/topics` | POST | CreateTopic | [CreateTopic](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/CreateTopic.cs) | [CreateTopic](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/CreateTopic.cs) |
 | `/notification/namespaces/{namespace}/topics/{topic}` | GET | GetTopicByTopicName | [GetTopicByTopicName](../../apis/AccelByte.Sdk.Api.Lobby/Operation/Notification/GetTopicByTopicName.cs) | [GetTopicByTopicName](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Lobby/Notification/GetTopicByTopicName.cs) |
@@ -250,12 +251,14 @@
 | `model.NativeFriendSyncResponse` | [ModelNativeFriendSyncResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeFriendSyncResponse.cs) |
 | `model.NativeUserBlockRequest` | [ModelNativeUserBlockRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeUserBlockRequest.cs) |
 | `model.NativeUserBlockResponse` | [ModelNativeUserBlockResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNativeUserBlockResponse.cs) |
+| `model.Notification` | [ModelNotification](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotification.cs) |
 | `model.NotificationResponse` | [ModelNotificationResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationResponse.cs) |
 | `model.NotificationTemplateResponse` | [ModelNotificationTemplateResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationTemplateResponse.cs) |
 | `model.NotificationTopicResponse` | [ModelNotificationTopicResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationTopicResponse.cs) |
 | `model.NotificationTopicResponseV1` | [ModelNotificationTopicResponseV1](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationTopicResponseV1.cs) |
 | `model.NotificationWithTemplateRequest` | [ModelNotificationWithTemplateRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationWithTemplateRequest.cs) |
 | `model.NotificationWithTemplateRequestV1` | [ModelNotificationWithTemplateRequestV1](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationWithTemplateRequestV1.cs) |
+| `model.NotificationsResponse` | [ModelNotificationsResponse](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelNotificationsResponse.cs) |
 | `model.OutgoingFriendsWithTimeData` | [ModelOutgoingFriendsWithTimeData](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelOutgoingFriendsWithTimeData.cs) |
 | `model.Pagination` | [ModelPagination](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelPagination.cs) |
 | `model.PutGlobalConfigurationRequest` | [ModelPutGlobalConfigurationRequest](../../apis/AccelByte.Sdk.Api.Lobby/Model/ModelPutGlobalConfigurationRequest.cs) |

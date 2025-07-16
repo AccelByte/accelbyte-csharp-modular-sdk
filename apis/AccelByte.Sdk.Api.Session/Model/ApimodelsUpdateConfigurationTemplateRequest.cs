@@ -95,7 +95,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? InviteTimeout { get; set; }
 
         [JsonPropertyName("joinability")]
-        public string? Joinability { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateConfigurationTemplateRequestJoinability? Joinability { get; set; }
 
         [JsonPropertyName("leaderElectionGracePeriod")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -145,7 +146,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? TtlHours { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateConfigurationTemplateRequestType? Type { get; set; }
 
     }
 
@@ -232,7 +234,8 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? InviteTimeout { get; set; }
 
         [JsonPropertyName("joinability")]
-        public string? Joinability { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateConfigurationTemplateRequestJoinability? Joinability { get; set; }
 
         [JsonPropertyName("leaderElectionGracePeriod")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -282,10 +285,44 @@ namespace AccelByte.Sdk.Api.Session.Model
         public int? TtlHours { get; set; }
 
         [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonStringEnum]
+        public ApimodelsUpdateConfigurationTemplateRequestType? Type { get; set; }
 
     }
 
+
+    public class ApimodelsUpdateConfigurationTemplateRequestJoinability : StringEnum<ApimodelsUpdateConfigurationTemplateRequestJoinability>
+    {
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestJoinability CLOSED
+            = new ApimodelsUpdateConfigurationTemplateRequestJoinability("CLOSED");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestJoinability FRIENDSOFFRIENDS
+            = new ApimodelsUpdateConfigurationTemplateRequestJoinability("FRIENDS_OF_FRIENDS");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestJoinability FRIENDSOFLEADER
+            = new ApimodelsUpdateConfigurationTemplateRequestJoinability("FRIENDS_OF_LEADER");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestJoinability FRIENDSOFMEMBERS
+            = new ApimodelsUpdateConfigurationTemplateRequestJoinability("FRIENDS_OF_MEMBERS");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestJoinability INVITEONLY
+            = new ApimodelsUpdateConfigurationTemplateRequestJoinability("INVITE_ONLY");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestJoinability OPEN
+            = new ApimodelsUpdateConfigurationTemplateRequestJoinability("OPEN");
+
+
+        public static implicit operator ApimodelsUpdateConfigurationTemplateRequestJoinability(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsUpdateConfigurationTemplateRequestJoinability(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
 
     public class ApimodelsUpdateConfigurationTemplateRequestTextChatMode : StringEnum<ApimodelsUpdateConfigurationTemplateRequestTextChatMode>
     {
@@ -305,6 +342,30 @@ namespace AccelByte.Sdk.Api.Session.Model
         }
 
         public ApimodelsUpdateConfigurationTemplateRequestTextChatMode(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class ApimodelsUpdateConfigurationTemplateRequestType : StringEnum<ApimodelsUpdateConfigurationTemplateRequestType>
+    {
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestType DS
+            = new ApimodelsUpdateConfigurationTemplateRequestType("DS");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestType NONE
+            = new ApimodelsUpdateConfigurationTemplateRequestType("NONE");
+
+        public static readonly ApimodelsUpdateConfigurationTemplateRequestType P2P
+            = new ApimodelsUpdateConfigurationTemplateRequestType("P2P");
+
+
+        public static implicit operator ApimodelsUpdateConfigurationTemplateRequestType(string value)
+        {
+            return NewValue(value);
+        }
+
+        public ApimodelsUpdateConfigurationTemplateRequestType(string enumValue)
             : base(enumValue)
         {
 
