@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -20,15 +20,21 @@ using AccelByte.Sdk.Api.Iam.Model;
 
 namespace AccelByte.Sdk.Sample.Cli
 {
-    public class FileBasedTokenRepository : ITokenRepository
+    public class FileBasedTokenRepository : ITokenRepository, IObservableTokenRepository
     {
         private class _TokenStore
         {
             [JsonPropertyName("token")]
-            public string Token { get; set; } = String.Empty;
+            public string Token { get; set; } = "";
+
+            [JsonPropertyName("refresh_token")]
+            public string RefreshToken { get; set; } = "";
 
             [JsonPropertyName("expiry_in")]
             public int TokenExpiryIn { get; set; } = 0;
+
+            [JsonPropertyName("refresh_expiry_in")]
+            public int RefreshTokenExpiryIn { get; set; } = 0;
 
             [JsonPropertyName("type")]
             public LoginType Type { get; set; } = LoginType.User;
@@ -62,6 +68,8 @@ namespace AccelByte.Sdk.Sample.Cli
 
         private object _TokenLock = new object();
 
+        private List<ITokenRepositoryObserver> _Observers = new List<ITokenRepositoryObserver>();
+
         public long CurrentTimestamp
         {
             get => (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeSeconds();
@@ -84,6 +92,23 @@ namespace AccelByte.Sdk.Sample.Cli
             }
         }
 
+        public string RefreshToken
+        {
+            get
+            {
+                lock (_TokenLock)
+                {
+                    if (_Store == null)
+                        _Store = _TokenStore.LoadFromFile(_FileName);
+
+                    if (_Store == null)
+                        throw new Exception("No token stored.");
+
+                    return _Store.RefreshToken;
+                }
+            }
+        }
+
         public int TokenExpiryIn
         {
             get
@@ -91,6 +116,17 @@ namespace AccelByte.Sdk.Sample.Cli
                 lock (_TokenLock)
                 {
                     return (_Store != null ? _Store.TokenExpiryIn : 0);
+                }
+            }
+        }
+
+        public int RefreshExpireIn
+        {
+            get
+            {
+                lock (_TokenLock)
+                {
+                    return (_Store != null ? _Store.RefreshTokenExpiryIn : 0);
                 }
             }
         }
@@ -128,6 +164,21 @@ namespace AccelByte.Sdk.Sample.Cli
                     if (_Store == null)
                         _Store = _TokenStore.LoadFromFile(_FileName);
                     return (_Store != null);
+                }
+            }
+        }
+
+        public bool HasRefreshToken
+        {
+            get
+            {
+                lock (_TokenLock)
+                {
+                    if (_Store == null)
+                        _Store = _TokenStore.LoadFromFile(_FileName);
+                    if (_Store != null)
+                        return _Store.RefreshToken != "";
+                    return false;
                 }
             }
         }
@@ -184,11 +235,14 @@ namespace AccelByte.Sdk.Sample.Cli
                 {
                     Token = tokenResponse.AccessToken,
                     Type = LoginType,
-                    IssuedTimestamp = CurrentTimestamp
+                    IssuedTimestamp = CurrentTimestamp,
+                    RefreshToken = tokenResponse.RefreshToken
                 };
 
                 if (tokenResponse.ExpiresIn != null)
                     _Store.TokenExpiryIn = tokenResponse.ExpiresIn.Value;
+                if (tokenResponse.RefreshExpiresIn != null)
+                    _Store.RefreshTokenExpiryIn = tokenResponse.RefreshExpiresIn.Value;
 
                 _Store.SaveToFile(_FileName);
             }
@@ -206,12 +260,48 @@ namespace AccelByte.Sdk.Sample.Cli
                     _Store = new _TokenStore();
 
                 _Store.Token = tokenResponse.AccessToken;
+                _Store.RefreshToken = tokenResponse.RefreshToken;
                 _Store.IssuedTimestamp = CurrentTimestamp;
                 if (tokenResponse.ExpiresIn != null)
                     _Store.TokenExpiryIn = tokenResponse.ExpiresIn.Value;
+                if (tokenResponse.RefreshExpiresIn != null)
+                    _Store.RefreshTokenExpiryIn = tokenResponse.RefreshExpiresIn.Value;
 
                 _Store.SaveToFile(_FileName);
             }
+        }
+
+        public void SetTokenExpiry(int value)
+        {
+            lock (_TokenLock)
+            {
+                if (_Store != null)
+                    _Store.TokenExpiryIn = value;
+            }
+        }
+
+        public bool IsTokenExpiring(float rate)
+        {
+            long tExpiry = (long)Math.Round((rate * TokenExpiryIn), 0);
+            long tgt = IssuedTimestamp + tExpiry;
+            return (CurrentTimestamp >= tgt);
+        }
+
+        public void RegisterObserver(ITokenRepositoryObserver observer)
+        {
+            _Observers.Add(observer);
+        }
+
+        public void UnregisterObserver(ITokenRepositoryObserver observer)
+        {
+            _Observers.Remove(observer);
+        }
+
+        public async Task UpdateObserversWithNewToken()
+        {
+            string newToken = Token;
+            foreach (var observer in _Observers)
+                await observer.OnAccessTokenChanged(newToken);
         }
     }
 }
