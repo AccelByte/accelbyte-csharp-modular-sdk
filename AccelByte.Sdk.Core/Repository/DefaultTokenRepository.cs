@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -20,14 +20,14 @@ namespace AccelByte.Sdk.Core.Repository
             get => (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeSeconds();
         }
 
-        private string _Token = String.Empty;
+        private string _Token = "";
         public string Token
         {
             get
             {
                 lock (_TokenLock)
                 {
-                    if (_Token != String.Empty)
+                    if (_Token != "")
                         return _Token;
                     else
                         throw new Exception("No token stored.");
@@ -42,9 +42,13 @@ namespace AccelByte.Sdk.Core.Repository
             }
         }
 
+        public string RefreshToken { get; protected set; } = "";
+
         private int _TokenExpiryIn = 0;
 
         public int TokenExpiryIn { get => _TokenExpiryIn; }
+
+        public int RefreshExpireIn { get; protected set; } = 0;
 
         public int SecondsUntilExpiry
         {
@@ -58,11 +62,11 @@ namespace AccelByte.Sdk.Core.Repository
             get
             {
                 lock (_TokenLock)
-                {
-                    return (_Token != String.Empty);
-                }
+                    return (_Token != "");
             }
         }
+
+        public bool HasRefreshToken { get => RefreshToken != ""; }
 
         public bool IsTokenExpired
         {
@@ -75,9 +79,7 @@ namespace AccelByte.Sdk.Core.Repository
             get
             {
                 lock (_TokenLock)
-                {
                     return _LoginType;
-                }
             }
         }
 
@@ -89,10 +91,11 @@ namespace AccelByte.Sdk.Core.Repository
         {
             lock (_TokenLock)
             {
-                _Token = String.Empty;
+                _Token = "";
                 _TokenExpiryIn = 0;
                 IssuedTimestamp = 0;
                 TokenData = null;
+                RefreshToken = "";
             }
         }
 
@@ -109,7 +112,11 @@ namespace AccelByte.Sdk.Core.Repository
                 IssuedTimestamp = CurrentTimestamp;
                 if (tokenResponse.ExpiresIn != null)
                     _TokenExpiryIn = tokenResponse.ExpiresIn.Value;
-            }
+
+                RefreshToken = tokenResponse.RefreshToken;
+                if (tokenResponse.RefreshExpiresIn != null)
+                    RefreshExpireIn = tokenResponse.RefreshExpiresIn.Value;
+            }            
         }
 
         public void UpdateToken(ITokenResponse tokenResponse)
@@ -124,12 +131,23 @@ namespace AccelByte.Sdk.Core.Repository
                 IssuedTimestamp = CurrentTimestamp;
                 if (tokenResponse.ExpiresIn != null)
                     _TokenExpiryIn = tokenResponse.ExpiresIn.Value;
+
+                RefreshToken = tokenResponse.RefreshToken;
+                if (tokenResponse.RefreshExpiresIn != null)
+                    RefreshExpireIn = tokenResponse.RefreshExpiresIn.Value;
             }
         }
 
         public void SetTokenExpiry(int value)
         {
             _TokenExpiryIn = value;
+        }
+
+        public bool IsTokenExpiring(float rate)
+        {
+            long tExpiry = (long)Math.Round((rate * TokenExpiryIn), 0);
+            long tgt = IssuedTimestamp + tExpiry;
+            return (CurrentTimestamp >= tgt);
         }
 
         public void RegisterObserver(ITokenRepositoryObserver observer)

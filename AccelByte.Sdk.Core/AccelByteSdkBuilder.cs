@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -139,11 +139,11 @@ namespace AccelByte.Sdk.Core
         public T Build()
         {
             if (_Client == null)
-                throw IncompleteComponentException.NoHttpClient;
+                _Client = new DefaultHttpClient();
             if (_TokenRepository == null)
-                throw IncompleteComponentException.NoTokenRepository;
+                _TokenRepository = new DefaultTokenRepository();
             if (_ConfigRepository == null)
-                throw IncompleteComponentException.NoConfigRepository;
+                _ConfigRepository = new DefaultConfigRepository();
 
             if (_EnableLogging)
             {

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,34 +34,29 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         public void UserLoginWithAutoRefreshToken()
         {
             using var sdk = AccelByteSdk.Builder
-                .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultCredentialRepository()
-                .UseAutoTokenRefresh()
+                .UseOnDemandTokenRefresh()
                 .EnableLog()
                 .Build();
 
-            sdk.LoginUser(true);
+            sdk.LoginUser();
 
             //First request, valid token
-            _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
-                RetrieveAgreementsPublic
-                .Builder.Build()).EnsureSuccess();
+            _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp
+                .Execute()
+                .EnsureSuccess();
 
-            //Force token expire
-            if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
-            {
-                RefreshableTokenRepository tokenRepo = (RefreshableTokenRepository)sdk.Configuration.TokenRepository;
-                tokenRepo.SetTokenExpiry(5); // expiry in 5 seconds
+            //force expiry in 5 seconds
+            sdk.Configuration.TokenRepository.SetTokenExpiry(5); 
 
-                //wait for 5 seconds
-                Thread.Sleep(5000);
-            }
+            //wait for 5 seconds
+            Thread.Sleep(5000);
 
             //Second request, expired token, try to do refresh
-            _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublic(
-                RetrieveAgreementsPublic
-                .Builder.Build()).EnsureSuccess();
+            _ = sdk.GetLegalApi().Agreement.RetrieveAgreementsPublicOp
+                .Execute()
+                .EnsureSuccess();
 
             sdk.Logout();
         }
@@ -70,29 +65,24 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         public void ClientLoginWithAutoRefreshToken()
         {
             using var sdk = AccelByteSdk.Builder
-                .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultCredentialRepository()
-                .UseAutoTokenRefresh()
+                .UseOnDemandTokenRefresh()
                 .EnableLog()
                 .Build();
 
-            sdk.LoginClient(true);
+            sdk.LoginClient();
 
             //First request, valid token
             _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
                 .Execute(sdk.Namespace, "en")
                 .EnsureSuccess();
 
-            //Force token expire
-            if (sdk.Configuration.TokenRepository is RefreshableTokenRepository)
-            {
-                RefreshableTokenRepository tokenRepo = (RefreshableTokenRepository)sdk.Configuration.TokenRepository;
-                tokenRepo.SetTokenExpiry(5); // expiry in 5 seconds
+            //force expiry in 5 seconds
+            sdk.Configuration.TokenRepository.SetTokenExpiry(5);
 
-                //wait for 5 seconds
-                Thread.Sleep(5000);
-            }
+            //wait for 5 seconds
+            Thread.Sleep(5000);
 
             //Second request, expired token, try to do refresh
             _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
@@ -106,22 +96,18 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         public void AutoRefreshTokenForWebSocket()
         {
             using var sdk = AccelByteSdk.Builder
-                .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultCredentialRepository()
-                .UseAutoTokenRefresh()
+                .UseOnDemandTokenRefresh()
                 .EnableLog()
                 .SetOnAfterLoginEventHandler((loginType, authType, tokenData, fSdk) =>
                 {
-                    if (fSdk.Configuration.TokenRepository is RefreshableTokenRepository)
-                    {
-                        RefreshableTokenRepository tokenRepo = (RefreshableTokenRepository)fSdk.Configuration.TokenRepository;
-                        tokenRepo.SetTokenExpiry(5); // expiry in 5 seconds
-                    }
+                    // expiry in 5 seconds
+                    fSdk.Configuration.TokenRepository.SetTokenExpiry(5);
                 })
                 .Build();
 
-            sdk.LoginUser(true);
+            sdk.LoginUser();
 
             bool isRefreshTokenResponseReceived = false;
 

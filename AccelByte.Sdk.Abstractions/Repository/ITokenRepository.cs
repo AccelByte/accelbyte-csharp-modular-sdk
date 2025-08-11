@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -14,11 +14,19 @@ namespace AccelByte.Sdk.Core.Repository
     {
         string Token { get; }
 
+        string RefreshToken { get; }
+
+        int TokenExpiryIn { get; }
+
+        int RefreshExpireIn { get; }
+
         int SecondsUntilExpiry { get; }
 
         long IssuedTimestamp { get; }
 
         bool HasToken { get; }
+
+        bool HasRefreshToken { get; }
 
         bool IsTokenExpired { get; }
 
@@ -31,5 +39,9 @@ namespace AccelByte.Sdk.Core.Repository
         void StoreToken(LoginType loginType, ITokenResponse tokenResponse);
 
         void UpdateToken(ITokenResponse tokenResponse);
+
+        void SetTokenExpiry(int value);
+
+        bool IsTokenExpiring(float rate);
     }
 }
