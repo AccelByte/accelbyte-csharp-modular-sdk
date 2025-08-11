@@ -40,8 +40,8 @@ Below are the list of things that changed.
 ## Sdk Initialization
 In monolithic version, using default implementations only need to include single namespace, which is `AccelByte.Sdk.Core`. In modular version, You will need to include respective namespace for each default implementations. For example, if you want to include default repositories, then you will need to include `AccelByte.Sdk.Core.Repository`. For Http clients, you will need to include `AccelByte.Sdk.Core.Net.Http`.
 
-## On-Demand Refresh Token
-Now on-demand refresh token is enabled by default. To disable it, you can call `DisableRefreshIfPossible` while building the sdk object.
+## Refresh token if possible while login
+Now every login will try to use refresh token first if available. To disable it, you can call `.DisableRefreshIfPossible()` while building the sdk object.
 
 ## Token Validation
 In monolithic version, default token validator is assigned by default. Now you will need to explicitly set in in sdk builder with `UseDefaultTokenValidator` method. Refer to [README](./README.md) on how to use it.
