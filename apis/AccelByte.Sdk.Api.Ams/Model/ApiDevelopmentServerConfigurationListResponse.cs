@@ -15,6 +15,9 @@ namespace AccelByte.Sdk.Api.Ams.Model
         [JsonPropertyName("data")]
         public List<ApiDevelopmentServerConfigurationGetResponse>? Data { get; set; }
 
+        [JsonPropertyName("paging")]
+        public PaginationPaginationInfo? Paging { get; set; }
+
         [JsonPropertyName("totalData")]
         public int? TotalData { get; set; }
 

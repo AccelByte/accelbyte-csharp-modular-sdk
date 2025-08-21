@@ -29,6 +29,12 @@
 | `/match2/v1/admin/namespaces/{namespace}/playfeatureflag` | POST | AdminUpsertPlayFeatureFlag | [AdminUpsertPlayFeatureFlag](../../apis/AccelByte.Sdk.Api.Match2/Operation/PlayFeatureFlag/AdminUpsertPlayFeatureFlag.cs) | [AdminUpsertPlayFeatureFlag](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/PlayFeatureFlag/AdminUpsertPlayFeatureFlag.cs) |
 | `/match2/v1/admin/namespaces/{namespace}/playfeatureflag` | DELETE | AdminDeletePlayFeatureFlag | [AdminDeletePlayFeatureFlag](../../apis/AccelByte.Sdk.Api.Match2/Operation/PlayFeatureFlag/AdminDeletePlayFeatureFlag.cs) | [AdminDeletePlayFeatureFlag](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/PlayFeatureFlag/AdminDeletePlayFeatureFlag.cs) |
 
+### XRay Config Wrapper:  [XRayConfig](../../apis/AccelByte.Sdk.Api.Match2/Wrapper/XRayConfig.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/match2/v1/admin/namespaces/{namespace}/xray/config` | GET | AdminGetXRayConfig | [AdminGetXRayConfig](../../apis/AccelByte.Sdk.Api.Match2/Operation/XRayConfig/AdminGetXRayConfig.cs) | [AdminGetXRayConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/XRayConfig/AdminGetXRayConfig.cs) |
+| `/match2/v1/admin/namespaces/{namespace}/xray/config` | POST | AdminUpdateXRayConfig | [AdminUpdateXRayConfig](../../apis/AccelByte.Sdk.Api.Match2/Operation/XRayConfig/AdminUpdateXRayConfig.cs) | [AdminUpdateXRayConfig](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Match2/XRayConfig/AdminUpdateXRayConfig.cs) |
+
 ### Environment-Variables Wrapper:  [EnvironmentVariables](../../apis/AccelByte.Sdk.Api.Match2/Wrapper/EnvironmentVariables.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
@@ -99,6 +105,10 @@
 |---|---|---|---|---|
 
 ### PlayFeatureFlag Wrapper:  [PlayFeatureFlag](../../apis/AccelByte.Sdk.Api.Match2/Wrapper/PlayFeatureFlag.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+
+### XRay Config Wrapper:  [XRayConfig](../../apis/AccelByte.Sdk.Api.Match2/Wrapper/XRayConfig.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -185,5 +195,7 @@
 | `models.PlayFeatureFlag` | [ModelsPlayFeatureFlag](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsPlayFeatureFlag.cs) |
 | `models.Server` | [ModelsServer](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsServer.cs) |
 | `models.User` | [ModelsUser](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsUser.cs) |
+| `models.XRayConfigHttpResponse` | [ModelsXRayConfigHttpResponse](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsXRayConfigHttpResponse.cs) |
+| `models.XRayConfigHttpUpdateRequest` | [ModelsXRayConfigHttpUpdateRequest](../../apis/AccelByte.Sdk.Api.Match2/Model/ModelsXRayConfigHttpUpdateRequest.cs) |
 | `player.PlayerData` | [PlayerPlayerData](../../apis/AccelByte.Sdk.Api.Match2/Model/PlayerPlayerData.cs) |
 | `response.Error` | [ResponseError](../../apis/AccelByte.Sdk.Api.Match2/Model/ResponseError.cs) |

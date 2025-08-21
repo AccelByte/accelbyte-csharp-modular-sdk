@@ -11,30 +11,30 @@
         <FeatureAutoRefreshTokenVersion>0.3.0</FeatureAutoRefreshTokenVersion>
         <FeatureLocalTokenValidationVersion>0.8.0</FeatureLocalTokenValidationVersion>
 
-        <ApiAchievementVersion>0.8.0</ApiAchievementVersion>
-        <ApiAmsVersion>0.18.0</ApiAmsVersion>
-        <ApiBasicVersion>0.8.0</ApiBasicVersion>
-        <ApiChallengeVersion>0.13.0</ApiChallengeVersion>
-		<ApiChatVersion>0.12.0</ApiChatVersion>
-        <ApiCloudsaveVersion>0.14.0</ApiCloudsaveVersion>
-        <ApiCsmVersion>0.6.0</ApiCsmVersion>
+        <ApiAchievementVersion>0.9.0</ApiAchievementVersion>
+        <ApiAmsVersion>0.19.0</ApiAmsVersion>
+        <ApiBasicVersion>0.9.0</ApiBasicVersion>
+        <ApiChallengeVersion>0.14.0</ApiChallengeVersion>
+		<ApiChatVersion>0.13.0</ApiChatVersion>
+        <ApiCloudsaveVersion>0.15.0</ApiCloudsaveVersion>
+        <ApiCsmVersion>0.7.0</ApiCsmVersion>
         <ApiEventlogVersion>0.5.0</ApiEventlogVersion>
-        <ApiGametelemetryVersion>0.8.0</ApiGametelemetryVersion>
-        <ApiGdprVersion>0.11.0</ApiGdprVersion>
-        <ApiGroupVersion>0.6.0</ApiGroupVersion>
-        <ApiIamVersion>0.23.0</ApiIamVersion>
-        <ApiInventoryVersion>0.12.0</ApiInventoryVersion>
-        <ApiLeaderboardVersion>0.11.0</ApiLeaderboardVersion>
-        <ApiLegalVersion>0.12.0</ApiLegalVersion>
-        <ApiLobbyVersion>0.16.0</ApiLobbyVersion>
-        <ApiLoginqueueVersion>0.2.0</ApiLoginqueueVersion>
-        <ApiMatch2Version>0.15.0</ApiMatch2Version>
-        <ApiPlatformVersion>0.19.0</ApiPlatformVersion>
-        <ApiReportingVersion>0.6.0</ApiReportingVersion>
-        <ApiSeasonpassVersion>0.9.0</ApiSeasonpassVersion>
-        <ApiSessionVersion>0.21.0</ApiSessionVersion>
+        <ApiGametelemetryVersion>0.9.0</ApiGametelemetryVersion>
+        <ApiGdprVersion>0.12.0</ApiGdprVersion>
+        <ApiGroupVersion>0.7.0</ApiGroupVersion>
+        <ApiIamVersion>0.24.0</ApiIamVersion>
+        <ApiInventoryVersion>0.13.0</ApiInventoryVersion>
+        <ApiLeaderboardVersion>0.12.0</ApiLeaderboardVersion>
+        <ApiLegalVersion>0.13.0</ApiLegalVersion>
+        <ApiLobbyVersion>0.17.0</ApiLobbyVersion>
+        <ApiLoginqueueVersion>0.3.0</ApiLoginqueueVersion>
+        <ApiMatch2Version>0.16.0</ApiMatch2Version>
+        <ApiPlatformVersion>0.20.0</ApiPlatformVersion>
+        <ApiReportingVersion>0.7.0</ApiReportingVersion>
+        <ApiSeasonpassVersion>0.10.0</ApiSeasonpassVersion>
+        <ApiSessionVersion>0.22.0</ApiSessionVersion>
         <ApiSessionhistoryVersion>0.10.0</ApiSessionhistoryVersion>
-        <ApiSocialVersion>0.15.0</ApiSocialVersion>
-        <ApiUgcVersion>0.11.0</ApiUgcVersion>
+        <ApiSocialVersion>0.16.0</ApiSocialVersion>
+        <ApiUgcVersion>0.12.0</ApiUgcVersion>
     </PropertyGroup>
 </Project>

@@ -182,24 +182,25 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             var response = new DeleteInventory.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)400)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
             {
                 response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-            
             {
                 response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
             {
                 response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

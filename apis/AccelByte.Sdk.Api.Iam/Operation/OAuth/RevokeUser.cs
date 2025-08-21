@@ -171,12 +171,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             var response = new RevokeUser.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)401)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)401)
             {
                 response.Error401 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error401!);

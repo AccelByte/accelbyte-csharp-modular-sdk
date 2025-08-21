@@ -164,12 +164,15 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             var response = new DeleteReason.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)500)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)500)
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

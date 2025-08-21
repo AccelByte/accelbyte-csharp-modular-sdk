@@ -164,12 +164,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             var response = new UnselectAllRecords.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)404)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)404)
             {
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();

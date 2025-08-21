@@ -195,30 +195,30 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             var response = new ArtifactBulkDelete.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)400)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
             {
                 response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
-            
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();

@@ -140,10 +140,14 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             var response = new VersionCheckHandler.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
 
             return response;
         }

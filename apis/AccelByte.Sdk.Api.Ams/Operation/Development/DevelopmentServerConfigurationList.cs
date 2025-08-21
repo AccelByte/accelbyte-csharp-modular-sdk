@@ -36,7 +36,15 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
             public long? Count { get; set; }
 
+            public string? ImageId { get; set; }
+
+            public string? Name { get; set; }
+
             public long? Offset { get; set; }
+
+            public DevelopmentServerConfigurationListSortBy? SortBy { get; set; }
+
+            public DevelopmentServerConfigurationListSortDirection? SortDirection { get; set; }
 
 
 
@@ -56,9 +64,33 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 return this;
             }
 
+            public DevelopmentServerConfigurationListBuilder SetImageId(string _imageId)
+            {
+                ImageId = _imageId;
+                return this;
+            }
+
+            public DevelopmentServerConfigurationListBuilder SetName(string _name)
+            {
+                Name = _name;
+                return this;
+            }
+
             public DevelopmentServerConfigurationListBuilder SetOffset(long _offset)
             {
                 Offset = _offset;
+                return this;
+            }
+
+            public DevelopmentServerConfigurationListBuilder SetSortBy(DevelopmentServerConfigurationListSortBy _sortBy)
+            {
+                SortBy = _sortBy;
+                return this;
+            }
+
+            public DevelopmentServerConfigurationListBuilder SetSortDirection(DevelopmentServerConfigurationListSortDirection _sortDirection)
+            {
+                SortDirection = _sortDirection;
                 return this;
             }
 
@@ -121,7 +153,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             PathParams["namespace"] = namespace_;
             
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
+            if (builder.ImageId is not null) QueryParams["imageId"] = builder.ImageId;
+            if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
+            if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
+            if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection.Value;
             
 
             
@@ -151,13 +187,21 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public DevelopmentServerConfigurationList(
             string namespace_,            
             long? count,            
-            long? offset            
+            string? imageId,            
+            string? name,            
+            long? offset,            
+            DevelopmentServerConfigurationListSortBy? sortBy,            
+            DevelopmentServerConfigurationListSortDirection? sortDirection            
         )
         {
             PathParams["namespace"] = namespace_;
             
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
+            if (imageId is not null) QueryParams["imageId"] = imageId;
+            if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
+            if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
+            if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection.Value;
             
 
             
@@ -209,6 +253,51 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
 
             return response;
+        }
+    }
+
+    public class DevelopmentServerConfigurationListSortBy : StringEnum<DevelopmentServerConfigurationListSortBy>
+    {
+        public static readonly DevelopmentServerConfigurationListSortBy CreatedAt
+            = new DevelopmentServerConfigurationListSortBy("created_at");
+
+        public static readonly DevelopmentServerConfigurationListSortBy ExpiresAt
+            = new DevelopmentServerConfigurationListSortBy("expires_at");
+
+        public static readonly DevelopmentServerConfigurationListSortBy Name
+            = new DevelopmentServerConfigurationListSortBy("name");
+
+
+        public static implicit operator DevelopmentServerConfigurationListSortBy(string value)
+        {
+            return NewValue(value);
+        }
+
+        public DevelopmentServerConfigurationListSortBy(string enumValue)
+            : base(enumValue)
+        {
+
+        }
+    }
+
+    public class DevelopmentServerConfigurationListSortDirection : StringEnum<DevelopmentServerConfigurationListSortDirection>
+    {
+        public static readonly DevelopmentServerConfigurationListSortDirection Asc
+            = new DevelopmentServerConfigurationListSortDirection("asc");
+
+        public static readonly DevelopmentServerConfigurationListSortDirection Desc
+            = new DevelopmentServerConfigurationListSortDirection("desc");
+
+
+        public static implicit operator DevelopmentServerConfigurationListSortDirection(string value)
+        {
+            return NewValue(value);
+        }
+
+        public DevelopmentServerConfigurationListSortDirection(string enumValue)
+            : base(enumValue)
+        {
+
         }
     }
 

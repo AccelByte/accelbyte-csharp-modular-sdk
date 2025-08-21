@@ -152,10 +152,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             var response = new DeleteGoogleIAPConfig.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
 
             return response;
         }

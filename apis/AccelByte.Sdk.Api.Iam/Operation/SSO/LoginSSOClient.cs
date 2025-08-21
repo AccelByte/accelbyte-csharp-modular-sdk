@@ -161,10 +161,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             var response = new LoginSSOClient.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
 
             return response;
         }

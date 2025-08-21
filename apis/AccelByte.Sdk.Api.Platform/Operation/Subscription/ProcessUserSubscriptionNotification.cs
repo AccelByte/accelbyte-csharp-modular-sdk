@@ -187,12 +187,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             var response = new ProcessUserSubscriptionNotification.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)400)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
             {
                 response.Error400 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error400!);

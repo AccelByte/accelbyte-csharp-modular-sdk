@@ -50,6 +50,17 @@ namespace AccelByte.Sdk.Api.Match2
         }
         private Wrapper.PlayFeatureFlag? _PlayFeatureFlag = null;
 
+        public Wrapper.XRayConfig XRayConfig
+        {
+            get
+            {
+                if (_XRayConfig == null)
+                    _XRayConfig = new Wrapper.XRayConfig(_Sdk, _CustomBasePath);
+                return _XRayConfig;
+            }
+        }
+        private Wrapper.XRayConfig? _XRayConfig = null;
+
         public Wrapper.EnvironmentVariables EnvironmentVariables
         {
             get

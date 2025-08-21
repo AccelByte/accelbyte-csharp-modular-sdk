@@ -189,24 +189,25 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             var response = new CheckUserAvailability.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)400)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
             {
                 response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-            
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)422)
-            
             {
                 response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();

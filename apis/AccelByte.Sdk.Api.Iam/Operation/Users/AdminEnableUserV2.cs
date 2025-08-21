@@ -174,30 +174,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             var response = new AdminEnableUserV2.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)401)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)401)
             {
                 response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
-            
             {
                 response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
-            
             {
                 response.Error404 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
-            
             {
                 response.Error500 = payload.ReadToString();
                 response.Error = new ApiError("-1", response.Error500!);

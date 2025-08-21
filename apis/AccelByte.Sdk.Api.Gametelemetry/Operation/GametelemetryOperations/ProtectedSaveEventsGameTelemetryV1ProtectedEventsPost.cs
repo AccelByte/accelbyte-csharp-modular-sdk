@@ -218,24 +218,25 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             var response = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)422)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)422)
             {
                 response.Error422 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
             {
                 response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)507)
-            
             {
                 response.Error507 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error507!.TranslateToApiError();

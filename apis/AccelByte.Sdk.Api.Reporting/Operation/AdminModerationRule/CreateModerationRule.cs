@@ -178,24 +178,25 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             var response = new CreateModerationRule.Response()
             {
                 StatusCode = code,
-                ContentType = contentType,
-                IsSuccess = true
+                ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)400)
-            
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
             {
                 response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
-            
             {
                 response.Error409 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
-            
             {
                 response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
