@@ -34,22 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
-        public QueryEntitlements1.QueryEntitlements1Builder QueryEntitlements1Op
+        public QueryEntitlements.QueryEntitlementsBuilder QueryEntitlementsOp
         {
             get
             {
-                var opBuilder = new Operation.QueryEntitlements1.QueryEntitlements1Builder(_sdk);
+                var opBuilder = new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public QueryEntitlements.QueryEntitlementsBuilder QueryEntitlementsOp
+        public QueryEntitlementsByItemIds.QueryEntitlementsByItemIdsBuilder QueryEntitlementsByItemIdsOp
         {
             get
             {
-                var opBuilder = new Operation.QueryEntitlements.QueryEntitlementsBuilder(_sdk);
+                var opBuilder = new Operation.QueryEntitlementsByItemIds.QueryEntitlementsByItemIdsBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -677,22 +677,6 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
-        public QueryEntitlements1.Response QueryEntitlements1(QueryEntitlements1 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<QueryEntitlements1.Response> QueryEntitlements1Async(QueryEntitlements1 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
         public QueryEntitlements.Response QueryEntitlements(QueryEntitlements input)
         {
             var response = _sdk.RunRequest(input);
@@ -702,6 +686,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<QueryEntitlements.Response> QueryEntitlementsAsync(QueryEntitlements input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public QueryEntitlementsByItemIds.Response QueryEntitlementsByItemIds(QueryEntitlementsByItemIds input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<QueryEntitlementsByItemIds.Response> QueryEntitlementsByItemIdsAsync(QueryEntitlementsByItemIds input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

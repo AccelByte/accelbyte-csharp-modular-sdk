@@ -161,6 +161,8 @@ namespace AccelByte.Sdk.Api.Cloudsave
         public static readonly ApiError Error18354 = new ApiError("18354", "records amount exceeded max limit");
         public static readonly ApiError Error18355 = new ApiError("18355", "unable to marshal request body");
         public static readonly ApiError Error18356 = new ApiError("18356", "invalid request body: size of the request body must be less than [%d]MB");
+        public static readonly ApiError Error18361 = new ApiError("18361", "record not found");
+        public static readonly ApiError Error18362 = new ApiError("18362", "unable to update record");
         public static readonly ApiError Error18401 = new ApiError("18401", "invalid request body");
         public static readonly ApiError Error18402 = new ApiError("18402", "plugins already configured");
         public static readonly ApiError Error18404 = new ApiError("18404", "plugins not found");

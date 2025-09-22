@@ -30,6 +30,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
+        [SdkCommandArgument("challengeCode")]
+        public List<string>? ChallengeCode { get; set; }
+
         [SdkCommandData("body")]
         public ModelEvaluatePlayerProgressionRequest Body { get; set; } = new ModelEvaluatePlayerProgressionRequest();
 
@@ -44,6 +47,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 
             var opBuilder = AccelByte.Sdk.Api.Challenge.Operation.AdminEvaluateProgress.Builder;
 
+            if (ChallengeCode != null)
+                opBuilder.SetChallengeCode((List<string>)ChallengeCode);
 
 
 

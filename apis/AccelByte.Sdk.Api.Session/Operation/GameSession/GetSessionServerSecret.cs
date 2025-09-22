@@ -42,6 +42,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
     /// If there is error:
     /// - 400 Invalid path parameters
     /// - 401 unauthorized
+    /// - 403 status forbidden, The User is not active in session
     /// - 404 StatusNotFound
     /// - 500 Internal server error
     /// </summary>
@@ -150,6 +151,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
             public ResponseError? Error401 { get; set; } = null;
 
+            public ResponseError? Error403 { get; set; } = null;
+
             public ResponseError? Error404 { get; set; } = null;
 
             public ResponseError? Error500 { get; set; } = null;
@@ -211,6 +214,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             {
                 response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)403)
+            {
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
