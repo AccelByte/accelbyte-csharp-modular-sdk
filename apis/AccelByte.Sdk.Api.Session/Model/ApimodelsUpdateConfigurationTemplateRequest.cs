@@ -119,6 +119,10 @@ namespace AccelByte.Sdk.Api.Session.Model
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
+        [JsonPropertyName("partyCodeGeneratorString")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? PartyCodeGeneratorString { get; set; }
+
         [JsonPropertyName("partyCodeLength")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? PartyCodeLength { get; set; }
@@ -261,6 +265,10 @@ namespace AccelByte.Sdk.Api.Session.Model
 
         [JsonPropertyName("name")]
         public string? Name { get; set; }
+
+        [JsonPropertyName("partyCodeGeneratorString")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? PartyCodeGeneratorString { get; set; }
 
         [JsonPropertyName("partyCodeLength")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

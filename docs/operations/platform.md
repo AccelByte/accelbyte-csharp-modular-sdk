@@ -317,6 +317,7 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/all` | GET | QueryAllUserIAPOrders | [QueryAllUserIAPOrders](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryAllUserIAPOrders.cs) | [QueryAllUserIAPOrders](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryAllUserIAPOrders.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/consume/history` | GET | QueryUserIAPConsumeHistory | [QueryUserIAPConsumeHistory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/QueryUserIAPConsumeHistory.cs) | [QueryUserIAPConsumeHistory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/QueryUserIAPConsumeHistory.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/mock/receipt` | PUT | MockFulfillIAPItem | [MockFulfillIAPItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/MockFulfillIAPItem.cs) | [MockFulfillIAPItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/MockFulfillIAPItem.cs) |
+| `/platform/admin/namespaces/{namespace}/users/{userId}/iap/oculus/subscription/sync` | PUT | AdminSyncOculusSubscriptions | [AdminSyncOculusSubscriptions](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminSyncOculusSubscriptions.cs) | [AdminSyncOculusSubscriptions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminSyncOculusSubscriptions.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/orders/{iapOrderNo}/line_items` | GET | AdminGetIAPOrderLineItems | [AdminGetIAPOrderLineItems](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminGetIAPOrderLineItems.cs) | [AdminGetIAPOrderLineItems](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminGetIAPOrderLineItems.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/steam/syncAbnormalTransaction` | PUT | AdminSyncSteamAbnormalTransaction | [AdminSyncSteamAbnormalTransaction](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminSyncSteamAbnormalTransaction.cs) | [AdminSyncSteamAbnormalTransaction](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminSyncSteamAbnormalTransaction.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/steam/syncByTransaction` | PUT | AdminSyncSteamIAPByTransaction | [AdminSyncSteamIAPByTransaction](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/AdminSyncSteamIAPByTransaction.cs) | [AdminSyncSteamIAPByTransaction](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/AdminSyncSteamIAPByTransaction.cs) |
@@ -326,6 +327,7 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/apple/receipt` | PUT | PublicFulfillAppleIAPItem | [PublicFulfillAppleIAPItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/PublicFulfillAppleIAPItem.cs) | [PublicFulfillAppleIAPItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/PublicFulfillAppleIAPItem.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/epicgames/sync` | PUT | SyncEpicGamesInventory | [SyncEpicGamesInventory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncEpicGamesInventory.cs) | [SyncEpicGamesInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncEpicGamesInventory.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/google/receipt` | PUT | PublicFulfillGoogleIAPItem | [PublicFulfillGoogleIAPItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/PublicFulfillGoogleIAPItem.cs) | [PublicFulfillGoogleIAPItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/PublicFulfillGoogleIAPItem.cs) |
+| `/platform/public/namespaces/{namespace}/users/{userId}/iap/oculus/subscription/sync` | PUT | SyncOculusSubscriptions | [SyncOculusSubscriptions](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncOculusSubscriptions.cs) | [SyncOculusSubscriptions](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncOculusSubscriptions.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/oculus/sync` | PUT | SyncOculusConsumableEntitlements | [SyncOculusConsumableEntitlements](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncOculusConsumableEntitlements.cs) | [SyncOculusConsumableEntitlements](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncOculusConsumableEntitlements.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync` | PUT | PublicReconcilePlayStationStore | [PublicReconcilePlayStationStore](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/PublicReconcilePlayStationStore.cs) | [PublicReconcilePlayStationStore](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/PublicReconcilePlayStationStore.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/psn/sync/multiServiceLabels` | PUT | PublicReconcilePlayStationStoreWithMultipleServiceLabels | [PublicReconcilePlayStationStoreWithMultipleServiceLabels](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/PublicReconcilePlayStationStoreWithMultipleServiceLabels.cs) | [PublicReconcilePlayStationStoreWithMultipleServiceLabels](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/PublicReconcilePlayStationStoreWithMultipleServiceLabels.cs) |
@@ -336,14 +338,15 @@
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/xbl/sync` | PUT | SyncXboxInventory | [SyncXboxInventory](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/SyncXboxInventory.cs) | [SyncXboxInventory](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/SyncXboxInventory.cs) |
 | `/platform/v2/public/namespaces/{namespace}/users/{userId}/iap/apple/receipt` | PUT | V2PublicFulfillAppleIAPItem | [V2PublicFulfillAppleIAPItem](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAP/V2PublicFulfillAppleIAPItem.cs) | [V2PublicFulfillAppleIAPItem](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAP/V2PublicFulfillAppleIAPItem.cs) |
 
-### IAP(Notification) Wrapper:  [IAPNotification](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPNotification.cs)
-| Endpoint | Method | ID | Class | Example |
-|---|---|---|---|---|
-| `/platform/admin/namespaces/{namespace}/iap/notifications` | GET | QueryThirdPartyNotifications | [QueryThirdPartyNotifications](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPNotification/QueryThirdPartyNotifications.cs) | [QueryThirdPartyNotifications](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPNotification/QueryThirdPartyNotifications.cs) |
-
 ### IAP(Subscription) Wrapper:  [IAPSubscription](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPSubscription.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
+| `/platform/admin/namespaces/{namespace}/iap/config/oculus/subscription/group` | GET | ListOculusSubscriptionGroups | [ListOculusSubscriptionGroups](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/ListOculusSubscriptionGroups.cs) | [ListOculusSubscriptionGroups](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/ListOculusSubscriptionGroups.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/config/oculus/subscription/group` | POST | CreateOculusSubscriptionGroup | [CreateOculusSubscriptionGroup](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/CreateOculusSubscriptionGroup.cs) | [CreateOculusSubscriptionGroup](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/CreateOculusSubscriptionGroup.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/config/oculus/subscription/group/{sku}` | DELETE | DeleteOculusSubscriptionGroup | [DeleteOculusSubscriptionGroup](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/DeleteOculusSubscriptionGroup.cs) | [DeleteOculusSubscriptionGroup](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/DeleteOculusSubscriptionGroup.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/config/oculus/subscription/group/{sku}/tiers` | GET | ListOculusSubscriptionGroupTier | [ListOculusSubscriptionGroupTier](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/ListOculusSubscriptionGroupTier.cs) | [ListOculusSubscriptionGroupTier](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/ListOculusSubscriptionGroupTier.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/config/oculus/subscription/tier` | POST | AddTierIntoMetaQuestSubscriptionGroup | [AddTierIntoMetaQuestSubscriptionGroup](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/AddTierIntoMetaQuestSubscriptionGroup.cs) | [AddTierIntoMetaQuestSubscriptionGroup](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/AddTierIntoMetaQuestSubscriptionGroup.cs) |
+| `/platform/admin/namespaces/{namespace}/iap/config/oculus/subscription/tier/{sku}` | DELETE | DeleteOculusSubscriptionTier | [DeleteOculusSubscriptionTier](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/DeleteOculusSubscriptionTier.cs) | [DeleteOculusSubscriptionTier](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/DeleteOculusSubscriptionTier.cs) |
 | `/platform/admin/namespaces/{namespace}/iap/subscriptions` | GET | QueryThirdPartySubscription | [QueryThirdPartySubscription](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/QueryThirdPartySubscription.cs) | [QueryThirdPartySubscription](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/QueryThirdPartySubscription.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/subscriptions` | GET | QueryUserThirdPartySubscription | [QueryUserThirdPartySubscription](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/QueryUserThirdPartySubscription.cs) | [QueryUserThirdPartySubscription](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/QueryUserThirdPartySubscription.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/subscriptions/platforms/{platform}/ownership/byGroupId` | GET | GetThirdPartyPlatformSubscriptionOwnershipByGroupId | [GetThirdPartyPlatformSubscriptionOwnershipByGroupId](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/GetThirdPartyPlatformSubscriptionOwnershipByGroupId.cs) | [GetThirdPartyPlatformSubscriptionOwnershipByGroupId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/GetThirdPartyPlatformSubscriptionOwnershipByGroupId.cs) |
@@ -355,6 +358,11 @@
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/subscriptions/{id}` | GET | GetThirdPartyUserSubscriptionDetails | [GetThirdPartyUserSubscriptionDetails](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/GetThirdPartyUserSubscriptionDetails.cs) | [GetThirdPartyUserSubscriptionDetails](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/GetThirdPartyUserSubscriptionDetails.cs) |
 | `/platform/admin/namespaces/{namespace}/users/{userId}/iap/subscriptions/{id}/sync` | PUT | SyncSubscription | [SyncSubscription](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/SyncSubscription.cs) | [SyncSubscription](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/SyncSubscription.cs) |
 | `/platform/public/namespaces/{namespace}/users/{userId}/iap/subscriptions/platforms/{platform}` | GET | PublicQueryUserThirdPartySubscription | [PublicQueryUserThirdPartySubscription](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPSubscription/PublicQueryUserThirdPartySubscription.cs) | [PublicQueryUserThirdPartySubscription](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPSubscription/PublicQueryUserThirdPartySubscription.cs) |
+
+### IAP(Notification) Wrapper:  [IAPNotification](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPNotification.cs)
+| Endpoint | Method | ID | Class | Example |
+|---|---|---|---|---|
+| `/platform/admin/namespaces/{namespace}/iap/notifications` | GET | QueryThirdPartyNotifications | [QueryThirdPartyNotifications](../../apis/AccelByte.Sdk.Api.Platform/Operation/IAPNotification/QueryThirdPartyNotifications.cs) | [QueryThirdPartyNotifications](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Platform/IAPNotification/QueryThirdPartyNotifications.cs) |
 
 ### Invoice Wrapper:  [Invoice](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/Invoice.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -712,11 +720,11 @@
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
-### IAP(Notification) Wrapper:  [IAPNotification](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPNotification.cs)
+### IAP(Subscription) Wrapper:  [IAPSubscription](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPSubscription.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
-### IAP(Subscription) Wrapper:  [IAPSubscription](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPSubscription.cs)
+### IAP(Notification) Wrapper:  [IAPNotification](../../apis/AccelByte.Sdk.Api.Platform/Wrapper/IAPNotification.cs)
 | Endpoint | Method | ID | Class | Example |
 |---|---|---|---|---|
 
@@ -1079,6 +1087,7 @@
 | `OculusIAPConfigInfo` | [OculusIAPConfigInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/OculusIAPConfigInfo.cs) |
 | `OculusIAPConfigRequest` | [OculusIAPConfigRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/OculusIAPConfigRequest.cs) |
 | `OculusReconcileResult` | [OculusReconcileResult](../../apis/AccelByte.Sdk.Api.Platform/Model/OculusReconcileResult.cs) |
+| `OculusSubscriptionSyncRequest` | [OculusSubscriptionSyncRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/OculusSubscriptionSyncRequest.cs) |
 | `Operation` | [Operation](../../apis/AccelByte.Sdk.Api.Platform/Model/Operation.cs) |
 | `OperationRequest` | [OperationRequest](../../apis/AccelByte.Sdk.Api.Platform/Model/OperationRequest.cs) |
 | `OptionBoxConfig` | [OptionBoxConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/OptionBoxConfig.cs) |
@@ -1254,7 +1263,11 @@
 | `TLSConfig` | [TLSConfig](../../apis/AccelByte.Sdk.Api.Platform/Model/TLSConfig.cs) |
 | `TaxResult` | [TaxResult](../../apis/AccelByte.Sdk.Api.Platform/Model/TaxResult.cs) |
 | `TestResult` | [TestResult](../../apis/AccelByte.Sdk.Api.Platform/Model/TestResult.cs) |
+| `ThirdPartySubscriptionGroupCreate` | [ThirdPartySubscriptionGroupCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionGroupCreate.cs) |
+| `ThirdPartySubscriptionGroupInfo` | [ThirdPartySubscriptionGroupInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionGroupInfo.cs) |
 | `ThirdPartySubscriptionOwnership` | [ThirdPartySubscriptionOwnership](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionOwnership.cs) |
+| `ThirdPartySubscriptionTierCreate` | [ThirdPartySubscriptionTierCreate](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionTierCreate.cs) |
+| `ThirdPartySubscriptionTierInfo` | [ThirdPartySubscriptionTierInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionTierInfo.cs) |
 | `ThirdPartySubscriptionTransactionHistoryInfo` | [ThirdPartySubscriptionTransactionHistoryInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionTransactionHistoryInfo.cs) |
 | `ThirdPartySubscriptionTransactionHistoryPagingSlicedResult` | [ThirdPartySubscriptionTransactionHistoryPagingSlicedResult](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionTransactionHistoryPagingSlicedResult.cs) |
 | `ThirdPartySubscriptionTransactionInfo` | [ThirdPartySubscriptionTransactionInfo](../../apis/AccelByte.Sdk.Api.Platform/Model/ThirdPartySubscriptionTransactionInfo.cs) |

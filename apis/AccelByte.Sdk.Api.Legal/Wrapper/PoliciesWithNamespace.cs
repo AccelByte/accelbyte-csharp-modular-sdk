@@ -45,22 +45,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        public UpdatePolicy1.UpdatePolicy1Builder UpdatePolicy1Op
+        public UpdatePolicy.UpdatePolicyBuilder UpdatePolicyOp
         {
             get
             {
-                var opBuilder = new Operation.UpdatePolicy1.UpdatePolicy1Builder(_sdk);
+                var opBuilder = new Operation.UpdatePolicy.UpdatePolicyBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public SetDefaultPolicy3.SetDefaultPolicy3Builder SetDefaultPolicy3Op
+        public SetDefaultPolicy.SetDefaultPolicyBuilder SetDefaultPolicyOp
         {
             get
             {
-                var opBuilder = new Operation.SetDefaultPolicy3.SetDefaultPolicy3Builder(_sdk);
+                var opBuilder = new Operation.SetDefaultPolicy.SetDefaultPolicyBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public UpdatePolicy1.Response UpdatePolicy1(UpdatePolicy1 input)
+        public UpdatePolicy.Response UpdatePolicy(UpdatePolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<UpdatePolicy1.Response> UpdatePolicy1Async(UpdatePolicy1 input)
+        public async Task<UpdatePolicy.Response> UpdatePolicyAsync(UpdatePolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public SetDefaultPolicy3.Response SetDefaultPolicy3(SetDefaultPolicy3 input)
+        public SetDefaultPolicy.Response SetDefaultPolicy(SetDefaultPolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<SetDefaultPolicy3.Response> SetDefaultPolicy3Async(SetDefaultPolicy3 input)
+        public async Task<SetDefaultPolicy.Response> SetDefaultPolicyAsync(SetDefaultPolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

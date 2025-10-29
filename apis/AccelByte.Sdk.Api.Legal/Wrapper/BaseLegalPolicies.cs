@@ -45,55 +45,55 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        public CreatePolicy.CreatePolicyBuilder CreatePolicyOp
+        public OldCreatePolicy.OldCreatePolicyBuilder OldCreatePolicyOp
         {
             get
             {
-                var opBuilder = new Operation.CreatePolicy.CreatePolicyBuilder(_sdk);
+                var opBuilder = new Operation.OldCreatePolicy.OldCreatePolicyBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public RetrieveSinglePolicy.RetrieveSinglePolicyBuilder RetrieveSinglePolicyOp
+        public OldRetrieveSinglePolicy.OldRetrieveSinglePolicyBuilder OldRetrieveSinglePolicyOp
         {
             get
             {
-                var opBuilder = new Operation.RetrieveSinglePolicy.RetrieveSinglePolicyBuilder(_sdk);
+                var opBuilder = new Operation.OldRetrieveSinglePolicy.OldRetrieveSinglePolicyBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public PartialUpdatePolicy.PartialUpdatePolicyBuilder PartialUpdatePolicyOp
+        public OldPartialUpdatePolicy.OldPartialUpdatePolicyBuilder OldPartialUpdatePolicyOp
         {
             get
             {
-                var opBuilder = new Operation.PartialUpdatePolicy.PartialUpdatePolicyBuilder(_sdk);
+                var opBuilder = new Operation.OldPartialUpdatePolicy.OldPartialUpdatePolicyBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public RetrievePolicyCountry.RetrievePolicyCountryBuilder RetrievePolicyCountryOp
+        public OldRetrievePolicyCountry.OldRetrievePolicyCountryBuilder OldRetrievePolicyCountryOp
         {
             get
             {
-                var opBuilder = new Operation.RetrievePolicyCountry.RetrievePolicyCountryBuilder(_sdk);
+                var opBuilder = new Operation.OldRetrievePolicyCountry.OldRetrievePolicyCountryBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public RetrieveAllPolicyTypes.RetrieveAllPolicyTypesBuilder RetrieveAllPolicyTypesOp
+        public OldRetrieveAllPolicyTypes.OldRetrieveAllPolicyTypesBuilder OldRetrieveAllPolicyTypesOp
         {
             get
             {
-                var opBuilder = new Operation.RetrieveAllPolicyTypes.RetrieveAllPolicyTypesBuilder(_sdk);
+                var opBuilder = new Operation.OldRetrieveAllPolicyTypes.OldRetrieveAllPolicyTypesBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public CreatePolicy.Response CreatePolicy(CreatePolicy input)
+        public OldCreatePolicy.Response OldCreatePolicy(OldCreatePolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<CreatePolicy.Response> CreatePolicyAsync(CreatePolicy input)
+        public async Task<OldCreatePolicy.Response> OldCreatePolicyAsync(OldCreatePolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public RetrieveSinglePolicy.Response RetrieveSinglePolicy(RetrieveSinglePolicy input)
+        public OldRetrieveSinglePolicy.Response OldRetrieveSinglePolicy(OldRetrieveSinglePolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrieveSinglePolicy.Response> RetrieveSinglePolicyAsync(RetrieveSinglePolicy input)
+        public async Task<OldRetrieveSinglePolicy.Response> OldRetrieveSinglePolicyAsync(OldRetrieveSinglePolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public PartialUpdatePolicy.Response PartialUpdatePolicy(PartialUpdatePolicy input)
+        public OldPartialUpdatePolicy.Response OldPartialUpdatePolicy(OldPartialUpdatePolicy input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<PartialUpdatePolicy.Response> PartialUpdatePolicyAsync(PartialUpdatePolicy input)
+        public async Task<OldPartialUpdatePolicy.Response> OldPartialUpdatePolicyAsync(OldPartialUpdatePolicy input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public RetrievePolicyCountry.Response RetrievePolicyCountry(RetrievePolicyCountry input)
+        public OldRetrievePolicyCountry.Response OldRetrievePolicyCountry(OldRetrievePolicyCountry input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -174,7 +174,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrievePolicyCountry.Response> RetrievePolicyCountryAsync(RetrievePolicyCountry input)
+        public async Task<OldRetrievePolicyCountry.Response> OldRetrievePolicyCountryAsync(OldRetrievePolicyCountry input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -182,7 +182,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public RetrieveAllPolicyTypes.Response RetrieveAllPolicyTypes(RetrieveAllPolicyTypes input)
+        public OldRetrieveAllPolicyTypes.Response OldRetrieveAllPolicyTypes(OldRetrieveAllPolicyTypes input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -190,7 +190,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrieveAllPolicyTypes.Response> RetrieveAllPolicyTypesAsync(RetrieveAllPolicyTypes input)
+        public async Task<OldRetrieveAllPolicyTypes.Response> OldRetrieveAllPolicyTypesAsync(OldRetrieveAllPolicyTypes input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

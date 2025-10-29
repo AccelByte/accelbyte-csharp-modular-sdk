@@ -105,6 +105,17 @@ namespace AccelByte.Sdk.Api.Csm
         }
         private Wrapper.ImageV2? _ImageV2 = null;
 
+        public Wrapper.ManagedResources ManagedResources
+        {
+            get
+            {
+                if (_ManagedResources == null)
+                    _ManagedResources = new Wrapper.ManagedResources(_Sdk, _CustomBasePath);
+                return _ManagedResources;
+            }
+        }
+        private Wrapper.ManagedResources? _ManagedResources = null;
+
         public Wrapper.ConfigurationV2 ConfigurationV2
         {
             get

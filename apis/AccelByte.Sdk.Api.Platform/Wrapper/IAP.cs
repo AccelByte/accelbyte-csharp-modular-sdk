@@ -496,6 +496,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public AdminSyncOculusSubscriptions.AdminSyncOculusSubscriptionsBuilder AdminSyncOculusSubscriptionsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminSyncOculusSubscriptions.AdminSyncOculusSubscriptionsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public AdminGetIAPOrderLineItems.AdminGetIAPOrderLineItemsBuilder AdminGetIAPOrderLineItemsOp
         {
             get
@@ -589,6 +600,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get
             {
                 var opBuilder = new Operation.PublicFulfillGoogleIAPItem.PublicFulfillGoogleIAPItemBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public SyncOculusSubscriptions.SyncOculusSubscriptionsBuilder SyncOculusSubscriptionsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.SyncOculusSubscriptions.SyncOculusSubscriptionsBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -1368,6 +1390,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
+        public AdminSyncOculusSubscriptions.Response AdminSyncOculusSubscriptions(AdminSyncOculusSubscriptions input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminSyncOculusSubscriptions.Response> AdminSyncOculusSubscriptionsAsync(AdminSyncOculusSubscriptions input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public AdminGetIAPOrderLineItems.Response AdminGetIAPOrderLineItems(AdminGetIAPOrderLineItems input)
         {
             var response = _sdk.RunRequest(input);
@@ -1505,6 +1543,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
         public async Task<PublicFulfillGoogleIAPItem.Response> PublicFulfillGoogleIAPItemAsync(PublicFulfillGoogleIAPItem input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public SyncOculusSubscriptions.Response SyncOculusSubscriptions(SyncOculusSubscriptions input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<SyncOculusSubscriptions.Response> SyncOculusSubscriptionsAsync(SyncOculusSubscriptions input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -66,6 +66,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public InventoryConfig? InventoryConfig { get; set; }
 
+        [JsonPropertyName("itemId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ItemId { get; set; }
+
         [JsonPropertyName("itemIds")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? ItemIds { get; set; }
@@ -219,6 +223,10 @@ namespace AccelByte.Sdk.Api.Platform.Model
         [JsonPropertyName("inventoryConfig")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public InventoryConfig? InventoryConfig { get; set; }
+
+        [JsonPropertyName("itemId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? ItemId { get; set; }
 
         [JsonPropertyName("itemIds")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

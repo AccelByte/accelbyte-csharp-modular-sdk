@@ -34,44 +34,44 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
 
         #region Operation Builders
-        public UpdatePolicyVersion.UpdatePolicyVersionBuilder UpdatePolicyVersionOp
+        public OldUpdatePolicyVersion.OldUpdatePolicyVersionBuilder OldUpdatePolicyVersionOp
         {
             get
             {
-                var opBuilder = new Operation.UpdatePolicyVersion.UpdatePolicyVersionBuilder(_sdk);
+                var opBuilder = new Operation.OldUpdatePolicyVersion.OldUpdatePolicyVersionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public PublishPolicyVersion.PublishPolicyVersionBuilder PublishPolicyVersionOp
+        public OldPublishPolicyVersion.OldPublishPolicyVersionBuilder OldPublishPolicyVersionOp
         {
             get
             {
-                var opBuilder = new Operation.PublishPolicyVersion.PublishPolicyVersionBuilder(_sdk);
+                var opBuilder = new Operation.OldPublishPolicyVersion.OldPublishPolicyVersionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public RetrieveSinglePolicyVersion.RetrieveSinglePolicyVersionBuilder RetrieveSinglePolicyVersionOp
+        public OldRetrieveSinglePolicyVersion.OldRetrieveSinglePolicyVersionBuilder OldRetrieveSinglePolicyVersionOp
         {
             get
             {
-                var opBuilder = new Operation.RetrieveSinglePolicyVersion.RetrieveSinglePolicyVersionBuilder(_sdk);
+                var opBuilder = new Operation.OldRetrieveSinglePolicyVersion.OldRetrieveSinglePolicyVersionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public CreatePolicyVersion.CreatePolicyVersionBuilder CreatePolicyVersionOp
+        public OldCreatePolicyVersion.OldCreatePolicyVersionBuilder OldCreatePolicyVersionOp
         {
             get
             {
-                var opBuilder = new Operation.CreatePolicyVersion.CreatePolicyVersionBuilder(_sdk);
+                var opBuilder = new Operation.OldCreatePolicyVersion.OldCreatePolicyVersionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -80,7 +80,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public UpdatePolicyVersion.Response UpdatePolicyVersion(UpdatePolicyVersion input)
+        public OldUpdatePolicyVersion.Response OldUpdatePolicyVersion(OldUpdatePolicyVersion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<UpdatePolicyVersion.Response> UpdatePolicyVersionAsync(UpdatePolicyVersion input)
+        public async Task<OldUpdatePolicyVersion.Response> OldUpdatePolicyVersionAsync(OldUpdatePolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public PublishPolicyVersion.Response PublishPolicyVersion(PublishPolicyVersion input)
+        public OldPublishPolicyVersion.Response OldPublishPolicyVersion(OldPublishPolicyVersion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<PublishPolicyVersion.Response> PublishPolicyVersionAsync(PublishPolicyVersion input)
+        public async Task<OldPublishPolicyVersion.Response> OldPublishPolicyVersionAsync(OldPublishPolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public RetrieveSinglePolicyVersion.Response RetrieveSinglePolicyVersion(RetrieveSinglePolicyVersion input)
+        public OldRetrieveSinglePolicyVersion.Response OldRetrieveSinglePolicyVersion(OldRetrieveSinglePolicyVersion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrieveSinglePolicyVersion.Response> RetrieveSinglePolicyVersionAsync(RetrieveSinglePolicyVersion input)
+        public async Task<OldRetrieveSinglePolicyVersion.Response> OldRetrieveSinglePolicyVersionAsync(OldRetrieveSinglePolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public CreatePolicyVersion.Response CreatePolicyVersion(CreatePolicyVersion input)
+        public OldCreatePolicyVersion.Response OldCreatePolicyVersion(OldCreatePolicyVersion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<CreatePolicyVersion.Response> CreatePolicyVersionAsync(CreatePolicyVersion input)
+        public async Task<OldCreatePolicyVersion.Response> OldCreatePolicyVersionAsync(OldCreatePolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -149,17 +149,6 @@ namespace AccelByte.Sdk.Api.Platform
         }
         private Wrapper.IAP? _IAP = null;
 
-        public Wrapper.IAPNotification IAPNotification
-        {
-            get
-            {
-                if (_IAPNotification == null)
-                    _IAPNotification = new Wrapper.IAPNotification(_Sdk, _CustomBasePath);
-                return _IAPNotification;
-            }
-        }
-        private Wrapper.IAPNotification? _IAPNotification = null;
-
         public Wrapper.IAPSubscription IAPSubscription
         {
             get
@@ -170,6 +159,17 @@ namespace AccelByte.Sdk.Api.Platform
             }
         }
         private Wrapper.IAPSubscription? _IAPSubscription = null;
+
+        public Wrapper.IAPNotification IAPNotification
+        {
+            get
+            {
+                if (_IAPNotification == null)
+                    _IAPNotification = new Wrapper.IAPNotification(_Sdk, _CustomBasePath);
+                return _IAPNotification;
+            }
+        }
+        private Wrapper.IAPNotification? _IAPNotification = null;
 
         public Wrapper.Invoice Invoice
         {

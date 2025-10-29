@@ -34,6 +34,72 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
 
         #region Operation Builders
+        public ListOculusSubscriptionGroups.ListOculusSubscriptionGroupsBuilder ListOculusSubscriptionGroupsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.ListOculusSubscriptionGroups.ListOculusSubscriptionGroupsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public CreateOculusSubscriptionGroup.CreateOculusSubscriptionGroupBuilder CreateOculusSubscriptionGroupOp
+        {
+            get
+            {
+                var opBuilder = new Operation.CreateOculusSubscriptionGroup.CreateOculusSubscriptionGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public DeleteOculusSubscriptionGroup.DeleteOculusSubscriptionGroupBuilder DeleteOculusSubscriptionGroupOp
+        {
+            get
+            {
+                var opBuilder = new Operation.DeleteOculusSubscriptionGroup.DeleteOculusSubscriptionGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public ListOculusSubscriptionGroupTier.ListOculusSubscriptionGroupTierBuilder ListOculusSubscriptionGroupTierOp
+        {
+            get
+            {
+                var opBuilder = new Operation.ListOculusSubscriptionGroupTier.ListOculusSubscriptionGroupTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public AddTierIntoMetaQuestSubscriptionGroup.AddTierIntoMetaQuestSubscriptionGroupBuilder AddTierIntoMetaQuestSubscriptionGroupOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AddTierIntoMetaQuestSubscriptionGroup.AddTierIntoMetaQuestSubscriptionGroupBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public DeleteOculusSubscriptionTier.DeleteOculusSubscriptionTierBuilder DeleteOculusSubscriptionTierOp
+        {
+            get
+            {
+                var opBuilder = new Operation.DeleteOculusSubscriptionTier.DeleteOculusSubscriptionTierBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public QueryThirdPartySubscription.QueryThirdPartySubscriptionBuilder QueryThirdPartySubscriptionOp
         {
             get
@@ -157,6 +223,102 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         }
         #endregion
 
+        public ListOculusSubscriptionGroups.Response ListOculusSubscriptionGroups(ListOculusSubscriptionGroups input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ListOculusSubscriptionGroups.Response> ListOculusSubscriptionGroupsAsync(ListOculusSubscriptionGroups input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public CreateOculusSubscriptionGroup.Response CreateOculusSubscriptionGroup(CreateOculusSubscriptionGroup input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<CreateOculusSubscriptionGroup.Response> CreateOculusSubscriptionGroupAsync(CreateOculusSubscriptionGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteOculusSubscriptionGroup.Response DeleteOculusSubscriptionGroup(DeleteOculusSubscriptionGroup input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteOculusSubscriptionGroup.Response> DeleteOculusSubscriptionGroupAsync(DeleteOculusSubscriptionGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ListOculusSubscriptionGroupTier.Response ListOculusSubscriptionGroupTier(ListOculusSubscriptionGroupTier input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ListOculusSubscriptionGroupTier.Response> ListOculusSubscriptionGroupTierAsync(ListOculusSubscriptionGroupTier input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AddTierIntoMetaQuestSubscriptionGroup.Response AddTierIntoMetaQuestSubscriptionGroup(AddTierIntoMetaQuestSubscriptionGroup input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AddTierIntoMetaQuestSubscriptionGroup.Response> AddTierIntoMetaQuestSubscriptionGroupAsync(AddTierIntoMetaQuestSubscriptionGroup input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public DeleteOculusSubscriptionTier.Response DeleteOculusSubscriptionTier(DeleteOculusSubscriptionTier input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<DeleteOculusSubscriptionTier.Response> DeleteOculusSubscriptionTierAsync(DeleteOculusSubscriptionTier input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public QueryThirdPartySubscription.Response QueryThirdPartySubscription(QueryThirdPartySubscription input)
         {
             var response = _sdk.RunRequest(input);

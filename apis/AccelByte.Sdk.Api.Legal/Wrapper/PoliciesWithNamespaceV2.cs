@@ -34,11 +34,11 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
 
         #region Operation Builders
-        public RetrieveLatestPoliciesByNamespaceAndCountryPublic1.RetrieveLatestPoliciesByNamespaceAndCountryPublic1Builder RetrieveLatestPoliciesByNamespaceAndCountryPublic1Op
+        public RetrieveLatestPoliciesByNamespaceAndCountryPublic.RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder RetrieveLatestPoliciesByNamespaceAndCountryPublicOp
         {
             get
             {
-                var opBuilder = new Operation.RetrieveLatestPoliciesByNamespaceAndCountryPublic1.RetrieveLatestPoliciesByNamespaceAndCountryPublic1Builder(_sdk);
+                var opBuilder = new Operation.RetrieveLatestPoliciesByNamespaceAndCountryPublic.RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -47,7 +47,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
         }
         #endregion
 
-        public RetrieveLatestPoliciesByNamespaceAndCountryPublic1.Response RetrieveLatestPoliciesByNamespaceAndCountryPublic1(RetrieveLatestPoliciesByNamespaceAndCountryPublic1 input)
+        public RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response RetrieveLatestPoliciesByNamespaceAndCountryPublic(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic1.Response> RetrieveLatestPoliciesByNamespaceAndCountryPublic1Async(RetrieveLatestPoliciesByNamespaceAndCountryPublic1 input)
+        public async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> RetrieveLatestPoliciesByNamespaceAndCountryPublicAsync(RetrieveLatestPoliciesByNamespaceAndCountryPublic input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

@@ -54,6 +54,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
             public string? Tag { get; set; }
 
+            public string? TargetArchitecture { get; set; }
+
 
 
 
@@ -117,6 +119,12 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             public ImageListBuilder SetTag(string _tag)
             {
                 Tag = _tag;
+                return this;
+            }
+
+            public ImageListBuilder SetTargetArchitecture(string _targetArchitecture)
+            {
+                TargetArchitecture = _targetArchitecture;
                 return this;
             }
 
@@ -187,6 +195,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
             if (builder.Tag is not null) QueryParams["tag"] = builder.Tag;
+            if (builder.TargetArchitecture is not null) QueryParams["targetArchitecture"] = builder.TargetArchitecture;
             
 
             
@@ -225,7 +234,8 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             string? sortBy,            
             string? sortDirection,            
             string? status,            
-            string? tag            
+            string? tag,            
+            string? targetArchitecture            
         )
         {
             PathParams["namespace"] = namespace_;
@@ -239,6 +249,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection;
             if (status is not null) QueryParams["status"] = status;
             if (tag is not null) QueryParams["tag"] = tag;
+            if (targetArchitecture is not null) QueryParams["targetArchitecture"] = targetArchitecture;
             
 
             

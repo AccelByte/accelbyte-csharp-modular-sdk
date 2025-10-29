@@ -30,18 +30,6 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandArgument("endTime")]
-        public long? EndTime { get; set; }
-
-        [SdkCommandArgument("limit")]
-        public long? Limit { get; set; }
-
-        [SdkCommandArgument("offset")]
-        public long? Offset { get; set; }
-
-        [SdkCommandArgument("startTime")]
-        public long? StartTime { get; set; }
-
         public GetMyOfflineNotificationsCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -53,14 +41,6 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Lobby
 
             var opBuilder = AccelByte.Sdk.Api.Lobby.Operation.GetMyOfflineNotifications.Builder;
 
-            if (EndTime != null)
-                opBuilder.SetEndTime((long)EndTime);
-            if (Limit != null)
-                opBuilder.SetLimit((long)Limit);
-            if (Offset != null)
-                opBuilder.SetOffset((long)Offset);
-            if (StartTime != null)
-                opBuilder.SetStartTime((long)StartTime);
 
 
 

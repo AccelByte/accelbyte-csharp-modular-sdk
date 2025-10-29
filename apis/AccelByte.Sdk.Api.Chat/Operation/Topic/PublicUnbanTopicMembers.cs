@@ -140,6 +140,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
             public RestapiErrorResponseBody? Error403 { get; set; } = null;
 
+            public RestapiErrorResponseBody? Error404 { get; set; } = null;
+
             public RestapiErrorResponseBody? Error500 { get; set; } = null;
 
 
@@ -206,6 +208,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             {
                 response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
+            }
+            else if (code == (HttpStatusCode)404)
+            {
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {

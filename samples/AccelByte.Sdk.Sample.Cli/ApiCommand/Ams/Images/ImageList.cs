@@ -57,6 +57,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
         [SdkCommandArgument("tag")]
         public string? Tag { get; set; }
 
+        [SdkCommandArgument("targetArchitecture")]
+        public string? TargetArchitecture { get; set; }
+
         public ImageListCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -86,6 +89,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
                 opBuilder.SetStatus((string)Status);
             if (Tag != null)
                 opBuilder.SetTag((string)Tag);
+            if (TargetArchitecture != null)
+                opBuilder.SetTargetArchitecture((string)TargetArchitecture);
 
 
 

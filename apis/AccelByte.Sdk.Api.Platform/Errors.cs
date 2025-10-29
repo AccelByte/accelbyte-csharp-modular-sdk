@@ -232,6 +232,8 @@ namespace AccelByte.Sdk.Api.Platform
         public static readonly ApiError Error39149 = new ApiError("39149", "Third Party Subscription Transaction [{id}] not found for user [{userId}] in the namespace [{namespace}].");
         public static readonly ApiError Error39150 = new ApiError("39150", "Third Party User Subscription [{id}] not found for user [{userId}] in the namespace [{namespace}]..");
         public static readonly ApiError Error39151 = new ApiError("39151", "IAP order no [{iapOrderNo}] not found in namespace [{namespace}].");
+        public static readonly ApiError Error39152 = new ApiError("39152", "Platform [{platform}] - Third-party subscription group [{sku}] not found in namespace [{namespace}]. It may have been deleted.");
+        public static readonly ApiError Error39154 = new ApiError("39154", "Meta Quest Subscription Sku [{sku}] not found in namespace [{namespace}] config, please config this Subscription sku in subscription group.");
         public static readonly ApiError Error39171 = new ApiError("39171", "The bundle id in namespace [{namespace}] expect [{expected}] but was [{actual}]");
         public static readonly ApiError Error39172 = new ApiError("39172", "The order id in namespace [{namespace}] expect [{expected}] but was [{actual}]");
         public static readonly ApiError Error39173 = new ApiError("39173", "The purchase status of google play order [{orderId}] in namespace [{namespace}] expect [{expected}] but was [{actual}]");
@@ -240,6 +242,8 @@ namespace AccelByte.Sdk.Api.Platform
         public static readonly ApiError Error39183 = new ApiError("39183", "Steam transaction [{orderId}] is still pending or failed, status [{status}], please try it later");
         public static readonly ApiError Error39184 = new ApiError("39184", "Steam api exception with error code [{errorCode}] and error message [{message}]");
         public static readonly ApiError Error39185 = new ApiError("39185", "This endpoint only works on sync mode [{workSyncMode}], but current steam iap config sync mode is [{currentSyncMode}] under namespace [{namespace}]");
+        public static readonly ApiError Error39187 = new ApiError("39187", "Duplicated group sku [{sku}] platform [{platform}] in namespace [{namespace}]");
+        public static readonly ApiError Error39188 = new ApiError("39188", "Third-party subscription group [{sku}] on platform [{platform}] in namespace [{namespace}] is already linked to the user's third-party subscription.");
         public static readonly ApiError Error39221 = new ApiError("39221", "Invalid Xbox Business Partner Certificate or password: [{message}]");
         public static readonly ApiError Error39244 = new ApiError("39244", "Steam config does not exist");
         public static readonly ApiError Error39245 = new ApiError("39245", "Steam app id does not exist");

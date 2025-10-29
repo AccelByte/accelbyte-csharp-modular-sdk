@@ -45,22 +45,22 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        public RetrieveAcceptedAgreements1.RetrieveAcceptedAgreements1Builder RetrieveAcceptedAgreements1Op
+        public RetrieveAcceptedAgreements.RetrieveAcceptedAgreementsBuilder RetrieveAcceptedAgreementsOp
         {
             get
             {
-                var opBuilder = new Operation.RetrieveAcceptedAgreements1.RetrieveAcceptedAgreements1Builder(_sdk);
+                var opBuilder = new Operation.RetrieveAcceptedAgreements.RetrieveAcceptedAgreementsBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
                     return opBuilder;
             }
         }
-        public RetrieveAllUsersByPolicyVersion1.RetrieveAllUsersByPolicyVersion1Builder RetrieveAllUsersByPolicyVersion1Op
+        public RetrieveAllUsersByPolicyVersion.RetrieveAllUsersByPolicyVersionBuilder RetrieveAllUsersByPolicyVersionOp
         {
             get
             {
-                var opBuilder = new Operation.RetrieveAllUsersByPolicyVersion1.RetrieveAllUsersByPolicyVersion1Builder(_sdk);
+                var opBuilder = new Operation.RetrieveAllUsersByPolicyVersion.RetrieveAllUsersByPolicyVersionBuilder(_sdk);
                 if (_CustomBasePath != "")
                     return opBuilder.UseCustomBasePath(_CustomBasePath);
                 else
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public RetrieveAcceptedAgreements1.Response RetrieveAcceptedAgreements1(RetrieveAcceptedAgreements1 input)
+        public RetrieveAcceptedAgreements.Response RetrieveAcceptedAgreements(RetrieveAcceptedAgreements input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrieveAcceptedAgreements1.Response> RetrieveAcceptedAgreements1Async(RetrieveAcceptedAgreements1 input)
+        public async Task<RetrieveAcceptedAgreements.Response> RetrieveAcceptedAgreementsAsync(RetrieveAcceptedAgreements input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public RetrieveAllUsersByPolicyVersion1.Response RetrieveAllUsersByPolicyVersion1(RetrieveAllUsersByPolicyVersion1 input)
+        public RetrieveAllUsersByPolicyVersion.Response RetrieveAllUsersByPolicyVersion(RetrieveAllUsersByPolicyVersion input)
         {
             var response = _sdk.RunRequest(input);
             return input.ParseResponse(
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        public async Task<RetrieveAllUsersByPolicyVersion1.Response> RetrieveAllUsersByPolicyVersion1Async(RetrieveAllUsersByPolicyVersion1 input)
+        public async Task<RetrieveAllUsersByPolicyVersion.Response> RetrieveAllUsersByPolicyVersionAsync(RetrieveAllUsersByPolicyVersion input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
