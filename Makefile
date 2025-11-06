@@ -62,7 +62,7 @@ test_broken_link:
 	bash "$(SDK_MD_CRAWLER_PATH)/md-crawler.sh" -i README.md
 	DOCKER_SKIP_BUILD=1 bash "$(SDK_MD_CRAWLER_PATH)/md-crawler.sh" -i CHANGELOG.md
 	(for FILE in $$(find docs -type f); do \
-			(set -o pipefail; DOCKER_SKIP_BUILD=1 bash "$(SDK_MD_CRAWLER_PATH)/md-crawler.sh" -i $$FILE) || touch test.err; \
+			(set -o pipefail; DOCKER_SKIP_BUILD=1 bash "$(SDK_MD_CRAWLER_PATH)/md-crawler.sh" -i "$$FILE") || touch test.err; \
 	done)
 	DOCKER_SKIP_BUILD=1 bash "$(SDK_MD_CRAWLER_PATH)/md-crawler.sh" -i "https://docs.accelbyte.io/gaming-services/services/extend/extend-sdk/get-started-with-extend-sdk/"
 	[ ! -f test.err ]
