@@ -159,6 +159,7 @@
 | `models.BulkUserRankingResponseV3` | [ModelsBulkUserRankingResponseV3](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsBulkUserRankingResponseV3.cs) |
 | `models.DailyConfig` | [ModelsDailyConfig](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsDailyConfig.cs) |
 | `models.DeleteBulkLeaderboardFailedResp` | [ModelsDeleteBulkLeaderboardFailedResp](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsDeleteBulkLeaderboardFailedResp.cs) |
+| `models.DeleteBulkLeaderboardSuccessResp` | [ModelsDeleteBulkLeaderboardSuccessResp](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsDeleteBulkLeaderboardSuccessResp.cs) |
 | `models.DeleteBulkLeaderboardsReq` | [ModelsDeleteBulkLeaderboardsReq](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsDeleteBulkLeaderboardsReq.cs) |
 | `models.DeleteBulkLeaderboardsResp` | [ModelsDeleteBulkLeaderboardsResp](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsDeleteBulkLeaderboardsResp.cs) |
 | `models.GetAllLeaderboardConfigsPublicResp` | [ModelsGetAllLeaderboardConfigsPublicResp](../../apis/AccelByte.Sdk.Api.Leaderboard/Model/ModelsGetAllLeaderboardConfigsPublicResp.cs) |

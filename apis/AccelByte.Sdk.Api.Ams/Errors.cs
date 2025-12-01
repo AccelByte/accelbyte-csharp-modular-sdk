@@ -27,6 +27,30 @@ namespace AccelByte.Sdk.Api.Ams
     {
     }
 
+    public class ApiFleetBulkDeleteResponse : AccelByte.Sdk.Core.Model
+    {
+        [JsonPropertyName("errors")]
+        public List<ApiFleetBulkActionErrorItemResponse>? Errors { get; set; }
+
+        [JsonPropertyName("successCount")]
+        public int? SuccessCount { get; set; }
+
+        [JsonPropertyName("totalCount")]
+        public int? TotalCount { get; set; }
+
+
+        public ApiError TranslateToApiError()
+        {
+            string errorCode = 
+                "";
+            
+            string errorMessage = 
+                "";
+            
+            return new ApiError(errorCode, errorMessage);
+        }
+    }
+
     public class ResponseErrorResponse : AccelByte.Sdk.Core.Model
     {
         [JsonPropertyName("errorMessage")]

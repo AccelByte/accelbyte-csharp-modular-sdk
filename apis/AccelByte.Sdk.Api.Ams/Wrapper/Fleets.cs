@@ -56,6 +56,17 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     return opBuilder;
             }
         }
+        public BulkFleetDelete.BulkFleetDeleteBuilder BulkFleetDeleteOp
+        {
+            get
+            {
+                var opBuilder = new Operation.BulkFleetDelete.BulkFleetDeleteBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public FleetGet.FleetGetBuilder FleetGetOp
         {
             get
@@ -149,6 +160,22 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
                     response.Payload);
         }
         public async Task<FleetCreate.Response> FleetCreateAsync(FleetCreate input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public BulkFleetDelete.Response BulkFleetDelete(BulkFleetDelete input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<BulkFleetDelete.Response> BulkFleetDeleteAsync(BulkFleetDelete input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

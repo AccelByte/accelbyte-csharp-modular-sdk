@@ -122,6 +122,28 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
+        public StartNoSQLClusterV2.StartNoSQLClusterV2Builder StartNoSQLClusterV2Op
+        {
+            get
+            {
+                var opBuilder = new Operation.StartNoSQLClusterV2.StartNoSQLClusterV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
+        public StopNoSQLClusterV2.StopNoSQLClusterV2Builder StopNoSQLClusterV2Op
+        {
+            get
+            {
+                var opBuilder = new Operation.StopNoSQLClusterV2.StopNoSQLClusterV2Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public GetNoSQLAccessTunnelV2.GetNoSQLAccessTunnelV2Builder GetNoSQLAccessTunnelV2Op
         {
             get
@@ -256,6 +278,38 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.Payload);
         }
         public async Task<DeleteNoSQLClusterV2.Response> DeleteNoSQLClusterV2Async(DeleteNoSQLClusterV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public StartNoSQLClusterV2.Response StartNoSQLClusterV2(StartNoSQLClusterV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<StartNoSQLClusterV2.Response> StartNoSQLClusterV2Async(StartNoSQLClusterV2 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public StopNoSQLClusterV2.Response StopNoSQLClusterV2(StopNoSQLClusterV2 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<StopNoSQLClusterV2.Response> StopNoSQLClusterV2Async(StopNoSQLClusterV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

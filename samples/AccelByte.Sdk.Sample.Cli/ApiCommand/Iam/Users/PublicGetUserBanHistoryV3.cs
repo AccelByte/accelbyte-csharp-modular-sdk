@@ -36,14 +36,11 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
         [SdkCommandArgument("activeOnly")]
         public bool? ActiveOnly { get; set; }
 
-        [SdkCommandArgument("after")]
-        public string? After { get; set; }
-
-        [SdkCommandArgument("before")]
-        public string? Before { get; set; }
-
         [SdkCommandArgument("limit")]
         public long? Limit { get; set; }
+
+        [SdkCommandArgument("offset")]
+        public long? Offset { get; set; }
 
         public PublicGetUserBanHistoryV3Command(IAccelByteSdk sdk)
         {
@@ -58,12 +55,10 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 
             if (ActiveOnly != null)
                 opBuilder.SetActiveOnly((bool)ActiveOnly);
-            if (After != null)
-                opBuilder.SetAfter((string)After);
-            if (Before != null)
-                opBuilder.SetBefore((string)Before);
             if (Limit != null)
                 opBuilder.SetLimit((long)Limit);
+            if (Offset != null)
+                opBuilder.SetOffset((long)Offset);
 
 
 

@@ -83,6 +83,17 @@ namespace AccelByte.Sdk.Api.Csm
         }
         private Wrapper.AppV2? _AppV2 = null;
 
+        public Wrapper.AsyncMessaging AsyncMessaging
+        {
+            get
+            {
+                if (_AsyncMessaging == null)
+                    _AsyncMessaging = new Wrapper.AsyncMessaging(_Sdk, _CustomBasePath);
+                return _AsyncMessaging;
+            }
+        }
+        private Wrapper.AsyncMessaging? _AsyncMessaging = null;
+
         public Wrapper.DeploymentV2 DeploymentV2
         {
             get

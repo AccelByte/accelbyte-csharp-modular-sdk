@@ -52,6 +52,7 @@
 |---|---|---|---|---|
 | `/ams/v1/admin/namespaces/{namespace}/fleets` | GET | FleetList | [FleetList](../../apis/AccelByte.Sdk.Api.Ams/Operation/Fleets/FleetList.cs) | [FleetList](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Fleets/FleetList.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/fleets` | POST | FleetCreate | [FleetCreate](../../apis/AccelByte.Sdk.Api.Ams/Operation/Fleets/FleetCreate.cs) | [FleetCreate](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Fleets/FleetCreate.cs) |
+| `/ams/v1/admin/namespaces/{namespace}/fleets` | DELETE | BulkFleetDelete | [BulkFleetDelete](../../apis/AccelByte.Sdk.Api.Ams/Operation/Fleets/BulkFleetDelete.cs) | [BulkFleetDelete](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Fleets/BulkFleetDelete.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/fleets/{fleetID}` | GET | FleetGet | [FleetGet](../../apis/AccelByte.Sdk.Api.Ams/Operation/Fleets/FleetGet.cs) | [FleetGet](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Fleets/FleetGet.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/fleets/{fleetID}` | PUT | FleetUpdate | [FleetUpdate](../../apis/AccelByte.Sdk.Api.Ams/Operation/Fleets/FleetUpdate.cs) | [FleetUpdate](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Fleets/FleetUpdate.cs) |
 | `/ams/v1/admin/namespaces/{namespace}/fleets/{fleetID}` | DELETE | FleetDelete | [FleetDelete](../../apis/AccelByte.Sdk.Api.Ams/Operation/Fleets/FleetDelete.cs) | [FleetDelete](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Ams/Fleets/FleetDelete.cs) |
@@ -178,6 +179,9 @@
 | `api.DevelopmentServerConfigurationListResponse` | [ApiDevelopmentServerConfigurationListResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationListResponse.cs) |
 | `api.DevelopmentServerConfigurationUpdateRequest` | [ApiDevelopmentServerConfigurationUpdateRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiDevelopmentServerConfigurationUpdateRequest.cs) |
 | `api.FleetArtifactsSampleRules` | [ApiFleetArtifactsSampleRules](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetArtifactsSampleRules.cs) |
+| `api.FleetBulkActionErrorItemResponse` | [ApiFleetBulkActionErrorItemResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetBulkActionErrorItemResponse.cs) |
+| `api.FleetBulkDeleteRequest` | [ApiFleetBulkDeleteRequest](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetBulkDeleteRequest.cs) |
+| `api.FleetBulkDeleteResponse` | [ApiFleetBulkDeleteResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetBulkDeleteResponse.cs) |
 | `api.FleetClaimByKeysReq` | [ApiFleetClaimByKeysReq](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetClaimByKeysReq.cs) |
 | `api.FleetClaimReq` | [ApiFleetClaimReq](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetClaimReq.cs) |
 | `api.FleetClaimResponse` | [ApiFleetClaimResponse](../../apis/AccelByte.Sdk.Api.Ams/Model/ApiFleetClaimResponse.cs) |
