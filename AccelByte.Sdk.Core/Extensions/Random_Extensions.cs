@@ -1,6 +1,11 @@
-﻿using System;
+﻿// Copyright (c) 2023-2025 AccelByte Inc. All Rights Reserved.
+// This is licensed software from AccelByte Inc, for limitations
+// and restrictions contact your company contract manager.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +17,13 @@ namespace AccelByte.Sdk.Core
         {
             var codeVerifier = new byte[32];
             random.NextBytes(codeVerifier);
+            return codeVerifier.EncodeBase64Url();
+        }
+
+        public static string GenerateCodeVerifier(this RandomNumberGenerator random)
+        {
+            var codeVerifier = new byte[32];
+            random.GetBytes(codeVerifier);
             return codeVerifier.EncodeBase64Url();
         }
 
@@ -29,7 +41,7 @@ namespace AccelByte.Sdk.Core
 
         public static string RandomizeChar(this Random random, string source, int length)
         {
-            string result = String.Empty;
+            string result = "";
             for (int i = 0; i < length; i++)
             {
                 char temp = source[random.Next(source.Length)];
@@ -47,16 +59,36 @@ namespace AccelByte.Sdk.Core
             return result;
         }
 
+        public static string RandomizeChar(string source, int length)
+        {
+            string result = "";
+            for (int i = 0; i < length; i++)
+            {
+                char temp = source[RandomNumberGenerator.GetInt32(source.Length)];
+                while (true)
+                {
+                    if (result.IndexOf(temp) > -1)
+                        temp = source[RandomNumberGenerator.GetInt32(source.Length)];
+                    else
+                    {
+                        result += temp.ToString();
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
         public static string GenerateRandomPassword(this Random random, int length)
         {
-            string final = String.Empty;
+            string final = "";
             int pCount = (length / 3);
 
-            final += random.RandomizeChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ", pCount);
-            final += random.RandomizeChar("abcdefghijklmnopqrstuvwxyz", pCount);
+            final += RandomizeChar("ABCDEFGHIJKLMNOPQRSTUVWXYZ", pCount);
+            final += RandomizeChar("abcdefghijklmnopqrstuvwxyz", pCount);
 
             int fCount = (length - (pCount * 2));
-            final += random.RandomizeChar("0123456789!@#$%^&*()", fCount);
+            final += RandomizeChar("0123456789!@#$%^&*()", fCount);
 
             return final;
         }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -17,6 +17,7 @@ using AccelByte.Sdk.Core.Security;
 
 using AccelByte.Sdk.Api.Iam.Model;
 using AccelByte.Sdk.Api.Iam.Operation;
+using System.Security.Cryptography;
 
 namespace AccelByte.Sdk.Core
 {
@@ -92,7 +93,7 @@ namespace AccelByte.Sdk.Core
             else
                 sdk.Configuration.TokenRepository.RemoveToken();
 
-            Random random = new Random();
+            RandomNumberGenerator random = RandomNumberGenerator.Create();
             var codeVerifier = random.GenerateCodeVerifier();
             var codeChallenge = codeVerifier.GenerateCodeChallenge();
             var clientId = sdk.Configuration.ConfigRepository.ClientId;
@@ -178,7 +179,7 @@ namespace AccelByte.Sdk.Core
             else
                 sdk.Configuration.TokenRepository.RemoveToken();
 
-            Random random = new Random();
+            RandomNumberGenerator random = RandomNumberGenerator.Create();
             var codeVerifier = random.GenerateCodeVerifier();
             var codeChallenge = codeVerifier.GenerateCodeChallenge();
             var clientId = sdk.Configuration.ConfigRepository.ClientId;

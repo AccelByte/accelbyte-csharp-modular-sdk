@@ -1,10 +1,11 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace AccelByte.Sdk.Core.Util
@@ -13,7 +14,7 @@ namespace AccelByte.Sdk.Core.Util
     {
         public static string GenerateCodeVerifier()
         {
-            var random = new Random();
+            RandomNumberGenerator random = RandomNumberGenerator.Create();
             return random.GenerateCodeVerifier();
         }
 
