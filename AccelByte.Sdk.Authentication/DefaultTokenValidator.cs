@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -151,6 +151,10 @@ namespace AccelByte.Sdk.Authentication
                 if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
 
+                Dictionary<string, string> pParams = new Dictionary<string, string>();
+                GetNamespaceContext(sdk, sdk.Namespace, _NamespaceFetchFunction);
+                pParams.Add("namespace", sdk.Namespace);
+
                 bool foundMatchingPermission = false;
                 if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
                 {
@@ -182,7 +186,8 @@ namespace AccelByte.Sdk.Authentication
                             var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
                             foreach (var p in permissions)
                             {
-                                if (IsResourceAllowed(p.Resource, permission))
+                                string aPermission = ReplacePlaceholder(p.Resource, pParams);
+                                if (IsResourceAllowed(aPermission, permission))
                                 {
                                     if (PermissionAction.Has(p.Action, action))
                                     {
@@ -216,6 +221,10 @@ namespace AccelByte.Sdk.Authentication
                 if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
 
+                Dictionary<string, string> pParams = new Dictionary<string, string>();
+                await GetNamespaceContextAsync(sdk, sdk.Namespace, _NamespaceFetchFunctionAsync);
+                pParams.Add("namespace", sdk.Namespace);
+
                 bool foundMatchingPermission = false;
                 if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
                 {
@@ -247,7 +256,8 @@ namespace AccelByte.Sdk.Authentication
                             var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
                             foreach (var p in permissions)
                             {
-                                if (IsResourceAllowed(p.Resource, permission))
+                                string aPermission = ReplacePlaceholder(p.Resource, pParams);
+                                if (IsResourceAllowed(aPermission, permission))
                                 {
                                     if (PermissionAction.Has(p.Action, action))
                                     {

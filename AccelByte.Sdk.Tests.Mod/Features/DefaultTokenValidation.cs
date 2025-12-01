@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -17,6 +17,7 @@ using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Authentication;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Tests.Mod.Repository;
+using AccelByte.Sdk.Tests.Mod.Scenario;
 
 namespace AccelByte.Sdk.Tests.Mod.Features
 {
@@ -36,13 +37,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 .EnableLog()
                 .Build();
 
-            if (IsUsingAGSStarter(sdk))
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
-
-            string accessToken = String.Empty;
+            string accessToken = "";
             sdk.LoginClient((tokenResp) =>
             {
                 accessToken = tokenResp.AccessToken!;
@@ -72,19 +67,11 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 .EnableLog()
                 .Build();
 
-            if (IsUsingAGSStarter(sdk))
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
-
-            string accessToken = String.Empty;
+            string accessToken = "";
             sdk.LoginClient((tokenResp) =>
             {
                 accessToken = tokenResp.AccessToken!;
             });
-
-            Thread.Sleep(2000);
 
             string tPermission = $"NAMESPACE:{sdk.Namespace}:PROFILE";
             int tAction = 15;
@@ -96,6 +83,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         [Test]
         public void UserPermissionValidationTest()
         {
+            //first sdk object is for oauth client which has ADMIN:ROLE [READ] permission, since we will assume that default user doesn't have this permission.
             using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
                 .SetConfigRepository(IntegrationTestConfigRepository.Admin)
@@ -104,26 +92,19 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 .UseDefaultTokenValidator()
                 .EnableLog()
                 .Build();
+            sdk.LoginClient();
 
-            if (IsUsingAGSStarter(sdk))
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
-
-            string accessToken = String.Empty;
-            sdk.LoginUser((tokenResp) =>
-            {
-                accessToken = tokenResp.AccessToken!;
-            });
-
-            Thread.Sleep(2000);
+            //we will access user using different sdk object wrapped inside `ExistingTestPlayer` object.
+            var user = new ExistingTestPlayer("AB", true);
 
             string tPermission = $"ADMIN:NAMESPACE:{sdk.Namespace}:USER";
             int tAction = 2;
 
-            bool b = sdk.ValidateToken(accessToken, tPermission, tAction);
+            //validate user's token against expected permission.
+            bool b = sdk.ValidateToken(user.AccessToken, tPermission, tAction);
             Assert.IsTrue(b);
+
+            user.Logout();
         }
     }
 }

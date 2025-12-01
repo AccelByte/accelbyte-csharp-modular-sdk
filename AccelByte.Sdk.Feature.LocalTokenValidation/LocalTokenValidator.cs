@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2025 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -446,6 +446,10 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(jsonWebToken);
 #endif
 
+                Dictionary<string, string> pParams = new Dictionary<string, string>();
+                GetNamespaceContext(sdk, sdk.Namespace, _NamespaceFetchFunction);
+                pParams.Add("namespace", sdk.Namespace);
+
                 bool foundMatchingPermission = false;
                 if ((payload.Permissions != null) && (payload.Permissions.Count > 0))
                 {
@@ -474,7 +478,8 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                             var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
                             foreach (var p in permissions)
                             {
-                                if (IsResourceAllowed(p.Resource, permission))
+                                string aPermission = ReplacePlaceholder(p.Resource, pParams);
+                                if (IsResourceAllowed(aPermission, permission))
                                 {
                                     if (PermissionAction.Has(p.Action, action))
                                     {
@@ -596,8 +601,17 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             try
             {
-                var rawJwt = await InternalValidateTokenAsync(sdk, accessToken);
+#if NET6_0
+                InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
+#elif NET8_0_OR_GREATER
+                var jsonWebToken = InternalValidateToken(sdk, accessToken);
+                AccessTokenPayload payload = AccessTokenPayload.FromToken(jsonWebToken);
+#endif
+
+                Dictionary<string, string> pParams = new Dictionary<string, string>();
+                await GetNamespaceContextAsync(sdk, sdk.Namespace, _NamespaceFetchFunctionAsync);
+                pParams.Add("namespace", sdk.Namespace);
 
                 bool foundMatchingPermission = false;
                 if ((payload.Permissions != null) && (payload.Permissions.Count > 0))
@@ -627,7 +641,8 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
                             var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
                             foreach (var p in permissions)
                             {
-                                if (IsResourceAllowed(p.Resource, permission))
+                                string aPermission = ReplacePlaceholder(p.Resource, pParams);
+                                if (IsResourceAllowed(aPermission, permission))
                                 {
                                     if (PermissionAction.Has(p.Action, action))
                                     {
@@ -655,8 +670,13 @@ namespace AccelByte.Sdk.Feature.LocalTokenValidation
         {
             try
             {
-                var rawJwt = await InternalValidateTokenAsync(sdk, accessToken);
+#if NET6_0
+                InternalValidateToken(sdk, accessToken, out JwtSecurityToken rawJwt);
                 AccessTokenPayload payload = AccessTokenPayload.FromToken(rawJwt);
+#elif NET8_0_OR_GREATER
+                var jsonWebToken = InternalValidateToken(sdk, accessToken);
+                AccessTokenPayload payload = AccessTokenPayload.FromToken(jsonWebToken);
+#endif
 
                 Dictionary<string, string> pParams = new Dictionary<string, string>();
                 if (aNamespace != null)

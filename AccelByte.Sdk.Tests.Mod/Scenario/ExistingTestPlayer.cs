@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
             }
         }
 
-        public string UserId { get; set; } = String.Empty;
+        public string UserId { get; set; } = "";
         #endregion
     }
 }
