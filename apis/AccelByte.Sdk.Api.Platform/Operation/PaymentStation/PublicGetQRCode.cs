@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.BinarySchema>
+        public class Response : ApiResponse<Dictionary<string, object>>
         {
 
 
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

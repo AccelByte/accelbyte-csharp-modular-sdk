@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.EstimatedPriceInfo>
+        public class Response : ApiResponse<List<Model.EstimatedPriceInfo>>
         {
 
             public ErrorEntity? Error404 { get; set; } = null;
@@ -216,7 +216,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EstimatedPriceInfo>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.EstimatedPriceInfo>>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)

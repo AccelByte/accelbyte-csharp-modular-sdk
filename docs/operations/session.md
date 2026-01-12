@@ -141,6 +141,7 @@
 | `/session/v1/admin/namespaces/{namespace}/platform-credentials` | DELETE | AdminDeletePlatformCredentials | [AdminDeletePlatformCredentials](../../apis/AccelByte.Sdk.Api.Session/Operation/PlatformCredential/AdminDeletePlatformCredentials.cs) | [AdminDeletePlatformCredentials](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/PlatformCredential/AdminDeletePlatformCredentials.cs) |
 | `/session/v1/admin/namespaces/{namespace}/platform-credentials/{platformId}` | DELETE | AdminDeletePlatformCredentialsByPlatformId | [AdminDeletePlatformCredentialsByPlatformId](../../apis/AccelByte.Sdk.Api.Session/Operation/PlatformCredential/AdminDeletePlatformCredentialsByPlatformId.cs) | [AdminDeletePlatformCredentialsByPlatformId](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/PlatformCredential/AdminDeletePlatformCredentialsByPlatformId.cs) |
 | `/session/v1/admin/namespaces/{namespace}/platform-credentials/{platformId}/sync` | PUT | AdminSyncPlatformCredentials | [AdminSyncPlatformCredentials](../../apis/AccelByte.Sdk.Api.Session/Operation/PlatformCredential/AdminSyncPlatformCredentials.cs) | [AdminSyncPlatformCredentials](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/PlatformCredential/AdminSyncPlatformCredentials.cs) |
+| `/session/v1/admin/namespaces/{namespace}/platform-credentials/{platformId}/upload` | PUT | AdminUploadPlatformCredentials | [AdminUploadPlatformCredentials](../../apis/AccelByte.Sdk.Api.Session/Operation/PlatformCredential/AdminUploadPlatformCredentials.cs) | [AdminUploadPlatformCredentials](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Session/PlatformCredential/AdminUploadPlatformCredentials.cs) |
 
 ### Recent Player Wrapper:  [RecentPlayer](../../apis/AccelByte.Sdk.Api.Session/Wrapper/RecentPlayer.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -275,6 +276,7 @@
 | `apimodels.EnvironmentVariableResponse` | [ApimodelsEnvironmentVariableResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsEnvironmentVariableResponse.cs) |
 | `apimodels.GameSessionQueryResponse` | [ApimodelsGameSessionQueryResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGameSessionQueryResponse.cs) |
 | `apimodels.GameSessionResponse` | [ApimodelsGameSessionResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGameSessionResponse.cs) |
+| `apimodels.GenericObject` | [ApimodelsGenericObject](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGenericObject.cs) |
 | `apimodels.GlobalConfigurationResponse` | [ApimodelsGlobalConfigurationResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsGlobalConfigurationResponse.cs) |
 | `apimodels.JoinByCodeRequest` | [ApimodelsJoinByCodeRequest](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsJoinByCodeRequest.cs) |
 | `apimodels.KickResponse` | [ApimodelsKickResponse](../../apis/AccelByte.Sdk.Api.Session/Model/ApimodelsKickResponse.cs) |

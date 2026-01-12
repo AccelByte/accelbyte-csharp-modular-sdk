@@ -89,6 +89,17 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     return opBuilder;
             }
         }
+        public AdminUploadPlatformCredentials.AdminUploadPlatformCredentialsBuilder AdminUploadPlatformCredentialsOp
+        {
+            get
+            {
+                var opBuilder = new Operation.AdminUploadPlatformCredentials.AdminUploadPlatformCredentialsBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         #endregion
 
         public AdminGetPlatformCredentials.Response AdminGetPlatformCredentials(AdminGetPlatformCredentials input)
@@ -164,6 +175,22 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.Payload);
         }
         public async Task<AdminSyncPlatformCredentials.Response> AdminSyncPlatformCredentialsAsync(AdminSyncPlatformCredentials input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public AdminUploadPlatformCredentials.Response AdminUploadPlatformCredentials(AdminUploadPlatformCredentials input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<AdminUploadPlatformCredentials.Response> AdminUploadPlatformCredentialsAsync(AdminUploadPlatformCredentials input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
