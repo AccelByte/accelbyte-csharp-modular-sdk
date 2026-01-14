@@ -21,28 +21,36 @@ using AccelByte.Sdk.Api.Csm.Model;
 namespace AccelByte.Sdk.Api.Csm.Operation
 {
     /// <summary>
-    /// GetAppListV1
+    /// GetNoSQLAppListV2
     ///
-    /// Required permission : `ADMIN:NAMESPACE:{namespace}:EXTEND:APP [READ]`
+    /// Required permission : `ADMIN:NAMESPACE:{namespace}:EXTEND:NOSQL:CLUSTERS [READ]`
     /// 
-    /// Gets the List of Apps for AB-Extend Customer
-    /// 
-    /// Available scenario:
-    /// - scenario 1: `function-override`
-    /// - scenario 2: `service-extension`
-    /// - scenario 3: `event-handler`
+    /// Get List of Extend App using NoSQL database by given studio/publisher namespace and the NoSQL cluster resourceId.
+    /// - `available` : The cluster is accessible.
+    /// - `creating` : The cluster or instance is being created and is not yet accessible.
+    /// - `deleting` : The cluster is in the process of being deleted and is not accessible.
+    /// - `stopped` : The cluster is stopped and not accessible.
+    /// - `updating` : The cluster is being modified and is not yet accessible (e.g., updating min/max DCU).
+    /// - `failed` : The cluster failed to provision or is in an error state and not accessible.
+    /// - `stopping` : The cluster is in the process of stopping and will soon become inaccessible.
+    /// - `starting` : The cluster is transitioning from stopped to running, or is rebooting.
+    /// - `maintenance` : The cluster is undergoing maintenance operations and is not accessible.
+    /// - `unknown` : The cluster status is not recognized
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
-    public class GetAppListV1 : AccelByte.Sdk.Core.Operation
+    public class GetNoSQLAppListV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static GetAppListV1Builder Builder { get => new GetAppListV1Builder(); }
+        public static GetNoSQLAppListV2Builder Builder { get => new GetNoSQLAppListV2Builder(); }
 
-        public class GetAppListV1Builder
-            : OperationBuilder<GetAppListV1Builder>
+        public class GetNoSQLAppListV2Builder
+            : OperationBuilder<GetNoSQLAppListV2Builder>
         {
 
+            public string? AppName { get; set; }
+
             public long? Limit { get; set; }
+
+            public string? Namespace { get; set; }
 
             public long? Offset { get; set; }
 
@@ -50,21 +58,33 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal GetAppListV1Builder() { }
+            internal GetNoSQLAppListV2Builder() { }
 
-            internal GetAppListV1Builder(IAccelByteSdk sdk)
+            internal GetNoSQLAppListV2Builder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetAppListV1Builder SetLimit(long _limit)
+            public GetNoSQLAppListV2Builder SetAppName(string _appName)
+            {
+                AppName = _appName;
+                return this;
+            }
+
+            public GetNoSQLAppListV2Builder SetLimit(long _limit)
             {
                 Limit = _limit;
                 return this;
             }
 
-            public GetAppListV1Builder SetOffset(long _offset)
+            public GetNoSQLAppListV2Builder SetNamespace(string _namespace_)
+            {
+                Namespace = _namespace_;
+                return this;
+            }
+
+            public GetNoSQLAppListV2Builder SetOffset(long _offset)
             {
                 Offset = _offset;
                 return this;
@@ -74,29 +94,28 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            public GetAppListV1 Build(
-                GeneratedGetAppListV1Request body,
-                string namespace_
+            public GetNoSQLAppListV2 Build(
+                string resourceId,
+                string studioName
             )
             {
-                GetAppListV1 op = new GetAppListV1(this,
-                    body,                    
-                    namespace_                    
+                GetNoSQLAppListV2 op = new GetNoSQLAppListV2(this,
+                    resourceId,                    
+                    studioName                    
                 );
 
-                op.SetBaseFields<GetAppListV1Builder>(this);
+                op.SetBaseFields<GetNoSQLAppListV2Builder>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetAppListV1.Response Execute(
-                GeneratedGetAppListV1Request body,
-                string namespace_
+            public GetNoSQLAppListV2.Response Execute(
+                string resourceId,
+                string studioName
             )
             {
-                GetAppListV1 op = Build(
-                    body,
-                    namespace_
+                GetNoSQLAppListV2 op = Build(
+                    resourceId,
+                    studioName
                 );
 
                 if (_Sdk == null)
@@ -108,14 +127,14 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAppListV1.Response> ExecuteAsync(
-                GeneratedGetAppListV1Request body,
-                string namespace_
+            public async Task<GetNoSQLAppListV2.Response> ExecuteAsync(
+                string resourceId,
+                string studioName
             )
             {
-                GetAppListV1 op = Build(
-                    body,
-                    namespace_
+                GetNoSQLAppListV2 op = Build(
+                    resourceId,
+                    studioName
                 );
 
                 if (_Sdk == null)
@@ -129,20 +148,22 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetAppListV1(GetAppListV1Builder builder,
-            GeneratedGetAppListV1Request body,
-            string namespace_
+        private GetNoSQLAppListV2(GetNoSQLAppListV2Builder builder,
+            string resourceId,
+            string studioName
         )
         {
-            PathParams["namespace"] = namespace_;
+            PathParams["resourceId"] = resourceId;
+            PathParams["studioName"] = studioName;
             
+            if (builder.AppName is not null) QueryParams["appName"] = builder.AppName;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
+            if (builder.Namespace is not null) QueryParams["namespace"] = builder.Namespace;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             
 
             
             
-            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -150,7 +171,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.GeneratedGetAppListV1Response>
+        public class Response : ApiResponse<Model.ApimodelNoSQLAppListResponse>
         {
 
             public ResponseErrorResponse? Error400 { get; set; } = null;
@@ -159,48 +180,50 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
             public ResponseErrorResponse? Error403 { get; set; } = null;
 
-            public ResponseErrorResponse? Error404 { get; set; } = null;
-
             public ResponseErrorResponse? Error500 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Csm::App::GetAppListV1";
+            protected override string GetFullOperationId() => "Csm::ManagedResources::GetNoSQLAppListV2";
         }
 
         #endregion
 
-        public GetAppListV1(
-            string namespace_,            
+        public GetNoSQLAppListV2(
+            string resourceId,            
+            string studioName,            
+            string? appName,            
             long? limit,            
-            long? offset,            
-            Model.GeneratedGetAppListV1Request body            
+            string? namespace_,            
+            long? offset            
         )
         {
-            PathParams["namespace"] = namespace_;
+            PathParams["resourceId"] = resourceId;
+            PathParams["studioName"] = studioName;
             
+            if (appName is not null) QueryParams["appName"] = appName;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
+            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             
 
             
             
-            BodyParams = body;
             
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/csm/v1/admin/namespaces/{namespace}/apps";
+        public override string Path => "/csm/v2/admin/namespaces/{studioName}/nosql/{resourceId}/apps";
 
-        public override HttpMethod Method => HttpMethod.Post;
+        public override HttpMethod Method => HttpMethod.Get;
 
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
         
-        public GetAppListV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public GetNoSQLAppListV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new GetAppListV1.Response()
+            var response = new GetNoSQLAppListV2.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
@@ -212,7 +235,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GeneratedGetAppListV1Response>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelNoSQLAppListResponse>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
@@ -229,11 +252,6 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             {
                 response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
-            }
-            else if (code == (HttpStatusCode)404)
-            {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
-                response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {

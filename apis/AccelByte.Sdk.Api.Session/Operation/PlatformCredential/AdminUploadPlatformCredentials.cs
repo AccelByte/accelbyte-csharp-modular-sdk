@@ -21,35 +21,28 @@ using AccelByte.Sdk.Api.Session.Model;
 namespace AccelByte.Sdk.Api.Session.Operation
 {
     /// <summary>
-    /// adminSyncPlatformCredentials
+    /// adminUploadPlatformCredentials
     ///
-    /// Sync Platform Credentials.
-    /// 
-    /// Supported Platforms:
-    /// 1. XBOX
-    /// With this method, we will be performing sync to Platform Service to retrieve the existing PFX certificate which uploaded through IAP.
-    /// If the API returns Not Found, alternatively what you can do is either:
-    /// a. upload PFX file to IAP. You can access it from Admin Portal {BASE_URL}/admin/namespaces/{NAMESPACE}/in-app-purchase/xbox, or directly through API /platform/admin/namespaces/{NAMESPACE}/iap/config/xbl/cert.
-    /// b. upload PFX file through Session API /session/v1/admin/namespaces/{namespace}/platform-credentials/xbox/upload
-    /// We recommend approach #a, since you need to only upload the file once, and the service will do the sync.
-    /// If you set the PFX through Session service, when this API is invoked, we will sync and replace the existing PFX file with the one from Platform (IAP).
+    /// Upload certificates for XBox. Certificate must be in the valid form of PFX format.
     /// </summary>
-    public class AdminSyncPlatformCredentials : AccelByte.Sdk.Core.Operation
+    public class AdminUploadPlatformCredentials : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static AdminSyncPlatformCredentialsBuilder Builder { get => new AdminSyncPlatformCredentialsBuilder(); }
+        public static AdminUploadPlatformCredentialsBuilder Builder { get => new AdminUploadPlatformCredentialsBuilder(); }
 
-        public class AdminSyncPlatformCredentialsBuilder
-            : OperationBuilder<AdminSyncPlatformCredentialsBuilder>
+        public class AdminUploadPlatformCredentialsBuilder
+            : OperationBuilder<AdminUploadPlatformCredentialsBuilder>
         {
 
 
 
+            public string? Description { get; set; }
 
 
-            internal AdminSyncPlatformCredentialsBuilder() { }
 
-            internal AdminSyncPlatformCredentialsBuilder(IAccelByteSdk sdk)
+            internal AdminUploadPlatformCredentialsBuilder() { }
+
+            internal AdminUploadPlatformCredentialsBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,28 +50,42 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
+            public AdminUploadPlatformCredentialsBuilder SetDescription(string _description)
+            {
+                Description = _description;
+                return this;
+            }
 
 
-            public AdminSyncPlatformCredentials Build(
+
+            public AdminUploadPlatformCredentials Build(
+                Stream file,
+                string password,
                 string namespace_,
-                AdminSyncPlatformCredentialsPlatformId platformId
+                AdminUploadPlatformCredentialsPlatformId platformId
             )
             {
-                AdminSyncPlatformCredentials op = new AdminSyncPlatformCredentials(this,
+                AdminUploadPlatformCredentials op = new AdminUploadPlatformCredentials(this,
+                    file,                    
+                    password,                    
                     namespace_,                    
                     platformId                    
                 );
 
-                op.SetBaseFields<AdminSyncPlatformCredentialsBuilder>(this);
+                op.SetBaseFields<AdminUploadPlatformCredentialsBuilder>(this);
                 return op;
             }
 
-            public AdminSyncPlatformCredentials.Response Execute(
+            public AdminUploadPlatformCredentials.Response Execute(
+                Stream file,
+                string password,
                 string namespace_,
                 string platformId
             )
             {
-                AdminSyncPlatformCredentials op = Build(
+                AdminUploadPlatformCredentials op = Build(
+                    file,
+                    password,
                     namespace_,
                     platformId
                 );
@@ -92,12 +99,16 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSyncPlatformCredentials.Response> ExecuteAsync(
+            public async Task<AdminUploadPlatformCredentials.Response> ExecuteAsync(
+                Stream file,
+                string password,
                 string namespace_,
                 string platformId
             )
             {
-                AdminSyncPlatformCredentials op = Build(
+                AdminUploadPlatformCredentials op = Build(
+                    file,
+                    password,
                     namespace_,
                     platformId
                 );
@@ -113,15 +124,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminSyncPlatformCredentials(AdminSyncPlatformCredentialsBuilder builder,
+        private AdminUploadPlatformCredentials(AdminUploadPlatformCredentialsBuilder builder,
+            Stream file,
+            string password,
             string namespace_,
-            AdminSyncPlatformCredentialsPlatformId platformId
+            AdminUploadPlatformCredentialsPlatformId platformId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId.Value;
             
             
+            if (builder.Description is not null) FormParams["description"] = builder.Description;
+            if (file is not null) FormParams["file"] = file;
+            if (password is not null) FormParams["password"] = password;
 
             
             
@@ -132,7 +148,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.ApimodelsXblCertificateResponseBody>
+        public class Response : ApiResponse
         {
 
             public ResponseError? Error400 { get; set; } = null;
@@ -141,25 +157,29 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
             public ResponseError? Error403 { get; set; } = null;
 
-            public ResponseError? Error404 { get; set; } = null;
-
             public ResponseError? Error500 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Session::PlatformCredential::AdminSyncPlatformCredentials";
+            protected override string GetFullOperationId() => "Session::PlatformCredential::AdminUploadPlatformCredentials";
         }
 
         #endregion
 
-        public AdminSyncPlatformCredentials(
+        public AdminUploadPlatformCredentials(
             string namespace_,            
-            AdminSyncPlatformCredentialsPlatformId platformId            
+            AdminUploadPlatformCredentialsPlatformId platformId,            
+            string? description,            
+            Stream file,            
+            string password            
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId.Value;
             
             
+            if (description is not null) FormParams["description"] = description;
+            if (file is not null) FormParams["file"] = file;
+            if (password is not null) FormParams["password"] = password;
 
             
             
@@ -168,29 +188,25 @@ namespace AccelByte.Sdk.Api.Session.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/session/v1/admin/namespaces/{namespace}/platform-credentials/{platformId}/sync";
+        public override string Path => "/session/v1/admin/namespaces/{namespace}/platform-credentials/{platformId}/upload";
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
         
-        public AdminSyncPlatformCredentials.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public AdminUploadPlatformCredentials.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new AdminSyncPlatformCredentials.Response()
+            var response = new AdminUploadPlatformCredentials.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)204)
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
             {
-                response.IsSuccess = true;
-            }
-            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
-            {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsXblCertificateResponseBody>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
@@ -208,11 +224,6 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
-            else if (code == (HttpStatusCode)404)
-            {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
-                response.Error = response.Error404!.TranslateToApiError();
-            }
             else if (code == (HttpStatusCode)500)
             {
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
@@ -223,18 +234,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
         }
     }
 
-    public class AdminSyncPlatformCredentialsPlatformId : StringEnum<AdminSyncPlatformCredentialsPlatformId>
+    public class AdminUploadPlatformCredentialsPlatformId : StringEnum<AdminUploadPlatformCredentialsPlatformId>
     {
-        public static readonly AdminSyncPlatformCredentialsPlatformId XBOX
-            = new AdminSyncPlatformCredentialsPlatformId("XBOX");
+        public static readonly AdminUploadPlatformCredentialsPlatformId XBOX
+            = new AdminUploadPlatformCredentialsPlatformId("XBOX");
 
 
-        public static implicit operator AdminSyncPlatformCredentialsPlatformId(string value)
+        public static implicit operator AdminUploadPlatformCredentialsPlatformId(string value)
         {
             return NewValue(value);
         }
 
-        public AdminSyncPlatformCredentialsPlatformId(string enumValue)
+        public AdminUploadPlatformCredentialsPlatformId(string enumValue)
             : base(enumValue)
         {
 

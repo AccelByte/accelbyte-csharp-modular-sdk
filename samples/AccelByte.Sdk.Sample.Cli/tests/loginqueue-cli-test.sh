@@ -61,7 +61,7 @@ eval_tap $? 2 'AdminGetConfiguration' test.out
 
 #- 3 AdminUpdateConfiguration
 # body param: body
-echo '{"enabled": true, "maxConcurrency": 9, "maxLoginRate": 7, "minActivationPeriodInSecond": 0, "playerPollingTimeInSecond": 70, "playerReconnectGracePeriodInSecond": 95, "queueReconnectGracePeriodInSecond": 74, "safetyMarginPercentage": 2}' > $TEMP_JSON_INPUT
+echo '{"enabled": false, "maxConcurrency": 25, "maxLoginRate": 93, "minActivationPeriodInSecond": 60, "playerPollingTimeInSecond": 86, "playerReconnectGracePeriodInSecond": 95, "queueReconnectGracePeriodInSecond": 82, "safetyMarginPercentage": 75}' > $TEMP_JSON_INPUT
 $CLI_EXE \
     --sn loginqueue \
     --op AdminUpdateConfiguration \
