@@ -155,17 +155,6 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        public GetNoSQLAppListV2.GetNoSQLAppListV2Builder GetNoSQLAppListV2Op
-        {
-            get
-            {
-                var opBuilder = new Operation.GetNoSQLAppListV2.GetNoSQLAppListV2Builder(_sdk);
-                if (_CustomBasePath != "")
-                    return opBuilder.UseCustomBasePath(_CustomBasePath);
-                else
-                    return opBuilder;
-            }
-        }
         #endregion
 
         public CreateNoSQLDatabaseCredentialV2.Response CreateNoSQLDatabaseCredentialV2(CreateNoSQLDatabaseCredentialV2 input)
@@ -337,22 +326,6 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.Payload);
         }
         public async Task<GetNoSQLAccessTunnelV2.Response> GetNoSQLAccessTunnelV2Async(GetNoSQLAccessTunnelV2 input)
-        {
-            var response = await _sdk.RunRequestAsync(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public GetNoSQLAppListV2.Response GetNoSQLAppListV2(GetNoSQLAppListV2 input)
-        {
-            var response = _sdk.RunRequest(input);
-            return input.ParseResponse(
-                    response.Code,
-                    response.ContentType,
-                    response.Payload);
-        }
-        public async Task<GetNoSQLAppListV2.Response> GetNoSQLAppListV2Async(GetNoSQLAppListV2 input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

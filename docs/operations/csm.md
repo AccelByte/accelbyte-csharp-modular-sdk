@@ -99,7 +99,6 @@
 | `/csm/v2/admin/namespaces/{namespace}/nosql/clusters/start` | PUT | StartNoSQLClusterV2 | [StartNoSQLClusterV2](../../apis/AccelByte.Sdk.Api.Csm/Operation/ManagedResources/StartNoSQLClusterV2.cs) | [StartNoSQLClusterV2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/ManagedResources/StartNoSQLClusterV2.cs) |
 | `/csm/v2/admin/namespaces/{namespace}/nosql/clusters/stop` | PUT | StopNoSQLClusterV2 | [StopNoSQLClusterV2](../../apis/AccelByte.Sdk.Api.Csm/Operation/ManagedResources/StopNoSQLClusterV2.cs) | [StopNoSQLClusterV2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/ManagedResources/StopNoSQLClusterV2.cs) |
 | `/csm/v2/admin/namespaces/{namespace}/nosql/tunnels` | GET | GetNoSQLAccessTunnelV2 | [GetNoSQLAccessTunnelV2](../../apis/AccelByte.Sdk.Api.Csm/Operation/ManagedResources/GetNoSQLAccessTunnelV2.cs) | [GetNoSQLAccessTunnelV2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/ManagedResources/GetNoSQLAccessTunnelV2.cs) |
-| `/csm/v2/admin/namespaces/{studioName}/nosql/{resourceId}/apps` | GET | GetNoSQLAppListV2 | [GetNoSQLAppListV2](../../apis/AccelByte.Sdk.Api.Csm/Operation/ManagedResources/GetNoSQLAppListV2.cs) | [GetNoSQLAppListV2](../../samples/AccelByte.Sdk.Sample.Cli/ApiCommand/Csm/ManagedResources/GetNoSQLAppListV2.cs) |
 
 ### Configuration V2 Wrapper:  [ConfigurationV2](../../apis/AccelByte.Sdk.Api.Csm/Wrapper/ConfigurationV2.cs)
 | Endpoint | Method | ID | Class | Example |
@@ -241,8 +240,6 @@
 | `apimodel.ListTopicsResponse` | [ApimodelListTopicsResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelListTopicsResponse.cs) |
 | `apimodel.MemoryRequest` | [ApimodelMemoryRequest](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelMemoryRequest.cs) |
 | `apimodel.MemoryResponse` | [ApimodelMemoryResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelMemoryResponse.cs) |
-| `apimodel.NoSQLAppListResponse` | [ApimodelNoSQLAppListResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelNoSQLAppListResponse.cs) |
-| `apimodel.NoSQLAppResponse` | [ApimodelNoSQLAppResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelNoSQLAppResponse.cs) |
 | `apimodel.NoSQLDatabaseCredentialResponse` | [ApimodelNoSQLDatabaseCredentialResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelNoSQLDatabaseCredentialResponse.cs) |
 | `apimodel.NoSQLDatabaseDeleteResponse` | [ApimodelNoSQLDatabaseDeleteResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelNoSQLDatabaseDeleteResponse.cs) |
 | `apimodel.NoSQLDatabaseResponse` | [ApimodelNoSQLDatabaseResponse](../../apis/AccelByte.Sdk.Api.Csm/Model/ApimodelNoSQLDatabaseResponse.cs) |

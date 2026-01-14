@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
             public AdminSendInboxMessage Build(
-                Dictionary<string, object> body,
+                ModelsSendInboxMessageRequest body,
                 string messageId,
                 string namespace_
             )
@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
 
             public AdminSendInboxMessage.Response Execute(
-                Dictionary<string, object> body,
+                ModelsSendInboxMessageRequest body,
                 string messageId,
                 string namespace_
             )
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.Payload);
             }
             public async Task<AdminSendInboxMessage.Response> ExecuteAsync(
-                Dictionary<string, object> body,
+                ModelsSendInboxMessageRequest body,
                 string messageId,
                 string namespace_
             )
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         }
 
         private AdminSendInboxMessage(AdminSendInboxMessageBuilder builder,
-            Dictionary<string, object> body,
+            ModelsSendInboxMessageRequest body,
             string messageId,
             string namespace_
         )
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Dictionary<string, object>>
+        public class Response : ApiResponse<Model.ModelsSendInboxMessageResponse>
         {
 
             public RestapiErrorResponseBody? Error400 { get; set; } = null;
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public AdminSendInboxMessage(
             string messageId,            
             string namespace_,            
-            Dictionary<string, object> body            
+            Model.ModelsSendInboxMessageRequest body            
         )
         {
             PathParams["messageId"] = messageId;
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.ModelsSendInboxMessageResponse>(payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
