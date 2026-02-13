@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2025 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -18,10 +18,10 @@ namespace AccelByte.Sdk.Authentication
 {
     public class DefaultTokenValidator : TokenValidator, ITokenValidator, IAsyncTokenValidator
     {
-        private Func<IAccelByteSdk, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId) =>
+        private Func<IAccelByteSdk, string, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId, roleNs) =>
         {
             var response = sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
-                .Execute(sdk.Namespace, roleId)
+                .Execute(roleNs, roleId)
                 .EnsureSuccess();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
@@ -37,10 +37,10 @@ namespace AccelByte.Sdk.Authentication
             return permissions;
         });
 
-        private Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId) =>
+        private Func<IAccelByteSdk, string, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId, roleNs) =>
         {
             var response = await sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
-                .ExecuteAsync(sdk.Namespace, roleId);
+                .ExecuteAsync(roleNs, roleId);
             var responseData = response.EnsureSuccess();
 
             List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Authentication
                             if (r.RoleId == null)
                                 continue;
 
-                            var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
+                            var permissions = GetRolePermission(sdk, r.RoleId, r.Namespace!, _FetchFunction);
                             foreach (var p in permissions)
                             {
                                 string aPermission = ReplacePlaceholder(p.Resource, pParams);
@@ -253,7 +253,7 @@ namespace AccelByte.Sdk.Authentication
                             if (r.RoleId == null)
                                 continue;
 
-                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
+                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, r.Namespace!, _FetchFunctionAsync);
                             foreach (var p in permissions)
                             {
                                 string aPermission = ReplacePlaceholder(p.Resource, pParams);
@@ -332,7 +332,7 @@ namespace AccelByte.Sdk.Authentication
                             if (r.RoleId == null)
                                 continue;
 
-                            var permissions = GetRolePermission(sdk, r.RoleId, _FetchFunction);
+                            var permissions = GetRolePermission(sdk, r.RoleId, r.Namespace!, _FetchFunction);
                             foreach (var p in permissions)
                             {
                                 string aPermission = p.Resource;
@@ -414,7 +414,7 @@ namespace AccelByte.Sdk.Authentication
                             if (r.RoleId == null)
                                 continue;
 
-                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, _FetchFunctionAsync);
+                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, r.Namespace!, _FetchFunctionAsync);
                             foreach (var p in permissions)
                             {
                                 string aPermission = p.Resource;

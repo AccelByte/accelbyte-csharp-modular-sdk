@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,16 +42,17 @@ namespace AccelByte.Sdk.Core.Security
             _NamespaceContextCache.Clear();
         }
 
-        protected virtual List<LocalPermissionItem> GetRolePermission(IAccelByteSdk sdk, string roleId,
-            Func<IAccelByteSdk, string, List<LocalPermissionItem>> fetchFunction)
+        protected virtual List<LocalPermissionItem> GetRolePermission(IAccelByteSdk sdk, string roleId, string roleNs,
+            Func<IAccelByteSdk, string, string, List<LocalPermissionItem>> fetchFunction)
         {
-            if (_PermissionCache.ContainsKey(roleId))
-                return _PermissionCache[roleId];
+            string cacheKey = $"{roleId}-{roleNs}";
+            if (_PermissionCache.ContainsKey(cacheKey))
+                return _PermissionCache[cacheKey];
 
             try
             {
-                var permissions = fetchFunction.Invoke(sdk, roleId);
-                _PermissionCache[roleId] = permissions;
+                var permissions = fetchFunction.Invoke(sdk, roleId, roleNs);
+                _PermissionCache[cacheKey] = permissions;
                 return permissions;
             }
             catch
@@ -60,16 +61,17 @@ namespace AccelByte.Sdk.Core.Security
             }
         }
 
-        protected virtual async Task<List<LocalPermissionItem>> GetRolePermissionAsync(IAccelByteSdk sdk, string roleId,
-            Func<IAccelByteSdk, string, Task<List<LocalPermissionItem>>> fetchFunction)
+        protected virtual async Task<List<LocalPermissionItem>> GetRolePermissionAsync(IAccelByteSdk sdk, string roleId, string roleNs,
+            Func<IAccelByteSdk, string, string, Task<List<LocalPermissionItem>>> fetchFunction)
         {
-            if (_PermissionCache.ContainsKey(roleId))
-                return _PermissionCache[roleId];
+            string cacheKey = $"{roleId}-{roleNs}";
+            if (_PermissionCache.ContainsKey(cacheKey))
+                return _PermissionCache[cacheKey];
 
             try
             {
-                var permissions = await fetchFunction.Invoke(sdk, roleId);
-                _PermissionCache[roleId] = permissions;
+                var permissions = await fetchFunction.Invoke(sdk, roleId, roleNs);
+                _PermissionCache[cacheKey] = permissions;
                 return permissions;
             }
             catch
