@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -12,6 +12,7 @@ using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Basic.Model;
 using AccelByte.Sdk.Api.Basic;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -19,7 +20,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class BasicTests : BaseServiceTests
     {
-        public BasicTests() : base(true) { }
+        public BasicTests() : base(true, IntegrationTestConfigRepository.Basic) { }
 
         [Test]
         public void BasicServiceTests()

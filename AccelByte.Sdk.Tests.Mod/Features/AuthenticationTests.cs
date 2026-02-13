@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -17,6 +17,7 @@ using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Authentication;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Legal.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Features
 {
@@ -34,7 +35,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             DefaultTokenRepository tokenRepo = new DefaultTokenRepository();
             using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
-                .UseDefaultConfigRepository()
+                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .SetTokenRepository(tokenRepo)
                 .UseDefaultCredentialRepository()
                 .SetOnAfterLoginEventHandler((loginType, authAction, token, sdk) =>
@@ -81,7 +82,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             DefaultTokenRepository tokenRepo = new DefaultTokenRepository();
             using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
-                .UseDefaultConfigRepository()
+                .SetConfigRepository(IntegrationTestConfigRepository.Achievement)
                 .SetTokenRepository(tokenRepo)
                 .UseDefaultCredentialRepository()
                 .SetOnAfterLoginEventHandler((loginType, authAction, token, sdk) =>
@@ -99,7 +100,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                     throw new Exception("Login failed");
 
                 _ = sdk.GetAchievementApi()
-                    .GlobalAchievements.PublicListGlobalAchievementsOp
+                    .GlobalAchievements.AdminListGlobalAchievementsOp
                     .Execute(sdk.Namespace)
                     .EnsureSuccess();
 

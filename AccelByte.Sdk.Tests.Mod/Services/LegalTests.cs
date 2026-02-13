@@ -1,15 +1,18 @@
-﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+
 using NUnit.Framework;
 
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Legal.Model;
+
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -17,7 +20,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class LegalTests : BaseServiceTests
     {
-        public LegalTests() : base(true) { }
+        public LegalTests() : base(true, IntegrationTestConfigRepository.Admin) { }
 
         public void CreateMarketingPreferencePolicyAndAcceptTest()
         {
@@ -47,7 +50,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 }
             }
 
-            if (targetPolicyId == String.Empty)
+            if (targetPolicyId == "")
             {
                 //Policy does not exists. so we create it.
 

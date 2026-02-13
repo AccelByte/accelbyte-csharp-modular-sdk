@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024-2025 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -65,7 +65,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         public void ClientLoginWithAutoRefreshToken()
         {
             using var sdk = AccelByteSdk.Builder
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .SetConfigRepository(IntegrationTestConfigRepository.Achievement)
                 .UseDefaultCredentialRepository()
                 .UseOnDemandTokenRefresh()
                 .EnableLog()
@@ -74,8 +74,8 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             sdk.LoginClient();
 
             //First request, valid token
-            _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
-                .Execute(sdk.Namespace, "en")
+            _ = sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
+                .Execute(sdk.Namespace)
                 .EnsureSuccess();
 
             //force expiry in 5 seconds
@@ -85,8 +85,8 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             Thread.Sleep(5000);
 
             //Second request, expired token, try to do refresh
-            _ = sdk.GetAchievementApi().Achievements.PublicListAchievementsOp
-                .Execute(sdk.Namespace, "en")
+            _ = sdk.GetAchievementApi().Achievements.AdminListAchievementsOp
+                .Execute(sdk.Namespace)
                 .EnsureSuccess();
 
             sdk.Logout();
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         public void AutoRefreshTokenForWebSocket()
         {
             using var sdk = AccelByteSdk.Builder
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .SetConfigRepository(IntegrationTestConfigRepository.Achievement)
                 .UseDefaultCredentialRepository()
                 .UseOnDemandTokenRefresh()
                 .EnableLog()
@@ -140,8 +140,8 @@ namespace AccelByte.Sdk.Tests.Mod.Features
 
             //force token to be refreshed by calling any op
             _ = sdk.GetAchievementApi().Achievements
-                .PublicListAchievementsOp
-                .Execute(sdk.Namespace, "en")
+                .AdminListAchievementsOp
+                .Execute(sdk.Namespace)
                 .EnsureSuccess();
 
             //wait for any ws response

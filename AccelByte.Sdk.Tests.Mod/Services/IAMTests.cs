@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -13,6 +13,7 @@ using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Iam.Model;
 using System.Diagnostics;
 using System.Threading;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -20,7 +21,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class IAMTests : BaseServiceTests
     {
-        public IAMTests() : base(true) { }
+        public IAMTests() : base(true, IntegrationTestConfigRepository.IAM) { }
 
         protected int FindAndCheckResourceActionFromRole(IAccelByteSdk sdk, string roleId, string resourceToCheck)
         {
@@ -161,7 +162,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         {
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
-                return;
+                return;            
 
             string roleIdentityToUpdate = "USER";
             string resourceToCheck = "NAMESPACE:{namespace}:PROFILE";
@@ -169,6 +170,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             int updatedActionToCheck = 2;
             int checkCount = 20;
             int checkInterval = 1000;
+
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive($"AGS Shared Cloud has different default action value than AGS Private Cloud for {resourceToCheck} permission string.");
+                return;
+            }
 
             DisableRetry();
 

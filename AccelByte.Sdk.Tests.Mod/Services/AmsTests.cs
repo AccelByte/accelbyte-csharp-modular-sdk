@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,6 +10,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Ams.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -17,7 +18,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class AmsTests : BaseServiceTests
     {
-        public AmsTests() : base(false) { }
+        public AmsTests() : base(false, IntegrationTestConfigRepository.AMS) { }
 
         [Test]
         public void InfoTests()
@@ -25,6 +26,12 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
+
+            if (IsUsingAGSStarter())
+            {
+                Assert.Inconclusive("Test does not apply to AGS Starter environment due to ARMADA permission requirement.");
+                return;
+            }
 
             DisableRetry();
 

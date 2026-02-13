@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 using AccelByte.Sdk.Api.Platform.Model;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core;
+using AccelByte.Sdk.Core.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
     public abstract class StoreBasedTests : BaseServiceTests
     {
-        public StoreBasedTests(bool useUserLogin) : base(useUserLogin) { }
+        public StoreBasedTests(bool useUserLogin, IConfigRepository sharedCloudConfig)
+            : base(useUserLogin, sharedCloudConfig) { }
 
         public void CheckAndClearStores(IAccelByteSdk sdk)
         {

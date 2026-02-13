@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -12,6 +12,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 
 using AccelByte.Sdk.Api.Social.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -19,7 +20,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class SocialTests : BaseServiceTests
     {
-        public SocialTests() : base(true) { }
+        public SocialTests() : base(true, IntegrationTestConfigRepository.Statistics) { }
 
         [Test]
         public void SocialServiceTests()
@@ -28,19 +29,14 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
-
-            string stat_code = "csharpserversdkteststat";
+            Random random = new Random();
+            string stat_code = $"csharpsdktest-{random.GenerateRandomAlphabet(4).ToLower()}";
 
             #region Create a stat
             StatCreate createStat = new StatCreate()
             {
-                Name = "CSharp Server SDK Test Stat",
-                Description = "CSharp server sdk integration test.",
+                Name = "CSharp Extend SDK Test Stat",
+                Description = "CSharp extend sdk integration test.",
                 StatCode = stat_code,
                 SetBy = "SERVER",
                 Minimum = 0.0,
@@ -48,21 +44,21 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 DefaultValue = 50.0,
                 IncrementOnly = true,
                 SetAsGlobal = false,
-                Tags = new List<string>() { "csharp", "server_sdk", "test" }
+                Tags = new List<string>() { "csharp", "extend_sdk", "test" }
             };
 
             StatInfo cStat = _Sdk.GetSocialApi().StatConfiguration.CreateStatOp
                 .Execute(createStat, _Sdk.Namespace)
                 .EnsureSuccess();
             #endregion
-            Assert.AreEqual("CSharp Server SDK Test Stat", cStat.Name);
+            Assert.AreEqual("CSharp Extend SDK Test Stat", cStat.Name);
 
             #region Get a stat
             StatInfo gStat = _Sdk.GetSocialApi().StatConfiguration.GetStatOp
                 .Execute(_Sdk.Namespace, stat_code)
                 .EnsureSuccess();
             #endregion
-            Assert.AreEqual("CSharp Server SDK Test Stat", gStat.Name);
+            Assert.AreEqual("CSharp Extend SDK Test Stat", gStat.Name);
 
             #region Update a stat
             StatUpdate updateStat = new StatUpdate()
@@ -89,12 +85,6 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
-
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
 
             Random random = new Random();
             string stat_code = $"csharpsdktest-{random.GenerateRandomAlphabet(4).ToLower()}";

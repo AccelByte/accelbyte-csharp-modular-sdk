@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024-2025 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -15,6 +15,7 @@ using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Challenge.Model;
 using AccelByte.Sdk.Tests.Mod.Scenario;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -22,7 +23,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class ChallengeTests : BaseServiceTests
     {
-        public ChallengeTests() : base(false) { }
+        public ChallengeTests() : base(false, IntegrationTestConfigRepository.Challenge) { }
 
         [Test]
         public void UserRewardTests()

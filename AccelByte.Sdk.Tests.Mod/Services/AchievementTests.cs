@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             public string AchievementCode { get; set; } = "";
         }
 
-        public AchievementTests() : base(true) { }
+        public AchievementTests() : base(true, IntegrationTestConfigRepository.Achievement) { }
 
         [Test]
         public void AchievementServiceTests()

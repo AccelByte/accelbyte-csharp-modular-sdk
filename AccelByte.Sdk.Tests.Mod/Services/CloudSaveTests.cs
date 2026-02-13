@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -13,6 +13,7 @@ using AccelByte.Sdk.Api.Cloudsave.Model;
 
 using AccelByte.Sdk.Tests.Mod.Model;
 using System.Text.Json;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -20,7 +21,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class CloudSaveTests : BaseServiceTests
     {
-        public CloudSaveTests() : base(true) { }
+        public CloudSaveTests() : base(true, IntegrationTestConfigRepository.CloudSave) { }
 
         [Test]
         public void CloudSaveServiceTests()

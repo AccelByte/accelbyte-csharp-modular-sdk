@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023-2025 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -63,7 +63,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         {
             using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .SetConfigRepository(IntegrationTestConfigRepository.Basic)
                 .UseDefaultTokenRepository()
                 .UseDefaultCredentialRepository()
                 .UseLocalTokenValidator()
@@ -77,8 +77,8 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 accessToken = tokenResp.AccessToken!;
             });
 
-            string tPermission = $"NAMESPACE:{sdk.Namespace}:PROFILE";
-            int tAction = 15;
+            string tPermission = $"ADMIN:NAMESPACE:{sdk.Namespace}:PROFILE";
+            int tAction = 2;
 
             bool b = sdk.ValidateToken(accessToken, tPermission, tAction);
             Assert.IsTrue(b);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             //first sdk object is for oauth client which has ADMIN:ROLE [READ] permission, since we will assume that default user doesn't have this permission.
             using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .SetConfigRepository(IntegrationTestConfigRepository.Basic)
                 .UseDefaultTokenRepository()
                 .UseDefaultCredentialRepository()
                 .UseLocalTokenValidator()

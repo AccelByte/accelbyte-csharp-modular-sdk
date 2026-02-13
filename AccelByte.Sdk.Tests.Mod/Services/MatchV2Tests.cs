@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -16,6 +16,7 @@ using AccelByte.Sdk.Api.Match2.Model;
 using AccelByte.Sdk.Api.Session.Model;
 
 using AccelByte.Sdk.Tests.Mod.Scenario;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -23,17 +24,11 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class MatchV2Tests : BaseServiceTests
     {
-        public MatchV2Tests() : base(false) { }
+        public MatchV2Tests() : base(false, IntegrationTestConfigRepository.Matchmaking) { }
 
         [Test]
         public void MatchPoolTests()
         {
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
-                return;
-            }
-
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;

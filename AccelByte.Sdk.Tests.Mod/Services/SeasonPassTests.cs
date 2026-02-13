@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,6 +10,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Platform.Model;
 using AccelByte.Sdk.Api.Seasonpass.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -17,7 +18,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class SeasonPassTests : StoreBasedTests
     {
-        public SeasonPassTests() : base(true) { }
+        public SeasonPassTests() : base(true, IntegrationTestConfigRepository.SeasonPass) { }
 
         [Test]
         public void SeasonPassTest()
@@ -26,19 +27,13 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             if (_Sdk == null)
                 return;
 
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
-
             CheckAndClearStores(_Sdk);
 
             string nameSeason = "CSharpExtendSDKTestSeason";
             DateTime? startTime = new DateTime();
             DateTime? endTime = new DateTime().AddDays(2);
-            string defaultDraftStoreId = String.Empty;
-            string defaultTierItemId = String.Empty;
+            string defaultDraftStoreId;
+            string defaultTierItemId;
 
             // Create a new store
             StoreCreate createStore = new StoreCreate()
@@ -79,8 +74,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             {
                 new RegionDataItemDTO()
                 {
-                    CurrencyCode = "USD",
-                    CurrencyNamespace = "accelbyte",
+                    CurrencyCode = "TESTING",
+                    CurrencyNamespace = _Sdk.Namespace,
                     CurrencyType = RegionDataItemDTOCurrencyType.REAL,
                     Price = price
                 }

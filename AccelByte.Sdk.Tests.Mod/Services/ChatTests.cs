@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2023-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,6 +10,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Api.Chat.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -17,7 +18,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class ChatTests : BaseServiceTests
     {
-        public ChatTests() : base(true) { }
+        public ChatTests() : base(true, IntegrationTestConfigRepository.Chat) { }
 
         [Test]
         public void ChatProfanityTests()
@@ -25,12 +26,6 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
-
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Test does not apply to AGS Starter environment.");
-                return;
-            }
 
             Random random = new Random();
             string profanityWord = $"xsdk{random.GenerateRandomAlphabet(4)}";

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024-2025 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -60,7 +60,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         {
             using IAccelByteSdk sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
-                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
+                .SetConfigRepository(IntegrationTestConfigRepository.Basic)
                 .UseDefaultTokenRepository()
                 .UseDefaultCredentialRepository()
                 .UseDefaultTokenValidator()
@@ -73,8 +73,8 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 accessToken = tokenResp.AccessToken!;
             });
 
-            string tPermission = $"NAMESPACE:{sdk.Namespace}:PROFILE";
-            int tAction = 15;
+            string tPermission = $"ADMIN:NAMESPACE:{sdk.Namespace}:PROFILE";
+            int tAction = 2;
 
             bool b = sdk.ValidateToken(accessToken, tPermission, tAction);
             Assert.IsTrue(b);
@@ -82,6 +82,58 @@ namespace AccelByte.Sdk.Tests.Mod.Features
 
         [Test]
         public void UserPermissionValidationTest()
+        {
+            //first sdk object is for oauth client which has ADMIN:ROLE [READ] permission, since we will assume that default user doesn't have this permission.
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
+                .UseDefaultHttpClient()
+                .SetConfigRepository(IntegrationTestConfigRepository.Basic)
+                .UseDefaultTokenRepository()
+                .UseDefaultCredentialRepository()
+                .UseDefaultTokenValidator()
+                .EnableLog()
+                .Build();
+            sdk.LoginClient();
+
+            //we will access user using different sdk object wrapped inside `ExistingTestPlayer` object.
+            var user = new ExistingTestPlayer("AB", true);
+
+            string tPermission = $"ADMIN:NAMESPACE:{sdk.Namespace}:USER";
+            int tAction = 2;
+
+            //validate user's token against expected permission.
+            bool b = sdk.ValidateToken(user.AccessToken, tPermission, tAction);
+            Assert.IsTrue(b);
+
+            user.Logout();
+        }
+
+        [Test]
+        public void CustomPermissionValidationTestUsingDefaultValidator()
+        {
+            using IAccelByteSdk sdk = AccelByteSdk.Builder
+                .UseDefaultHttpClient()
+                .SetConfigRepository(IntegrationTestConfigRepository.CustomPermission)
+                .UseDefaultTokenRepository()
+                .UseDefaultCredentialRepository()
+                .UseDefaultTokenValidator()
+                .EnableLog()
+                .Build();
+
+            string accessToken = "";
+            sdk.LoginClient((tokenResp) =>
+            {
+                accessToken = tokenResp.AccessToken!;
+            });
+
+            string tPermission = $"CUSTOM:ADMIN:NAMESPACE:{sdk.Namespace}:GUILD";
+            int tAction = 2;
+
+            bool b = sdk.ValidateToken(accessToken, tPermission, tAction);
+            Assert.IsTrue(b);
+        }
+
+        [Test]
+        public void UserCustomPermissionValidationTestUsingDefaultValidator()
         {
             //first sdk object is for oauth client which has ADMIN:ROLE [READ] permission, since we will assume that default user doesn't have this permission.
             using IAccelByteSdk sdk = AccelByteSdk.Builder
@@ -95,9 +147,9 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             sdk.LoginClient();
 
             //we will access user using different sdk object wrapped inside `ExistingTestPlayer` object.
-            var user = new ExistingTestPlayer("AB", true);
+            var user = new ExistingTestPlayer("AB_PLAYER1", true);
 
-            string tPermission = $"ADMIN:NAMESPACE:{sdk.Namespace}:USER";
+            string tPermission = $"CUSTOM:NAMESPACE:{sdk.Namespace}:GUILD";
             int tAction = 2;
 
             //validate user's token against expected permission.

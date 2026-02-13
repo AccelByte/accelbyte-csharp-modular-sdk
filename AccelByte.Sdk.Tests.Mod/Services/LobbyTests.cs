@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -12,6 +12,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Lobby.Model;
 using AccelByte.Sdk.Api.Lobby;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -22,7 +23,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         public const string LOBBY_PRESENCE_ONLINE = "online";
         public const string LOBBY_PRESENCE_OFFLINE = "offline";
 
-        public LobbyTests() : base(true) { }
+        public LobbyTests() : base(true, IntegrationTestConfigRepository.Lobby) { }
 
         [Test]
         public void LobbyAPIServiceTests()

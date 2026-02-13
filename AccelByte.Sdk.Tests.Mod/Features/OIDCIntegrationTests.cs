@@ -18,6 +18,7 @@ using AccelByte.Sdk.Core.Net.Http;
 using AccelByte.Sdk.Core.Repository;
 
 using AccelByte.Sdk.Tests.Mod.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Features
 {
@@ -25,8 +26,6 @@ namespace AccelByte.Sdk.Tests.Mod.Features
     [Explicit]
     public class OIDCIntegrationTests : BaseIntegrationTest
     {
-        private IAccelByteSdk? _Sdk = null;
-
         private string _PhantauthBaseUrl = "https://phantauth.net";
 
         [OneTimeSetUp]
@@ -34,7 +33,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
         {
             _Sdk = AccelByteSdk.Builder
                 .UseDefaultHttpClient()
-                .UseDefaultConfigRepository()
+                .SetConfigRepository(IntegrationTestConfigRepository.Admin)
                 .UseDefaultTokenRepository()
                 .UseDefaultCredentialRepository()
                 .EnableLog()
@@ -89,7 +88,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
             if (_Sdk == null)
                 return;
 
-            if (IsUsingAGSStarter(_Sdk))
+            if (IsUsingAGSStarter())
             {
                 Assert.Inconclusive("Test does not apply to AGS Starter environment.");
                 return;

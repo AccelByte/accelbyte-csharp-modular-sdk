@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -10,6 +10,7 @@ using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Leaderboard.Model;
 using AccelByte.Sdk.Api.Social.Model;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -17,7 +18,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
     [Explicit]
     public class LeaderboardTests : BaseServiceTests
     {
-        public LeaderboardTests() : base(true) { }
+        public LeaderboardTests() : base(true, IntegrationTestConfigRepository.Leaderboard) { }
 
         [Test]
         public void LeaderboardServiceTests()

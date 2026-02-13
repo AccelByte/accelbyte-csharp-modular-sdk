@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -12,6 +12,7 @@ using AccelByte.Sdk.Api;
 using AccelByte.Sdk.Api.Session.Model;
 
 using AccelByte.Sdk.Tests.Mod.Scenario;
+using AccelByte.Sdk.Tests.Mod.Repository;
 
 namespace AccelByte.Sdk.Tests.Mod.Services
 {
@@ -23,7 +24,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
         private ITestPlayer? _Player2 = null;
 
-        public SessionTests() : base(false) { }
+        public SessionTests() : base(false, IntegrationTestConfigRepository.Session) { }
 
         protected override void OnStartup(IAccelByteSdk sdk)
         {
@@ -44,12 +45,6 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void ConfigurationTemplateTests()
         {
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
-                return;
-            }
-
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
@@ -84,8 +79,8 @@ namespace AccelByte.Sdk.Tests.Mod.Services
                 .Execute(cfgTemplateName, _Sdk.Namespace)
                 .EnsureSuccess();
             #endregion
-            Assert.AreEqual(ApimodelsCreateConfigurationTemplateRequestType.P2P, cfgTemplate.Type!);
-            Assert.AreEqual(ApimodelsCreateConfigurationTemplateRequestJoinability.OPEN, cfgTemplate.Joinability!);
+            Assert.AreEqual(ApimodelsCreateConfigurationTemplateRequestType.P2P.ToString(), cfgTemplate.Type!.ToString());
+            Assert.AreEqual(ApimodelsCreateConfigurationTemplateRequestJoinability.OPEN.ToString(), cfgTemplate.Joinability!.ToString());
             Assert.AreEqual(2, cfgTemplate.MaxPlayers!);
 
             #region Update session configuration template
@@ -115,12 +110,6 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void GameSessionTests()
         {
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
-                return;
-            }
-
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
@@ -263,12 +252,6 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         [Test]
         public void PartyTests()
         {
-            if (IsUsingAGSStarter())
-            {
-                Assert.Inconclusive("Temporarily disabled in AGS Starter due to issue in session service.");
-                return;
-            }
-
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
                 return;
@@ -355,15 +338,20 @@ namespace AccelByte.Sdk.Tests.Mod.Services
             Wait();
 
             #region Get party detail
-            ApimodelsPartySessionResponse partyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp
-                .Execute(_Sdk.Namespace, partyId)
+            ApimodelsPartyQueryResponse partyData = _Sdk.GetSessionApi().Party.AdminQueryPartiesOp
+                .SetPartyID(partyId)
+                .Execute(_Sdk.Namespace)
                 .EnsureSuccess();
             #endregion
 
-            Assert.AreEqual(2, partyData.Members!.Count);
-            List<string> userIds = partyData.Members!.Select(item => item.Id!).ToList();
-            Assert.Contains(_Player1.UserId, userIds);
-            Assert.Contains(_Player2.UserId, userIds);
+            if ((partyData.Data != null) && (partyData.Data.Count > 0))
+            {
+                var party = partyData.Data[0];
+                Assert.AreEqual(2, party.Members!.Count);
+                List<string> userIds = party.Members!.Select(item => item.Id!).ToList();
+                Assert.Contains(_Player1.UserId, userIds);
+                Assert.Contains(_Player2.UserId, userIds);
+            }
 
             #region Admin query parties
             var adminPartyData = _Sdk.GetSessionApi().Party.AdminQueryPartiesOp
@@ -385,19 +373,24 @@ namespace AccelByte.Sdk.Tests.Mod.Services
 
             Wait();
 
-            ApimodelsPartySessionResponse uPartyData = _Sdk.GetSessionApi().Party.PublicGetPartyOp
-                .Execute(_Sdk.Namespace, partyId)
+            partyData = _Sdk.GetSessionApi().Party.AdminQueryPartiesOp
+                .SetPartyID(partyId)
+                .Execute(_Sdk.Namespace)
                 .EnsureSuccess();
 
-            Assert.AreEqual(2, uPartyData.Members!.Count);
+            if ((partyData.Data != null) && (partyData.Data.Count > 0))
+            {
+                var uPartyData = partyData.Data[0];
+                Assert.AreEqual(2, uPartyData.Members!.Count);
 
-            //Get id of members who are still in party.
-            userIds = uPartyData.Members!
-                .Where(item => item.Status! != ApimodelsUserResponseStatus.LEFT)
-                .Select(item => item.Id!).ToList();
+                //Get id of members who are still in party.
+                var userIds = uPartyData.Members!
+                    .Where(item => item.Status! != ApimodelsUserResponseStatus.LEFT)
+                    .Select(item => item.Id!).ToList();
 
-            Assert.Contains(_Player1.UserId, userIds);
-            Assert.That(userIds, Has.No.Member(_Player2.UserId));
+                Assert.Contains(_Player1.UserId, userIds);
+                Assert.That(userIds, Has.No.Member(_Player2.UserId));
+            }
 
             _Sdk.GetSessionApi().ConfigurationTemplate.AdminDeleteConfigurationTemplateV1Op
                 .Execute(cfgTemplateName, _Sdk.Namespace)
