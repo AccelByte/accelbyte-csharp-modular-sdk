@@ -15,6 +15,8 @@ namespace AccelByte.Sdk.Core
 
         public HttpStatusCode StatusCode { get; set; }
 
+        public string Payload { get; set; } = "";
+
         public ApiResponseException(ApiResponse responseObj, bool errorAvailable)
             : base(errorAvailable ?
                   $"{responseObj.FullOperationId} returns error: {responseObj.Error.Code}. {responseObj.Error.Message}" :
@@ -32,5 +34,17 @@ namespace AccelByte.Sdk.Core
             FullOperationId = responseObj.FullOperationId;
             StatusCode = responseObj.StatusCode;
         }
+
+        public ApiResponseException WithPayload(string payload)
+        {
+            Payload = payload;
+            return this;
+        }
+
+        public static ApiResponseException Create(ApiResponse responseObj, bool errorAvailable)
+            => new ApiResponseException(responseObj, errorAvailable);
+
+        public static ApiResponseException Create(ApiResponse responseObj, string customMessage)
+            => new ApiResponseException(responseObj, customMessage);
     }
 }

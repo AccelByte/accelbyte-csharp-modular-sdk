@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 AccelByte Inc. All Rights Reserved.
+﻿// Copyright (c) 2024-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+
+using AccelByte.Sdk.Core.Net.Http;
 
 namespace AccelByte.Sdk.Core
 {
@@ -23,14 +25,25 @@ namespace AccelByte.Sdk.Core
 
         public ApiError Error { get; set; } = ApiError.Empty;
 
+        public string Payload { get; set; } = "";
+
         protected abstract string GetFullOperationId();
 
         public void ThrowExceptionIfError()
         {
             if (!IsSuccess && Error.IsAvailable)
-                throw new ApiResponseException(this, true);
+                throw ApiResponseException.Create(this, true).WithPayload(Payload);
             else if (!IsSuccess)
-                throw new ApiResponseException(this, false);
+                throw ApiResponseException.Create(this, false).WithPayload(Payload);
+        }
+
+        /// <summary>
+        /// This method is for backward compatibility with monolithic SDK which will throws HttpResponseException.
+        /// </summary>
+        public void ThrowHttpExceptionIfError()
+        {
+            if (!IsSuccess)
+                throw new HttpResponseException(StatusCode, Payload);
         }
 
         public void EnsureSuccess()
@@ -47,7 +60,8 @@ namespace AccelByte.Sdk.Core
         {
             ThrowExceptionIfError();
             if (Data == null)
-                throw new ApiResponseException(this, $"{FullOperationId} returns NULL");
+                throw ApiResponseException.Create(this, $"{FullOperationId} returns NULL")
+                    .WithPayload(Payload);
 
             return Data;
         }
