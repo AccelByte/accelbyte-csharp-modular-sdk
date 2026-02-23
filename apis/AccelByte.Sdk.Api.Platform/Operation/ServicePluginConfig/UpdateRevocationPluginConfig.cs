@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateRevocationPluginConfigBuilder Builder { get => new UpdateRevocationPluginConfigBuilder(); }
 
-        public class UpdateRevocationPluginConfigBuilder
-            : OperationBuilder<UpdateRevocationPluginConfigBuilder>
+        public interface IUpdateRevocationPluginConfigBuilder
         {
 
 
 
 
 
-            internal UpdateRevocationPluginConfigBuilder() { }
+        }
 
-            internal UpdateRevocationPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateRevocationPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateRevocationPluginConfigBuilder
+            where TImpl : UpdateRevocationPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateRevocationPluginConfigAbstractBuilder() { }
+
+            public UpdateRevocationPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateRevocationPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateRevocationPluginConfig.Response Execute(
+            protected UpdateRevocationPluginConfig.Response InternalExecute(
                 RevocationPluginConfigUpdate body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateRevocationPluginConfig.Response> ExecuteAsync(
+            protected async Task<UpdateRevocationPluginConfig.Response> InternalExecuteAsync(
                 RevocationPluginConfigUpdate body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateRevocationPluginConfig(UpdateRevocationPluginConfigBuilder builder,
+        public class UpdateRevocationPluginConfigBuilder : UpdateRevocationPluginConfigAbstractBuilder<UpdateRevocationPluginConfigBuilder>
+        {
+            public UpdateRevocationPluginConfigBuilder() : base() { }
+
+            public UpdateRevocationPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateRevocationPluginConfig.Response Execute(
+                RevocationPluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateRevocationPluginConfig.Response> ExecuteAsync(
+                RevocationPluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateRevocationPluginConfig(IUpdateRevocationPluginConfigBuilder builder,
             RevocationPluginConfigUpdate body,
             string namespace_
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

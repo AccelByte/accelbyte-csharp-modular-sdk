@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder Builder { get => new AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder(); }
 
-        public class AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder
-            : OperationBuilder<AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder>
+        public interface IAdminCheckThirdPartyLoginPlatformAvailabilityV3Builder
         {
 
 
 
 
 
-            internal AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder() { }
+        }
 
-            internal AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminCheckThirdPartyLoginPlatformAvailabilityV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCheckThirdPartyLoginPlatformAvailabilityV3Builder
+            where TImpl : AdminCheckThirdPartyLoginPlatformAvailabilityV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCheckThirdPartyLoginPlatformAvailabilityV3AbstractBuilder() { }
+
+            public AdminCheckThirdPartyLoginPlatformAvailabilityV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response Execute(
+            protected AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response InternalExecute(
                 string platformId
             )
             {
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response> ExecuteAsync(
+            protected async Task<AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response> InternalExecuteAsync(
                 string platformId
             )
             {
@@ -104,7 +114,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminCheckThirdPartyLoginPlatformAvailabilityV3(AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder builder,
+        public class AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder : AdminCheckThirdPartyLoginPlatformAvailabilityV3AbstractBuilder<AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder>
+        {
+            public AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder() : base() { }
+
+            public AdminCheckThirdPartyLoginPlatformAvailabilityV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response Execute(
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    platformId
+                );
+            }
+            public async Task<AdminCheckThirdPartyLoginPlatformAvailabilityV3.Response> ExecuteAsync(
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId
+                );
+            }
+        }
+
+
+        public AdminCheckThirdPartyLoginPlatformAvailabilityV3(IAdminCheckThirdPartyLoginPlatformAvailabilityV3Builder builder,
             string platformId
         )
         {
@@ -173,22 +208,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelCheckAvailabilityResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelCheckAvailabilityResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

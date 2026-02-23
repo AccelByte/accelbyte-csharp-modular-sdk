@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,17 +42,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateUserV2Builder Builder { get => new AdminUpdateUserV2Builder(); }
 
-        public class AdminUpdateUserV2Builder
-            : OperationBuilder<AdminUpdateUserV2Builder>
+        public interface IAdminUpdateUserV2Builder
         {
 
 
 
 
 
-            internal AdminUpdateUserV2Builder() { }
+        }
 
-            internal AdminUpdateUserV2Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateUserV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateUserV2Builder
+            where TImpl : AdminUpdateUserV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateUserV2AbstractBuilder() { }
+
+            public AdminUpdateUserV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -74,12 +84,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminUpdateUserV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminUpdateUserV2.Response Execute(
+            protected AdminUpdateUserV2.Response InternalExecute(
                 ModelUserUpdateRequest body,
                 string namespace_,
                 string userId
@@ -100,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateUserV2.Response> ExecuteAsync(
+            protected async Task<AdminUpdateUserV2.Response> InternalExecuteAsync(
                 ModelUserUpdateRequest body,
                 string namespace_,
                 string userId
@@ -123,7 +133,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateUserV2(AdminUpdateUserV2Builder builder,
+        public class AdminUpdateUserV2Builder : AdminUpdateUserV2AbstractBuilder<AdminUpdateUserV2Builder>
+        {
+            public AdminUpdateUserV2Builder() : base() { }
+
+            public AdminUpdateUserV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminUpdateUserV2.Response Execute(
+                ModelUserUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminUpdateUserV2.Response> ExecuteAsync(
+                ModelUserUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminUpdateUserV2(IAdminUpdateUserV2Builder builder,
             ModelUserUpdateRequest body,
             string namespace_,
             string userId
@@ -204,32 +248,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error409 = response.Payload;
                 response.Error = new ApiError("-1", response.Error409!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

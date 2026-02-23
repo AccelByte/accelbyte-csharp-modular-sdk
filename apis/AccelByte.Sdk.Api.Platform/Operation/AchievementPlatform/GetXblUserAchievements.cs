@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetXblUserAchievementsBuilder Builder { get => new GetXblUserAchievementsBuilder(); }
 
-        public class GetXblUserAchievementsBuilder
-            : OperationBuilder<GetXblUserAchievementsBuilder>
+        public interface IGetXblUserAchievementsBuilder
         {
 
 
 
 
 
-            internal GetXblUserAchievementsBuilder() { }
+        }
 
-            internal GetXblUserAchievementsBuilder(IAccelByteSdk sdk)
+        public abstract class GetXblUserAchievementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetXblUserAchievementsBuilder
+            where TImpl : GetXblUserAchievementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetXblUserAchievementsAbstractBuilder() { }
+
+            public GetXblUserAchievementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     xboxUserId                    
                 );
 
-                op.SetBaseFields<GetXblUserAchievementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetXblUserAchievements.Response Execute(
+            protected GetXblUserAchievements.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string xboxUserId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetXblUserAchievements.Response> ExecuteAsync(
+            protected async Task<GetXblUserAchievements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string xboxUserId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetXblUserAchievements(GetXblUserAchievementsBuilder builder,
+        public class GetXblUserAchievementsBuilder : GetXblUserAchievementsAbstractBuilder<GetXblUserAchievementsBuilder>
+        {
+            public GetXblUserAchievementsBuilder() : base() { }
+
+            public GetXblUserAchievementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetXblUserAchievements.Response Execute(
+                string namespace_,
+                string userId,
+                string xboxUserId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    xboxUserId
+                );
+            }
+            public async Task<GetXblUserAchievements.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string xboxUserId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    xboxUserId
+                );
+            }
+        }
+
+
+        public GetXblUserAchievements(IGetXblUserAchievementsBuilder builder,
             string namespace_,
             string userId,
             string xboxUserId
@@ -183,12 +226,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.XblUserAchievements>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.XblUserAchievements>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateWxPayConfigBuilder Builder { get => new UpdateWxPayConfigBuilder(); }
 
-        public class UpdateWxPayConfigBuilder
-            : OperationBuilder<UpdateWxPayConfigBuilder>
+        public interface IUpdateWxPayConfigBuilder
+        {
+
+            bool? Validate { get; }
+
+
+
+
+
+        }
+
+        public abstract class UpdateWxPayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateWxPayConfigBuilder
+            where TImpl : UpdateWxPayConfigAbstractBuilder<TImpl>
         {
 
             public bool? Validate { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateWxPayConfigBuilder() { }
+            public UpdateWxPayConfigAbstractBuilder() { }
 
-            internal UpdateWxPayConfigBuilder(IAccelByteSdk sdk)
+            public UpdateWxPayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UpdateWxPayConfigBuilder SetValidate(bool _validate)
+            public TImpl SetValidate(bool _validate)
             {
                 Validate = _validate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateWxPayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateWxPayConfig.Response Execute(
+            protected UpdateWxPayConfig.Response InternalExecute(
                 WxPayConfigRequest body,
                 string id
             )
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateWxPayConfig.Response> ExecuteAsync(
+            protected async Task<UpdateWxPayConfig.Response> InternalExecuteAsync(
                 WxPayConfigRequest body,
                 string id
             )
@@ -115,7 +127,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateWxPayConfig(UpdateWxPayConfigBuilder builder,
+        public class UpdateWxPayConfigBuilder : UpdateWxPayConfigAbstractBuilder<UpdateWxPayConfigBuilder>
+        {
+            public UpdateWxPayConfigBuilder() : base() { }
+
+            public UpdateWxPayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateWxPayConfig.Response Execute(
+                WxPayConfigRequest body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateWxPayConfig.Response> ExecuteAsync(
+                WxPayConfigRequest body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateWxPayConfig(IUpdateWxPayConfigBuilder builder,
             WxPayConfigRequest body,
             string id
         )
@@ -187,12 +228,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

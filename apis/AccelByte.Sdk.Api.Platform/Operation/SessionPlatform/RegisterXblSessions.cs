@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RegisterXblSessionsBuilder Builder { get => new RegisterXblSessionsBuilder(); }
 
-        public class RegisterXblSessionsBuilder
-            : OperationBuilder<RegisterXblSessionsBuilder>
+        public interface IRegisterXblSessionsBuilder
         {
 
 
 
 
 
-            internal RegisterXblSessionsBuilder() { }
+        }
 
-            internal RegisterXblSessionsBuilder(IAccelByteSdk sdk)
+        public abstract class RegisterXblSessionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRegisterXblSessionsBuilder
+            where TImpl : RegisterXblSessionsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RegisterXblSessionsAbstractBuilder() { }
+
+            public RegisterXblSessionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RegisterXblSessionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RegisterXblSessions.Response Execute(
+            protected RegisterXblSessions.Response InternalExecute(
                 XblUserSessionRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RegisterXblSessions.Response> ExecuteAsync(
+            protected async Task<RegisterXblSessions.Response> InternalExecuteAsync(
                 XblUserSessionRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RegisterXblSessions(RegisterXblSessionsBuilder builder,
+        public class RegisterXblSessionsBuilder : RegisterXblSessionsAbstractBuilder<RegisterXblSessionsBuilder>
+        {
+            public RegisterXblSessionsBuilder() : base() { }
+
+            public RegisterXblSessionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RegisterXblSessions.Response Execute(
+                XblUserSessionRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RegisterXblSessions.Response> ExecuteAsync(
+                XblUserSessionRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RegisterXblSessions(IRegisterXblSessionsBuilder builder,
             XblUserSessionRequest body,
             string namespace_,
             string userId
@@ -183,12 +226,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

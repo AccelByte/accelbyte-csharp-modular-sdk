@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DefeatureItemBuilder Builder { get => new DefeatureItemBuilder(); }
 
-        public class DefeatureItemBuilder
-            : OperationBuilder<DefeatureItemBuilder>
+        public interface IDefeatureItemBuilder
         {
 
 
 
 
 
-            internal DefeatureItemBuilder() { }
+        }
 
-            internal DefeatureItemBuilder(IAccelByteSdk sdk)
+        public abstract class DefeatureItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDefeatureItemBuilder
+            where TImpl : DefeatureItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DefeatureItemAbstractBuilder() { }
+
+            public DefeatureItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<DefeatureItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DefeatureItem.Response Execute(
+            protected DefeatureItem.Response InternalExecute(
                 string feature,
                 string itemId,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DefeatureItem.Response> ExecuteAsync(
+            protected async Task<DefeatureItem.Response> InternalExecuteAsync(
                 string feature,
                 string itemId,
                 string namespace_,
@@ -118,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public DefeatureItem.Response<T1> Execute<T1>(
+            protected DefeatureItem.Response<T1> InternalExecute<T1>(
                 string feature,
                 string itemId,
                 string namespace_,
@@ -141,7 +151,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DefeatureItem.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<DefeatureItem.Response<T1>> InternalExecuteAsync<T1>(
                 string feature,
                 string itemId,
                 string namespace_,
@@ -166,7 +176,73 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DefeatureItem(DefeatureItemBuilder builder,
+        public class DefeatureItemBuilder : DefeatureItemAbstractBuilder<DefeatureItemBuilder>
+        {
+            public DefeatureItemBuilder() : base() { }
+
+            public DefeatureItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DefeatureItem.Response Execute(
+                string feature,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    feature,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<DefeatureItem.Response> ExecuteAsync(
+                string feature,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    feature,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+
+            public DefeatureItem.Response<T1> Execute<T1>(
+                string feature,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute<T1>(
+                    feature,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<DefeatureItem.Response<T1>> ExecuteAsync<T1>(
+                string feature,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    feature,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public DefeatureItem(IDefeatureItemBuilder builder,
             string feature,
             string itemId,
             string namespace_,
@@ -254,17 +330,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 
@@ -285,17 +364,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             

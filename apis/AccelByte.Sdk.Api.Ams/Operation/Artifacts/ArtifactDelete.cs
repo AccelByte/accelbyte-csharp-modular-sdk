@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static ArtifactDeleteBuilder Builder { get => new ArtifactDeleteBuilder(); }
 
-        public class ArtifactDeleteBuilder
-            : OperationBuilder<ArtifactDeleteBuilder>
+        public interface IArtifactDeleteBuilder
         {
 
 
 
 
 
-            internal ArtifactDeleteBuilder() { }
+        }
 
-            internal ArtifactDeleteBuilder(IAccelByteSdk sdk)
+        public abstract class ArtifactDeleteAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IArtifactDeleteBuilder
+            where TImpl : ArtifactDeleteAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ArtifactDeleteAbstractBuilder() { }
+
+            public ArtifactDeleteAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ArtifactDeleteBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ArtifactDelete.Response Execute(
+            protected ArtifactDelete.Response InternalExecute(
                 string artifactID,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ArtifactDelete.Response> ExecuteAsync(
+            protected async Task<ArtifactDelete.Response> InternalExecuteAsync(
                 string artifactID,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private ArtifactDelete(ArtifactDeleteBuilder builder,
+        public class ArtifactDeleteBuilder : ArtifactDeleteAbstractBuilder<ArtifactDeleteBuilder>
+        {
+            public ArtifactDeleteBuilder() : base() { }
+
+            public ArtifactDeleteBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ArtifactDelete.Response Execute(
+                string artifactID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    artifactID,
+                    namespace_
+                );
+            }
+            public async Task<ArtifactDelete.Response> ExecuteAsync(
+                string artifactID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    artifactID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ArtifactDelete(IArtifactDeleteBuilder builder,
             string artifactID,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

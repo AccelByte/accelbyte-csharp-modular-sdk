@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListItemTypeConfigsBuilder Builder { get => new ListItemTypeConfigsBuilder(); }
 
-        public class ListItemTypeConfigsBuilder
-            : OperationBuilder<ListItemTypeConfigsBuilder>
+        public interface IListItemTypeConfigsBuilder
         {
 
 
 
 
 
-            internal ListItemTypeConfigsBuilder() { }
+        }
 
-            internal ListItemTypeConfigsBuilder(IAccelByteSdk sdk)
+        public abstract class ListItemTypeConfigsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListItemTypeConfigsBuilder
+            where TImpl : ListItemTypeConfigsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ListItemTypeConfigsAbstractBuilder() { }
+
+            public ListItemTypeConfigsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ListItemTypeConfigs op = new ListItemTypeConfigs(this
                 );
 
-                op.SetBaseFields<ListItemTypeConfigsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListItemTypeConfigs.Response Execute(
+            protected ListItemTypeConfigs.Response InternalExecute(
             )
             {
                 ListItemTypeConfigs op = Build(
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListItemTypeConfigs.Response> ExecuteAsync(
+            protected async Task<ListItemTypeConfigs.Response> InternalExecuteAsync(
             )
             {
                 ListItemTypeConfigs op = Build(
@@ -96,7 +106,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListItemTypeConfigs(ListItemTypeConfigsBuilder builder
+        public class ListItemTypeConfigsBuilder : ListItemTypeConfigsAbstractBuilder<ListItemTypeConfigsBuilder>
+        {
+            public ListItemTypeConfigsBuilder() : base() { }
+
+            public ListItemTypeConfigsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListItemTypeConfigs.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<ListItemTypeConfigs.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public ListItemTypeConfigs(IListItemTypeConfigsBuilder builder
         )
         {
             
@@ -155,7 +186,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ItemTypeConfigInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemTypeConfigInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

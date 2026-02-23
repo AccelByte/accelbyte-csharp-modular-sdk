@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,8 +28,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicVerifyUserByLinkV3Builder Builder { get => new PublicVerifyUserByLinkV3Builder(); }
 
-        public class PublicVerifyUserByLinkV3Builder
-            : OperationBuilder<PublicVerifyUserByLinkV3Builder>
+        public interface IPublicVerifyUserByLinkV3Builder
+        {
+
+            string? Code { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicVerifyUserByLinkV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicVerifyUserByLinkV3Builder
+            where TImpl : PublicVerifyUserByLinkV3AbstractBuilder<TImpl>
         {
 
             public string? Code { get; set; }
@@ -38,18 +50,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicVerifyUserByLinkV3Builder() { }
+            public PublicVerifyUserByLinkV3AbstractBuilder() { }
 
-            internal PublicVerifyUserByLinkV3Builder(IAccelByteSdk sdk)
+            public PublicVerifyUserByLinkV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicVerifyUserByLinkV3Builder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -62,11 +74,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicVerifyUserByLinkV3 op = new PublicVerifyUserByLinkV3(this
                 );
 
-                op.SetBaseFields<PublicVerifyUserByLinkV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicVerifyUserByLinkV3.Response Execute(
+            protected PublicVerifyUserByLinkV3.Response InternalExecute(
             )
             {
                 PublicVerifyUserByLinkV3 op = Build(
@@ -81,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicVerifyUserByLinkV3.Response> ExecuteAsync(
+            protected async Task<PublicVerifyUserByLinkV3.Response> InternalExecuteAsync(
             )
             {
                 PublicVerifyUserByLinkV3 op = Build(
@@ -98,7 +110,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicVerifyUserByLinkV3(PublicVerifyUserByLinkV3Builder builder
+        public class PublicVerifyUserByLinkV3Builder : PublicVerifyUserByLinkV3AbstractBuilder<PublicVerifyUserByLinkV3Builder>
+        {
+            public PublicVerifyUserByLinkV3Builder() : base() { }
+
+            public PublicVerifyUserByLinkV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicVerifyUserByLinkV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicVerifyUserByLinkV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicVerifyUserByLinkV3(IPublicVerifyUserByLinkV3Builder builder
         )
         {
             

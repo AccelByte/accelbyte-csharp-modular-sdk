@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetRevocationPluginConfigBuilder Builder { get => new GetRevocationPluginConfigBuilder(); }
 
-        public class GetRevocationPluginConfigBuilder
-            : OperationBuilder<GetRevocationPluginConfigBuilder>
+        public interface IGetRevocationPluginConfigBuilder
         {
 
 
 
 
 
-            internal GetRevocationPluginConfigBuilder() { }
+        }
 
-            internal GetRevocationPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetRevocationPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRevocationPluginConfigBuilder
+            where TImpl : GetRevocationPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetRevocationPluginConfigAbstractBuilder() { }
+
+            public GetRevocationPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetRevocationPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetRevocationPluginConfig.Response Execute(
+            protected GetRevocationPluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRevocationPluginConfig.Response> ExecuteAsync(
+            protected async Task<GetRevocationPluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetRevocationPluginConfig(GetRevocationPluginConfigBuilder builder,
+        public class GetRevocationPluginConfigBuilder : GetRevocationPluginConfigAbstractBuilder<GetRevocationPluginConfigBuilder>
+        {
+            public GetRevocationPluginConfigBuilder() : base() { }
+
+            public GetRevocationPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetRevocationPluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetRevocationPluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetRevocationPluginConfig(IGetRevocationPluginConfigBuilder builder,
             string namespace_
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

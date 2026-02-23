@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateCurrencyBuilder Builder { get => new UpdateCurrencyBuilder(); }
 
-        public class UpdateCurrencyBuilder
-            : OperationBuilder<UpdateCurrencyBuilder>
+        public interface IUpdateCurrencyBuilder
         {
 
 
 
 
 
-            internal UpdateCurrencyBuilder() { }
+        }
 
-            internal UpdateCurrencyBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateCurrencyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateCurrencyBuilder
+            where TImpl : UpdateCurrencyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateCurrencyAbstractBuilder() { }
+
+            public UpdateCurrencyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateCurrencyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateCurrency.Response Execute(
+            protected UpdateCurrency.Response InternalExecute(
                 CurrencyUpdate body,
                 string currencyCode,
                 string namespace_
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateCurrency.Response> ExecuteAsync(
+            protected async Task<UpdateCurrency.Response> InternalExecuteAsync(
                 CurrencyUpdate body,
                 string currencyCode,
                 string namespace_
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateCurrency(UpdateCurrencyBuilder builder,
+        public class UpdateCurrencyBuilder : UpdateCurrencyAbstractBuilder<UpdateCurrencyBuilder>
+        {
+            public UpdateCurrencyBuilder() : base() { }
+
+            public UpdateCurrencyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateCurrency.Response Execute(
+                CurrencyUpdate body,
+                string currencyCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    currencyCode,
+                    namespace_
+                );
+            }
+            public async Task<UpdateCurrency.Response> ExecuteAsync(
+                CurrencyUpdate body,
+                string currencyCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    currencyCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateCurrency(IUpdateCurrencyBuilder builder,
             CurrencyUpdate body,
             string currencyCode,
             string namespace_
@@ -188,17 +231,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CurrencyInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CurrencyInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

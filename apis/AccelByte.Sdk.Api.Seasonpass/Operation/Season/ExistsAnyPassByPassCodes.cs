@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static ExistsAnyPassByPassCodesBuilder Builder { get => new ExistsAnyPassByPassCodesBuilder(); }
 
-        public class ExistsAnyPassByPassCodesBuilder
-            : OperationBuilder<ExistsAnyPassByPassCodesBuilder>
+        public interface IExistsAnyPassByPassCodesBuilder
+        {
+
+            List<string>? PassCodes { get; }
+
+
+
+
+
+        }
+
+        public abstract class ExistsAnyPassByPassCodesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExistsAnyPassByPassCodesBuilder
+            where TImpl : ExistsAnyPassByPassCodesAbstractBuilder<TImpl>
         {
 
             public List<string>? PassCodes { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal ExistsAnyPassByPassCodesBuilder() { }
+            public ExistsAnyPassByPassCodesAbstractBuilder() { }
 
-            internal ExistsAnyPassByPassCodesBuilder(IAccelByteSdk sdk)
+            public ExistsAnyPassByPassCodesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ExistsAnyPassByPassCodesBuilder SetPassCodes(List<string> _passCodes)
+            public TImpl SetPassCodes(List<string> _passCodes)
             {
                 PassCodes = _passCodes;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ExistsAnyPassByPassCodesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ExistsAnyPassByPassCodes.Response Execute(
+            protected ExistsAnyPassByPassCodes.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExistsAnyPassByPassCodes.Response> ExecuteAsync(
+            protected async Task<ExistsAnyPassByPassCodes.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private ExistsAnyPassByPassCodes(ExistsAnyPassByPassCodesBuilder builder,
+        public class ExistsAnyPassByPassCodesBuilder : ExistsAnyPassByPassCodesAbstractBuilder<ExistsAnyPassByPassCodesBuilder>
+        {
+            public ExistsAnyPassByPassCodesBuilder() : base() { }
+
+            public ExistsAnyPassByPassCodesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ExistsAnyPassByPassCodes.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ExistsAnyPassByPassCodes.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ExistsAnyPassByPassCodes(IExistsAnyPassByPassCodesBuilder builder,
             string namespace_,
             string userId
         )
@@ -190,12 +231,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.Ownership>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

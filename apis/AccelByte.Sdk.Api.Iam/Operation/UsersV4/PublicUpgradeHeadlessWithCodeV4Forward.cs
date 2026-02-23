@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicUpgradeHeadlessWithCodeV4ForwardBuilder Builder { get => new PublicUpgradeHeadlessWithCodeV4ForwardBuilder(); }
 
-        public class PublicUpgradeHeadlessWithCodeV4ForwardBuilder
-            : OperationBuilder<PublicUpgradeHeadlessWithCodeV4ForwardBuilder>
+        public interface IPublicUpgradeHeadlessWithCodeV4ForwardBuilder
         {
 
 
 
 
 
-            internal PublicUpgradeHeadlessWithCodeV4ForwardBuilder() { }
+        }
 
-            internal PublicUpgradeHeadlessWithCodeV4ForwardBuilder(IAccelByteSdk sdk)
+        public abstract class PublicUpgradeHeadlessWithCodeV4ForwardAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpgradeHeadlessWithCodeV4ForwardBuilder
+            where TImpl : PublicUpgradeHeadlessWithCodeV4ForwardAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicUpgradeHeadlessWithCodeV4ForwardAbstractBuilder() { }
+
+            public PublicUpgradeHeadlessWithCodeV4ForwardAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<PublicUpgradeHeadlessWithCodeV4ForwardBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUpgradeHeadlessWithCodeV4Forward.Response Execute(
+            protected PublicUpgradeHeadlessWithCodeV4Forward.Response InternalExecute(
                 AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
             )
             {
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpgradeHeadlessWithCodeV4Forward.Response> ExecuteAsync(
+            protected async Task<PublicUpgradeHeadlessWithCodeV4Forward.Response> InternalExecuteAsync(
                 AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
             )
             {
@@ -105,7 +115,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicUpgradeHeadlessWithCodeV4Forward(PublicUpgradeHeadlessWithCodeV4ForwardBuilder builder,
+        public class PublicUpgradeHeadlessWithCodeV4ForwardBuilder : PublicUpgradeHeadlessWithCodeV4ForwardAbstractBuilder<PublicUpgradeHeadlessWithCodeV4ForwardBuilder>
+        {
+            public PublicUpgradeHeadlessWithCodeV4ForwardBuilder() : base() { }
+
+            public PublicUpgradeHeadlessWithCodeV4ForwardBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUpgradeHeadlessWithCodeV4Forward.Response Execute(
+                AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<PublicUpgradeHeadlessWithCodeV4Forward.Response> ExecuteAsync(
+                AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public PublicUpgradeHeadlessWithCodeV4Forward(IPublicUpgradeHeadlessWithCodeV4ForwardBuilder builder,
             AccountUpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 body
         )
         {

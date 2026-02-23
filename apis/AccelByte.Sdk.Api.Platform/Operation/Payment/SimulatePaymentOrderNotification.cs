@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SimulatePaymentOrderNotificationBuilder Builder { get => new SimulatePaymentOrderNotificationBuilder(); }
 
-        public class SimulatePaymentOrderNotificationBuilder
-            : OperationBuilder<SimulatePaymentOrderNotificationBuilder>
+        public interface ISimulatePaymentOrderNotificationBuilder
         {
 
 
 
 
 
-            internal SimulatePaymentOrderNotificationBuilder() { }
+        }
 
-            internal SimulatePaymentOrderNotificationBuilder(IAccelByteSdk sdk)
+        public abstract class SimulatePaymentOrderNotificationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISimulatePaymentOrderNotificationBuilder
+            where TImpl : SimulatePaymentOrderNotificationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SimulatePaymentOrderNotificationAbstractBuilder() { }
+
+            public SimulatePaymentOrderNotificationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentOrderNo                    
                 );
 
-                op.SetBaseFields<SimulatePaymentOrderNotificationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SimulatePaymentOrderNotification.Response Execute(
+            protected SimulatePaymentOrderNotification.Response InternalExecute(
                 PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SimulatePaymentOrderNotification.Response> ExecuteAsync(
+            protected async Task<SimulatePaymentOrderNotification.Response> InternalExecuteAsync(
                 PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
@@ -112,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public SimulatePaymentOrderNotification.Response<T1> Execute<T1>(
+            protected SimulatePaymentOrderNotification.Response<T1> InternalExecute<T1>(
                 PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SimulatePaymentOrderNotification.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<SimulatePaymentOrderNotification.Response<T1>> InternalExecuteAsync<T1>(
                 PaymentOrderNotifySimulation body,
                 string namespace_,
                 string paymentOrderNo
@@ -156,7 +166,65 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SimulatePaymentOrderNotification(SimulatePaymentOrderNotificationBuilder builder,
+        public class SimulatePaymentOrderNotificationBuilder : SimulatePaymentOrderNotificationAbstractBuilder<SimulatePaymentOrderNotificationBuilder>
+        {
+            public SimulatePaymentOrderNotificationBuilder() : base() { }
+
+            public SimulatePaymentOrderNotificationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SimulatePaymentOrderNotification.Response Execute(
+                PaymentOrderNotifySimulation body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+            public async Task<SimulatePaymentOrderNotification.Response> ExecuteAsync(
+                PaymentOrderNotifySimulation body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+
+            public SimulatePaymentOrderNotification.Response<T1> Execute<T1>(
+                PaymentOrderNotifySimulation body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+            public async Task<SimulatePaymentOrderNotification.Response<T1>> ExecuteAsync<T1>(
+                PaymentOrderNotifySimulation body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+        }
+
+
+        public SimulatePaymentOrderNotification(ISimulatePaymentOrderNotificationBuilder builder,
             PaymentOrderNotifySimulation body,
             string namespace_,
             string paymentOrderNo
@@ -240,17 +308,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.NotificationProcessResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.NotificationProcessResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -271,17 +342,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.NotificationProcessResult<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.NotificationProcessResult<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

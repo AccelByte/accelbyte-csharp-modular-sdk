@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static CheckUserAvailabilityBuilder Builder { get => new CheckUserAvailabilityBuilder(); }
 
-        public class CheckUserAvailabilityBuilder
-            : OperationBuilder<CheckUserAvailabilityBuilder>
+        public interface ICheckUserAvailabilityBuilder
         {
 
 
 
 
 
-            internal CheckUserAvailabilityBuilder() { }
+        }
 
-            internal CheckUserAvailabilityBuilder(IAccelByteSdk sdk)
+        public abstract class CheckUserAvailabilityAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICheckUserAvailabilityBuilder
+            where TImpl : CheckUserAvailabilityAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CheckUserAvailabilityAbstractBuilder() { }
+
+            public CheckUserAvailabilityAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -73,11 +83,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     query                    
                 );
 
-                op.SetBaseFields<CheckUserAvailabilityBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CheckUserAvailability.Response Execute(
+            protected CheckUserAvailability.Response InternalExecute(
                 string namespace_,
                 string field,
                 string query
@@ -98,7 +108,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CheckUserAvailability.Response> ExecuteAsync(
+            protected async Task<CheckUserAvailability.Response> InternalExecuteAsync(
                 string namespace_,
                 string field,
                 string query
@@ -121,7 +131,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private CheckUserAvailability(CheckUserAvailabilityBuilder builder,
+        public class CheckUserAvailabilityBuilder : CheckUserAvailabilityAbstractBuilder<CheckUserAvailabilityBuilder>
+        {
+            public CheckUserAvailabilityBuilder() : base() { }
+
+            public CheckUserAvailabilityBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CheckUserAvailability.Response Execute(
+                string namespace_,
+                string field,
+                string query
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    field,
+                    query
+                );
+            }
+            public async Task<CheckUserAvailability.Response> ExecuteAsync(
+                string namespace_,
+                string field,
+                string query
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    field,
+                    query
+                );
+            }
+        }
+
+
+        public CheckUserAvailability(ICheckUserAvailabilityBuilder builder,
             string namespace_,
             string field,
             string query
@@ -199,17 +242,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

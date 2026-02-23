@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizeWalletBuilder Builder { get => new AnonymizeWalletBuilder(); }
 
-        public class AnonymizeWalletBuilder
-            : OperationBuilder<AnonymizeWalletBuilder>
+        public interface IAnonymizeWalletBuilder
         {
 
 
 
 
 
-            internal AnonymizeWalletBuilder() { }
+        }
 
-            internal AnonymizeWalletBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeWalletAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeWalletBuilder
+            where TImpl : AnonymizeWalletAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeWalletAbstractBuilder() { }
+
+            public AnonymizeWalletAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeWalletBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeWallet.Response Execute(
+            protected AnonymizeWallet.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeWallet.Response> ExecuteAsync(
+            protected async Task<AnonymizeWallet.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizeWallet(AnonymizeWalletBuilder builder,
+        public class AnonymizeWalletBuilder : AnonymizeWalletAbstractBuilder<AnonymizeWalletBuilder>
+        {
+            public AnonymizeWalletBuilder() : base() { }
+
+            public AnonymizeWalletBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeWallet.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeWallet.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeWallet(IAnonymizeWalletBuilder builder,
             string namespace_,
             string userId
         )

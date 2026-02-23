@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UploadKeysBuilder Builder { get => new UploadKeysBuilder(); }
 
-        public class UploadKeysBuilder
-            : OperationBuilder<UploadKeysBuilder>
+        public interface IUploadKeysBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class UploadKeysAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUploadKeysBuilder
+            where TImpl : UploadKeysAbstractBuilder<TImpl>
         {
 
 
@@ -44,9 +56,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UploadKeysBuilder() { }
+            public UploadKeysAbstractBuilder() { }
 
-            internal UploadKeysBuilder(IAccelByteSdk sdk)
+            public UploadKeysAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,10 +66,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UploadKeysBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UploadKeysBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UploadKeys.Response Execute(
+            protected UploadKeys.Response InternalExecute(
                 string keyGroupId,
                 string namespace_
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UploadKeys.Response> ExecuteAsync(
+            protected async Task<UploadKeys.Response> InternalExecuteAsync(
                 string keyGroupId,
                 string namespace_
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UploadKeys(UploadKeysBuilder builder,
+        public class UploadKeysBuilder : UploadKeysAbstractBuilder<UploadKeysBuilder>
+        {
+            public UploadKeysBuilder() : base() { }
+
+            public UploadKeysBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UploadKeys.Response Execute(
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    keyGroupId,
+                    namespace_
+                );
+            }
+            public async Task<UploadKeys.Response> ExecuteAsync(
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    keyGroupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UploadKeys(IUploadKeysBuilder builder,
             string keyGroupId,
             string namespace_
         )
@@ -190,17 +231,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

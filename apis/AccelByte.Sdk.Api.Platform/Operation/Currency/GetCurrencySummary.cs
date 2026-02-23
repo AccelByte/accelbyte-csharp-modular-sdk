@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetCurrencySummaryBuilder Builder { get => new GetCurrencySummaryBuilder(); }
 
-        public class GetCurrencySummaryBuilder
-            : OperationBuilder<GetCurrencySummaryBuilder>
+        public interface IGetCurrencySummaryBuilder
         {
 
 
 
 
 
-            internal GetCurrencySummaryBuilder() { }
+        }
 
-            internal GetCurrencySummaryBuilder(IAccelByteSdk sdk)
+        public abstract class GetCurrencySummaryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCurrencySummaryBuilder
+            where TImpl : GetCurrencySummaryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetCurrencySummaryAbstractBuilder() { }
+
+            public GetCurrencySummaryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCurrencySummaryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCurrencySummary.Response Execute(
+            protected GetCurrencySummary.Response InternalExecute(
                 string currencyCode,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCurrencySummary.Response> ExecuteAsync(
+            protected async Task<GetCurrencySummary.Response> InternalExecuteAsync(
                 string currencyCode,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetCurrencySummary(GetCurrencySummaryBuilder builder,
+        public class GetCurrencySummaryBuilder : GetCurrencySummaryAbstractBuilder<GetCurrencySummaryBuilder>
+        {
+            public GetCurrencySummaryBuilder() : base() { }
+
+            public GetCurrencySummaryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCurrencySummary.Response Execute(
+                string currencyCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    currencyCode,
+                    namespace_
+                );
+            }
+            public async Task<GetCurrencySummary.Response> ExecuteAsync(
+                string currencyCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    currencyCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCurrencySummary(IGetCurrencySummaryBuilder builder,
             string currencyCode,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CurrencySummary>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CurrencySummary>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

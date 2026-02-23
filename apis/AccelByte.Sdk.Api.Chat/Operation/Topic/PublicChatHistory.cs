@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static PublicChatHistoryBuilder Builder { get => new PublicChatHistoryBuilder(); }
 
-        public class PublicChatHistoryBuilder
-            : OperationBuilder<PublicChatHistoryBuilder>
+        public interface IPublicChatHistoryBuilder
+        {
+
+            long? Limit { get; }
+
+            string? Order { get; }
+
+            long? StartCreatedAt { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicChatHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicChatHistoryBuilder
+            where TImpl : PublicChatHistoryAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal PublicChatHistoryBuilder() { }
+            public PublicChatHistoryAbstractBuilder() { }
 
-            internal PublicChatHistoryBuilder(IAccelByteSdk sdk)
+            public PublicChatHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicChatHistoryBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicChatHistoryBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicChatHistoryBuilder SetStartCreatedAt(long _startCreatedAt)
+            public TImpl SetStartCreatedAt(long _startCreatedAt)
             {
                 StartCreatedAt = _startCreatedAt;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<PublicChatHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicChatHistory.Response Execute(
+            protected PublicChatHistory.Response InternalExecute(
                 string namespace_,
                 string topic
             )
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicChatHistory.Response> ExecuteAsync(
+            protected async Task<PublicChatHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string topic
             )
@@ -128,7 +144,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private PublicChatHistory(PublicChatHistoryBuilder builder,
+        public class PublicChatHistoryBuilder : PublicChatHistoryAbstractBuilder<PublicChatHistoryBuilder>
+        {
+            public PublicChatHistoryBuilder() : base() { }
+
+            public PublicChatHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicChatHistory.Response Execute(
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<PublicChatHistory.Response> ExecuteAsync(
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public PublicChatHistory(IPublicChatHistoryBuilder builder,
             string namespace_,
             string topic
         )
@@ -212,27 +257,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsChatMessageResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsChatMessageResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

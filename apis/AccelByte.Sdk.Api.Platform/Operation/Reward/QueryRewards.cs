@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryRewardsBuilder Builder { get => new QueryRewardsBuilder(); }
 
-        public class QueryRewardsBuilder
-            : OperationBuilder<QueryRewardsBuilder>
+        public interface IQueryRewardsBuilder
+        {
+
+            string? EventTopic { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            List<QueryRewardsSortBy>? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryRewardsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryRewardsBuilder
+            where TImpl : QueryRewardsAbstractBuilder<TImpl>
         {
 
             public string? EventTopic { get; set; }
@@ -50,36 +68,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryRewardsBuilder() { }
+            public QueryRewardsAbstractBuilder() { }
 
-            internal QueryRewardsBuilder(IAccelByteSdk sdk)
+            public QueryRewardsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryRewardsBuilder SetEventTopic(string _eventTopic)
+            public TImpl SetEventTopic(string _eventTopic)
             {
                 EventTopic = _eventTopic;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRewardsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRewardsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRewardsBuilder SetSortBy(List<QueryRewardsSortBy> _sortBy)
+            public TImpl SetSortBy(List<QueryRewardsSortBy> _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -94,11 +112,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryRewardsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryRewards.Response Execute(
+            protected QueryRewards.Response InternalExecute(
                 string namespace_
             )
             {
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryRewards.Response> ExecuteAsync(
+            protected async Task<QueryRewards.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -134,7 +152,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryRewards(QueryRewardsBuilder builder,
+        public class QueryRewardsBuilder : QueryRewardsAbstractBuilder<QueryRewardsBuilder>
+        {
+            public QueryRewardsBuilder() : base() { }
+
+            public QueryRewardsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryRewards.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryRewards.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryRewards(IQueryRewardsBuilder builder,
             string namespace_
         )
         {
@@ -213,12 +256,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RewardPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RewardPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

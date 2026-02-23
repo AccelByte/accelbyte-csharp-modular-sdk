@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -71,8 +71,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetUserPlatformAccountsV3Builder Builder { get => new AdminGetUserPlatformAccountsV3Builder(); }
 
-        public class AdminGetUserPlatformAccountsV3Builder
-            : OperationBuilder<AdminGetUserPlatformAccountsV3Builder>
+        public interface IAdminGetUserPlatformAccountsV3Builder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            long? Limit { get; }
+
+            string? PlatformId { get; }
+
+            string? TargetNamespace { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetUserPlatformAccountsV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUserPlatformAccountsV3Builder
+            where TImpl : AdminGetUserPlatformAccountsV3AbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -89,42 +109,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGetUserPlatformAccountsV3Builder() { }
+            public AdminGetUserPlatformAccountsV3AbstractBuilder() { }
 
-            internal AdminGetUserPlatformAccountsV3Builder(IAccelByteSdk sdk)
+            public AdminGetUserPlatformAccountsV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetUserPlatformAccountsV3Builder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountsV3Builder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountsV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountsV3Builder SetPlatformId(string _platformId)
+            public TImpl SetPlatformId(string _platformId)
             {
                 PlatformId = _platformId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountsV3Builder SetTargetNamespace(string _targetNamespace)
+            public TImpl SetTargetNamespace(string _targetNamespace)
             {
                 TargetNamespace = _targetNamespace;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -141,11 +161,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetUserPlatformAccountsV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUserPlatformAccountsV3.Response Execute(
+            protected AdminGetUserPlatformAccountsV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -164,7 +184,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserPlatformAccountsV3.Response> ExecuteAsync(
+            protected async Task<AdminGetUserPlatformAccountsV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -185,7 +205,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetUserPlatformAccountsV3(AdminGetUserPlatformAccountsV3Builder builder,
+        public class AdminGetUserPlatformAccountsV3Builder : AdminGetUserPlatformAccountsV3AbstractBuilder<AdminGetUserPlatformAccountsV3Builder>
+        {
+            public AdminGetUserPlatformAccountsV3Builder() : base() { }
+
+            public AdminGetUserPlatformAccountsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUserPlatformAccountsV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetUserPlatformAccountsV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetUserPlatformAccountsV3(IAdminGetUserPlatformAccountsV3Builder builder,
             string namespace_,
             string userId
         )
@@ -277,32 +326,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonUserLinkedPlatformsResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonUserLinkedPlatformsResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

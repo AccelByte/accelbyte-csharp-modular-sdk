@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RevokeAllEntitlementsBuilder Builder { get => new RevokeAllEntitlementsBuilder(); }
 
-        public class RevokeAllEntitlementsBuilder
-            : OperationBuilder<RevokeAllEntitlementsBuilder>
+        public interface IRevokeAllEntitlementsBuilder
         {
 
 
 
 
 
-            internal RevokeAllEntitlementsBuilder() { }
+        }
 
-            internal RevokeAllEntitlementsBuilder(IAccelByteSdk sdk)
+        public abstract class RevokeAllEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeAllEntitlementsBuilder
+            where TImpl : RevokeAllEntitlementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RevokeAllEntitlementsAbstractBuilder() { }
+
+            public RevokeAllEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RevokeAllEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RevokeAllEntitlements.Response Execute(
+            protected RevokeAllEntitlements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeAllEntitlements.Response> ExecuteAsync(
+            protected async Task<RevokeAllEntitlements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RevokeAllEntitlements(RevokeAllEntitlementsBuilder builder,
+        public class RevokeAllEntitlementsBuilder : RevokeAllEntitlementsAbstractBuilder<RevokeAllEntitlementsBuilder>
+        {
+            public RevokeAllEntitlementsBuilder() : base() { }
+
+            public RevokeAllEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RevokeAllEntitlements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RevokeAllEntitlements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RevokeAllEntitlements(IRevokeAllEntitlementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

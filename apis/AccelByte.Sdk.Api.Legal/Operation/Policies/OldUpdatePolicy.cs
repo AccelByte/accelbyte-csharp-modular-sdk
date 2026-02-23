@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldUpdatePolicyBuilder Builder { get => new OldUpdatePolicyBuilder(); }
 
-        public class OldUpdatePolicyBuilder
-            : OperationBuilder<OldUpdatePolicyBuilder>
+        public interface IOldUpdatePolicyBuilder
+        {
+
+
+            Model.UpdatePolicyRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class OldUpdatePolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldUpdatePolicyBuilder
+            where TImpl : OldUpdatePolicyAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal OldUpdatePolicyBuilder() { }
+            public OldUpdatePolicyAbstractBuilder() { }
 
-            internal OldUpdatePolicyBuilder(IAccelByteSdk sdk)
+            public OldUpdatePolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public OldUpdatePolicyBuilder SetBody(Model.UpdatePolicyRequest _body)
+            public TImpl SetBody(Model.UpdatePolicyRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyId                    
                 );
 
-                op.SetBaseFields<OldUpdatePolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldUpdatePolicy.Response Execute(
+            protected OldUpdatePolicy.Response InternalExecute(
                 string policyId
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldUpdatePolicy.Response> ExecuteAsync(
+            protected async Task<OldUpdatePolicy.Response> InternalExecuteAsync(
                 string policyId
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldUpdatePolicy(OldUpdatePolicyBuilder builder,
+        public class OldUpdatePolicyBuilder : OldUpdatePolicyAbstractBuilder<OldUpdatePolicyBuilder>
+        {
+            public OldUpdatePolicyBuilder() : base() { }
+
+            public OldUpdatePolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldUpdatePolicy.Response Execute(
+                string policyId
+            )
+            {
+                return InternalExecute(
+                    policyId
+                );
+            }
+            public async Task<OldUpdatePolicy.Response> ExecuteAsync(
+                string policyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    policyId
+                );
+            }
+        }
+
+
+        public OldUpdatePolicy(IOldUpdatePolicyBuilder builder,
             string policyId
         )
         {
@@ -175,7 +212,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

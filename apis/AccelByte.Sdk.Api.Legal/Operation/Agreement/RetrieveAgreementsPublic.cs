@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAgreementsPublicBuilder Builder { get => new RetrieveAgreementsPublicBuilder(); }
 
-        public class RetrieveAgreementsPublicBuilder
-            : OperationBuilder<RetrieveAgreementsPublicBuilder>
+        public interface IRetrieveAgreementsPublicBuilder
         {
 
 
 
 
 
-            internal RetrieveAgreementsPublicBuilder() { }
+        }
 
-            internal RetrieveAgreementsPublicBuilder(IAccelByteSdk sdk)
+        public abstract class RetrieveAgreementsPublicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAgreementsPublicBuilder
+            where TImpl : RetrieveAgreementsPublicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveAgreementsPublicAbstractBuilder() { }
+
+            public RetrieveAgreementsPublicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveAgreementsPublic op = new RetrieveAgreementsPublic(this
                 );
 
-                op.SetBaseFields<RetrieveAgreementsPublicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAgreementsPublic.Response Execute(
+            protected RetrieveAgreementsPublic.Response InternalExecute(
             )
             {
                 RetrieveAgreementsPublic op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAgreementsPublic.Response> ExecuteAsync(
+            protected async Task<RetrieveAgreementsPublic.Response> InternalExecuteAsync(
             )
             {
                 RetrieveAgreementsPublic op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAgreementsPublic(RetrieveAgreementsPublicBuilder builder
+        public class RetrieveAgreementsPublicBuilder : RetrieveAgreementsPublicAbstractBuilder<RetrieveAgreementsPublicBuilder>
+        {
+            public RetrieveAgreementsPublicBuilder() : base() { }
+
+            public RetrieveAgreementsPublicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAgreementsPublic.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<RetrieveAgreementsPublic.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public RetrieveAgreementsPublic(IRetrieveAgreementsPublicBuilder builder
         )
         {
             
@@ -153,12 +184,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

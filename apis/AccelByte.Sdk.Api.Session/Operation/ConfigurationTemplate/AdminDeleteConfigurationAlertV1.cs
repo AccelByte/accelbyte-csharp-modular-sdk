@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminDeleteConfigurationAlertV1Builder Builder { get => new AdminDeleteConfigurationAlertV1Builder(); }
 
-        public class AdminDeleteConfigurationAlertV1Builder
-            : OperationBuilder<AdminDeleteConfigurationAlertV1Builder>
+        public interface IAdminDeleteConfigurationAlertV1Builder
         {
 
 
 
 
 
-            internal AdminDeleteConfigurationAlertV1Builder() { }
+        }
 
-            internal AdminDeleteConfigurationAlertV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteConfigurationAlertV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteConfigurationAlertV1Builder
+            where TImpl : AdminDeleteConfigurationAlertV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteConfigurationAlertV1AbstractBuilder() { }
+
+            public AdminDeleteConfigurationAlertV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteConfigurationAlertV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteConfigurationAlertV1.Response Execute(
+            protected AdminDeleteConfigurationAlertV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteConfigurationAlertV1.Response> ExecuteAsync(
+            protected async Task<AdminDeleteConfigurationAlertV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminDeleteConfigurationAlertV1(AdminDeleteConfigurationAlertV1Builder builder,
+        public class AdminDeleteConfigurationAlertV1Builder : AdminDeleteConfigurationAlertV1AbstractBuilder<AdminDeleteConfigurationAlertV1Builder>
+        {
+            public AdminDeleteConfigurationAlertV1Builder() : base() { }
+
+            public AdminDeleteConfigurationAlertV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteConfigurationAlertV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteConfigurationAlertV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteConfigurationAlertV1(IAdminDeleteConfigurationAlertV1Builder builder,
             string namespace_
         )
         {
@@ -170,22 +205,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

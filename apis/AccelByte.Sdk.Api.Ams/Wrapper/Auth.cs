@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Ams.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public Auth(IAccelByteSdk sdk)
         {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncTwitchDropsEntitlementBuilder Builder { get => new SyncTwitchDropsEntitlementBuilder(); }
 
-        public class SyncTwitchDropsEntitlementBuilder
-            : OperationBuilder<SyncTwitchDropsEntitlementBuilder>
+        public interface ISyncTwitchDropsEntitlementBuilder
         {
 
 
 
 
 
-            internal SyncTwitchDropsEntitlementBuilder() { }
+        }
 
-            internal SyncTwitchDropsEntitlementBuilder(IAccelByteSdk sdk)
+        public abstract class SyncTwitchDropsEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncTwitchDropsEntitlementBuilder
+            where TImpl : SyncTwitchDropsEntitlementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncTwitchDropsEntitlementAbstractBuilder() { }
+
+            public SyncTwitchDropsEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SyncTwitchDropsEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncTwitchDropsEntitlement.Response Execute(
+            protected SyncTwitchDropsEntitlement.Response InternalExecute(
                 TwitchSyncRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncTwitchDropsEntitlement.Response> ExecuteAsync(
+            protected async Task<SyncTwitchDropsEntitlement.Response> InternalExecuteAsync(
                 TwitchSyncRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncTwitchDropsEntitlement(SyncTwitchDropsEntitlementBuilder builder,
+        public class SyncTwitchDropsEntitlementBuilder : SyncTwitchDropsEntitlementAbstractBuilder<SyncTwitchDropsEntitlementBuilder>
+        {
+            public SyncTwitchDropsEntitlementBuilder() : base() { }
+
+            public SyncTwitchDropsEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncTwitchDropsEntitlement.Response Execute(
+                TwitchSyncRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<SyncTwitchDropsEntitlement.Response> ExecuteAsync(
+                TwitchSyncRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SyncTwitchDropsEntitlement(ISyncTwitchDropsEntitlementBuilder builder,
             TwitchSyncRequest body,
             string namespace_
         )
@@ -173,12 +212,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.TwitchSyncResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.TwitchSyncResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

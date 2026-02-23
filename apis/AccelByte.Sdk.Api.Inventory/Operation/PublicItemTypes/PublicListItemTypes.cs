@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,24 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static PublicListItemTypesBuilder Builder { get => new PublicListItemTypesBuilder(); }
 
-        public class PublicListItemTypesBuilder
-            : OperationBuilder<PublicListItemTypesBuilder>
+        public interface IPublicListItemTypesBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            PublicListItemTypesSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListItemTypesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListItemTypesBuilder
+            where TImpl : PublicListItemTypesAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -46,30 +62,30 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal PublicListItemTypesBuilder() { }
+            public PublicListItemTypesAbstractBuilder() { }
 
-            internal PublicListItemTypesBuilder(IAccelByteSdk sdk)
+            public PublicListItemTypesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListItemTypesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListItemTypesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListItemTypesBuilder SetSortBy(PublicListItemTypesSortBy _sortBy)
+            public TImpl SetSortBy(PublicListItemTypesSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListItemTypesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListItemTypes.Response Execute(
+            protected PublicListItemTypes.Response InternalExecute(
                 string namespace_
             )
             {
@@ -105,7 +121,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListItemTypes.Response> ExecuteAsync(
+            protected async Task<PublicListItemTypes.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -124,7 +140,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private PublicListItemTypes(PublicListItemTypesBuilder builder,
+        public class PublicListItemTypesBuilder : PublicListItemTypesAbstractBuilder<PublicListItemTypesBuilder>
+        {
+            public PublicListItemTypesBuilder() : base() { }
+
+            public PublicListItemTypesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListItemTypes.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListItemTypes.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListItemTypes(IPublicListItemTypesBuilder builder,
             string namespace_
         )
         {
@@ -200,17 +241,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemTypesResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemTypesResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

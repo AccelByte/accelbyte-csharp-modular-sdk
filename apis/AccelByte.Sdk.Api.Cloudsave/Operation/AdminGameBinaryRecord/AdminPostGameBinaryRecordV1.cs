@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminPostGameBinaryRecordV1Builder Builder { get => new AdminPostGameBinaryRecordV1Builder(); }
 
-        public class AdminPostGameBinaryRecordV1Builder
-            : OperationBuilder<AdminPostGameBinaryRecordV1Builder>
+        public interface IAdminPostGameBinaryRecordV1Builder
         {
 
 
 
 
 
-            internal AdminPostGameBinaryRecordV1Builder() { }
+        }
 
-            internal AdminPostGameBinaryRecordV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminPostGameBinaryRecordV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPostGameBinaryRecordV1Builder
+            where TImpl : AdminPostGameBinaryRecordV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPostGameBinaryRecordV1AbstractBuilder() { }
+
+            public AdminPostGameBinaryRecordV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,11 +81,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminPostGameBinaryRecordV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminPostGameBinaryRecordV1.Response Execute(
+            protected AdminPostGameBinaryRecordV1.Response InternalExecute(
                 ModelsGameBinaryRecordCreate body,
                 string namespace_
             )
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPostGameBinaryRecordV1.Response> ExecuteAsync(
+            protected async Task<AdminPostGameBinaryRecordV1.Response> InternalExecuteAsync(
                 ModelsGameBinaryRecordCreate body,
                 string namespace_
             )
@@ -115,7 +125,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminPostGameBinaryRecordV1(AdminPostGameBinaryRecordV1Builder builder,
+        public class AdminPostGameBinaryRecordV1Builder : AdminPostGameBinaryRecordV1AbstractBuilder<AdminPostGameBinaryRecordV1Builder>
+        {
+            public AdminPostGameBinaryRecordV1Builder() : base() { }
+
+            public AdminPostGameBinaryRecordV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminPostGameBinaryRecordV1.Response Execute(
+                ModelsGameBinaryRecordCreate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminPostGameBinaryRecordV1.Response> ExecuteAsync(
+                ModelsGameBinaryRecordCreate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminPostGameBinaryRecordV1(IAdminPostGameBinaryRecordV1Builder builder,
             ModelsGameBinaryRecordCreate body,
             string namespace_
         )
@@ -192,32 +231,38 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUploadBinaryRecordResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUploadBinaryRecordResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

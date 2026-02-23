@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminListClientAvailablePermissionsBuilder Builder { get => new AdminListClientAvailablePermissionsBuilder(); }
 
-        public class AdminListClientAvailablePermissionsBuilder
-            : OperationBuilder<AdminListClientAvailablePermissionsBuilder>
+        public interface IAdminListClientAvailablePermissionsBuilder
+        {
+
+            bool? ExcludePermissions { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListClientAvailablePermissionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListClientAvailablePermissionsBuilder
+            where TImpl : AdminListClientAvailablePermissionsAbstractBuilder<TImpl>
         {
 
             public bool? ExcludePermissions { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminListClientAvailablePermissionsBuilder() { }
+            public AdminListClientAvailablePermissionsAbstractBuilder() { }
 
-            internal AdminListClientAvailablePermissionsBuilder(IAccelByteSdk sdk)
+            public AdminListClientAvailablePermissionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListClientAvailablePermissionsBuilder SetExcludePermissions(bool _excludePermissions)
+            public TImpl SetExcludePermissions(bool _excludePermissions)
             {
                 ExcludePermissions = _excludePermissions;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -64,11 +76,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminListClientAvailablePermissions op = new AdminListClientAvailablePermissions(this
                 );
 
-                op.SetBaseFields<AdminListClientAvailablePermissionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListClientAvailablePermissions.Response Execute(
+            protected AdminListClientAvailablePermissions.Response InternalExecute(
             )
             {
                 AdminListClientAvailablePermissions op = Build(
@@ -83,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListClientAvailablePermissions.Response> ExecuteAsync(
+            protected async Task<AdminListClientAvailablePermissions.Response> InternalExecuteAsync(
             )
             {
                 AdminListClientAvailablePermissions op = Build(
@@ -100,7 +112,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminListClientAvailablePermissions(AdminListClientAvailablePermissionsBuilder builder
+        public class AdminListClientAvailablePermissionsBuilder : AdminListClientAvailablePermissionsAbstractBuilder<AdminListClientAvailablePermissionsBuilder>
+        {
+            public AdminListClientAvailablePermissionsBuilder() : base() { }
+
+            public AdminListClientAvailablePermissionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListClientAvailablePermissions.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminListClientAvailablePermissions.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminListClientAvailablePermissions(IAdminListClientAvailablePermissionsBuilder builder
         )
         {
             
@@ -166,17 +199,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClientmodelListClientPermissionSet>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClientmodelListClientPermissionSet>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

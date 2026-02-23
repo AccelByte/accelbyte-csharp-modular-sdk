@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicListContentLikeV2Builder Builder { get => new PublicListContentLikeV2Builder(); }
 
-        public class PublicListContentLikeV2Builder
-            : OperationBuilder<PublicListContentLikeV2Builder>
+        public interface IPublicListContentLikeV2Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListContentLikeV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListContentLikeV2Builder
+            where TImpl : PublicListContentLikeV2AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal PublicListContentLikeV2Builder() { }
+            public PublicListContentLikeV2AbstractBuilder() { }
 
-            internal PublicListContentLikeV2Builder(IAccelByteSdk sdk)
+            public PublicListContentLikeV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListContentLikeV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListContentLikeV2Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListContentLikeV2Builder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListContentLikeV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListContentLikeV2.Response Execute(
+            protected PublicListContentLikeV2.Response InternalExecute(
                 string contentId,
                 string namespace_
             )
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListContentLikeV2.Response> ExecuteAsync(
+            protected async Task<PublicListContentLikeV2.Response> InternalExecuteAsync(
                 string contentId,
                 string namespace_
             )
@@ -128,7 +144,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicListContentLikeV2(PublicListContentLikeV2Builder builder,
+        public class PublicListContentLikeV2Builder : PublicListContentLikeV2AbstractBuilder<PublicListContentLikeV2Builder>
+        {
+            public PublicListContentLikeV2Builder() : base() { }
+
+            public PublicListContentLikeV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListContentLikeV2.Response Execute(
+                string contentId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    contentId,
+                    namespace_
+                );
+            }
+            public async Task<PublicListContentLikeV2.Response> ExecuteAsync(
+                string contentId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    contentId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListContentLikeV2(IPublicListContentLikeV2Builder builder,
             string contentId,
             string namespace_
         )
@@ -210,22 +255,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentLikersResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentLikersResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

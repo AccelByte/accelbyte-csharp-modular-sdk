@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePlaystationIAPConfigBuilder Builder { get => new UpdatePlaystationIAPConfigBuilder(); }
 
-        public class UpdatePlaystationIAPConfigBuilder
-            : OperationBuilder<UpdatePlaystationIAPConfigBuilder>
+        public interface IUpdatePlaystationIAPConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePlaystationIAPConfigBuilder() { }
+        }
 
-            internal UpdatePlaystationIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePlaystationIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePlaystationIAPConfigBuilder
+            where TImpl : UpdatePlaystationIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePlaystationIAPConfigAbstractBuilder() { }
+
+            public UpdatePlaystationIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdatePlaystationIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePlaystationIAPConfig.Response Execute(
+            protected UpdatePlaystationIAPConfig.Response InternalExecute(
                 PlaystationIAPConfigRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePlaystationIAPConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePlaystationIAPConfig.Response> InternalExecuteAsync(
                 PlaystationIAPConfigRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePlaystationIAPConfig(UpdatePlaystationIAPConfigBuilder builder,
+        public class UpdatePlaystationIAPConfigBuilder : UpdatePlaystationIAPConfigAbstractBuilder<UpdatePlaystationIAPConfigBuilder>
+        {
+            public UpdatePlaystationIAPConfigBuilder() : base() { }
+
+            public UpdatePlaystationIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePlaystationIAPConfig.Response Execute(
+                PlaystationIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdatePlaystationIAPConfig.Response> ExecuteAsync(
+                PlaystationIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdatePlaystationIAPConfig(IUpdatePlaystationIAPConfigBuilder builder,
             PlaystationIAPConfigRequest body,
             string namespace_
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlayStationIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlayStationIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

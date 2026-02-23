@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserDLCByPlatformBuilder Builder { get => new GetUserDLCByPlatformBuilder(); }
 
-        public class GetUserDLCByPlatformBuilder
-            : OperationBuilder<GetUserDLCByPlatformBuilder>
+        public interface IGetUserDLCByPlatformBuilder
         {
 
 
 
 
 
-            internal GetUserDLCByPlatformBuilder() { }
+        }
 
-            internal GetUserDLCByPlatformBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserDLCByPlatformAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserDLCByPlatformBuilder
+            where TImpl : GetUserDLCByPlatformAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserDLCByPlatformAbstractBuilder() { }
+
+            public GetUserDLCByPlatformAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     type                    
                 );
 
-                op.SetBaseFields<GetUserDLCByPlatformBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserDLCByPlatform.Response Execute(
+            protected GetUserDLCByPlatform.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string type
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserDLCByPlatform.Response> ExecuteAsync(
+            protected async Task<GetUserDLCByPlatform.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string type
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserDLCByPlatform(GetUserDLCByPlatformBuilder builder,
+        public class GetUserDLCByPlatformBuilder : GetUserDLCByPlatformAbstractBuilder<GetUserDLCByPlatformBuilder>
+        {
+            public GetUserDLCByPlatformBuilder() : base() { }
+
+            public GetUserDLCByPlatformBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserDLCByPlatform.Response Execute(
+                string namespace_,
+                string userId,
+                string type
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    type
+                );
+            }
+            public async Task<GetUserDLCByPlatform.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string type
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    type
+                );
+            }
+        }
+
+
+        public GetUserDLCByPlatform(IGetUserDLCByPlatformBuilder builder,
             string namespace_,
             string userId,
             GetUserDLCByPlatformType type
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserDLC>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserDLC>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

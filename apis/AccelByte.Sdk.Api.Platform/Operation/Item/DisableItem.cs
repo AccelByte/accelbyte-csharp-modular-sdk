@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DisableItemBuilder Builder { get => new DisableItemBuilder(); }
 
-        public class DisableItemBuilder
-            : OperationBuilder<DisableItemBuilder>
+        public interface IDisableItemBuilder
+        {
+
+
+            Model.ChangeStatusItemRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class DisableItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDisableItemBuilder
+            where TImpl : DisableItemAbstractBuilder<TImpl>
         {
 
 
@@ -43,19 +55,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal DisableItemBuilder() { }
+            public DisableItemAbstractBuilder() { }
 
-            internal DisableItemBuilder(IAccelByteSdk sdk)
+            public DisableItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public DisableItemBuilder SetBody(Model.ChangeStatusItemRequest _body)
+            public TImpl SetBody(Model.ChangeStatusItemRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<DisableItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DisableItem.Response Execute(
+            protected DisableItem.Response InternalExecute(
                 string itemId,
                 string namespace_,
                 string storeId
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DisableItem.Response> ExecuteAsync(
+            protected async Task<DisableItem.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_,
                 string storeId
@@ -120,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public DisableItem.Response<T1> Execute<T1>(
+            protected DisableItem.Response<T1> InternalExecute<T1>(
                 string itemId,
                 string namespace_,
                 string storeId
@@ -141,7 +153,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DisableItem.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<DisableItem.Response<T1>> InternalExecuteAsync<T1>(
                 string itemId,
                 string namespace_,
                 string storeId
@@ -164,7 +176,65 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DisableItem(DisableItemBuilder builder,
+        public class DisableItemBuilder : DisableItemAbstractBuilder<DisableItemBuilder>
+        {
+            public DisableItemBuilder() : base() { }
+
+            public DisableItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DisableItem.Response Execute(
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<DisableItem.Response> ExecuteAsync(
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+
+            public DisableItem.Response<T1> Execute<T1>(
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute<T1>(
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<DisableItem.Response<T1>> ExecuteAsync<T1>(
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public DisableItem(IDisableItemBuilder builder,
             string itemId,
             string namespace_,
             string storeId
@@ -251,17 +321,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 
@@ -282,17 +355,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminLinkPlatformAccountBuilder Builder { get => new AdminLinkPlatformAccountBuilder(); }
 
-        public class AdminLinkPlatformAccountBuilder
-            : OperationBuilder<AdminLinkPlatformAccountBuilder>
+        public interface IAdminLinkPlatformAccountBuilder
+        {
+
+            bool? SkipConflict { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminLinkPlatformAccountAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminLinkPlatformAccountBuilder
+            where TImpl : AdminLinkPlatformAccountAbstractBuilder<TImpl>
         {
 
             public bool? SkipConflict { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminLinkPlatformAccountBuilder() { }
+            public AdminLinkPlatformAccountAbstractBuilder() { }
 
-            internal AdminLinkPlatformAccountBuilder(IAccelByteSdk sdk)
+            public AdminLinkPlatformAccountAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminLinkPlatformAccountBuilder SetSkipConflict(bool _skipConflict)
+            public TImpl SetSkipConflict(bool _skipConflict)
             {
                 SkipConflict = _skipConflict;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminLinkPlatformAccountBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminLinkPlatformAccount.Response Execute(
+            protected AdminLinkPlatformAccount.Response InternalExecute(
                 ModelLinkPlatformAccountRequest body,
                 string namespace_,
                 string userId
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminLinkPlatformAccount.Response> ExecuteAsync(
+            protected async Task<AdminLinkPlatformAccount.Response> InternalExecuteAsync(
                 ModelLinkPlatformAccountRequest body,
                 string namespace_,
                 string userId
@@ -121,7 +133,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminLinkPlatformAccount(AdminLinkPlatformAccountBuilder builder,
+        public class AdminLinkPlatformAccountBuilder : AdminLinkPlatformAccountAbstractBuilder<AdminLinkPlatformAccountBuilder>
+        {
+            public AdminLinkPlatformAccountBuilder() : base() { }
+
+            public AdminLinkPlatformAccountBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminLinkPlatformAccount.Response Execute(
+                ModelLinkPlatformAccountRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminLinkPlatformAccount.Response> ExecuteAsync(
+                ModelLinkPlatformAccountRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminLinkPlatformAccount(IAdminLinkPlatformAccountBuilder builder,
             ModelLinkPlatformAccountRequest body,
             string namespace_,
             string userId
@@ -206,27 +251,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

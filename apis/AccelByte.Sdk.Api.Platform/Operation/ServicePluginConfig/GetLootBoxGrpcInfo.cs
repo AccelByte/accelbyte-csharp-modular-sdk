@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetLootBoxGrpcInfoBuilder Builder { get => new GetLootBoxGrpcInfoBuilder(); }
 
-        public class GetLootBoxGrpcInfoBuilder
-            : OperationBuilder<GetLootBoxGrpcInfoBuilder>
+        public interface IGetLootBoxGrpcInfoBuilder
+        {
+
+            bool? Force { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetLootBoxGrpcInfoAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLootBoxGrpcInfoBuilder
+            where TImpl : GetLootBoxGrpcInfoAbstractBuilder<TImpl>
         {
 
             public bool? Force { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetLootBoxGrpcInfoBuilder() { }
+            public GetLootBoxGrpcInfoAbstractBuilder() { }
 
-            internal GetLootBoxGrpcInfoBuilder(IAccelByteSdk sdk)
+            public GetLootBoxGrpcInfoAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetLootBoxGrpcInfoBuilder SetForce(bool _force)
+            public TImpl SetForce(bool _force)
             {
                 Force = _force;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLootBoxGrpcInfoBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLootBoxGrpcInfo.Response Execute(
+            protected GetLootBoxGrpcInfo.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLootBoxGrpcInfo.Response> ExecuteAsync(
+            protected async Task<GetLootBoxGrpcInfo.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetLootBoxGrpcInfo(GetLootBoxGrpcInfoBuilder builder,
+        public class GetLootBoxGrpcInfoBuilder : GetLootBoxGrpcInfoAbstractBuilder<GetLootBoxGrpcInfoBuilder>
+        {
+            public GetLootBoxGrpcInfoBuilder() : base() { }
+
+            public GetLootBoxGrpcInfoBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLootBoxGrpcInfo.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetLootBoxGrpcInfo.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLootBoxGrpcInfo(IGetLootBoxGrpcInfoBuilder builder,
             string namespace_
         )
         {
@@ -172,7 +209,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GrpcServerInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.GrpcServerInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

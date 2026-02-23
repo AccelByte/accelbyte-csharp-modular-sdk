@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DecreaseTicketSaleBuilder Builder { get => new DecreaseTicketSaleBuilder(); }
 
-        public class DecreaseTicketSaleBuilder
-            : OperationBuilder<DecreaseTicketSaleBuilder>
+        public interface IDecreaseTicketSaleBuilder
         {
 
 
 
 
 
-            internal DecreaseTicketSaleBuilder() { }
+        }
 
-            internal DecreaseTicketSaleBuilder(IAccelByteSdk sdk)
+        public abstract class DecreaseTicketSaleAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDecreaseTicketSaleBuilder
+            where TImpl : DecreaseTicketSaleAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DecreaseTicketSaleAbstractBuilder() { }
+
+            public DecreaseTicketSaleAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DecreaseTicketSaleBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DecreaseTicketSale.Response Execute(
+            protected DecreaseTicketSale.Response InternalExecute(
                 TicketSaleDecrementRequest body,
                 string boothName,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DecreaseTicketSale.Response> ExecuteAsync(
+            protected async Task<DecreaseTicketSale.Response> InternalExecuteAsync(
                 TicketSaleDecrementRequest body,
                 string boothName,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DecreaseTicketSale(DecreaseTicketSaleBuilder builder,
+        public class DecreaseTicketSaleBuilder : DecreaseTicketSaleAbstractBuilder<DecreaseTicketSaleBuilder>
+        {
+            public DecreaseTicketSaleBuilder() : base() { }
+
+            public DecreaseTicketSaleBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DecreaseTicketSale.Response Execute(
+                TicketSaleDecrementRequest body,
+                string boothName,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    boothName,
+                    namespace_
+                );
+            }
+            public async Task<DecreaseTicketSale.Response> ExecuteAsync(
+                TicketSaleDecrementRequest body,
+                string boothName,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    boothName,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DecreaseTicketSale(IDecreaseTicketSaleBuilder builder,
             TicketSaleDecrementRequest body,
             string boothName,
             string namespace_
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

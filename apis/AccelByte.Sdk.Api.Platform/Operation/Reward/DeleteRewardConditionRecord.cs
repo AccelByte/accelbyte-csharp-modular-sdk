@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteRewardConditionRecordBuilder Builder { get => new DeleteRewardConditionRecordBuilder(); }
 
-        public class DeleteRewardConditionRecordBuilder
-            : OperationBuilder<DeleteRewardConditionRecordBuilder>
+        public interface IDeleteRewardConditionRecordBuilder
         {
 
 
 
 
 
-            internal DeleteRewardConditionRecordBuilder() { }
+        }
 
-            internal DeleteRewardConditionRecordBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteRewardConditionRecordAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteRewardConditionRecordBuilder
+            where TImpl : DeleteRewardConditionRecordAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteRewardConditionRecordAbstractBuilder() { }
+
+            public DeleteRewardConditionRecordAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     rewardId                    
                 );
 
-                op.SetBaseFields<DeleteRewardConditionRecordBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteRewardConditionRecord.Response Execute(
+            protected DeleteRewardConditionRecord.Response InternalExecute(
                 DeleteRewardConditionRequest body,
                 string namespace_,
                 string rewardId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteRewardConditionRecord.Response> ExecuteAsync(
+            protected async Task<DeleteRewardConditionRecord.Response> InternalExecuteAsync(
                 DeleteRewardConditionRequest body,
                 string namespace_,
                 string rewardId
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteRewardConditionRecord(DeleteRewardConditionRecordBuilder builder,
+        public class DeleteRewardConditionRecordBuilder : DeleteRewardConditionRecordAbstractBuilder<DeleteRewardConditionRecordBuilder>
+        {
+            public DeleteRewardConditionRecordBuilder() : base() { }
+
+            public DeleteRewardConditionRecordBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteRewardConditionRecord.Response Execute(
+                DeleteRewardConditionRequest body,
+                string namespace_,
+                string rewardId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    rewardId
+                );
+            }
+            public async Task<DeleteRewardConditionRecord.Response> ExecuteAsync(
+                DeleteRewardConditionRequest body,
+                string namespace_,
+                string rewardId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    rewardId
+                );
+            }
+        }
+
+
+        public DeleteRewardConditionRecord(IDeleteRewardConditionRecordBuilder builder,
             DeleteRewardConditionRequest body,
             string namespace_,
             string rewardId

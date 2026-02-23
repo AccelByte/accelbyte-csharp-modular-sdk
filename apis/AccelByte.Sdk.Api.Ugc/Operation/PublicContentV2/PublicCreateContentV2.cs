@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicCreateContentV2Builder Builder { get => new PublicCreateContentV2Builder(); }
 
-        public class PublicCreateContentV2Builder
-            : OperationBuilder<PublicCreateContentV2Builder>
+        public interface IPublicCreateContentV2Builder
         {
 
 
 
 
 
-            internal PublicCreateContentV2Builder() { }
+        }
 
-            internal PublicCreateContentV2Builder(IAccelByteSdk sdk)
+        public abstract class PublicCreateContentV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCreateContentV2Builder
+            where TImpl : PublicCreateContentV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicCreateContentV2AbstractBuilder() { }
+
+            public PublicCreateContentV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicCreateContentV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicCreateContentV2.Response Execute(
+            protected PublicCreateContentV2.Response InternalExecute(
                 ModelsContentRequestV2 body,
                 string channelId,
                 string namespace_,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCreateContentV2.Response> ExecuteAsync(
+            protected async Task<PublicCreateContentV2.Response> InternalExecuteAsync(
                 ModelsContentRequestV2 body,
                 string channelId,
                 string namespace_,
@@ -115,7 +125,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.Payload);
             }
 
-            public PublicCreateContentV2.Response<T1> Execute<T1>(
+            protected PublicCreateContentV2.Response<T1> InternalExecute<T1>(
                 ModelsContentRequestV2 body,
                 string channelId,
                 string namespace_,
@@ -138,7 +148,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCreateContentV2.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicCreateContentV2.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsContentRequestV2 body,
                 string channelId,
                 string namespace_,
@@ -163,7 +173,73 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicCreateContentV2(PublicCreateContentV2Builder builder,
+        public class PublicCreateContentV2Builder : PublicCreateContentV2AbstractBuilder<PublicCreateContentV2Builder>
+        {
+            public PublicCreateContentV2Builder() : base() { }
+
+            public PublicCreateContentV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicCreateContentV2.Response Execute(
+                ModelsContentRequestV2 body,
+                string channelId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicCreateContentV2.Response> ExecuteAsync(
+                ModelsContentRequestV2 body,
+                string channelId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
+                );
+            }
+
+            public PublicCreateContentV2.Response<T1> Execute<T1>(
+                ModelsContentRequestV2 body,
+                string channelId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicCreateContentV2.Response<T1>> ExecuteAsync<T1>(
+                ModelsContentRequestV2 body,
+                string channelId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    channelId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicCreateContentV2(IPublicCreateContentV2Builder builder,
             ModelsContentRequestV2 body,
             string channelId,
             string namespace_,
@@ -259,27 +335,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -300,27 +381,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponseV2<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

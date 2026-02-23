@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static SetDefaultLocalizedPolicyBuilder Builder { get => new SetDefaultLocalizedPolicyBuilder(); }
 
-        public class SetDefaultLocalizedPolicyBuilder
-            : OperationBuilder<SetDefaultLocalizedPolicyBuilder>
+        public interface ISetDefaultLocalizedPolicyBuilder
         {
 
 
 
 
 
-            internal SetDefaultLocalizedPolicyBuilder() { }
+        }
 
-            internal SetDefaultLocalizedPolicyBuilder(IAccelByteSdk sdk)
+        public abstract class SetDefaultLocalizedPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISetDefaultLocalizedPolicyBuilder
+            where TImpl : SetDefaultLocalizedPolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SetDefaultLocalizedPolicyAbstractBuilder() { }
+
+            public SetDefaultLocalizedPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SetDefaultLocalizedPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SetDefaultLocalizedPolicy.Response Execute(
+            protected SetDefaultLocalizedPolicy.Response InternalExecute(
                 string localizedPolicyVersionId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SetDefaultLocalizedPolicy.Response> ExecuteAsync(
+            protected async Task<SetDefaultLocalizedPolicy.Response> InternalExecuteAsync(
                 string localizedPolicyVersionId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private SetDefaultLocalizedPolicy(SetDefaultLocalizedPolicyBuilder builder,
+        public class SetDefaultLocalizedPolicyBuilder : SetDefaultLocalizedPolicyAbstractBuilder<SetDefaultLocalizedPolicyBuilder>
+        {
+            public SetDefaultLocalizedPolicyBuilder() : base() { }
+
+            public SetDefaultLocalizedPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SetDefaultLocalizedPolicy.Response Execute(
+                string localizedPolicyVersionId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    localizedPolicyVersionId,
+                    namespace_
+                );
+            }
+            public async Task<SetDefaultLocalizedPolicy.Response> ExecuteAsync(
+                string localizedPolicyVersionId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    localizedPolicyVersionId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SetDefaultLocalizedPolicy(ISetDefaultLocalizedPolicyBuilder builder,
             string localizedPolicyVersionId,
             string namespace_
         )

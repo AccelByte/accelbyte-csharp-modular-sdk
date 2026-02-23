@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SelectAllRecordsByCriteriaBuilder Builder { get => new SelectAllRecordsByCriteriaBuilder(); }
 
-        public class SelectAllRecordsByCriteriaBuilder
-            : OperationBuilder<SelectAllRecordsByCriteriaBuilder>
+        public interface ISelectAllRecordsByCriteriaBuilder
+        {
+
+            SelectAllRecordsByCriteriaAction? Action { get; }
+
+            string? ItemSku { get; }
+
+            SelectAllRecordsByCriteriaItemType? ItemType { get; }
+
+            bool? Selected { get; }
+
+            SelectAllRecordsByCriteriaType? Type { get; }
+
+            string? UpdatedAtEnd { get; }
+
+            string? UpdatedAtStart { get; }
+
+
+
+
+
+        }
+
+        public abstract class SelectAllRecordsByCriteriaAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISelectAllRecordsByCriteriaBuilder
+            where TImpl : SelectAllRecordsByCriteriaAbstractBuilder<TImpl>
         {
 
             public SelectAllRecordsByCriteriaAction? Action { get; set; }
@@ -52,54 +76,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SelectAllRecordsByCriteriaBuilder() { }
+            public SelectAllRecordsByCriteriaAbstractBuilder() { }
 
-            internal SelectAllRecordsByCriteriaBuilder(IAccelByteSdk sdk)
+            public SelectAllRecordsByCriteriaAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SelectAllRecordsByCriteriaBuilder SetAction(SelectAllRecordsByCriteriaAction _action)
+            public TImpl SetAction(SelectAllRecordsByCriteriaAction _action)
             {
                 Action = _action;
-                return this;
+                return (TImpl)this;
             }
 
-            public SelectAllRecordsByCriteriaBuilder SetItemSku(string _itemSku)
+            public TImpl SetItemSku(string _itemSku)
             {
                 ItemSku = _itemSku;
-                return this;
+                return (TImpl)this;
             }
 
-            public SelectAllRecordsByCriteriaBuilder SetItemType(SelectAllRecordsByCriteriaItemType _itemType)
+            public TImpl SetItemType(SelectAllRecordsByCriteriaItemType _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public SelectAllRecordsByCriteriaBuilder SetSelected(bool _selected)
+            public TImpl SetSelected(bool _selected)
             {
                 Selected = _selected;
-                return this;
+                return (TImpl)this;
             }
 
-            public SelectAllRecordsByCriteriaBuilder SetType(SelectAllRecordsByCriteriaType _type)
+            public TImpl SetType(SelectAllRecordsByCriteriaType _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public SelectAllRecordsByCriteriaBuilder SetUpdatedAtEnd(string _updatedAtEnd)
+            public TImpl SetUpdatedAtEnd(string _updatedAtEnd)
             {
                 UpdatedAtEnd = _updatedAtEnd;
-                return this;
+                return (TImpl)this;
             }
 
-            public SelectAllRecordsByCriteriaBuilder SetUpdatedAtStart(string _updatedAtStart)
+            public TImpl SetUpdatedAtStart(string _updatedAtStart)
             {
                 UpdatedAtStart = _updatedAtStart;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -116,11 +140,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<SelectAllRecordsByCriteriaBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SelectAllRecordsByCriteria.Response Execute(
+            protected SelectAllRecordsByCriteria.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -139,7 +163,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SelectAllRecordsByCriteria.Response> ExecuteAsync(
+            protected async Task<SelectAllRecordsByCriteria.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -160,7 +184,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SelectAllRecordsByCriteria(SelectAllRecordsByCriteriaBuilder builder,
+        public class SelectAllRecordsByCriteriaBuilder : SelectAllRecordsByCriteriaAbstractBuilder<SelectAllRecordsByCriteriaBuilder>
+        {
+            public SelectAllRecordsByCriteriaBuilder() : base() { }
+
+            public SelectAllRecordsByCriteriaBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SelectAllRecordsByCriteria.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<SelectAllRecordsByCriteria.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public SelectAllRecordsByCriteria(ISelectAllRecordsByCriteriaBuilder builder,
             string namespace_,
             string storeId
         )
@@ -251,7 +304,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

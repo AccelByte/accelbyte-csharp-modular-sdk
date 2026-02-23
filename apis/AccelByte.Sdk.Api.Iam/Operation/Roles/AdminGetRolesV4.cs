@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetRolesV4Builder Builder { get => new AdminGetRolesV4Builder(); }
 
-        public class AdminGetRolesV4Builder
-            : OperationBuilder<AdminGetRolesV4Builder>
+        public interface IAdminGetRolesV4Builder
+        {
+
+            bool? AdminRole { get; }
+
+            bool? IsWildcard { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetRolesV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetRolesV4Builder
+            where TImpl : AdminGetRolesV4AbstractBuilder<TImpl>
         {
 
             public bool? AdminRole { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGetRolesV4Builder() { }
+            public AdminGetRolesV4AbstractBuilder() { }
 
-            internal AdminGetRolesV4Builder(IAccelByteSdk sdk)
+            public AdminGetRolesV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetRolesV4Builder SetAdminRole(bool _adminRole)
+            public TImpl SetAdminRole(bool _adminRole)
             {
                 AdminRole = _adminRole;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetRolesV4Builder SetIsWildcard(bool _isWildcard)
+            public TImpl SetIsWildcard(bool _isWildcard)
             {
                 IsWildcard = _isWildcard;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetRolesV4Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetRolesV4Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +106,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetRolesV4 op = new AdminGetRolesV4(this
                 );
 
-                op.SetBaseFields<AdminGetRolesV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetRolesV4.Response Execute(
+            protected AdminGetRolesV4.Response InternalExecute(
             )
             {
                 AdminGetRolesV4 op = Build(
@@ -107,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetRolesV4.Response> ExecuteAsync(
+            protected async Task<AdminGetRolesV4.Response> InternalExecuteAsync(
             )
             {
                 AdminGetRolesV4 op = Build(
@@ -124,7 +142,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetRolesV4(AdminGetRolesV4Builder builder
+        public class AdminGetRolesV4Builder : AdminGetRolesV4AbstractBuilder<AdminGetRolesV4Builder>
+        {
+            public AdminGetRolesV4Builder() : base() { }
+
+            public AdminGetRolesV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetRolesV4.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGetRolesV4.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGetRolesV4(IAdminGetRolesV4Builder builder
         )
         {
             
@@ -203,27 +242,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListRoleV4Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListRoleV4Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

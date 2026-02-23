@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,28 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminGetListDeletionDataRequestBuilder Builder { get => new AdminGetListDeletionDataRequestBuilder(); }
 
-        public class AdminGetListDeletionDataRequestBuilder
-            : OperationBuilder<AdminGetListDeletionDataRequestBuilder>
+        public interface IAdminGetListDeletionDataRequestBuilder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? RequestDate { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetListDeletionDataRequestAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetListDeletionDataRequestBuilder
+            where TImpl : AdminGetListDeletionDataRequestAbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -49,42 +69,42 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
 
 
-            internal AdminGetListDeletionDataRequestBuilder() { }
+            public AdminGetListDeletionDataRequestAbstractBuilder() { }
 
-            internal AdminGetListDeletionDataRequestBuilder(IAccelByteSdk sdk)
+            public AdminGetListDeletionDataRequestAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetListDeletionDataRequestBuilder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetListDeletionDataRequestBuilder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetListDeletionDataRequestBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetListDeletionDataRequestBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetListDeletionDataRequestBuilder SetRequestDate(string _requestDate)
+            public TImpl SetRequestDate(string _requestDate)
             {
                 RequestDate = _requestDate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -99,11 +119,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetListDeletionDataRequestBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetListDeletionDataRequest.Response Execute(
+            protected AdminGetListDeletionDataRequest.Response InternalExecute(
                 string namespace_
             )
             {
@@ -120,7 +140,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetListDeletionDataRequest.Response> ExecuteAsync(
+            protected async Task<AdminGetListDeletionDataRequest.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -139,7 +159,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminGetListDeletionDataRequest(AdminGetListDeletionDataRequestBuilder builder,
+        public class AdminGetListDeletionDataRequestBuilder : AdminGetListDeletionDataRequestAbstractBuilder<AdminGetListDeletionDataRequestBuilder>
+        {
+            public AdminGetListDeletionDataRequestBuilder() : base() { }
+
+            public AdminGetListDeletionDataRequestBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetListDeletionDataRequest.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetListDeletionDataRequest.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetListDeletionDataRequest(IAdminGetListDeletionDataRequestBuilder builder,
             string namespace_
         )
         {
@@ -227,32 +272,38 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsListDeletionDataResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsListDeletionDataResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

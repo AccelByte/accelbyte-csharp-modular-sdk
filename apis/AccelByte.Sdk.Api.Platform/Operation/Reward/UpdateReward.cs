@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateRewardBuilder Builder { get => new UpdateRewardBuilder(); }
 
-        public class UpdateRewardBuilder
-            : OperationBuilder<UpdateRewardBuilder>
+        public interface IUpdateRewardBuilder
         {
 
 
 
 
 
-            internal UpdateRewardBuilder() { }
+        }
 
-            internal UpdateRewardBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateRewardAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateRewardBuilder
+            where TImpl : UpdateRewardAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateRewardAbstractBuilder() { }
+
+            public UpdateRewardAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     rewardId                    
                 );
 
-                op.SetBaseFields<UpdateRewardBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateReward.Response Execute(
+            protected UpdateReward.Response InternalExecute(
                 RewardUpdate body,
                 string namespace_,
                 string rewardId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateReward.Response> ExecuteAsync(
+            protected async Task<UpdateReward.Response> InternalExecuteAsync(
                 RewardUpdate body,
                 string namespace_,
                 string rewardId
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateReward(UpdateRewardBuilder builder,
+        public class UpdateRewardBuilder : UpdateRewardAbstractBuilder<UpdateRewardBuilder>
+        {
+            public UpdateRewardBuilder() : base() { }
+
+            public UpdateRewardBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateReward.Response Execute(
+                RewardUpdate body,
+                string namespace_,
+                string rewardId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    rewardId
+                );
+            }
+            public async Task<UpdateReward.Response> ExecuteAsync(
+                RewardUpdate body,
+                string namespace_,
+                string rewardId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    rewardId
+                );
+            }
+        }
+
+
+        public UpdateReward(IUpdateRewardBuilder builder,
             RewardUpdate body,
             string namespace_,
             string rewardId
@@ -191,22 +234,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RewardInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RewardInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

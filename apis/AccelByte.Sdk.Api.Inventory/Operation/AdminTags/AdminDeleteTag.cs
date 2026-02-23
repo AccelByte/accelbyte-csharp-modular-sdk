@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminDeleteTagBuilder Builder { get => new AdminDeleteTagBuilder(); }
 
-        public class AdminDeleteTagBuilder
-            : OperationBuilder<AdminDeleteTagBuilder>
+        public interface IAdminDeleteTagBuilder
         {
 
 
 
 
 
-            internal AdminDeleteTagBuilder() { }
+        }
 
-            internal AdminDeleteTagBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteTagAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteTagBuilder
+            where TImpl : AdminDeleteTagAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteTagAbstractBuilder() { }
+
+            public AdminDeleteTagAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     tagName                    
                 );
 
-                op.SetBaseFields<AdminDeleteTagBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteTag.Response Execute(
+            protected AdminDeleteTag.Response InternalExecute(
                 string namespace_,
                 string tagName
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteTag.Response> ExecuteAsync(
+            protected async Task<AdminDeleteTag.Response> InternalExecuteAsync(
                 string namespace_,
                 string tagName
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminDeleteTag(AdminDeleteTagBuilder builder,
+        public class AdminDeleteTagBuilder : AdminDeleteTagAbstractBuilder<AdminDeleteTagBuilder>
+        {
+            public AdminDeleteTagBuilder() : base() { }
+
+            public AdminDeleteTagBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteTag.Response Execute(
+                string namespace_,
+                string tagName
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    tagName
+                );
+            }
+            public async Task<AdminDeleteTag.Response> ExecuteAsync(
+                string namespace_,
+                string tagName
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    tagName
+                );
+            }
+        }
+
+
+        public AdminDeleteTag(IAdminDeleteTagBuilder builder,
             string namespace_,
             string tagName
         )
@@ -180,12 +219,14 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

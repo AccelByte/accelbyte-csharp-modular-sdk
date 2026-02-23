@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminPutPlayerRecordsHandlerV1Builder Builder { get => new AdminPutPlayerRecordsHandlerV1Builder(); }
 
-        public class AdminPutPlayerRecordsHandlerV1Builder
-            : OperationBuilder<AdminPutPlayerRecordsHandlerV1Builder>
+        public interface IAdminPutPlayerRecordsHandlerV1Builder
         {
 
 
 
 
 
-            internal AdminPutPlayerRecordsHandlerV1Builder() { }
+        }
 
-            internal AdminPutPlayerRecordsHandlerV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminPutPlayerRecordsHandlerV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPutPlayerRecordsHandlerV1Builder
+            where TImpl : AdminPutPlayerRecordsHandlerV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPutPlayerRecordsHandlerV1AbstractBuilder() { }
+
+            public AdminPutPlayerRecordsHandlerV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -73,11 +83,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminPutPlayerRecordsHandlerV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminPutPlayerRecordsHandlerV1.Response Execute(
+            protected AdminPutPlayerRecordsHandlerV1.Response InternalExecute(
                 ModelsBulkUpdatePlayerRecordsRequest body,
                 string namespace_,
                 string userId
@@ -98,7 +108,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPutPlayerRecordsHandlerV1.Response> ExecuteAsync(
+            protected async Task<AdminPutPlayerRecordsHandlerV1.Response> InternalExecuteAsync(
                 ModelsBulkUpdatePlayerRecordsRequest body,
                 string namespace_,
                 string userId
@@ -120,7 +130,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.Payload);
             }
 
-            public AdminPutPlayerRecordsHandlerV1.Response<T1> Execute<T1>(
+            protected AdminPutPlayerRecordsHandlerV1.Response<T1> InternalExecute<T1>(
                 ModelsBulkUpdatePlayerRecordsRequest body,
                 string namespace_,
                 string userId
@@ -141,7 +151,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPutPlayerRecordsHandlerV1.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminPutPlayerRecordsHandlerV1.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsBulkUpdatePlayerRecordsRequest body,
                 string namespace_,
                 string userId
@@ -164,7 +174,65 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminPutPlayerRecordsHandlerV1(AdminPutPlayerRecordsHandlerV1Builder builder,
+        public class AdminPutPlayerRecordsHandlerV1Builder : AdminPutPlayerRecordsHandlerV1AbstractBuilder<AdminPutPlayerRecordsHandlerV1Builder>
+        {
+            public AdminPutPlayerRecordsHandlerV1Builder() : base() { }
+
+            public AdminPutPlayerRecordsHandlerV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminPutPlayerRecordsHandlerV1.Response Execute(
+                ModelsBulkUpdatePlayerRecordsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminPutPlayerRecordsHandlerV1.Response> ExecuteAsync(
+                ModelsBulkUpdatePlayerRecordsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+
+            public AdminPutPlayerRecordsHandlerV1.Response<T1> Execute<T1>(
+                ModelsBulkUpdatePlayerRecordsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminPutPlayerRecordsHandlerV1.Response<T1>> ExecuteAsync<T1>(
+                ModelsBulkUpdatePlayerRecordsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminPutPlayerRecordsHandlerV1(IAdminPutPlayerRecordsHandlerV1Builder builder,
             ModelsBulkUpdatePlayerRecordsRequest body,
             string namespace_,
             string userId
@@ -252,22 +320,26 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsBulkUpdatePlayerRecordResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsBulkUpdatePlayerRecordResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 
@@ -288,22 +360,26 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsBulkUpdatePlayerRecordResponse<T1>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsBulkUpdatePlayerRecordResponse<T1>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             

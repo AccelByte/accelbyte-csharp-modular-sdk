@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static GetMyNotificationsBuilder Builder { get => new GetMyNotificationsBuilder(); }
 
-        public class GetMyNotificationsBuilder
-            : OperationBuilder<GetMyNotificationsBuilder>
+        public interface IGetMyNotificationsBuilder
+        {
+
+            long? EndTime { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            long? StartTime { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetMyNotificationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetMyNotificationsBuilder
+            where TImpl : GetMyNotificationsAbstractBuilder<TImpl>
         {
 
             public long? EndTime { get; set; }
@@ -48,36 +66,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal GetMyNotificationsBuilder() { }
+            public GetMyNotificationsAbstractBuilder() { }
 
-            internal GetMyNotificationsBuilder(IAccelByteSdk sdk)
+            public GetMyNotificationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetMyNotificationsBuilder SetEndTime(long _endTime)
+            public TImpl SetEndTime(long _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetMyNotificationsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetMyNotificationsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetMyNotificationsBuilder SetStartTime(long _startTime)
+            public TImpl SetStartTime(long _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetMyNotificationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetMyNotifications.Response Execute(
+            protected GetMyNotifications.Response InternalExecute(
                 string namespace_
             )
             {
@@ -113,7 +131,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetMyNotifications.Response> ExecuteAsync(
+            protected async Task<GetMyNotifications.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -132,7 +150,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private GetMyNotifications(GetMyNotificationsBuilder builder,
+        public class GetMyNotificationsBuilder : GetMyNotificationsAbstractBuilder<GetMyNotificationsBuilder>
+        {
+            public GetMyNotificationsBuilder() : base() { }
+
+            public GetMyNotificationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetMyNotifications.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetMyNotifications.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetMyNotifications(IGetMyNotificationsBuilder builder,
             string namespace_
         )
         {
@@ -217,32 +260,38 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelNotificationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelNotificationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

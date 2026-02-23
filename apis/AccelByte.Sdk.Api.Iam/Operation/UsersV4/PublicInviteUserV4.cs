@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -39,17 +39,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicInviteUserV4Builder Builder { get => new PublicInviteUserV4Builder(); }
 
-        public class PublicInviteUserV4Builder
-            : OperationBuilder<PublicInviteUserV4Builder>
+        public interface IPublicInviteUserV4Builder
         {
 
 
 
 
 
-            internal PublicInviteUserV4Builder() { }
+        }
 
-            internal PublicInviteUserV4Builder(IAccelByteSdk sdk)
+        public abstract class PublicInviteUserV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicInviteUserV4Builder
+            where TImpl : PublicInviteUserV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicInviteUserV4AbstractBuilder() { }
+
+            public PublicInviteUserV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<PublicInviteUserV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicInviteUserV4.Response Execute(
+            protected PublicInviteUserV4.Response InternalExecute(
                 ModelPublicInviteUserRequestV4 body
             )
             {
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicInviteUserV4.Response> ExecuteAsync(
+            protected async Task<PublicInviteUserV4.Response> InternalExecuteAsync(
                 ModelPublicInviteUserRequestV4 body
             )
             {
@@ -107,7 +117,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicInviteUserV4(PublicInviteUserV4Builder builder,
+        public class PublicInviteUserV4Builder : PublicInviteUserV4AbstractBuilder<PublicInviteUserV4Builder>
+        {
+            public PublicInviteUserV4Builder() : base() { }
+
+            public PublicInviteUserV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicInviteUserV4.Response Execute(
+                ModelPublicInviteUserRequestV4 body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<PublicInviteUserV4.Response> ExecuteAsync(
+                ModelPublicInviteUserRequestV4 body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public PublicInviteUserV4(IPublicInviteUserV4Builder builder,
             ModelPublicInviteUserRequestV4 body
         )
         {
@@ -180,32 +215,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelInviteUserResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelInviteUserResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

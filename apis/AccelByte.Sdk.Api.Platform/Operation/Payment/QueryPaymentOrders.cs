@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryPaymentOrdersBuilder Builder { get => new QueryPaymentOrdersBuilder(); }
 
-        public class QueryPaymentOrdersBuilder
-            : OperationBuilder<QueryPaymentOrdersBuilder>
+        public interface IQueryPaymentOrdersBuilder
+        {
+
+            QueryPaymentOrdersChannel? Channel { get; }
+
+            string? ExtTxId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryPaymentOrdersStatus? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryPaymentOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryPaymentOrdersBuilder
+            where TImpl : QueryPaymentOrdersAbstractBuilder<TImpl>
         {
 
             public QueryPaymentOrdersChannel? Channel { get; set; }
@@ -51,42 +71,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryPaymentOrdersBuilder() { }
+            public QueryPaymentOrdersAbstractBuilder() { }
 
-            internal QueryPaymentOrdersBuilder(IAccelByteSdk sdk)
+            public QueryPaymentOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryPaymentOrdersBuilder SetChannel(QueryPaymentOrdersChannel _channel)
+            public TImpl SetChannel(QueryPaymentOrdersChannel _channel)
             {
                 Channel = _channel;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentOrdersBuilder SetExtTxId(string _extTxId)
+            public TImpl SetExtTxId(string _extTxId)
             {
                 ExtTxId = _extTxId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentOrdersBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentOrdersBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentOrdersBuilder SetStatus(QueryPaymentOrdersStatus _status)
+            public TImpl SetStatus(QueryPaymentOrdersStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -101,11 +121,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryPaymentOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryPaymentOrders.Response Execute(
+            protected QueryPaymentOrders.Response InternalExecute(
                 string namespace_
             )
             {
@@ -122,7 +142,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryPaymentOrders.Response> ExecuteAsync(
+            protected async Task<QueryPaymentOrders.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -141,7 +161,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryPaymentOrders(QueryPaymentOrdersBuilder builder,
+        public class QueryPaymentOrdersBuilder : QueryPaymentOrdersAbstractBuilder<QueryPaymentOrdersBuilder>
+        {
+            public QueryPaymentOrdersBuilder() : base() { }
+
+            public QueryPaymentOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryPaymentOrders.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryPaymentOrders.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryPaymentOrders(IQueryPaymentOrdersBuilder builder,
             string namespace_
         )
         {
@@ -219,7 +264,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static PublicConsumeMyItemBuilder Builder { get => new PublicConsumeMyItemBuilder(); }
 
-        public class PublicConsumeMyItemBuilder
-            : OperationBuilder<PublicConsumeMyItemBuilder>
+        public interface IPublicConsumeMyItemBuilder
         {
 
 
 
 
 
-            internal PublicConsumeMyItemBuilder() { }
+        }
 
-            internal PublicConsumeMyItemBuilder(IAccelByteSdk sdk)
+        public abstract class PublicConsumeMyItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicConsumeMyItemBuilder
+            where TImpl : PublicConsumeMyItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicConsumeMyItemAbstractBuilder() { }
+
+            public PublicConsumeMyItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicConsumeMyItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicConsumeMyItem.Response Execute(
+            protected PublicConsumeMyItem.Response InternalExecute(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicConsumeMyItem.Response> ExecuteAsync(
+            protected async Task<PublicConsumeMyItem.Response> InternalExecuteAsync(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_
@@ -111,7 +121,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.Payload);
             }
 
-            public PublicConsumeMyItem.Response<T1, T2, T3> Execute<T1, T2, T3>(
+            protected PublicConsumeMyItem.Response<T1, T2, T3> InternalExecute<T1, T2, T3>(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_
@@ -132,7 +142,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicConsumeMyItem.Response<T1, T2, T3>> ExecuteAsync<T1, T2, T3>(
+            protected async Task<PublicConsumeMyItem.Response<T1, T2, T3>> InternalExecuteAsync<T1, T2, T3>(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_
@@ -155,7 +165,65 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private PublicConsumeMyItem(PublicConsumeMyItemBuilder builder,
+        public class PublicConsumeMyItemBuilder : PublicConsumeMyItemAbstractBuilder<PublicConsumeMyItemBuilder>
+        {
+            public PublicConsumeMyItemBuilder() : base() { }
+
+            public PublicConsumeMyItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicConsumeMyItem.Response Execute(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<PublicConsumeMyItem.Response> ExecuteAsync(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+
+            public PublicConsumeMyItem.Response<T1, T2, T3> Execute<T1, T2, T3>(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1, T2, T3>(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<PublicConsumeMyItem.Response<T1, T2, T3>> ExecuteAsync<T1, T2, T3>(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1, T2, T3>(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicConsumeMyItem(IPublicConsumeMyItemBuilder builder,
             ApimodelsConsumeItemReq body,
             string inventoryId,
             string namespace_
@@ -243,22 +311,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -279,22 +351,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

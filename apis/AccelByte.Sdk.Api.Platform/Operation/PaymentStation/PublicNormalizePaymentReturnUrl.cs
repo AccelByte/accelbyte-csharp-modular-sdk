@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -51,8 +51,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicNormalizePaymentReturnUrlBuilder Builder { get => new PublicNormalizePaymentReturnUrlBuilder(); }
 
-        public class PublicNormalizePaymentReturnUrlBuilder
-            : OperationBuilder<PublicNormalizePaymentReturnUrlBuilder>
+        public interface IPublicNormalizePaymentReturnUrlBuilder
+        {
+
+            string? PayerID { get; }
+
+            string? Foreinginvoice { get; }
+
+            string? InvoiceId { get; }
+
+            string? Payload { get; }
+
+            string? RedirectResult { get; }
+
+            string? ResultCode { get; }
+
+            string? SessionId { get; }
+
+            string? Status { get; }
+
+            string? Token { get; }
+
+            string? Type { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicNormalizePaymentReturnUrlAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicNormalizePaymentReturnUrlBuilder
+            where TImpl : PublicNormalizePaymentReturnUrlAbstractBuilder<TImpl>
         {
 
             public string? PayerID { get; set; }
@@ -81,78 +113,78 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicNormalizePaymentReturnUrlBuilder() { }
+            public PublicNormalizePaymentReturnUrlAbstractBuilder() { }
 
-            internal PublicNormalizePaymentReturnUrlBuilder(IAccelByteSdk sdk)
+            public PublicNormalizePaymentReturnUrlAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicNormalizePaymentReturnUrlBuilder SetPayerID(string _payerID)
+            public TImpl SetPayerID(string _payerID)
             {
                 PayerID = _payerID;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetForeinginvoice(string _foreinginvoice)
+            public TImpl SetForeinginvoice(string _foreinginvoice)
             {
                 Foreinginvoice = _foreinginvoice;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetInvoiceId(string _invoiceId)
+            public TImpl SetInvoiceId(string _invoiceId)
             {
                 InvoiceId = _invoiceId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetPayload(string _payload)
+            public TImpl SetPayload(string _payload)
             {
                 Payload = _payload;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetRedirectResult(string _redirectResult)
+            public TImpl SetRedirectResult(string _redirectResult)
             {
                 RedirectResult = _redirectResult;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetResultCode(string _resultCode)
+            public TImpl SetResultCode(string _resultCode)
             {
                 ResultCode = _resultCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetSessionId(string _sessionId)
+            public TImpl SetSessionId(string _sessionId)
             {
                 SessionId = _sessionId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetToken(string _token)
+            public TImpl SetToken(string _token)
             {
                 Token = _token;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetType(string _type)
+            public TImpl SetType(string _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicNormalizePaymentReturnUrlBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -175,11 +207,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     returnUrl                    
                 );
 
-                op.SetBaseFields<PublicNormalizePaymentReturnUrlBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicNormalizePaymentReturnUrl.Response Execute(
+            protected PublicNormalizePaymentReturnUrl.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string paymentOrderNo,
@@ -204,7 +236,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicNormalizePaymentReturnUrl.Response> ExecuteAsync(
+            protected async Task<PublicNormalizePaymentReturnUrl.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string paymentOrderNo,
@@ -231,7 +263,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicNormalizePaymentReturnUrl(PublicNormalizePaymentReturnUrlBuilder builder,
+        public class PublicNormalizePaymentReturnUrlBuilder : PublicNormalizePaymentReturnUrlAbstractBuilder<PublicNormalizePaymentReturnUrlBuilder>
+        {
+            public PublicNormalizePaymentReturnUrlBuilder() : base() { }
+
+            public PublicNormalizePaymentReturnUrlBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicNormalizePaymentReturnUrl.Response Execute(
+                string namespace_,
+                string orderNo,
+                string paymentOrderNo,
+                string paymentProvider,
+                string returnUrl
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    paymentOrderNo,
+                    paymentProvider,
+                    returnUrl
+                );
+            }
+            public async Task<PublicNormalizePaymentReturnUrl.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string paymentOrderNo,
+                string paymentProvider,
+                string returnUrl
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    paymentOrderNo,
+                    paymentProvider,
+                    returnUrl
+                );
+            }
+        }
+
+
+        public PublicNormalizePaymentReturnUrl(IPublicNormalizePaymentReturnUrlBuilder builder,
             string namespace_,
             string orderNo,
             string paymentOrderNo,

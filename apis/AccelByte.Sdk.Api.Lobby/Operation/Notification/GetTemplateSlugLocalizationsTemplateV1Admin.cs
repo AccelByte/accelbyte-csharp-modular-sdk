@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,24 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static GetTemplateSlugLocalizationsTemplateV1AdminBuilder Builder { get => new GetTemplateSlugLocalizationsTemplateV1AdminBuilder(); }
 
-        public class GetTemplateSlugLocalizationsTemplateV1AdminBuilder
-            : OperationBuilder<GetTemplateSlugLocalizationsTemplateV1AdminBuilder>
+        public interface IGetTemplateSlugLocalizationsTemplateV1AdminBuilder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetTemplateSlugLocalizationsTemplateV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTemplateSlugLocalizationsTemplateV1AdminBuilder
+            where TImpl : GetTemplateSlugLocalizationsTemplateV1AdminAbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -46,30 +62,30 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal GetTemplateSlugLocalizationsTemplateV1AdminBuilder() { }
+            public GetTemplateSlugLocalizationsTemplateV1AdminAbstractBuilder() { }
 
-            internal GetTemplateSlugLocalizationsTemplateV1AdminBuilder(IAccelByteSdk sdk)
+            public GetTemplateSlugLocalizationsTemplateV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetTemplateSlugLocalizationsTemplateV1AdminBuilder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTemplateSlugLocalizationsTemplateV1AdminBuilder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTemplateSlugLocalizationsTemplateV1AdminBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -86,11 +102,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<GetTemplateSlugLocalizationsTemplateV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTemplateSlugLocalizationsTemplateV1Admin.Response Execute(
+            protected GetTemplateSlugLocalizationsTemplateV1Admin.Response InternalExecute(
                 string namespace_,
                 string templateSlug
             )
@@ -109,7 +125,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTemplateSlugLocalizationsTemplateV1Admin.Response> ExecuteAsync(
+            protected async Task<GetTemplateSlugLocalizationsTemplateV1Admin.Response> InternalExecuteAsync(
                 string namespace_,
                 string templateSlug
             )
@@ -130,7 +146,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private GetTemplateSlugLocalizationsTemplateV1Admin(GetTemplateSlugLocalizationsTemplateV1AdminBuilder builder,
+        public class GetTemplateSlugLocalizationsTemplateV1AdminBuilder : GetTemplateSlugLocalizationsTemplateV1AdminAbstractBuilder<GetTemplateSlugLocalizationsTemplateV1AdminBuilder>
+        {
+            public GetTemplateSlugLocalizationsTemplateV1AdminBuilder() : base() { }
+
+            public GetTemplateSlugLocalizationsTemplateV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTemplateSlugLocalizationsTemplateV1Admin.Response Execute(
+                string namespace_,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    templateSlug
+                );
+            }
+            public async Task<GetTemplateSlugLocalizationsTemplateV1Admin.Response> ExecuteAsync(
+                string namespace_,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public GetTemplateSlugLocalizationsTemplateV1Admin(IGetTemplateSlugLocalizationsTemplateV1AdminBuilder builder,
             string namespace_,
             string templateSlug
         )
@@ -214,27 +259,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetAllNotificationTemplateSlugResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetAllNotificationTemplateSlugResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

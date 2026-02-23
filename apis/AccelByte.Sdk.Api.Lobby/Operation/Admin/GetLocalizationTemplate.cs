@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static GetLocalizationTemplateBuilder Builder { get => new GetLocalizationTemplateBuilder(); }
 
-        public class GetLocalizationTemplateBuilder
-            : OperationBuilder<GetLocalizationTemplateBuilder>
+        public interface IGetLocalizationTemplateBuilder
         {
 
 
 
 
 
-            internal GetLocalizationTemplateBuilder() { }
+        }
 
-            internal GetLocalizationTemplateBuilder(IAccelByteSdk sdk)
+        public abstract class GetLocalizationTemplateAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLocalizationTemplateBuilder
+            where TImpl : GetLocalizationTemplateAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetLocalizationTemplateAbstractBuilder() { }
+
+            public GetLocalizationTemplateAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<GetLocalizationTemplateBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLocalizationTemplate.Response Execute(
+            protected GetLocalizationTemplate.Response InternalExecute(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLocalizationTemplate.Response> ExecuteAsync(
+            protected async Task<GetLocalizationTemplate.Response> InternalExecuteAsync(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private GetLocalizationTemplate(GetLocalizationTemplateBuilder builder,
+        public class GetLocalizationTemplateBuilder : GetLocalizationTemplateAbstractBuilder<GetLocalizationTemplateBuilder>
+        {
+            public GetLocalizationTemplateBuilder() : base() { }
+
+            public GetLocalizationTemplateBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLocalizationTemplate.Response Execute(
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+            public async Task<GetLocalizationTemplate.Response> ExecuteAsync(
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public GetLocalizationTemplate(IGetLocalizationTemplateBuilder builder,
             string namespace_,
             string templateLanguage,
             string templateSlug
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelTemplateLocalization>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelTemplateLocalization>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

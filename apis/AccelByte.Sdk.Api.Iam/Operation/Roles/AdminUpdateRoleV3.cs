@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateRoleV3Builder Builder { get => new AdminUpdateRoleV3Builder(); }
 
-        public class AdminUpdateRoleV3Builder
-            : OperationBuilder<AdminUpdateRoleV3Builder>
+        public interface IAdminUpdateRoleV3Builder
         {
 
 
 
 
 
-            internal AdminUpdateRoleV3Builder() { }
+        }
 
-            internal AdminUpdateRoleV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateRoleV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateRoleV3Builder
+            where TImpl : AdminUpdateRoleV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateRoleV3AbstractBuilder() { }
+
+            public AdminUpdateRoleV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<AdminUpdateRoleV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateRoleV3.Response Execute(
+            protected AdminUpdateRoleV3.Response InternalExecute(
                 ModelRoleUpdateRequestV3 body,
                 string roleId
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateRoleV3.Response> ExecuteAsync(
+            protected async Task<AdminUpdateRoleV3.Response> InternalExecuteAsync(
                 ModelRoleUpdateRequestV3 body,
                 string roleId
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateRoleV3(AdminUpdateRoleV3Builder builder,
+        public class AdminUpdateRoleV3Builder : AdminUpdateRoleV3AbstractBuilder<AdminUpdateRoleV3Builder>
+        {
+            public AdminUpdateRoleV3Builder() : base() { }
+
+            public AdminUpdateRoleV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateRoleV3.Response Execute(
+                ModelRoleUpdateRequestV3 body,
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    roleId
+                );
+            }
+            public async Task<AdminUpdateRoleV3.Response> ExecuteAsync(
+                ModelRoleUpdateRequestV3 body,
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    roleId
+                );
+            }
+        }
+
+
+        public AdminUpdateRoleV3(IAdminUpdateRoleV3Builder builder,
             ModelRoleUpdateRequestV3 body,
             string roleId
         )
@@ -186,32 +225,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelRoleResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelRoleResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetCountryGroupsBuilder Builder { get => new GetCountryGroupsBuilder(); }
 
-        public class GetCountryGroupsBuilder
-            : OperationBuilder<GetCountryGroupsBuilder>
+        public interface IGetCountryGroupsBuilder
+        {
+
+            string? GroupCode { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetCountryGroupsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCountryGroupsBuilder
+            where TImpl : GetCountryGroupsAbstractBuilder<TImpl>
         {
 
             public string? GroupCode { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal GetCountryGroupsBuilder() { }
+            public GetCountryGroupsAbstractBuilder() { }
 
-            internal GetCountryGroupsBuilder(IAccelByteSdk sdk)
+            public GetCountryGroupsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetCountryGroupsBuilder SetGroupCode(string _groupCode)
+            public TImpl SetGroupCode(string _groupCode)
             {
                 GroupCode = _groupCode;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCountryGroupsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCountryGroups.Response Execute(
+            protected GetCountryGroups.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCountryGroups.Response> ExecuteAsync(
+            protected async Task<GetCountryGroups.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetCountryGroups(GetCountryGroupsBuilder builder,
+        public class GetCountryGroupsBuilder : GetCountryGroupsAbstractBuilder<GetCountryGroupsBuilder>
+        {
+            public GetCountryGroupsBuilder() : base() { }
+
+            public GetCountryGroupsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCountryGroups.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetCountryGroups.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCountryGroups(IGetCountryGroupsBuilder builder,
             string namespace_
         )
         {
@@ -184,27 +221,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveCountryGroupResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveCountryGroupResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

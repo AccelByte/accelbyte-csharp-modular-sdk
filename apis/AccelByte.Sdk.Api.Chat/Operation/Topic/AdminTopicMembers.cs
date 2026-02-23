@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,28 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminTopicMembersBuilder Builder { get => new AdminTopicMembersBuilder(); }
 
-        public class AdminTopicMembersBuilder
-            : OperationBuilder<AdminTopicMembersBuilder>
+        public interface IAdminTopicMembersBuilder
+        {
+
+            bool? IsBanned { get; }
+
+            bool? IsModerator { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? ShardId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminTopicMembersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminTopicMembersBuilder
+            where TImpl : AdminTopicMembersAbstractBuilder<TImpl>
         {
 
             public bool? IsBanned { get; set; }
@@ -48,42 +68,42 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal AdminTopicMembersBuilder() { }
+            public AdminTopicMembersAbstractBuilder() { }
 
-            internal AdminTopicMembersBuilder(IAccelByteSdk sdk)
+            public AdminTopicMembersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminTopicMembersBuilder SetIsBanned(bool _isBanned)
+            public TImpl SetIsBanned(bool _isBanned)
             {
                 IsBanned = _isBanned;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminTopicMembersBuilder SetIsModerator(bool _isModerator)
+            public TImpl SetIsModerator(bool _isModerator)
             {
                 IsModerator = _isModerator;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminTopicMembersBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminTopicMembersBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminTopicMembersBuilder SetShardId(string _shardId)
+            public TImpl SetShardId(string _shardId)
             {
                 ShardId = _shardId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -100,11 +120,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<AdminTopicMembersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminTopicMembers.Response Execute(
+            protected AdminTopicMembers.Response InternalExecute(
                 string namespace_,
                 string topic
             )
@@ -123,7 +143,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminTopicMembers.Response> ExecuteAsync(
+            protected async Task<AdminTopicMembers.Response> InternalExecuteAsync(
                 string namespace_,
                 string topic
             )
@@ -144,7 +164,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminTopicMembers(AdminTopicMembersBuilder builder,
+        public class AdminTopicMembersBuilder : AdminTopicMembersAbstractBuilder<AdminTopicMembersBuilder>
+        {
+            public AdminTopicMembersBuilder() : base() { }
+
+            public AdminTopicMembersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminTopicMembers.Response Execute(
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<AdminTopicMembers.Response> ExecuteAsync(
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public AdminTopicMembers(IAdminTopicMembersBuilder builder,
             string namespace_,
             string topic
         )
@@ -234,27 +283,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsTopicMemberWithPaginationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsTopicMemberWithPaginationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static DeleteUserSlotConfigBuilder Builder { get => new DeleteUserSlotConfigBuilder(); }
 
-        public class DeleteUserSlotConfigBuilder
-            : OperationBuilder<DeleteUserSlotConfigBuilder>
+        public interface IDeleteUserSlotConfigBuilder
         {
 
 
 
 
 
-            internal DeleteUserSlotConfigBuilder() { }
+        }
 
-            internal DeleteUserSlotConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteUserSlotConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteUserSlotConfigBuilder
+            where TImpl : DeleteUserSlotConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteUserSlotConfigAbstractBuilder() { }
+
+            public DeleteUserSlotConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,12 +77,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteUserSlotConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteUserSlotConfig.Response Execute(
+            protected DeleteUserSlotConfig.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteUserSlotConfig.Response> ExecuteAsync(
+            protected async Task<DeleteUserSlotConfig.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -112,7 +122,37 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private DeleteUserSlotConfig(DeleteUserSlotConfigBuilder builder,
+        public class DeleteUserSlotConfigBuilder : DeleteUserSlotConfigAbstractBuilder<DeleteUserSlotConfigBuilder>
+        {
+            public DeleteUserSlotConfigBuilder() : base() { }
+
+            public DeleteUserSlotConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteUserSlotConfig.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DeleteUserSlotConfig.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteUserSlotConfig(IDeleteUserSlotConfigBuilder builder,
             string namespace_,
             string userId
         )

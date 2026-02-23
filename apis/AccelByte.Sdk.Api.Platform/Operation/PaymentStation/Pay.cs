@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PayBuilder Builder { get => new PayBuilder(); }
 
-        public class PayBuilder
-            : OperationBuilder<PayBuilder>
+        public interface IPayBuilder
+        {
+
+            PayPaymentProvider? PaymentProvider { get; }
+
+            string? ZipCode { get; }
+
+
+
+
+
+        }
+
+        public abstract class PayAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPayBuilder
+            where TImpl : PayAbstractBuilder<TImpl>
         {
 
             public PayPaymentProvider? PaymentProvider { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PayBuilder() { }
+            public PayAbstractBuilder() { }
 
-            internal PayBuilder(IAccelByteSdk sdk)
+            public PayAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PayBuilder SetPaymentProvider(PayPaymentProvider _paymentProvider)
+            public TImpl SetPaymentProvider(PayPaymentProvider _paymentProvider)
             {
                 PaymentProvider = _paymentProvider;
-                return this;
+                return (TImpl)this;
             }
 
-            public PayBuilder SetZipCode(string _zipCode)
+            public TImpl SetZipCode(string _zipCode)
             {
                 ZipCode = _zipCode;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentOrderNo                    
                 );
 
-                op.SetBaseFields<PayBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Pay.Response Execute(
+            protected Pay.Response InternalExecute(
                 PaymentToken body,
                 string namespace_,
                 string paymentOrderNo
@@ -106,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Pay.Response> ExecuteAsync(
+            protected async Task<Pay.Response> InternalExecuteAsync(
                 PaymentToken body,
                 string namespace_,
                 string paymentOrderNo
@@ -129,7 +143,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private Pay(PayBuilder builder,
+        public class PayBuilder : PayAbstractBuilder<PayBuilder>
+        {
+            public PayBuilder() : base() { }
+
+            public PayBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Pay.Response Execute(
+                PaymentToken body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+            public async Task<Pay.Response> ExecuteAsync(
+                PaymentToken body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+        }
+
+
+        public Pay(IPayBuilder builder,
             PaymentToken body,
             string namespace_,
             string paymentOrderNo
@@ -210,22 +257,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentProcessResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentProcessResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

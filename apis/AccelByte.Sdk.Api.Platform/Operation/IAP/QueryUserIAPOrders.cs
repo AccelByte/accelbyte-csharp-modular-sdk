@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUserIAPOrdersBuilder Builder { get => new QueryUserIAPOrdersBuilder(); }
 
-        public class QueryUserIAPOrdersBuilder
-            : OperationBuilder<QueryUserIAPOrdersBuilder>
+        public interface IQueryUserIAPOrdersBuilder
+        {
+
+            string? EndTime { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? ProductId { get; }
+
+            string? StartTime { get; }
+
+            QueryUserIAPOrdersStatus? Status { get; }
+
+            QueryUserIAPOrdersType? Type { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserIAPOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserIAPOrdersBuilder
+            where TImpl : QueryUserIAPOrdersAbstractBuilder<TImpl>
         {
 
             public string? EndTime { get; set; }
@@ -55,54 +79,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUserIAPOrdersBuilder() { }
+            public QueryUserIAPOrdersAbstractBuilder() { }
 
-            internal QueryUserIAPOrdersBuilder(IAccelByteSdk sdk)
+            public QueryUserIAPOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserIAPOrdersBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPOrdersBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPOrdersBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPOrdersBuilder SetProductId(string _productId)
+            public TImpl SetProductId(string _productId)
             {
                 ProductId = _productId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPOrdersBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPOrdersBuilder SetStatus(QueryUserIAPOrdersStatus _status)
+            public TImpl SetStatus(QueryUserIAPOrdersStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPOrdersBuilder SetType(QueryUserIAPOrdersType _type)
+            public TImpl SetType(QueryUserIAPOrdersType _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -119,11 +143,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserIAPOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserIAPOrders.Response Execute(
+            protected QueryUserIAPOrders.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -142,7 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserIAPOrders.Response> ExecuteAsync(
+            protected async Task<QueryUserIAPOrders.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -163,7 +187,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUserIAPOrders(QueryUserIAPOrdersBuilder builder,
+        public class QueryUserIAPOrdersBuilder : QueryUserIAPOrdersAbstractBuilder<QueryUserIAPOrdersBuilder>
+        {
+            public QueryUserIAPOrdersBuilder() : base() { }
+
+            public QueryUserIAPOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserIAPOrders.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserIAPOrders.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserIAPOrders(IQueryUserIAPOrdersBuilder builder,
             string namespace_,
             string userId
         )
@@ -251,7 +304,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPOrderPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPOrderPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

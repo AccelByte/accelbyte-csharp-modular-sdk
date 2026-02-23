@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -267,17 +267,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateItemBuilder Builder { get => new UpdateItemBuilder(); }
 
-        public class UpdateItemBuilder
-            : OperationBuilder<UpdateItemBuilder>
+        public interface IUpdateItemBuilder
         {
 
 
 
 
 
-            internal UpdateItemBuilder() { }
+        }
 
-            internal UpdateItemBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateItemBuilder
+            where TImpl : UpdateItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateItemAbstractBuilder() { }
+
+            public UpdateItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -301,11 +311,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<UpdateItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateItem.Response Execute(
+            protected UpdateItem.Response InternalExecute(
                 ItemUpdate body,
                 string itemId,
                 string namespace_,
@@ -328,7 +338,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateItem.Response> ExecuteAsync(
+            protected async Task<UpdateItem.Response> InternalExecuteAsync(
                 ItemUpdate body,
                 string itemId,
                 string namespace_,
@@ -352,7 +362,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public UpdateItem.Response<T1> Execute<T1>(
+            protected UpdateItem.Response<T1> InternalExecute<T1>(
                 ItemUpdate body,
                 string itemId,
                 string namespace_,
@@ -375,7 +385,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateItem.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<UpdateItem.Response<T1>> InternalExecuteAsync<T1>(
                 ItemUpdate body,
                 string itemId,
                 string namespace_,
@@ -400,7 +410,73 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateItem(UpdateItemBuilder builder,
+        public class UpdateItemBuilder : UpdateItemAbstractBuilder<UpdateItemBuilder>
+        {
+            public UpdateItemBuilder() : base() { }
+
+            public UpdateItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateItem.Response Execute(
+                ItemUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<UpdateItem.Response> ExecuteAsync(
+                ItemUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+
+            public UpdateItem.Response<T1> Execute<T1>(
+                ItemUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<UpdateItem.Response<T1>> ExecuteAsync<T1>(
+                ItemUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public UpdateItem(IUpdateItemBuilder builder,
             ItemUpdate body,
             string itemId,
             string namespace_,
@@ -496,27 +572,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 
@@ -537,27 +618,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             

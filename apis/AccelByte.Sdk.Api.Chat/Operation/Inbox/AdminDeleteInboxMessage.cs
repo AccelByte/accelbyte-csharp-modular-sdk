@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminDeleteInboxMessageBuilder Builder { get => new AdminDeleteInboxMessageBuilder(); }
 
-        public class AdminDeleteInboxMessageBuilder
-            : OperationBuilder<AdminDeleteInboxMessageBuilder>
+        public interface IAdminDeleteInboxMessageBuilder
+        {
+
+            bool? Force { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminDeleteInboxMessageAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteInboxMessageBuilder
+            where TImpl : AdminDeleteInboxMessageAbstractBuilder<TImpl>
         {
 
             public bool? Force { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal AdminDeleteInboxMessageBuilder() { }
+            public AdminDeleteInboxMessageAbstractBuilder() { }
 
-            internal AdminDeleteInboxMessageBuilder(IAccelByteSdk sdk)
+            public AdminDeleteInboxMessageAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminDeleteInboxMessageBuilder SetForce(bool _force)
+            public TImpl SetForce(bool _force)
             {
                 Force = _force;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteInboxMessageBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteInboxMessage.Response Execute(
+            protected AdminDeleteInboxMessage.Response InternalExecute(
                 string messageId,
                 string namespace_
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteInboxMessage.Response> ExecuteAsync(
+            protected async Task<AdminDeleteInboxMessage.Response> InternalExecuteAsync(
                 string messageId,
                 string namespace_
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminDeleteInboxMessage(AdminDeleteInboxMessageBuilder builder,
+        public class AdminDeleteInboxMessageBuilder : AdminDeleteInboxMessageAbstractBuilder<AdminDeleteInboxMessageBuilder>
+        {
+            public AdminDeleteInboxMessageBuilder() : base() { }
+
+            public AdminDeleteInboxMessageBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteInboxMessage.Response Execute(
+                string messageId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    messageId,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteInboxMessage.Response> ExecuteAsync(
+                string messageId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    messageId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteInboxMessage(IAdminDeleteInboxMessageBuilder builder,
             string messageId,
             string namespace_
         )
@@ -191,22 +232,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

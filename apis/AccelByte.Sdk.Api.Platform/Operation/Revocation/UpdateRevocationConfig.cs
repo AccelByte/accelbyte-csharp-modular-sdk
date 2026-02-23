@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateRevocationConfigBuilder Builder { get => new UpdateRevocationConfigBuilder(); }
 
-        public class UpdateRevocationConfigBuilder
-            : OperationBuilder<UpdateRevocationConfigBuilder>
+        public interface IUpdateRevocationConfigBuilder
         {
 
 
 
 
 
-            internal UpdateRevocationConfigBuilder() { }
+        }
 
-            internal UpdateRevocationConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateRevocationConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateRevocationConfigBuilder
+            where TImpl : UpdateRevocationConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateRevocationConfigAbstractBuilder() { }
+
+            public UpdateRevocationConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateRevocationConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateRevocationConfig.Response Execute(
+            protected UpdateRevocationConfig.Response InternalExecute(
                 RevocationConfigUpdate body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateRevocationConfig.Response> ExecuteAsync(
+            protected async Task<UpdateRevocationConfig.Response> InternalExecuteAsync(
                 RevocationConfigUpdate body,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateRevocationConfig(UpdateRevocationConfigBuilder builder,
+        public class UpdateRevocationConfigBuilder : UpdateRevocationConfigAbstractBuilder<UpdateRevocationConfigBuilder>
+        {
+            public UpdateRevocationConfigBuilder() : base() { }
+
+            public UpdateRevocationConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateRevocationConfig.Response Execute(
+                RevocationConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateRevocationConfig.Response> ExecuteAsync(
+                RevocationConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateRevocationConfig(IUpdateRevocationConfigBuilder builder,
             RevocationConfigUpdate body,
             string namespace_
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

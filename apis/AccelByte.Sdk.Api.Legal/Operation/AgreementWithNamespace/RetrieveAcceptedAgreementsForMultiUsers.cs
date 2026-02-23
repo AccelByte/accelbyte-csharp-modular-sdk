@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAcceptedAgreementsForMultiUsersBuilder Builder { get => new RetrieveAcceptedAgreementsForMultiUsersBuilder(); }
 
-        public class RetrieveAcceptedAgreementsForMultiUsersBuilder
-            : OperationBuilder<RetrieveAcceptedAgreementsForMultiUsersBuilder>
+        public interface IRetrieveAcceptedAgreementsForMultiUsersBuilder
+        {
+
+
+            Model.UsersAgreementsRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class RetrieveAcceptedAgreementsForMultiUsersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAcceptedAgreementsForMultiUsersBuilder
+            where TImpl : RetrieveAcceptedAgreementsForMultiUsersAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveAcceptedAgreementsForMultiUsersBuilder() { }
+            public RetrieveAcceptedAgreementsForMultiUsersAbstractBuilder() { }
 
-            internal RetrieveAcceptedAgreementsForMultiUsersBuilder(IAccelByteSdk sdk)
+            public RetrieveAcceptedAgreementsForMultiUsersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public RetrieveAcceptedAgreementsForMultiUsersBuilder SetBody(Model.UsersAgreementsRequest _body)
+            public TImpl SetBody(Model.UsersAgreementsRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RetrieveAcceptedAgreementsForMultiUsersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAcceptedAgreementsForMultiUsers.Response Execute(
+            protected RetrieveAcceptedAgreementsForMultiUsers.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAcceptedAgreementsForMultiUsers.Response> ExecuteAsync(
+            protected async Task<RetrieveAcceptedAgreementsForMultiUsers.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAcceptedAgreementsForMultiUsers(RetrieveAcceptedAgreementsForMultiUsersBuilder builder,
+        public class RetrieveAcceptedAgreementsForMultiUsersBuilder : RetrieveAcceptedAgreementsForMultiUsersAbstractBuilder<RetrieveAcceptedAgreementsForMultiUsersBuilder>
+        {
+            public RetrieveAcceptedAgreementsForMultiUsersBuilder() : base() { }
+
+            public RetrieveAcceptedAgreementsForMultiUsersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAcceptedAgreementsForMultiUsers.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RetrieveAcceptedAgreementsForMultiUsers.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RetrieveAcceptedAgreementsForMultiUsers(IRetrieveAcceptedAgreementsForMultiUsersBuilder builder,
             string namespace_
         )
         {
@@ -172,7 +209,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserAgreementsResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserAgreementsResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

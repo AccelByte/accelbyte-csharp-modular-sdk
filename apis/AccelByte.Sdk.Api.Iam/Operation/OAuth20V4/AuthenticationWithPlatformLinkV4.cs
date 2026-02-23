@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AuthenticationWithPlatformLinkV4Builder Builder { get => new AuthenticationWithPlatformLinkV4Builder(); }
 
-        public class AuthenticationWithPlatformLinkV4Builder
-            : OperationBuilder<AuthenticationWithPlatformLinkV4Builder>
+        public interface IAuthenticationWithPlatformLinkV4Builder
+        {
+
+
+
+            bool? ExtendExp { get; }
+
+
+
+        }
+
+        public abstract class AuthenticationWithPlatformLinkV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAuthenticationWithPlatformLinkV4Builder
+            where TImpl : AuthenticationWithPlatformLinkV4AbstractBuilder<TImpl>
         {
 
 
@@ -47,9 +59,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AuthenticationWithPlatformLinkV4Builder() { }
+            public AuthenticationWithPlatformLinkV4AbstractBuilder() { }
 
-            internal AuthenticationWithPlatformLinkV4Builder(IAccelByteSdk sdk)
+            public AuthenticationWithPlatformLinkV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,10 +69,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public AuthenticationWithPlatformLinkV4Builder SetExtendExp(bool _extendExp)
+            public TImpl SetExtendExp(bool _extendExp)
             {
                 ExtendExp = _extendExp;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +91,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     username                    
                 );
 
-                op.SetBaseFields<AuthenticationWithPlatformLinkV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AuthenticationWithPlatformLinkV4.Response Execute(
+            protected AuthenticationWithPlatformLinkV4.Response InternalExecute(
                 string clientId,
                 string linkingToken,
                 string password,
@@ -106,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AuthenticationWithPlatformLinkV4.Response> ExecuteAsync(
+            protected async Task<AuthenticationWithPlatformLinkV4.Response> InternalExecuteAsync(
                 string clientId,
                 string linkingToken,
                 string password,
@@ -131,7 +143,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AuthenticationWithPlatformLinkV4(AuthenticationWithPlatformLinkV4Builder builder,
+        public class AuthenticationWithPlatformLinkV4Builder : AuthenticationWithPlatformLinkV4AbstractBuilder<AuthenticationWithPlatformLinkV4Builder>
+        {
+            public AuthenticationWithPlatformLinkV4Builder() : base() { }
+
+            public AuthenticationWithPlatformLinkV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AuthenticationWithPlatformLinkV4.Response Execute(
+                string clientId,
+                string linkingToken,
+                string password,
+                string username
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    linkingToken,
+                    password,
+                    username
+                );
+            }
+            public async Task<AuthenticationWithPlatformLinkV4.Response> ExecuteAsync(
+                string clientId,
+                string linkingToken,
+                string password,
+                string username
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    linkingToken,
+                    password,
+                    username
+                );
+            }
+        }
+
+
+        public AuthenticationWithPlatformLinkV4(IAuthenticationWithPlatformLinkV4Builder builder,
             string clientId,
             string linkingToken,
             string password,
@@ -217,27 +266,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

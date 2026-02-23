@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder Builder { get => new PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder(); }
 
-        public class PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder
-            : OperationBuilder<PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder>
+        public interface IPublicGetLinkHeadlessAccountToMyAccountConflictV3Builder
         {
 
 
 
 
 
-            internal PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder() { }
+        }
 
-            internal PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetLinkHeadlessAccountToMyAccountConflictV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetLinkHeadlessAccountToMyAccountConflictV3Builder
+            where TImpl : PublicGetLinkHeadlessAccountToMyAccountConflictV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetLinkHeadlessAccountToMyAccountConflictV3AbstractBuilder() { }
+
+            public PublicGetLinkHeadlessAccountToMyAccountConflictV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     oneTimeLinkCode                    
                 );
 
-                op.SetBaseFields<PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response Execute(
+            protected PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response InternalExecute(
                 string oneTimeLinkCode
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response> ExecuteAsync(
+            protected async Task<PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response> InternalExecuteAsync(
                 string oneTimeLinkCode
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetLinkHeadlessAccountToMyAccountConflictV3(PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder builder,
+        public class PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder : PublicGetLinkHeadlessAccountToMyAccountConflictV3AbstractBuilder<PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder>
+        {
+            public PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder() : base() { }
+
+            public PublicGetLinkHeadlessAccountToMyAccountConflictV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response Execute(
+                string oneTimeLinkCode
+            )
+            {
+                return InternalExecute(
+                    oneTimeLinkCode
+                );
+            }
+            public async Task<PublicGetLinkHeadlessAccountToMyAccountConflictV3.Response> ExecuteAsync(
+                string oneTimeLinkCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    oneTimeLinkCode
+                );
+            }
+        }
+
+
+        public PublicGetLinkHeadlessAccountToMyAccountConflictV3(IPublicGetLinkHeadlessAccountToMyAccountConflictV3Builder builder,
             string oneTimeLinkCode
         )
         {
@@ -173,27 +208,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetLinkHeadlessAccountConflictResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetLinkHeadlessAccountConflictResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

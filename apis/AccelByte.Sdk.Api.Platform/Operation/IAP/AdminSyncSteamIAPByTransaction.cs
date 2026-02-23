@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AdminSyncSteamIAPByTransactionBuilder Builder { get => new AdminSyncSteamIAPByTransactionBuilder(); }
 
-        public class AdminSyncSteamIAPByTransactionBuilder
-            : OperationBuilder<AdminSyncSteamIAPByTransactionBuilder>
+        public interface IAdminSyncSteamIAPByTransactionBuilder
         {
 
 
 
 
 
-            internal AdminSyncSteamIAPByTransactionBuilder() { }
+        }
 
-            internal AdminSyncSteamIAPByTransactionBuilder(IAccelByteSdk sdk)
+        public abstract class AdminSyncSteamIAPByTransactionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSyncSteamIAPByTransactionBuilder
+            where TImpl : AdminSyncSteamIAPByTransactionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminSyncSteamIAPByTransactionAbstractBuilder() { }
+
+            public AdminSyncSteamIAPByTransactionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminSyncSteamIAPByTransactionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSyncSteamIAPByTransaction.Response Execute(
+            protected AdminSyncSteamIAPByTransaction.Response InternalExecute(
                 SteamSyncByTransactionRequest body,
                 string namespace_,
                 string userId
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSyncSteamIAPByTransaction.Response> ExecuteAsync(
+            protected async Task<AdminSyncSteamIAPByTransaction.Response> InternalExecuteAsync(
                 SteamSyncByTransactionRequest body,
                 string namespace_,
                 string userId
@@ -108,7 +118,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AdminSyncSteamIAPByTransaction(AdminSyncSteamIAPByTransactionBuilder builder,
+        public class AdminSyncSteamIAPByTransactionBuilder : AdminSyncSteamIAPByTransactionAbstractBuilder<AdminSyncSteamIAPByTransactionBuilder>
+        {
+            public AdminSyncSteamIAPByTransactionBuilder() : base() { }
+
+            public AdminSyncSteamIAPByTransactionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSyncSteamIAPByTransaction.Response Execute(
+                SteamSyncByTransactionRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminSyncSteamIAPByTransaction.Response> ExecuteAsync(
+                SteamSyncByTransactionRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminSyncSteamIAPByTransaction(IAdminSyncSteamIAPByTransactionBuilder builder,
             SteamSyncByTransactionRequest body,
             string namespace_,
             string userId
@@ -185,22 +228,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPOrderShortInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPOrderShortInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

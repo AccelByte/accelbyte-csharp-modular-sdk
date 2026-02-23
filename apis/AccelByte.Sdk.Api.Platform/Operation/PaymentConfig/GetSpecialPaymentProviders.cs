@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetSpecialPaymentProvidersBuilder Builder { get => new GetSpecialPaymentProvidersBuilder(); }
 
-        public class GetSpecialPaymentProvidersBuilder
-            : OperationBuilder<GetSpecialPaymentProvidersBuilder>
+        public interface IGetSpecialPaymentProvidersBuilder
         {
 
 
 
 
 
-            internal GetSpecialPaymentProvidersBuilder() { }
+        }
 
-            internal GetSpecialPaymentProvidersBuilder(IAccelByteSdk sdk)
+        public abstract class GetSpecialPaymentProvidersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetSpecialPaymentProvidersBuilder
+            where TImpl : GetSpecialPaymentProvidersAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetSpecialPaymentProvidersAbstractBuilder() { }
+
+            public GetSpecialPaymentProvidersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetSpecialPaymentProviders op = new GetSpecialPaymentProviders(this
                 );
 
-                op.SetBaseFields<GetSpecialPaymentProvidersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetSpecialPaymentProviders.Response Execute(
+            protected GetSpecialPaymentProviders.Response InternalExecute(
             )
             {
                 GetSpecialPaymentProviders op = Build(
@@ -78,7 +88,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetSpecialPaymentProviders.Response> ExecuteAsync(
+            protected async Task<GetSpecialPaymentProviders.Response> InternalExecuteAsync(
             )
             {
                 GetSpecialPaymentProviders op = Build(
@@ -95,7 +105,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetSpecialPaymentProviders(GetSpecialPaymentProvidersBuilder builder
+        public class GetSpecialPaymentProvidersBuilder : GetSpecialPaymentProvidersAbstractBuilder<GetSpecialPaymentProvidersBuilder>
+        {
+            public GetSpecialPaymentProvidersBuilder() : base() { }
+
+            public GetSpecialPaymentProvidersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetSpecialPaymentProviders.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetSpecialPaymentProviders.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetSpecialPaymentProviders(IGetSpecialPaymentProvidersBuilder builder
         )
         {
             
@@ -154,7 +185,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

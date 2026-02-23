@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetKeyGroupByBoothNameBuilder Builder { get => new GetKeyGroupByBoothNameBuilder(); }
 
-        public class GetKeyGroupByBoothNameBuilder
-            : OperationBuilder<GetKeyGroupByBoothNameBuilder>
+        public interface IGetKeyGroupByBoothNameBuilder
         {
 
 
 
 
 
-            internal GetKeyGroupByBoothNameBuilder() { }
+        }
 
-            internal GetKeyGroupByBoothNameBuilder(IAccelByteSdk sdk)
+        public abstract class GetKeyGroupByBoothNameAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetKeyGroupByBoothNameBuilder
+            where TImpl : GetKeyGroupByBoothNameAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetKeyGroupByBoothNameAbstractBuilder() { }
+
+            public GetKeyGroupByBoothNameAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,12 +74,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     boothName                    
                 );
 
-                op.SetBaseFields<GetKeyGroupByBoothNameBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetKeyGroupByBoothName.Response Execute(
+            protected GetKeyGroupByBoothName.Response InternalExecute(
                 string namespace_,
                 string boothName
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetKeyGroupByBoothName.Response> ExecuteAsync(
+            protected async Task<GetKeyGroupByBoothName.Response> InternalExecuteAsync(
                 string namespace_,
                 string boothName
             )
@@ -109,7 +119,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetKeyGroupByBoothName(GetKeyGroupByBoothNameBuilder builder,
+        public class GetKeyGroupByBoothNameBuilder : GetKeyGroupByBoothNameAbstractBuilder<GetKeyGroupByBoothNameBuilder>
+        {
+            public GetKeyGroupByBoothNameBuilder() : base() { }
+
+            public GetKeyGroupByBoothNameBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetKeyGroupByBoothName.Response Execute(
+                string namespace_,
+                string boothName
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    boothName
+                );
+            }
+            public async Task<GetKeyGroupByBoothName.Response> ExecuteAsync(
+                string namespace_,
+                string boothName
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    boothName
+                );
+            }
+        }
+
+
+        public GetKeyGroupByBoothName(IGetKeyGroupByBoothNameBuilder builder,
             string namespace_,
             string boothName
         )
@@ -178,12 +218,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

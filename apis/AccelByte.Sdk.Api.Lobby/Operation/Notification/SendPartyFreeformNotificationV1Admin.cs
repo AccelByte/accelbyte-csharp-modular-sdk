@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static SendPartyFreeformNotificationV1AdminBuilder Builder { get => new SendPartyFreeformNotificationV1AdminBuilder(); }
 
-        public class SendPartyFreeformNotificationV1AdminBuilder
-            : OperationBuilder<SendPartyFreeformNotificationV1AdminBuilder>
+        public interface ISendPartyFreeformNotificationV1AdminBuilder
         {
 
 
 
 
 
-            internal SendPartyFreeformNotificationV1AdminBuilder() { }
+        }
 
-            internal SendPartyFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk)
+        public abstract class SendPartyFreeformNotificationV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISendPartyFreeformNotificationV1AdminBuilder
+            where TImpl : SendPartyFreeformNotificationV1AdminAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SendPartyFreeformNotificationV1AdminAbstractBuilder() { }
+
+            public SendPartyFreeformNotificationV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     partyId                    
                 );
 
-                op.SetBaseFields<SendPartyFreeformNotificationV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public SendPartyFreeformNotificationV1Admin.Response Execute(
+            protected SendPartyFreeformNotificationV1Admin.Response InternalExecute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
                 string partyId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SendPartyFreeformNotificationV1Admin.Response> ExecuteAsync(
+            protected async Task<SendPartyFreeformNotificationV1Admin.Response> InternalExecuteAsync(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
                 string partyId
@@ -112,7 +122,41 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private SendPartyFreeformNotificationV1Admin(SendPartyFreeformNotificationV1AdminBuilder builder,
+        public class SendPartyFreeformNotificationV1AdminBuilder : SendPartyFreeformNotificationV1AdminAbstractBuilder<SendPartyFreeformNotificationV1AdminBuilder>
+        {
+            public SendPartyFreeformNotificationV1AdminBuilder() : base() { }
+
+            public SendPartyFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public SendPartyFreeformNotificationV1Admin.Response Execute(
+                ModelFreeFormNotificationRequestV1 body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+            public async Task<SendPartyFreeformNotificationV1Admin.Response> ExecuteAsync(
+                ModelFreeFormNotificationRequestV1 body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+        }
+
+
+        public SendPartyFreeformNotificationV1Admin(ISendPartyFreeformNotificationV1AdminBuilder builder,
             ModelFreeFormNotificationRequestV1 body,
             string namespace_,
             string partyId
@@ -192,22 +236,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

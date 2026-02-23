@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminUploadPlatformCredentialsBuilder Builder { get => new AdminUploadPlatformCredentialsBuilder(); }
 
-        public class AdminUploadPlatformCredentialsBuilder
-            : OperationBuilder<AdminUploadPlatformCredentialsBuilder>
+        public interface IAdminUploadPlatformCredentialsBuilder
+        {
+
+
+
+            string? Description { get; }
+
+
+
+        }
+
+        public abstract class AdminUploadPlatformCredentialsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUploadPlatformCredentialsBuilder
+            where TImpl : AdminUploadPlatformCredentialsAbstractBuilder<TImpl>
         {
 
 
@@ -40,9 +52,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal AdminUploadPlatformCredentialsBuilder() { }
+            public AdminUploadPlatformCredentialsAbstractBuilder() { }
 
-            internal AdminUploadPlatformCredentialsBuilder(IAccelByteSdk sdk)
+            public AdminUploadPlatformCredentialsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -50,10 +62,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            public AdminUploadPlatformCredentialsBuilder SetDescription(string _description)
+            public TImpl SetDescription(string _description)
             {
                 Description = _description;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<AdminUploadPlatformCredentialsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUploadPlatformCredentials.Response Execute(
+            protected AdminUploadPlatformCredentials.Response InternalExecute(
                 Stream file,
                 string password,
                 string namespace_,
@@ -99,7 +111,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUploadPlatformCredentials.Response> ExecuteAsync(
+            protected async Task<AdminUploadPlatformCredentials.Response> InternalExecuteAsync(
                 Stream file,
                 string password,
                 string namespace_,
@@ -124,7 +136,44 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminUploadPlatformCredentials(AdminUploadPlatformCredentialsBuilder builder,
+        public class AdminUploadPlatformCredentialsBuilder : AdminUploadPlatformCredentialsAbstractBuilder<AdminUploadPlatformCredentialsBuilder>
+        {
+            public AdminUploadPlatformCredentialsBuilder() : base() { }
+
+            public AdminUploadPlatformCredentialsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUploadPlatformCredentials.Response Execute(
+                Stream file,
+                string password,
+                string namespace_,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    file,
+                    password,
+                    namespace_,
+                    platformId
+                );
+            }
+            public async Task<AdminUploadPlatformCredentials.Response> ExecuteAsync(
+                Stream file,
+                string password,
+                string namespace_,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    file,
+                    password,
+                    namespace_,
+                    platformId
+                );
+            }
+        }
+
+
+        public AdminUploadPlatformCredentials(IAdminUploadPlatformCredentialsBuilder builder,
             Stream file,
             string password,
             string namespace_,
@@ -211,22 +260,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

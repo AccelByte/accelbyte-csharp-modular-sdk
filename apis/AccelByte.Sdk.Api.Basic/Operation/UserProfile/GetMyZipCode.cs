@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetMyZipCodeBuilder Builder { get => new GetMyZipCodeBuilder(); }
 
-        public class GetMyZipCodeBuilder
-            : OperationBuilder<GetMyZipCodeBuilder>
+        public interface IGetMyZipCodeBuilder
         {
 
 
 
 
 
-            internal GetMyZipCodeBuilder() { }
+        }
 
-            internal GetMyZipCodeBuilder(IAccelByteSdk sdk)
+        public abstract class GetMyZipCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetMyZipCodeBuilder
+            where TImpl : GetMyZipCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetMyZipCodeAbstractBuilder() { }
+
+            public GetMyZipCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetMyZipCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetMyZipCode.Response Execute(
+            protected GetMyZipCode.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetMyZipCode.Response> ExecuteAsync(
+            protected async Task<GetMyZipCode.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetMyZipCode(GetMyZipCodeBuilder builder,
+        public class GetMyZipCodeBuilder : GetMyZipCodeAbstractBuilder<GetMyZipCodeBuilder>
+        {
+            public GetMyZipCodeBuilder() : base() { }
+
+            public GetMyZipCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetMyZipCode.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetMyZipCode.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetMyZipCode(IGetMyZipCodeBuilder builder,
             string namespace_
         )
         {
@@ -169,17 +204,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserZipCode>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserZipCode>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

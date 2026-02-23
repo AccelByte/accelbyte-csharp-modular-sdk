@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminUpdateInboxCategoryBuilder Builder { get => new AdminUpdateInboxCategoryBuilder(); }
 
-        public class AdminUpdateInboxCategoryBuilder
-            : OperationBuilder<AdminUpdateInboxCategoryBuilder>
+        public interface IAdminUpdateInboxCategoryBuilder
         {
 
 
 
 
 
-            internal AdminUpdateInboxCategoryBuilder() { }
+        }
 
-            internal AdminUpdateInboxCategoryBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateInboxCategoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateInboxCategoryBuilder
+            where TImpl : AdminUpdateInboxCategoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateInboxCategoryAbstractBuilder() { }
+
+            public AdminUpdateInboxCategoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateInboxCategoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateInboxCategory.Response Execute(
+            protected AdminUpdateInboxCategory.Response InternalExecute(
                 ModelsUpdateInboxCategoryRequest body,
                 string category,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateInboxCategory.Response> ExecuteAsync(
+            protected async Task<AdminUpdateInboxCategory.Response> InternalExecuteAsync(
                 ModelsUpdateInboxCategoryRequest body,
                 string category,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminUpdateInboxCategory(AdminUpdateInboxCategoryBuilder builder,
+        public class AdminUpdateInboxCategoryBuilder : AdminUpdateInboxCategoryAbstractBuilder<AdminUpdateInboxCategoryBuilder>
+        {
+            public AdminUpdateInboxCategoryBuilder() : base() { }
+
+            public AdminUpdateInboxCategoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateInboxCategory.Response Execute(
+                ModelsUpdateInboxCategoryRequest body,
+                string category,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    category,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateInboxCategory.Response> ExecuteAsync(
+                ModelsUpdateInboxCategoryRequest body,
+                string category,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    category,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateInboxCategory(IAdminUpdateInboxCategoryBuilder builder,
             ModelsUpdateInboxCategoryRequest body,
             string category,
             string namespace_
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

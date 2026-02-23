@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminDeletePlatformCredentialsByPlatformIdBuilder Builder { get => new AdminDeletePlatformCredentialsByPlatformIdBuilder(); }
 
-        public class AdminDeletePlatformCredentialsByPlatformIdBuilder
-            : OperationBuilder<AdminDeletePlatformCredentialsByPlatformIdBuilder>
+        public interface IAdminDeletePlatformCredentialsByPlatformIdBuilder
         {
 
 
 
 
 
-            internal AdminDeletePlatformCredentialsByPlatformIdBuilder() { }
+        }
 
-            internal AdminDeletePlatformCredentialsByPlatformIdBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeletePlatformCredentialsByPlatformIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeletePlatformCredentialsByPlatformIdBuilder
+            where TImpl : AdminDeletePlatformCredentialsByPlatformIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeletePlatformCredentialsByPlatformIdAbstractBuilder() { }
+
+            public AdminDeletePlatformCredentialsByPlatformIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<AdminDeletePlatformCredentialsByPlatformIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeletePlatformCredentialsByPlatformId.Response Execute(
+            protected AdminDeletePlatformCredentialsByPlatformId.Response InternalExecute(
                 string namespace_,
                 string platformId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeletePlatformCredentialsByPlatformId.Response> ExecuteAsync(
+            protected async Task<AdminDeletePlatformCredentialsByPlatformId.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminDeletePlatformCredentialsByPlatformId(AdminDeletePlatformCredentialsByPlatformIdBuilder builder,
+        public class AdminDeletePlatformCredentialsByPlatformIdBuilder : AdminDeletePlatformCredentialsByPlatformIdAbstractBuilder<AdminDeletePlatformCredentialsByPlatformIdBuilder>
+        {
+            public AdminDeletePlatformCredentialsByPlatformIdBuilder() : base() { }
+
+            public AdminDeletePlatformCredentialsByPlatformIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeletePlatformCredentialsByPlatformId.Response Execute(
+                string namespace_,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId
+                );
+            }
+            public async Task<AdminDeletePlatformCredentialsByPlatformId.Response> ExecuteAsync(
+                string namespace_,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId
+                );
+            }
+        }
+
+
+        public AdminDeletePlatformCredentialsByPlatformId(IAdminDeletePlatformCredentialsByPlatformIdBuilder builder,
             string namespace_,
             AdminDeletePlatformCredentialsByPlatformIdPlatformId platformId
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

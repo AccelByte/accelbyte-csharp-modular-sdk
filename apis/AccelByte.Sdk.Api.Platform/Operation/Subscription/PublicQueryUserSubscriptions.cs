@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicQueryUserSubscriptionsBuilder Builder { get => new PublicQueryUserSubscriptionsBuilder(); }
 
-        public class PublicQueryUserSubscriptionsBuilder
-            : OperationBuilder<PublicQueryUserSubscriptionsBuilder>
+        public interface IPublicQueryUserSubscriptionsBuilder
+        {
+
+            PublicQueryUserSubscriptionsChargeStatus? ChargeStatus { get; }
+
+            string? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Sku { get; }
+
+            PublicQueryUserSubscriptionsStatus? Status { get; }
+
+            PublicQueryUserSubscriptionsSubscribedBy? SubscribedBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryUserSubscriptionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryUserSubscriptionsBuilder
+            where TImpl : PublicQueryUserSubscriptionsAbstractBuilder<TImpl>
         {
 
             public PublicQueryUserSubscriptionsChargeStatus? ChargeStatus { get; set; }
@@ -55,54 +79,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicQueryUserSubscriptionsBuilder() { }
+            public PublicQueryUserSubscriptionsAbstractBuilder() { }
 
-            internal PublicQueryUserSubscriptionsBuilder(IAccelByteSdk sdk)
+            public PublicQueryUserSubscriptionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryUserSubscriptionsBuilder SetChargeStatus(PublicQueryUserSubscriptionsChargeStatus _chargeStatus)
+            public TImpl SetChargeStatus(PublicQueryUserSubscriptionsChargeStatus _chargeStatus)
             {
                 ChargeStatus = _chargeStatus;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserSubscriptionsBuilder SetItemId(string _itemId)
+            public TImpl SetItemId(string _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserSubscriptionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserSubscriptionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserSubscriptionsBuilder SetSku(string _sku)
+            public TImpl SetSku(string _sku)
             {
                 Sku = _sku;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserSubscriptionsBuilder SetStatus(PublicQueryUserSubscriptionsStatus _status)
+            public TImpl SetStatus(PublicQueryUserSubscriptionsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserSubscriptionsBuilder SetSubscribedBy(PublicQueryUserSubscriptionsSubscribedBy _subscribedBy)
+            public TImpl SetSubscribedBy(PublicQueryUserSubscriptionsSubscribedBy _subscribedBy)
             {
                 SubscribedBy = _subscribedBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -119,11 +143,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicQueryUserSubscriptionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryUserSubscriptions.Response Execute(
+            protected PublicQueryUserSubscriptions.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -142,7 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryUserSubscriptions.Response> ExecuteAsync(
+            protected async Task<PublicQueryUserSubscriptions.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -163,7 +187,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicQueryUserSubscriptions(PublicQueryUserSubscriptionsBuilder builder,
+        public class PublicQueryUserSubscriptionsBuilder : PublicQueryUserSubscriptionsAbstractBuilder<PublicQueryUserSubscriptionsBuilder>
+        {
+            public PublicQueryUserSubscriptionsBuilder() : base() { }
+
+            public PublicQueryUserSubscriptionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryUserSubscriptions.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicQueryUserSubscriptions.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicQueryUserSubscriptions(IPublicQueryUserSubscriptionsBuilder builder,
             string namespace_,
             string userId
         )
@@ -251,7 +304,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

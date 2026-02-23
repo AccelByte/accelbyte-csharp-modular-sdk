@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static AuthCheckBuilder Builder { get => new AuthCheckBuilder(); }
 
-        public class AuthCheckBuilder
-            : OperationBuilder<AuthCheckBuilder>
+        public interface IAuthCheckBuilder
         {
 
 
 
 
 
-            internal AuthCheckBuilder() { }
+        }
 
-            internal AuthCheckBuilder(IAccelByteSdk sdk)
+        public abstract class AuthCheckAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAuthCheckBuilder
+            where TImpl : AuthCheckAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AuthCheckAbstractBuilder() { }
+
+            public AuthCheckAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 AuthCheck op = new AuthCheck(this
                 );
 
-                op.SetBaseFields<AuthCheckBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AuthCheck.Response Execute(
+            protected AuthCheck.Response InternalExecute(
             )
             {
                 AuthCheck op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AuthCheck.Response> ExecuteAsync(
+            protected async Task<AuthCheck.Response> InternalExecuteAsync(
             )
             {
                 AuthCheck op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private AuthCheck(AuthCheckBuilder builder
+        public class AuthCheckBuilder : AuthCheckAbstractBuilder<AuthCheckBuilder>
+        {
+            public AuthCheckBuilder() : base() { }
+
+            public AuthCheckBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AuthCheck.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AuthCheck.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AuthCheck(IAuthCheckBuilder builder
         )
         {
             
@@ -158,17 +189,20 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

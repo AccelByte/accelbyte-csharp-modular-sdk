@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteLootBoxPluginConfigBuilder Builder { get => new DeleteLootBoxPluginConfigBuilder(); }
 
-        public class DeleteLootBoxPluginConfigBuilder
-            : OperationBuilder<DeleteLootBoxPluginConfigBuilder>
+        public interface IDeleteLootBoxPluginConfigBuilder
         {
 
 
 
 
 
-            internal DeleteLootBoxPluginConfigBuilder() { }
+        }
 
-            internal DeleteLootBoxPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteLootBoxPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteLootBoxPluginConfigBuilder
+            where TImpl : DeleteLootBoxPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteLootBoxPluginConfigAbstractBuilder() { }
+
+            public DeleteLootBoxPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteLootBoxPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteLootBoxPluginConfig.Response Execute(
+            protected DeleteLootBoxPluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteLootBoxPluginConfig.Response> ExecuteAsync(
+            protected async Task<DeleteLootBoxPluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteLootBoxPluginConfig(DeleteLootBoxPluginConfigBuilder builder,
+        public class DeleteLootBoxPluginConfigBuilder : DeleteLootBoxPluginConfigAbstractBuilder<DeleteLootBoxPluginConfigBuilder>
+        {
+            public DeleteLootBoxPluginConfigBuilder() : base() { }
+
+            public DeleteLootBoxPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteLootBoxPluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteLootBoxPluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteLootBoxPluginConfig(IDeleteLootBoxPluginConfigBuilder builder,
             string namespace_
         )
         {

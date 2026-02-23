@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminImportConfigV1Builder Builder { get => new AdminImportConfigV1Builder(); }
 
-        public class AdminImportConfigV1Builder
-            : OperationBuilder<AdminImportConfigV1Builder>
+        public interface IAdminImportConfigV1Builder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class AdminImportConfigV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminImportConfigV1Builder
+            where TImpl : AdminImportConfigV1AbstractBuilder<TImpl>
         {
 
 
@@ -44,9 +56,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal AdminImportConfigV1Builder() { }
+            public AdminImportConfigV1AbstractBuilder() { }
 
-            internal AdminImportConfigV1Builder(IAccelByteSdk sdk)
+            public AdminImportConfigV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,10 +66,10 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            public AdminImportConfigV1Builder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminImportConfigV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminImportConfigV1.Response Execute(
+            protected AdminImportConfigV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminImportConfigV1.Response> ExecuteAsync(
+            protected async Task<AdminImportConfigV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminImportConfigV1(AdminImportConfigV1Builder builder,
+        public class AdminImportConfigV1Builder : AdminImportConfigV1AbstractBuilder<AdminImportConfigV1Builder>
+        {
+            public AdminImportConfigV1Builder() : base() { }
+
+            public AdminImportConfigV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminImportConfigV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminImportConfigV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminImportConfigV1(IAdminImportConfigV1Builder builder,
             string namespace_
         )
         {
@@ -182,22 +219,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

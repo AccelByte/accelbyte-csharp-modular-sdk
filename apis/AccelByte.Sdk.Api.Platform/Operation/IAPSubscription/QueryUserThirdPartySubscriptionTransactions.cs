@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUserThirdPartySubscriptionTransactionsBuilder Builder { get => new QueryUserThirdPartySubscriptionTransactionsBuilder(); }
 
-        public class QueryUserThirdPartySubscriptionTransactionsBuilder
-            : OperationBuilder<QueryUserThirdPartySubscriptionTransactionsBuilder>
+        public interface IQueryUserThirdPartySubscriptionTransactionsBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? GroupId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryUserThirdPartySubscriptionTransactionsPlatform? Platform { get; }
+
+            string? ProductId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserThirdPartySubscriptionTransactionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserThirdPartySubscriptionTransactionsBuilder
+            where TImpl : QueryUserThirdPartySubscriptionTransactionsAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -51,48 +73,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUserThirdPartySubscriptionTransactionsBuilder() { }
+            public QueryUserThirdPartySubscriptionTransactionsAbstractBuilder() { }
 
-            internal QueryUserThirdPartySubscriptionTransactionsBuilder(IAccelByteSdk sdk)
+            public QueryUserThirdPartySubscriptionTransactionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserThirdPartySubscriptionTransactionsBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserThirdPartySubscriptionTransactionsBuilder SetGroupId(string _groupId)
+            public TImpl SetGroupId(string _groupId)
             {
                 GroupId = _groupId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserThirdPartySubscriptionTransactionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserThirdPartySubscriptionTransactionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserThirdPartySubscriptionTransactionsBuilder SetPlatform(QueryUserThirdPartySubscriptionTransactionsPlatform _platform)
+            public TImpl SetPlatform(QueryUserThirdPartySubscriptionTransactionsPlatform _platform)
             {
                 Platform = _platform;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserThirdPartySubscriptionTransactionsBuilder SetProductId(string _productId)
+            public TImpl SetProductId(string _productId)
             {
                 ProductId = _productId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -109,11 +131,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserThirdPartySubscriptionTransactionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserThirdPartySubscriptionTransactions.Response Execute(
+            protected QueryUserThirdPartySubscriptionTransactions.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -132,7 +154,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserThirdPartySubscriptionTransactions.Response> ExecuteAsync(
+            protected async Task<QueryUserThirdPartySubscriptionTransactions.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -153,7 +175,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUserThirdPartySubscriptionTransactions(QueryUserThirdPartySubscriptionTransactionsBuilder builder,
+        public class QueryUserThirdPartySubscriptionTransactionsBuilder : QueryUserThirdPartySubscriptionTransactionsAbstractBuilder<QueryUserThirdPartySubscriptionTransactionsBuilder>
+        {
+            public QueryUserThirdPartySubscriptionTransactionsBuilder() : base() { }
+
+            public QueryUserThirdPartySubscriptionTransactionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserThirdPartySubscriptionTransactions.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserThirdPartySubscriptionTransactions.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserThirdPartySubscriptionTransactions(IQueryUserThirdPartySubscriptionTransactionsBuilder builder,
             string namespace_,
             string userId
         )
@@ -238,7 +289,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

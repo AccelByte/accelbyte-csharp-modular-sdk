@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RequestTokenExchangeCodeV3Builder Builder { get => new RequestTokenExchangeCodeV3Builder(); }
 
-        public class RequestTokenExchangeCodeV3Builder
-            : OperationBuilder<RequestTokenExchangeCodeV3Builder>
+        public interface IRequestTokenExchangeCodeV3Builder
+        {
+
+            string? CodeChallenge { get; }
+
+            RequestTokenExchangeCodeV3CodeChallengeMethod? CodeChallengeMethod { get; }
+
+
+
+
+
+        }
+
+        public abstract class RequestTokenExchangeCodeV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRequestTokenExchangeCodeV3Builder
+            where TImpl : RequestTokenExchangeCodeV3AbstractBuilder<TImpl>
         {
 
             public string? CodeChallenge { get; set; }
@@ -47,24 +61,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal RequestTokenExchangeCodeV3Builder() { }
+            public RequestTokenExchangeCodeV3AbstractBuilder() { }
 
-            internal RequestTokenExchangeCodeV3Builder(IAccelByteSdk sdk)
+            public RequestTokenExchangeCodeV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RequestTokenExchangeCodeV3Builder SetCodeChallenge(string _codeChallenge)
+            public TImpl SetCodeChallenge(string _codeChallenge)
             {
                 CodeChallenge = _codeChallenge;
-                return this;
+                return (TImpl)this;
             }
 
-            public RequestTokenExchangeCodeV3Builder SetCodeChallengeMethod(RequestTokenExchangeCodeV3CodeChallengeMethod _codeChallengeMethod)
+            public TImpl SetCodeChallengeMethod(RequestTokenExchangeCodeV3CodeChallengeMethod _codeChallengeMethod)
             {
                 CodeChallengeMethod = _codeChallengeMethod;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RequestTokenExchangeCodeV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RequestTokenExchangeCodeV3.Response Execute(
+            protected RequestTokenExchangeCodeV3.Response InternalExecute(
                 string clientId,
                 string namespace_
             )
@@ -104,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RequestTokenExchangeCodeV3.Response> ExecuteAsync(
+            protected async Task<RequestTokenExchangeCodeV3.Response> InternalExecuteAsync(
                 string clientId,
                 string namespace_
             )
@@ -125,7 +139,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RequestTokenExchangeCodeV3(RequestTokenExchangeCodeV3Builder builder,
+        public class RequestTokenExchangeCodeV3Builder : RequestTokenExchangeCodeV3AbstractBuilder<RequestTokenExchangeCodeV3Builder>
+        {
+            public RequestTokenExchangeCodeV3Builder() : base() { }
+
+            public RequestTokenExchangeCodeV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RequestTokenExchangeCodeV3.Response Execute(
+                string clientId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    namespace_
+                );
+            }
+            public async Task<RequestTokenExchangeCodeV3.Response> ExecuteAsync(
+                string clientId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public RequestTokenExchangeCodeV3(IRequestTokenExchangeCodeV3Builder builder,
             string clientId,
             string namespace_
         )
@@ -198,7 +241,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTargetTokenCodeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTargetTokenCodeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

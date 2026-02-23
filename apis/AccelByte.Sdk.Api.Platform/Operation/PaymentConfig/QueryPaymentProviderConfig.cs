@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryPaymentProviderConfigBuilder Builder { get => new QueryPaymentProviderConfigBuilder(); }
 
-        public class QueryPaymentProviderConfigBuilder
-            : OperationBuilder<QueryPaymentProviderConfigBuilder>
+        public interface IQueryPaymentProviderConfigBuilder
+        {
+
+            int? Limit { get; }
+
+            string? Namespace { get; }
+
+            int? Offset { get; }
+
+            string? Region { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryPaymentProviderConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryPaymentProviderConfigBuilder
+            where TImpl : QueryPaymentProviderConfigAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryPaymentProviderConfigBuilder() { }
+            public QueryPaymentProviderConfigAbstractBuilder() { }
 
-            internal QueryPaymentProviderConfigBuilder(IAccelByteSdk sdk)
+            public QueryPaymentProviderConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryPaymentProviderConfigBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentProviderConfigBuilder SetNamespace(string _namespace_)
+            public TImpl SetNamespace(string _namespace_)
             {
                 Namespace = _namespace_;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentProviderConfigBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentProviderConfigBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -91,11 +109,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 QueryPaymentProviderConfig op = new QueryPaymentProviderConfig(this
                 );
 
-                op.SetBaseFields<QueryPaymentProviderConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryPaymentProviderConfig.Response Execute(
+            protected QueryPaymentProviderConfig.Response InternalExecute(
             )
             {
                 QueryPaymentProviderConfig op = Build(
@@ -110,7 +128,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryPaymentProviderConfig.Response> ExecuteAsync(
+            protected async Task<QueryPaymentProviderConfig.Response> InternalExecuteAsync(
             )
             {
                 QueryPaymentProviderConfig op = Build(
@@ -127,7 +145,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryPaymentProviderConfig(QueryPaymentProviderConfigBuilder builder
+        public class QueryPaymentProviderConfigBuilder : QueryPaymentProviderConfigAbstractBuilder<QueryPaymentProviderConfigBuilder>
+        {
+            public QueryPaymentProviderConfigBuilder() : base() { }
+
+            public QueryPaymentProviderConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryPaymentProviderConfig.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<QueryPaymentProviderConfig.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public QueryPaymentProviderConfig(IQueryPaymentProviderConfigBuilder builder
         )
         {
             
@@ -198,7 +237,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

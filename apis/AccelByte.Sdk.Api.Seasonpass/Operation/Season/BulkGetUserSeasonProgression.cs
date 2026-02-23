@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static BulkGetUserSeasonProgressionBuilder Builder { get => new BulkGetUserSeasonProgressionBuilder(); }
 
-        public class BulkGetUserSeasonProgressionBuilder
-            : OperationBuilder<BulkGetUserSeasonProgressionBuilder>
+        public interface IBulkGetUserSeasonProgressionBuilder
+        {
+
+
+            Model.BulkUserProgressionRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class BulkGetUserSeasonProgressionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkGetUserSeasonProgressionBuilder
+            where TImpl : BulkGetUserSeasonProgressionAbstractBuilder<TImpl>
         {
 
 
@@ -44,19 +56,19 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal BulkGetUserSeasonProgressionBuilder() { }
+            public BulkGetUserSeasonProgressionAbstractBuilder() { }
 
-            internal BulkGetUserSeasonProgressionBuilder(IAccelByteSdk sdk)
+            public BulkGetUserSeasonProgressionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public BulkGetUserSeasonProgressionBuilder SetBody(Model.BulkUserProgressionRequest _body)
+            public TImpl SetBody(Model.BulkUserProgressionRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<BulkGetUserSeasonProgressionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkGetUserSeasonProgression.Response Execute(
+            protected BulkGetUserSeasonProgression.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkGetUserSeasonProgression.Response> ExecuteAsync(
+            protected async Task<BulkGetUserSeasonProgression.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private BulkGetUserSeasonProgression(BulkGetUserSeasonProgressionBuilder builder,
+        public class BulkGetUserSeasonProgressionBuilder : BulkGetUserSeasonProgressionAbstractBuilder<BulkGetUserSeasonProgressionBuilder>
+        {
+            public BulkGetUserSeasonProgressionBuilder() : base() { }
+
+            public BulkGetUserSeasonProgressionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkGetUserSeasonProgression.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<BulkGetUserSeasonProgression.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public BulkGetUserSeasonProgression(IBulkGetUserSeasonProgressionBuilder builder,
             string namespace_
         )
         {
@@ -180,17 +217,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserSeasonSummary>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserSeasonSummary>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

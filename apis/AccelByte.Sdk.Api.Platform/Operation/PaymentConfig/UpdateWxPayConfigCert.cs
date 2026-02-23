@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateWxPayConfigCertBuilder Builder { get => new UpdateWxPayConfigCertBuilder(); }
 
-        public class UpdateWxPayConfigCertBuilder
-            : OperationBuilder<UpdateWxPayConfigCertBuilder>
+        public interface IUpdateWxPayConfigCertBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class UpdateWxPayConfigCertAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateWxPayConfigCertBuilder
+            where TImpl : UpdateWxPayConfigCertAbstractBuilder<TImpl>
         {
 
 
@@ -43,9 +55,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateWxPayConfigCertBuilder() { }
+            public UpdateWxPayConfigCertAbstractBuilder() { }
 
-            internal UpdateWxPayConfigCertBuilder(IAccelByteSdk sdk)
+            public UpdateWxPayConfigCertAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -53,10 +65,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateWxPayConfigCertBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateWxPayConfigCertBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateWxPayConfigCert.Response Execute(
+            protected UpdateWxPayConfigCert.Response InternalExecute(
                 string id
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateWxPayConfigCert.Response> ExecuteAsync(
+            protected async Task<UpdateWxPayConfigCert.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateWxPayConfigCert(UpdateWxPayConfigCertBuilder builder,
+        public class UpdateWxPayConfigCertBuilder : UpdateWxPayConfigCertAbstractBuilder<UpdateWxPayConfigCertBuilder>
+        {
+            public UpdateWxPayConfigCertBuilder() : base() { }
+
+            public UpdateWxPayConfigCertBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateWxPayConfigCert.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<UpdateWxPayConfigCert.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public UpdateWxPayConfigCert(IUpdateWxPayConfigCertBuilder builder,
             string id
         )
         {
@@ -177,12 +214,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

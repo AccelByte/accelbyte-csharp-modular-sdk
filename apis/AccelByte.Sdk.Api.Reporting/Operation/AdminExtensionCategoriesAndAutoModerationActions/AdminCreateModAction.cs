@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static AdminCreateModActionBuilder Builder { get => new AdminCreateModActionBuilder(); }
 
-        public class AdminCreateModActionBuilder
-            : OperationBuilder<AdminCreateModActionBuilder>
+        public interface IAdminCreateModActionBuilder
         {
 
 
 
 
 
-            internal AdminCreateModActionBuilder() { }
+        }
 
-            internal AdminCreateModActionBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateModActionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateModActionBuilder
+            where TImpl : AdminCreateModActionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateModActionAbstractBuilder() { }
+
+            public AdminCreateModActionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminCreateModActionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateModAction.Response Execute(
+            protected AdminCreateModAction.Response InternalExecute(
                 RestapiActionApiRequest body
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateModAction.Response> ExecuteAsync(
+            protected async Task<AdminCreateModAction.Response> InternalExecuteAsync(
                 RestapiActionApiRequest body
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private AdminCreateModAction(AdminCreateModActionBuilder builder,
+        public class AdminCreateModActionBuilder : AdminCreateModActionAbstractBuilder<AdminCreateModActionBuilder>
+        {
+            public AdminCreateModActionBuilder() : base() { }
+
+            public AdminCreateModActionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateModAction.Response Execute(
+                RestapiActionApiRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminCreateModAction.Response> ExecuteAsync(
+                RestapiActionApiRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminCreateModAction(IAdminCreateModActionBuilder builder,
             RestapiActionApiRequest body
         )
         {
@@ -165,17 +200,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiActionApiResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiActionApiResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

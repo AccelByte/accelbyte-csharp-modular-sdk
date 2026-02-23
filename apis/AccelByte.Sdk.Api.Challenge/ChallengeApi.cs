@@ -15,7 +15,7 @@ namespace AccelByte.Sdk.Api.Challenge
     {
         private IAccelByteSdk _Sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public Wrapper.ChallengeConfiguration ChallengeConfiguration
         {

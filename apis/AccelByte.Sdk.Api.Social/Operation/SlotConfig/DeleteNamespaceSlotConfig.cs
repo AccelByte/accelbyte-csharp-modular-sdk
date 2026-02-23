@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static DeleteNamespaceSlotConfigBuilder Builder { get => new DeleteNamespaceSlotConfigBuilder(); }
 
-        public class DeleteNamespaceSlotConfigBuilder
-            : OperationBuilder<DeleteNamespaceSlotConfigBuilder>
+        public interface IDeleteNamespaceSlotConfigBuilder
         {
 
 
 
 
 
-            internal DeleteNamespaceSlotConfigBuilder() { }
+        }
 
-            internal DeleteNamespaceSlotConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteNamespaceSlotConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteNamespaceSlotConfigBuilder
+            where TImpl : DeleteNamespaceSlotConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteNamespaceSlotConfigAbstractBuilder() { }
+
+            public DeleteNamespaceSlotConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteNamespaceSlotConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteNamespaceSlotConfig.Response Execute(
+            protected DeleteNamespaceSlotConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteNamespaceSlotConfig.Response> ExecuteAsync(
+            protected async Task<DeleteNamespaceSlotConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -106,7 +116,33 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private DeleteNamespaceSlotConfig(DeleteNamespaceSlotConfigBuilder builder,
+        public class DeleteNamespaceSlotConfigBuilder : DeleteNamespaceSlotConfigAbstractBuilder<DeleteNamespaceSlotConfigBuilder>
+        {
+            public DeleteNamespaceSlotConfigBuilder() : base() { }
+
+            public DeleteNamespaceSlotConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteNamespaceSlotConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteNamespaceSlotConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteNamespaceSlotConfig(IDeleteNamespaceSlotConfigBuilder builder,
             string namespace_
         )
         {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPlatformDLCConfigBuilder Builder { get => new GetPlatformDLCConfigBuilder(); }
 
-        public class GetPlatformDLCConfigBuilder
-            : OperationBuilder<GetPlatformDLCConfigBuilder>
+        public interface IGetPlatformDLCConfigBuilder
         {
 
 
 
 
 
-            internal GetPlatformDLCConfigBuilder() { }
+        }
 
-            internal GetPlatformDLCConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetPlatformDLCConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPlatformDLCConfigBuilder
+            where TImpl : GetPlatformDLCConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPlatformDLCConfigAbstractBuilder() { }
+
+            public GetPlatformDLCConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetPlatformDLCConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPlatformDLCConfig.Response Execute(
+            protected GetPlatformDLCConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPlatformDLCConfig.Response> ExecuteAsync(
+            protected async Task<GetPlatformDLCConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPlatformDLCConfig(GetPlatformDLCConfigBuilder builder,
+        public class GetPlatformDLCConfigBuilder : GetPlatformDLCConfigAbstractBuilder<GetPlatformDLCConfigBuilder>
+        {
+            public GetPlatformDLCConfigBuilder() : base() { }
+
+            public GetPlatformDLCConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPlatformDLCConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetPlatformDLCConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetPlatformDLCConfig(IGetPlatformDLCConfigBuilder builder,
             string namespace_
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

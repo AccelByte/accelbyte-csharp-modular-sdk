@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static CreatePluginConfigBuilder Builder { get => new CreatePluginConfigBuilder(); }
 
-        public class CreatePluginConfigBuilder
-            : OperationBuilder<CreatePluginConfigBuilder>
+        public interface ICreatePluginConfigBuilder
         {
 
 
 
 
 
-            internal CreatePluginConfigBuilder() { }
+        }
 
-            internal CreatePluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class CreatePluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreatePluginConfigBuilder
+            where TImpl : CreatePluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreatePluginConfigAbstractBuilder() { }
+
+            public CreatePluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreatePluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreatePluginConfig.Response Execute(
+            protected CreatePluginConfig.Response InternalExecute(
                 ModelsPluginRequest body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreatePluginConfig.Response> ExecuteAsync(
+            protected async Task<CreatePluginConfig.Response> InternalExecuteAsync(
                 ModelsPluginRequest body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private CreatePluginConfig(CreatePluginConfigBuilder builder,
+        public class CreatePluginConfigBuilder : CreatePluginConfigAbstractBuilder<CreatePluginConfigBuilder>
+        {
+            public CreatePluginConfigBuilder() : base() { }
+
+            public CreatePluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreatePluginConfig.Response Execute(
+                ModelsPluginRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreatePluginConfig.Response> ExecuteAsync(
+                ModelsPluginRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreatePluginConfig(ICreatePluginConfigBuilder builder,
             ModelsPluginRequest body,
             string namespace_
         )
@@ -183,32 +222,38 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPluginResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPluginResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

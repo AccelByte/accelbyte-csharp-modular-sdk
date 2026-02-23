@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicListContentDownloaderV2Builder Builder { get => new PublicListContentDownloaderV2Builder(); }
 
-        public class PublicListContentDownloaderV2Builder
-            : OperationBuilder<PublicListContentDownloaderV2Builder>
+        public interface IPublicListContentDownloaderV2Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? SortBy { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListContentDownloaderV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListContentDownloaderV2Builder
+            where TImpl : PublicListContentDownloaderV2AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal PublicListContentDownloaderV2Builder() { }
+            public PublicListContentDownloaderV2AbstractBuilder() { }
 
-            internal PublicListContentDownloaderV2Builder(IAccelByteSdk sdk)
+            public PublicListContentDownloaderV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListContentDownloaderV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListContentDownloaderV2Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListContentDownloaderV2Builder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListContentDownloaderV2Builder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListContentDownloaderV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListContentDownloaderV2.Response Execute(
+            protected PublicListContentDownloaderV2.Response InternalExecute(
                 string contentId,
                 string namespace_
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListContentDownloaderV2.Response> ExecuteAsync(
+            protected async Task<PublicListContentDownloaderV2.Response> InternalExecuteAsync(
                 string contentId,
                 string namespace_
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicListContentDownloaderV2(PublicListContentDownloaderV2Builder builder,
+        public class PublicListContentDownloaderV2Builder : PublicListContentDownloaderV2AbstractBuilder<PublicListContentDownloaderV2Builder>
+        {
+            public PublicListContentDownloaderV2Builder() : base() { }
+
+            public PublicListContentDownloaderV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListContentDownloaderV2.Response Execute(
+                string contentId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    contentId,
+                    namespace_
+                );
+            }
+            public async Task<PublicListContentDownloaderV2.Response> ExecuteAsync(
+                string contentId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    contentId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListContentDownloaderV2(IPublicListContentDownloaderV2Builder builder,
             string contentId,
             string namespace_
         )
@@ -221,22 +268,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloaderResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloaderResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

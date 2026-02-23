@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -44,17 +44,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminQueryGameSessionsByAttributesBuilder Builder { get => new AdminQueryGameSessionsByAttributesBuilder(); }
 
-        public class AdminQueryGameSessionsByAttributesBuilder
-            : OperationBuilder<AdminQueryGameSessionsByAttributesBuilder>
+        public interface IAdminQueryGameSessionsByAttributesBuilder
         {
 
 
 
 
 
-            internal AdminQueryGameSessionsByAttributesBuilder() { }
+        }
 
-            internal AdminQueryGameSessionsByAttributesBuilder(IAccelByteSdk sdk)
+        public abstract class AdminQueryGameSessionsByAttributesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminQueryGameSessionsByAttributesBuilder
+            where TImpl : AdminQueryGameSessionsByAttributesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminQueryGameSessionsByAttributesAbstractBuilder() { }
+
+            public AdminQueryGameSessionsByAttributesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -74,11 +84,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryGameSessionsByAttributesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminQueryGameSessionsByAttributes.Response Execute(
+            protected AdminQueryGameSessionsByAttributes.Response InternalExecute(
                 Dictionary<string, object> body,
                 string namespace_
             )
@@ -97,7 +107,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryGameSessionsByAttributes.Response> ExecuteAsync(
+            protected async Task<AdminQueryGameSessionsByAttributes.Response> InternalExecuteAsync(
                 Dictionary<string, object> body,
                 string namespace_
             )
@@ -118,7 +128,36 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminQueryGameSessionsByAttributes(AdminQueryGameSessionsByAttributesBuilder builder,
+        public class AdminQueryGameSessionsByAttributesBuilder : AdminQueryGameSessionsByAttributesAbstractBuilder<AdminQueryGameSessionsByAttributesBuilder>
+        {
+            public AdminQueryGameSessionsByAttributesBuilder() : base() { }
+
+            public AdminQueryGameSessionsByAttributesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminQueryGameSessionsByAttributes.Response Execute(
+                Dictionary<string, object> body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminQueryGameSessionsByAttributes.Response> ExecuteAsync(
+                Dictionary<string, object> body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminQueryGameSessionsByAttributes(IAdminQueryGameSessionsByAttributesBuilder builder,
             Dictionary<string, object> body,
             string namespace_
         )
@@ -193,27 +232,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

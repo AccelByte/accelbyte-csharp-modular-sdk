@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentTaxValueBuilder Builder { get => new GetPaymentTaxValueBuilder(); }
 
-        public class GetPaymentTaxValueBuilder
-            : OperationBuilder<GetPaymentTaxValueBuilder>
+        public interface IGetPaymentTaxValueBuilder
+        {
+
+            string? ZipCode { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetPaymentTaxValueAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentTaxValueBuilder
+            where TImpl : GetPaymentTaxValueAbstractBuilder<TImpl>
         {
 
             public string? ZipCode { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetPaymentTaxValueBuilder() { }
+            public GetPaymentTaxValueAbstractBuilder() { }
 
-            internal GetPaymentTaxValueBuilder(IAccelByteSdk sdk)
+            public GetPaymentTaxValueAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetPaymentTaxValueBuilder SetZipCode(string _zipCode)
+            public TImpl SetZipCode(string _zipCode)
             {
                 ZipCode = _zipCode;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentProvider                    
                 );
 
-                op.SetBaseFields<GetPaymentTaxValueBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPaymentTaxValue.Response Execute(
+            protected GetPaymentTaxValue.Response InternalExecute(
                 string namespace_,
                 string paymentOrderNo,
                 string paymentProvider
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentTaxValue.Response> ExecuteAsync(
+            protected async Task<GetPaymentTaxValue.Response> InternalExecuteAsync(
                 string namespace_,
                 string paymentOrderNo,
                 string paymentProvider
@@ -121,7 +133,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentTaxValue(GetPaymentTaxValueBuilder builder,
+        public class GetPaymentTaxValueBuilder : GetPaymentTaxValueAbstractBuilder<GetPaymentTaxValueBuilder>
+        {
+            public GetPaymentTaxValueBuilder() : base() { }
+
+            public GetPaymentTaxValueBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPaymentTaxValue.Response Execute(
+                string namespace_,
+                string paymentOrderNo,
+                string paymentProvider
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    paymentOrderNo,
+                    paymentProvider
+                );
+            }
+            public async Task<GetPaymentTaxValue.Response> ExecuteAsync(
+                string namespace_,
+                string paymentOrderNo,
+                string paymentProvider
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    paymentOrderNo,
+                    paymentProvider
+                );
+            }
+        }
+
+
+        public GetPaymentTaxValue(IGetPaymentTaxValueBuilder builder,
             string namespace_,
             string paymentOrderNo,
             GetPaymentTaxValuePaymentProvider paymentProvider
@@ -197,17 +242,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TaxResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TaxResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

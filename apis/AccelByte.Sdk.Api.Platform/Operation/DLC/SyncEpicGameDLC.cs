@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncEpicGameDLCBuilder Builder { get => new SyncEpicGameDLCBuilder(); }
 
-        public class SyncEpicGameDLCBuilder
-            : OperationBuilder<SyncEpicGameDLCBuilder>
+        public interface ISyncEpicGameDLCBuilder
+        {
+
+
+            Model.EpicGamesDLCSyncRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class SyncEpicGameDLCAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncEpicGameDLCBuilder
+            where TImpl : SyncEpicGameDLCAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SyncEpicGameDLCBuilder() { }
+            public SyncEpicGameDLCAbstractBuilder() { }
 
-            internal SyncEpicGameDLCBuilder(IAccelByteSdk sdk)
+            public SyncEpicGameDLCAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public SyncEpicGameDLCBuilder SetBody(Model.EpicGamesDLCSyncRequest _body)
+            public TImpl SetBody(Model.EpicGamesDLCSyncRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncEpicGameDLCBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncEpicGameDLC.Response Execute(
+            protected SyncEpicGameDLC.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncEpicGameDLC.Response> ExecuteAsync(
+            protected async Task<SyncEpicGameDLC.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncEpicGameDLC(SyncEpicGameDLCBuilder builder,
+        public class SyncEpicGameDLCBuilder : SyncEpicGameDLCAbstractBuilder<SyncEpicGameDLCBuilder>
+        {
+            public SyncEpicGameDLCBuilder() : base() { }
+
+            public SyncEpicGameDLCBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncEpicGameDLC.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncEpicGameDLC.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncEpicGameDLC(ISyncEpicGameDLCBuilder builder,
             string namespace_,
             string userId
         )
@@ -187,12 +228,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

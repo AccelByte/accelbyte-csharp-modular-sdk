@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminGetConfigurationAlertV1Builder Builder { get => new AdminGetConfigurationAlertV1Builder(); }
 
-        public class AdminGetConfigurationAlertV1Builder
-            : OperationBuilder<AdminGetConfigurationAlertV1Builder>
+        public interface IAdminGetConfigurationAlertV1Builder
         {
 
 
 
 
 
-            internal AdminGetConfigurationAlertV1Builder() { }
+        }
 
-            internal AdminGetConfigurationAlertV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetConfigurationAlertV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetConfigurationAlertV1Builder
+            where TImpl : AdminGetConfigurationAlertV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetConfigurationAlertV1AbstractBuilder() { }
+
+            public AdminGetConfigurationAlertV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetConfigurationAlertV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetConfigurationAlertV1.Response Execute(
+            protected AdminGetConfigurationAlertV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetConfigurationAlertV1.Response> ExecuteAsync(
+            protected async Task<AdminGetConfigurationAlertV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminGetConfigurationAlertV1(AdminGetConfigurationAlertV1Builder builder,
+        public class AdminGetConfigurationAlertV1Builder : AdminGetConfigurationAlertV1AbstractBuilder<AdminGetConfigurationAlertV1Builder>
+        {
+            public AdminGetConfigurationAlertV1Builder() : base() { }
+
+            public AdminGetConfigurationAlertV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetConfigurationAlertV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetConfigurationAlertV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetConfigurationAlertV1(IAdminGetConfigurationAlertV1Builder builder,
             string namespace_
         )
         {
@@ -171,32 +206,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsConfigAlertResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsConfigAlertResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static UnpublishPolicyVersionBuilder Builder { get => new UnpublishPolicyVersionBuilder(); }
 
-        public class UnpublishPolicyVersionBuilder
-            : OperationBuilder<UnpublishPolicyVersionBuilder>
+        public interface IUnpublishPolicyVersionBuilder
         {
 
 
 
 
 
-            internal UnpublishPolicyVersionBuilder() { }
+        }
 
-            internal UnpublishPolicyVersionBuilder(IAccelByteSdk sdk)
+        public abstract class UnpublishPolicyVersionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUnpublishPolicyVersionBuilder
+            where TImpl : UnpublishPolicyVersionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UnpublishPolicyVersionAbstractBuilder() { }
+
+            public UnpublishPolicyVersionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyVersionId                    
                 );
 
-                op.SetBaseFields<UnpublishPolicyVersionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UnpublishPolicyVersion.Response Execute(
+            protected UnpublishPolicyVersion.Response InternalExecute(
                 string namespace_,
                 string policyVersionId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UnpublishPolicyVersion.Response> ExecuteAsync(
+            protected async Task<UnpublishPolicyVersion.Response> InternalExecuteAsync(
                 string namespace_,
                 string policyVersionId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private UnpublishPolicyVersion(UnpublishPolicyVersionBuilder builder,
+        public class UnpublishPolicyVersionBuilder : UnpublishPolicyVersionAbstractBuilder<UnpublishPolicyVersionBuilder>
+        {
+            public UnpublishPolicyVersionBuilder() : base() { }
+
+            public UnpublishPolicyVersionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UnpublishPolicyVersion.Response Execute(
+                string namespace_,
+                string policyVersionId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    policyVersionId
+                );
+            }
+            public async Task<UnpublishPolicyVersion.Response> ExecuteAsync(
+                string namespace_,
+                string policyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    policyVersionId
+                );
+            }
+        }
+
+
+        public UnpublishPolicyVersion(IUnpublishPolicyVersionBuilder builder,
             string namespace_,
             string policyVersionId
         )
@@ -177,7 +216,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

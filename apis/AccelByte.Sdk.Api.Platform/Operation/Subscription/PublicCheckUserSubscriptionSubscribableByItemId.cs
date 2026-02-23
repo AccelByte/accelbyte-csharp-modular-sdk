@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicCheckUserSubscriptionSubscribableByItemIdBuilder Builder { get => new PublicCheckUserSubscriptionSubscribableByItemIdBuilder(); }
 
-        public class PublicCheckUserSubscriptionSubscribableByItemIdBuilder
-            : OperationBuilder<PublicCheckUserSubscriptionSubscribableByItemIdBuilder>
+        public interface IPublicCheckUserSubscriptionSubscribableByItemIdBuilder
         {
 
 
 
 
 
-            internal PublicCheckUserSubscriptionSubscribableByItemIdBuilder() { }
+        }
 
-            internal PublicCheckUserSubscriptionSubscribableByItemIdBuilder(IAccelByteSdk sdk)
+        public abstract class PublicCheckUserSubscriptionSubscribableByItemIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCheckUserSubscriptionSubscribableByItemIdBuilder
+            where TImpl : PublicCheckUserSubscriptionSubscribableByItemIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicCheckUserSubscriptionSubscribableByItemIdAbstractBuilder() { }
+
+            public PublicCheckUserSubscriptionSubscribableByItemIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemId                    
                 );
 
-                op.SetBaseFields<PublicCheckUserSubscriptionSubscribableByItemIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicCheckUserSubscriptionSubscribableByItemId.Response Execute(
+            protected PublicCheckUserSubscriptionSubscribableByItemId.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string itemId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCheckUserSubscriptionSubscribableByItemId.Response> ExecuteAsync(
+            protected async Task<PublicCheckUserSubscriptionSubscribableByItemId.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string itemId
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicCheckUserSubscriptionSubscribableByItemId(PublicCheckUserSubscriptionSubscribableByItemIdBuilder builder,
+        public class PublicCheckUserSubscriptionSubscribableByItemIdBuilder : PublicCheckUserSubscriptionSubscribableByItemIdAbstractBuilder<PublicCheckUserSubscriptionSubscribableByItemIdBuilder>
+        {
+            public PublicCheckUserSubscriptionSubscribableByItemIdBuilder() : base() { }
+
+            public PublicCheckUserSubscriptionSubscribableByItemIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicCheckUserSubscriptionSubscribableByItemId.Response Execute(
+                string namespace_,
+                string userId,
+                string itemId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    itemId
+                );
+            }
+            public async Task<PublicCheckUserSubscriptionSubscribableByItemId.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string itemId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    itemId
+                );
+            }
+        }
+
+
+        public PublicCheckUserSubscriptionSubscribableByItemId(IPublicCheckUserSubscriptionSubscribableByItemIdBuilder builder,
             string namespace_,
             string userId,
             string itemId
@@ -185,7 +228,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.Subscribable>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.Subscribable>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

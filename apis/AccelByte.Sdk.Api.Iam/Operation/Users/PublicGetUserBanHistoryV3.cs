@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetUserBanHistoryV3Builder Builder { get => new PublicGetUserBanHistoryV3Builder(); }
 
-        public class PublicGetUserBanHistoryV3Builder
-            : OperationBuilder<PublicGetUserBanHistoryV3Builder>
+        public interface IPublicGetUserBanHistoryV3Builder
+        {
+
+            bool? ActiveOnly { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetUserBanHistoryV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserBanHistoryV3Builder
+            where TImpl : PublicGetUserBanHistoryV3AbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -47,30 +63,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicGetUserBanHistoryV3Builder() { }
+            public PublicGetUserBanHistoryV3AbstractBuilder() { }
 
-            internal PublicGetUserBanHistoryV3Builder(IAccelByteSdk sdk)
+            public PublicGetUserBanHistoryV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetUserBanHistoryV3Builder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetUserBanHistoryV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetUserBanHistoryV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -87,11 +103,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserBanHistoryV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserBanHistoryV3.Response Execute(
+            protected PublicGetUserBanHistoryV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -110,7 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserBanHistoryV3.Response> ExecuteAsync(
+            protected async Task<PublicGetUserBanHistoryV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -131,7 +147,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetUserBanHistoryV3(PublicGetUserBanHistoryV3Builder builder,
+        public class PublicGetUserBanHistoryV3Builder : PublicGetUserBanHistoryV3AbstractBuilder<PublicGetUserBanHistoryV3Builder>
+        {
+            public PublicGetUserBanHistoryV3Builder() : base() { }
+
+            public PublicGetUserBanHistoryV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserBanHistoryV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserBanHistoryV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserBanHistoryV3(IPublicGetUserBanHistoryV3Builder builder,
             string namespace_,
             string userId
         )
@@ -217,32 +262,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserBanV3Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserBanV3Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

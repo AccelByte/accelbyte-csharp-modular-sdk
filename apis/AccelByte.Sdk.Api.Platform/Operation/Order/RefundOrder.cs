@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RefundOrderBuilder Builder { get => new RefundOrderBuilder(); }
 
-        public class RefundOrderBuilder
-            : OperationBuilder<RefundOrderBuilder>
+        public interface IRefundOrderBuilder
         {
 
 
 
 
 
-            internal RefundOrderBuilder() { }
+        }
 
-            internal RefundOrderBuilder(IAccelByteSdk sdk)
+        public abstract class RefundOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRefundOrderBuilder
+            where TImpl : RefundOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RefundOrderAbstractBuilder() { }
+
+            public RefundOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     orderNo                    
                 );
 
-                op.SetBaseFields<RefundOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RefundOrder.Response Execute(
+            protected RefundOrder.Response InternalExecute(
                 OrderRefundCreate body,
                 string namespace_,
                 string orderNo
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RefundOrder.Response> ExecuteAsync(
+            protected async Task<RefundOrder.Response> InternalExecuteAsync(
                 OrderRefundCreate body,
                 string namespace_,
                 string orderNo
@@ -109,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public RefundOrder.Response<T1> Execute<T1>(
+            protected RefundOrder.Response<T1> InternalExecute<T1>(
                 OrderRefundCreate body,
                 string namespace_,
                 string orderNo
@@ -130,7 +140,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RefundOrder.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<RefundOrder.Response<T1>> InternalExecuteAsync<T1>(
                 OrderRefundCreate body,
                 string namespace_,
                 string orderNo
@@ -153,7 +163,65 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RefundOrder(RefundOrderBuilder builder,
+        public class RefundOrderBuilder : RefundOrderAbstractBuilder<RefundOrderBuilder>
+        {
+            public RefundOrderBuilder() : base() { }
+
+            public RefundOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RefundOrder.Response Execute(
+                OrderRefundCreate body,
+                string namespace_,
+                string orderNo
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    orderNo
+                );
+            }
+            public async Task<RefundOrder.Response> ExecuteAsync(
+                OrderRefundCreate body,
+                string namespace_,
+                string orderNo
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    orderNo
+                );
+            }
+
+            public RefundOrder.Response<T1> Execute<T1>(
+                OrderRefundCreate body,
+                string namespace_,
+                string orderNo
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_,
+                    orderNo
+                );
+            }
+            public async Task<RefundOrder.Response<T1>> ExecuteAsync<T1>(
+                OrderRefundCreate body,
+                string namespace_,
+                string orderNo
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_,
+                    orderNo
+                );
+            }
+        }
+
+
+        public RefundOrder(IRefundOrderBuilder builder,
             OrderRefundCreate body,
             string namespace_,
             string orderNo
@@ -241,22 +309,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 
@@ -277,22 +349,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             

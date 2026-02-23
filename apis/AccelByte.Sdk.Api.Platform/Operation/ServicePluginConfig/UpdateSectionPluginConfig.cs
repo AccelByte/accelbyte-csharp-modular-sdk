@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateSectionPluginConfigBuilder Builder { get => new UpdateSectionPluginConfigBuilder(); }
 
-        public class UpdateSectionPluginConfigBuilder
-            : OperationBuilder<UpdateSectionPluginConfigBuilder>
+        public interface IUpdateSectionPluginConfigBuilder
         {
 
 
 
 
 
-            internal UpdateSectionPluginConfigBuilder() { }
+        }
 
-            internal UpdateSectionPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateSectionPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateSectionPluginConfigBuilder
+            where TImpl : UpdateSectionPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateSectionPluginConfigAbstractBuilder() { }
+
+            public UpdateSectionPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateSectionPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateSectionPluginConfig.Response Execute(
+            protected UpdateSectionPluginConfig.Response InternalExecute(
                 SectionPluginConfigUpdate body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateSectionPluginConfig.Response> ExecuteAsync(
+            protected async Task<UpdateSectionPluginConfig.Response> InternalExecuteAsync(
                 SectionPluginConfigUpdate body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateSectionPluginConfig(UpdateSectionPluginConfigBuilder builder,
+        public class UpdateSectionPluginConfigBuilder : UpdateSectionPluginConfigAbstractBuilder<UpdateSectionPluginConfigBuilder>
+        {
+            public UpdateSectionPluginConfigBuilder() : base() { }
+
+            public UpdateSectionPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateSectionPluginConfig.Response Execute(
+                SectionPluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateSectionPluginConfig.Response> ExecuteAsync(
+                SectionPluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateSectionPluginConfig(IUpdateSectionPluginConfigBuilder builder,
             SectionPluginConfigUpdate body,
             string namespace_
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SectionPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SectionPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminGetChatSnapshotBuilder Builder { get => new AdminGetChatSnapshotBuilder(); }
 
-        public class AdminGetChatSnapshotBuilder
-            : OperationBuilder<AdminGetChatSnapshotBuilder>
+        public interface IAdminGetChatSnapshotBuilder
         {
 
 
 
 
 
-            internal AdminGetChatSnapshotBuilder() { }
+        }
 
-            internal AdminGetChatSnapshotBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetChatSnapshotAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetChatSnapshotBuilder
+            where TImpl : AdminGetChatSnapshotAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetChatSnapshotAbstractBuilder() { }
+
+            public AdminGetChatSnapshotAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetChatSnapshotBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetChatSnapshot.Response Execute(
+            protected AdminGetChatSnapshot.Response InternalExecute(
                 string chatId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetChatSnapshot.Response> ExecuteAsync(
+            protected async Task<AdminGetChatSnapshot.Response> InternalExecuteAsync(
                 string chatId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminGetChatSnapshot(AdminGetChatSnapshotBuilder builder,
+        public class AdminGetChatSnapshotBuilder : AdminGetChatSnapshotAbstractBuilder<AdminGetChatSnapshotBuilder>
+        {
+            public AdminGetChatSnapshotBuilder() : base() { }
+
+            public AdminGetChatSnapshotBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetChatSnapshot.Response Execute(
+                string chatId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    chatId,
+                    namespace_
+                );
+            }
+            public async Task<AdminGetChatSnapshot.Response> ExecuteAsync(
+                string chatId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    chatId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetChatSnapshot(IAdminGetChatSnapshotBuilder builder,
             string chatId,
             string namespace_
         )
@@ -181,32 +220,38 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsChatSnapshots>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChatSnapshots>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

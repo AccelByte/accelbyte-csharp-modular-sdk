@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static UpdateGroupConfigurationGlobalRuleAdminV1Builder Builder { get => new UpdateGroupConfigurationGlobalRuleAdminV1Builder(); }
 
-        public class UpdateGroupConfigurationGlobalRuleAdminV1Builder
-            : OperationBuilder<UpdateGroupConfigurationGlobalRuleAdminV1Builder>
+        public interface IUpdateGroupConfigurationGlobalRuleAdminV1Builder
         {
 
 
 
 
 
-            internal UpdateGroupConfigurationGlobalRuleAdminV1Builder() { }
+        }
 
-            internal UpdateGroupConfigurationGlobalRuleAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class UpdateGroupConfigurationGlobalRuleAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateGroupConfigurationGlobalRuleAdminV1Builder
+            where TImpl : UpdateGroupConfigurationGlobalRuleAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateGroupConfigurationGlobalRuleAdminV1AbstractBuilder() { }
+
+            public UpdateGroupConfigurationGlobalRuleAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateGroupConfigurationGlobalRuleAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateGroupConfigurationGlobalRuleAdminV1.Response Execute(
+            protected UpdateGroupConfigurationGlobalRuleAdminV1.Response InternalExecute(
                 ModelsUpdateGroupConfigurationGlobalRulesRequestV1 body,
                 string allowedAction,
                 string configurationCode,
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateGroupConfigurationGlobalRuleAdminV1.Response> ExecuteAsync(
+            protected async Task<UpdateGroupConfigurationGlobalRuleAdminV1.Response> InternalExecuteAsync(
                 ModelsUpdateGroupConfigurationGlobalRulesRequestV1 body,
                 string allowedAction,
                 string configurationCode,
@@ -118,7 +128,44 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private UpdateGroupConfigurationGlobalRuleAdminV1(UpdateGroupConfigurationGlobalRuleAdminV1Builder builder,
+        public class UpdateGroupConfigurationGlobalRuleAdminV1Builder : UpdateGroupConfigurationGlobalRuleAdminV1AbstractBuilder<UpdateGroupConfigurationGlobalRuleAdminV1Builder>
+        {
+            public UpdateGroupConfigurationGlobalRuleAdminV1Builder() : base() { }
+
+            public UpdateGroupConfigurationGlobalRuleAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateGroupConfigurationGlobalRuleAdminV1.Response Execute(
+                ModelsUpdateGroupConfigurationGlobalRulesRequestV1 body,
+                string allowedAction,
+                string configurationCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    allowedAction,
+                    configurationCode,
+                    namespace_
+                );
+            }
+            public async Task<UpdateGroupConfigurationGlobalRuleAdminV1.Response> ExecuteAsync(
+                ModelsUpdateGroupConfigurationGlobalRulesRequestV1 body,
+                string allowedAction,
+                string configurationCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    allowedAction,
+                    configurationCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateGroupConfigurationGlobalRuleAdminV1(IUpdateGroupConfigurationGlobalRuleAdminV1Builder builder,
             ModelsUpdateGroupConfigurationGlobalRulesRequestV1 body,
             string allowedAction,
             string configurationCode,
@@ -203,32 +250,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUpdateGroupConfigurationResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUpdateGroupConfigurationResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

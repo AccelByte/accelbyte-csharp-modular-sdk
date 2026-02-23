@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,8 +50,42 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminSearchChannelSpecificContentBuilder Builder { get => new AdminSearchChannelSpecificContentBuilder(); }
 
-        public class AdminSearchChannelSpecificContentBuilder
-            : OperationBuilder<AdminSearchChannelSpecificContentBuilder>
+        public interface IAdminSearchChannelSpecificContentBuilder
+        {
+
+            string? Creator { get; }
+
+            string? Ishidden { get; }
+
+            string? Isofficial { get; }
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            string? Orderby { get; }
+
+            string? Sortby { get; }
+
+            string? Subtype { get; }
+
+            List<string>? Tags { get; }
+
+            string? Type { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminSearchChannelSpecificContentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSearchChannelSpecificContentBuilder
+            where TImpl : AdminSearchChannelSpecificContentAbstractBuilder<TImpl>
         {
 
             public string? Creator { get; set; }
@@ -82,84 +116,84 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal AdminSearchChannelSpecificContentBuilder() { }
+            public AdminSearchChannelSpecificContentAbstractBuilder() { }
 
-            internal AdminSearchChannelSpecificContentBuilder(IAccelByteSdk sdk)
+            public AdminSearchChannelSpecificContentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminSearchChannelSpecificContentBuilder SetCreator(string _creator)
+            public TImpl SetCreator(string _creator)
             {
                 Creator = _creator;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetIshidden(string _ishidden)
+            public TImpl SetIshidden(string _ishidden)
             {
                 Ishidden = _ishidden;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetIsofficial(string _isofficial)
+            public TImpl SetIsofficial(string _isofficial)
             {
                 Isofficial = _isofficial;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetOrderby(string _orderby)
+            public TImpl SetOrderby(string _orderby)
             {
                 Orderby = _orderby;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetSortby(string _sortby)
+            public TImpl SetSortby(string _sortby)
             {
                 Sortby = _sortby;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetSubtype(string _subtype)
+            public TImpl SetSubtype(string _subtype)
             {
                 Subtype = _subtype;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetType(string _type)
+            public TImpl SetType(string _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchChannelSpecificContentBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -176,11 +210,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminSearchChannelSpecificContentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSearchChannelSpecificContent.Response Execute(
+            protected AdminSearchChannelSpecificContent.Response InternalExecute(
                 string channelId,
                 string namespace_
             )
@@ -199,7 +233,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSearchChannelSpecificContent.Response> ExecuteAsync(
+            protected async Task<AdminSearchChannelSpecificContent.Response> InternalExecuteAsync(
                 string channelId,
                 string namespace_
             )
@@ -220,7 +254,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminSearchChannelSpecificContent(AdminSearchChannelSpecificContentBuilder builder,
+        public class AdminSearchChannelSpecificContentBuilder : AdminSearchChannelSpecificContentAbstractBuilder<AdminSearchChannelSpecificContentBuilder>
+        {
+            public AdminSearchChannelSpecificContentBuilder() : base() { }
+
+            public AdminSearchChannelSpecificContentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSearchChannelSpecificContent.Response Execute(
+                string channelId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    channelId,
+                    namespace_
+                );
+            }
+            public async Task<AdminSearchChannelSpecificContent.Response> ExecuteAsync(
+                string channelId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    channelId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminSearchChannelSpecificContent(IAdminSearchChannelSpecificContentBuilder builder,
             string channelId,
             string namespace_
         )
@@ -331,22 +394,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

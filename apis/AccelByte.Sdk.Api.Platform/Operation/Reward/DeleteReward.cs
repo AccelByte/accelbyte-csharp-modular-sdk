@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteRewardBuilder Builder { get => new DeleteRewardBuilder(); }
 
-        public class DeleteRewardBuilder
-            : OperationBuilder<DeleteRewardBuilder>
+        public interface IDeleteRewardBuilder
         {
 
 
 
 
 
-            internal DeleteRewardBuilder() { }
+        }
 
-            internal DeleteRewardBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteRewardAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteRewardBuilder
+            where TImpl : DeleteRewardAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteRewardAbstractBuilder() { }
+
+            public DeleteRewardAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     rewardId                    
                 );
 
-                op.SetBaseFields<DeleteRewardBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteReward.Response Execute(
+            protected DeleteReward.Response InternalExecute(
                 string namespace_,
                 string rewardId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteReward.Response> ExecuteAsync(
+            protected async Task<DeleteReward.Response> InternalExecuteAsync(
                 string namespace_,
                 string rewardId
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteReward(DeleteRewardBuilder builder,
+        public class DeleteRewardBuilder : DeleteRewardAbstractBuilder<DeleteRewardBuilder>
+        {
+            public DeleteRewardBuilder() : base() { }
+
+            public DeleteRewardBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteReward.Response Execute(
+                string namespace_,
+                string rewardId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    rewardId
+                );
+            }
+            public async Task<DeleteReward.Response> ExecuteAsync(
+                string namespace_,
+                string rewardId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    rewardId
+                );
+            }
+        }
+
+
+        public DeleteReward(IDeleteRewardBuilder builder,
             string namespace_,
             string rewardId
         )
@@ -177,12 +216,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RewardInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RewardInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

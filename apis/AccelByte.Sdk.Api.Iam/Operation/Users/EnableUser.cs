@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static EnableUserBuilder Builder { get => new EnableUserBuilder(); }
 
-        public class EnableUserBuilder
-            : OperationBuilder<EnableUserBuilder>
+        public interface IEnableUserBuilder
         {
 
 
 
 
 
-            internal EnableUserBuilder() { }
+        }
 
-            internal EnableUserBuilder(IAccelByteSdk sdk)
+        public abstract class EnableUserAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IEnableUserBuilder
+            where TImpl : EnableUserAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public EnableUserAbstractBuilder() { }
+
+            public EnableUserAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<EnableUserBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public EnableUser.Response Execute(
+            protected EnableUser.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<EnableUser.Response> ExecuteAsync(
+            protected async Task<EnableUser.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -108,7 +118,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private EnableUser(EnableUserBuilder builder,
+        public class EnableUserBuilder : EnableUserAbstractBuilder<EnableUserBuilder>
+        {
+            public EnableUserBuilder() : base() { }
+
+            public EnableUserBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public EnableUser.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<EnableUser.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public EnableUser(IEnableUserBuilder builder,
             string namespace_,
             string userId
         )
@@ -184,22 +224,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

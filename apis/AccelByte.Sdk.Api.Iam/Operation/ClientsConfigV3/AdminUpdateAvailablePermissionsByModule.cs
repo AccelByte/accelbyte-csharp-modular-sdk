@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateAvailablePermissionsByModuleBuilder Builder { get => new AdminUpdateAvailablePermissionsByModuleBuilder(); }
 
-        public class AdminUpdateAvailablePermissionsByModuleBuilder
-            : OperationBuilder<AdminUpdateAvailablePermissionsByModuleBuilder>
+        public interface IAdminUpdateAvailablePermissionsByModuleBuilder
+        {
+
+            bool? ForceDelete { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminUpdateAvailablePermissionsByModuleAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateAvailablePermissionsByModuleBuilder
+            where TImpl : AdminUpdateAvailablePermissionsByModuleAbstractBuilder<TImpl>
         {
 
             public bool? ForceDelete { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminUpdateAvailablePermissionsByModuleBuilder() { }
+            public AdminUpdateAvailablePermissionsByModuleAbstractBuilder() { }
 
-            internal AdminUpdateAvailablePermissionsByModuleBuilder(IAccelByteSdk sdk)
+            public AdminUpdateAvailablePermissionsByModuleAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminUpdateAvailablePermissionsByModuleBuilder SetForceDelete(bool _forceDelete)
+            public TImpl SetForceDelete(bool _forceDelete)
             {
                 ForceDelete = _forceDelete;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminUpdateAvailablePermissionsByModuleBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateAvailablePermissionsByModule.Response Execute(
+            protected AdminUpdateAvailablePermissionsByModule.Response InternalExecute(
                 ClientmodelListUpsertModulesRequest body
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateAvailablePermissionsByModule.Response> ExecuteAsync(
+            protected async Task<AdminUpdateAvailablePermissionsByModule.Response> InternalExecuteAsync(
                 ClientmodelListUpsertModulesRequest body
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateAvailablePermissionsByModule(AdminUpdateAvailablePermissionsByModuleBuilder builder,
+        public class AdminUpdateAvailablePermissionsByModuleBuilder : AdminUpdateAvailablePermissionsByModuleAbstractBuilder<AdminUpdateAvailablePermissionsByModuleBuilder>
+        {
+            public AdminUpdateAvailablePermissionsByModuleBuilder() : base() { }
+
+            public AdminUpdateAvailablePermissionsByModuleBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateAvailablePermissionsByModule.Response Execute(
+                ClientmodelListUpsertModulesRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminUpdateAvailablePermissionsByModule.Response> ExecuteAsync(
+                ClientmodelListUpsertModulesRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminUpdateAvailablePermissionsByModule(IAdminUpdateAvailablePermissionsByModuleBuilder builder,
             ClientmodelListUpsertModulesRequest body
         )
         {
@@ -177,12 +214,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

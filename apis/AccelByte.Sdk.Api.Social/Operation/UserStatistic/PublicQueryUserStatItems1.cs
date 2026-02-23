@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,28 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicQueryUserStatItems1Builder Builder { get => new PublicQueryUserStatItems1Builder(); }
 
-        public class PublicQueryUserStatItems1Builder
-            : OperationBuilder<PublicQueryUserStatItems1Builder>
+        public interface IPublicQueryUserStatItems1Builder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? SortBy { get; }
+
+            string? StatCodes { get; }
+
+            string? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryUserStatItems1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryUserStatItems1Builder
+            where TImpl : PublicQueryUserStatItems1AbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -50,42 +70,42 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal PublicQueryUserStatItems1Builder() { }
+            public PublicQueryUserStatItems1AbstractBuilder() { }
 
-            internal PublicQueryUserStatItems1Builder(IAccelByteSdk sdk)
+            public PublicQueryUserStatItems1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryUserStatItems1Builder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserStatItems1Builder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserStatItems1Builder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserStatItems1Builder SetStatCodes(string _statCodes)
+            public TImpl SetStatCodes(string _statCodes)
             {
                 StatCodes = _statCodes;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserStatItems1Builder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,11 +122,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicQueryUserStatItems1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryUserStatItems1.Response Execute(
+            protected PublicQueryUserStatItems1.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -125,7 +145,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryUserStatItems1.Response> ExecuteAsync(
+            protected async Task<PublicQueryUserStatItems1.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -146,7 +166,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicQueryUserStatItems1(PublicQueryUserStatItems1Builder builder,
+        public class PublicQueryUserStatItems1Builder : PublicQueryUserStatItems1AbstractBuilder<PublicQueryUserStatItems1Builder>
+        {
+            public PublicQueryUserStatItems1Builder() : base() { }
+
+            public PublicQueryUserStatItems1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryUserStatItems1.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicQueryUserStatItems1.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicQueryUserStatItems1(IPublicQueryUserStatItems1Builder builder,
             string namespace_,
             string userId
         )
@@ -236,27 +285,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserStatItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserStatItemPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

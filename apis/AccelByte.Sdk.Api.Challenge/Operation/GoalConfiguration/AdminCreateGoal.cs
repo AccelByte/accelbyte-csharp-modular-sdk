@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -65,17 +65,27 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminCreateGoalBuilder Builder { get => new AdminCreateGoalBuilder(); }
 
-        public class AdminCreateGoalBuilder
-            : OperationBuilder<AdminCreateGoalBuilder>
+        public interface IAdminCreateGoalBuilder
         {
 
 
 
 
 
-            internal AdminCreateGoalBuilder() { }
+        }
 
-            internal AdminCreateGoalBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateGoalAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateGoalBuilder
+            where TImpl : AdminCreateGoalAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateGoalAbstractBuilder() { }
+
+            public AdminCreateGoalAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -97,11 +107,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateGoalBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateGoal.Response Execute(
+            protected AdminCreateGoal.Response InternalExecute(
                 ModelCreateGoalRequest body,
                 string challengeCode,
                 string namespace_
@@ -122,7 +132,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateGoal.Response> ExecuteAsync(
+            protected async Task<AdminCreateGoal.Response> InternalExecuteAsync(
                 ModelCreateGoalRequest body,
                 string challengeCode,
                 string namespace_
@@ -145,7 +155,40 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminCreateGoal(AdminCreateGoalBuilder builder,
+        public class AdminCreateGoalBuilder : AdminCreateGoalAbstractBuilder<AdminCreateGoalBuilder>
+        {
+            public AdminCreateGoalBuilder() : base() { }
+
+            public AdminCreateGoalBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateGoal.Response Execute(
+                ModelCreateGoalRequest body,
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    challengeCode,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateGoal.Response> ExecuteAsync(
+                ModelCreateGoalRequest body,
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    challengeCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateGoal(IAdminCreateGoalBuilder builder,
             ModelCreateGoalRequest body,
             string challengeCode,
             string namespace_
@@ -230,42 +273,50 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGoalResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGoalResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

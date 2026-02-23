@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveAllPolicyTypesBuilder Builder { get => new OldRetrieveAllPolicyTypesBuilder(); }
 
-        public class OldRetrieveAllPolicyTypesBuilder
-            : OperationBuilder<OldRetrieveAllPolicyTypesBuilder>
+        public interface IOldRetrieveAllPolicyTypesBuilder
+        {
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class OldRetrieveAllPolicyTypesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveAllPolicyTypesBuilder
+            where TImpl : OldRetrieveAllPolicyTypesAbstractBuilder<TImpl>
         {
 
             public int? Offset { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal OldRetrieveAllPolicyTypesBuilder() { }
+            public OldRetrieveAllPolicyTypesAbstractBuilder() { }
 
-            internal OldRetrieveAllPolicyTypesBuilder(IAccelByteSdk sdk)
+            public OldRetrieveAllPolicyTypesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public OldRetrieveAllPolicyTypesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     limit                    
                 );
 
-                op.SetBaseFields<OldRetrieveAllPolicyTypesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveAllPolicyTypes.Response Execute(
+            protected OldRetrieveAllPolicyTypes.Response InternalExecute(
                 int limit
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveAllPolicyTypes.Response> ExecuteAsync(
+            protected async Task<OldRetrieveAllPolicyTypes.Response> InternalExecuteAsync(
                 int limit
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveAllPolicyTypes(OldRetrieveAllPolicyTypesBuilder builder,
+        public class OldRetrieveAllPolicyTypesBuilder : OldRetrieveAllPolicyTypesAbstractBuilder<OldRetrieveAllPolicyTypesBuilder>
+        {
+            public OldRetrieveAllPolicyTypesBuilder() : base() { }
+
+            public OldRetrieveAllPolicyTypesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveAllPolicyTypes.Response Execute(
+                int limit
+            )
+            {
+                return InternalExecute(
+                    limit
+                );
+            }
+            public async Task<OldRetrieveAllPolicyTypes.Response> ExecuteAsync(
+                int limit
+            )
+            {
+                return await InternalExecuteAsync(
+                    limit
+                );
+            }
+        }
+
+
+        public OldRetrieveAllPolicyTypes(IOldRetrieveAllPolicyTypesBuilder builder,
             int limit
         )
         {
@@ -174,7 +211,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyTypeResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyTypeResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

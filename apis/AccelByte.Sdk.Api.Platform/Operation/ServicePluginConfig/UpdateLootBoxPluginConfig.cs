@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateLootBoxPluginConfigBuilder Builder { get => new UpdateLootBoxPluginConfigBuilder(); }
 
-        public class UpdateLootBoxPluginConfigBuilder
-            : OperationBuilder<UpdateLootBoxPluginConfigBuilder>
+        public interface IUpdateLootBoxPluginConfigBuilder
         {
 
 
 
 
 
-            internal UpdateLootBoxPluginConfigBuilder() { }
+        }
 
-            internal UpdateLootBoxPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateLootBoxPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateLootBoxPluginConfigBuilder
+            where TImpl : UpdateLootBoxPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateLootBoxPluginConfigAbstractBuilder() { }
+
+            public UpdateLootBoxPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateLootBoxPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateLootBoxPluginConfig.Response Execute(
+            protected UpdateLootBoxPluginConfig.Response InternalExecute(
                 LootBoxPluginConfigUpdate body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateLootBoxPluginConfig.Response> ExecuteAsync(
+            protected async Task<UpdateLootBoxPluginConfig.Response> InternalExecuteAsync(
                 LootBoxPluginConfigUpdate body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateLootBoxPluginConfig(UpdateLootBoxPluginConfigBuilder builder,
+        public class UpdateLootBoxPluginConfigBuilder : UpdateLootBoxPluginConfigAbstractBuilder<UpdateLootBoxPluginConfigBuilder>
+        {
+            public UpdateLootBoxPluginConfigBuilder() : base() { }
+
+            public UpdateLootBoxPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateLootBoxPluginConfig.Response Execute(
+                LootBoxPluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateLootBoxPluginConfig.Response> ExecuteAsync(
+                LootBoxPluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateLootBoxPluginConfig(IUpdateLootBoxPluginConfigBuilder builder,
             LootBoxPluginConfigUpdate body,
             string namespace_
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.LootBoxPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.LootBoxPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

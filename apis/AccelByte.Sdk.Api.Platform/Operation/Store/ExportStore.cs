@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ExportStoreBuilder Builder { get => new ExportStoreBuilder(); }
 
-        public class ExportStoreBuilder
-            : OperationBuilder<ExportStoreBuilder>
+        public interface IExportStoreBuilder
         {
 
 
 
 
 
-            internal ExportStoreBuilder() { }
+        }
 
-            internal ExportStoreBuilder(IAccelByteSdk sdk)
+        public abstract class ExportStoreAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExportStoreBuilder
+            where TImpl : ExportStoreAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ExportStoreAbstractBuilder() { }
+
+            public ExportStoreAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<ExportStoreBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public ExportStore.Response Execute(
+            protected ExportStore.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExportStore.Response> ExecuteAsync(
+            protected async Task<ExportStore.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -108,7 +118,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ExportStore(ExportStoreBuilder builder,
+        public class ExportStoreBuilder : ExportStoreAbstractBuilder<ExportStoreBuilder>
+        {
+            public ExportStoreBuilder() : base() { }
+
+            public ExportStoreBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public ExportStore.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<ExportStore.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public ExportStore(IExportStoreBuilder builder,
             string namespace_,
             string storeId
         )
@@ -182,7 +222,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryRedeemHistoryBuilder Builder { get => new QueryRedeemHistoryBuilder(); }
 
-        public class QueryRedeemHistoryBuilder
-            : OperationBuilder<QueryRedeemHistoryBuilder>
+        public interface IQueryRedeemHistoryBuilder
+        {
+
+            string? Code { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryRedeemHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryRedeemHistoryBuilder
+            where TImpl : QueryRedeemHistoryAbstractBuilder<TImpl>
         {
 
             public string? Code { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryRedeemHistoryBuilder() { }
+            public QueryRedeemHistoryAbstractBuilder() { }
 
-            internal QueryRedeemHistoryBuilder(IAccelByteSdk sdk)
+            public QueryRedeemHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryRedeemHistoryBuilder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRedeemHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRedeemHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRedeemHistoryBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -95,11 +113,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryRedeemHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryRedeemHistory.Response Execute(
+            protected QueryRedeemHistory.Response InternalExecute(
                 string campaignId,
                 string namespace_
             )
@@ -118,7 +136,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryRedeemHistory.Response> ExecuteAsync(
+            protected async Task<QueryRedeemHistory.Response> InternalExecuteAsync(
                 string campaignId,
                 string namespace_
             )
@@ -139,7 +157,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryRedeemHistory(QueryRedeemHistoryBuilder builder,
+        public class QueryRedeemHistoryBuilder : QueryRedeemHistoryAbstractBuilder<QueryRedeemHistoryBuilder>
+        {
+            public QueryRedeemHistoryBuilder() : base() { }
+
+            public QueryRedeemHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryRedeemHistory.Response Execute(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<QueryRedeemHistory.Response> ExecuteAsync(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryRedeemHistory(IQueryRedeemHistoryBuilder builder,
             string campaignId,
             string namespace_
         )
@@ -218,7 +265,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RedeemHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RedeemHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

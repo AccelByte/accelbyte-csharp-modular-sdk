@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetRolesV3Builder Builder { get => new PublicGetRolesV3Builder(); }
 
-        public class PublicGetRolesV3Builder
-            : OperationBuilder<PublicGetRolesV3Builder>
+        public interface IPublicGetRolesV3Builder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            bool? IsWildcard { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetRolesV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetRolesV3Builder
+            where TImpl : PublicGetRolesV3AbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -47,36 +65,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicGetRolesV3Builder() { }
+            public PublicGetRolesV3AbstractBuilder() { }
 
-            internal PublicGetRolesV3Builder(IAccelByteSdk sdk)
+            public PublicGetRolesV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetRolesV3Builder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetRolesV3Builder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetRolesV3Builder SetIsWildcard(bool _isWildcard)
+            public TImpl SetIsWildcard(bool _isWildcard)
             {
                 IsWildcard = _isWildcard;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetRolesV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -89,11 +107,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetRolesV3 op = new PublicGetRolesV3(this
                 );
 
-                op.SetBaseFields<PublicGetRolesV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetRolesV3.Response Execute(
+            protected PublicGetRolesV3.Response InternalExecute(
             )
             {
                 PublicGetRolesV3 op = Build(
@@ -108,7 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetRolesV3.Response> ExecuteAsync(
+            protected async Task<PublicGetRolesV3.Response> InternalExecuteAsync(
             )
             {
                 PublicGetRolesV3 op = Build(
@@ -125,7 +143,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetRolesV3(PublicGetRolesV3Builder builder
+        public class PublicGetRolesV3Builder : PublicGetRolesV3AbstractBuilder<PublicGetRolesV3Builder>
+        {
+            public PublicGetRolesV3Builder() : base() { }
+
+            public PublicGetRolesV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetRolesV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetRolesV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetRolesV3(IPublicGetRolesV3Builder builder
         )
         {
             
@@ -198,12 +237,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelRoleNamesResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelRoleNamesResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

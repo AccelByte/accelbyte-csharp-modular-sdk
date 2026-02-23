@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetUserEntitlementOwnershipByItemIdsBuilder Builder { get => new PublicGetUserEntitlementOwnershipByItemIdsBuilder(); }
 
-        public class PublicGetUserEntitlementOwnershipByItemIdsBuilder
-            : OperationBuilder<PublicGetUserEntitlementOwnershipByItemIdsBuilder>
+        public interface IPublicGetUserEntitlementOwnershipByItemIdsBuilder
+        {
+
+            List<string>? Ids { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetUserEntitlementOwnershipByItemIdsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserEntitlementOwnershipByItemIdsBuilder
+            where TImpl : PublicGetUserEntitlementOwnershipByItemIdsAbstractBuilder<TImpl>
         {
 
             public List<string>? Ids { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetUserEntitlementOwnershipByItemIdsBuilder() { }
+            public PublicGetUserEntitlementOwnershipByItemIdsAbstractBuilder() { }
 
-            internal PublicGetUserEntitlementOwnershipByItemIdsBuilder(IAccelByteSdk sdk)
+            public PublicGetUserEntitlementOwnershipByItemIdsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetUserEntitlementOwnershipByItemIdsBuilder SetIds(List<string> _ids)
+            public TImpl SetIds(List<string> _ids)
             {
                 Ids = _ids;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserEntitlementOwnershipByItemIdsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserEntitlementOwnershipByItemIds.Response Execute(
+            protected PublicGetUserEntitlementOwnershipByItemIds.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserEntitlementOwnershipByItemIds.Response> ExecuteAsync(
+            protected async Task<PublicGetUserEntitlementOwnershipByItemIds.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetUserEntitlementOwnershipByItemIds(PublicGetUserEntitlementOwnershipByItemIdsBuilder builder,
+        public class PublicGetUserEntitlementOwnershipByItemIdsBuilder : PublicGetUserEntitlementOwnershipByItemIdsAbstractBuilder<PublicGetUserEntitlementOwnershipByItemIdsBuilder>
+        {
+            public PublicGetUserEntitlementOwnershipByItemIdsBuilder() : base() { }
+
+            public PublicGetUserEntitlementOwnershipByItemIdsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserEntitlementOwnershipByItemIds.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserEntitlementOwnershipByItemIds.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserEntitlementOwnershipByItemIds(IPublicGetUserEntitlementOwnershipByItemIdsBuilder builder,
             string namespace_,
             string userId
         )
@@ -184,7 +225,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementOwnership>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementOwnership>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

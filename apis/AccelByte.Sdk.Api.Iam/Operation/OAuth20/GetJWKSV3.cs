@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetJWKSV3Builder Builder { get => new GetJWKSV3Builder(); }
 
-        public class GetJWKSV3Builder
-            : OperationBuilder<GetJWKSV3Builder>
+        public interface IGetJWKSV3Builder
         {
 
 
 
 
 
-            internal GetJWKSV3Builder() { }
+        }
 
-            internal GetJWKSV3Builder(IAccelByteSdk sdk)
+        public abstract class GetJWKSV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetJWKSV3Builder
+            where TImpl : GetJWKSV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetJWKSV3AbstractBuilder() { }
+
+            public GetJWKSV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetJWKSV3 op = new GetJWKSV3(this
                 );
 
-                op.SetBaseFields<GetJWKSV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetJWKSV3.Response Execute(
+            protected GetJWKSV3.Response InternalExecute(
             )
             {
                 GetJWKSV3 op = Build(
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetJWKSV3.Response> ExecuteAsync(
+            protected async Task<GetJWKSV3.Response> InternalExecuteAsync(
             )
             {
                 GetJWKSV3 op = Build(
@@ -99,7 +109,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetJWKSV3(GetJWKSV3Builder builder
+        public class GetJWKSV3Builder : GetJWKSV3AbstractBuilder<GetJWKSV3Builder>
+        {
+            public GetJWKSV3Builder() : base() { }
+
+            public GetJWKSV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetJWKSV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetJWKSV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetJWKSV3(IGetJWKSV3Builder builder
         )
         {
             
@@ -158,7 +189,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

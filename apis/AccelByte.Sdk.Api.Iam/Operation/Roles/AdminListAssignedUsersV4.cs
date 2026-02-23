@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminListAssignedUsersV4Builder Builder { get => new AdminListAssignedUsersV4Builder(); }
 
-        public class AdminListAssignedUsersV4Builder
-            : OperationBuilder<AdminListAssignedUsersV4Builder>
+        public interface IAdminListAssignedUsersV4Builder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListAssignedUsersV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListAssignedUsersV4Builder
+            where TImpl : AdminListAssignedUsersV4AbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -45,30 +61,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminListAssignedUsersV4Builder() { }
+            public AdminListAssignedUsersV4AbstractBuilder() { }
 
-            internal AdminListAssignedUsersV4Builder(IAccelByteSdk sdk)
+            public AdminListAssignedUsersV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListAssignedUsersV4Builder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListAssignedUsersV4Builder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListAssignedUsersV4Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -83,11 +99,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<AdminListAssignedUsersV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListAssignedUsersV4.Response Execute(
+            protected AdminListAssignedUsersV4.Response InternalExecute(
                 string roleId
             )
             {
@@ -104,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListAssignedUsersV4.Response> ExecuteAsync(
+            protected async Task<AdminListAssignedUsersV4.Response> InternalExecuteAsync(
                 string roleId
             )
             {
@@ -123,7 +139,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminListAssignedUsersV4(AdminListAssignedUsersV4Builder builder,
+        public class AdminListAssignedUsersV4Builder : AdminListAssignedUsersV4AbstractBuilder<AdminListAssignedUsersV4Builder>
+        {
+            public AdminListAssignedUsersV4Builder() : base() { }
+
+            public AdminListAssignedUsersV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListAssignedUsersV4.Response Execute(
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    roleId
+                );
+            }
+            public async Task<AdminListAssignedUsersV4.Response> ExecuteAsync(
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    roleId
+                );
+            }
+        }
+
+
+        public AdminListAssignedUsersV4(IAdminListAssignedUsersV4Builder builder,
             string roleId
         )
         {
@@ -203,27 +244,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListAssignedUsersV4Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListAssignedUsersV4Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

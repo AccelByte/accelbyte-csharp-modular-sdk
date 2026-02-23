@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -51,17 +51,27 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminCreateChallengeBuilder Builder { get => new AdminCreateChallengeBuilder(); }
 
-        public class AdminCreateChallengeBuilder
-            : OperationBuilder<AdminCreateChallengeBuilder>
+        public interface IAdminCreateChallengeBuilder
         {
 
 
 
 
 
-            internal AdminCreateChallengeBuilder() { }
+        }
 
-            internal AdminCreateChallengeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateChallengeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateChallengeBuilder
+            where TImpl : AdminCreateChallengeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateChallengeAbstractBuilder() { }
+
+            public AdminCreateChallengeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -81,11 +91,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateChallengeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateChallenge.Response Execute(
+            protected AdminCreateChallenge.Response InternalExecute(
                 ModelCreateChallengeRequest body,
                 string namespace_
             )
@@ -104,7 +114,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateChallenge.Response> ExecuteAsync(
+            protected async Task<AdminCreateChallenge.Response> InternalExecuteAsync(
                 ModelCreateChallengeRequest body,
                 string namespace_
             )
@@ -125,7 +135,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminCreateChallenge(AdminCreateChallengeBuilder builder,
+        public class AdminCreateChallengeBuilder : AdminCreateChallengeAbstractBuilder<AdminCreateChallengeBuilder>
+        {
+            public AdminCreateChallengeBuilder() : base() { }
+
+            public AdminCreateChallengeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateChallenge.Response Execute(
+                ModelCreateChallengeRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateChallenge.Response> ExecuteAsync(
+                ModelCreateChallengeRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateChallenge(IAdminCreateChallengeBuilder builder,
             ModelCreateChallengeRequest body,
             string namespace_
         )
@@ -204,37 +243,44 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelChallengeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelChallengeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

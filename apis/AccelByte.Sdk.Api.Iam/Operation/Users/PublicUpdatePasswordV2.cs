@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicUpdatePasswordV2Builder Builder { get => new PublicUpdatePasswordV2Builder(); }
 
-        public class PublicUpdatePasswordV2Builder
-            : OperationBuilder<PublicUpdatePasswordV2Builder>
+        public interface IPublicUpdatePasswordV2Builder
         {
 
 
 
 
 
-            internal PublicUpdatePasswordV2Builder() { }
+        }
 
-            internal PublicUpdatePasswordV2Builder(IAccelByteSdk sdk)
+        public abstract class PublicUpdatePasswordV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdatePasswordV2Builder
+            where TImpl : PublicUpdatePasswordV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicUpdatePasswordV2AbstractBuilder() { }
+
+            public PublicUpdatePasswordV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdatePasswordV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicUpdatePasswordV2.Response Execute(
+            protected PublicUpdatePasswordV2.Response InternalExecute(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
                 string userId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdatePasswordV2.Response> ExecuteAsync(
+            protected async Task<PublicUpdatePasswordV2.Response> InternalExecuteAsync(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
                 string userId
@@ -114,7 +124,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicUpdatePasswordV2(PublicUpdatePasswordV2Builder builder,
+        public class PublicUpdatePasswordV2Builder : PublicUpdatePasswordV2AbstractBuilder<PublicUpdatePasswordV2Builder>
+        {
+            public PublicUpdatePasswordV2Builder() : base() { }
+
+            public PublicUpdatePasswordV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdatePasswordV2.Response Execute(
+                ModelUserPasswordUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicUpdatePasswordV2.Response> ExecuteAsync(
+                ModelUserPasswordUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdatePasswordV2(IPublicUpdatePasswordV2Builder builder,
             ModelUserPasswordUpdateRequest body,
             string namespace_,
             string userId
@@ -196,27 +240,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

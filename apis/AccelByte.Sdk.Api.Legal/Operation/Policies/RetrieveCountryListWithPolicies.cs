@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveCountryListWithPoliciesBuilder Builder { get => new RetrieveCountryListWithPoliciesBuilder(); }
 
-        public class RetrieveCountryListWithPoliciesBuilder
-            : OperationBuilder<RetrieveCountryListWithPoliciesBuilder>
+        public interface IRetrieveCountryListWithPoliciesBuilder
         {
 
 
 
 
 
-            internal RetrieveCountryListWithPoliciesBuilder() { }
+        }
 
-            internal RetrieveCountryListWithPoliciesBuilder(IAccelByteSdk sdk)
+        public abstract class RetrieveCountryListWithPoliciesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveCountryListWithPoliciesBuilder
+            where TImpl : RetrieveCountryListWithPoliciesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveCountryListWithPoliciesAbstractBuilder() { }
+
+            public RetrieveCountryListWithPoliciesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveCountryListWithPolicies op = new RetrieveCountryListWithPolicies(this
                 );
 
-                op.SetBaseFields<RetrieveCountryListWithPoliciesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveCountryListWithPolicies.Response Execute(
+            protected RetrieveCountryListWithPolicies.Response InternalExecute(
             )
             {
                 RetrieveCountryListWithPolicies op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveCountryListWithPolicies.Response> ExecuteAsync(
+            protected async Task<RetrieveCountryListWithPolicies.Response> InternalExecuteAsync(
             )
             {
                 RetrieveCountryListWithPolicies op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveCountryListWithPolicies(RetrieveCountryListWithPoliciesBuilder builder
+        public class RetrieveCountryListWithPoliciesBuilder : RetrieveCountryListWithPoliciesAbstractBuilder<RetrieveCountryListWithPoliciesBuilder>
+        {
+            public RetrieveCountryListWithPoliciesBuilder() : base() { }
+
+            public RetrieveCountryListWithPoliciesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveCountryListWithPolicies.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<RetrieveCountryListWithPolicies.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public RetrieveCountryListWithPolicies(IRetrieveCountryListWithPoliciesBuilder builder
         )
         {
             
@@ -149,7 +180,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UserUnfriendRequestBuilder Builder { get => new UserUnfriendRequestBuilder(); }
 
-        public class UserUnfriendRequestBuilder
-            : OperationBuilder<UserUnfriendRequestBuilder>
+        public interface IUserUnfriendRequestBuilder
         {
 
 
 
 
 
-            internal UserUnfriendRequestBuilder() { }
+        }
 
-            internal UserUnfriendRequestBuilder(IAccelByteSdk sdk)
+        public abstract class UserUnfriendRequestAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUserUnfriendRequestBuilder
+            where TImpl : UserUnfriendRequestAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UserUnfriendRequestAbstractBuilder() { }
+
+            public UserUnfriendRequestAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UserUnfriendRequestBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UserUnfriendRequest.Response Execute(
+            protected UserUnfriendRequest.Response InternalExecute(
                 ModelUserUnfriendRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UserUnfriendRequest.Response> ExecuteAsync(
+            protected async Task<UserUnfriendRequest.Response> InternalExecuteAsync(
                 ModelUserUnfriendRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UserUnfriendRequest(UserUnfriendRequestBuilder builder,
+        public class UserUnfriendRequestBuilder : UserUnfriendRequestAbstractBuilder<UserUnfriendRequestBuilder>
+        {
+            public UserUnfriendRequestBuilder() : base() { }
+
+            public UserUnfriendRequestBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UserUnfriendRequest.Response Execute(
+                ModelUserUnfriendRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UserUnfriendRequest.Response> ExecuteAsync(
+                ModelUserUnfriendRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UserUnfriendRequest(IUserUnfriendRequestBuilder builder,
             ModelUserUnfriendRequest body,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

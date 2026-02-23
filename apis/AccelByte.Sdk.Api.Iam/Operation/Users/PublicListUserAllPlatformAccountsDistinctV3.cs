@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicListUserAllPlatformAccountsDistinctV3Builder Builder { get => new PublicListUserAllPlatformAccountsDistinctV3Builder(); }
 
-        public class PublicListUserAllPlatformAccountsDistinctV3Builder
-            : OperationBuilder<PublicListUserAllPlatformAccountsDistinctV3Builder>
+        public interface IPublicListUserAllPlatformAccountsDistinctV3Builder
         {
 
 
 
 
 
-            internal PublicListUserAllPlatformAccountsDistinctV3Builder() { }
+        }
 
-            internal PublicListUserAllPlatformAccountsDistinctV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicListUserAllPlatformAccountsDistinctV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListUserAllPlatformAccountsDistinctV3Builder
+            where TImpl : PublicListUserAllPlatformAccountsDistinctV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicListUserAllPlatformAccountsDistinctV3AbstractBuilder() { }
+
+            public PublicListUserAllPlatformAccountsDistinctV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicListUserAllPlatformAccountsDistinctV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListUserAllPlatformAccountsDistinctV3.Response Execute(
+            protected PublicListUserAllPlatformAccountsDistinctV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListUserAllPlatformAccountsDistinctV3.Response> ExecuteAsync(
+            protected async Task<PublicListUserAllPlatformAccountsDistinctV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicListUserAllPlatformAccountsDistinctV3(PublicListUserAllPlatformAccountsDistinctV3Builder builder,
+        public class PublicListUserAllPlatformAccountsDistinctV3Builder : PublicListUserAllPlatformAccountsDistinctV3AbstractBuilder<PublicListUserAllPlatformAccountsDistinctV3Builder>
+        {
+            public PublicListUserAllPlatformAccountsDistinctV3Builder() : base() { }
+
+            public PublicListUserAllPlatformAccountsDistinctV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListUserAllPlatformAccountsDistinctV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicListUserAllPlatformAccountsDistinctV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicListUserAllPlatformAccountsDistinctV3(IPublicListUserAllPlatformAccountsDistinctV3Builder builder,
             string namespace_,
             string userId
         )
@@ -186,32 +225,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonDistinctPlatformResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonDistinctPlatformResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

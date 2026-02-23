@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,28 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static ListUserContributionsBuilder Builder { get => new ListUserContributionsBuilder(); }
 
-        public class ListUserContributionsBuilder
-            : OperationBuilder<ListUserContributionsBuilder>
+        public interface IListUserContributionsBuilder
+        {
+
+            string? AchievementCodes { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            ListUserContributionsSortBy? SortBy { get; }
+
+            List<string>? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListUserContributionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListUserContributionsBuilder
+            where TImpl : ListUserContributionsAbstractBuilder<TImpl>
         {
 
             public string? AchievementCodes { get; set; }
@@ -51,42 +71,42 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal ListUserContributionsBuilder() { }
+            public ListUserContributionsAbstractBuilder() { }
 
-            internal ListUserContributionsBuilder(IAccelByteSdk sdk)
+            public ListUserContributionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListUserContributionsBuilder SetAchievementCodes(string _achievementCodes)
+            public TImpl SetAchievementCodes(string _achievementCodes)
             {
                 AchievementCodes = _achievementCodes;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListUserContributionsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListUserContributionsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListUserContributionsBuilder SetSortBy(ListUserContributionsSortBy _sortBy)
+            public TImpl SetSortBy(ListUserContributionsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListUserContributionsBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -103,11 +123,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ListUserContributionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListUserContributions.Response Execute(
+            protected ListUserContributions.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -126,7 +146,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListUserContributions.Response> ExecuteAsync(
+            protected async Task<ListUserContributions.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -147,7 +167,36 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private ListUserContributions(ListUserContributionsBuilder builder,
+        public class ListUserContributionsBuilder : ListUserContributionsAbstractBuilder<ListUserContributionsBuilder>
+        {
+            public ListUserContributionsBuilder() : base() { }
+
+            public ListUserContributionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListUserContributions.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ListUserContributions.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ListUserContributions(IListUserContributionsBuilder builder,
             string namespace_,
             string userId
         )
@@ -237,22 +286,26 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedUserContributionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedUserContributionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

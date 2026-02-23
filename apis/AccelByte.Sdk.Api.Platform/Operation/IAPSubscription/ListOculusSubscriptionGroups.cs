@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListOculusSubscriptionGroupsBuilder Builder { get => new ListOculusSubscriptionGroupsBuilder(); }
 
-        public class ListOculusSubscriptionGroupsBuilder
-            : OperationBuilder<ListOculusSubscriptionGroupsBuilder>
+        public interface IListOculusSubscriptionGroupsBuilder
         {
 
 
 
 
 
-            internal ListOculusSubscriptionGroupsBuilder() { }
+        }
 
-            internal ListOculusSubscriptionGroupsBuilder(IAccelByteSdk sdk)
+        public abstract class ListOculusSubscriptionGroupsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListOculusSubscriptionGroupsBuilder
+            where TImpl : ListOculusSubscriptionGroupsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ListOculusSubscriptionGroupsAbstractBuilder() { }
+
+            public ListOculusSubscriptionGroupsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListOculusSubscriptionGroupsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListOculusSubscriptionGroups.Response Execute(
+            protected ListOculusSubscriptionGroups.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListOculusSubscriptionGroups.Response> ExecuteAsync(
+            protected async Task<ListOculusSubscriptionGroups.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListOculusSubscriptionGroups(ListOculusSubscriptionGroupsBuilder builder,
+        public class ListOculusSubscriptionGroupsBuilder : ListOculusSubscriptionGroupsAbstractBuilder<ListOculusSubscriptionGroupsBuilder>
+        {
+            public ListOculusSubscriptionGroupsBuilder() : base() { }
+
+            public ListOculusSubscriptionGroupsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListOculusSubscriptionGroups.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListOculusSubscriptionGroups.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListOculusSubscriptionGroups(IListOculusSubscriptionGroupsBuilder builder,
             string namespace_
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ThirdPartySubscriptionGroupInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ThirdPartySubscriptionGroupInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

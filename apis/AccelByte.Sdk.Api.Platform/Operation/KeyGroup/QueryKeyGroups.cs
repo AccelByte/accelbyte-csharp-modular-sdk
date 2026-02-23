@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryKeyGroupsBuilder Builder { get => new QueryKeyGroupsBuilder(); }
 
-        public class QueryKeyGroupsBuilder
-            : OperationBuilder<QueryKeyGroupsBuilder>
+        public interface IQueryKeyGroupsBuilder
+        {
+
+            int? Limit { get; }
+
+            string? Name { get; }
+
+            int? Offset { get; }
+
+            string? Tag { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryKeyGroupsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryKeyGroupsBuilder
+            where TImpl : QueryKeyGroupsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryKeyGroupsBuilder() { }
+            public QueryKeyGroupsAbstractBuilder() { }
 
-            internal QueryKeyGroupsBuilder(IAccelByteSdk sdk)
+            public QueryKeyGroupsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryKeyGroupsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryKeyGroupsBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryKeyGroupsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryKeyGroupsBuilder SetTag(string _tag)
+            public TImpl SetTag(string _tag)
             {
                 Tag = _tag;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -93,11 +111,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryKeyGroupsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryKeyGroups.Response Execute(
+            protected QueryKeyGroups.Response InternalExecute(
                 string namespace_
             )
             {
@@ -114,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryKeyGroups.Response> ExecuteAsync(
+            protected async Task<QueryKeyGroups.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -133,7 +151,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryKeyGroups(QueryKeyGroupsBuilder builder,
+        public class QueryKeyGroupsBuilder : QueryKeyGroupsAbstractBuilder<QueryKeyGroupsBuilder>
+        {
+            public QueryKeyGroupsBuilder() : base() { }
+
+            public QueryKeyGroupsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryKeyGroups.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryKeyGroups.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryKeyGroups(IQueryKeyGroupsBuilder builder,
             string namespace_
         )
         {
@@ -208,7 +251,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.KeyGroupPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.KeyGroupPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

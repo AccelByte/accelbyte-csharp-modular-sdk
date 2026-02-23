@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static PartialUpdatePolicyBuilder Builder { get => new PartialUpdatePolicyBuilder(); }
 
-        public class PartialUpdatePolicyBuilder
-            : OperationBuilder<PartialUpdatePolicyBuilder>
+        public interface IPartialUpdatePolicyBuilder
+        {
+
+
+            Model.UpdateBasePolicyRequestV2? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PartialUpdatePolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPartialUpdatePolicyBuilder
+            where TImpl : PartialUpdatePolicyAbstractBuilder<TImpl>
         {
 
 
@@ -48,19 +60,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal PartialUpdatePolicyBuilder() { }
+            public PartialUpdatePolicyAbstractBuilder() { }
 
-            internal PartialUpdatePolicyBuilder(IAccelByteSdk sdk)
+            public PartialUpdatePolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PartialUpdatePolicyBuilder SetBody(Model.UpdateBasePolicyRequestV2 _body)
+            public TImpl SetBody(Model.UpdateBasePolicyRequestV2 _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +88,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PartialUpdatePolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PartialUpdatePolicy.Response Execute(
+            protected PartialUpdatePolicy.Response InternalExecute(
                 string basePolicyId,
                 string namespace_
             )
@@ -99,7 +111,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PartialUpdatePolicy.Response> ExecuteAsync(
+            protected async Task<PartialUpdatePolicy.Response> InternalExecuteAsync(
                 string basePolicyId,
                 string namespace_
             )
@@ -120,7 +132,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private PartialUpdatePolicy(PartialUpdatePolicyBuilder builder,
+        public class PartialUpdatePolicyBuilder : PartialUpdatePolicyAbstractBuilder<PartialUpdatePolicyBuilder>
+        {
+            public PartialUpdatePolicyBuilder() : base() { }
+
+            public PartialUpdatePolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PartialUpdatePolicy.Response Execute(
+                string basePolicyId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    basePolicyId,
+                    namespace_
+                );
+            }
+            public async Task<PartialUpdatePolicy.Response> ExecuteAsync(
+                string basePolicyId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    basePolicyId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PartialUpdatePolicy(IPartialUpdatePolicyBuilder builder,
             string basePolicyId,
             string namespace_
         )
@@ -192,12 +233,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UpdateBasePolicyResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UpdateBasePolicyResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

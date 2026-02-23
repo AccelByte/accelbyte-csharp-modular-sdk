@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateEpicGamesIAPConfigBuilder Builder { get => new UpdateEpicGamesIAPConfigBuilder(); }
 
-        public class UpdateEpicGamesIAPConfigBuilder
-            : OperationBuilder<UpdateEpicGamesIAPConfigBuilder>
+        public interface IUpdateEpicGamesIAPConfigBuilder
         {
 
 
 
 
 
-            internal UpdateEpicGamesIAPConfigBuilder() { }
+        }
 
-            internal UpdateEpicGamesIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateEpicGamesIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateEpicGamesIAPConfigBuilder
+            where TImpl : UpdateEpicGamesIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateEpicGamesIAPConfigAbstractBuilder() { }
+
+            public UpdateEpicGamesIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateEpicGamesIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateEpicGamesIAPConfig.Response Execute(
+            protected UpdateEpicGamesIAPConfig.Response InternalExecute(
                 EpicGamesIAPConfigRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateEpicGamesIAPConfig.Response> ExecuteAsync(
+            protected async Task<UpdateEpicGamesIAPConfig.Response> InternalExecuteAsync(
                 EpicGamesIAPConfigRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateEpicGamesIAPConfig(UpdateEpicGamesIAPConfigBuilder builder,
+        public class UpdateEpicGamesIAPConfigBuilder : UpdateEpicGamesIAPConfigAbstractBuilder<UpdateEpicGamesIAPConfigBuilder>
+        {
+            public UpdateEpicGamesIAPConfigBuilder() : base() { }
+
+            public UpdateEpicGamesIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateEpicGamesIAPConfig.Response Execute(
+                EpicGamesIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateEpicGamesIAPConfig.Response> ExecuteAsync(
+                EpicGamesIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateEpicGamesIAPConfig(IUpdateEpicGamesIAPConfigBuilder builder,
             EpicGamesIAPConfigRequest body,
             string namespace_
         )
@@ -172,7 +211,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

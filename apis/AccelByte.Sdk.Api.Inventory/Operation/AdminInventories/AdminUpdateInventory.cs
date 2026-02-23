@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminUpdateInventoryBuilder Builder { get => new AdminUpdateInventoryBuilder(); }
 
-        public class AdminUpdateInventoryBuilder
-            : OperationBuilder<AdminUpdateInventoryBuilder>
+        public interface IAdminUpdateInventoryBuilder
         {
 
 
 
 
 
-            internal AdminUpdateInventoryBuilder() { }
+        }
 
-            internal AdminUpdateInventoryBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateInventoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateInventoryBuilder
+            where TImpl : AdminUpdateInventoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateInventoryAbstractBuilder() { }
+
+            public AdminUpdateInventoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateInventoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateInventory.Response Execute(
+            protected AdminUpdateInventory.Response InternalExecute(
                 ApimodelsUpdateInventoryReq body,
                 string inventoryId,
                 string namespace_
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateInventory.Response> ExecuteAsync(
+            protected async Task<AdminUpdateInventory.Response> InternalExecuteAsync(
                 ApimodelsUpdateInventoryReq body,
                 string inventoryId,
                 string namespace_
@@ -116,7 +126,40 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminUpdateInventory(AdminUpdateInventoryBuilder builder,
+        public class AdminUpdateInventoryBuilder : AdminUpdateInventoryAbstractBuilder<AdminUpdateInventoryBuilder>
+        {
+            public AdminUpdateInventoryBuilder() : base() { }
+
+            public AdminUpdateInventoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateInventory.Response Execute(
+                ApimodelsUpdateInventoryReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateInventory.Response> ExecuteAsync(
+                ApimodelsUpdateInventoryReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateInventory(IAdminUpdateInventoryBuilder builder,
             ApimodelsUpdateInventoryReq body,
             string inventoryId,
             string namespace_
@@ -193,22 +236,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsInventoryResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsInventoryResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

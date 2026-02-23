@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateAliPayConfigBuilder Builder { get => new UpdateAliPayConfigBuilder(); }
 
-        public class UpdateAliPayConfigBuilder
-            : OperationBuilder<UpdateAliPayConfigBuilder>
+        public interface IUpdateAliPayConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+            bool? Validate { get; }
+
+
+
+
+
+        }
+
+        public abstract class UpdateAliPayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateAliPayConfigBuilder
+            where TImpl : UpdateAliPayConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateAliPayConfigBuilder() { }
+            public UpdateAliPayConfigAbstractBuilder() { }
 
-            internal UpdateAliPayConfigBuilder(IAccelByteSdk sdk)
+            public UpdateAliPayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UpdateAliPayConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
-            public UpdateAliPayConfigBuilder SetValidate(bool _validate)
+            public TImpl SetValidate(bool _validate)
             {
                 Validate = _validate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateAliPayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateAliPayConfig.Response Execute(
+            protected UpdateAliPayConfig.Response InternalExecute(
                 AliPayConfig body,
                 string id
             )
@@ -102,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateAliPayConfig.Response> ExecuteAsync(
+            protected async Task<UpdateAliPayConfig.Response> InternalExecuteAsync(
                 AliPayConfig body,
                 string id
             )
@@ -123,7 +137,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateAliPayConfig(UpdateAliPayConfigBuilder builder,
+        public class UpdateAliPayConfigBuilder : UpdateAliPayConfigAbstractBuilder<UpdateAliPayConfigBuilder>
+        {
+            public UpdateAliPayConfigBuilder() : base() { }
+
+            public UpdateAliPayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateAliPayConfig.Response Execute(
+                AliPayConfig body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateAliPayConfig.Response> ExecuteAsync(
+                AliPayConfig body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateAliPayConfig(IUpdateAliPayConfigBuilder builder,
             AliPayConfig body,
             string id
         )
@@ -198,12 +241,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

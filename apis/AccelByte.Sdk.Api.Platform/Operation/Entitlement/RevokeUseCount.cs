@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RevokeUseCountBuilder Builder { get => new RevokeUseCountBuilder(); }
 
-        public class RevokeUseCountBuilder
-            : OperationBuilder<RevokeUseCountBuilder>
+        public interface IRevokeUseCountBuilder
         {
 
 
 
 
 
-            internal RevokeUseCountBuilder() { }
+        }
 
-            internal RevokeUseCountBuilder(IAccelByteSdk sdk)
+        public abstract class RevokeUseCountAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeUseCountBuilder
+            where TImpl : RevokeUseCountAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RevokeUseCountAbstractBuilder() { }
+
+            public RevokeUseCountAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,12 +78,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RevokeUseCountBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public RevokeUseCount.Response Execute(
+            protected RevokeUseCount.Response InternalExecute(
                 RevokeUseCountRequest body,
                 string entitlementId,
                 string namespace_,
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeUseCount.Response> ExecuteAsync(
+            protected async Task<RevokeUseCount.Response> InternalExecuteAsync(
                 RevokeUseCountRequest body,
                 string entitlementId,
                 string namespace_,
@@ -121,7 +131,45 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RevokeUseCount(RevokeUseCountBuilder builder,
+        public class RevokeUseCountBuilder : RevokeUseCountAbstractBuilder<RevokeUseCountBuilder>
+        {
+            public RevokeUseCountBuilder() : base() { }
+
+            public RevokeUseCountBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public RevokeUseCount.Response Execute(
+                RevokeUseCountRequest body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RevokeUseCount.Response> ExecuteAsync(
+                RevokeUseCountRequest body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RevokeUseCount(IRevokeUseCountBuilder builder,
             RevokeUseCountRequest body,
             string entitlementId,
             string namespace_,
@@ -198,12 +246,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

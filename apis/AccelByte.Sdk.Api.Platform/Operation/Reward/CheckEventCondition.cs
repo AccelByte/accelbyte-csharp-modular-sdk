@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CheckEventConditionBuilder Builder { get => new CheckEventConditionBuilder(); }
 
-        public class CheckEventConditionBuilder
-            : OperationBuilder<CheckEventConditionBuilder>
+        public interface ICheckEventConditionBuilder
+        {
+
+
+            Model.EventPayload? Body { get; }
+
+
+
+
+        }
+
+        public abstract class CheckEventConditionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICheckEventConditionBuilder
+            where TImpl : CheckEventConditionAbstractBuilder<TImpl>
         {
 
 
@@ -42,19 +54,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal CheckEventConditionBuilder() { }
+            public CheckEventConditionAbstractBuilder() { }
 
-            internal CheckEventConditionBuilder(IAccelByteSdk sdk)
+            public CheckEventConditionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public CheckEventConditionBuilder SetBody(Model.EventPayload _body)
+            public TImpl SetBody(Model.EventPayload _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     rewardId                    
                 );
 
-                op.SetBaseFields<CheckEventConditionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CheckEventCondition.Response Execute(
+            protected CheckEventCondition.Response InternalExecute(
                 string namespace_,
                 string rewardId
             )
@@ -93,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CheckEventCondition.Response> ExecuteAsync(
+            protected async Task<CheckEventCondition.Response> InternalExecuteAsync(
                 string namespace_,
                 string rewardId
             )
@@ -114,7 +126,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CheckEventCondition(CheckEventConditionBuilder builder,
+        public class CheckEventConditionBuilder : CheckEventConditionAbstractBuilder<CheckEventConditionBuilder>
+        {
+            public CheckEventConditionBuilder() : base() { }
+
+            public CheckEventConditionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CheckEventCondition.Response Execute(
+                string namespace_,
+                string rewardId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    rewardId
+                );
+            }
+            public async Task<CheckEventCondition.Response> ExecuteAsync(
+                string namespace_,
+                string rewardId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    rewardId
+                );
+            }
+        }
+
+
+        public CheckEventCondition(ICheckEventConditionBuilder builder,
             string namespace_,
             string rewardId
         )
@@ -186,12 +227,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ConditionMatchResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ConditionMatchResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

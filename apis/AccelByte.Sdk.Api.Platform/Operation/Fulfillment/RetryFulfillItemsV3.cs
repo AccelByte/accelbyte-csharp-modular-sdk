@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RetryFulfillItemsV3Builder Builder { get => new RetryFulfillItemsV3Builder(); }
 
-        public class RetryFulfillItemsV3Builder
-            : OperationBuilder<RetryFulfillItemsV3Builder>
+        public interface IRetryFulfillItemsV3Builder
         {
 
 
 
 
 
-            internal RetryFulfillItemsV3Builder() { }
+        }
 
-            internal RetryFulfillItemsV3Builder(IAccelByteSdk sdk)
+        public abstract class RetryFulfillItemsV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetryFulfillItemsV3Builder
+            where TImpl : RetryFulfillItemsV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetryFulfillItemsV3AbstractBuilder() { }
+
+            public RetryFulfillItemsV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RetryFulfillItemsV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetryFulfillItemsV3.Response Execute(
+            protected RetryFulfillItemsV3.Response InternalExecute(
                 string namespace_,
                 string transactionId,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetryFulfillItemsV3.Response> ExecuteAsync(
+            protected async Task<RetryFulfillItemsV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string transactionId,
                 string userId
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RetryFulfillItemsV3(RetryFulfillItemsV3Builder builder,
+        public class RetryFulfillItemsV3Builder : RetryFulfillItemsV3AbstractBuilder<RetryFulfillItemsV3Builder>
+        {
+            public RetryFulfillItemsV3Builder() : base() { }
+
+            public RetryFulfillItemsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetryFulfillItemsV3.Response Execute(
+                string namespace_,
+                string transactionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    transactionId,
+                    userId
+                );
+            }
+            public async Task<RetryFulfillItemsV3.Response> ExecuteAsync(
+                string namespace_,
+                string transactionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    transactionId,
+                    userId
+                );
+            }
+        }
+
+
+        public RetryFulfillItemsV3(IRetryFulfillItemsV3Builder builder,
             string namespace_,
             string transactionId,
             string userId
@@ -185,12 +228,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentV2Result>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentV2Result>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

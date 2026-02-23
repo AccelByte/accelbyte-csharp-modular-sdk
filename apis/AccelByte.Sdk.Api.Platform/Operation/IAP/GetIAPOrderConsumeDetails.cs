@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetIAPOrderConsumeDetailsBuilder Builder { get => new GetIAPOrderConsumeDetailsBuilder(); }
 
-        public class GetIAPOrderConsumeDetailsBuilder
-            : OperationBuilder<GetIAPOrderConsumeDetailsBuilder>
+        public interface IGetIAPOrderConsumeDetailsBuilder
         {
 
 
 
 
 
-            internal GetIAPOrderConsumeDetailsBuilder() { }
+        }
 
-            internal GetIAPOrderConsumeDetailsBuilder(IAccelByteSdk sdk)
+        public abstract class GetIAPOrderConsumeDetailsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetIAPOrderConsumeDetailsBuilder
+            where TImpl : GetIAPOrderConsumeDetailsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetIAPOrderConsumeDetailsAbstractBuilder() { }
+
+            public GetIAPOrderConsumeDetailsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetIAPOrderConsumeDetailsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetIAPOrderConsumeDetails.Response Execute(
+            protected GetIAPOrderConsumeDetails.Response InternalExecute(
                 string iapOrderNo,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetIAPOrderConsumeDetails.Response> ExecuteAsync(
+            protected async Task<GetIAPOrderConsumeDetails.Response> InternalExecuteAsync(
                 string iapOrderNo,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetIAPOrderConsumeDetails(GetIAPOrderConsumeDetailsBuilder builder,
+        public class GetIAPOrderConsumeDetailsBuilder : GetIAPOrderConsumeDetailsAbstractBuilder<GetIAPOrderConsumeDetailsBuilder>
+        {
+            public GetIAPOrderConsumeDetailsBuilder() : base() { }
+
+            public GetIAPOrderConsumeDetailsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetIAPOrderConsumeDetails.Response Execute(
+                string iapOrderNo,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    iapOrderNo,
+                    namespace_
+                );
+            }
+            public async Task<GetIAPOrderConsumeDetails.Response> ExecuteAsync(
+                string iapOrderNo,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    iapOrderNo,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetIAPOrderConsumeDetails(IGetIAPOrderConsumeDetailsBuilder builder,
             string iapOrderNo,
             string namespace_
         )
@@ -171,7 +210,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.IAPOrderConsumeDetailInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.IAPOrderConsumeDetailInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

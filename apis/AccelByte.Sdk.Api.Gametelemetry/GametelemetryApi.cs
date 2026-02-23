@@ -15,7 +15,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry
     {
         private IAccelByteSdk _Sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public Wrapper.Telemetry Telemetry
         {

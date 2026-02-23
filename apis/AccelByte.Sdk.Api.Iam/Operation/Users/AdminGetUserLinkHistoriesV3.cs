@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -66,17 +66,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetUserLinkHistoriesV3Builder Builder { get => new AdminGetUserLinkHistoriesV3Builder(); }
 
-        public class AdminGetUserLinkHistoriesV3Builder
-            : OperationBuilder<AdminGetUserLinkHistoriesV3Builder>
+        public interface IAdminGetUserLinkHistoriesV3Builder
         {
 
 
 
 
 
-            internal AdminGetUserLinkHistoriesV3Builder() { }
+        }
 
-            internal AdminGetUserLinkHistoriesV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetUserLinkHistoriesV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUserLinkHistoriesV3Builder
+            where TImpl : AdminGetUserLinkHistoriesV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetUserLinkHistoriesV3AbstractBuilder() { }
+
+            public AdminGetUserLinkHistoriesV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -98,11 +108,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<AdminGetUserLinkHistoriesV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUserLinkHistoriesV3.Response Execute(
+            protected AdminGetUserLinkHistoriesV3.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string platformId
@@ -123,7 +133,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserLinkHistoriesV3.Response> ExecuteAsync(
+            protected async Task<AdminGetUserLinkHistoriesV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string platformId
@@ -146,7 +156,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetUserLinkHistoriesV3(AdminGetUserLinkHistoriesV3Builder builder,
+        public class AdminGetUserLinkHistoriesV3Builder : AdminGetUserLinkHistoriesV3AbstractBuilder<AdminGetUserLinkHistoriesV3Builder>
+        {
+            public AdminGetUserLinkHistoriesV3Builder() : base() { }
+
+            public AdminGetUserLinkHistoriesV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUserLinkHistoriesV3.Response Execute(
+                string namespace_,
+                string userId,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    platformId
+                );
+            }
+            public async Task<AdminGetUserLinkHistoriesV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    platformId
+                );
+            }
+        }
+
+
+        public AdminGetUserLinkHistoriesV3(IAdminGetUserLinkHistoriesV3Builder builder,
             string namespace_,
             string userId,
             string platformId
@@ -225,27 +268,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserPlatformLinkHistories>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserPlatformLinkHistories>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

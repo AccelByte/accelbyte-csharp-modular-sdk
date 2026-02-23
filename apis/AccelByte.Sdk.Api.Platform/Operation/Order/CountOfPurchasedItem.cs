@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CountOfPurchasedItemBuilder Builder { get => new CountOfPurchasedItemBuilder(); }
 
-        public class CountOfPurchasedItemBuilder
-            : OperationBuilder<CountOfPurchasedItemBuilder>
+        public interface ICountOfPurchasedItemBuilder
         {
 
 
 
 
 
-            internal CountOfPurchasedItemBuilder() { }
+        }
 
-            internal CountOfPurchasedItemBuilder(IAccelByteSdk sdk)
+        public abstract class CountOfPurchasedItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICountOfPurchasedItemBuilder
+            where TImpl : CountOfPurchasedItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CountOfPurchasedItemAbstractBuilder() { }
+
+            public CountOfPurchasedItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemId                    
                 );
 
-                op.SetBaseFields<CountOfPurchasedItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CountOfPurchasedItem.Response Execute(
+            protected CountOfPurchasedItem.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string itemId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CountOfPurchasedItem.Response> ExecuteAsync(
+            protected async Task<CountOfPurchasedItem.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string itemId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CountOfPurchasedItem(CountOfPurchasedItemBuilder builder,
+        public class CountOfPurchasedItemBuilder : CountOfPurchasedItemAbstractBuilder<CountOfPurchasedItemBuilder>
+        {
+            public CountOfPurchasedItemBuilder() : base() { }
+
+            public CountOfPurchasedItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CountOfPurchasedItem.Response Execute(
+                string namespace_,
+                string userId,
+                string itemId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    itemId
+                );
+            }
+            public async Task<CountOfPurchasedItem.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string itemId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    itemId
+                );
+            }
+        }
+
+
+        public CountOfPurchasedItem(ICountOfPurchasedItemBuilder builder,
             string namespace_,
             string userId,
             string itemId
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PurchasedItemCount>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PurchasedItemCount>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminCreateNamespaceTopicBuilder Builder { get => new AdminCreateNamespaceTopicBuilder(); }
 
-        public class AdminCreateNamespaceTopicBuilder
-            : OperationBuilder<AdminCreateNamespaceTopicBuilder>
+        public interface IAdminCreateNamespaceTopicBuilder
         {
 
 
 
 
 
-            internal AdminCreateNamespaceTopicBuilder() { }
+        }
 
-            internal AdminCreateNamespaceTopicBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateNamespaceTopicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateNamespaceTopicBuilder
+            where TImpl : AdminCreateNamespaceTopicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateNamespaceTopicAbstractBuilder() { }
+
+            public AdminCreateNamespaceTopicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateNamespaceTopicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateNamespaceTopic.Response Execute(
+            protected AdminCreateNamespaceTopic.Response InternalExecute(
                 ApiCreateNamespaceTopicParams body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateNamespaceTopic.Response> ExecuteAsync(
+            protected async Task<AdminCreateNamespaceTopic.Response> InternalExecuteAsync(
                 ApiCreateNamespaceTopicParams body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminCreateNamespaceTopic(AdminCreateNamespaceTopicBuilder builder,
+        public class AdminCreateNamespaceTopicBuilder : AdminCreateNamespaceTopicAbstractBuilder<AdminCreateNamespaceTopicBuilder>
+        {
+            public AdminCreateNamespaceTopicBuilder() : base() { }
+
+            public AdminCreateNamespaceTopicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateNamespaceTopic.Response Execute(
+                ApiCreateNamespaceTopicParams body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateNamespaceTopic.Response> ExecuteAsync(
+                ApiCreateNamespaceTopicParams body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateNamespaceTopic(IAdminCreateNamespaceTopicBuilder builder,
             ApiCreateNamespaceTopicParams body,
             string namespace_
         )
@@ -171,7 +210,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiCreateTopicResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiCreateTopicResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

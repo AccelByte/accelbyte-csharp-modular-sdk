@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncSteamDLCBuilder Builder { get => new SyncSteamDLCBuilder(); }
 
-        public class SyncSteamDLCBuilder
-            : OperationBuilder<SyncSteamDLCBuilder>
+        public interface ISyncSteamDLCBuilder
         {
 
 
 
 
 
-            internal SyncSteamDLCBuilder() { }
+        }
 
-            internal SyncSteamDLCBuilder(IAccelByteSdk sdk)
+        public abstract class SyncSteamDLCAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncSteamDLCBuilder
+            where TImpl : SyncSteamDLCAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncSteamDLCAbstractBuilder() { }
+
+            public SyncSteamDLCAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncSteamDLCBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncSteamDLC.Response Execute(
+            protected SyncSteamDLC.Response InternalExecute(
                 SteamDLCSyncRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncSteamDLC.Response> ExecuteAsync(
+            protected async Task<SyncSteamDLC.Response> InternalExecuteAsync(
                 SteamDLCSyncRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncSteamDLC(SyncSteamDLCBuilder builder,
+        public class SyncSteamDLCBuilder : SyncSteamDLCAbstractBuilder<SyncSteamDLCBuilder>
+        {
+            public SyncSteamDLCBuilder() : base() { }
+
+            public SyncSteamDLCBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncSteamDLC.Response Execute(
+                SteamDLCSyncRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncSteamDLC.Response> ExecuteAsync(
+                SteamDLCSyncRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncSteamDLC(ISyncSteamDLCBuilder builder,
             SteamDLCSyncRequest body,
             string namespace_,
             string userId
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

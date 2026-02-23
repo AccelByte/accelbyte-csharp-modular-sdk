@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static KickGroupMemberPublicV2Builder Builder { get => new KickGroupMemberPublicV2Builder(); }
 
-        public class KickGroupMemberPublicV2Builder
-            : OperationBuilder<KickGroupMemberPublicV2Builder>
+        public interface IKickGroupMemberPublicV2Builder
         {
 
 
 
 
 
-            internal KickGroupMemberPublicV2Builder() { }
+        }
 
-            internal KickGroupMemberPublicV2Builder(IAccelByteSdk sdk)
+        public abstract class KickGroupMemberPublicV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IKickGroupMemberPublicV2Builder
+            where TImpl : KickGroupMemberPublicV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public KickGroupMemberPublicV2AbstractBuilder() { }
+
+            public KickGroupMemberPublicV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,11 +80,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<KickGroupMemberPublicV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public KickGroupMemberPublicV2.Response Execute(
+            protected KickGroupMemberPublicV2.Response InternalExecute(
                 string groupId,
                 string namespace_,
                 string userId
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<KickGroupMemberPublicV2.Response> ExecuteAsync(
+            protected async Task<KickGroupMemberPublicV2.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_,
                 string userId
@@ -118,7 +128,40 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private KickGroupMemberPublicV2(KickGroupMemberPublicV2Builder builder,
+        public class KickGroupMemberPublicV2Builder : KickGroupMemberPublicV2AbstractBuilder<KickGroupMemberPublicV2Builder>
+        {
+            public KickGroupMemberPublicV2Builder() : base() { }
+
+            public KickGroupMemberPublicV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public KickGroupMemberPublicV2.Response Execute(
+                string groupId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<KickGroupMemberPublicV2.Response> ExecuteAsync(
+                string groupId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public KickGroupMemberPublicV2(IKickGroupMemberPublicV2Builder builder,
             string groupId,
             string namespace_,
             string userId
@@ -199,32 +242,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsKickGroupMemberResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsKickGroupMemberResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteSteamIAPConfigBuilder Builder { get => new DeleteSteamIAPConfigBuilder(); }
 
-        public class DeleteSteamIAPConfigBuilder
-            : OperationBuilder<DeleteSteamIAPConfigBuilder>
+        public interface IDeleteSteamIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeleteSteamIAPConfigBuilder() { }
+        }
 
-            internal DeleteSteamIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteSteamIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteSteamIAPConfigBuilder
+            where TImpl : DeleteSteamIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteSteamIAPConfigAbstractBuilder() { }
+
+            public DeleteSteamIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteSteamIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteSteamIAPConfig.Response Execute(
+            protected DeleteSteamIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteSteamIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeleteSteamIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteSteamIAPConfig(DeleteSteamIAPConfigBuilder builder,
+        public class DeleteSteamIAPConfigBuilder : DeleteSteamIAPConfigAbstractBuilder<DeleteSteamIAPConfigBuilder>
+        {
+            public DeleteSteamIAPConfigBuilder() : base() { }
+
+            public DeleteSteamIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteSteamIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteSteamIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteSteamIAPConfig(IDeleteSteamIAPConfigBuilder builder,
             string namespace_
         )
         {

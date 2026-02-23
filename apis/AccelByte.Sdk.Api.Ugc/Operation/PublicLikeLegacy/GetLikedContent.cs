@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -46,8 +46,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static GetLikedContentBuilder Builder { get => new GetLikedContentBuilder(); }
 
-        public class GetLikedContentBuilder
-            : OperationBuilder<GetLikedContentBuilder>
+        public interface IGetLikedContentBuilder
+        {
+
+            bool? Isofficial { get; }
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            string? Orderby { get; }
+
+            string? Sortby { get; }
+
+            string? Subtype { get; }
+
+            List<string>? Tags { get; }
+
+            string? Type { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetLikedContentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLikedContentBuilder
+            where TImpl : GetLikedContentAbstractBuilder<TImpl>
         {
 
             public bool? Isofficial { get; set; }
@@ -72,66 +100,66 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal GetLikedContentBuilder() { }
+            public GetLikedContentAbstractBuilder() { }
 
-            internal GetLikedContentBuilder(IAccelByteSdk sdk)
+            public GetLikedContentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetLikedContentBuilder SetIsofficial(bool _isofficial)
+            public TImpl SetIsofficial(bool _isofficial)
             {
                 Isofficial = _isofficial;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetOrderby(string _orderby)
+            public TImpl SetOrderby(string _orderby)
             {
                 Orderby = _orderby;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetSortby(string _sortby)
+            public TImpl SetSortby(string _sortby)
             {
                 Sortby = _sortby;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetSubtype(string _subtype)
+            public TImpl SetSubtype(string _subtype)
             {
                 Subtype = _subtype;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLikedContentBuilder SetType(string _type)
+            public TImpl SetType(string _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -146,11 +174,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLikedContentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLikedContent.Response Execute(
+            protected GetLikedContent.Response InternalExecute(
                 string namespace_
             )
             {
@@ -167,7 +195,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLikedContent.Response> ExecuteAsync(
+            protected async Task<GetLikedContent.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -186,7 +214,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private GetLikedContent(GetLikedContentBuilder builder,
+        public class GetLikedContentBuilder : GetLikedContentAbstractBuilder<GetLikedContentBuilder>
+        {
+            public GetLikedContentBuilder() : base() { }
+
+            public GetLikedContentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLikedContent.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetLikedContent.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLikedContent(IGetLikedContentBuilder builder,
             string namespace_
         )
         {
@@ -284,22 +337,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

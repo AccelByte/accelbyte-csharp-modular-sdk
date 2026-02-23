@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static EnableCodeBuilder Builder { get => new EnableCodeBuilder(); }
 
-        public class EnableCodeBuilder
-            : OperationBuilder<EnableCodeBuilder>
+        public interface IEnableCodeBuilder
         {
 
 
 
 
 
-            internal EnableCodeBuilder() { }
+        }
 
-            internal EnableCodeBuilder(IAccelByteSdk sdk)
+        public abstract class EnableCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IEnableCodeBuilder
+            where TImpl : EnableCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public EnableCodeAbstractBuilder() { }
+
+            public EnableCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<EnableCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public EnableCode.Response Execute(
+            protected EnableCode.Response InternalExecute(
                 string code,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<EnableCode.Response> ExecuteAsync(
+            protected async Task<EnableCode.Response> InternalExecuteAsync(
                 string code,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private EnableCode(EnableCodeBuilder builder,
+        public class EnableCodeBuilder : EnableCodeAbstractBuilder<EnableCodeBuilder>
+        {
+            public EnableCodeBuilder() : base() { }
+
+            public EnableCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public EnableCode.Response Execute(
+                string code,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    code,
+                    namespace_
+                );
+            }
+            public async Task<EnableCode.Response> ExecuteAsync(
+                string code,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    namespace_
+                );
+            }
+        }
+
+
+        public EnableCode(IEnableCodeBuilder builder,
             string code,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

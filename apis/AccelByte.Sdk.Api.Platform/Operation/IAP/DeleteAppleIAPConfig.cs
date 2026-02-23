@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteAppleIAPConfigBuilder Builder { get => new DeleteAppleIAPConfigBuilder(); }
 
-        public class DeleteAppleIAPConfigBuilder
-            : OperationBuilder<DeleteAppleIAPConfigBuilder>
+        public interface IDeleteAppleIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeleteAppleIAPConfigBuilder() { }
+        }
 
-            internal DeleteAppleIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteAppleIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteAppleIAPConfigBuilder
+            where TImpl : DeleteAppleIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteAppleIAPConfigAbstractBuilder() { }
+
+            public DeleteAppleIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteAppleIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteAppleIAPConfig.Response Execute(
+            protected DeleteAppleIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteAppleIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeleteAppleIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteAppleIAPConfig(DeleteAppleIAPConfigBuilder builder,
+        public class DeleteAppleIAPConfigBuilder : DeleteAppleIAPConfigAbstractBuilder<DeleteAppleIAPConfigBuilder>
+        {
+            public DeleteAppleIAPConfigBuilder() : base() { }
+
+            public DeleteAppleIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteAppleIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteAppleIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteAppleIAPConfig(IDeleteAppleIAPConfigBuilder builder,
             string namespace_
         )
         {

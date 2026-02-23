@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static UpdateGroupCustomAttributesPublicV1Builder Builder { get => new UpdateGroupCustomAttributesPublicV1Builder(); }
 
-        public class UpdateGroupCustomAttributesPublicV1Builder
-            : OperationBuilder<UpdateGroupCustomAttributesPublicV1Builder>
+        public interface IUpdateGroupCustomAttributesPublicV1Builder
         {
 
 
 
 
 
-            internal UpdateGroupCustomAttributesPublicV1Builder() { }
+        }
 
-            internal UpdateGroupCustomAttributesPublicV1Builder(IAccelByteSdk sdk)
+        public abstract class UpdateGroupCustomAttributesPublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateGroupCustomAttributesPublicV1Builder
+            where TImpl : UpdateGroupCustomAttributesPublicV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateGroupCustomAttributesPublicV1AbstractBuilder() { }
+
+            public UpdateGroupCustomAttributesPublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateGroupCustomAttributesPublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateGroupCustomAttributesPublicV1.Response Execute(
+            protected UpdateGroupCustomAttributesPublicV1.Response InternalExecute(
                 ModelsUpdateGroupCustomAttributesRequestV1 body,
                 string groupId,
                 string namespace_
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateGroupCustomAttributesPublicV1.Response> ExecuteAsync(
+            protected async Task<UpdateGroupCustomAttributesPublicV1.Response> InternalExecuteAsync(
                 ModelsUpdateGroupCustomAttributesRequestV1 body,
                 string groupId,
                 string namespace_
@@ -115,7 +125,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.Payload);
             }
 
-            public UpdateGroupCustomAttributesPublicV1.Response<T1> Execute<T1>(
+            protected UpdateGroupCustomAttributesPublicV1.Response<T1> InternalExecute<T1>(
                 ModelsUpdateGroupCustomAttributesRequestV1 body,
                 string groupId,
                 string namespace_
@@ -136,7 +146,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateGroupCustomAttributesPublicV1.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<UpdateGroupCustomAttributesPublicV1.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsUpdateGroupCustomAttributesRequestV1 body,
                 string groupId,
                 string namespace_
@@ -159,7 +169,65 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private UpdateGroupCustomAttributesPublicV1(UpdateGroupCustomAttributesPublicV1Builder builder,
+        public class UpdateGroupCustomAttributesPublicV1Builder : UpdateGroupCustomAttributesPublicV1AbstractBuilder<UpdateGroupCustomAttributesPublicV1Builder>
+        {
+            public UpdateGroupCustomAttributesPublicV1Builder() : base() { }
+
+            public UpdateGroupCustomAttributesPublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateGroupCustomAttributesPublicV1.Response Execute(
+                ModelsUpdateGroupCustomAttributesRequestV1 body,
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<UpdateGroupCustomAttributesPublicV1.Response> ExecuteAsync(
+                ModelsUpdateGroupCustomAttributesRequestV1 body,
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    groupId,
+                    namespace_
+                );
+            }
+
+            public UpdateGroupCustomAttributesPublicV1.Response<T1> Execute<T1>(
+                ModelsUpdateGroupCustomAttributesRequestV1 body,
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<UpdateGroupCustomAttributesPublicV1.Response<T1>> ExecuteAsync<T1>(
+                ModelsUpdateGroupCustomAttributesRequestV1 body,
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateGroupCustomAttributesPublicV1(IUpdateGroupCustomAttributesPublicV1Builder builder,
             ModelsUpdateGroupCustomAttributesRequestV1 body,
             string groupId,
             string namespace_
@@ -255,32 +323,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -301,32 +375,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

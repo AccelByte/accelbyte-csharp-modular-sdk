@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetMyRedirectionAfterLinkV3Builder Builder { get => new PublicGetMyRedirectionAfterLinkV3Builder(); }
 
-        public class PublicGetMyRedirectionAfterLinkV3Builder
-            : OperationBuilder<PublicGetMyRedirectionAfterLinkV3Builder>
+        public interface IPublicGetMyRedirectionAfterLinkV3Builder
         {
 
 
 
 
 
-            internal PublicGetMyRedirectionAfterLinkV3Builder() { }
+        }
 
-            internal PublicGetMyRedirectionAfterLinkV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetMyRedirectionAfterLinkV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetMyRedirectionAfterLinkV3Builder
+            where TImpl : PublicGetMyRedirectionAfterLinkV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetMyRedirectionAfterLinkV3AbstractBuilder() { }
+
+            public PublicGetMyRedirectionAfterLinkV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     oneTimeLinkCode                    
                 );
 
-                op.SetBaseFields<PublicGetMyRedirectionAfterLinkV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetMyRedirectionAfterLinkV3.Response Execute(
+            protected PublicGetMyRedirectionAfterLinkV3.Response InternalExecute(
                 string oneTimeLinkCode
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetMyRedirectionAfterLinkV3.Response> ExecuteAsync(
+            protected async Task<PublicGetMyRedirectionAfterLinkV3.Response> InternalExecuteAsync(
                 string oneTimeLinkCode
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetMyRedirectionAfterLinkV3(PublicGetMyRedirectionAfterLinkV3Builder builder,
+        public class PublicGetMyRedirectionAfterLinkV3Builder : PublicGetMyRedirectionAfterLinkV3AbstractBuilder<PublicGetMyRedirectionAfterLinkV3Builder>
+        {
+            public PublicGetMyRedirectionAfterLinkV3Builder() : base() { }
+
+            public PublicGetMyRedirectionAfterLinkV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetMyRedirectionAfterLinkV3.Response Execute(
+                string oneTimeLinkCode
+            )
+            {
+                return InternalExecute(
+                    oneTimeLinkCode
+                );
+            }
+            public async Task<PublicGetMyRedirectionAfterLinkV3.Response> ExecuteAsync(
+                string oneTimeLinkCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    oneTimeLinkCode
+                );
+            }
+        }
+
+
+        public PublicGetMyRedirectionAfterLinkV3(IPublicGetMyRedirectionAfterLinkV3Builder builder,
             string oneTimeLinkCode
         )
         {
@@ -167,22 +202,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelOneTimeCodeLinkRedirectionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelOneTimeCodeLinkRedirectionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

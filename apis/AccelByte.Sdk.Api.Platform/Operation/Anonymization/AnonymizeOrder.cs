@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizeOrderBuilder Builder { get => new AnonymizeOrderBuilder(); }
 
-        public class AnonymizeOrderBuilder
-            : OperationBuilder<AnonymizeOrderBuilder>
+        public interface IAnonymizeOrderBuilder
         {
 
 
 
 
 
-            internal AnonymizeOrderBuilder() { }
+        }
 
-            internal AnonymizeOrderBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeOrderBuilder
+            where TImpl : AnonymizeOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeOrderAbstractBuilder() { }
+
+            public AnonymizeOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeOrder.Response Execute(
+            protected AnonymizeOrder.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeOrder.Response> ExecuteAsync(
+            protected async Task<AnonymizeOrder.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizeOrder(AnonymizeOrderBuilder builder,
+        public class AnonymizeOrderBuilder : AnonymizeOrderAbstractBuilder<AnonymizeOrderBuilder>
+        {
+            public AnonymizeOrderBuilder() : base() { }
+
+            public AnonymizeOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeOrder.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeOrder.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeOrder(IAnonymizeOrderBuilder builder,
             string namespace_,
             string userId
         )

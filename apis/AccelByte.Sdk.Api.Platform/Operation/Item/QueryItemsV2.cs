@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryItemsV2Builder Builder { get => new QueryItemsV2Builder(); }
 
-        public class QueryItemsV2Builder
-            : OperationBuilder<QueryItemsV2Builder>
+        public interface IQueryItemsV2Builder
+        {
+
+            QueryItemsV2AppType? AppType { get; }
+
+            string? AvailableDate { get; }
+
+            string? BaseAppId { get; }
+
+            string? CategoryPath { get; }
+
+            string? Features { get; }
+
+            bool? IncludeSubCategoryItem { get; }
+
+            string? ItemName { get; }
+
+            QueryItemsV2ItemStatus? ItemStatus { get; }
+
+            List<QueryItemsV2ItemType>? ItemType { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Region { get; }
+
+            bool? SectionExclusive { get; }
+
+            List<QueryItemsV2SortBy>? SortBy { get; }
+
+            string? StoreId { get; }
+
+            string? Tags { get; }
+
+            string? TargetNamespace { get; }
+
+            bool? WithTotal { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryItemsV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryItemsV2Builder
+            where TImpl : QueryItemsV2AbstractBuilder<TImpl>
         {
 
             public QueryItemsV2AppType? AppType { get; set; }
@@ -82,120 +128,120 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryItemsV2Builder() { }
+            public QueryItemsV2AbstractBuilder() { }
 
-            internal QueryItemsV2Builder(IAccelByteSdk sdk)
+            public QueryItemsV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryItemsV2Builder SetAppType(QueryItemsV2AppType _appType)
+            public TImpl SetAppType(QueryItemsV2AppType _appType)
             {
                 AppType = _appType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetAvailableDate(string _availableDate)
+            public TImpl SetAvailableDate(string _availableDate)
             {
                 AvailableDate = _availableDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetBaseAppId(string _baseAppId)
+            public TImpl SetBaseAppId(string _baseAppId)
             {
                 BaseAppId = _baseAppId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetCategoryPath(string _categoryPath)
+            public TImpl SetCategoryPath(string _categoryPath)
             {
                 CategoryPath = _categoryPath;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetFeatures(string _features)
+            public TImpl SetFeatures(string _features)
             {
                 Features = _features;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetIncludeSubCategoryItem(bool _includeSubCategoryItem)
+            public TImpl SetIncludeSubCategoryItem(bool _includeSubCategoryItem)
             {
                 IncludeSubCategoryItem = _includeSubCategoryItem;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetItemName(string _itemName)
+            public TImpl SetItemName(string _itemName)
             {
                 ItemName = _itemName;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetItemStatus(QueryItemsV2ItemStatus _itemStatus)
+            public TImpl SetItemStatus(QueryItemsV2ItemStatus _itemStatus)
             {
                 ItemStatus = _itemStatus;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetItemType(List<QueryItemsV2ItemType> _itemType)
+            public TImpl SetItemType(List<QueryItemsV2ItemType> _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetSectionExclusive(bool _sectionExclusive)
+            public TImpl SetSectionExclusive(bool _sectionExclusive)
             {
                 SectionExclusive = _sectionExclusive;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetSortBy(List<QueryItemsV2SortBy> _sortBy)
+            public TImpl SetSortBy(List<QueryItemsV2SortBy> _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetTargetNamespace(string _targetNamespace)
+            public TImpl SetTargetNamespace(string _targetNamespace)
             {
                 TargetNamespace = _targetNamespace;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemsV2Builder SetWithTotal(bool _withTotal)
+            public TImpl SetWithTotal(bool _withTotal)
             {
                 WithTotal = _withTotal;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -210,11 +256,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryItemsV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryItemsV2.Response Execute(
+            protected QueryItemsV2.Response InternalExecute(
                 string namespace_
             )
             {
@@ -231,7 +277,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryItemsV2.Response> ExecuteAsync(
+            protected async Task<QueryItemsV2.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -250,7 +296,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryItemsV2(QueryItemsV2Builder builder,
+        public class QueryItemsV2Builder : QueryItemsV2AbstractBuilder<QueryItemsV2Builder>
+        {
+            public QueryItemsV2Builder() : base() { }
+
+            public QueryItemsV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryItemsV2.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryItemsV2.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryItemsV2(IQueryItemsV2Builder builder,
             string namespace_
         )
         {
@@ -375,17 +446,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemPagingResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemPagingResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

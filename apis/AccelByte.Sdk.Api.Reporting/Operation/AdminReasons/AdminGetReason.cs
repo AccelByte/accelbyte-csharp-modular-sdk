@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static AdminGetReasonBuilder Builder { get => new AdminGetReasonBuilder(); }
 
-        public class AdminGetReasonBuilder
-            : OperationBuilder<AdminGetReasonBuilder>
+        public interface IAdminGetReasonBuilder
         {
 
 
 
 
 
-            internal AdminGetReasonBuilder() { }
+        }
 
-            internal AdminGetReasonBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetReasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetReasonBuilder
+            where TImpl : AdminGetReasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetReasonAbstractBuilder() { }
+
+            public AdminGetReasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     reasonId                    
                 );
 
-                op.SetBaseFields<AdminGetReasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetReason.Response Execute(
+            protected AdminGetReason.Response InternalExecute(
                 string namespace_,
                 string reasonId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetReason.Response> ExecuteAsync(
+            protected async Task<AdminGetReason.Response> InternalExecuteAsync(
                 string namespace_,
                 string reasonId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private AdminGetReason(AdminGetReasonBuilder builder,
+        public class AdminGetReasonBuilder : AdminGetReasonAbstractBuilder<AdminGetReasonBuilder>
+        {
+            public AdminGetReasonBuilder() : base() { }
+
+            public AdminGetReasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetReason.Response Execute(
+                string namespace_,
+                string reasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    reasonId
+                );
+            }
+            public async Task<AdminGetReason.Response> ExecuteAsync(
+                string namespace_,
+                string reasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    reasonId
+                );
+            }
+        }
+
+
+        public AdminGetReason(IAdminGetReasonBuilder builder,
             string namespace_,
             string reasonId
         )
@@ -175,17 +214,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiAdminReasonResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiAdminReasonResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

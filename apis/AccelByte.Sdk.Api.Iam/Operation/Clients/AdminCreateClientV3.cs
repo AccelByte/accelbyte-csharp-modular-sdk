@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -68,17 +68,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminCreateClientV3Builder Builder { get => new AdminCreateClientV3Builder(); }
 
-        public class AdminCreateClientV3Builder
-            : OperationBuilder<AdminCreateClientV3Builder>
+        public interface IAdminCreateClientV3Builder
         {
 
 
 
 
 
-            internal AdminCreateClientV3Builder() { }
+        }
 
-            internal AdminCreateClientV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminCreateClientV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateClientV3Builder
+            where TImpl : AdminCreateClientV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateClientV3AbstractBuilder() { }
+
+            public AdminCreateClientV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -98,11 +108,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateClientV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateClientV3.Response Execute(
+            protected AdminCreateClientV3.Response InternalExecute(
                 ClientmodelClientCreationV3Request body,
                 string namespace_
             )
@@ -121,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateClientV3.Response> ExecuteAsync(
+            protected async Task<AdminCreateClientV3.Response> InternalExecuteAsync(
                 ClientmodelClientCreationV3Request body,
                 string namespace_
             )
@@ -142,7 +152,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminCreateClientV3(AdminCreateClientV3Builder builder,
+        public class AdminCreateClientV3Builder : AdminCreateClientV3AbstractBuilder<AdminCreateClientV3Builder>
+        {
+            public AdminCreateClientV3Builder() : base() { }
+
+            public AdminCreateClientV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateClientV3.Response Execute(
+                ClientmodelClientCreationV3Request body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateClientV3.Response> ExecuteAsync(
+                ClientmodelClientCreationV3Request body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateClientV3(IAdminCreateClientV3Builder builder,
             ClientmodelClientCreationV3Request body,
             string namespace_
         )
@@ -217,27 +256,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientV3Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientV3Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

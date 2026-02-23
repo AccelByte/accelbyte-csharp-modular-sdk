@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static GetUserRankingPublicV1Builder Builder { get => new GetUserRankingPublicV1Builder(); }
 
-        public class GetUserRankingPublicV1Builder
-            : OperationBuilder<GetUserRankingPublicV1Builder>
+        public interface IGetUserRankingPublicV1Builder
+        {
+
+            long? PreviousVersion { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserRankingPublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserRankingPublicV1Builder
+            where TImpl : GetUserRankingPublicV1AbstractBuilder<TImpl>
         {
 
             public long? PreviousVersion { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
 
 
-            internal GetUserRankingPublicV1Builder() { }
+            public GetUserRankingPublicV1AbstractBuilder() { }
 
-            internal GetUserRankingPublicV1Builder(IAccelByteSdk sdk)
+            public GetUserRankingPublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserRankingPublicV1Builder SetPreviousVersion(long _previousVersion)
+            public TImpl SetPreviousVersion(long _previousVersion)
             {
                 PreviousVersion = _previousVersion;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserRankingPublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserRankingPublicV1.Response Execute(
+            protected GetUserRankingPublicV1.Response InternalExecute(
                 string leaderboardCode,
                 string namespace_,
                 string userId
@@ -97,7 +109,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserRankingPublicV1.Response> ExecuteAsync(
+            protected async Task<GetUserRankingPublicV1.Response> InternalExecuteAsync(
                 string leaderboardCode,
                 string namespace_,
                 string userId
@@ -120,7 +132,40 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private GetUserRankingPublicV1(GetUserRankingPublicV1Builder builder,
+        public class GetUserRankingPublicV1Builder : GetUserRankingPublicV1AbstractBuilder<GetUserRankingPublicV1Builder>
+        {
+            public GetUserRankingPublicV1Builder() : base() { }
+
+            public GetUserRankingPublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserRankingPublicV1.Response Execute(
+                string leaderboardCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    leaderboardCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserRankingPublicV1.Response> ExecuteAsync(
+                string leaderboardCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    leaderboardCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserRankingPublicV1(IGetUserRankingPublicV1Builder builder,
             string leaderboardCode,
             string namespace_,
             string userId
@@ -202,27 +247,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUserRankingResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUserRankingResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AdminSyncOculusSubscriptionsBuilder Builder { get => new AdminSyncOculusSubscriptionsBuilder(); }
 
-        public class AdminSyncOculusSubscriptionsBuilder
-            : OperationBuilder<AdminSyncOculusSubscriptionsBuilder>
+        public interface IAdminSyncOculusSubscriptionsBuilder
+        {
+
+
+            Model.OculusSubscriptionSyncRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class AdminSyncOculusSubscriptionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSyncOculusSubscriptionsBuilder
+            where TImpl : AdminSyncOculusSubscriptionsAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal AdminSyncOculusSubscriptionsBuilder() { }
+            public AdminSyncOculusSubscriptionsAbstractBuilder() { }
 
-            internal AdminSyncOculusSubscriptionsBuilder(IAccelByteSdk sdk)
+            public AdminSyncOculusSubscriptionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public AdminSyncOculusSubscriptionsBuilder SetBody(Model.OculusSubscriptionSyncRequest _body)
+            public TImpl SetBody(Model.OculusSubscriptionSyncRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminSyncOculusSubscriptionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSyncOculusSubscriptions.Response Execute(
+            protected AdminSyncOculusSubscriptions.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSyncOculusSubscriptions.Response> ExecuteAsync(
+            protected async Task<AdminSyncOculusSubscriptions.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AdminSyncOculusSubscriptions(AdminSyncOculusSubscriptionsBuilder builder,
+        public class AdminSyncOculusSubscriptionsBuilder : AdminSyncOculusSubscriptionsAbstractBuilder<AdminSyncOculusSubscriptionsBuilder>
+        {
+            public AdminSyncOculusSubscriptionsBuilder() : base() { }
+
+            public AdminSyncOculusSubscriptionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSyncOculusSubscriptions.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminSyncOculusSubscriptions.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminSyncOculusSubscriptions(IAdminSyncOculusSubscriptionsBuilder builder,
             string namespace_,
             string userId
         )
@@ -186,17 +227,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ThirdPartySubscriptionTransactionInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ThirdPartySubscriptionTransactionInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

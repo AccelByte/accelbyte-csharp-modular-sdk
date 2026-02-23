@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetProfileUpdateStrategyV3Builder Builder { get => new PublicGetProfileUpdateStrategyV3Builder(); }
 
-        public class PublicGetProfileUpdateStrategyV3Builder
-            : OperationBuilder<PublicGetProfileUpdateStrategyV3Builder>
+        public interface IPublicGetProfileUpdateStrategyV3Builder
+        {
+
+            PublicGetProfileUpdateStrategyV3Field? Field { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetProfileUpdateStrategyV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetProfileUpdateStrategyV3Builder
+            where TImpl : PublicGetProfileUpdateStrategyV3AbstractBuilder<TImpl>
         {
 
             public PublicGetProfileUpdateStrategyV3Field? Field { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicGetProfileUpdateStrategyV3Builder() { }
+            public PublicGetProfileUpdateStrategyV3AbstractBuilder() { }
 
-            internal PublicGetProfileUpdateStrategyV3Builder(IAccelByteSdk sdk)
+            public PublicGetProfileUpdateStrategyV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetProfileUpdateStrategyV3Builder SetField(PublicGetProfileUpdateStrategyV3Field _field)
+            public TImpl SetField(PublicGetProfileUpdateStrategyV3Field _field)
             {
                 Field = _field;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -67,11 +79,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetProfileUpdateStrategyV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetProfileUpdateStrategyV3.Response Execute(
+            protected PublicGetProfileUpdateStrategyV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -88,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetProfileUpdateStrategyV3.Response> ExecuteAsync(
+            protected async Task<PublicGetProfileUpdateStrategyV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -107,7 +119,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetProfileUpdateStrategyV3(PublicGetProfileUpdateStrategyV3Builder builder,
+        public class PublicGetProfileUpdateStrategyV3Builder : PublicGetProfileUpdateStrategyV3AbstractBuilder<PublicGetProfileUpdateStrategyV3Builder>
+        {
+            public PublicGetProfileUpdateStrategyV3Builder() : base() { }
+
+            public PublicGetProfileUpdateStrategyV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetProfileUpdateStrategyV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetProfileUpdateStrategyV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetProfileUpdateStrategyV3(IPublicGetProfileUpdateStrategyV3Builder builder,
             string namespace_
         )
         {
@@ -181,27 +218,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetProfileUpdateStrategyConfigResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetProfileUpdateStrategyConfigResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

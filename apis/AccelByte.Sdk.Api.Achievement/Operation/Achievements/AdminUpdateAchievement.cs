@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static AdminUpdateAchievementBuilder Builder { get => new AdminUpdateAchievementBuilder(); }
 
-        public class AdminUpdateAchievementBuilder
-            : OperationBuilder<AdminUpdateAchievementBuilder>
+        public interface IAdminUpdateAchievementBuilder
         {
 
 
 
 
 
-            internal AdminUpdateAchievementBuilder() { }
+        }
 
-            internal AdminUpdateAchievementBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateAchievementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateAchievementBuilder
+            where TImpl : AdminUpdateAchievementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateAchievementAbstractBuilder() { }
+
+            public AdminUpdateAchievementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateAchievementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateAchievement.Response Execute(
+            protected AdminUpdateAchievement.Response InternalExecute(
                 ModelsAchievementUpdateRequest body,
                 string achievementCode,
                 string namespace_
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateAchievement.Response> ExecuteAsync(
+            protected async Task<AdminUpdateAchievement.Response> InternalExecuteAsync(
                 ModelsAchievementUpdateRequest body,
                 string achievementCode,
                 string namespace_
@@ -112,7 +122,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.Payload);
             }
 
-            public AdminUpdateAchievement.Response<T1> Execute<T1>(
+            protected AdminUpdateAchievement.Response<T1> InternalExecute<T1>(
                 ModelsAchievementUpdateRequest body,
                 string achievementCode,
                 string namespace_
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateAchievement.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminUpdateAchievement.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsAchievementUpdateRequest body,
                 string achievementCode,
                 string namespace_
@@ -156,7 +166,65 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private AdminUpdateAchievement(AdminUpdateAchievementBuilder builder,
+        public class AdminUpdateAchievementBuilder : AdminUpdateAchievementAbstractBuilder<AdminUpdateAchievementBuilder>
+        {
+            public AdminUpdateAchievementBuilder() : base() { }
+
+            public AdminUpdateAchievementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateAchievement.Response Execute(
+                ModelsAchievementUpdateRequest body,
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    achievementCode,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateAchievement.Response> ExecuteAsync(
+                ModelsAchievementUpdateRequest body,
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    achievementCode,
+                    namespace_
+                );
+            }
+
+            public AdminUpdateAchievement.Response<T1> Execute<T1>(
+                ModelsAchievementUpdateRequest body,
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    achievementCode,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateAchievement.Response<T1>> ExecuteAsync<T1>(
+                ModelsAchievementUpdateRequest body,
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    achievementCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateAchievement(IAdminUpdateAchievementBuilder builder,
             ModelsAchievementUpdateRequest body,
             string achievementCode,
             string namespace_
@@ -248,27 +316,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsAchievementResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsAchievementResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -289,27 +362,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsAchievementResponse<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsAchievementResponse<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

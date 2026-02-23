@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -43,8 +43,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicWebLinkPlatformBuilder Builder { get => new PublicWebLinkPlatformBuilder(); }
 
-        public class PublicWebLinkPlatformBuilder
-            : OperationBuilder<PublicWebLinkPlatformBuilder>
+        public interface IPublicWebLinkPlatformBuilder
+        {
+
+            string? ClientId { get; }
+
+            string? RedirectUri { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicWebLinkPlatformAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicWebLinkPlatformBuilder
+            where TImpl : PublicWebLinkPlatformAbstractBuilder<TImpl>
         {
 
             public string? ClientId { get; set; }
@@ -55,24 +69,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicWebLinkPlatformBuilder() { }
+            public PublicWebLinkPlatformAbstractBuilder() { }
 
-            internal PublicWebLinkPlatformBuilder(IAccelByteSdk sdk)
+            public PublicWebLinkPlatformAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicWebLinkPlatformBuilder SetClientId(string _clientId)
+            public TImpl SetClientId(string _clientId)
             {
                 ClientId = _clientId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicWebLinkPlatformBuilder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -89,11 +103,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<PublicWebLinkPlatformBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicWebLinkPlatform.Response Execute(
+            protected PublicWebLinkPlatform.Response InternalExecute(
                 string namespace_,
                 string platformId
             )
@@ -112,7 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicWebLinkPlatform.Response> ExecuteAsync(
+            protected async Task<PublicWebLinkPlatform.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId
             )
@@ -133,7 +147,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicWebLinkPlatform(PublicWebLinkPlatformBuilder builder,
+        public class PublicWebLinkPlatformBuilder : PublicWebLinkPlatformAbstractBuilder<PublicWebLinkPlatformBuilder>
+        {
+            public PublicWebLinkPlatformBuilder() : base() { }
+
+            public PublicWebLinkPlatformBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicWebLinkPlatform.Response Execute(
+                string namespace_,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId
+                );
+            }
+            public async Task<PublicWebLinkPlatform.Response> ExecuteAsync(
+                string namespace_,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId
+                );
+            }
+        }
+
+
+        public PublicWebLinkPlatform(IPublicWebLinkPlatformBuilder builder,
             string namespace_,
             string platformId
         )
@@ -212,22 +255,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelWebLinkingResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelWebLinkingResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

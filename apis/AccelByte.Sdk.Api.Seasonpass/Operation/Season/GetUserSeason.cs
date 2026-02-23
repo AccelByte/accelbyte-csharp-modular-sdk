@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static GetUserSeasonBuilder Builder { get => new GetUserSeasonBuilder(); }
 
-        public class GetUserSeasonBuilder
-            : OperationBuilder<GetUserSeasonBuilder>
+        public interface IGetUserSeasonBuilder
         {
 
 
 
 
 
-            internal GetUserSeasonBuilder() { }
+        }
 
-            internal GetUserSeasonBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserSeasonBuilder
+            where TImpl : GetUserSeasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserSeasonAbstractBuilder() { }
+
+            public GetUserSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserSeason.Response Execute(
+            protected GetUserSeason.Response InternalExecute(
                 string namespace_,
                 string seasonId,
                 string userId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserSeason.Response> ExecuteAsync(
+            protected async Task<GetUserSeason.Response> InternalExecuteAsync(
                 string namespace_,
                 string seasonId,
                 string userId
@@ -113,7 +123,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.Payload);
             }
 
-            public GetUserSeason.Response<T1, T2> Execute<T1, T2>(
+            protected GetUserSeason.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_,
                 string seasonId,
                 string userId
@@ -134,7 +144,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserSeason.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<GetUserSeason.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_,
                 string seasonId,
                 string userId
@@ -157,7 +167,65 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private GetUserSeason(GetUserSeasonBuilder builder,
+        public class GetUserSeasonBuilder : GetUserSeasonAbstractBuilder<GetUserSeasonBuilder>
+        {
+            public GetUserSeasonBuilder() : base() { }
+
+            public GetUserSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserSeason.Response Execute(
+                string namespace_,
+                string seasonId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    seasonId,
+                    userId
+                );
+            }
+            public async Task<GetUserSeason.Response> ExecuteAsync(
+                string namespace_,
+                string seasonId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    seasonId,
+                    userId
+                );
+            }
+
+            public GetUserSeason.Response<T1, T2> Execute<T1, T2>(
+                string namespace_,
+                string seasonId,
+                string userId
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_,
+                    seasonId,
+                    userId
+                );
+            }
+            public async Task<GetUserSeason.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_,
+                string seasonId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_,
+                    seasonId,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserSeason(IGetUserSeasonBuilder builder,
             string namespace_,
             string seasonId,
             string userId
@@ -241,17 +309,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClaimableUserSeasonInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClaimableUserSeasonInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -272,17 +343,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClaimableUserSeasonInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClaimableUserSeasonInfo<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

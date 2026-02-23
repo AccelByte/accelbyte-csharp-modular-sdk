@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,28 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicCreateUserNamespaceSlotBuilder Builder { get => new PublicCreateUserNamespaceSlotBuilder(); }
 
-        public class PublicCreateUserNamespaceSlotBuilder
-            : OperationBuilder<PublicCreateUserNamespaceSlotBuilder>
+        public interface IPublicCreateUserNamespaceSlotBuilder
+        {
+
+            string? Label { get; }
+
+            List<string>? Tags { get; }
+
+
+
+            string? Checksum { get; }
+
+            string? CustomAttribute { get; }
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class PublicCreateUserNamespaceSlotAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCreateUserNamespaceSlotBuilder
+            where TImpl : PublicCreateUserNamespaceSlotAbstractBuilder<TImpl>
         {
 
             public string? Label { get; set; }
@@ -56,44 +76,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal PublicCreateUserNamespaceSlotBuilder() { }
+            public PublicCreateUserNamespaceSlotAbstractBuilder() { }
 
-            internal PublicCreateUserNamespaceSlotBuilder(IAccelByteSdk sdk)
+            public PublicCreateUserNamespaceSlotAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicCreateUserNamespaceSlotBuilder SetLabel(string _label)
+            public TImpl SetLabel(string _label)
             {
                 Label = _label;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicCreateUserNamespaceSlotBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
 
-            public PublicCreateUserNamespaceSlotBuilder SetChecksum(string _checksum)
+            public TImpl SetChecksum(string _checksum)
             {
                 Checksum = _checksum;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicCreateUserNamespaceSlotBuilder SetCustomAttribute(string _customAttribute)
+            public TImpl SetCustomAttribute(string _customAttribute)
             {
                 CustomAttribute = _customAttribute;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicCreateUserNamespaceSlotBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -108,12 +128,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicCreateUserNamespaceSlotBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicCreateUserNamespaceSlot.Response Execute(
+            protected PublicCreateUserNamespaceSlot.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -132,7 +152,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCreateUserNamespaceSlot.Response> ExecuteAsync(
+            protected async Task<PublicCreateUserNamespaceSlot.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -153,7 +173,37 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicCreateUserNamespaceSlot(PublicCreateUserNamespaceSlotBuilder builder,
+        public class PublicCreateUserNamespaceSlotBuilder : PublicCreateUserNamespaceSlotAbstractBuilder<PublicCreateUserNamespaceSlotBuilder>
+        {
+            public PublicCreateUserNamespaceSlotBuilder() : base() { }
+
+            public PublicCreateUserNamespaceSlotBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicCreateUserNamespaceSlot.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicCreateUserNamespaceSlot.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicCreateUserNamespaceSlot(IPublicCreateUserNamespaceSlotBuilder builder,
             string namespace_,
             string userId
         )
@@ -242,12 +292,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

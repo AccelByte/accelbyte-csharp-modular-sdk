@@ -15,7 +15,7 @@ namespace AccelByte.Sdk.Api.Leaderboard
     {
         private IAccelByteSdk _Sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public Wrapper.LeaderboardConfiguration LeaderboardConfiguration
         {

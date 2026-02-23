@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static FleetServerHistoryBuilder Builder { get => new FleetServerHistoryBuilder(); }
 
-        public class FleetServerHistoryBuilder
-            : OperationBuilder<FleetServerHistoryBuilder>
+        public interface IFleetServerHistoryBuilder
+        {
+
+            long? Count { get; }
+
+            long? Offset { get; }
+
+            string? Reason { get; }
+
+            string? Region { get; }
+
+            string? ServerId { get; }
+
+            string? SortDirection { get; }
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class FleetServerHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IFleetServerHistoryBuilder
+            where TImpl : FleetServerHistoryAbstractBuilder<TImpl>
         {
 
             public long? Count { get; set; }
@@ -52,54 +76,54 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal FleetServerHistoryBuilder() { }
+            public FleetServerHistoryAbstractBuilder() { }
 
-            internal FleetServerHistoryBuilder(IAccelByteSdk sdk)
+            public FleetServerHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public FleetServerHistoryBuilder SetCount(long _count)
+            public TImpl SetCount(long _count)
             {
                 Count = _count;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetServerHistoryBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetServerHistoryBuilder SetReason(string _reason)
+            public TImpl SetReason(string _reason)
             {
                 Reason = _reason;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetServerHistoryBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetServerHistoryBuilder SetServerId(string _serverId)
+            public TImpl SetServerId(string _serverId)
             {
                 ServerId = _serverId;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetServerHistoryBuilder SetSortDirection(string _sortDirection)
+            public TImpl SetSortDirection(string _sortDirection)
             {
                 SortDirection = _sortDirection;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetServerHistoryBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -116,11 +140,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<FleetServerHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public FleetServerHistory.Response Execute(
+            protected FleetServerHistory.Response InternalExecute(
                 string fleetID,
                 string namespace_
             )
@@ -139,7 +163,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<FleetServerHistory.Response> ExecuteAsync(
+            protected async Task<FleetServerHistory.Response> InternalExecuteAsync(
                 string fleetID,
                 string namespace_
             )
@@ -160,7 +184,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private FleetServerHistory(FleetServerHistoryBuilder builder,
+        public class FleetServerHistoryBuilder : FleetServerHistoryAbstractBuilder<FleetServerHistoryBuilder>
+        {
+            public FleetServerHistoryBuilder() : base() { }
+
+            public FleetServerHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public FleetServerHistory.Response Execute(
+                string fleetID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    fleetID,
+                    namespace_
+                );
+            }
+            public async Task<FleetServerHistory.Response> ExecuteAsync(
+                string fleetID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    fleetID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public FleetServerHistory(IFleetServerHistoryBuilder builder,
             string fleetID,
             string namespace_
         )
@@ -256,27 +309,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiDSHistoryList>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiDSHistoryList>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

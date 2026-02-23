@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetItemTypeConfigBuilder Builder { get => new GetItemTypeConfigBuilder(); }
 
-        public class GetItemTypeConfigBuilder
-            : OperationBuilder<GetItemTypeConfigBuilder>
+        public interface IGetItemTypeConfigBuilder
         {
 
 
 
 
 
-            internal GetItemTypeConfigBuilder() { }
+        }
 
-            internal GetItemTypeConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetItemTypeConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetItemTypeConfigBuilder
+            where TImpl : GetItemTypeConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetItemTypeConfigAbstractBuilder() { }
+
+            public GetItemTypeConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<GetItemTypeConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetItemTypeConfig.Response Execute(
+            protected GetItemTypeConfig.Response InternalExecute(
                 string id
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItemTypeConfig.Response> ExecuteAsync(
+            protected async Task<GetItemTypeConfig.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetItemTypeConfig(GetItemTypeConfigBuilder builder,
+        public class GetItemTypeConfigBuilder : GetItemTypeConfigAbstractBuilder<GetItemTypeConfigBuilder>
+        {
+            public GetItemTypeConfigBuilder() : base() { }
+
+            public GetItemTypeConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetItemTypeConfig.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<GetItemTypeConfig.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public GetItemTypeConfig(IGetItemTypeConfigBuilder builder,
             string id
         )
         {
@@ -167,12 +202,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

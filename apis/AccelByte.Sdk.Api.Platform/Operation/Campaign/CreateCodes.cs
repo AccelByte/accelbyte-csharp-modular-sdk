@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CreateCodesBuilder Builder { get => new CreateCodesBuilder(); }
 
-        public class CreateCodesBuilder
-            : OperationBuilder<CreateCodesBuilder>
+        public interface ICreateCodesBuilder
         {
 
 
 
 
 
-            internal CreateCodesBuilder() { }
+        }
 
-            internal CreateCodesBuilder(IAccelByteSdk sdk)
+        public abstract class CreateCodesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateCodesBuilder
+            where TImpl : CreateCodesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateCodesAbstractBuilder() { }
+
+            public CreateCodesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateCodesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateCodes.Response Execute(
+            protected CreateCodes.Response InternalExecute(
                 CodeCreate body,
                 string campaignId,
                 string namespace_
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateCodes.Response> ExecuteAsync(
+            protected async Task<CreateCodes.Response> InternalExecuteAsync(
                 CodeCreate body,
                 string campaignId,
                 string namespace_
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CreateCodes(CreateCodesBuilder builder,
+        public class CreateCodesBuilder : CreateCodesAbstractBuilder<CreateCodesBuilder>
+        {
+            public CreateCodesBuilder() : base() { }
+
+            public CreateCodesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateCodes.Response Execute(
+                CodeCreate body,
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<CreateCodes.Response> ExecuteAsync(
+                CodeCreate body,
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateCodes(ICreateCodesBuilder builder,
             CodeCreate body,
             string campaignId,
             string namespace_
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CodeCreateResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CodeCreateResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

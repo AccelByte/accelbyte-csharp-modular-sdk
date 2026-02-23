@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetCampaignDynamicBuilder Builder { get => new GetCampaignDynamicBuilder(); }
 
-        public class GetCampaignDynamicBuilder
-            : OperationBuilder<GetCampaignDynamicBuilder>
+        public interface IGetCampaignDynamicBuilder
         {
 
 
 
 
 
-            internal GetCampaignDynamicBuilder() { }
+        }
 
-            internal GetCampaignDynamicBuilder(IAccelByteSdk sdk)
+        public abstract class GetCampaignDynamicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCampaignDynamicBuilder
+            where TImpl : GetCampaignDynamicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetCampaignDynamicAbstractBuilder() { }
+
+            public GetCampaignDynamicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCampaignDynamicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCampaignDynamic.Response Execute(
+            protected GetCampaignDynamic.Response InternalExecute(
                 string campaignId,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCampaignDynamic.Response> ExecuteAsync(
+            protected async Task<GetCampaignDynamic.Response> InternalExecuteAsync(
                 string campaignId,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetCampaignDynamic(GetCampaignDynamicBuilder builder,
+        public class GetCampaignDynamicBuilder : GetCampaignDynamicAbstractBuilder<GetCampaignDynamicBuilder>
+        {
+            public GetCampaignDynamicBuilder() : base() { }
+
+            public GetCampaignDynamicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCampaignDynamic.Response Execute(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<GetCampaignDynamic.Response> ExecuteAsync(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCampaignDynamic(IGetCampaignDynamicBuilder builder,
             string campaignId,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CampaignDynamicInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CampaignDynamicInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

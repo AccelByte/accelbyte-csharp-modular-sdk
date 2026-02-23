@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminDeleteItemTypeBuilder Builder { get => new AdminDeleteItemTypeBuilder(); }
 
-        public class AdminDeleteItemTypeBuilder
-            : OperationBuilder<AdminDeleteItemTypeBuilder>
+        public interface IAdminDeleteItemTypeBuilder
         {
 
 
 
 
 
-            internal AdminDeleteItemTypeBuilder() { }
+        }
 
-            internal AdminDeleteItemTypeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteItemTypeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteItemTypeBuilder
+            where TImpl : AdminDeleteItemTypeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteItemTypeAbstractBuilder() { }
+
+            public AdminDeleteItemTypeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteItemTypeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteItemType.Response Execute(
+            protected AdminDeleteItemType.Response InternalExecute(
                 string itemTypeName,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteItemType.Response> ExecuteAsync(
+            protected async Task<AdminDeleteItemType.Response> InternalExecuteAsync(
                 string itemTypeName,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminDeleteItemType(AdminDeleteItemTypeBuilder builder,
+        public class AdminDeleteItemTypeBuilder : AdminDeleteItemTypeAbstractBuilder<AdminDeleteItemTypeBuilder>
+        {
+            public AdminDeleteItemTypeBuilder() : base() { }
+
+            public AdminDeleteItemTypeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteItemType.Response Execute(
+                string itemTypeName,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemTypeName,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteItemType.Response> ExecuteAsync(
+                string itemTypeName,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemTypeName,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteItemType(IAdminDeleteItemTypeBuilder builder,
             string itemTypeName,
             string namespace_
         )
@@ -180,12 +219,14 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListUserWalletTransactionsBuilder Builder { get => new ListUserWalletTransactionsBuilder(); }
 
-        public class ListUserWalletTransactionsBuilder
-            : OperationBuilder<ListUserWalletTransactionsBuilder>
+        public interface IListUserWalletTransactionsBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListUserWalletTransactionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListUserWalletTransactionsBuilder
+            where TImpl : ListUserWalletTransactionsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListUserWalletTransactionsBuilder() { }
+            public ListUserWalletTransactionsAbstractBuilder() { }
 
-            internal ListUserWalletTransactionsBuilder(IAccelByteSdk sdk)
+            public ListUserWalletTransactionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListUserWalletTransactionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListUserWalletTransactionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,12 +96,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     walletId                    
                 );
 
-                op.SetBaseFields<ListUserWalletTransactionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public ListUserWalletTransactions.Response Execute(
+            protected ListUserWalletTransactions.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string walletId
@@ -108,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListUserWalletTransactions.Response> ExecuteAsync(
+            protected async Task<ListUserWalletTransactions.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string walletId
@@ -131,7 +145,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListUserWalletTransactions(ListUserWalletTransactionsBuilder builder,
+        public class ListUserWalletTransactionsBuilder : ListUserWalletTransactionsAbstractBuilder<ListUserWalletTransactionsBuilder>
+        {
+            public ListUserWalletTransactionsBuilder() : base() { }
+
+            public ListUserWalletTransactionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public ListUserWalletTransactions.Response Execute(
+                string namespace_,
+                string userId,
+                string walletId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    walletId
+                );
+            }
+            public async Task<ListUserWalletTransactions.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string walletId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    walletId
+                );
+            }
+        }
+
+
+        public ListUserWalletTransactions(IListUserWalletTransactionsBuilder builder,
             string namespace_,
             string userId,
             string walletId
@@ -210,12 +258,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DetailedWalletTransactionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DetailedWalletTransactionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

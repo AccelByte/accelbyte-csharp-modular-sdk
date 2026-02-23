@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetClientBuilder Builder { get => new GetClientBuilder(); }
 
-        public class GetClientBuilder
-            : OperationBuilder<GetClientBuilder>
+        public interface IGetClientBuilder
         {
 
 
 
 
 
-            internal GetClientBuilder() { }
+        }
 
-            internal GetClientBuilder(IAccelByteSdk sdk)
+        public abstract class GetClientAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetClientBuilder
+            where TImpl : GetClientAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetClientAbstractBuilder() { }
+
+            public GetClientAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     clientId                    
                 );
 
-                op.SetBaseFields<GetClientBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetClient.Response Execute(
+            protected GetClient.Response InternalExecute(
                 string clientId
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetClient.Response> ExecuteAsync(
+            protected async Task<GetClient.Response> InternalExecuteAsync(
                 string clientId
             )
             {
@@ -102,7 +112,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetClient(GetClientBuilder builder,
+        public class GetClientBuilder : GetClientAbstractBuilder<GetClientBuilder>
+        {
+            public GetClientBuilder() : base() { }
+
+            public GetClientBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetClient.Response Execute(
+                string clientId
+            )
+            {
+                return InternalExecute(
+                    clientId
+                );
+            }
+            public async Task<GetClient.Response> ExecuteAsync(
+                string clientId
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId
+                );
+            }
+        }
+
+
+        public GetClient(IGetClientBuilder builder,
             string clientId
         )
         {
@@ -171,22 +207,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static ChangePreferenceConsentBuilder Builder { get => new ChangePreferenceConsentBuilder(); }
 
-        public class ChangePreferenceConsentBuilder
-            : OperationBuilder<ChangePreferenceConsentBuilder>
+        public interface IChangePreferenceConsentBuilder
+        {
+
+
+            List<Model.AcceptAgreementRequest>? Body { get; }
+
+
+
+
+        }
+
+        public abstract class ChangePreferenceConsentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IChangePreferenceConsentBuilder
+            where TImpl : ChangePreferenceConsentAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal ChangePreferenceConsentBuilder() { }
+            public ChangePreferenceConsentAbstractBuilder() { }
 
-            internal ChangePreferenceConsentBuilder(IAccelByteSdk sdk)
+            public ChangePreferenceConsentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public ChangePreferenceConsentBuilder SetBody(List<Model.AcceptAgreementRequest> _body)
+            public TImpl SetBody(List<Model.AcceptAgreementRequest> _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ChangePreferenceConsentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ChangePreferenceConsent.Response Execute(
+            protected ChangePreferenceConsent.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ChangePreferenceConsent.Response> ExecuteAsync(
+            protected async Task<ChangePreferenceConsent.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private ChangePreferenceConsent(ChangePreferenceConsentBuilder builder,
+        public class ChangePreferenceConsentBuilder : ChangePreferenceConsentAbstractBuilder<ChangePreferenceConsentBuilder>
+        {
+            public ChangePreferenceConsentBuilder() : base() { }
+
+            public ChangePreferenceConsentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ChangePreferenceConsent.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ChangePreferenceConsent.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ChangePreferenceConsent(IChangePreferenceConsentBuilder builder,
             string namespace_,
             string userId
         )
@@ -185,7 +226,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

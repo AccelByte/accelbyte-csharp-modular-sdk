@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static GetTagBuilder Builder { get => new GetTagBuilder(); }
 
-        public class GetTagBuilder
-            : OperationBuilder<GetTagBuilder>
+        public interface IGetTagBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetTagAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTagBuilder
+            where TImpl : GetTagAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal GetTagBuilder() { }
+            public GetTagAbstractBuilder() { }
 
-            internal GetTagBuilder(IAccelByteSdk sdk)
+            public GetTagAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetTagBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTagBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +88,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetTagBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTag.Response Execute(
+            protected GetTag.Response InternalExecute(
                 string namespace_
             )
             {
@@ -95,7 +109,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTag.Response> ExecuteAsync(
+            protected async Task<GetTag.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -114,7 +128,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private GetTag(GetTagBuilder builder,
+        public class GetTagBuilder : GetTagAbstractBuilder<GetTagBuilder>
+        {
+            public GetTagBuilder() : base() { }
+
+            public GetTagBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTag.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetTag.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetTag(IGetTagBuilder builder,
             string namespace_
         )
         {
@@ -189,22 +228,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedGetTagResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedGetTagResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

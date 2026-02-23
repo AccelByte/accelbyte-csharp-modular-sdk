@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -56,8 +56,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminSearchUserV3Builder Builder { get => new AdminSearchUserV3Builder(); }
 
-        public class AdminSearchUserV3Builder
-            : OperationBuilder<AdminSearchUserV3Builder>
+        public interface IAdminSearchUserV3Builder
+        {
+
+            string? By { get; }
+
+            string? EndDate { get; }
+
+            bool? IncludeTotal { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? PlatformBy { get; }
+
+            string? PlatformId { get; }
+
+            string? Query { get; }
+
+            string? RoleIds { get; }
+
+            string? SelectedFields { get; }
+
+            bool? SkipLoginQueue { get; }
+
+            string? StartDate { get; }
+
+            string? TagIds { get; }
+
+            bool? TestAccount { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminSearchUserV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSearchUserV3Builder
+            where TImpl : AdminSearchUserV3AbstractBuilder<TImpl>
         {
 
             public string? By { get; set; }
@@ -92,96 +130,96 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminSearchUserV3Builder() { }
+            public AdminSearchUserV3AbstractBuilder() { }
 
-            internal AdminSearchUserV3Builder(IAccelByteSdk sdk)
+            public AdminSearchUserV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminSearchUserV3Builder SetBy(string _by)
+            public TImpl SetBy(string _by)
             {
                 By = _by;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetEndDate(string _endDate)
+            public TImpl SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetIncludeTotal(bool _includeTotal)
+            public TImpl SetIncludeTotal(bool _includeTotal)
             {
                 IncludeTotal = _includeTotal;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetPlatformBy(string _platformBy)
+            public TImpl SetPlatformBy(string _platformBy)
             {
                 PlatformBy = _platformBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetPlatformId(string _platformId)
+            public TImpl SetPlatformId(string _platformId)
             {
                 PlatformId = _platformId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetQuery(string _query)
+            public TImpl SetQuery(string _query)
             {
                 Query = _query;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetRoleIds(string _roleIds)
+            public TImpl SetRoleIds(string _roleIds)
             {
                 RoleIds = _roleIds;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetSelectedFields(string _selectedFields)
+            public TImpl SetSelectedFields(string _selectedFields)
             {
                 SelectedFields = _selectedFields;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetSkipLoginQueue(bool _skipLoginQueue)
+            public TImpl SetSkipLoginQueue(bool _skipLoginQueue)
             {
                 SkipLoginQueue = _skipLoginQueue;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetStartDate(string _startDate)
+            public TImpl SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetTagIds(string _tagIds)
+            public TImpl SetTagIds(string _tagIds)
             {
                 TagIds = _tagIds;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUserV3Builder SetTestAccount(bool _testAccount)
+            public TImpl SetTestAccount(bool _testAccount)
             {
                 TestAccount = _testAccount;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -196,11 +234,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminSearchUserV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSearchUserV3.Response Execute(
+            protected AdminSearchUserV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -217,7 +255,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSearchUserV3.Response> ExecuteAsync(
+            protected async Task<AdminSearchUserV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -236,7 +274,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminSearchUserV3(AdminSearchUserV3Builder builder,
+        public class AdminSearchUserV3Builder : AdminSearchUserV3AbstractBuilder<AdminSearchUserV3Builder>
+        {
+            public AdminSearchUserV3Builder() : base() { }
+
+            public AdminSearchUserV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSearchUserV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminSearchUserV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminSearchUserV3(IAdminSearchUserV3Builder builder,
             string namespace_
         )
         {
@@ -349,27 +412,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersResponseWithPaginationV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersResponseWithPaginationV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

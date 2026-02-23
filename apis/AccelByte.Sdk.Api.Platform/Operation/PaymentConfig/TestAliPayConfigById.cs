@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestAliPayConfigByIdBuilder Builder { get => new TestAliPayConfigByIdBuilder(); }
 
-        public class TestAliPayConfigByIdBuilder
-            : OperationBuilder<TestAliPayConfigByIdBuilder>
+        public interface ITestAliPayConfigByIdBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestAliPayConfigByIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestAliPayConfigByIdBuilder
+            where TImpl : TestAliPayConfigByIdAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestAliPayConfigByIdBuilder() { }
+            public TestAliPayConfigByIdAbstractBuilder() { }
 
-            internal TestAliPayConfigByIdBuilder(IAccelByteSdk sdk)
+            public TestAliPayConfigByIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestAliPayConfigByIdBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<TestAliPayConfigByIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestAliPayConfigById.Response Execute(
+            protected TestAliPayConfigById.Response InternalExecute(
                 string id
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestAliPayConfigById.Response> ExecuteAsync(
+            protected async Task<TestAliPayConfigById.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestAliPayConfigById(TestAliPayConfigByIdBuilder builder,
+        public class TestAliPayConfigByIdBuilder : TestAliPayConfigByIdAbstractBuilder<TestAliPayConfigByIdBuilder>
+        {
+            public TestAliPayConfigByIdBuilder() : base() { }
+
+            public TestAliPayConfigByIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestAliPayConfigById.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<TestAliPayConfigById.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public TestAliPayConfigById(ITestAliPayConfigByIdBuilder builder,
             string id
         )
         {
@@ -177,12 +214,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

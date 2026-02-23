@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static DeleteBasePolicyBuilder Builder { get => new DeleteBasePolicyBuilder(); }
 
-        public class DeleteBasePolicyBuilder
-            : OperationBuilder<DeleteBasePolicyBuilder>
+        public interface IDeleteBasePolicyBuilder
         {
 
 
 
 
 
-            internal DeleteBasePolicyBuilder() { }
+        }
 
-            internal DeleteBasePolicyBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteBasePolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteBasePolicyBuilder
+            where TImpl : DeleteBasePolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteBasePolicyAbstractBuilder() { }
+
+            public DeleteBasePolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteBasePolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteBasePolicy.Response Execute(
+            protected DeleteBasePolicy.Response InternalExecute(
                 string basePolicyId,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteBasePolicy.Response> ExecuteAsync(
+            protected async Task<DeleteBasePolicy.Response> InternalExecuteAsync(
                 string basePolicyId,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private DeleteBasePolicy(DeleteBasePolicyBuilder builder,
+        public class DeleteBasePolicyBuilder : DeleteBasePolicyAbstractBuilder<DeleteBasePolicyBuilder>
+        {
+            public DeleteBasePolicyBuilder() : base() { }
+
+            public DeleteBasePolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteBasePolicy.Response Execute(
+                string basePolicyId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    basePolicyId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteBasePolicy.Response> ExecuteAsync(
+                string basePolicyId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    basePolicyId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteBasePolicy(IDeleteBasePolicyBuilder builder,
             string basePolicyId,
             string namespace_
         )
@@ -178,7 +217,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

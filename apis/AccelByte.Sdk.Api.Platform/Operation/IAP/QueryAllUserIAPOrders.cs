@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryAllUserIAPOrdersBuilder Builder { get => new QueryAllUserIAPOrdersBuilder(); }
 
-        public class QueryAllUserIAPOrdersBuilder
-            : OperationBuilder<QueryAllUserIAPOrdersBuilder>
+        public interface IQueryAllUserIAPOrdersBuilder
         {
 
 
 
 
 
-            internal QueryAllUserIAPOrdersBuilder() { }
+        }
 
-            internal QueryAllUserIAPOrdersBuilder(IAccelByteSdk sdk)
+        public abstract class QueryAllUserIAPOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryAllUserIAPOrdersBuilder
+            where TImpl : QueryAllUserIAPOrdersAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public QueryAllUserIAPOrdersAbstractBuilder() { }
+
+            public QueryAllUserIAPOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryAllUserIAPOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryAllUserIAPOrders.Response Execute(
+            protected QueryAllUserIAPOrders.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryAllUserIAPOrders.Response> ExecuteAsync(
+            protected async Task<QueryAllUserIAPOrders.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryAllUserIAPOrders(QueryAllUserIAPOrdersBuilder builder,
+        public class QueryAllUserIAPOrdersBuilder : QueryAllUserIAPOrdersAbstractBuilder<QueryAllUserIAPOrdersBuilder>
+        {
+            public QueryAllUserIAPOrdersBuilder() : base() { }
+
+            public QueryAllUserIAPOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryAllUserIAPOrders.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryAllUserIAPOrders.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryAllUserIAPOrders(IQueryAllUserIAPOrdersBuilder builder,
             string namespace_,
             string userId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPOrderPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPOrderPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

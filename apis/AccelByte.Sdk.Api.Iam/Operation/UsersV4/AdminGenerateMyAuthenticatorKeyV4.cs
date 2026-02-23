@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGenerateMyAuthenticatorKeyV4Builder Builder { get => new AdminGenerateMyAuthenticatorKeyV4Builder(); }
 
-        public class AdminGenerateMyAuthenticatorKeyV4Builder
-            : OperationBuilder<AdminGenerateMyAuthenticatorKeyV4Builder>
+        public interface IAdminGenerateMyAuthenticatorKeyV4Builder
         {
 
 
 
 
 
-            internal AdminGenerateMyAuthenticatorKeyV4Builder() { }
+        }
 
-            internal AdminGenerateMyAuthenticatorKeyV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminGenerateMyAuthenticatorKeyV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGenerateMyAuthenticatorKeyV4Builder
+            where TImpl : AdminGenerateMyAuthenticatorKeyV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGenerateMyAuthenticatorKeyV4AbstractBuilder() { }
+
+            public AdminGenerateMyAuthenticatorKeyV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,11 +67,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGenerateMyAuthenticatorKeyV4 op = new AdminGenerateMyAuthenticatorKeyV4(this
                 );
 
-                op.SetBaseFields<AdminGenerateMyAuthenticatorKeyV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGenerateMyAuthenticatorKeyV4.Response Execute(
+            protected AdminGenerateMyAuthenticatorKeyV4.Response InternalExecute(
             )
             {
                 AdminGenerateMyAuthenticatorKeyV4 op = Build(
@@ -76,7 +86,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGenerateMyAuthenticatorKeyV4.Response> ExecuteAsync(
+            protected async Task<AdminGenerateMyAuthenticatorKeyV4.Response> InternalExecuteAsync(
             )
             {
                 AdminGenerateMyAuthenticatorKeyV4 op = Build(
@@ -93,7 +103,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGenerateMyAuthenticatorKeyV4(AdminGenerateMyAuthenticatorKeyV4Builder builder
+        public class AdminGenerateMyAuthenticatorKeyV4Builder : AdminGenerateMyAuthenticatorKeyV4AbstractBuilder<AdminGenerateMyAuthenticatorKeyV4Builder>
+        {
+            public AdminGenerateMyAuthenticatorKeyV4Builder() : base() { }
+
+            public AdminGenerateMyAuthenticatorKeyV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGenerateMyAuthenticatorKeyV4.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGenerateMyAuthenticatorKeyV4.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGenerateMyAuthenticatorKeyV4(IAdminGenerateMyAuthenticatorKeyV4Builder builder
         )
         {
             
@@ -162,32 +193,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelAuthenticatorKeyResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelAuthenticatorKeyResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

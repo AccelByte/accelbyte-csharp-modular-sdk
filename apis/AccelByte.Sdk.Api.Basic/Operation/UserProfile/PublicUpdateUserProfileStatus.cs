@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static PublicUpdateUserProfileStatusBuilder Builder { get => new PublicUpdateUserProfileStatusBuilder(); }
 
-        public class PublicUpdateUserProfileStatusBuilder
-            : OperationBuilder<PublicUpdateUserProfileStatusBuilder>
+        public interface IPublicUpdateUserProfileStatusBuilder
+        {
+
+
+            Model.UserProfileStatusUpdate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PublicUpdateUserProfileStatusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdateUserProfileStatusBuilder
+            where TImpl : PublicUpdateUserProfileStatusAbstractBuilder<TImpl>
         {
 
 
@@ -44,19 +56,19 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal PublicUpdateUserProfileStatusBuilder() { }
+            public PublicUpdateUserProfileStatusAbstractBuilder() { }
 
-            internal PublicUpdateUserProfileStatusBuilder(IAccelByteSdk sdk)
+            public PublicUpdateUserProfileStatusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PublicUpdateUserProfileStatusBuilder SetBody(Model.UserProfileStatusUpdate _body)
+            public TImpl SetBody(Model.UserProfileStatusUpdate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdateUserProfileStatusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUpdateUserProfileStatus.Response Execute(
+            protected PublicUpdateUserProfileStatus.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateUserProfileStatus.Response> ExecuteAsync(
+            protected async Task<PublicUpdateUserProfileStatus.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -115,7 +127,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.Payload);
             }
 
-            public PublicUpdateUserProfileStatus.Response<T1> Execute<T1>(
+            protected PublicUpdateUserProfileStatus.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string userId
             )
@@ -134,7 +146,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateUserProfileStatus.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicUpdateUserProfileStatus.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -155,7 +167,57 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private PublicUpdateUserProfileStatus(PublicUpdateUserProfileStatusBuilder builder,
+        public class PublicUpdateUserProfileStatusBuilder : PublicUpdateUserProfileStatusAbstractBuilder<PublicUpdateUserProfileStatusBuilder>
+        {
+            public PublicUpdateUserProfileStatusBuilder() : base() { }
+
+            public PublicUpdateUserProfileStatusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUpdateUserProfileStatus.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateUserProfileStatus.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public PublicUpdateUserProfileStatus.Response<T1> Execute<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateUserProfileStatus.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdateUserProfileStatus(IPublicUpdateUserProfileStatusBuilder builder,
             string namespace_,
             string userId
         )
@@ -246,27 +308,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -287,27 +354,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

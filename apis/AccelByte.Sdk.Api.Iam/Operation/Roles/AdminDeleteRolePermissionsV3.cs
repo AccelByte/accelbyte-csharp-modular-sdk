@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDeleteRolePermissionsV3Builder Builder { get => new AdminDeleteRolePermissionsV3Builder(); }
 
-        public class AdminDeleteRolePermissionsV3Builder
-            : OperationBuilder<AdminDeleteRolePermissionsV3Builder>
+        public interface IAdminDeleteRolePermissionsV3Builder
         {
 
 
 
 
 
-            internal AdminDeleteRolePermissionsV3Builder() { }
+        }
 
-            internal AdminDeleteRolePermissionsV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteRolePermissionsV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteRolePermissionsV3Builder
+            where TImpl : AdminDeleteRolePermissionsV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteRolePermissionsV3AbstractBuilder() { }
+
+            public AdminDeleteRolePermissionsV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<AdminDeleteRolePermissionsV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteRolePermissionsV3.Response Execute(
+            protected AdminDeleteRolePermissionsV3.Response InternalExecute(
                 List<string> body,
                 string roleId
             )
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteRolePermissionsV3.Response> ExecuteAsync(
+            protected async Task<AdminDeleteRolePermissionsV3.Response> InternalExecuteAsync(
                 List<string> body,
                 string roleId
             )
@@ -102,7 +112,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDeleteRolePermissionsV3(AdminDeleteRolePermissionsV3Builder builder,
+        public class AdminDeleteRolePermissionsV3Builder : AdminDeleteRolePermissionsV3AbstractBuilder<AdminDeleteRolePermissionsV3Builder>
+        {
+            public AdminDeleteRolePermissionsV3Builder() : base() { }
+
+            public AdminDeleteRolePermissionsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteRolePermissionsV3.Response Execute(
+                List<string> body,
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    roleId
+                );
+            }
+            public async Task<AdminDeleteRolePermissionsV3.Response> ExecuteAsync(
+                List<string> body,
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    roleId
+                );
+            }
+        }
+
+
+        public AdminDeleteRolePermissionsV3(IAdminDeleteRolePermissionsV3Builder builder,
             List<string> body,
             string roleId
         )
@@ -176,17 +215,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

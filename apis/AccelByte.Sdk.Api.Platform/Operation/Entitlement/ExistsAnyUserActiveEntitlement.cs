@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ExistsAnyUserActiveEntitlementBuilder Builder { get => new ExistsAnyUserActiveEntitlementBuilder(); }
 
-        public class ExistsAnyUserActiveEntitlementBuilder
-            : OperationBuilder<ExistsAnyUserActiveEntitlementBuilder>
+        public interface IExistsAnyUserActiveEntitlementBuilder
+        {
+
+            List<string>? AppIds { get; }
+
+            List<string>? ItemIds { get; }
+
+            string? Platform { get; }
+
+            List<string>? Skus { get; }
+
+
+
+
+
+        }
+
+        public abstract class ExistsAnyUserActiveEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExistsAnyUserActiveEntitlementBuilder
+            where TImpl : ExistsAnyUserActiveEntitlementAbstractBuilder<TImpl>
         {
 
             public List<string>? AppIds { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ExistsAnyUserActiveEntitlementBuilder() { }
+            public ExistsAnyUserActiveEntitlementAbstractBuilder() { }
 
-            internal ExistsAnyUserActiveEntitlementBuilder(IAccelByteSdk sdk)
+            public ExistsAnyUserActiveEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ExistsAnyUserActiveEntitlementBuilder SetAppIds(List<string> _appIds)
+            public TImpl SetAppIds(List<string> _appIds)
             {
                 AppIds = _appIds;
-                return this;
+                return (TImpl)this;
             }
 
-            public ExistsAnyUserActiveEntitlementBuilder SetItemIds(List<string> _itemIds)
+            public TImpl SetItemIds(List<string> _itemIds)
             {
                 ItemIds = _itemIds;
-                return this;
+                return (TImpl)this;
             }
 
-            public ExistsAnyUserActiveEntitlementBuilder SetPlatform(string _platform)
+            public TImpl SetPlatform(string _platform)
             {
                 Platform = _platform;
-                return this;
+                return (TImpl)this;
             }
 
-            public ExistsAnyUserActiveEntitlementBuilder SetSkus(List<string> _skus)
+            public TImpl SetSkus(List<string> _skus)
             {
                 Skus = _skus;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ExistsAnyUserActiveEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ExistsAnyUserActiveEntitlement.Response Execute(
+            protected ExistsAnyUserActiveEntitlement.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExistsAnyUserActiveEntitlement.Response> ExecuteAsync(
+            protected async Task<ExistsAnyUserActiveEntitlement.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ExistsAnyUserActiveEntitlement(ExistsAnyUserActiveEntitlementBuilder builder,
+        public class ExistsAnyUserActiveEntitlementBuilder : ExistsAnyUserActiveEntitlementAbstractBuilder<ExistsAnyUserActiveEntitlementBuilder>
+        {
+            public ExistsAnyUserActiveEntitlementBuilder() : base() { }
+
+            public ExistsAnyUserActiveEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ExistsAnyUserActiveEntitlement.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ExistsAnyUserActiveEntitlement.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ExistsAnyUserActiveEntitlement(IExistsAnyUserActiveEntitlementBuilder builder,
             string namespace_,
             string userId
         )
@@ -221,7 +268,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.Ownership>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

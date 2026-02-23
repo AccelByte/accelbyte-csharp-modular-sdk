@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -55,17 +55,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateInputValidationsBuilder Builder { get => new AdminUpdateInputValidationsBuilder(); }
 
-        public class AdminUpdateInputValidationsBuilder
-            : OperationBuilder<AdminUpdateInputValidationsBuilder>
+        public interface IAdminUpdateInputValidationsBuilder
         {
 
 
 
 
 
-            internal AdminUpdateInputValidationsBuilder() { }
+        }
 
-            internal AdminUpdateInputValidationsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateInputValidationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateInputValidationsBuilder
+            where TImpl : AdminUpdateInputValidationsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateInputValidationsAbstractBuilder() { }
+
+            public AdminUpdateInputValidationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -83,11 +93,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminUpdateInputValidationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateInputValidations.Response Execute(
+            protected AdminUpdateInputValidations.Response InternalExecute(
                 List<ModelInputValidationUpdatePayload> body
             )
             {
@@ -104,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateInputValidations.Response> ExecuteAsync(
+            protected async Task<AdminUpdateInputValidations.Response> InternalExecuteAsync(
                 List<ModelInputValidationUpdatePayload> body
             )
             {
@@ -123,7 +133,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateInputValidations(AdminUpdateInputValidationsBuilder builder,
+        public class AdminUpdateInputValidationsBuilder : AdminUpdateInputValidationsAbstractBuilder<AdminUpdateInputValidationsBuilder>
+        {
+            public AdminUpdateInputValidationsBuilder() : base() { }
+
+            public AdminUpdateInputValidationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateInputValidations.Response Execute(
+                List<ModelInputValidationUpdatePayload> body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminUpdateInputValidations.Response> ExecuteAsync(
+                List<ModelInputValidationUpdatePayload> body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminUpdateInputValidations(IAdminUpdateInputValidationsBuilder builder,
             List<ModelInputValidationUpdatePayload> body
         )
         {
@@ -193,17 +228,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

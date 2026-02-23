@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicUserVerificationV3Builder Builder { get => new PublicUserVerificationV3Builder(); }
 
-        public class PublicUserVerificationV3Builder
-            : OperationBuilder<PublicUserVerificationV3Builder>
+        public interface IPublicUserVerificationV3Builder
         {
 
 
 
 
 
-            internal PublicUserVerificationV3Builder() { }
+        }
 
-            internal PublicUserVerificationV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicUserVerificationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUserVerificationV3Builder
+            where TImpl : PublicUserVerificationV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicUserVerificationV3AbstractBuilder() { }
+
+            public PublicUserVerificationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicUserVerificationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUserVerificationV3.Response Execute(
+            protected PublicUserVerificationV3.Response InternalExecute(
                 ModelUserVerificationRequestV3 body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUserVerificationV3.Response> ExecuteAsync(
+            protected async Task<PublicUserVerificationV3.Response> InternalExecuteAsync(
                 ModelUserVerificationRequestV3 body,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicUserVerificationV3(PublicUserVerificationV3Builder builder,
+        public class PublicUserVerificationV3Builder : PublicUserVerificationV3AbstractBuilder<PublicUserVerificationV3Builder>
+        {
+            public PublicUserVerificationV3Builder() : base() { }
+
+            public PublicUserVerificationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUserVerificationV3.Response Execute(
+                ModelUserVerificationRequestV3 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicUserVerificationV3.Response> ExecuteAsync(
+                ModelUserVerificationRequestV3 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicUserVerificationV3(IPublicUserVerificationV3Builder builder,
             ModelUserVerificationRequestV3 body,
             string namespace_
         )
@@ -183,22 +222,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UserCancelFriendRequestBuilder Builder { get => new UserCancelFriendRequestBuilder(); }
 
-        public class UserCancelFriendRequestBuilder
-            : OperationBuilder<UserCancelFriendRequestBuilder>
+        public interface IUserCancelFriendRequestBuilder
         {
 
 
 
 
 
-            internal UserCancelFriendRequestBuilder() { }
+        }
 
-            internal UserCancelFriendRequestBuilder(IAccelByteSdk sdk)
+        public abstract class UserCancelFriendRequestAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUserCancelFriendRequestBuilder
+            where TImpl : UserCancelFriendRequestAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UserCancelFriendRequestAbstractBuilder() { }
+
+            public UserCancelFriendRequestAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UserCancelFriendRequestBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UserCancelFriendRequest.Response Execute(
+            protected UserCancelFriendRequest.Response InternalExecute(
                 ModelUserCancelFriendRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UserCancelFriendRequest.Response> ExecuteAsync(
+            protected async Task<UserCancelFriendRequest.Response> InternalExecuteAsync(
                 ModelUserCancelFriendRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UserCancelFriendRequest(UserCancelFriendRequestBuilder builder,
+        public class UserCancelFriendRequestBuilder : UserCancelFriendRequestAbstractBuilder<UserCancelFriendRequestBuilder>
+        {
+            public UserCancelFriendRequestBuilder() : base() { }
+
+            public UserCancelFriendRequestBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UserCancelFriendRequest.Response Execute(
+                ModelUserCancelFriendRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UserCancelFriendRequest.Response> ExecuteAsync(
+                ModelUserCancelFriendRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UserCancelFriendRequest(IUserCancelFriendRequestBuilder builder,
             ModelUserCancelFriendRequest body,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

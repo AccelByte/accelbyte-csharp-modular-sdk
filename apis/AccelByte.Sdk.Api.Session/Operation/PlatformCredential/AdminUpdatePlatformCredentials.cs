@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminUpdatePlatformCredentialsBuilder Builder { get => new AdminUpdatePlatformCredentialsBuilder(); }
 
-        public class AdminUpdatePlatformCredentialsBuilder
-            : OperationBuilder<AdminUpdatePlatformCredentialsBuilder>
+        public interface IAdminUpdatePlatformCredentialsBuilder
         {
 
 
 
 
 
-            internal AdminUpdatePlatformCredentialsBuilder() { }
+        }
 
-            internal AdminUpdatePlatformCredentialsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdatePlatformCredentialsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdatePlatformCredentialsBuilder
+            where TImpl : AdminUpdatePlatformCredentialsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdatePlatformCredentialsAbstractBuilder() { }
+
+            public AdminUpdatePlatformCredentialsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdatePlatformCredentialsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdatePlatformCredentials.Response Execute(
+            protected AdminUpdatePlatformCredentials.Response InternalExecute(
                 ApimodelsPutPlatformCredentialsRequest body,
                 string namespace_
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdatePlatformCredentials.Response> ExecuteAsync(
+            protected async Task<AdminUpdatePlatformCredentials.Response> InternalExecuteAsync(
                 ApimodelsPutPlatformCredentialsRequest body,
                 string namespace_
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminUpdatePlatformCredentials(AdminUpdatePlatformCredentialsBuilder builder,
+        public class AdminUpdatePlatformCredentialsBuilder : AdminUpdatePlatformCredentialsAbstractBuilder<AdminUpdatePlatformCredentialsBuilder>
+        {
+            public AdminUpdatePlatformCredentialsBuilder() : base() { }
+
+            public AdminUpdatePlatformCredentialsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdatePlatformCredentials.Response Execute(
+                ApimodelsPutPlatformCredentialsRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdatePlatformCredentials.Response> ExecuteAsync(
+                ApimodelsPutPlatformCredentialsRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdatePlatformCredentials(IAdminUpdatePlatformCredentialsBuilder builder,
             ApimodelsPutPlatformCredentialsRequest body,
             string namespace_
         )
@@ -186,32 +225,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPlatformCredentials>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPlatformCredentials>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

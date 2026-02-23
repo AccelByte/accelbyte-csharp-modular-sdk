@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UnselectRecordBuilder Builder { get => new UnselectRecordBuilder(); }
 
-        public class UnselectRecordBuilder
-            : OperationBuilder<UnselectRecordBuilder>
+        public interface IUnselectRecordBuilder
         {
 
 
 
 
 
-            internal UnselectRecordBuilder() { }
+        }
 
-            internal UnselectRecordBuilder(IAccelByteSdk sdk)
+        public abstract class UnselectRecordAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUnselectRecordBuilder
+            where TImpl : UnselectRecordAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UnselectRecordAbstractBuilder() { }
+
+            public UnselectRecordAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<UnselectRecordBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UnselectRecord.Response Execute(
+            protected UnselectRecord.Response InternalExecute(
                 string changeId,
                 string namespace_,
                 string storeId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UnselectRecord.Response> ExecuteAsync(
+            protected async Task<UnselectRecord.Response> InternalExecuteAsync(
                 string changeId,
                 string namespace_,
                 string storeId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UnselectRecord(UnselectRecordBuilder builder,
+        public class UnselectRecordBuilder : UnselectRecordAbstractBuilder<UnselectRecordBuilder>
+        {
+            public UnselectRecordBuilder() : base() { }
+
+            public UnselectRecordBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UnselectRecord.Response Execute(
+                string changeId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    changeId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<UnselectRecord.Response> ExecuteAsync(
+                string changeId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    changeId,
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public UnselectRecord(IUnselectRecordBuilder builder,
             string changeId,
             string namespace_,
             string storeId
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

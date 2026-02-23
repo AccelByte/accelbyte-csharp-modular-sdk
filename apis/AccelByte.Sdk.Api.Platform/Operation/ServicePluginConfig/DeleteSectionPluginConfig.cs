@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteSectionPluginConfigBuilder Builder { get => new DeleteSectionPluginConfigBuilder(); }
 
-        public class DeleteSectionPluginConfigBuilder
-            : OperationBuilder<DeleteSectionPluginConfigBuilder>
+        public interface IDeleteSectionPluginConfigBuilder
         {
 
 
 
 
 
-            internal DeleteSectionPluginConfigBuilder() { }
+        }
 
-            internal DeleteSectionPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteSectionPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteSectionPluginConfigBuilder
+            where TImpl : DeleteSectionPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteSectionPluginConfigAbstractBuilder() { }
+
+            public DeleteSectionPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteSectionPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteSectionPluginConfig.Response Execute(
+            protected DeleteSectionPluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteSectionPluginConfig.Response> ExecuteAsync(
+            protected async Task<DeleteSectionPluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteSectionPluginConfig(DeleteSectionPluginConfigBuilder builder,
+        public class DeleteSectionPluginConfigBuilder : DeleteSectionPluginConfigAbstractBuilder<DeleteSectionPluginConfigBuilder>
+        {
+            public DeleteSectionPluginConfigBuilder() : base() { }
+
+            public DeleteSectionPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteSectionPluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteSectionPluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteSectionPluginConfig(IDeleteSectionPluginConfigBuilder builder,
             string namespace_
         )
         {

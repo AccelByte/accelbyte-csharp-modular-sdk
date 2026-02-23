@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -45,8 +45,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestStripeConfigBuilder Builder { get => new TestStripeConfigBuilder(); }
 
-        public class TestStripeConfigBuilder
-            : OperationBuilder<TestStripeConfigBuilder>
+        public interface ITestStripeConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestStripeConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestStripeConfigBuilder
+            where TImpl : TestStripeConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -55,18 +67,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestStripeConfigBuilder() { }
+            public TestStripeConfigAbstractBuilder() { }
 
-            internal TestStripeConfigBuilder(IAccelByteSdk sdk)
+            public TestStripeConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestStripeConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestStripeConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestStripeConfig.Response Execute(
+            protected TestStripeConfig.Response InternalExecute(
                 StripeConfig body
             )
             {
@@ -102,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestStripeConfig.Response> ExecuteAsync(
+            protected async Task<TestStripeConfig.Response> InternalExecuteAsync(
                 StripeConfig body
             )
             {
@@ -121,7 +133,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestStripeConfig(TestStripeConfigBuilder builder,
+        public class TestStripeConfigBuilder : TestStripeConfigAbstractBuilder<TestStripeConfigBuilder>
+        {
+            public TestStripeConfigBuilder() : base() { }
+
+            public TestStripeConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestStripeConfig.Response Execute(
+                StripeConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestStripeConfig.Response> ExecuteAsync(
+                StripeConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestStripeConfig(ITestStripeConfigBuilder builder,
             StripeConfig body
         )
         {
@@ -187,7 +224,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

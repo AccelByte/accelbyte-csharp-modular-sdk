@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static UpdateMemberRolePublicV1Builder Builder { get => new UpdateMemberRolePublicV1Builder(); }
 
-        public class UpdateMemberRolePublicV1Builder
-            : OperationBuilder<UpdateMemberRolePublicV1Builder>
+        public interface IUpdateMemberRolePublicV1Builder
         {
 
 
 
 
 
-            internal UpdateMemberRolePublicV1Builder() { }
+        }
 
-            internal UpdateMemberRolePublicV1Builder(IAccelByteSdk sdk)
+        public abstract class UpdateMemberRolePublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateMemberRolePublicV1Builder
+            where TImpl : UpdateMemberRolePublicV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateMemberRolePublicV1AbstractBuilder() { }
+
+            public UpdateMemberRolePublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateMemberRolePublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateMemberRolePublicV1.Response Execute(
+            protected UpdateMemberRolePublicV1.Response InternalExecute(
                 ModelsAssignRoleToMemberRequestV1 body,
                 string memberRoleId,
                 string namespace_
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateMemberRolePublicV1.Response> ExecuteAsync(
+            protected async Task<UpdateMemberRolePublicV1.Response> InternalExecuteAsync(
                 ModelsAssignRoleToMemberRequestV1 body,
                 string memberRoleId,
                 string namespace_
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private UpdateMemberRolePublicV1(UpdateMemberRolePublicV1Builder builder,
+        public class UpdateMemberRolePublicV1Builder : UpdateMemberRolePublicV1AbstractBuilder<UpdateMemberRolePublicV1Builder>
+        {
+            public UpdateMemberRolePublicV1Builder() : base() { }
+
+            public UpdateMemberRolePublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateMemberRolePublicV1.Response Execute(
+                ModelsAssignRoleToMemberRequestV1 body,
+                string memberRoleId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    memberRoleId,
+                    namespace_
+                );
+            }
+            public async Task<UpdateMemberRolePublicV1.Response> ExecuteAsync(
+                ModelsAssignRoleToMemberRequestV1 body,
+                string memberRoleId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    memberRoleId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateMemberRolePublicV1(IUpdateMemberRolePublicV1Builder builder,
             ModelsAssignRoleToMemberRequestV1 body,
             string memberRoleId,
             string namespace_
@@ -195,32 +238,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetUserGroupInformationResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetUserGroupInformationResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

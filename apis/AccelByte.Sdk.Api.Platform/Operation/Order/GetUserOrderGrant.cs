@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserOrderGrantBuilder Builder { get => new GetUserOrderGrantBuilder(); }
 
-        public class GetUserOrderGrantBuilder
-            : OperationBuilder<GetUserOrderGrantBuilder>
+        public interface IGetUserOrderGrantBuilder
         {
 
 
 
 
 
-            internal GetUserOrderGrantBuilder() { }
+        }
 
-            internal GetUserOrderGrantBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserOrderGrantAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserOrderGrantBuilder
+            where TImpl : GetUserOrderGrantAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserOrderGrantAbstractBuilder() { }
+
+            public GetUserOrderGrantAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,12 +76,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserOrderGrantBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetUserOrderGrant.Response Execute(
+            protected GetUserOrderGrant.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserOrderGrant.Response> ExecuteAsync(
+            protected async Task<GetUserOrderGrant.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -115,7 +125,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserOrderGrant(GetUserOrderGrantBuilder builder,
+        public class GetUserOrderGrantBuilder : GetUserOrderGrantAbstractBuilder<GetUserOrderGrantBuilder>
+        {
+            public GetUserOrderGrantBuilder() : base() { }
+
+            public GetUserOrderGrantBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUserOrderGrant.Response Execute(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<GetUserOrderGrant.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserOrderGrant(IGetUserOrderGrantBuilder builder,
             string namespace_,
             string orderNo,
             string userId
@@ -186,7 +230,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderGrantInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderGrantInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

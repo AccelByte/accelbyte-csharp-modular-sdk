@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminBulkUnblockPlayersV1Builder Builder { get => new AdminBulkUnblockPlayersV1Builder(); }
 
-        public class AdminBulkUnblockPlayersV1Builder
-            : OperationBuilder<AdminBulkUnblockPlayersV1Builder>
+        public interface IAdminBulkUnblockPlayersV1Builder
         {
 
 
 
 
 
-            internal AdminBulkUnblockPlayersV1Builder() { }
+        }
 
-            internal AdminBulkUnblockPlayersV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminBulkUnblockPlayersV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBulkUnblockPlayersV1Builder
+            where TImpl : AdminBulkUnblockPlayersV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBulkUnblockPlayersV1AbstractBuilder() { }
+
+            public AdminBulkUnblockPlayersV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminBulkUnblockPlayersV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBulkUnblockPlayersV1.Response Execute(
+            protected AdminBulkUnblockPlayersV1.Response InternalExecute(
                 ModelsListUnblockPlayerRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBulkUnblockPlayersV1.Response> ExecuteAsync(
+            protected async Task<AdminBulkUnblockPlayersV1.Response> InternalExecuteAsync(
                 ModelsListUnblockPlayerRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminBulkUnblockPlayersV1(AdminBulkUnblockPlayersV1Builder builder,
+        public class AdminBulkUnblockPlayersV1Builder : AdminBulkUnblockPlayersV1AbstractBuilder<AdminBulkUnblockPlayersV1Builder>
+        {
+            public AdminBulkUnblockPlayersV1Builder() : base() { }
+
+            public AdminBulkUnblockPlayersV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBulkUnblockPlayersV1.Response Execute(
+                ModelsListUnblockPlayerRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminBulkUnblockPlayersV1.Response> ExecuteAsync(
+                ModelsListUnblockPlayerRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminBulkUnblockPlayersV1(IAdminBulkUnblockPlayersV1Builder builder,
             ModelsListUnblockPlayerRequest body,
             string namespace_,
             string userId
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

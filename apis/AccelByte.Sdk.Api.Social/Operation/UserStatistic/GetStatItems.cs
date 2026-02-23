@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,24 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static GetStatItemsBuilder Builder { get => new GetStatItemsBuilder(); }
 
-        public class GetStatItemsBuilder
-            : OperationBuilder<GetStatItemsBuilder>
+        public interface IGetStatItemsBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetStatItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetStatItemsBuilder
+            where TImpl : GetStatItemsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -46,30 +62,30 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal GetStatItemsBuilder() { }
+            public GetStatItemsAbstractBuilder() { }
 
-            internal GetStatItemsBuilder(IAccelByteSdk sdk)
+            public GetStatItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetStatItemsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatItemsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatItemsBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -86,11 +102,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     statCode                    
                 );
 
-                op.SetBaseFields<GetStatItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetStatItems.Response Execute(
+            protected GetStatItems.Response InternalExecute(
                 string namespace_,
                 string statCode
             )
@@ -109,7 +125,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetStatItems.Response> ExecuteAsync(
+            protected async Task<GetStatItems.Response> InternalExecuteAsync(
                 string namespace_,
                 string statCode
             )
@@ -130,7 +146,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private GetStatItems(GetStatItemsBuilder builder,
+        public class GetStatItemsBuilder : GetStatItemsAbstractBuilder<GetStatItemsBuilder>
+        {
+            public GetStatItemsBuilder() : base() { }
+
+            public GetStatItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetStatItems.Response Execute(
+                string namespace_,
+                string statCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    statCode
+                );
+            }
+            public async Task<GetStatItems.Response> ExecuteAsync(
+                string namespace_,
+                string statCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    statCode
+                );
+            }
+        }
+
+
+        public GetStatItems(IGetStatItemsBuilder builder,
             string namespace_,
             string statCode
         )
@@ -212,22 +257,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StatItemValuePagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StatItemValuePagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

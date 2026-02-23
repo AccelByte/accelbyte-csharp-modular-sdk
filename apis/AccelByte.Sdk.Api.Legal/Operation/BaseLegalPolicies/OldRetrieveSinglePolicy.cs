@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveSinglePolicyBuilder Builder { get => new OldRetrieveSinglePolicyBuilder(); }
 
-        public class OldRetrieveSinglePolicyBuilder
-            : OperationBuilder<OldRetrieveSinglePolicyBuilder>
+        public interface IOldRetrieveSinglePolicyBuilder
         {
 
 
 
 
 
-            internal OldRetrieveSinglePolicyBuilder() { }
+        }
 
-            internal OldRetrieveSinglePolicyBuilder(IAccelByteSdk sdk)
+        public abstract class OldRetrieveSinglePolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveSinglePolicyBuilder
+            where TImpl : OldRetrieveSinglePolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public OldRetrieveSinglePolicyAbstractBuilder() { }
+
+            public OldRetrieveSinglePolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     basePolicyId                    
                 );
 
-                op.SetBaseFields<OldRetrieveSinglePolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveSinglePolicy.Response Execute(
+            protected OldRetrieveSinglePolicy.Response InternalExecute(
                 string basePolicyId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveSinglePolicy.Response> ExecuteAsync(
+            protected async Task<OldRetrieveSinglePolicy.Response> InternalExecuteAsync(
                 string basePolicyId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveSinglePolicy(OldRetrieveSinglePolicyBuilder builder,
+        public class OldRetrieveSinglePolicyBuilder : OldRetrieveSinglePolicyAbstractBuilder<OldRetrieveSinglePolicyBuilder>
+        {
+            public OldRetrieveSinglePolicyBuilder() : base() { }
+
+            public OldRetrieveSinglePolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveSinglePolicy.Response Execute(
+                string basePolicyId
+            )
+            {
+                return InternalExecute(
+                    basePolicyId
+                );
+            }
+            public async Task<OldRetrieveSinglePolicy.Response> ExecuteAsync(
+                string basePolicyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    basePolicyId
+                );
+            }
+        }
+
+
+        public OldRetrieveSinglePolicy(IOldRetrieveSinglePolicyBuilder builder,
             string basePolicyId
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RetrieveBasePolicyResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RetrieveBasePolicyResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

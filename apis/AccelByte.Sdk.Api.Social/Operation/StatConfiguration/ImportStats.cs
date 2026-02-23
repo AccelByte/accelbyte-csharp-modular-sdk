@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static ImportStatsBuilder Builder { get => new ImportStatsBuilder(); }
 
-        public class ImportStatsBuilder
-            : OperationBuilder<ImportStatsBuilder>
+        public interface IImportStatsBuilder
+        {
+
+            bool? ReplaceExisting { get; }
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class ImportStatsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImportStatsBuilder
+            where TImpl : ImportStatsAbstractBuilder<TImpl>
         {
 
             public bool? ReplaceExisting { get; set; }
@@ -42,26 +56,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal ImportStatsBuilder() { }
+            public ImportStatsAbstractBuilder() { }
 
-            internal ImportStatsBuilder(IAccelByteSdk sdk)
+            public ImportStatsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ImportStatsBuilder SetReplaceExisting(bool _replaceExisting)
+            public TImpl SetReplaceExisting(bool _replaceExisting)
             {
                 ReplaceExisting = _replaceExisting;
-                return this;
+                return (TImpl)this;
             }
 
 
 
-            public ImportStatsBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +88,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ImportStatsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImportStats.Response Execute(
+            protected ImportStats.Response InternalExecute(
                 string namespace_
             )
             {
@@ -95,7 +109,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImportStats.Response> ExecuteAsync(
+            protected async Task<ImportStats.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -114,7 +128,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private ImportStats(ImportStatsBuilder builder,
+        public class ImportStatsBuilder : ImportStatsAbstractBuilder<ImportStatsBuilder>
+        {
+            public ImportStatsBuilder() : base() { }
+
+            public ImportStatsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImportStats.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ImportStats.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ImportStats(IImportStatsBuilder builder,
             string namespace_
         )
         {
@@ -191,27 +230,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StatImportInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StatImportInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

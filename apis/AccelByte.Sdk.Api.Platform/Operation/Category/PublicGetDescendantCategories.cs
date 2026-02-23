@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetDescendantCategoriesBuilder Builder { get => new PublicGetDescendantCategoriesBuilder(); }
 
-        public class PublicGetDescendantCategoriesBuilder
-            : OperationBuilder<PublicGetDescendantCategoriesBuilder>
+        public interface IPublicGetDescendantCategoriesBuilder
+        {
+
+            string? Language { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetDescendantCategoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetDescendantCategoriesBuilder
+            where TImpl : PublicGetDescendantCategoriesAbstractBuilder<TImpl>
         {
 
             public string? Language { get; set; }
@@ -48,24 +62,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetDescendantCategoriesBuilder() { }
+            public PublicGetDescendantCategoriesAbstractBuilder() { }
 
-            internal PublicGetDescendantCategoriesBuilder(IAccelByteSdk sdk)
+            public PublicGetDescendantCategoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetDescendantCategoriesBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetDescendantCategoriesBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +96,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetDescendantCategoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetDescendantCategories.Response Execute(
+            protected PublicGetDescendantCategories.Response InternalExecute(
                 string categoryPath,
                 string namespace_
             )
@@ -105,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetDescendantCategories.Response> ExecuteAsync(
+            protected async Task<PublicGetDescendantCategories.Response> InternalExecuteAsync(
                 string categoryPath,
                 string namespace_
             )
@@ -126,7 +140,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetDescendantCategories(PublicGetDescendantCategoriesBuilder builder,
+        public class PublicGetDescendantCategoriesBuilder : PublicGetDescendantCategoriesAbstractBuilder<PublicGetDescendantCategoriesBuilder>
+        {
+            public PublicGetDescendantCategoriesBuilder() : base() { }
+
+            public PublicGetDescendantCategoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetDescendantCategories.Response Execute(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    categoryPath,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetDescendantCategories.Response> ExecuteAsync(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    categoryPath,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetDescendantCategories(IPublicGetDescendantCategoriesBuilder builder,
             string categoryPath,
             string namespace_
         )
@@ -197,7 +240,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.CategoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.CategoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

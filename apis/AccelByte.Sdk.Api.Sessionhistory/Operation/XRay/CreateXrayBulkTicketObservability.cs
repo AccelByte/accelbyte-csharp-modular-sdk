@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -53,17 +53,27 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
         #region Builder Part
         public static CreateXrayBulkTicketObservabilityBuilder Builder { get => new CreateXrayBulkTicketObservabilityBuilder(); }
 
-        public class CreateXrayBulkTicketObservabilityBuilder
-            : OperationBuilder<CreateXrayBulkTicketObservabilityBuilder>
+        public interface ICreateXrayBulkTicketObservabilityBuilder
         {
 
 
 
 
 
-            internal CreateXrayBulkTicketObservabilityBuilder() { }
+        }
 
-            internal CreateXrayBulkTicketObservabilityBuilder(IAccelByteSdk sdk)
+        public abstract class CreateXrayBulkTicketObservabilityAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateXrayBulkTicketObservabilityBuilder
+            where TImpl : CreateXrayBulkTicketObservabilityAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateXrayBulkTicketObservabilityAbstractBuilder() { }
+
+            public CreateXrayBulkTicketObservabilityAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -83,11 +93,11 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateXrayBulkTicketObservabilityBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateXrayBulkTicketObservability.Response Execute(
+            protected CreateXrayBulkTicketObservability.Response InternalExecute(
                 ApimodelsXRayBulkTicketObservabilityRequest body,
                 string namespace_
             )
@@ -106,7 +116,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateXrayBulkTicketObservability.Response> ExecuteAsync(
+            protected async Task<CreateXrayBulkTicketObservability.Response> InternalExecuteAsync(
                 ApimodelsXRayBulkTicketObservabilityRequest body,
                 string namespace_
             )
@@ -127,7 +137,36 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             }
         }
 
-        private CreateXrayBulkTicketObservability(CreateXrayBulkTicketObservabilityBuilder builder,
+        public class CreateXrayBulkTicketObservabilityBuilder : CreateXrayBulkTicketObservabilityAbstractBuilder<CreateXrayBulkTicketObservabilityBuilder>
+        {
+            public CreateXrayBulkTicketObservabilityBuilder() : base() { }
+
+            public CreateXrayBulkTicketObservabilityBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateXrayBulkTicketObservability.Response Execute(
+                ApimodelsXRayBulkTicketObservabilityRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateXrayBulkTicketObservability.Response> ExecuteAsync(
+                ApimodelsXRayBulkTicketObservabilityRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateXrayBulkTicketObservability(ICreateXrayBulkTicketObservabilityBuilder builder,
             ApimodelsXRayBulkTicketObservabilityRequest body,
             string namespace_
         )
@@ -202,27 +241,32 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsXRayBulkTicketObservabilityResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsXRayBulkTicketObservabilityResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

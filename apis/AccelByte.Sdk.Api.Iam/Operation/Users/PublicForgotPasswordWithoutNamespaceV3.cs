@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -39,17 +39,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicForgotPasswordWithoutNamespaceV3Builder Builder { get => new PublicForgotPasswordWithoutNamespaceV3Builder(); }
 
-        public class PublicForgotPasswordWithoutNamespaceV3Builder
-            : OperationBuilder<PublicForgotPasswordWithoutNamespaceV3Builder>
+        public interface IPublicForgotPasswordWithoutNamespaceV3Builder
         {
 
 
 
 
 
-            internal PublicForgotPasswordWithoutNamespaceV3Builder() { }
+        }
 
-            internal PublicForgotPasswordWithoutNamespaceV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicForgotPasswordWithoutNamespaceV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicForgotPasswordWithoutNamespaceV3Builder
+            where TImpl : PublicForgotPasswordWithoutNamespaceV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicForgotPasswordWithoutNamespaceV3AbstractBuilder() { }
+
+            public PublicForgotPasswordWithoutNamespaceV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<PublicForgotPasswordWithoutNamespaceV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicForgotPasswordWithoutNamespaceV3.Response Execute(
+            protected PublicForgotPasswordWithoutNamespaceV3.Response InternalExecute(
                 ModelForgotPasswordWithoutNamespaceRequestV3 body
             )
             {
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicForgotPasswordWithoutNamespaceV3.Response> ExecuteAsync(
+            protected async Task<PublicForgotPasswordWithoutNamespaceV3.Response> InternalExecuteAsync(
                 ModelForgotPasswordWithoutNamespaceRequestV3 body
             )
             {
@@ -107,7 +117,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicForgotPasswordWithoutNamespaceV3(PublicForgotPasswordWithoutNamespaceV3Builder builder,
+        public class PublicForgotPasswordWithoutNamespaceV3Builder : PublicForgotPasswordWithoutNamespaceV3AbstractBuilder<PublicForgotPasswordWithoutNamespaceV3Builder>
+        {
+            public PublicForgotPasswordWithoutNamespaceV3Builder() : base() { }
+
+            public PublicForgotPasswordWithoutNamespaceV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicForgotPasswordWithoutNamespaceV3.Response Execute(
+                ModelForgotPasswordWithoutNamespaceRequestV3 body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<PublicForgotPasswordWithoutNamespaceV3.Response> ExecuteAsync(
+                ModelForgotPasswordWithoutNamespaceRequestV3 body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public PublicForgotPasswordWithoutNamespaceV3(IPublicForgotPasswordWithoutNamespaceV3Builder builder,
             ModelForgotPasswordWithoutNamespaceRequestV3 body
         )
         {
@@ -174,17 +209,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelForgotPasswordResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelForgotPasswordResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public AdminV1(IAccelByteSdk sdk)
         {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static PublicGetTimeZonesBuilder Builder { get => new PublicGetTimeZonesBuilder(); }
 
-        public class PublicGetTimeZonesBuilder
-            : OperationBuilder<PublicGetTimeZonesBuilder>
+        public interface IPublicGetTimeZonesBuilder
         {
 
 
 
 
 
-            internal PublicGetTimeZonesBuilder() { }
+        }
 
-            internal PublicGetTimeZonesBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetTimeZonesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetTimeZonesBuilder
+            where TImpl : PublicGetTimeZonesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetTimeZonesAbstractBuilder() { }
+
+            public PublicGetTimeZonesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetTimeZonesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetTimeZones.Response Execute(
+            protected PublicGetTimeZones.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetTimeZones.Response> ExecuteAsync(
+            protected async Task<PublicGetTimeZones.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private PublicGetTimeZones(PublicGetTimeZonesBuilder builder,
+        public class PublicGetTimeZonesBuilder : PublicGetTimeZonesAbstractBuilder<PublicGetTimeZonesBuilder>
+        {
+            public PublicGetTimeZonesBuilder() : base() { }
+
+            public PublicGetTimeZonesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetTimeZones.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetTimeZones.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetTimeZones(IPublicGetTimeZonesBuilder builder,
             string namespace_
         )
         {
@@ -164,12 +199,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

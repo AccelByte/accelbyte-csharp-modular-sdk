@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminSaveInboxMessageBuilder Builder { get => new AdminSaveInboxMessageBuilder(); }
 
-        public class AdminSaveInboxMessageBuilder
-            : OperationBuilder<AdminSaveInboxMessageBuilder>
+        public interface IAdminSaveInboxMessageBuilder
         {
 
 
 
 
 
-            internal AdminSaveInboxMessageBuilder() { }
+        }
 
-            internal AdminSaveInboxMessageBuilder(IAccelByteSdk sdk)
+        public abstract class AdminSaveInboxMessageAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSaveInboxMessageBuilder
+            where TImpl : AdminSaveInboxMessageAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminSaveInboxMessageAbstractBuilder() { }
+
+            public AdminSaveInboxMessageAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminSaveInboxMessageBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSaveInboxMessage.Response Execute(
+            protected AdminSaveInboxMessage.Response InternalExecute(
                 ModelsSaveInboxMessageRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSaveInboxMessage.Response> ExecuteAsync(
+            protected async Task<AdminSaveInboxMessage.Response> InternalExecuteAsync(
                 ModelsSaveInboxMessageRequest body,
                 string namespace_
             )
@@ -103,7 +113,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.Payload);
             }
 
-            public AdminSaveInboxMessage.Response<T1> Execute<T1>(
+            protected AdminSaveInboxMessage.Response<T1> InternalExecute<T1>(
                 ModelsSaveInboxMessageRequest body,
                 string namespace_
             )
@@ -122,7 +132,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSaveInboxMessage.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminSaveInboxMessage.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsSaveInboxMessageRequest body,
                 string namespace_
             )
@@ -143,7 +153,57 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminSaveInboxMessage(AdminSaveInboxMessageBuilder builder,
+        public class AdminSaveInboxMessageBuilder : AdminSaveInboxMessageAbstractBuilder<AdminSaveInboxMessageBuilder>
+        {
+            public AdminSaveInboxMessageBuilder() : base() { }
+
+            public AdminSaveInboxMessageBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSaveInboxMessage.Response Execute(
+                ModelsSaveInboxMessageRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminSaveInboxMessage.Response> ExecuteAsync(
+                ModelsSaveInboxMessageRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+
+            public AdminSaveInboxMessage.Response<T1> Execute<T1>(
+                ModelsSaveInboxMessageRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminSaveInboxMessage.Response<T1>> ExecuteAsync<T1>(
+                ModelsSaveInboxMessageRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminSaveInboxMessage(IAdminSaveInboxMessageBuilder builder,
             ModelsSaveInboxMessageRequest body,
             string namespace_
         )
@@ -231,27 +291,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsSaveInboxMessageResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsSaveInboxMessageResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -272,27 +337,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsSaveInboxMessageResponse<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsSaveInboxMessageResponse<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

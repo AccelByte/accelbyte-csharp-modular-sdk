@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,24 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static GetAllNotificationTopicsV1AdminBuilder Builder { get => new GetAllNotificationTopicsV1AdminBuilder(); }
 
-        public class GetAllNotificationTopicsV1AdminBuilder
-            : OperationBuilder<GetAllNotificationTopicsV1AdminBuilder>
+        public interface IGetAllNotificationTopicsV1AdminBuilder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetAllNotificationTopicsV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAllNotificationTopicsV1AdminBuilder
+            where TImpl : GetAllNotificationTopicsV1AdminAbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -46,30 +62,30 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal GetAllNotificationTopicsV1AdminBuilder() { }
+            public GetAllNotificationTopicsV1AdminAbstractBuilder() { }
 
-            internal GetAllNotificationTopicsV1AdminBuilder(IAccelByteSdk sdk)
+            public GetAllNotificationTopicsV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetAllNotificationTopicsV1AdminBuilder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetAllNotificationTopicsV1AdminBuilder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetAllNotificationTopicsV1AdminBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetAllNotificationTopicsV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAllNotificationTopicsV1Admin.Response Execute(
+            protected GetAllNotificationTopicsV1Admin.Response InternalExecute(
                 string namespace_
             )
             {
@@ -105,7 +121,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAllNotificationTopicsV1Admin.Response> ExecuteAsync(
+            protected async Task<GetAllNotificationTopicsV1Admin.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -124,7 +140,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private GetAllNotificationTopicsV1Admin(GetAllNotificationTopicsV1AdminBuilder builder,
+        public class GetAllNotificationTopicsV1AdminBuilder : GetAllNotificationTopicsV1AdminAbstractBuilder<GetAllNotificationTopicsV1AdminBuilder>
+        {
+            public GetAllNotificationTopicsV1AdminBuilder() : base() { }
+
+            public GetAllNotificationTopicsV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAllNotificationTopicsV1Admin.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetAllNotificationTopicsV1Admin.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetAllNotificationTopicsV1Admin(IGetAllNotificationTopicsV1AdminBuilder builder,
             string namespace_
         )
         {
@@ -204,27 +245,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetAllNotificationTopicsResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetAllNotificationTopicsResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

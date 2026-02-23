@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminCancelUserAccountDeletionRequestBuilder Builder { get => new AdminCancelUserAccountDeletionRequestBuilder(); }
 
-        public class AdminCancelUserAccountDeletionRequestBuilder
-            : OperationBuilder<AdminCancelUserAccountDeletionRequestBuilder>
+        public interface IAdminCancelUserAccountDeletionRequestBuilder
         {
 
 
 
 
 
-            internal AdminCancelUserAccountDeletionRequestBuilder() { }
+        }
 
-            internal AdminCancelUserAccountDeletionRequestBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCancelUserAccountDeletionRequestAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCancelUserAccountDeletionRequestBuilder
+            where TImpl : AdminCancelUserAccountDeletionRequestAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCancelUserAccountDeletionRequestAbstractBuilder() { }
+
+            public AdminCancelUserAccountDeletionRequestAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminCancelUserAccountDeletionRequestBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCancelUserAccountDeletionRequest.Response Execute(
+            protected AdminCancelUserAccountDeletionRequest.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCancelUserAccountDeletionRequest.Response> ExecuteAsync(
+            protected async Task<AdminCancelUserAccountDeletionRequest.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminCancelUserAccountDeletionRequest(AdminCancelUserAccountDeletionRequestBuilder builder,
+        public class AdminCancelUserAccountDeletionRequestBuilder : AdminCancelUserAccountDeletionRequestAbstractBuilder<AdminCancelUserAccountDeletionRequestBuilder>
+        {
+            public AdminCancelUserAccountDeletionRequestBuilder() : base() { }
+
+            public AdminCancelUserAccountDeletionRequestBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCancelUserAccountDeletionRequest.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminCancelUserAccountDeletionRequest.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminCancelUserAccountDeletionRequest(IAdminCancelUserAccountDeletionRequestBuilder builder,
             string namespace_,
             string userId
         )
@@ -183,27 +222,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

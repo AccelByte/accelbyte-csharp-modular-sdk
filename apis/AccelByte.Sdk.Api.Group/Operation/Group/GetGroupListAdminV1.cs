@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,28 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static GetGroupListAdminV1Builder Builder { get => new GetGroupListAdminV1Builder(); }
 
-        public class GetGroupListAdminV1Builder
-            : OperationBuilder<GetGroupListAdminV1Builder>
+        public interface IGetGroupListAdminV1Builder
+        {
+
+            string? ConfigurationCode { get; }
+
+            string? GroupName { get; }
+
+            string? GroupRegion { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetGroupListAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetGroupListAdminV1Builder
+            where TImpl : GetGroupListAdminV1AbstractBuilder<TImpl>
         {
 
             public string? ConfigurationCode { get; set; }
@@ -50,42 +70,42 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
 
 
-            internal GetGroupListAdminV1Builder() { }
+            public GetGroupListAdminV1AbstractBuilder() { }
 
-            internal GetGroupListAdminV1Builder(IAccelByteSdk sdk)
+            public GetGroupListAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetGroupListAdminV1Builder SetConfigurationCode(string _configurationCode)
+            public TImpl SetConfigurationCode(string _configurationCode)
             {
                 ConfigurationCode = _configurationCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetGroupListAdminV1Builder SetGroupName(string _groupName)
+            public TImpl SetGroupName(string _groupName)
             {
                 GroupName = _groupName;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetGroupListAdminV1Builder SetGroupRegion(string _groupRegion)
+            public TImpl SetGroupRegion(string _groupRegion)
             {
                 GroupRegion = _groupRegion;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetGroupListAdminV1Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetGroupListAdminV1Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -100,11 +120,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetGroupListAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetGroupListAdminV1.Response Execute(
+            protected GetGroupListAdminV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -121,7 +141,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetGroupListAdminV1.Response> ExecuteAsync(
+            protected async Task<GetGroupListAdminV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -140,7 +160,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private GetGroupListAdminV1(GetGroupListAdminV1Builder builder,
+        public class GetGroupListAdminV1Builder : GetGroupListAdminV1AbstractBuilder<GetGroupListAdminV1Builder>
+        {
+            public GetGroupListAdminV1Builder() : base() { }
+
+            public GetGroupListAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetGroupListAdminV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetGroupListAdminV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetGroupListAdminV1(IGetGroupListAdminV1Builder builder,
             string namespace_
         )
         {
@@ -226,27 +271,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetGroupsListResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetGroupsListResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

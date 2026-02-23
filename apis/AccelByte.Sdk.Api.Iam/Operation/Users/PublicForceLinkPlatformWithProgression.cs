@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicForceLinkPlatformWithProgressionBuilder Builder { get => new PublicForceLinkPlatformWithProgressionBuilder(); }
 
-        public class PublicForceLinkPlatformWithProgressionBuilder
-            : OperationBuilder<PublicForceLinkPlatformWithProgressionBuilder>
+        public interface IPublicForceLinkPlatformWithProgressionBuilder
         {
 
 
 
 
 
-            internal PublicForceLinkPlatformWithProgressionBuilder() { }
+        }
 
-            internal PublicForceLinkPlatformWithProgressionBuilder(IAccelByteSdk sdk)
+        public abstract class PublicForceLinkPlatformWithProgressionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicForceLinkPlatformWithProgressionBuilder
+            where TImpl : PublicForceLinkPlatformWithProgressionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicForceLinkPlatformWithProgressionAbstractBuilder() { }
+
+            public PublicForceLinkPlatformWithProgressionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicForceLinkPlatformWithProgressionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicForceLinkPlatformWithProgression.Response Execute(
+            protected PublicForceLinkPlatformWithProgression.Response InternalExecute(
                 ModelLinkPlatformAccountWithProgressionRequest body,
                 string namespace_,
                 string userId
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicForceLinkPlatformWithProgression.Response> ExecuteAsync(
+            protected async Task<PublicForceLinkPlatformWithProgression.Response> InternalExecuteAsync(
                 ModelLinkPlatformAccountWithProgressionRequest body,
                 string namespace_,
                 string userId
@@ -116,7 +126,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicForceLinkPlatformWithProgression(PublicForceLinkPlatformWithProgressionBuilder builder,
+        public class PublicForceLinkPlatformWithProgressionBuilder : PublicForceLinkPlatformWithProgressionAbstractBuilder<PublicForceLinkPlatformWithProgressionBuilder>
+        {
+            public PublicForceLinkPlatformWithProgressionBuilder() : base() { }
+
+            public PublicForceLinkPlatformWithProgressionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicForceLinkPlatformWithProgression.Response Execute(
+                ModelLinkPlatformAccountWithProgressionRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicForceLinkPlatformWithProgression.Response> ExecuteAsync(
+                ModelLinkPlatformAccountWithProgressionRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicForceLinkPlatformWithProgression(IPublicForceLinkPlatformWithProgressionBuilder builder,
             ModelLinkPlatformAccountWithProgressionRequest body,
             string namespace_,
             string userId
@@ -196,22 +239,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

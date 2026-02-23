@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteOculusIAPConfigBuilder Builder { get => new DeleteOculusIAPConfigBuilder(); }
 
-        public class DeleteOculusIAPConfigBuilder
-            : OperationBuilder<DeleteOculusIAPConfigBuilder>
+        public interface IDeleteOculusIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeleteOculusIAPConfigBuilder() { }
+        }
 
-            internal DeleteOculusIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteOculusIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteOculusIAPConfigBuilder
+            where TImpl : DeleteOculusIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteOculusIAPConfigAbstractBuilder() { }
+
+            public DeleteOculusIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteOculusIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteOculusIAPConfig.Response Execute(
+            protected DeleteOculusIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteOculusIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeleteOculusIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteOculusIAPConfig(DeleteOculusIAPConfigBuilder builder,
+        public class DeleteOculusIAPConfigBuilder : DeleteOculusIAPConfigAbstractBuilder<DeleteOculusIAPConfigBuilder>
+        {
+            public DeleteOculusIAPConfigBuilder() : base() { }
+
+            public DeleteOculusIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteOculusIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteOculusIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteOculusIAPConfig(IDeleteOculusIAPConfigBuilder builder,
             string namespace_
         )
         {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUserIAPConsumeHistoryBuilder Builder { get => new QueryUserIAPConsumeHistoryBuilder(); }
 
-        public class QueryUserIAPConsumeHistoryBuilder
-            : OperationBuilder<QueryUserIAPConsumeHistoryBuilder>
+        public interface IQueryUserIAPConsumeHistoryBuilder
+        {
+
+            string? EndTime { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? StartTime { get; }
+
+            QueryUserIAPConsumeHistoryStatus? Status { get; }
+
+            QueryUserIAPConsumeHistoryType? Type { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserIAPConsumeHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserIAPConsumeHistoryBuilder
+            where TImpl : QueryUserIAPConsumeHistoryAbstractBuilder<TImpl>
         {
 
             public string? EndTime { get; set; }
@@ -53,48 +75,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUserIAPConsumeHistoryBuilder() { }
+            public QueryUserIAPConsumeHistoryAbstractBuilder() { }
 
-            internal QueryUserIAPConsumeHistoryBuilder(IAccelByteSdk sdk)
+            public QueryUserIAPConsumeHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserIAPConsumeHistoryBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPConsumeHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPConsumeHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPConsumeHistoryBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPConsumeHistoryBuilder SetStatus(QueryUserIAPConsumeHistoryStatus _status)
+            public TImpl SetStatus(QueryUserIAPConsumeHistoryStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserIAPConsumeHistoryBuilder SetType(QueryUserIAPConsumeHistoryType _type)
+            public TImpl SetType(QueryUserIAPConsumeHistoryType _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -111,11 +133,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserIAPConsumeHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserIAPConsumeHistory.Response Execute(
+            protected QueryUserIAPConsumeHistory.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -134,7 +156,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserIAPConsumeHistory.Response> ExecuteAsync(
+            protected async Task<QueryUserIAPConsumeHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -155,7 +177,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUserIAPConsumeHistory(QueryUserIAPConsumeHistoryBuilder builder,
+        public class QueryUserIAPConsumeHistoryBuilder : QueryUserIAPConsumeHistoryAbstractBuilder<QueryUserIAPConsumeHistoryBuilder>
+        {
+            public QueryUserIAPConsumeHistoryBuilder() : base() { }
+
+            public QueryUserIAPConsumeHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserIAPConsumeHistory.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserIAPConsumeHistory.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserIAPConsumeHistory(IQueryUserIAPConsumeHistoryBuilder builder,
             string namespace_,
             string userId
         )
@@ -240,7 +291,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPConsumeHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPConsumeHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

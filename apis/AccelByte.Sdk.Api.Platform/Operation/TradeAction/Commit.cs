@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -53,17 +53,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CommitBuilder Builder { get => new CommitBuilder(); }
 
-        public class CommitBuilder
-            : OperationBuilder<CommitBuilder>
+        public interface ICommitBuilder
         {
 
 
 
 
 
-            internal CommitBuilder() { }
+        }
 
-            internal CommitBuilder(IAccelByteSdk sdk)
+        public abstract class CommitAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICommitBuilder
+            where TImpl : CommitAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CommitAbstractBuilder() { }
+
+            public CommitAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -83,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CommitBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Commit.Response Execute(
+            protected Commit.Response InternalExecute(
                 TradeChainedActionCommitRequest body,
                 string namespace_
             )
@@ -106,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Commit.Response> ExecuteAsync(
+            protected async Task<Commit.Response> InternalExecuteAsync(
                 TradeChainedActionCommitRequest body,
                 string namespace_
             )
@@ -126,7 +136,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public Commit.Response<T1> Execute<T1>(
+            protected Commit.Response<T1> InternalExecute<T1>(
                 TradeChainedActionCommitRequest body,
                 string namespace_
             )
@@ -145,7 +155,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Commit.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<Commit.Response<T1>> InternalExecuteAsync<T1>(
                 TradeChainedActionCommitRequest body,
                 string namespace_
             )
@@ -166,7 +176,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private Commit(CommitBuilder builder,
+        public class CommitBuilder : CommitAbstractBuilder<CommitBuilder>
+        {
+            public CommitBuilder() : base() { }
+
+            public CommitBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Commit.Response Execute(
+                TradeChainedActionCommitRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<Commit.Response> ExecuteAsync(
+                TradeChainedActionCommitRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+
+            public Commit.Response<T1> Execute<T1>(
+                TradeChainedActionCommitRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<Commit.Response<T1>> ExecuteAsync<T1>(
+                TradeChainedActionCommitRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public Commit(ICommitBuilder builder,
             TradeChainedActionCommitRequest body,
             string namespace_
         )
@@ -238,7 +298,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
@@ -259,7 +320,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             

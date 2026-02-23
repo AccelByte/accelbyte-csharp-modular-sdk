@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,30 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static DevelopmentServerConfigurationListBuilder Builder { get => new DevelopmentServerConfigurationListBuilder(); }
 
-        public class DevelopmentServerConfigurationListBuilder
-            : OperationBuilder<DevelopmentServerConfigurationListBuilder>
+        public interface IDevelopmentServerConfigurationListBuilder
+        {
+
+            long? Count { get; }
+
+            string? ImageId { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            DevelopmentServerConfigurationListSortBy? SortBy { get; }
+
+            DevelopmentServerConfigurationListSortDirection? SortDirection { get; }
+
+
+
+
+
+        }
+
+        public abstract class DevelopmentServerConfigurationListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDevelopmentServerConfigurationListBuilder
+            where TImpl : DevelopmentServerConfigurationListAbstractBuilder<TImpl>
         {
 
             public long? Count { get; set; }
@@ -50,48 +72,48 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal DevelopmentServerConfigurationListBuilder() { }
+            public DevelopmentServerConfigurationListAbstractBuilder() { }
 
-            internal DevelopmentServerConfigurationListBuilder(IAccelByteSdk sdk)
+            public DevelopmentServerConfigurationListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DevelopmentServerConfigurationListBuilder SetCount(long _count)
+            public TImpl SetCount(long _count)
             {
                 Count = _count;
-                return this;
+                return (TImpl)this;
             }
 
-            public DevelopmentServerConfigurationListBuilder SetImageId(string _imageId)
+            public TImpl SetImageId(string _imageId)
             {
                 ImageId = _imageId;
-                return this;
+                return (TImpl)this;
             }
 
-            public DevelopmentServerConfigurationListBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public DevelopmentServerConfigurationListBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public DevelopmentServerConfigurationListBuilder SetSortBy(DevelopmentServerConfigurationListSortBy _sortBy)
+            public TImpl SetSortBy(DevelopmentServerConfigurationListSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public DevelopmentServerConfigurationListBuilder SetSortDirection(DevelopmentServerConfigurationListSortDirection _sortDirection)
+            public TImpl SetSortDirection(DevelopmentServerConfigurationListSortDirection _sortDirection)
             {
                 SortDirection = _sortDirection;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -106,11 +128,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DevelopmentServerConfigurationListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DevelopmentServerConfigurationList.Response Execute(
+            protected DevelopmentServerConfigurationList.Response InternalExecute(
                 string namespace_
             )
             {
@@ -127,7 +149,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DevelopmentServerConfigurationList.Response> ExecuteAsync(
+            protected async Task<DevelopmentServerConfigurationList.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -146,7 +168,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private DevelopmentServerConfigurationList(DevelopmentServerConfigurationListBuilder builder,
+        public class DevelopmentServerConfigurationListBuilder : DevelopmentServerConfigurationListAbstractBuilder<DevelopmentServerConfigurationListBuilder>
+        {
+            public DevelopmentServerConfigurationListBuilder() : base() { }
+
+            public DevelopmentServerConfigurationListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DevelopmentServerConfigurationList.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DevelopmentServerConfigurationList.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DevelopmentServerConfigurationList(IDevelopmentServerConfigurationListBuilder builder,
             string namespace_
         )
         {
@@ -233,22 +280,26 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiDevelopmentServerConfigurationListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiDevelopmentServerConfigurationListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

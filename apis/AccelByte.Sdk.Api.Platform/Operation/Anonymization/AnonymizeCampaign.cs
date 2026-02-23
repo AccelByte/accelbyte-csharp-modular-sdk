@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizeCampaignBuilder Builder { get => new AnonymizeCampaignBuilder(); }
 
-        public class AnonymizeCampaignBuilder
-            : OperationBuilder<AnonymizeCampaignBuilder>
+        public interface IAnonymizeCampaignBuilder
         {
 
 
 
 
 
-            internal AnonymizeCampaignBuilder() { }
+        }
 
-            internal AnonymizeCampaignBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeCampaignAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeCampaignBuilder
+            where TImpl : AnonymizeCampaignAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeCampaignAbstractBuilder() { }
+
+            public AnonymizeCampaignAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeCampaignBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeCampaign.Response Execute(
+            protected AnonymizeCampaign.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeCampaign.Response> ExecuteAsync(
+            protected async Task<AnonymizeCampaign.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizeCampaign(AnonymizeCampaignBuilder builder,
+        public class AnonymizeCampaignBuilder : AnonymizeCampaignAbstractBuilder<AnonymizeCampaignBuilder>
+        {
+            public AnonymizeCampaignBuilder() : base() { }
+
+            public AnonymizeCampaignBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeCampaign.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeCampaign.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeCampaign(IAnonymizeCampaignBuilder builder,
             string namespace_,
             string userId
         )

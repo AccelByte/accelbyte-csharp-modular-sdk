@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RetrieveAllSSOLoginPlatformCredentialV3Builder Builder { get => new RetrieveAllSSOLoginPlatformCredentialV3Builder(); }
 
-        public class RetrieveAllSSOLoginPlatformCredentialV3Builder
-            : OperationBuilder<RetrieveAllSSOLoginPlatformCredentialV3Builder>
+        public interface IRetrieveAllSSOLoginPlatformCredentialV3Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveAllSSOLoginPlatformCredentialV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAllSSOLoginPlatformCredentialV3Builder
+            where TImpl : RetrieveAllSSOLoginPlatformCredentialV3AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal RetrieveAllSSOLoginPlatformCredentialV3Builder() { }
+            public RetrieveAllSSOLoginPlatformCredentialV3AbstractBuilder() { }
 
-            internal RetrieveAllSSOLoginPlatformCredentialV3Builder(IAccelByteSdk sdk)
+            public RetrieveAllSSOLoginPlatformCredentialV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveAllSSOLoginPlatformCredentialV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveAllSSOLoginPlatformCredentialV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +88,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RetrieveAllSSOLoginPlatformCredentialV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAllSSOLoginPlatformCredentialV3.Response Execute(
+            protected RetrieveAllSSOLoginPlatformCredentialV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -95,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAllSSOLoginPlatformCredentialV3.Response> ExecuteAsync(
+            protected async Task<RetrieveAllSSOLoginPlatformCredentialV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -114,7 +128,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RetrieveAllSSOLoginPlatformCredentialV3(RetrieveAllSSOLoginPlatformCredentialV3Builder builder,
+        public class RetrieveAllSSOLoginPlatformCredentialV3Builder : RetrieveAllSSOLoginPlatformCredentialV3AbstractBuilder<RetrieveAllSSOLoginPlatformCredentialV3Builder>
+        {
+            public RetrieveAllSSOLoginPlatformCredentialV3Builder() : base() { }
+
+            public RetrieveAllSSOLoginPlatformCredentialV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAllSSOLoginPlatformCredentialV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RetrieveAllSSOLoginPlatformCredentialV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RetrieveAllSSOLoginPlatformCredentialV3(IRetrieveAllSSOLoginPlatformCredentialV3Builder builder,
             string namespace_
         )
         {
@@ -191,27 +230,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelSSOPlatformCredentialResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelSSOPlatformCredentialResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

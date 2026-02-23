@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncPaymentOrdersBuilder Builder { get => new SyncPaymentOrdersBuilder(); }
 
-        public class SyncPaymentOrdersBuilder
-            : OperationBuilder<SyncPaymentOrdersBuilder>
+        public interface ISyncPaymentOrdersBuilder
+        {
+
+            string? NextEvaluatedKey { get; }
+
+
+
+
+
+        }
+
+        public abstract class SyncPaymentOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncPaymentOrdersBuilder
+            where TImpl : SyncPaymentOrdersAbstractBuilder<TImpl>
         {
 
             public string? NextEvaluatedKey { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SyncPaymentOrdersBuilder() { }
+            public SyncPaymentOrdersAbstractBuilder() { }
 
-            internal SyncPaymentOrdersBuilder(IAccelByteSdk sdk)
+            public SyncPaymentOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SyncPaymentOrdersBuilder SetNextEvaluatedKey(string _nextEvaluatedKey)
+            public TImpl SetNextEvaluatedKey(string _nextEvaluatedKey)
             {
                 NextEvaluatedKey = _nextEvaluatedKey;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     start                    
                 );
 
-                op.SetBaseFields<SyncPaymentOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncPaymentOrders.Response Execute(
+            protected SyncPaymentOrders.Response InternalExecute(
                 string end,
                 string start
             )
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncPaymentOrders.Response> ExecuteAsync(
+            protected async Task<SyncPaymentOrders.Response> InternalExecuteAsync(
                 string end,
                 string start
             )
@@ -115,7 +127,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncPaymentOrders(SyncPaymentOrdersBuilder builder,
+        public class SyncPaymentOrdersBuilder : SyncPaymentOrdersAbstractBuilder<SyncPaymentOrdersBuilder>
+        {
+            public SyncPaymentOrdersBuilder() : base() { }
+
+            public SyncPaymentOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncPaymentOrders.Response Execute(
+                string end,
+                string start
+            )
+            {
+                return InternalExecute(
+                    end,
+                    start
+                );
+            }
+            public async Task<SyncPaymentOrders.Response> ExecuteAsync(
+                string end,
+                string start
+            )
+            {
+                return await InternalExecuteAsync(
+                    end,
+                    start
+                );
+            }
+        }
+
+
+        public SyncPaymentOrders(ISyncPaymentOrdersBuilder builder,
             string end,
             string start
         )
@@ -185,7 +226,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderSyncResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderSyncResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

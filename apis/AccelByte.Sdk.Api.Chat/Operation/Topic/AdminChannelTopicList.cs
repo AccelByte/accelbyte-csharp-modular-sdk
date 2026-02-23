@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminChannelTopicListBuilder Builder { get => new AdminChannelTopicListBuilder(); }
 
-        public class AdminChannelTopicListBuilder
-            : OperationBuilder<AdminChannelTopicListBuilder>
+        public interface IAdminChannelTopicListBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? TopicName { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminChannelTopicListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminChannelTopicListBuilder
+            where TImpl : AdminChannelTopicListAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal AdminChannelTopicListBuilder() { }
+            public AdminChannelTopicListAbstractBuilder() { }
 
-            internal AdminChannelTopicListBuilder(IAccelByteSdk sdk)
+            public AdminChannelTopicListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminChannelTopicListBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChannelTopicListBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChannelTopicListBuilder SetTopicName(string _topicName)
+            public TImpl SetTopicName(string _topicName)
             {
                 TopicName = _topicName;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminChannelTopicListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminChannelTopicList.Response Execute(
+            protected AdminChannelTopicList.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminChannelTopicList.Response> ExecuteAsync(
+            protected async Task<AdminChannelTopicList.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminChannelTopicList(AdminChannelTopicListBuilder builder,
+        public class AdminChannelTopicListBuilder : AdminChannelTopicListAbstractBuilder<AdminChannelTopicListBuilder>
+        {
+            public AdminChannelTopicListBuilder() : base() { }
+
+            public AdminChannelTopicListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminChannelTopicList.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminChannelTopicList.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminChannelTopicList(IAdminChannelTopicListBuilder builder,
             string namespace_
         )
         {
@@ -202,27 +243,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelTopicWithPaginationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelTopicWithPaginationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

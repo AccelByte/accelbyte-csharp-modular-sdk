@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static SaveAdminEmailConfigurationBuilder Builder { get => new SaveAdminEmailConfigurationBuilder(); }
 
-        public class SaveAdminEmailConfigurationBuilder
-            : OperationBuilder<SaveAdminEmailConfigurationBuilder>
+        public interface ISaveAdminEmailConfigurationBuilder
         {
 
 
 
 
 
-            internal SaveAdminEmailConfigurationBuilder() { }
+        }
 
-            internal SaveAdminEmailConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class SaveAdminEmailConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISaveAdminEmailConfigurationBuilder
+            where TImpl : SaveAdminEmailConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SaveAdminEmailConfigurationAbstractBuilder() { }
+
+            public SaveAdminEmailConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SaveAdminEmailConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SaveAdminEmailConfiguration.Response Execute(
+            protected SaveAdminEmailConfiguration.Response InternalExecute(
                 List<string> body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SaveAdminEmailConfiguration.Response> ExecuteAsync(
+            protected async Task<SaveAdminEmailConfiguration.Response> InternalExecuteAsync(
                 List<string> body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private SaveAdminEmailConfiguration(SaveAdminEmailConfigurationBuilder builder,
+        public class SaveAdminEmailConfigurationBuilder : SaveAdminEmailConfigurationAbstractBuilder<SaveAdminEmailConfigurationBuilder>
+        {
+            public SaveAdminEmailConfigurationBuilder() : base() { }
+
+            public SaveAdminEmailConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SaveAdminEmailConfiguration.Response Execute(
+                List<string> body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<SaveAdminEmailConfiguration.Response> ExecuteAsync(
+                List<string> body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SaveAdminEmailConfiguration(ISaveAdminEmailConfigurationBuilder builder,
             List<string> body,
             string namespace_
         )
@@ -179,17 +218,20 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

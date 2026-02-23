@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminChallengeMyMFAV4Builder Builder { get => new AdminChallengeMyMFAV4Builder(); }
 
-        public class AdminChallengeMyMFAV4Builder
-            : OperationBuilder<AdminChallengeMyMFAV4Builder>
+        public interface IAdminChallengeMyMFAV4Builder
+        {
+
+
+
+            string? Code { get; }
+
+            string? Factor { get; }
+
+
+
+        }
+
+        public abstract class AdminChallengeMyMFAV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminChallengeMyMFAV4Builder
+            where TImpl : AdminChallengeMyMFAV4AbstractBuilder<TImpl>
         {
 
 
@@ -42,9 +56,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminChallengeMyMFAV4Builder() { }
+            public AdminChallengeMyMFAV4AbstractBuilder() { }
 
-            internal AdminChallengeMyMFAV4Builder(IAccelByteSdk sdk)
+            public AdminChallengeMyMFAV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -52,16 +66,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public AdminChallengeMyMFAV4Builder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChallengeMyMFAV4Builder SetFactor(string _factor)
+            public TImpl SetFactor(string _factor)
             {
                 Factor = _factor;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +86,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminChallengeMyMFAV4 op = new AdminChallengeMyMFAV4(this
                 );
 
-                op.SetBaseFields<AdminChallengeMyMFAV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminChallengeMyMFAV4.Response Execute(
+            protected AdminChallengeMyMFAV4.Response InternalExecute(
             )
             {
                 AdminChallengeMyMFAV4 op = Build(
@@ -91,7 +105,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminChallengeMyMFAV4.Response> ExecuteAsync(
+            protected async Task<AdminChallengeMyMFAV4.Response> InternalExecuteAsync(
             )
             {
                 AdminChallengeMyMFAV4 op = Build(
@@ -108,7 +122,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminChallengeMyMFAV4(AdminChallengeMyMFAV4Builder builder
+        public class AdminChallengeMyMFAV4Builder : AdminChallengeMyMFAV4AbstractBuilder<AdminChallengeMyMFAV4Builder>
+        {
+            public AdminChallengeMyMFAV4Builder() : base() { }
+
+            public AdminChallengeMyMFAV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminChallengeMyMFAV4.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminChallengeMyMFAV4.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminChallengeMyMFAV4(IAdminChallengeMyMFAV4Builder builder
         )
         {
             
@@ -183,32 +218,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserMFATokenResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserMFATokenResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

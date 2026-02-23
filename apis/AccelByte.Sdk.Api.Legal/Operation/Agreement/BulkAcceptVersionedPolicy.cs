@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static BulkAcceptVersionedPolicyBuilder Builder { get => new BulkAcceptVersionedPolicyBuilder(); }
 
-        public class BulkAcceptVersionedPolicyBuilder
-            : OperationBuilder<BulkAcceptVersionedPolicyBuilder>
+        public interface IBulkAcceptVersionedPolicyBuilder
+        {
+
+
+            List<Model.AcceptAgreementRequest>? Body { get; }
+
+
+
+
+        }
+
+        public abstract class BulkAcceptVersionedPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkAcceptVersionedPolicyBuilder
+            where TImpl : BulkAcceptVersionedPolicyAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal BulkAcceptVersionedPolicyBuilder() { }
+            public BulkAcceptVersionedPolicyAbstractBuilder() { }
 
-            internal BulkAcceptVersionedPolicyBuilder(IAccelByteSdk sdk)
+            public BulkAcceptVersionedPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public BulkAcceptVersionedPolicyBuilder SetBody(List<Model.AcceptAgreementRequest> _body)
+            public TImpl SetBody(List<Model.AcceptAgreementRequest> _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -64,11 +76,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 BulkAcceptVersionedPolicy op = new BulkAcceptVersionedPolicy(this
                 );
 
-                op.SetBaseFields<BulkAcceptVersionedPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkAcceptVersionedPolicy.Response Execute(
+            protected BulkAcceptVersionedPolicy.Response InternalExecute(
             )
             {
                 BulkAcceptVersionedPolicy op = Build(
@@ -83,7 +95,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkAcceptVersionedPolicy.Response> ExecuteAsync(
+            protected async Task<BulkAcceptVersionedPolicy.Response> InternalExecuteAsync(
             )
             {
                 BulkAcceptVersionedPolicy op = Build(
@@ -100,7 +112,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private BulkAcceptVersionedPolicy(BulkAcceptVersionedPolicyBuilder builder
+        public class BulkAcceptVersionedPolicyBuilder : BulkAcceptVersionedPolicyAbstractBuilder<BulkAcceptVersionedPolicyBuilder>
+        {
+            public BulkAcceptVersionedPolicyBuilder() : base() { }
+
+            public BulkAcceptVersionedPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkAcceptVersionedPolicy.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<BulkAcceptVersionedPolicy.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public BulkAcceptVersionedPolicy(IBulkAcceptVersionedPolicyBuilder builder
         )
         {
             
@@ -164,12 +197,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

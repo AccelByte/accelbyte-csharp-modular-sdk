@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminResetPlatformAccountClosureServicesConfigurationBuilder Builder { get => new AdminResetPlatformAccountClosureServicesConfigurationBuilder(); }
 
-        public class AdminResetPlatformAccountClosureServicesConfigurationBuilder
-            : OperationBuilder<AdminResetPlatformAccountClosureServicesConfigurationBuilder>
+        public interface IAdminResetPlatformAccountClosureServicesConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminResetPlatformAccountClosureServicesConfigurationBuilder() { }
+        }
 
-            internal AdminResetPlatformAccountClosureServicesConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminResetPlatformAccountClosureServicesConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminResetPlatformAccountClosureServicesConfigurationBuilder
+            where TImpl : AdminResetPlatformAccountClosureServicesConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminResetPlatformAccountClosureServicesConfigurationAbstractBuilder() { }
+
+            public AdminResetPlatformAccountClosureServicesConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminResetPlatformAccountClosureServicesConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminResetPlatformAccountClosureServicesConfiguration.Response Execute(
+            protected AdminResetPlatformAccountClosureServicesConfiguration.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminResetPlatformAccountClosureServicesConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminResetPlatformAccountClosureServicesConfiguration.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminResetPlatformAccountClosureServicesConfiguration(AdminResetPlatformAccountClosureServicesConfigurationBuilder builder,
+        public class AdminResetPlatformAccountClosureServicesConfigurationBuilder : AdminResetPlatformAccountClosureServicesConfigurationAbstractBuilder<AdminResetPlatformAccountClosureServicesConfigurationBuilder>
+        {
+            public AdminResetPlatformAccountClosureServicesConfigurationBuilder() : base() { }
+
+            public AdminResetPlatformAccountClosureServicesConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminResetPlatformAccountClosureServicesConfiguration.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminResetPlatformAccountClosureServicesConfiguration.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminResetPlatformAccountClosureServicesConfiguration(IAdminResetPlatformAccountClosureServicesConfigurationBuilder builder,
             string namespace_
         )
         {
@@ -168,12 +203,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

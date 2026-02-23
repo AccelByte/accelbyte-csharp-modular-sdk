@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static DeleteModerationRuleBuilder Builder { get => new DeleteModerationRuleBuilder(); }
 
-        public class DeleteModerationRuleBuilder
-            : OperationBuilder<DeleteModerationRuleBuilder>
+        public interface IDeleteModerationRuleBuilder
         {
 
 
 
 
 
-            internal DeleteModerationRuleBuilder() { }
+        }
 
-            internal DeleteModerationRuleBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteModerationRuleAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteModerationRuleBuilder
+            where TImpl : DeleteModerationRuleAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteModerationRuleAbstractBuilder() { }
+
+            public DeleteModerationRuleAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ruleId                    
                 );
 
-                op.SetBaseFields<DeleteModerationRuleBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteModerationRule.Response Execute(
+            protected DeleteModerationRule.Response InternalExecute(
                 string namespace_,
                 string ruleId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteModerationRule.Response> ExecuteAsync(
+            protected async Task<DeleteModerationRule.Response> InternalExecuteAsync(
                 string namespace_,
                 string ruleId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private DeleteModerationRule(DeleteModerationRuleBuilder builder,
+        public class DeleteModerationRuleBuilder : DeleteModerationRuleAbstractBuilder<DeleteModerationRuleBuilder>
+        {
+            public DeleteModerationRuleBuilder() : base() { }
+
+            public DeleteModerationRuleBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteModerationRule.Response Execute(
+                string namespace_,
+                string ruleId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    ruleId
+                );
+            }
+            public async Task<DeleteModerationRule.Response> ExecuteAsync(
+                string namespace_,
+                string ruleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    ruleId
+                );
+            }
+        }
+
+
+        public DeleteModerationRule(IDeleteModerationRuleBuilder builder,
             string namespace_,
             string ruleId
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

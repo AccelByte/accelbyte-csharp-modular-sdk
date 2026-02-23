@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicChangeSubscriptionBillingAccountBuilder Builder { get => new PublicChangeSubscriptionBillingAccountBuilder(); }
 
-        public class PublicChangeSubscriptionBillingAccountBuilder
-            : OperationBuilder<PublicChangeSubscriptionBillingAccountBuilder>
+        public interface IPublicChangeSubscriptionBillingAccountBuilder
         {
 
 
 
 
 
-            internal PublicChangeSubscriptionBillingAccountBuilder() { }
+        }
 
-            internal PublicChangeSubscriptionBillingAccountBuilder(IAccelByteSdk sdk)
+        public abstract class PublicChangeSubscriptionBillingAccountAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicChangeSubscriptionBillingAccountBuilder
+            where TImpl : PublicChangeSubscriptionBillingAccountAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicChangeSubscriptionBillingAccountAbstractBuilder() { }
+
+            public PublicChangeSubscriptionBillingAccountAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicChangeSubscriptionBillingAccountBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicChangeSubscriptionBillingAccount.Response Execute(
+            protected PublicChangeSubscriptionBillingAccount.Response InternalExecute(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicChangeSubscriptionBillingAccount.Response> ExecuteAsync(
+            protected async Task<PublicChangeSubscriptionBillingAccount.Response> InternalExecuteAsync(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicChangeSubscriptionBillingAccount(PublicChangeSubscriptionBillingAccountBuilder builder,
+        public class PublicChangeSubscriptionBillingAccountBuilder : PublicChangeSubscriptionBillingAccountAbstractBuilder<PublicChangeSubscriptionBillingAccountBuilder>
+        {
+            public PublicChangeSubscriptionBillingAccountBuilder() : base() { }
+
+            public PublicChangeSubscriptionBillingAccountBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicChangeSubscriptionBillingAccount.Response Execute(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<PublicChangeSubscriptionBillingAccount.Response> ExecuteAsync(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicChangeSubscriptionBillingAccount(IPublicChangeSubscriptionBillingAccountBuilder builder,
             string namespace_,
             string subscriptionId,
             string userId
@@ -191,22 +234,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

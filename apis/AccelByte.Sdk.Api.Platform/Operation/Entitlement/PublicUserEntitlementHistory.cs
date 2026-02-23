@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicUserEntitlementHistoryBuilder Builder { get => new PublicUserEntitlementHistoryBuilder(); }
 
-        public class PublicUserEntitlementHistoryBuilder
-            : OperationBuilder<PublicUserEntitlementHistoryBuilder>
+        public interface IPublicUserEntitlementHistoryBuilder
+        {
+
+            string? EndDate { get; }
+
+            PublicUserEntitlementHistoryEntitlementClazz? EntitlementClazz { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? StartDate { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicUserEntitlementHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUserEntitlementHistoryBuilder
+            where TImpl : PublicUserEntitlementHistoryAbstractBuilder<TImpl>
         {
 
             public string? EndDate { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicUserEntitlementHistoryBuilder() { }
+            public PublicUserEntitlementHistoryAbstractBuilder() { }
 
-            internal PublicUserEntitlementHistoryBuilder(IAccelByteSdk sdk)
+            public PublicUserEntitlementHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicUserEntitlementHistoryBuilder SetEndDate(string _endDate)
+            public TImpl SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUserEntitlementHistoryBuilder SetEntitlementClazz(PublicUserEntitlementHistoryEntitlementClazz _entitlementClazz)
+            public TImpl SetEntitlementClazz(PublicUserEntitlementHistoryEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUserEntitlementHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUserEntitlementHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUserEntitlementHistoryBuilder SetStartDate(string _startDate)
+            public TImpl SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -104,11 +124,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUserEntitlementHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUserEntitlementHistory.Response Execute(
+            protected PublicUserEntitlementHistory.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -127,7 +147,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUserEntitlementHistory.Response> ExecuteAsync(
+            protected async Task<PublicUserEntitlementHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -148,7 +168,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicUserEntitlementHistory(PublicUserEntitlementHistoryBuilder builder,
+        public class PublicUserEntitlementHistoryBuilder : PublicUserEntitlementHistoryAbstractBuilder<PublicUserEntitlementHistoryBuilder>
+        {
+            public PublicUserEntitlementHistoryBuilder() : base() { }
+
+            public PublicUserEntitlementHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUserEntitlementHistory.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicUserEntitlementHistory.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUserEntitlementHistory(IPublicUserEntitlementHistoryBuilder builder,
             string namespace_,
             string userId
         )
@@ -230,7 +279,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserEntitlementHistoryPagingSlicedResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserEntitlementHistoryPagingSlicedResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

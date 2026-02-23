@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateStripeConfigBuilder Builder { get => new UpdateStripeConfigBuilder(); }
 
-        public class UpdateStripeConfigBuilder
-            : OperationBuilder<UpdateStripeConfigBuilder>
+        public interface IUpdateStripeConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+            bool? Validate { get; }
+
+
+
+
+
+        }
+
+        public abstract class UpdateStripeConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateStripeConfigBuilder
+            where TImpl : UpdateStripeConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateStripeConfigBuilder() { }
+            public UpdateStripeConfigAbstractBuilder() { }
 
-            internal UpdateStripeConfigBuilder(IAccelByteSdk sdk)
+            public UpdateStripeConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UpdateStripeConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
-            public UpdateStripeConfigBuilder SetValidate(bool _validate)
+            public TImpl SetValidate(bool _validate)
             {
                 Validate = _validate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateStripeConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateStripeConfig.Response Execute(
+            protected UpdateStripeConfig.Response InternalExecute(
                 StripeConfig body,
                 string id
             )
@@ -102,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateStripeConfig.Response> ExecuteAsync(
+            protected async Task<UpdateStripeConfig.Response> InternalExecuteAsync(
                 StripeConfig body,
                 string id
             )
@@ -123,7 +137,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateStripeConfig(UpdateStripeConfigBuilder builder,
+        public class UpdateStripeConfigBuilder : UpdateStripeConfigAbstractBuilder<UpdateStripeConfigBuilder>
+        {
+            public UpdateStripeConfigBuilder() : base() { }
+
+            public UpdateStripeConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateStripeConfig.Response Execute(
+                StripeConfig body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateStripeConfig.Response> ExecuteAsync(
+                StripeConfig body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateStripeConfig(IUpdateStripeConfigBuilder builder,
             StripeConfig body,
             string id
         )
@@ -198,12 +241,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

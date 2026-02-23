@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicUpdateAttributeBuilder Builder { get => new PublicUpdateAttributeBuilder(); }
 
-        public class PublicUpdateAttributeBuilder
-            : OperationBuilder<PublicUpdateAttributeBuilder>
+        public interface IPublicUpdateAttributeBuilder
+        {
+
+
+            Model.Attribute? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PublicUpdateAttributeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdateAttributeBuilder
+            where TImpl : PublicUpdateAttributeAbstractBuilder<TImpl>
         {
 
 
@@ -48,19 +60,19 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal PublicUpdateAttributeBuilder() { }
+            public PublicUpdateAttributeAbstractBuilder() { }
 
-            internal PublicUpdateAttributeBuilder(IAccelByteSdk sdk)
+            public PublicUpdateAttributeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PublicUpdateAttributeBuilder SetBody(Model.Attribute _body)
+            public TImpl SetBody(Model.Attribute _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,12 +92,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdateAttributeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicUpdateAttribute.Response Execute(
+            protected PublicUpdateAttribute.Response InternalExecute(
                 string attributeName,
                 string namespace_,
                 string profileId,
@@ -108,7 +120,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateAttribute.Response> ExecuteAsync(
+            protected async Task<PublicUpdateAttribute.Response> InternalExecuteAsync(
                 string attributeName,
                 string namespace_,
                 string profileId,
@@ -133,7 +145,45 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicUpdateAttribute(PublicUpdateAttributeBuilder builder,
+        public class PublicUpdateAttributeBuilder : PublicUpdateAttributeAbstractBuilder<PublicUpdateAttributeBuilder>
+        {
+            public PublicUpdateAttributeBuilder() : base() { }
+
+            public PublicUpdateAttributeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdateAttribute.Response Execute(
+                string attributeName,
+                string namespace_,
+                string profileId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    attributeName,
+                    namespace_,
+                    profileId,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateAttribute.Response> ExecuteAsync(
+                string attributeName,
+                string namespace_,
+                string profileId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    attributeName,
+                    namespace_,
+                    profileId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdateAttribute(IPublicUpdateAttributeBuilder builder,
             string attributeName,
             string namespace_,
             string profileId,
@@ -223,37 +273,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GameProfileInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.GameProfileInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

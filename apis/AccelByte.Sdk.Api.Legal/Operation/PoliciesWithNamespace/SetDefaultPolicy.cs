@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static SetDefaultPolicyBuilder Builder { get => new SetDefaultPolicyBuilder(); }
 
-        public class SetDefaultPolicyBuilder
-            : OperationBuilder<SetDefaultPolicyBuilder>
+        public interface ISetDefaultPolicyBuilder
         {
 
 
 
 
 
-            internal SetDefaultPolicyBuilder() { }
+        }
 
-            internal SetDefaultPolicyBuilder(IAccelByteSdk sdk)
+        public abstract class SetDefaultPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISetDefaultPolicyBuilder
+            where TImpl : SetDefaultPolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SetDefaultPolicyAbstractBuilder() { }
+
+            public SetDefaultPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyId                    
                 );
 
-                op.SetBaseFields<SetDefaultPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SetDefaultPolicy.Response Execute(
+            protected SetDefaultPolicy.Response InternalExecute(
                 string namespace_,
                 string policyId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SetDefaultPolicy.Response> ExecuteAsync(
+            protected async Task<SetDefaultPolicy.Response> InternalExecuteAsync(
                 string namespace_,
                 string policyId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private SetDefaultPolicy(SetDefaultPolicyBuilder builder,
+        public class SetDefaultPolicyBuilder : SetDefaultPolicyAbstractBuilder<SetDefaultPolicyBuilder>
+        {
+            public SetDefaultPolicyBuilder() : base() { }
+
+            public SetDefaultPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SetDefaultPolicy.Response Execute(
+                string namespace_,
+                string policyId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    policyId
+                );
+            }
+            public async Task<SetDefaultPolicy.Response> ExecuteAsync(
+                string namespace_,
+                string policyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    policyId
+                );
+            }
+        }
+
+
+        public SetDefaultPolicy(ISetDefaultPolicyBuilder builder,
             string namespace_,
             string policyId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

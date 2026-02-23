@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminGetPeriodsBuilder Builder { get => new AdminGetPeriodsBuilder(); }
 
-        public class AdminGetPeriodsBuilder
-            : OperationBuilder<AdminGetPeriodsBuilder>
+        public interface IAdminGetPeriodsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetPeriodsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetPeriodsBuilder
+            where TImpl : AdminGetPeriodsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
 
 
-            internal AdminGetPeriodsBuilder() { }
+            public AdminGetPeriodsAbstractBuilder() { }
 
-            internal AdminGetPeriodsBuilder(IAccelByteSdk sdk)
+            public AdminGetPeriodsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetPeriodsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetPeriodsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetPeriodsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetPeriods.Response Execute(
+            protected AdminGetPeriods.Response InternalExecute(
                 string challengeCode,
                 string namespace_
             )
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetPeriods.Response> ExecuteAsync(
+            protected async Task<AdminGetPeriods.Response> InternalExecuteAsync(
                 string challengeCode,
                 string namespace_
             )
@@ -120,7 +134,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminGetPeriods(AdminGetPeriodsBuilder builder,
+        public class AdminGetPeriodsBuilder : AdminGetPeriodsAbstractBuilder<AdminGetPeriodsBuilder>
+        {
+            public AdminGetPeriodsBuilder() : base() { }
+
+            public AdminGetPeriodsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetPeriods.Response Execute(
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    challengeCode,
+                    namespace_
+                );
+            }
+            public async Task<AdminGetPeriods.Response> ExecuteAsync(
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    challengeCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetPeriods(IAdminGetPeriodsBuilder builder,
             string challengeCode,
             string namespace_
         )
@@ -201,27 +244,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListPeriodsResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListPeriodsResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

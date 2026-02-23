@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminDeleteTagHandlerV1Builder Builder { get => new AdminDeleteTagHandlerV1Builder(); }
 
-        public class AdminDeleteTagHandlerV1Builder
-            : OperationBuilder<AdminDeleteTagHandlerV1Builder>
+        public interface IAdminDeleteTagHandlerV1Builder
         {
 
 
 
 
 
-            internal AdminDeleteTagHandlerV1Builder() { }
+        }
 
-            internal AdminDeleteTagHandlerV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteTagHandlerV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteTagHandlerV1Builder
+            where TImpl : AdminDeleteTagHandlerV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteTagHandlerV1AbstractBuilder() { }
+
+            public AdminDeleteTagHandlerV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     tag                    
                 );
 
-                op.SetBaseFields<AdminDeleteTagHandlerV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteTagHandlerV1.Response Execute(
+            protected AdminDeleteTagHandlerV1.Response InternalExecute(
                 string namespace_,
                 string tag
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteTagHandlerV1.Response> ExecuteAsync(
+            protected async Task<AdminDeleteTagHandlerV1.Response> InternalExecuteAsync(
                 string namespace_,
                 string tag
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminDeleteTagHandlerV1(AdminDeleteTagHandlerV1Builder builder,
+        public class AdminDeleteTagHandlerV1Builder : AdminDeleteTagHandlerV1AbstractBuilder<AdminDeleteTagHandlerV1Builder>
+        {
+            public AdminDeleteTagHandlerV1Builder() : base() { }
+
+            public AdminDeleteTagHandlerV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteTagHandlerV1.Response Execute(
+                string namespace_,
+                string tag
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    tag
+                );
+            }
+            public async Task<AdminDeleteTagHandlerV1.Response> ExecuteAsync(
+                string namespace_,
+                string tag
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    tag
+                );
+            }
+        }
+
+
+        public AdminDeleteTagHandlerV1(IAdminDeleteTagHandlerV1Builder builder,
             string namespace_,
             string tag
         )
@@ -182,22 +221,26 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

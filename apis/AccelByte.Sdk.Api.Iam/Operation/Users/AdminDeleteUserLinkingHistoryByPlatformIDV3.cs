@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -70,17 +70,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDeleteUserLinkingHistoryByPlatformIDV3Builder Builder { get => new AdminDeleteUserLinkingHistoryByPlatformIDV3Builder(); }
 
-        public class AdminDeleteUserLinkingHistoryByPlatformIDV3Builder
-            : OperationBuilder<AdminDeleteUserLinkingHistoryByPlatformIDV3Builder>
+        public interface IAdminDeleteUserLinkingHistoryByPlatformIDV3Builder
         {
 
 
 
 
 
-            internal AdminDeleteUserLinkingHistoryByPlatformIDV3Builder() { }
+        }
 
-            internal AdminDeleteUserLinkingHistoryByPlatformIDV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteUserLinkingHistoryByPlatformIDV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteUserLinkingHistoryByPlatformIDV3Builder
+            where TImpl : AdminDeleteUserLinkingHistoryByPlatformIDV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteUserLinkingHistoryByPlatformIDV3AbstractBuilder() { }
+
+            public AdminDeleteUserLinkingHistoryByPlatformIDV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -102,12 +112,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminDeleteUserLinkingHistoryByPlatformIDV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminDeleteUserLinkingHistoryByPlatformIDV3.Response Execute(
+            protected AdminDeleteUserLinkingHistoryByPlatformIDV3.Response InternalExecute(
                 string namespace_,
                 string platformId,
                 string userId
@@ -128,7 +138,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteUserLinkingHistoryByPlatformIDV3.Response> ExecuteAsync(
+            protected async Task<AdminDeleteUserLinkingHistoryByPlatformIDV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId,
                 string userId
@@ -151,7 +161,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDeleteUserLinkingHistoryByPlatformIDV3(AdminDeleteUserLinkingHistoryByPlatformIDV3Builder builder,
+        public class AdminDeleteUserLinkingHistoryByPlatformIDV3Builder : AdminDeleteUserLinkingHistoryByPlatformIDV3AbstractBuilder<AdminDeleteUserLinkingHistoryByPlatformIDV3Builder>
+        {
+            public AdminDeleteUserLinkingHistoryByPlatformIDV3Builder() : base() { }
+
+            public AdminDeleteUserLinkingHistoryByPlatformIDV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminDeleteUserLinkingHistoryByPlatformIDV3.Response Execute(
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+            public async Task<AdminDeleteUserLinkingHistoryByPlatformIDV3.Response> ExecuteAsync(
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminDeleteUserLinkingHistoryByPlatformIDV3(IAdminDeleteUserLinkingHistoryByPlatformIDV3Builder builder,
             string namespace_,
             string platformId,
             string userId
@@ -233,27 +277,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

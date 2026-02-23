@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static DeleteLocalizedPolicyBuilder Builder { get => new DeleteLocalizedPolicyBuilder(); }
 
-        public class DeleteLocalizedPolicyBuilder
-            : OperationBuilder<DeleteLocalizedPolicyBuilder>
+        public interface IDeleteLocalizedPolicyBuilder
         {
 
 
 
 
 
-            internal DeleteLocalizedPolicyBuilder() { }
+        }
 
-            internal DeleteLocalizedPolicyBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteLocalizedPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteLocalizedPolicyBuilder
+            where TImpl : DeleteLocalizedPolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteLocalizedPolicyAbstractBuilder() { }
+
+            public DeleteLocalizedPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteLocalizedPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteLocalizedPolicy.Response Execute(
+            protected DeleteLocalizedPolicy.Response InternalExecute(
                 string localizedPolicyVersionId,
                 string namespace_
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteLocalizedPolicy.Response> ExecuteAsync(
+            protected async Task<DeleteLocalizedPolicy.Response> InternalExecuteAsync(
                 string localizedPolicyVersionId,
                 string namespace_
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private DeleteLocalizedPolicy(DeleteLocalizedPolicyBuilder builder,
+        public class DeleteLocalizedPolicyBuilder : DeleteLocalizedPolicyAbstractBuilder<DeleteLocalizedPolicyBuilder>
+        {
+            public DeleteLocalizedPolicyBuilder() : base() { }
+
+            public DeleteLocalizedPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteLocalizedPolicy.Response Execute(
+                string localizedPolicyVersionId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    localizedPolicyVersionId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteLocalizedPolicy.Response> ExecuteAsync(
+                string localizedPolicyVersionId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    localizedPolicyVersionId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteLocalizedPolicy(IDeleteLocalizedPolicyBuilder builder,
             string localizedPolicyVersionId,
             string namespace_
         )
@@ -179,7 +218,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

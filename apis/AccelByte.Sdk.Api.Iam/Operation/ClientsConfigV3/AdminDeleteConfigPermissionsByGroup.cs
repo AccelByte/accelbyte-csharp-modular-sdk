@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDeleteConfigPermissionsByGroupBuilder Builder { get => new AdminDeleteConfigPermissionsByGroupBuilder(); }
 
-        public class AdminDeleteConfigPermissionsByGroupBuilder
-            : OperationBuilder<AdminDeleteConfigPermissionsByGroupBuilder>
+        public interface IAdminDeleteConfigPermissionsByGroupBuilder
+        {
+
+            bool? ForceDelete { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminDeleteConfigPermissionsByGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteConfigPermissionsByGroupBuilder
+            where TImpl : AdminDeleteConfigPermissionsByGroupAbstractBuilder<TImpl>
         {
 
             public bool? ForceDelete { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminDeleteConfigPermissionsByGroupBuilder() { }
+            public AdminDeleteConfigPermissionsByGroupAbstractBuilder() { }
 
-            internal AdminDeleteConfigPermissionsByGroupBuilder(IAccelByteSdk sdk)
+            public AdminDeleteConfigPermissionsByGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminDeleteConfigPermissionsByGroupBuilder SetForceDelete(bool _forceDelete)
+            public TImpl SetForceDelete(bool _forceDelete)
             {
                 ForceDelete = _forceDelete;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminDeleteConfigPermissionsByGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteConfigPermissionsByGroup.Response Execute(
+            protected AdminDeleteConfigPermissionsByGroup.Response InternalExecute(
                 ClientmodelPermissionSetDeleteGroupRequest body
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteConfigPermissionsByGroup.Response> ExecuteAsync(
+            protected async Task<AdminDeleteConfigPermissionsByGroup.Response> InternalExecuteAsync(
                 ClientmodelPermissionSetDeleteGroupRequest body
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDeleteConfigPermissionsByGroup(AdminDeleteConfigPermissionsByGroupBuilder builder,
+        public class AdminDeleteConfigPermissionsByGroupBuilder : AdminDeleteConfigPermissionsByGroupAbstractBuilder<AdminDeleteConfigPermissionsByGroupBuilder>
+        {
+            public AdminDeleteConfigPermissionsByGroupBuilder() : base() { }
+
+            public AdminDeleteConfigPermissionsByGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteConfigPermissionsByGroup.Response Execute(
+                ClientmodelPermissionSetDeleteGroupRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminDeleteConfigPermissionsByGroup.Response> ExecuteAsync(
+                ClientmodelPermissionSetDeleteGroupRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminDeleteConfigPermissionsByGroup(IAdminDeleteConfigPermissionsByGroupBuilder builder,
             ClientmodelPermissionSetDeleteGroupRequest body
         )
         {
@@ -177,12 +214,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

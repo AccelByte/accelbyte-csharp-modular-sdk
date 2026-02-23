@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPlatformWalletConfigBuilder Builder { get => new GetPlatformWalletConfigBuilder(); }
 
-        public class GetPlatformWalletConfigBuilder
-            : OperationBuilder<GetPlatformWalletConfigBuilder>
+        public interface IGetPlatformWalletConfigBuilder
         {
 
 
 
 
 
-            internal GetPlatformWalletConfigBuilder() { }
+        }
 
-            internal GetPlatformWalletConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetPlatformWalletConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPlatformWalletConfigBuilder
+            where TImpl : GetPlatformWalletConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPlatformWalletConfigAbstractBuilder() { }
+
+            public GetPlatformWalletConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     platform                    
                 );
 
-                op.SetBaseFields<GetPlatformWalletConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPlatformWalletConfig.Response Execute(
+            protected GetPlatformWalletConfig.Response InternalExecute(
                 string namespace_,
                 string platform
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPlatformWalletConfig.Response> ExecuteAsync(
+            protected async Task<GetPlatformWalletConfig.Response> InternalExecuteAsync(
                 string namespace_,
                 string platform
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPlatformWalletConfig(GetPlatformWalletConfigBuilder builder,
+        public class GetPlatformWalletConfigBuilder : GetPlatformWalletConfigAbstractBuilder<GetPlatformWalletConfigBuilder>
+        {
+            public GetPlatformWalletConfigBuilder() : base() { }
+
+            public GetPlatformWalletConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPlatformWalletConfig.Response Execute(
+                string namespace_,
+                string platform
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platform
+                );
+            }
+            public async Task<GetPlatformWalletConfig.Response> ExecuteAsync(
+                string namespace_,
+                string platform
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platform
+                );
+            }
+        }
+
+
+        public GetPlatformWalletConfig(IGetPlatformWalletConfigBuilder builder,
             string namespace_,
             GetPlatformWalletConfigPlatform platform
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

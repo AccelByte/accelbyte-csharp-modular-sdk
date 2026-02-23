@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetItemIdBySkuBuilder Builder { get => new GetItemIdBySkuBuilder(); }
 
-        public class GetItemIdBySkuBuilder
-            : OperationBuilder<GetItemIdBySkuBuilder>
+        public interface IGetItemIdBySkuBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetItemIdBySkuAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetItemIdBySkuBuilder
+            where TImpl : GetItemIdBySkuAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetItemIdBySkuBuilder() { }
+            public GetItemIdBySkuAbstractBuilder() { }
 
-            internal GetItemIdBySkuBuilder(IAccelByteSdk sdk)
+            public GetItemIdBySkuAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetItemIdBySkuBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetItemIdBySkuBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     sku                    
                 );
 
-                op.SetBaseFields<GetItemIdBySkuBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetItemIdBySku.Response Execute(
+            protected GetItemIdBySku.Response InternalExecute(
                 string namespace_,
                 string sku
             )
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItemIdBySku.Response> ExecuteAsync(
+            protected async Task<GetItemIdBySku.Response> InternalExecuteAsync(
                 string namespace_,
                 string sku
             )
@@ -124,7 +138,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetItemIdBySku(GetItemIdBySkuBuilder builder,
+        public class GetItemIdBySkuBuilder : GetItemIdBySkuAbstractBuilder<GetItemIdBySkuBuilder>
+        {
+            public GetItemIdBySkuBuilder() : base() { }
+
+            public GetItemIdBySkuBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetItemIdBySku.Response Execute(
+                string namespace_,
+                string sku
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    sku
+                );
+            }
+            public async Task<GetItemIdBySku.Response> ExecuteAsync(
+                string namespace_,
+                string sku
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    sku
+                );
+            }
+        }
+
+
+        public GetItemIdBySku(IGetItemIdBySkuBuilder builder,
             string namespace_,
             string sku
         )
@@ -199,12 +242,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemId>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemId>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

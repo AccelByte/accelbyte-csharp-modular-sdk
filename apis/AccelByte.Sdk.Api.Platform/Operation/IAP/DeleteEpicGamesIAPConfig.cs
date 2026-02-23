@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteEpicGamesIAPConfigBuilder Builder { get => new DeleteEpicGamesIAPConfigBuilder(); }
 
-        public class DeleteEpicGamesIAPConfigBuilder
-            : OperationBuilder<DeleteEpicGamesIAPConfigBuilder>
+        public interface IDeleteEpicGamesIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeleteEpicGamesIAPConfigBuilder() { }
+        }
 
-            internal DeleteEpicGamesIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteEpicGamesIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteEpicGamesIAPConfigBuilder
+            where TImpl : DeleteEpicGamesIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteEpicGamesIAPConfigAbstractBuilder() { }
+
+            public DeleteEpicGamesIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteEpicGamesIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteEpicGamesIAPConfig.Response Execute(
+            protected DeleteEpicGamesIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteEpicGamesIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeleteEpicGamesIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteEpicGamesIAPConfig(DeleteEpicGamesIAPConfigBuilder builder,
+        public class DeleteEpicGamesIAPConfigBuilder : DeleteEpicGamesIAPConfigAbstractBuilder<DeleteEpicGamesIAPConfigBuilder>
+        {
+            public DeleteEpicGamesIAPConfigBuilder() : base() { }
+
+            public DeleteEpicGamesIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteEpicGamesIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteEpicGamesIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteEpicGamesIAPConfig(IDeleteEpicGamesIAPConfigBuilder builder,
             string namespace_
         )
         {

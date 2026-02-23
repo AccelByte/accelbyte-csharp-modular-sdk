@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetConfigBuilder Builder { get => new GetConfigBuilder(); }
 
-        public class GetConfigBuilder
-            : OperationBuilder<GetConfigBuilder>
+        public interface IGetConfigBuilder
         {
 
 
 
 
 
-            internal GetConfigBuilder() { }
+        }
 
-            internal GetConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetConfigBuilder
+            where TImpl : GetConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetConfigAbstractBuilder() { }
+
+            public GetConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetConfig.Response Execute(
+            protected GetConfig.Response InternalExecute(
                 string configKey,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetConfig.Response> ExecuteAsync(
+            protected async Task<GetConfig.Response> InternalExecuteAsync(
                 string configKey,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetConfig(GetConfigBuilder builder,
+        public class GetConfigBuilder : GetConfigAbstractBuilder<GetConfigBuilder>
+        {
+            public GetConfigBuilder() : base() { }
+
+            public GetConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetConfig.Response Execute(
+                string configKey,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    configKey,
+                    namespace_
+                );
+            }
+            public async Task<GetConfig.Response> ExecuteAsync(
+                string configKey,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    configKey,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetConfig(IGetConfigBuilder builder,
             string configKey,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

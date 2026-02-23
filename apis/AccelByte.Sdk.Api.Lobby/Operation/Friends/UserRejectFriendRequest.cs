@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UserRejectFriendRequestBuilder Builder { get => new UserRejectFriendRequestBuilder(); }
 
-        public class UserRejectFriendRequestBuilder
-            : OperationBuilder<UserRejectFriendRequestBuilder>
+        public interface IUserRejectFriendRequestBuilder
         {
 
 
 
 
 
-            internal UserRejectFriendRequestBuilder() { }
+        }
 
-            internal UserRejectFriendRequestBuilder(IAccelByteSdk sdk)
+        public abstract class UserRejectFriendRequestAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUserRejectFriendRequestBuilder
+            where TImpl : UserRejectFriendRequestAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UserRejectFriendRequestAbstractBuilder() { }
+
+            public UserRejectFriendRequestAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UserRejectFriendRequestBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UserRejectFriendRequest.Response Execute(
+            protected UserRejectFriendRequest.Response InternalExecute(
                 ModelUserRejectFriendRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UserRejectFriendRequest.Response> ExecuteAsync(
+            protected async Task<UserRejectFriendRequest.Response> InternalExecuteAsync(
                 ModelUserRejectFriendRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UserRejectFriendRequest(UserRejectFriendRequestBuilder builder,
+        public class UserRejectFriendRequestBuilder : UserRejectFriendRequestAbstractBuilder<UserRejectFriendRequestBuilder>
+        {
+            public UserRejectFriendRequestBuilder() : base() { }
+
+            public UserRejectFriendRequestBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UserRejectFriendRequest.Response Execute(
+                ModelUserRejectFriendRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UserRejectFriendRequest.Response> ExecuteAsync(
+                ModelUserRejectFriendRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UserRejectFriendRequest(IUserRejectFriendRequestBuilder builder,
             ModelUserRejectFriendRequest body,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

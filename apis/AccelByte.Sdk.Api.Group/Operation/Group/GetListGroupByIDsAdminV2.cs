@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static GetListGroupByIDsAdminV2Builder Builder { get => new GetListGroupByIDsAdminV2Builder(); }
 
-        public class GetListGroupByIDsAdminV2Builder
-            : OperationBuilder<GetListGroupByIDsAdminV2Builder>
+        public interface IGetListGroupByIDsAdminV2Builder
         {
 
 
 
 
 
-            internal GetListGroupByIDsAdminV2Builder() { }
+        }
 
-            internal GetListGroupByIDsAdminV2Builder(IAccelByteSdk sdk)
+        public abstract class GetListGroupByIDsAdminV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetListGroupByIDsAdminV2Builder
+            where TImpl : GetListGroupByIDsAdminV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetListGroupByIDsAdminV2AbstractBuilder() { }
+
+            public GetListGroupByIDsAdminV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetListGroupByIDsAdminV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetListGroupByIDsAdminV2.Response Execute(
+            protected GetListGroupByIDsAdminV2.Response InternalExecute(
                 ModelsGetGroupListRequestV2 body,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetListGroupByIDsAdminV2.Response> ExecuteAsync(
+            protected async Task<GetListGroupByIDsAdminV2.Response> InternalExecuteAsync(
                 ModelsGetGroupListRequestV2 body,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private GetListGroupByIDsAdminV2(GetListGroupByIDsAdminV2Builder builder,
+        public class GetListGroupByIDsAdminV2Builder : GetListGroupByIDsAdminV2AbstractBuilder<GetListGroupByIDsAdminV2Builder>
+        {
+            public GetListGroupByIDsAdminV2Builder() : base() { }
+
+            public GetListGroupByIDsAdminV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetListGroupByIDsAdminV2.Response Execute(
+                ModelsGetGroupListRequestV2 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<GetListGroupByIDsAdminV2.Response> ExecuteAsync(
+                ModelsGetGroupListRequestV2 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetListGroupByIDsAdminV2(IGetListGroupByIDsAdminV2Builder builder,
             ModelsGetGroupListRequestV2 body,
             string namespace_
         )
@@ -183,27 +222,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetGroupsResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetGroupsResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

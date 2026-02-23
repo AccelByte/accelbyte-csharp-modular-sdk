@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -49,17 +49,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePlatformDLCConfigBuilder Builder { get => new UpdatePlatformDLCConfigBuilder(); }
 
-        public class UpdatePlatformDLCConfigBuilder
-            : OperationBuilder<UpdatePlatformDLCConfigBuilder>
+        public interface IUpdatePlatformDLCConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePlatformDLCConfigBuilder() { }
+        }
 
-            internal UpdatePlatformDLCConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePlatformDLCConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePlatformDLCConfigBuilder
+            where TImpl : UpdatePlatformDLCConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePlatformDLCConfigAbstractBuilder() { }
+
+            public UpdatePlatformDLCConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -79,11 +89,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdatePlatformDLCConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePlatformDLCConfig.Response Execute(
+            protected UpdatePlatformDLCConfig.Response InternalExecute(
                 PlatformDLCConfigUpdate body,
                 string namespace_
             )
@@ -102,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePlatformDLCConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePlatformDLCConfig.Response> InternalExecuteAsync(
                 PlatformDLCConfigUpdate body,
                 string namespace_
             )
@@ -123,7 +133,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePlatformDLCConfig(UpdatePlatformDLCConfigBuilder builder,
+        public class UpdatePlatformDLCConfigBuilder : UpdatePlatformDLCConfigAbstractBuilder<UpdatePlatformDLCConfigBuilder>
+        {
+            public UpdatePlatformDLCConfigBuilder() : base() { }
+
+            public UpdatePlatformDLCConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePlatformDLCConfig.Response Execute(
+                PlatformDLCConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdatePlatformDLCConfig.Response> ExecuteAsync(
+                PlatformDLCConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdatePlatformDLCConfig(IUpdatePlatformDLCConfigBuilder builder,
             PlatformDLCConfigUpdate body,
             string namespace_
         )
@@ -192,12 +231,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlatformDLCConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ApplyUserRedemptionBuilder Builder { get => new ApplyUserRedemptionBuilder(); }
 
-        public class ApplyUserRedemptionBuilder
-            : OperationBuilder<ApplyUserRedemptionBuilder>
+        public interface IApplyUserRedemptionBuilder
         {
 
 
 
 
 
-            internal ApplyUserRedemptionBuilder() { }
+        }
 
-            internal ApplyUserRedemptionBuilder(IAccelByteSdk sdk)
+        public abstract class ApplyUserRedemptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IApplyUserRedemptionBuilder
+            where TImpl : ApplyUserRedemptionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ApplyUserRedemptionAbstractBuilder() { }
+
+            public ApplyUserRedemptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ApplyUserRedemptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ApplyUserRedemption.Response Execute(
+            protected ApplyUserRedemption.Response InternalExecute(
                 RedeemRequest body,
                 string namespace_,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ApplyUserRedemption.Response> ExecuteAsync(
+            protected async Task<ApplyUserRedemption.Response> InternalExecuteAsync(
                 RedeemRequest body,
                 string namespace_,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ApplyUserRedemption(ApplyUserRedemptionBuilder builder,
+        public class ApplyUserRedemptionBuilder : ApplyUserRedemptionAbstractBuilder<ApplyUserRedemptionBuilder>
+        {
+            public ApplyUserRedemptionBuilder() : base() { }
+
+            public ApplyUserRedemptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ApplyUserRedemption.Response Execute(
+                RedeemRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ApplyUserRedemption.Response> ExecuteAsync(
+                RedeemRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ApplyUserRedemption(IApplyUserRedemptionBuilder builder,
             RedeemRequest body,
             string namespace_,
             string userId
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RedeemResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RedeemResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GenerateInvoiceSummaryBuilder Builder { get => new GenerateInvoiceSummaryBuilder(); }
 
-        public class GenerateInvoiceSummaryBuilder
-            : OperationBuilder<GenerateInvoiceSummaryBuilder>
+        public interface IGenerateInvoiceSummaryBuilder
         {
 
 
 
 
 
-            internal GenerateInvoiceSummaryBuilder() { }
+        }
 
-            internal GenerateInvoiceSummaryBuilder(IAccelByteSdk sdk)
+        public abstract class GenerateInvoiceSummaryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGenerateInvoiceSummaryBuilder
+            where TImpl : GenerateInvoiceSummaryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GenerateInvoiceSummaryAbstractBuilder() { }
+
+            public GenerateInvoiceSummaryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     startTime                    
                 );
 
-                op.SetBaseFields<GenerateInvoiceSummaryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GenerateInvoiceSummary.Response Execute(
+            protected GenerateInvoiceSummary.Response InternalExecute(
                 string namespace_,
                 string endTime,
                 string feature,
@@ -102,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GenerateInvoiceSummary.Response> ExecuteAsync(
+            protected async Task<GenerateInvoiceSummary.Response> InternalExecuteAsync(
                 string namespace_,
                 string endTime,
                 string feature,
@@ -131,7 +141,52 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GenerateInvoiceSummary(GenerateInvoiceSummaryBuilder builder,
+        public class GenerateInvoiceSummaryBuilder : GenerateInvoiceSummaryAbstractBuilder<GenerateInvoiceSummaryBuilder>
+        {
+            public GenerateInvoiceSummaryBuilder() : base() { }
+
+            public GenerateInvoiceSummaryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GenerateInvoiceSummary.Response Execute(
+                string namespace_,
+                string endTime,
+                string feature,
+                string itemId,
+                string itemType,
+                string startTime
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    endTime,
+                    feature,
+                    itemId,
+                    itemType,
+                    startTime
+                );
+            }
+            public async Task<GenerateInvoiceSummary.Response> ExecuteAsync(
+                string namespace_,
+                string endTime,
+                string feature,
+                string itemId,
+                string itemType,
+                string startTime
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    endTime,
+                    feature,
+                    itemId,
+                    itemType,
+                    startTime
+                );
+            }
+        }
+
+
+        public GenerateInvoiceSummary(IGenerateInvoiceSummaryBuilder builder,
             string namespace_,
             string endTime,
             string feature,
@@ -216,12 +271,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.InvoiceSummary>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.InvoiceSummary>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteItemTypeConfigBuilder Builder { get => new DeleteItemTypeConfigBuilder(); }
 
-        public class DeleteItemTypeConfigBuilder
-            : OperationBuilder<DeleteItemTypeConfigBuilder>
+        public interface IDeleteItemTypeConfigBuilder
         {
 
 
 
 
 
-            internal DeleteItemTypeConfigBuilder() { }
+        }
 
-            internal DeleteItemTypeConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteItemTypeConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteItemTypeConfigBuilder
+            where TImpl : DeleteItemTypeConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteItemTypeConfigAbstractBuilder() { }
+
+            public DeleteItemTypeConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<DeleteItemTypeConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteItemTypeConfig.Response Execute(
+            protected DeleteItemTypeConfig.Response InternalExecute(
                 string id
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteItemTypeConfig.Response> ExecuteAsync(
+            protected async Task<DeleteItemTypeConfig.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteItemTypeConfig(DeleteItemTypeConfigBuilder builder,
+        public class DeleteItemTypeConfigBuilder : DeleteItemTypeConfigAbstractBuilder<DeleteItemTypeConfigBuilder>
+        {
+            public DeleteItemTypeConfigBuilder() : base() { }
+
+            public DeleteItemTypeConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteItemTypeConfig.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<DeleteItemTypeConfig.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public DeleteItemTypeConfig(IDeleteItemTypeConfigBuilder builder,
             string id
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

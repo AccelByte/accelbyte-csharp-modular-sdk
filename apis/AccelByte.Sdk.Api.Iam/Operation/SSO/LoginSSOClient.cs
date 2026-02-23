@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,8 +28,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static LoginSSOClientBuilder Builder { get => new LoginSSOClientBuilder(); }
 
-        public class LoginSSOClientBuilder
-            : OperationBuilder<LoginSSOClientBuilder>
+        public interface ILoginSSOClientBuilder
+        {
+
+            string? Payload { get; }
+
+
+
+
+
+        }
+
+        public abstract class LoginSSOClientAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ILoginSSOClientBuilder
+            where TImpl : LoginSSOClientAbstractBuilder<TImpl>
         {
 
             public string? Payload { get; set; }
@@ -38,18 +50,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal LoginSSOClientBuilder() { }
+            public LoginSSOClientAbstractBuilder() { }
 
-            internal LoginSSOClientBuilder(IAccelByteSdk sdk)
+            public LoginSSOClientAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public LoginSSOClientBuilder SetPayload(string _payload)
+            public TImpl SetPayload(string _payload)
             {
                 Payload = _payload;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -64,11 +76,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<LoginSSOClientBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public LoginSSOClient.Response Execute(
+            protected LoginSSOClient.Response InternalExecute(
                 string platformId
             )
             {
@@ -85,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<LoginSSOClient.Response> ExecuteAsync(
+            protected async Task<LoginSSOClient.Response> InternalExecuteAsync(
                 string platformId
             )
             {
@@ -104,7 +116,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private LoginSSOClient(LoginSSOClientBuilder builder,
+        public class LoginSSOClientBuilder : LoginSSOClientAbstractBuilder<LoginSSOClientBuilder>
+        {
+            public LoginSSOClientBuilder() : base() { }
+
+            public LoginSSOClientBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public LoginSSOClient.Response Execute(
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    platformId
+                );
+            }
+            public async Task<LoginSSOClient.Response> ExecuteAsync(
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId
+                );
+            }
+        }
+
+
+        public LoginSSOClient(ILoginSSOClientBuilder builder,
             string platformId
         )
         {

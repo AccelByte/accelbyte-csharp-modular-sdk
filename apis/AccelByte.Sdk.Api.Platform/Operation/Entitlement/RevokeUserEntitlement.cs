@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RevokeUserEntitlementBuilder Builder { get => new RevokeUserEntitlementBuilder(); }
 
-        public class RevokeUserEntitlementBuilder
-            : OperationBuilder<RevokeUserEntitlementBuilder>
+        public interface IRevokeUserEntitlementBuilder
+        {
+
+
+            Model.EntitlementRevokeRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class RevokeUserEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeUserEntitlementBuilder
+            where TImpl : RevokeUserEntitlementAbstractBuilder<TImpl>
         {
 
 
@@ -43,19 +55,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal RevokeUserEntitlementBuilder() { }
+            public RevokeUserEntitlementAbstractBuilder() { }
 
-            internal RevokeUserEntitlementBuilder(IAccelByteSdk sdk)
+            public RevokeUserEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public RevokeUserEntitlementBuilder SetBody(Model.EntitlementRevokeRequest _body)
+            public TImpl SetBody(Model.EntitlementRevokeRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RevokeUserEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RevokeUserEntitlement.Response Execute(
+            protected RevokeUserEntitlement.Response InternalExecute(
                 string entitlementId,
                 string namespace_,
                 string userId
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeUserEntitlement.Response> ExecuteAsync(
+            protected async Task<RevokeUserEntitlement.Response> InternalExecuteAsync(
                 string entitlementId,
                 string namespace_,
                 string userId
@@ -121,7 +133,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RevokeUserEntitlement(RevokeUserEntitlementBuilder builder,
+        public class RevokeUserEntitlementBuilder : RevokeUserEntitlementAbstractBuilder<RevokeUserEntitlementBuilder>
+        {
+            public RevokeUserEntitlementBuilder() : base() { }
+
+            public RevokeUserEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RevokeUserEntitlement.Response Execute(
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RevokeUserEntitlement.Response> ExecuteAsync(
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RevokeUserEntitlement(IRevokeUserEntitlementBuilder builder,
             string entitlementId,
             string namespace_,
             string userId
@@ -197,12 +242,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

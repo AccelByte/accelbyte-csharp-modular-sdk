@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DownloadUserOrderReceiptBuilder Builder { get => new DownloadUserOrderReceiptBuilder(); }
 
-        public class DownloadUserOrderReceiptBuilder
-            : OperationBuilder<DownloadUserOrderReceiptBuilder>
+        public interface IDownloadUserOrderReceiptBuilder
         {
 
 
 
 
 
-            internal DownloadUserOrderReceiptBuilder() { }
+        }
 
-            internal DownloadUserOrderReceiptBuilder(IAccelByteSdk sdk)
+        public abstract class DownloadUserOrderReceiptAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDownloadUserOrderReceiptBuilder
+            where TImpl : DownloadUserOrderReceiptAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DownloadUserOrderReceiptAbstractBuilder() { }
+
+            public DownloadUserOrderReceiptAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DownloadUserOrderReceiptBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DownloadUserOrderReceipt.Response Execute(
+            protected DownloadUserOrderReceipt.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DownloadUserOrderReceipt.Response> ExecuteAsync(
+            protected async Task<DownloadUserOrderReceipt.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DownloadUserOrderReceipt(DownloadUserOrderReceiptBuilder builder,
+        public class DownloadUserOrderReceiptBuilder : DownloadUserOrderReceiptAbstractBuilder<DownloadUserOrderReceiptBuilder>
+        {
+            public DownloadUserOrderReceiptBuilder() : base() { }
+
+            public DownloadUserOrderReceiptBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DownloadUserOrderReceipt.Response Execute(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<DownloadUserOrderReceipt.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public DownloadUserOrderReceipt(IDownloadUserOrderReceiptBuilder builder,
             string namespace_,
             string orderNo,
             string userId
@@ -193,12 +236,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

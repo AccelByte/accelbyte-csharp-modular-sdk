@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetCountriesBuilder Builder { get => new GetCountriesBuilder(); }
 
-        public class GetCountriesBuilder
-            : OperationBuilder<GetCountriesBuilder>
+        public interface IGetCountriesBuilder
+        {
+
+            string? Lang { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetCountriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCountriesBuilder
+            where TImpl : GetCountriesAbstractBuilder<TImpl>
         {
 
             public string? Lang { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal GetCountriesBuilder() { }
+            public GetCountriesAbstractBuilder() { }
 
-            internal GetCountriesBuilder(IAccelByteSdk sdk)
+            public GetCountriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetCountriesBuilder SetLang(string _lang)
+            public TImpl SetLang(string _lang)
             {
                 Lang = _lang;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,12 +83,12 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCountriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetCountries.Response Execute(
+            protected GetCountries.Response InternalExecute(
                 string namespace_
             )
             {
@@ -93,7 +105,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCountries.Response> ExecuteAsync(
+            protected async Task<GetCountries.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -112,7 +124,33 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetCountries(GetCountriesBuilder builder,
+        public class GetCountriesBuilder : GetCountriesAbstractBuilder<GetCountriesBuilder>
+        {
+            public GetCountriesBuilder() : base() { }
+
+            public GetCountriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetCountries.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetCountries.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCountries(IGetCountriesBuilder builder,
             string namespace_
         )
         {
@@ -182,17 +220,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.CountryObject>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.CountryObject>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

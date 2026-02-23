@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteIAPItemConfigBuilder Builder { get => new DeleteIAPItemConfigBuilder(); }
 
-        public class DeleteIAPItemConfigBuilder
-            : OperationBuilder<DeleteIAPItemConfigBuilder>
+        public interface IDeleteIAPItemConfigBuilder
         {
 
 
 
 
 
-            internal DeleteIAPItemConfigBuilder() { }
+        }
 
-            internal DeleteIAPItemConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteIAPItemConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteIAPItemConfigBuilder
+            where TImpl : DeleteIAPItemConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteIAPItemConfigAbstractBuilder() { }
+
+            public DeleteIAPItemConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteIAPItemConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteIAPItemConfig.Response Execute(
+            protected DeleteIAPItemConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteIAPItemConfig.Response> ExecuteAsync(
+            protected async Task<DeleteIAPItemConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteIAPItemConfig(DeleteIAPItemConfigBuilder builder,
+        public class DeleteIAPItemConfigBuilder : DeleteIAPItemConfigAbstractBuilder<DeleteIAPItemConfigBuilder>
+        {
+            public DeleteIAPItemConfigBuilder() : base() { }
+
+            public DeleteIAPItemConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteIAPItemConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteIAPItemConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteIAPItemConfig(IDeleteIAPItemConfigBuilder builder,
             string namespace_
         )
         {

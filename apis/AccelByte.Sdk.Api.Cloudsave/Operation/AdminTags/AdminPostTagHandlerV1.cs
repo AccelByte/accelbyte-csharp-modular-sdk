@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminPostTagHandlerV1Builder Builder { get => new AdminPostTagHandlerV1Builder(); }
 
-        public class AdminPostTagHandlerV1Builder
-            : OperationBuilder<AdminPostTagHandlerV1Builder>
+        public interface IAdminPostTagHandlerV1Builder
         {
 
 
 
 
 
-            internal AdminPostTagHandlerV1Builder() { }
+        }
 
-            internal AdminPostTagHandlerV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminPostTagHandlerV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPostTagHandlerV1Builder
+            where TImpl : AdminPostTagHandlerV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPostTagHandlerV1AbstractBuilder() { }
+
+            public AdminPostTagHandlerV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminPostTagHandlerV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminPostTagHandlerV1.Response Execute(
+            protected AdminPostTagHandlerV1.Response InternalExecute(
                 ModelsTagRequest body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPostTagHandlerV1.Response> ExecuteAsync(
+            protected async Task<AdminPostTagHandlerV1.Response> InternalExecuteAsync(
                 ModelsTagRequest body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminPostTagHandlerV1(AdminPostTagHandlerV1Builder builder,
+        public class AdminPostTagHandlerV1Builder : AdminPostTagHandlerV1AbstractBuilder<AdminPostTagHandlerV1Builder>
+        {
+            public AdminPostTagHandlerV1Builder() : base() { }
+
+            public AdminPostTagHandlerV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminPostTagHandlerV1.Response Execute(
+                ModelsTagRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminPostTagHandlerV1.Response> ExecuteAsync(
+                ModelsTagRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminPostTagHandlerV1(IAdminPostTagHandlerV1Builder builder,
             ModelsTagRequest body,
             string namespace_
         )
@@ -184,27 +223,32 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

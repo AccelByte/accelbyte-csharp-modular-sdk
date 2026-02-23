@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static FulfillItemBuilder Builder { get => new FulfillItemBuilder(); }
 
-        public class FulfillItemBuilder
-            : OperationBuilder<FulfillItemBuilder>
+        public interface IFulfillItemBuilder
         {
 
 
 
 
 
-            internal FulfillItemBuilder() { }
+        }
 
-            internal FulfillItemBuilder(IAccelByteSdk sdk)
+        public abstract class FulfillItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IFulfillItemBuilder
+            where TImpl : FulfillItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public FulfillItemAbstractBuilder() { }
+
+            public FulfillItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<FulfillItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public FulfillItem.Response Execute(
+            protected FulfillItem.Response InternalExecute(
                 FulfillmentRequest body,
                 string namespace_,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<FulfillItem.Response> ExecuteAsync(
+            protected async Task<FulfillItem.Response> InternalExecuteAsync(
                 FulfillmentRequest body,
                 string namespace_,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private FulfillItem(FulfillItemBuilder builder,
+        public class FulfillItemBuilder : FulfillItemAbstractBuilder<FulfillItemBuilder>
+        {
+            public FulfillItemBuilder() : base() { }
+
+            public FulfillItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public FulfillItem.Response Execute(
+                FulfillmentRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<FulfillItem.Response> ExecuteAsync(
+                FulfillmentRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public FulfillItem(IFulfillItemBuilder builder,
             FulfillmentRequest body,
             string namespace_,
             string userId
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

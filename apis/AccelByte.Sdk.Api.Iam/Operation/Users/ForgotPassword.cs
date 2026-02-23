@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static ForgotPasswordBuilder Builder { get => new ForgotPasswordBuilder(); }
 
-        public class ForgotPasswordBuilder
-            : OperationBuilder<ForgotPasswordBuilder>
+        public interface IForgotPasswordBuilder
         {
 
 
 
 
 
-            internal ForgotPasswordBuilder() { }
+        }
 
-            internal ForgotPasswordBuilder(IAccelByteSdk sdk)
+        public abstract class ForgotPasswordAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IForgotPasswordBuilder
+            where TImpl : ForgotPasswordAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ForgotPasswordAbstractBuilder() { }
+
+            public ForgotPasswordAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,12 +77,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ForgotPasswordBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public ForgotPassword.Response Execute(
+            protected ForgotPassword.Response InternalExecute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
             )
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ForgotPassword.Response> ExecuteAsync(
+            protected async Task<ForgotPassword.Response> InternalExecuteAsync(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
             )
@@ -112,7 +122,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private ForgotPassword(ForgotPasswordBuilder builder,
+        public class ForgotPasswordBuilder : ForgotPasswordAbstractBuilder<ForgotPasswordBuilder>
+        {
+            public ForgotPasswordBuilder() : base() { }
+
+            public ForgotPasswordBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public ForgotPassword.Response Execute(
+                ModelSendVerificationCodeRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<ForgotPassword.Response> ExecuteAsync(
+                ModelSendVerificationCodeRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ForgotPassword(IForgotPasswordBuilder builder,
             ModelSendVerificationCodeRequest body,
             string namespace_
         )
@@ -190,22 +230,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

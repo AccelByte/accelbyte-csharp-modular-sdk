@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetUserEntitlementBySkuBuilder Builder { get => new PublicGetUserEntitlementBySkuBuilder(); }
 
-        public class PublicGetUserEntitlementBySkuBuilder
-            : OperationBuilder<PublicGetUserEntitlementBySkuBuilder>
+        public interface IPublicGetUserEntitlementBySkuBuilder
+        {
+
+            PublicGetUserEntitlementBySkuEntitlementClazz? EntitlementClazz { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetUserEntitlementBySkuAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserEntitlementBySkuBuilder
+            where TImpl : PublicGetUserEntitlementBySkuAbstractBuilder<TImpl>
         {
 
             public PublicGetUserEntitlementBySkuEntitlementClazz? EntitlementClazz { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetUserEntitlementBySkuBuilder() { }
+            public PublicGetUserEntitlementBySkuAbstractBuilder() { }
 
-            internal PublicGetUserEntitlementBySkuBuilder(IAccelByteSdk sdk)
+            public PublicGetUserEntitlementBySkuAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetUserEntitlementBySkuBuilder SetEntitlementClazz(PublicGetUserEntitlementBySkuEntitlementClazz _entitlementClazz)
+            public TImpl SetEntitlementClazz(PublicGetUserEntitlementBySkuEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,12 +83,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     sku                    
                 );
 
-                op.SetBaseFields<PublicGetUserEntitlementBySkuBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicGetUserEntitlementBySku.Response Execute(
+            protected PublicGetUserEntitlementBySku.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string sku
@@ -97,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserEntitlementBySku.Response> ExecuteAsync(
+            protected async Task<PublicGetUserEntitlementBySku.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string sku
@@ -120,7 +132,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetUserEntitlementBySku(PublicGetUserEntitlementBySkuBuilder builder,
+        public class PublicGetUserEntitlementBySkuBuilder : PublicGetUserEntitlementBySkuAbstractBuilder<PublicGetUserEntitlementBySkuBuilder>
+        {
+            public PublicGetUserEntitlementBySkuBuilder() : base() { }
+
+            public PublicGetUserEntitlementBySkuBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetUserEntitlementBySku.Response Execute(
+                string namespace_,
+                string userId,
+                string sku
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    sku
+                );
+            }
+            public async Task<PublicGetUserEntitlementBySku.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string sku
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    sku
+                );
+            }
+        }
+
+
+        public PublicGetUserEntitlementBySku(IPublicGetUserEntitlementBySkuBuilder builder,
             string namespace_,
             string userId,
             string sku
@@ -196,12 +242,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

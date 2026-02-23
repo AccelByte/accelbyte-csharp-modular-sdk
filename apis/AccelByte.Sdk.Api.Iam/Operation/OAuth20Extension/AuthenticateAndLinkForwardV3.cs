@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AuthenticateAndLinkForwardV3Builder Builder { get => new AuthenticateAndLinkForwardV3Builder(); }
 
-        public class AuthenticateAndLinkForwardV3Builder
-            : OperationBuilder<AuthenticateAndLinkForwardV3Builder>
+        public interface IAuthenticateAndLinkForwardV3Builder
+        {
+
+
+
+            bool? ExtendExp { get; }
+
+
+
+        }
+
+        public abstract class AuthenticateAndLinkForwardV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAuthenticateAndLinkForwardV3Builder
+            where TImpl : AuthenticateAndLinkForwardV3AbstractBuilder<TImpl>
         {
 
 
@@ -47,9 +59,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AuthenticateAndLinkForwardV3Builder() { }
+            public AuthenticateAndLinkForwardV3AbstractBuilder() { }
 
-            internal AuthenticateAndLinkForwardV3Builder(IAccelByteSdk sdk)
+            public AuthenticateAndLinkForwardV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,10 +69,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public AuthenticateAndLinkForwardV3Builder SetExtendExp(bool _extendExp)
+            public TImpl SetExtendExp(bool _extendExp)
             {
                 ExtendExp = _extendExp;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +91,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     username                    
                 );
 
-                op.SetBaseFields<AuthenticateAndLinkForwardV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AuthenticateAndLinkForwardV3.Response Execute(
+            protected AuthenticateAndLinkForwardV3.Response InternalExecute(
                 string clientId,
                 string linkingToken,
                 string password,
@@ -106,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AuthenticateAndLinkForwardV3.Response> ExecuteAsync(
+            protected async Task<AuthenticateAndLinkForwardV3.Response> InternalExecuteAsync(
                 string clientId,
                 string linkingToken,
                 string password,
@@ -131,7 +143,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AuthenticateAndLinkForwardV3(AuthenticateAndLinkForwardV3Builder builder,
+        public class AuthenticateAndLinkForwardV3Builder : AuthenticateAndLinkForwardV3AbstractBuilder<AuthenticateAndLinkForwardV3Builder>
+        {
+            public AuthenticateAndLinkForwardV3Builder() : base() { }
+
+            public AuthenticateAndLinkForwardV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AuthenticateAndLinkForwardV3.Response Execute(
+                string clientId,
+                string linkingToken,
+                string password,
+                string username
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    linkingToken,
+                    password,
+                    username
+                );
+            }
+            public async Task<AuthenticateAndLinkForwardV3.Response> ExecuteAsync(
+                string clientId,
+                string linkingToken,
+                string password,
+                string username
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    linkingToken,
+                    password,
+                    username
+                );
+            }
+        }
+
+
+        public AuthenticateAndLinkForwardV3(IAuthenticateAndLinkForwardV3Builder builder,
             string clientId,
             string linkingToken,
             string password,

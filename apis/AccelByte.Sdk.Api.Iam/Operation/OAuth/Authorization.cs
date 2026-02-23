@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -53,8 +53,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AuthorizationBuilder Builder { get => new AuthorizationBuilder(); }
 
-        public class AuthorizationBuilder
-            : OperationBuilder<AuthorizationBuilder>
+        public interface IAuthorizationBuilder
+        {
+
+
+
+            string? Login { get; }
+
+            string? Password { get; }
+
+            string? Scope { get; }
+
+            string? State { get; }
+
+
+
+        }
+
+        public abstract class AuthorizationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAuthorizationBuilder
+            where TImpl : AuthorizationAbstractBuilder<TImpl>
         {
 
 
@@ -69,9 +87,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AuthorizationBuilder() { }
+            public AuthorizationAbstractBuilder() { }
 
-            internal AuthorizationBuilder(IAccelByteSdk sdk)
+            public AuthorizationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -79,28 +97,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public AuthorizationBuilder SetLogin(string _login)
+            public TImpl SetLogin(string _login)
             {
                 Login = _login;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizationBuilder SetPassword(string _password)
+            public TImpl SetPassword(string _password)
             {
                 Password = _password;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizationBuilder SetScope(string _scope)
+            public TImpl SetScope(string _scope)
             {
                 Scope = _scope;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizationBuilder SetState(string _state)
+            public TImpl SetState(string _state)
             {
                 State = _state;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -117,12 +135,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     responseType                    
                 );
 
-                op.SetBaseFields<AuthorizationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public Authorization.Response Execute(
+            protected Authorization.Response InternalExecute(
                 string clientId,
                 string redirectUri,
                 string responseType
@@ -143,7 +161,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Authorization.Response> ExecuteAsync(
+            protected async Task<Authorization.Response> InternalExecuteAsync(
                 string clientId,
                 string redirectUri,
                 string responseType
@@ -166,7 +184,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private Authorization(AuthorizationBuilder builder,
+        public class AuthorizationBuilder : AuthorizationAbstractBuilder<AuthorizationBuilder>
+        {
+            public AuthorizationBuilder() : base() { }
+
+            public AuthorizationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public Authorization.Response Execute(
+                string clientId,
+                string redirectUri,
+                string responseType
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    redirectUri,
+                    responseType
+                );
+            }
+            public async Task<Authorization.Response> ExecuteAsync(
+                string clientId,
+                string redirectUri,
+                string responseType
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    redirectUri,
+                    responseType
+                );
+            }
+        }
+
+
+        public Authorization(IAuthorizationBuilder builder,
             string clientId,
             string redirectUri,
             AuthorizationResponseType responseType

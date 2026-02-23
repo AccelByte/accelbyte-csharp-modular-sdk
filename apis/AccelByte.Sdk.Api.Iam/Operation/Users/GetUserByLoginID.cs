@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetUserByLoginIDBuilder Builder { get => new GetUserByLoginIDBuilder(); }
 
-        public class GetUserByLoginIDBuilder
-            : OperationBuilder<GetUserByLoginIDBuilder>
+        public interface IGetUserByLoginIDBuilder
+        {
+
+            string? LoginId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserByLoginIDAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserByLoginIDBuilder
+            where TImpl : GetUserByLoginIDAbstractBuilder<TImpl>
         {
 
             public string? LoginId { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal GetUserByLoginIDBuilder() { }
+            public GetUserByLoginIDAbstractBuilder() { }
 
-            internal GetUserByLoginIDBuilder(IAccelByteSdk sdk)
+            public GetUserByLoginIDAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserByLoginIDBuilder SetLoginId(string _loginId)
+            public TImpl SetLoginId(string _loginId)
             {
                 LoginId = _loginId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,12 +81,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetUserByLoginIDBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetUserByLoginID.Response Execute(
+            protected GetUserByLoginID.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserByLoginID.Response> ExecuteAsync(
+            protected async Task<GetUserByLoginID.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetUserByLoginID(GetUserByLoginIDBuilder builder,
+        public class GetUserByLoginIDBuilder : GetUserByLoginIDAbstractBuilder<GetUserByLoginIDBuilder>
+        {
+            public GetUserByLoginIDBuilder() : base() { }
+
+            public GetUserByLoginIDBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUserByLoginID.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetUserByLoginID.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetUserByLoginID(IGetUserByLoginIDBuilder builder,
             string namespace_
         )
         {
@@ -182,22 +220,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelPublicUserResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelPublicUserResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

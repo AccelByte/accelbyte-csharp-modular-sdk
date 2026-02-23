@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static EnableEntitlementOriginFeatureBuilder Builder { get => new EnableEntitlementOriginFeatureBuilder(); }
 
-        public class EnableEntitlementOriginFeatureBuilder
-            : OperationBuilder<EnableEntitlementOriginFeatureBuilder>
+        public interface IEnableEntitlementOriginFeatureBuilder
         {
 
 
 
 
 
-            internal EnableEntitlementOriginFeatureBuilder() { }
+        }
 
-            internal EnableEntitlementOriginFeatureBuilder(IAccelByteSdk sdk)
+        public abstract class EnableEntitlementOriginFeatureAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IEnableEntitlementOriginFeatureBuilder
+            where TImpl : EnableEntitlementOriginFeatureAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public EnableEntitlementOriginFeatureAbstractBuilder() { }
+
+            public EnableEntitlementOriginFeatureAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<EnableEntitlementOriginFeatureBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public EnableEntitlementOriginFeature.Response Execute(
+            protected EnableEntitlementOriginFeature.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<EnableEntitlementOriginFeature.Response> ExecuteAsync(
+            protected async Task<EnableEntitlementOriginFeature.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private EnableEntitlementOriginFeature(EnableEntitlementOriginFeatureBuilder builder,
+        public class EnableEntitlementOriginFeatureBuilder : EnableEntitlementOriginFeatureAbstractBuilder<EnableEntitlementOriginFeatureBuilder>
+        {
+            public EnableEntitlementOriginFeatureBuilder() : base() { }
+
+            public EnableEntitlementOriginFeatureBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public EnableEntitlementOriginFeature.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<EnableEntitlementOriginFeature.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public EnableEntitlementOriginFeature(IEnableEntitlementOriginFeatureBuilder builder,
             string namespace_
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

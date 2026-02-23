@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminBanTopicMembersBuilder Builder { get => new AdminBanTopicMembersBuilder(); }
 
-        public class AdminBanTopicMembersBuilder
-            : OperationBuilder<AdminBanTopicMembersBuilder>
+        public interface IAdminBanTopicMembersBuilder
         {
 
 
 
 
 
-            internal AdminBanTopicMembersBuilder() { }
+        }
 
-            internal AdminBanTopicMembersBuilder(IAccelByteSdk sdk)
+        public abstract class AdminBanTopicMembersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBanTopicMembersBuilder
+            where TImpl : AdminBanTopicMembersAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBanTopicMembersAbstractBuilder() { }
+
+            public AdminBanTopicMembersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<AdminBanTopicMembersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBanTopicMembers.Response Execute(
+            protected AdminBanTopicMembers.Response InternalExecute(
                 ModelsBanTopicMemberParam body,
                 string namespace_,
                 string topic
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBanTopicMembers.Response> ExecuteAsync(
+            protected async Task<AdminBanTopicMembers.Response> InternalExecuteAsync(
                 ModelsBanTopicMemberParam body,
                 string namespace_,
                 string topic
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminBanTopicMembers(AdminBanTopicMembersBuilder builder,
+        public class AdminBanTopicMembersBuilder : AdminBanTopicMembersAbstractBuilder<AdminBanTopicMembersBuilder>
+        {
+            public AdminBanTopicMembersBuilder() : base() { }
+
+            public AdminBanTopicMembersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBanTopicMembers.Response Execute(
+                ModelsBanTopicMemberParam body,
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<AdminBanTopicMembers.Response> ExecuteAsync(
+                ModelsBanTopicMemberParam body,
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public AdminBanTopicMembers(IAdminBanTopicMembersBuilder builder,
             ModelsBanTopicMemberParam body,
             string namespace_,
             string topic
@@ -191,32 +234,38 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsBanTopicMemberResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsBanTopicMemberResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

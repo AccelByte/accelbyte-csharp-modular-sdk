@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryWalletsBuilder Builder { get => new QueryWalletsBuilder(); }
 
-        public class QueryWalletsBuilder
-            : OperationBuilder<QueryWalletsBuilder>
+        public interface IQueryWalletsBuilder
+        {
+
+            string? CurrencyCode { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryWalletsOrigin? Origin { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryWalletsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryWalletsBuilder
+            where TImpl : QueryWalletsAbstractBuilder<TImpl>
         {
 
             public string? CurrencyCode { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryWalletsBuilder() { }
+            public QueryWalletsAbstractBuilder() { }
 
-            internal QueryWalletsBuilder(IAccelByteSdk sdk)
+            public QueryWalletsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryWalletsBuilder SetCurrencyCode(string _currencyCode)
+            public TImpl SetCurrencyCode(string _currencyCode)
             {
                 CurrencyCode = _currencyCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryWalletsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryWalletsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryWalletsBuilder SetOrigin(QueryWalletsOrigin _origin)
+            public TImpl SetOrigin(QueryWalletsOrigin _origin)
             {
                 Origin = _origin;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryWalletsBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,12 +122,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryWalletsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public QueryWallets.Response Execute(
+            protected QueryWallets.Response InternalExecute(
                 string namespace_
             )
             {
@@ -124,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryWallets.Response> ExecuteAsync(
+            protected async Task<QueryWallets.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -143,7 +163,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryWallets(QueryWalletsBuilder builder,
+        public class QueryWalletsBuilder : QueryWalletsAbstractBuilder<QueryWalletsBuilder>
+        {
+            public QueryWalletsBuilder() : base() { }
+
+            public QueryWalletsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public QueryWallets.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryWallets.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryWallets(IQueryWalletsBuilder builder,
             string namespace_
         )
         {
@@ -221,7 +267,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.WalletPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.WalletPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

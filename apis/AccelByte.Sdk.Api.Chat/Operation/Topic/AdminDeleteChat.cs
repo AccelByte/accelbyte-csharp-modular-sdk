@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminDeleteChatBuilder Builder { get => new AdminDeleteChatBuilder(); }
 
-        public class AdminDeleteChatBuilder
-            : OperationBuilder<AdminDeleteChatBuilder>
+        public interface IAdminDeleteChatBuilder
         {
 
 
 
 
 
-            internal AdminDeleteChatBuilder() { }
+        }
 
-            internal AdminDeleteChatBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteChatAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteChatBuilder
+            where TImpl : AdminDeleteChatAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteChatAbstractBuilder() { }
+
+            public AdminDeleteChatAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<AdminDeleteChatBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteChat.Response Execute(
+            protected AdminDeleteChat.Response InternalExecute(
                 string chatId,
                 string namespace_,
                 string topic
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteChat.Response> ExecuteAsync(
+            protected async Task<AdminDeleteChat.Response> InternalExecuteAsync(
                 string chatId,
                 string namespace_,
                 string topic
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminDeleteChat(AdminDeleteChatBuilder builder,
+        public class AdminDeleteChatBuilder : AdminDeleteChatAbstractBuilder<AdminDeleteChatBuilder>
+        {
+            public AdminDeleteChatBuilder() : base() { }
+
+            public AdminDeleteChatBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteChat.Response Execute(
+                string chatId,
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    chatId,
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<AdminDeleteChat.Response> ExecuteAsync(
+                string chatId,
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    chatId,
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public AdminDeleteChat(IAdminDeleteChatBuilder builder,
             string chatId,
             string namespace_,
             string topic
@@ -192,27 +235,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminUpdatePlatformAccountClosureServicesConfigurationBuilder Builder { get => new AdminUpdatePlatformAccountClosureServicesConfigurationBuilder(); }
 
-        public class AdminUpdatePlatformAccountClosureServicesConfigurationBuilder
-            : OperationBuilder<AdminUpdatePlatformAccountClosureServicesConfigurationBuilder>
+        public interface IAdminUpdatePlatformAccountClosureServicesConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminUpdatePlatformAccountClosureServicesConfigurationBuilder() { }
+        }
 
-            internal AdminUpdatePlatformAccountClosureServicesConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdatePlatformAccountClosureServicesConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdatePlatformAccountClosureServicesConfigurationBuilder
+            where TImpl : AdminUpdatePlatformAccountClosureServicesConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdatePlatformAccountClosureServicesConfigurationAbstractBuilder() { }
+
+            public AdminUpdatePlatformAccountClosureServicesConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdatePlatformAccountClosureServicesConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdatePlatformAccountClosureServicesConfiguration.Response Execute(
+            protected AdminUpdatePlatformAccountClosureServicesConfiguration.Response InternalExecute(
                 DtoServiceConfigurationUpdateRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdatePlatformAccountClosureServicesConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminUpdatePlatformAccountClosureServicesConfiguration.Response> InternalExecuteAsync(
                 DtoServiceConfigurationUpdateRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminUpdatePlatformAccountClosureServicesConfiguration(AdminUpdatePlatformAccountClosureServicesConfigurationBuilder builder,
+        public class AdminUpdatePlatformAccountClosureServicesConfigurationBuilder : AdminUpdatePlatformAccountClosureServicesConfigurationAbstractBuilder<AdminUpdatePlatformAccountClosureServicesConfigurationBuilder>
+        {
+            public AdminUpdatePlatformAccountClosureServicesConfigurationBuilder() : base() { }
+
+            public AdminUpdatePlatformAccountClosureServicesConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdatePlatformAccountClosureServicesConfiguration.Response Execute(
+                DtoServiceConfigurationUpdateRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdatePlatformAccountClosureServicesConfiguration.Response> ExecuteAsync(
+                DtoServiceConfigurationUpdateRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdatePlatformAccountClosureServicesConfiguration(IAdminUpdatePlatformAccountClosureServicesConfigurationBuilder builder,
             DtoServiceConfigurationUpdateRequest body,
             string namespace_
         )
@@ -178,22 +217,26 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DtoServiceConfigurationUpdateRequest>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DtoServiceConfigurationUpdateRequest>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

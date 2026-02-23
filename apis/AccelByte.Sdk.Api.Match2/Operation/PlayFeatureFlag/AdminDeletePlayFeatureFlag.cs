@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static AdminDeletePlayFeatureFlagBuilder Builder { get => new AdminDeletePlayFeatureFlagBuilder(); }
 
-        public class AdminDeletePlayFeatureFlagBuilder
-            : OperationBuilder<AdminDeletePlayFeatureFlagBuilder>
+        public interface IAdminDeletePlayFeatureFlagBuilder
         {
 
 
 
 
 
-            internal AdminDeletePlayFeatureFlagBuilder() { }
+        }
 
-            internal AdminDeletePlayFeatureFlagBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeletePlayFeatureFlagAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeletePlayFeatureFlagBuilder
+            where TImpl : AdminDeletePlayFeatureFlagAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeletePlayFeatureFlagAbstractBuilder() { }
+
+            public AdminDeletePlayFeatureFlagAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeletePlayFeatureFlagBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeletePlayFeatureFlag.Response Execute(
+            protected AdminDeletePlayFeatureFlag.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeletePlayFeatureFlag.Response> ExecuteAsync(
+            protected async Task<AdminDeletePlayFeatureFlag.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private AdminDeletePlayFeatureFlag(AdminDeletePlayFeatureFlagBuilder builder,
+        public class AdminDeletePlayFeatureFlagBuilder : AdminDeletePlayFeatureFlagAbstractBuilder<AdminDeletePlayFeatureFlagBuilder>
+        {
+            public AdminDeletePlayFeatureFlagBuilder() : base() { }
+
+            public AdminDeletePlayFeatureFlagBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeletePlayFeatureFlag.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminDeletePlayFeatureFlag.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeletePlayFeatureFlag(IAdminDeletePlayFeatureFlagBuilder builder,
             string namespace_
         )
         {
@@ -170,17 +205,20 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

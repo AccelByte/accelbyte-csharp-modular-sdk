@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AddClientPermissionBuilder Builder { get => new AddClientPermissionBuilder(); }
 
-        public class AddClientPermissionBuilder
-            : OperationBuilder<AddClientPermissionBuilder>
+        public interface IAddClientPermissionBuilder
         {
 
 
 
 
 
-            internal AddClientPermissionBuilder() { }
+        }
 
-            internal AddClientPermissionBuilder(IAccelByteSdk sdk)
+        public abstract class AddClientPermissionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAddClientPermissionBuilder
+            where TImpl : AddClientPermissionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AddClientPermissionAbstractBuilder() { }
+
+            public AddClientPermissionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     resource                    
                 );
 
-                op.SetBaseFields<AddClientPermissionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AddClientPermission.Response Execute(
+            protected AddClientPermission.Response InternalExecute(
                 long action,
                 string clientId,
                 string resource
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AddClientPermission.Response> ExecuteAsync(
+            protected async Task<AddClientPermission.Response> InternalExecuteAsync(
                 long action,
                 string clientId,
                 string resource
@@ -114,7 +124,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AddClientPermission(AddClientPermissionBuilder builder,
+        public class AddClientPermissionBuilder : AddClientPermissionAbstractBuilder<AddClientPermissionBuilder>
+        {
+            public AddClientPermissionBuilder() : base() { }
+
+            public AddClientPermissionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AddClientPermission.Response Execute(
+                long action,
+                string clientId,
+                string resource
+            )
+            {
+                return InternalExecute(
+                    action,
+                    clientId,
+                    resource
+                );
+            }
+            public async Task<AddClientPermission.Response> ExecuteAsync(
+                long action,
+                string clientId,
+                string resource
+            )
+            {
+                return await InternalExecuteAsync(
+                    action,
+                    clientId,
+                    resource
+                );
+            }
+        }
+
+
+        public AddClientPermission(IAddClientPermissionBuilder builder,
             long action,
             string clientId,
             string resource
@@ -194,22 +238,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

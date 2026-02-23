@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserAppEntitlementByAppIdBuilder Builder { get => new GetUserAppEntitlementByAppIdBuilder(); }
 
-        public class GetUserAppEntitlementByAppIdBuilder
-            : OperationBuilder<GetUserAppEntitlementByAppIdBuilder>
+        public interface IGetUserAppEntitlementByAppIdBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserAppEntitlementByAppIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserAppEntitlementByAppIdBuilder
+            where TImpl : GetUserAppEntitlementByAppIdAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetUserAppEntitlementByAppIdBuilder() { }
+            public GetUserAppEntitlementByAppIdAbstractBuilder() { }
 
-            internal GetUserAppEntitlementByAppIdBuilder(IAccelByteSdk sdk)
+            public GetUserAppEntitlementByAppIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserAppEntitlementByAppIdBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     appId                    
                 );
 
-                op.SetBaseFields<GetUserAppEntitlementByAppIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserAppEntitlementByAppId.Response Execute(
+            protected GetUserAppEntitlementByAppId.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string appId
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserAppEntitlementByAppId.Response> ExecuteAsync(
+            protected async Task<GetUserAppEntitlementByAppId.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string appId
@@ -118,7 +130,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserAppEntitlementByAppId(GetUserAppEntitlementByAppIdBuilder builder,
+        public class GetUserAppEntitlementByAppIdBuilder : GetUserAppEntitlementByAppIdAbstractBuilder<GetUserAppEntitlementByAppIdBuilder>
+        {
+            public GetUserAppEntitlementByAppIdBuilder() : base() { }
+
+            public GetUserAppEntitlementByAppIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserAppEntitlementByAppId.Response Execute(
+                string namespace_,
+                string userId,
+                string appId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    appId
+                );
+            }
+            public async Task<GetUserAppEntitlementByAppId.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string appId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    appId
+                );
+            }
+        }
+
+
+        public GetUserAppEntitlementByAppId(IGetUserAppEntitlementByAppIdBuilder builder,
             string namespace_,
             string userId,
             string appId
@@ -194,12 +239,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AppEntitlementInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AppEntitlementInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

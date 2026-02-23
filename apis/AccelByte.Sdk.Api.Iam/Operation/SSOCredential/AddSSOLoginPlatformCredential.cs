@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AddSSOLoginPlatformCredentialBuilder Builder { get => new AddSSOLoginPlatformCredentialBuilder(); }
 
-        public class AddSSOLoginPlatformCredentialBuilder
-            : OperationBuilder<AddSSOLoginPlatformCredentialBuilder>
+        public interface IAddSSOLoginPlatformCredentialBuilder
         {
 
 
 
 
 
-            internal AddSSOLoginPlatformCredentialBuilder() { }
+        }
 
-            internal AddSSOLoginPlatformCredentialBuilder(IAccelByteSdk sdk)
+        public abstract class AddSSOLoginPlatformCredentialAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAddSSOLoginPlatformCredentialBuilder
+            where TImpl : AddSSOLoginPlatformCredentialAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AddSSOLoginPlatformCredentialAbstractBuilder() { }
+
+            public AddSSOLoginPlatformCredentialAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,11 +79,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<AddSSOLoginPlatformCredentialBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AddSSOLoginPlatformCredential.Response Execute(
+            protected AddSSOLoginPlatformCredential.Response InternalExecute(
                 ModelSSOPlatformCredentialRequest body,
                 string namespace_,
                 string platformId
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AddSSOLoginPlatformCredential.Response> ExecuteAsync(
+            protected async Task<AddSSOLoginPlatformCredential.Response> InternalExecuteAsync(
                 ModelSSOPlatformCredentialRequest body,
                 string namespace_,
                 string platformId
@@ -117,7 +127,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AddSSOLoginPlatformCredential(AddSSOLoginPlatformCredentialBuilder builder,
+        public class AddSSOLoginPlatformCredentialBuilder : AddSSOLoginPlatformCredentialAbstractBuilder<AddSSOLoginPlatformCredentialBuilder>
+        {
+            public AddSSOLoginPlatformCredentialBuilder() : base() { }
+
+            public AddSSOLoginPlatformCredentialBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AddSSOLoginPlatformCredential.Response Execute(
+                ModelSSOPlatformCredentialRequest body,
+                string namespace_,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    platformId
+                );
+            }
+            public async Task<AddSSOLoginPlatformCredential.Response> ExecuteAsync(
+                ModelSSOPlatformCredentialRequest body,
+                string namespace_,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    platformId
+                );
+            }
+        }
+
+
+        public AddSSOLoginPlatformCredential(IAddSSOLoginPlatformCredentialBuilder builder,
             ModelSSOPlatformCredentialRequest body,
             string namespace_,
             string platformId
@@ -196,27 +239,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelSSOPlatformCredentialResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelSSOPlatformCredentialResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

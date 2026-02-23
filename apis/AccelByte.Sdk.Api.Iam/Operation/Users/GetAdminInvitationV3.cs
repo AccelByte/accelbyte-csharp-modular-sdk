@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetAdminInvitationV3Builder Builder { get => new GetAdminInvitationV3Builder(); }
 
-        public class GetAdminInvitationV3Builder
-            : OperationBuilder<GetAdminInvitationV3Builder>
+        public interface IGetAdminInvitationV3Builder
         {
 
 
 
 
 
-            internal GetAdminInvitationV3Builder() { }
+        }
 
-            internal GetAdminInvitationV3Builder(IAccelByteSdk sdk)
+        public abstract class GetAdminInvitationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAdminInvitationV3Builder
+            where TImpl : GetAdminInvitationV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetAdminInvitationV3AbstractBuilder() { }
+
+            public GetAdminInvitationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetAdminInvitationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAdminInvitationV3.Response Execute(
+            protected GetAdminInvitationV3.Response InternalExecute(
                 string invitationId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAdminInvitationV3.Response> ExecuteAsync(
+            protected async Task<GetAdminInvitationV3.Response> InternalExecuteAsync(
                 string invitationId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetAdminInvitationV3(GetAdminInvitationV3Builder builder,
+        public class GetAdminInvitationV3Builder : GetAdminInvitationV3AbstractBuilder<GetAdminInvitationV3Builder>
+        {
+            public GetAdminInvitationV3Builder() : base() { }
+
+            public GetAdminInvitationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAdminInvitationV3.Response Execute(
+                string invitationId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    invitationId,
+                    namespace_
+                );
+            }
+            public async Task<GetAdminInvitationV3.Response> ExecuteAsync(
+                string invitationId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    invitationId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetAdminInvitationV3(IGetAdminInvitationV3Builder builder,
             string invitationId,
             string namespace_
         )
@@ -175,17 +214,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserInvitationV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserInvitationV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

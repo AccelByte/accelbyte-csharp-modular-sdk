@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -47,17 +47,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static HardDeleteLeaderboardAdminV1Builder Builder { get => new HardDeleteLeaderboardAdminV1Builder(); }
 
-        public class HardDeleteLeaderboardAdminV1Builder
-            : OperationBuilder<HardDeleteLeaderboardAdminV1Builder>
+        public interface IHardDeleteLeaderboardAdminV1Builder
         {
 
 
 
 
 
-            internal HardDeleteLeaderboardAdminV1Builder() { }
+        }
 
-            internal HardDeleteLeaderboardAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class HardDeleteLeaderboardAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IHardDeleteLeaderboardAdminV1Builder
+            where TImpl : HardDeleteLeaderboardAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public HardDeleteLeaderboardAdminV1AbstractBuilder() { }
+
+            public HardDeleteLeaderboardAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -77,11 +87,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<HardDeleteLeaderboardAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public HardDeleteLeaderboardAdminV1.Response Execute(
+            protected HardDeleteLeaderboardAdminV1.Response InternalExecute(
                 string leaderboardCode,
                 string namespace_
             )
@@ -100,7 +110,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<HardDeleteLeaderboardAdminV1.Response> ExecuteAsync(
+            protected async Task<HardDeleteLeaderboardAdminV1.Response> InternalExecuteAsync(
                 string leaderboardCode,
                 string namespace_
             )
@@ -121,7 +131,36 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private HardDeleteLeaderboardAdminV1(HardDeleteLeaderboardAdminV1Builder builder,
+        public class HardDeleteLeaderboardAdminV1Builder : HardDeleteLeaderboardAdminV1AbstractBuilder<HardDeleteLeaderboardAdminV1Builder>
+        {
+            public HardDeleteLeaderboardAdminV1Builder() : base() { }
+
+            public HardDeleteLeaderboardAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public HardDeleteLeaderboardAdminV1.Response Execute(
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+            public async Task<HardDeleteLeaderboardAdminV1.Response> ExecuteAsync(
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public HardDeleteLeaderboardAdminV1(IHardDeleteLeaderboardAdminV1Builder builder,
             string leaderboardCode,
             string namespace_
         )
@@ -199,27 +238,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

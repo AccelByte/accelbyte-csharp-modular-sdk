@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -40,8 +40,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static UserAuthenticationV3Builder Builder { get => new UserAuthenticationV3Builder(); }
 
-        public class UserAuthenticationV3Builder
-            : OperationBuilder<UserAuthenticationV3Builder>
+        public interface IUserAuthenticationV3Builder
+        {
+
+
+
+            string? ClientId { get; }
+
+            bool? ExtendExp { get; }
+
+            string? RedirectUri { get; }
+
+
+
+        }
+
+        public abstract class UserAuthenticationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUserAuthenticationV3Builder
+            where TImpl : UserAuthenticationV3AbstractBuilder<TImpl>
         {
 
 
@@ -54,9 +70,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal UserAuthenticationV3Builder() { }
+            public UserAuthenticationV3AbstractBuilder() { }
 
-            internal UserAuthenticationV3Builder(IAccelByteSdk sdk)
+            public UserAuthenticationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,22 +80,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public UserAuthenticationV3Builder SetClientId(string _clientId)
+            public TImpl SetClientId(string _clientId)
             {
                 ClientId = _clientId;
-                return this;
+                return (TImpl)this;
             }
 
-            public UserAuthenticationV3Builder SetExtendExp(bool _extendExp)
+            public TImpl SetExtendExp(bool _extendExp)
             {
                 ExtendExp = _extendExp;
-                return this;
+                return (TImpl)this;
             }
 
-            public UserAuthenticationV3Builder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -96,11 +112,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userName                    
                 );
 
-                op.SetBaseFields<UserAuthenticationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UserAuthenticationV3.Response Execute(
+            protected UserAuthenticationV3.Response InternalExecute(
                 string password,
                 string requestId,
                 string userName
@@ -121,7 +137,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UserAuthenticationV3.Response> ExecuteAsync(
+            protected async Task<UserAuthenticationV3.Response> InternalExecuteAsync(
                 string password,
                 string requestId,
                 string userName
@@ -144,7 +160,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private UserAuthenticationV3(UserAuthenticationV3Builder builder,
+        public class UserAuthenticationV3Builder : UserAuthenticationV3AbstractBuilder<UserAuthenticationV3Builder>
+        {
+            public UserAuthenticationV3Builder() : base() { }
+
+            public UserAuthenticationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UserAuthenticationV3.Response Execute(
+                string password,
+                string requestId,
+                string userName
+            )
+            {
+                return InternalExecute(
+                    password,
+                    requestId,
+                    userName
+                );
+            }
+            public async Task<UserAuthenticationV3.Response> ExecuteAsync(
+                string password,
+                string requestId,
+                string userName
+            )
+            {
+                return await InternalExecuteAsync(
+                    password,
+                    requestId,
+                    userName
+                );
+            }
+        }
+
+
+        public UserAuthenticationV3(IUserAuthenticationV3Builder builder,
             string password,
             string requestId,
             string userName

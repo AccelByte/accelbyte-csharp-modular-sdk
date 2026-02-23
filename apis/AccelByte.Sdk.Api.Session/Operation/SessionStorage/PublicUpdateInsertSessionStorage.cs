@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicUpdateInsertSessionStorageBuilder Builder { get => new PublicUpdateInsertSessionStorageBuilder(); }
 
-        public class PublicUpdateInsertSessionStorageBuilder
-            : OperationBuilder<PublicUpdateInsertSessionStorageBuilder>
+        public interface IPublicUpdateInsertSessionStorageBuilder
         {
 
 
 
 
 
-            internal PublicUpdateInsertSessionStorageBuilder() { }
+        }
 
-            internal PublicUpdateInsertSessionStorageBuilder(IAccelByteSdk sdk)
+        public abstract class PublicUpdateInsertSessionStorageAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdateInsertSessionStorageBuilder
+            where TImpl : PublicUpdateInsertSessionStorageAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicUpdateInsertSessionStorageAbstractBuilder() { }
+
+            public PublicUpdateInsertSessionStorageAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -75,11 +85,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdateInsertSessionStorageBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUpdateInsertSessionStorage.Response Execute(
+            protected PublicUpdateInsertSessionStorage.Response InternalExecute(
                 Dictionary<string, object> body,
                 string namespace_,
                 string sessionId,
@@ -102,7 +112,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateInsertSessionStorage.Response> ExecuteAsync(
+            protected async Task<PublicUpdateInsertSessionStorage.Response> InternalExecuteAsync(
                 Dictionary<string, object> body,
                 string namespace_,
                 string sessionId,
@@ -127,7 +137,44 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicUpdateInsertSessionStorage(PublicUpdateInsertSessionStorageBuilder builder,
+        public class PublicUpdateInsertSessionStorageBuilder : PublicUpdateInsertSessionStorageAbstractBuilder<PublicUpdateInsertSessionStorageBuilder>
+        {
+            public PublicUpdateInsertSessionStorageBuilder() : base() { }
+
+            public PublicUpdateInsertSessionStorageBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUpdateInsertSessionStorage.Response Execute(
+                Dictionary<string, object> body,
+                string namespace_,
+                string sessionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    sessionId,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateInsertSessionStorage.Response> ExecuteAsync(
+                Dictionary<string, object> body,
+                string namespace_,
+                string sessionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    sessionId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdateInsertSessionStorage(IPublicUpdateInsertSessionStorageBuilder builder,
             Dictionary<string, object> body,
             string namespace_,
             string sessionId,
@@ -212,32 +259,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

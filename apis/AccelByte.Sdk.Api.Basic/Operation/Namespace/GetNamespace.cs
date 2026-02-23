@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetNamespaceBuilder Builder { get => new GetNamespaceBuilder(); }
 
-        public class GetNamespaceBuilder
-            : OperationBuilder<GetNamespaceBuilder>
+        public interface IGetNamespaceBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetNamespaceAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetNamespaceBuilder
+            where TImpl : GetNamespaceAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal GetNamespaceBuilder() { }
+            public GetNamespaceAbstractBuilder() { }
 
-            internal GetNamespaceBuilder(IAccelByteSdk sdk)
+            public GetNamespaceAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetNamespaceBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetNamespaceBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetNamespace.Response Execute(
+            protected GetNamespace.Response InternalExecute(
                 string namespace_
             )
             {
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetNamespace.Response> ExecuteAsync(
+            protected async Task<GetNamespace.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -111,7 +123,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetNamespace(GetNamespaceBuilder builder,
+        public class GetNamespaceBuilder : GetNamespaceAbstractBuilder<GetNamespaceBuilder>
+        {
+            public GetNamespaceBuilder() : base() { }
+
+            public GetNamespaceBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetNamespace.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetNamespace.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetNamespace(IGetNamespaceBuilder builder,
             string namespace_
         )
         {
@@ -185,27 +222,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.NamespaceInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.NamespaceInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

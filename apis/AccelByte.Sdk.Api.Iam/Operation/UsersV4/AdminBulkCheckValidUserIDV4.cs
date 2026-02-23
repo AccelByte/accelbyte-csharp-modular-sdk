@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminBulkCheckValidUserIDV4Builder Builder { get => new AdminBulkCheckValidUserIDV4Builder(); }
 
-        public class AdminBulkCheckValidUserIDV4Builder
-            : OperationBuilder<AdminBulkCheckValidUserIDV4Builder>
+        public interface IAdminBulkCheckValidUserIDV4Builder
         {
 
 
 
 
 
-            internal AdminBulkCheckValidUserIDV4Builder() { }
+        }
 
-            internal AdminBulkCheckValidUserIDV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminBulkCheckValidUserIDV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBulkCheckValidUserIDV4Builder
+            where TImpl : AdminBulkCheckValidUserIDV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBulkCheckValidUserIDV4AbstractBuilder() { }
+
+            public AdminBulkCheckValidUserIDV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminBulkCheckValidUserIDV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBulkCheckValidUserIDV4.Response Execute(
+            protected AdminBulkCheckValidUserIDV4.Response InternalExecute(
                 ModelCheckValidUserIDRequestV4 body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBulkCheckValidUserIDV4.Response> ExecuteAsync(
+            protected async Task<AdminBulkCheckValidUserIDV4.Response> InternalExecuteAsync(
                 ModelCheckValidUserIDRequestV4 body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminBulkCheckValidUserIDV4(AdminBulkCheckValidUserIDV4Builder builder,
+        public class AdminBulkCheckValidUserIDV4Builder : AdminBulkCheckValidUserIDV4AbstractBuilder<AdminBulkCheckValidUserIDV4Builder>
+        {
+            public AdminBulkCheckValidUserIDV4Builder() : base() { }
+
+            public AdminBulkCheckValidUserIDV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBulkCheckValidUserIDV4.Response Execute(
+                ModelCheckValidUserIDRequestV4 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminBulkCheckValidUserIDV4.Response> ExecuteAsync(
+                ModelCheckValidUserIDRequestV4 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminBulkCheckValidUserIDV4(IAdminBulkCheckValidUserIDV4Builder builder,
             ModelCheckValidUserIDRequestV4 body,
             string namespace_
         )
@@ -180,27 +219,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListValidUserIDResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListValidUserIDResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

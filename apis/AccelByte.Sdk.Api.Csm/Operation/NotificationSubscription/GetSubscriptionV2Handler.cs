@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetSubscriptionV2HandlerBuilder Builder { get => new GetSubscriptionV2HandlerBuilder(); }
 
-        public class GetSubscriptionV2HandlerBuilder
-            : OperationBuilder<GetSubscriptionV2HandlerBuilder>
+        public interface IGetSubscriptionV2HandlerBuilder
         {
 
 
 
 
 
-            internal GetSubscriptionV2HandlerBuilder() { }
+        }
 
-            internal GetSubscriptionV2HandlerBuilder(IAccelByteSdk sdk)
+        public abstract class GetSubscriptionV2HandlerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetSubscriptionV2HandlerBuilder
+            where TImpl : GetSubscriptionV2HandlerAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetSubscriptionV2HandlerAbstractBuilder() { }
+
+            public GetSubscriptionV2HandlerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetSubscriptionV2HandlerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetSubscriptionV2Handler.Response Execute(
+            protected GetSubscriptionV2Handler.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetSubscriptionV2Handler.Response> ExecuteAsync(
+            protected async Task<GetSubscriptionV2Handler.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetSubscriptionV2Handler(GetSubscriptionV2HandlerBuilder builder,
+        public class GetSubscriptionV2HandlerBuilder : GetSubscriptionV2HandlerAbstractBuilder<GetSubscriptionV2HandlerBuilder>
+        {
+            public GetSubscriptionV2HandlerBuilder() : base() { }
+
+            public GetSubscriptionV2HandlerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetSubscriptionV2Handler.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<GetSubscriptionV2Handler.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetSubscriptionV2Handler(IGetSubscriptionV2HandlerBuilder builder,
             string app,
             string namespace_
         )
@@ -181,27 +220,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetNotificationSubscriberStatusResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetNotificationSubscriberStatusResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

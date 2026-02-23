@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static DeleteTemplateSlugBuilder Builder { get => new DeleteTemplateSlugBuilder(); }
 
-        public class DeleteTemplateSlugBuilder
-            : OperationBuilder<DeleteTemplateSlugBuilder>
+        public interface IDeleteTemplateSlugBuilder
         {
 
 
 
 
 
-            internal DeleteTemplateSlugBuilder() { }
+        }
 
-            internal DeleteTemplateSlugBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteTemplateSlugAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteTemplateSlugBuilder
+            where TImpl : DeleteTemplateSlugAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteTemplateSlugAbstractBuilder() { }
+
+            public DeleteTemplateSlugAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<DeleteTemplateSlugBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteTemplateSlug.Response Execute(
+            protected DeleteTemplateSlug.Response InternalExecute(
                 string namespace_,
                 string templateSlug
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteTemplateSlug.Response> ExecuteAsync(
+            protected async Task<DeleteTemplateSlug.Response> InternalExecuteAsync(
                 string namespace_,
                 string templateSlug
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private DeleteTemplateSlug(DeleteTemplateSlugBuilder builder,
+        public class DeleteTemplateSlugBuilder : DeleteTemplateSlugAbstractBuilder<DeleteTemplateSlugBuilder>
+        {
+            public DeleteTemplateSlugBuilder() : base() { }
+
+            public DeleteTemplateSlugBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteTemplateSlug.Response Execute(
+                string namespace_,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    templateSlug
+                );
+            }
+            public async Task<DeleteTemplateSlug.Response> ExecuteAsync(
+                string namespace_,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public DeleteTemplateSlug(IDeleteTemplateSlugBuilder builder,
             string namespace_,
             string templateSlug
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

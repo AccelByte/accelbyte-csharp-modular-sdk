@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetRootCategoriesBuilder Builder { get => new GetRootCategoriesBuilder(); }
 
-        public class GetRootCategoriesBuilder
-            : OperationBuilder<GetRootCategoriesBuilder>
+        public interface IGetRootCategoriesBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetRootCategoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRootCategoriesBuilder
+            where TImpl : GetRootCategoriesAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetRootCategoriesBuilder() { }
+            public GetRootCategoriesAbstractBuilder() { }
 
-            internal GetRootCategoriesBuilder(IAccelByteSdk sdk)
+            public GetRootCategoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetRootCategoriesBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetRootCategoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetRootCategories.Response Execute(
+            protected GetRootCategories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRootCategories.Response> ExecuteAsync(
+            protected async Task<GetRootCategories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetRootCategories(GetRootCategoriesBuilder builder,
+        public class GetRootCategoriesBuilder : GetRootCategoriesAbstractBuilder<GetRootCategoriesBuilder>
+        {
+            public GetRootCategoriesBuilder() : base() { }
+
+            public GetRootCategoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetRootCategories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetRootCategories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetRootCategories(IGetRootCategoriesBuilder builder,
             string namespace_
         )
         {
@@ -176,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

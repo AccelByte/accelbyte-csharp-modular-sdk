@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static MockFulfillIAPItemBuilder Builder { get => new MockFulfillIAPItemBuilder(); }
 
-        public class MockFulfillIAPItemBuilder
-            : OperationBuilder<MockFulfillIAPItemBuilder>
+        public interface IMockFulfillIAPItemBuilder
         {
 
 
 
 
 
-            internal MockFulfillIAPItemBuilder() { }
+        }
 
-            internal MockFulfillIAPItemBuilder(IAccelByteSdk sdk)
+        public abstract class MockFulfillIAPItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IMockFulfillIAPItemBuilder
+            where TImpl : MockFulfillIAPItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public MockFulfillIAPItemAbstractBuilder() { }
+
+            public MockFulfillIAPItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<MockFulfillIAPItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public MockFulfillIAPItem.Response Execute(
+            protected MockFulfillIAPItem.Response InternalExecute(
                 MockIAPReceipt body,
                 string namespace_,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<MockFulfillIAPItem.Response> ExecuteAsync(
+            protected async Task<MockFulfillIAPItem.Response> InternalExecuteAsync(
                 MockIAPReceipt body,
                 string namespace_,
                 string userId
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private MockFulfillIAPItem(MockFulfillIAPItemBuilder builder,
+        public class MockFulfillIAPItemBuilder : MockFulfillIAPItemAbstractBuilder<MockFulfillIAPItemBuilder>
+        {
+            public MockFulfillIAPItemBuilder() : base() { }
+
+            public MockFulfillIAPItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public MockFulfillIAPItem.Response Execute(
+                MockIAPReceipt body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<MockFulfillIAPItem.Response> ExecuteAsync(
+                MockIAPReceipt body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public MockFulfillIAPItem(IMockFulfillIAPItemBuilder builder,
             MockIAPReceipt body,
             string namespace_,
             string userId
@@ -190,17 +233,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

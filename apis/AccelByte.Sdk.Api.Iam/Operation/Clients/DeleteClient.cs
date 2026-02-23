@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static DeleteClientBuilder Builder { get => new DeleteClientBuilder(); }
 
-        public class DeleteClientBuilder
-            : OperationBuilder<DeleteClientBuilder>
+        public interface IDeleteClientBuilder
         {
 
 
 
 
 
-            internal DeleteClientBuilder() { }
+        }
 
-            internal DeleteClientBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteClientAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteClientBuilder
+            where TImpl : DeleteClientAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteClientAbstractBuilder() { }
+
+            public DeleteClientAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     clientId                    
                 );
 
-                op.SetBaseFields<DeleteClientBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteClient.Response Execute(
+            protected DeleteClient.Response InternalExecute(
                 string clientId
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteClient.Response> ExecuteAsync(
+            protected async Task<DeleteClient.Response> InternalExecuteAsync(
                 string clientId
             )
             {
@@ -102,7 +112,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private DeleteClient(DeleteClientBuilder builder,
+        public class DeleteClientBuilder : DeleteClientAbstractBuilder<DeleteClientBuilder>
+        {
+            public DeleteClientBuilder() : base() { }
+
+            public DeleteClientBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteClient.Response Execute(
+                string clientId
+            )
+            {
+                return InternalExecute(
+                    clientId
+                );
+            }
+            public async Task<DeleteClient.Response> ExecuteAsync(
+                string clientId
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId
+                );
+            }
+        }
+
+
+        public DeleteClient(IDeleteClientBuilder builder,
             string clientId
         )
         {
@@ -172,17 +208,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

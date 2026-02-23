@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static InitiateExportAgreementsToCSVBuilder Builder { get => new InitiateExportAgreementsToCSVBuilder(); }
 
-        public class InitiateExportAgreementsToCSVBuilder
-            : OperationBuilder<InitiateExportAgreementsToCSVBuilder>
+        public interface IInitiateExportAgreementsToCSVBuilder
+        {
+
+            string? End { get; }
+
+
+
+
+
+        }
+
+        public abstract class InitiateExportAgreementsToCSVAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IInitiateExportAgreementsToCSVBuilder
+            where TImpl : InitiateExportAgreementsToCSVAbstractBuilder<TImpl>
         {
 
             public string? End { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal InitiateExportAgreementsToCSVBuilder() { }
+            public InitiateExportAgreementsToCSVAbstractBuilder() { }
 
-            internal InitiateExportAgreementsToCSVBuilder(IAccelByteSdk sdk)
+            public InitiateExportAgreementsToCSVAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public InitiateExportAgreementsToCSVBuilder SetEnd(string _end)
+            public TImpl SetEnd(string _end)
             {
                 End = _end;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     start                    
                 );
 
-                op.SetBaseFields<InitiateExportAgreementsToCSVBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public InitiateExportAgreementsToCSV.Response Execute(
+            protected InitiateExportAgreementsToCSV.Response InternalExecute(
                 string namespace_,
                 string policyVersionId,
                 string start
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<InitiateExportAgreementsToCSV.Response> ExecuteAsync(
+            protected async Task<InitiateExportAgreementsToCSV.Response> InternalExecuteAsync(
                 string namespace_,
                 string policyVersionId,
                 string start
@@ -121,7 +133,40 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private InitiateExportAgreementsToCSV(InitiateExportAgreementsToCSVBuilder builder,
+        public class InitiateExportAgreementsToCSVBuilder : InitiateExportAgreementsToCSVAbstractBuilder<InitiateExportAgreementsToCSVBuilder>
+        {
+            public InitiateExportAgreementsToCSVBuilder() : base() { }
+
+            public InitiateExportAgreementsToCSVBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public InitiateExportAgreementsToCSV.Response Execute(
+                string namespace_,
+                string policyVersionId,
+                string start
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    policyVersionId,
+                    start
+                );
+            }
+            public async Task<InitiateExportAgreementsToCSV.Response> ExecuteAsync(
+                string namespace_,
+                string policyVersionId,
+                string start
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    policyVersionId,
+                    start
+                );
+            }
+        }
+
+
+        public InitiateExportAgreementsToCSV(IInitiateExportAgreementsToCSVBuilder builder,
             string namespace_,
             string policyVersionId,
             string start
@@ -201,22 +246,26 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.InitiateExportAgreementsToCSVResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.InitiateExportAgreementsToCSVResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminPutUserRolesV2Builder Builder { get => new AdminPutUserRolesV2Builder(); }
 
-        public class AdminPutUserRolesV2Builder
-            : OperationBuilder<AdminPutUserRolesV2Builder>
+        public interface IAdminPutUserRolesV2Builder
         {
 
 
 
 
 
-            internal AdminPutUserRolesV2Builder() { }
+        }
 
-            internal AdminPutUserRolesV2Builder(IAccelByteSdk sdk)
+        public abstract class AdminPutUserRolesV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPutUserRolesV2Builder
+            where TImpl : AdminPutUserRolesV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPutUserRolesV2AbstractBuilder() { }
+
+            public AdminPutUserRolesV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminPutUserRolesV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminPutUserRolesV2.Response Execute(
+            protected AdminPutUserRolesV2.Response InternalExecute(
                 List<string> body,
                 string namespace_,
                 string userId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPutUserRolesV2.Response> ExecuteAsync(
+            protected async Task<AdminPutUserRolesV2.Response> InternalExecuteAsync(
                 List<string> body,
                 string namespace_,
                 string userId
@@ -114,7 +124,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminPutUserRolesV2(AdminPutUserRolesV2Builder builder,
+        public class AdminPutUserRolesV2Builder : AdminPutUserRolesV2AbstractBuilder<AdminPutUserRolesV2Builder>
+        {
+            public AdminPutUserRolesV2Builder() : base() { }
+
+            public AdminPutUserRolesV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminPutUserRolesV2.Response Execute(
+                List<string> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminPutUserRolesV2.Response> ExecuteAsync(
+                List<string> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminPutUserRolesV2(IAdminPutUserRolesV2Builder builder,
             List<string> body,
             string namespace_,
             string userId
@@ -194,22 +238,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

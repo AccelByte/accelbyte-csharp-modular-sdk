@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static PublicListReasonGroupsBuilder Builder { get => new PublicListReasonGroupsBuilder(); }
 
-        public class PublicListReasonGroupsBuilder
-            : OperationBuilder<PublicListReasonGroupsBuilder>
+        public interface IPublicListReasonGroupsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListReasonGroupsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListReasonGroupsBuilder
+            where TImpl : PublicListReasonGroupsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal PublicListReasonGroupsBuilder() { }
+            public PublicListReasonGroupsAbstractBuilder() { }
 
-            internal PublicListReasonGroupsBuilder(IAccelByteSdk sdk)
+            public PublicListReasonGroupsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListReasonGroupsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListReasonGroupsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +88,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListReasonGroupsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListReasonGroups.Response Execute(
+            protected PublicListReasonGroups.Response InternalExecute(
                 string namespace_
             )
             {
@@ -95,7 +109,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListReasonGroups.Response> ExecuteAsync(
+            protected async Task<PublicListReasonGroups.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -114,7 +128,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private PublicListReasonGroups(PublicListReasonGroupsBuilder builder,
+        public class PublicListReasonGroupsBuilder : PublicListReasonGroupsAbstractBuilder<PublicListReasonGroupsBuilder>
+        {
+            public PublicListReasonGroupsBuilder() : base() { }
+
+            public PublicListReasonGroupsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListReasonGroups.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListReasonGroups.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListReasonGroups(IPublicListReasonGroupsBuilder builder,
             string namespace_
         )
         {
@@ -185,12 +224,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiReasonGroupListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiReasonGroupListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

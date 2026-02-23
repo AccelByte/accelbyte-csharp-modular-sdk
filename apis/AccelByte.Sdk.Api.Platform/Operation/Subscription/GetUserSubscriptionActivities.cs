@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserSubscriptionActivitiesBuilder Builder { get => new GetUserSubscriptionActivitiesBuilder(); }
 
-        public class GetUserSubscriptionActivitiesBuilder
-            : OperationBuilder<GetUserSubscriptionActivitiesBuilder>
+        public interface IGetUserSubscriptionActivitiesBuilder
+        {
+
+            bool? ExcludeSystem { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? SubscriptionId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserSubscriptionActivitiesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserSubscriptionActivitiesBuilder
+            where TImpl : GetUserSubscriptionActivitiesAbstractBuilder<TImpl>
         {
 
             public bool? ExcludeSystem { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetUserSubscriptionActivitiesBuilder() { }
+            public GetUserSubscriptionActivitiesAbstractBuilder() { }
 
-            internal GetUserSubscriptionActivitiesBuilder(IAccelByteSdk sdk)
+            public GetUserSubscriptionActivitiesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserSubscriptionActivitiesBuilder SetExcludeSystem(bool _excludeSystem)
+            public TImpl SetExcludeSystem(bool _excludeSystem)
             {
                 ExcludeSystem = _excludeSystem;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserSubscriptionActivitiesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserSubscriptionActivitiesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserSubscriptionActivitiesBuilder SetSubscriptionId(string _subscriptionId)
+            public TImpl SetSubscriptionId(string _subscriptionId)
             {
                 SubscriptionId = _subscriptionId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -95,11 +113,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserSubscriptionActivitiesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserSubscriptionActivities.Response Execute(
+            protected GetUserSubscriptionActivities.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -118,7 +136,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserSubscriptionActivities.Response> ExecuteAsync(
+            protected async Task<GetUserSubscriptionActivities.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -139,7 +157,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserSubscriptionActivities(GetUserSubscriptionActivitiesBuilder builder,
+        public class GetUserSubscriptionActivitiesBuilder : GetUserSubscriptionActivitiesAbstractBuilder<GetUserSubscriptionActivitiesBuilder>
+        {
+            public GetUserSubscriptionActivitiesBuilder() : base() { }
+
+            public GetUserSubscriptionActivitiesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserSubscriptionActivities.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserSubscriptionActivities.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserSubscriptionActivities(IGetUserSubscriptionActivitiesBuilder builder,
             string namespace_,
             string userId
         )
@@ -218,7 +265,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionActivityPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionActivityPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

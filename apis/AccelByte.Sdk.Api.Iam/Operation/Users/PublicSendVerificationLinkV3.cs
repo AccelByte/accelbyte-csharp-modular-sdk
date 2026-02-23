@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicSendVerificationLinkV3Builder Builder { get => new PublicSendVerificationLinkV3Builder(); }
 
-        public class PublicSendVerificationLinkV3Builder
-            : OperationBuilder<PublicSendVerificationLinkV3Builder>
+        public interface IPublicSendVerificationLinkV3Builder
         {
 
 
 
 
 
-            internal PublicSendVerificationLinkV3Builder() { }
+        }
 
-            internal PublicSendVerificationLinkV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicSendVerificationLinkV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSendVerificationLinkV3Builder
+            where TImpl : PublicSendVerificationLinkV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicSendVerificationLinkV3AbstractBuilder() { }
+
+            public PublicSendVerificationLinkV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<PublicSendVerificationLinkV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSendVerificationLinkV3.Response Execute(
+            protected PublicSendVerificationLinkV3.Response InternalExecute(
                 ModelSendVerificationLinkRequest body
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSendVerificationLinkV3.Response> ExecuteAsync(
+            protected async Task<PublicSendVerificationLinkV3.Response> InternalExecuteAsync(
                 ModelSendVerificationLinkRequest body
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicSendVerificationLinkV3(PublicSendVerificationLinkV3Builder builder,
+        public class PublicSendVerificationLinkV3Builder : PublicSendVerificationLinkV3AbstractBuilder<PublicSendVerificationLinkV3Builder>
+        {
+            public PublicSendVerificationLinkV3Builder() : base() { }
+
+            public PublicSendVerificationLinkV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSendVerificationLinkV3.Response Execute(
+                ModelSendVerificationLinkRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<PublicSendVerificationLinkV3.Response> ExecuteAsync(
+                ModelSendVerificationLinkRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public PublicSendVerificationLinkV3(IPublicSendVerificationLinkV3Builder builder,
             ModelSendVerificationLinkRequest body
         )
         {
@@ -171,22 +206,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
 

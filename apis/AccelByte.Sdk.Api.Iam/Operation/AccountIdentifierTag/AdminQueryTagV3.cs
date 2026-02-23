@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminQueryTagV3Builder Builder { get => new AdminQueryTagV3Builder(); }
 
-        public class AdminQueryTagV3Builder
-            : OperationBuilder<AdminQueryTagV3Builder>
+        public interface IAdminQueryTagV3Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? TagName { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminQueryTagV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminQueryTagV3Builder
+            where TImpl : AdminQueryTagV3AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -45,30 +61,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminQueryTagV3Builder() { }
+            public AdminQueryTagV3AbstractBuilder() { }
 
-            internal AdminQueryTagV3Builder(IAccelByteSdk sdk)
+            public AdminQueryTagV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminQueryTagV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTagV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTagV3Builder SetTagName(string _tagName)
+            public TImpl SetTagName(string _tagName)
             {
                 TagName = _tagName;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -83,11 +99,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryTagV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminQueryTagV3.Response Execute(
+            protected AdminQueryTagV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -104,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryTagV3.Response> ExecuteAsync(
+            protected async Task<AdminQueryTagV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -123,7 +139,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminQueryTagV3(AdminQueryTagV3Builder builder,
+        public class AdminQueryTagV3Builder : AdminQueryTagV3AbstractBuilder<AdminQueryTagV3Builder>
+        {
+            public AdminQueryTagV3Builder() : base() { }
+
+            public AdminQueryTagV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminQueryTagV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminQueryTagV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminQueryTagV3(IAdminQueryTagV3Builder builder,
             string namespace_
         )
         {
@@ -197,12 +238,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonTagsGetResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonTagsGetResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

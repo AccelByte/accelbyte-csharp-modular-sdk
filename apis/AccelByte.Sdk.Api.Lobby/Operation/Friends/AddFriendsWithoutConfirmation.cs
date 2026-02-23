@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AddFriendsWithoutConfirmationBuilder Builder { get => new AddFriendsWithoutConfirmationBuilder(); }
 
-        public class AddFriendsWithoutConfirmationBuilder
-            : OperationBuilder<AddFriendsWithoutConfirmationBuilder>
+        public interface IAddFriendsWithoutConfirmationBuilder
         {
 
 
 
 
 
-            internal AddFriendsWithoutConfirmationBuilder() { }
+        }
 
-            internal AddFriendsWithoutConfirmationBuilder(IAccelByteSdk sdk)
+        public abstract class AddFriendsWithoutConfirmationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAddFriendsWithoutConfirmationBuilder
+            where TImpl : AddFriendsWithoutConfirmationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AddFriendsWithoutConfirmationAbstractBuilder() { }
+
+            public AddFriendsWithoutConfirmationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AddFriendsWithoutConfirmationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AddFriendsWithoutConfirmation.Response Execute(
+            protected AddFriendsWithoutConfirmation.Response InternalExecute(
                 ModelBulkFriendsRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AddFriendsWithoutConfirmation.Response> ExecuteAsync(
+            protected async Task<AddFriendsWithoutConfirmation.Response> InternalExecuteAsync(
                 ModelBulkFriendsRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AddFriendsWithoutConfirmation(AddFriendsWithoutConfirmationBuilder builder,
+        public class AddFriendsWithoutConfirmationBuilder : AddFriendsWithoutConfirmationAbstractBuilder<AddFriendsWithoutConfirmationBuilder>
+        {
+            public AddFriendsWithoutConfirmationBuilder() : base() { }
+
+            public AddFriendsWithoutConfirmationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AddFriendsWithoutConfirmation.Response Execute(
+                ModelBulkFriendsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AddFriendsWithoutConfirmation.Response> ExecuteAsync(
+                ModelBulkFriendsRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AddFriendsWithoutConfirmation(IAddFriendsWithoutConfirmationBuilder builder,
             ModelBulkFriendsRequest body,
             string namespace_,
             string userId
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

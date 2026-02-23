@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteRevocationConfigBuilder Builder { get => new DeleteRevocationConfigBuilder(); }
 
-        public class DeleteRevocationConfigBuilder
-            : OperationBuilder<DeleteRevocationConfigBuilder>
+        public interface IDeleteRevocationConfigBuilder
         {
 
 
 
 
 
-            internal DeleteRevocationConfigBuilder() { }
+        }
 
-            internal DeleteRevocationConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteRevocationConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteRevocationConfigBuilder
+            where TImpl : DeleteRevocationConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteRevocationConfigAbstractBuilder() { }
+
+            public DeleteRevocationConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteRevocationConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteRevocationConfig.Response Execute(
+            protected DeleteRevocationConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteRevocationConfig.Response> ExecuteAsync(
+            protected async Task<DeleteRevocationConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteRevocationConfig(DeleteRevocationConfigBuilder builder,
+        public class DeleteRevocationConfigBuilder : DeleteRevocationConfigAbstractBuilder<DeleteRevocationConfigBuilder>
+        {
+            public DeleteRevocationConfigBuilder() : base() { }
+
+            public DeleteRevocationConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteRevocationConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteRevocationConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteRevocationConfig(IDeleteRevocationConfigBuilder builder,
             string namespace_
         )
         {

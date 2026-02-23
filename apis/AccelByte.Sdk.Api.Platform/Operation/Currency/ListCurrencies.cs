@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListCurrenciesBuilder Builder { get => new ListCurrenciesBuilder(); }
 
-        public class ListCurrenciesBuilder
-            : OperationBuilder<ListCurrenciesBuilder>
+        public interface IListCurrenciesBuilder
+        {
+
+            ListCurrenciesCurrencyType? CurrencyType { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListCurrenciesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListCurrenciesBuilder
+            where TImpl : ListCurrenciesAbstractBuilder<TImpl>
         {
 
             public ListCurrenciesCurrencyType? CurrencyType { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListCurrenciesBuilder() { }
+            public ListCurrenciesAbstractBuilder() { }
 
-            internal ListCurrenciesBuilder(IAccelByteSdk sdk)
+            public ListCurrenciesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListCurrenciesBuilder SetCurrencyType(ListCurrenciesCurrencyType _currencyType)
+            public TImpl SetCurrencyType(ListCurrenciesCurrencyType _currencyType)
             {
                 CurrencyType = _currencyType;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListCurrenciesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListCurrencies.Response Execute(
+            protected ListCurrencies.Response InternalExecute(
                 string namespace_
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListCurrencies.Response> ExecuteAsync(
+            protected async Task<ListCurrencies.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListCurrencies(ListCurrenciesBuilder builder,
+        public class ListCurrenciesBuilder : ListCurrenciesAbstractBuilder<ListCurrenciesBuilder>
+        {
+            public ListCurrenciesBuilder() : base() { }
+
+            public ListCurrenciesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListCurrencies.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListCurrencies.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListCurrencies(IListCurrenciesBuilder builder,
             string namespace_
         )
         {
@@ -175,7 +212,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static DisableUserBanBuilder Builder { get => new DisableUserBanBuilder(); }
 
-        public class DisableUserBanBuilder
-            : OperationBuilder<DisableUserBanBuilder>
+        public interface IDisableUserBanBuilder
         {
 
 
 
 
 
-            internal DisableUserBanBuilder() { }
+        }
 
-            internal DisableUserBanBuilder(IAccelByteSdk sdk)
+        public abstract class DisableUserBanAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDisableUserBanBuilder
+            where TImpl : DisableUserBanAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DisableUserBanAbstractBuilder() { }
+
+            public DisableUserBanAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -73,12 +83,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DisableUserBanBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DisableUserBan.Response Execute(
+            protected DisableUserBan.Response InternalExecute(
                 string banId,
                 string namespace_,
                 string userId
@@ -99,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DisableUserBan.Response> ExecuteAsync(
+            protected async Task<DisableUserBan.Response> InternalExecuteAsync(
                 string banId,
                 string namespace_,
                 string userId
@@ -122,7 +132,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private DisableUserBan(DisableUserBanBuilder builder,
+        public class DisableUserBanBuilder : DisableUserBanAbstractBuilder<DisableUserBanBuilder>
+        {
+            public DisableUserBanBuilder() : base() { }
+
+            public DisableUserBanBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DisableUserBan.Response Execute(
+                string banId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    banId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DisableUserBan.Response> ExecuteAsync(
+                string banId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    banId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DisableUserBan(IDisableUserBanBuilder builder,
             string banId,
             string namespace_,
             string userId
@@ -201,27 +245,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserBanResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserBanResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error403 = response.Payload;
                 response.Error = new ApiError("-1", response.Error403!);
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

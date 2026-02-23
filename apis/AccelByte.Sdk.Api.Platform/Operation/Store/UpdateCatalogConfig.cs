@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateCatalogConfigBuilder Builder { get => new UpdateCatalogConfigBuilder(); }
 
-        public class UpdateCatalogConfigBuilder
-            : OperationBuilder<UpdateCatalogConfigBuilder>
+        public interface IUpdateCatalogConfigBuilder
         {
 
 
 
 
 
-            internal UpdateCatalogConfigBuilder() { }
+        }
 
-            internal UpdateCatalogConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateCatalogConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateCatalogConfigBuilder
+            where TImpl : UpdateCatalogConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateCatalogConfigAbstractBuilder() { }
+
+            public UpdateCatalogConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateCatalogConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateCatalogConfig.Response Execute(
+            protected UpdateCatalogConfig.Response InternalExecute(
                 CatalogConfigUpdate body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateCatalogConfig.Response> ExecuteAsync(
+            protected async Task<UpdateCatalogConfig.Response> InternalExecuteAsync(
                 CatalogConfigUpdate body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateCatalogConfig(UpdateCatalogConfigBuilder builder,
+        public class UpdateCatalogConfigBuilder : UpdateCatalogConfigAbstractBuilder<UpdateCatalogConfigBuilder>
+        {
+            public UpdateCatalogConfigBuilder() : base() { }
+
+            public UpdateCatalogConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateCatalogConfig.Response Execute(
+                CatalogConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateCatalogConfig.Response> ExecuteAsync(
+                CatalogConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateCatalogConfig(IUpdateCatalogConfigBuilder builder,
             CatalogConfigUpdate body,
             string namespace_
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CatalogConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CatalogConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

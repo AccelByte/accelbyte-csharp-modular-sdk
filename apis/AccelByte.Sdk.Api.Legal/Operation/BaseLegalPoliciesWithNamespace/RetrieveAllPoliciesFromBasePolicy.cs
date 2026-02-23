@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAllPoliciesFromBasePolicyBuilder Builder { get => new RetrieveAllPoliciesFromBasePolicyBuilder(); }
 
-        public class RetrieveAllPoliciesFromBasePolicyBuilder
-            : OperationBuilder<RetrieveAllPoliciesFromBasePolicyBuilder>
+        public interface IRetrieveAllPoliciesFromBasePolicyBuilder
         {
 
 
 
 
 
-            internal RetrieveAllPoliciesFromBasePolicyBuilder() { }
+        }
 
-            internal RetrieveAllPoliciesFromBasePolicyBuilder(IAccelByteSdk sdk)
+        public abstract class RetrieveAllPoliciesFromBasePolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAllPoliciesFromBasePolicyBuilder
+            where TImpl : RetrieveAllPoliciesFromBasePolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveAllPoliciesFromBasePolicyAbstractBuilder() { }
+
+            public RetrieveAllPoliciesFromBasePolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RetrieveAllPoliciesFromBasePolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAllPoliciesFromBasePolicy.Response Execute(
+            protected RetrieveAllPoliciesFromBasePolicy.Response InternalExecute(
                 string basePolicyId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAllPoliciesFromBasePolicy.Response> ExecuteAsync(
+            protected async Task<RetrieveAllPoliciesFromBasePolicy.Response> InternalExecuteAsync(
                 string basePolicyId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAllPoliciesFromBasePolicy(RetrieveAllPoliciesFromBasePolicyBuilder builder,
+        public class RetrieveAllPoliciesFromBasePolicyBuilder : RetrieveAllPoliciesFromBasePolicyAbstractBuilder<RetrieveAllPoliciesFromBasePolicyBuilder>
+        {
+            public RetrieveAllPoliciesFromBasePolicyBuilder() : base() { }
+
+            public RetrieveAllPoliciesFromBasePolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAllPoliciesFromBasePolicy.Response Execute(
+                string basePolicyId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    basePolicyId,
+                    namespace_
+                );
+            }
+            public async Task<RetrieveAllPoliciesFromBasePolicy.Response> ExecuteAsync(
+                string basePolicyId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    basePolicyId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public RetrieveAllPoliciesFromBasePolicy(IRetrieveAllPoliciesFromBasePolicyBuilder builder,
             string basePolicyId,
             string namespace_
         )
@@ -173,12 +212,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePoliciesFromBasePolicyResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePoliciesFromBasePolicyResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

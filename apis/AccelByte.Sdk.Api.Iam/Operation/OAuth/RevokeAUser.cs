@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RevokeAUserBuilder Builder { get => new RevokeAUserBuilder(); }
 
-        public class RevokeAUserBuilder
-            : OperationBuilder<RevokeAUserBuilder>
+        public interface IRevokeAUserBuilder
         {
 
 
 
 
 
-            internal RevokeAUserBuilder() { }
+        }
 
-            internal RevokeAUserBuilder(IAccelByteSdk sdk)
+        public abstract class RevokeAUserAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeAUserBuilder
+            where TImpl : RevokeAUserAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RevokeAUserAbstractBuilder() { }
+
+            public RevokeAUserAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userID                    
                 );
 
-                op.SetBaseFields<RevokeAUserBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public RevokeAUser.Response Execute(
+            protected RevokeAUser.Response InternalExecute(
                 string userID
             )
             {
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeAUser.Response> ExecuteAsync(
+            protected async Task<RevokeAUser.Response> InternalExecuteAsync(
                 string userID
             )
             {
@@ -106,7 +116,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RevokeAUser(RevokeAUserBuilder builder,
+        public class RevokeAUserBuilder : RevokeAUserAbstractBuilder<RevokeAUserBuilder>
+        {
+            public RevokeAUserBuilder() : base() { }
+
+            public RevokeAUserBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public RevokeAUser.Response Execute(
+                string userID
+            )
+            {
+                return InternalExecute(
+                    userID
+                );
+            }
+            public async Task<RevokeAUser.Response> ExecuteAsync(
+                string userID
+            )
+            {
+                return await InternalExecuteAsync(
+                    userID
+                );
+            }
+        }
+
+
+        public RevokeAUser(IRevokeAUserBuilder builder,
             string userID
         )
         {
@@ -174,12 +210,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error401 = response.Payload;
                 response.Error = new ApiError("-1", response.Error401!);
             }
 

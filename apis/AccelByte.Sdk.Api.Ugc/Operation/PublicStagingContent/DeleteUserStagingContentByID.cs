@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static DeleteUserStagingContentByIDBuilder Builder { get => new DeleteUserStagingContentByIDBuilder(); }
 
-        public class DeleteUserStagingContentByIDBuilder
-            : OperationBuilder<DeleteUserStagingContentByIDBuilder>
+        public interface IDeleteUserStagingContentByIDBuilder
         {
 
 
 
 
 
-            internal DeleteUserStagingContentByIDBuilder() { }
+        }
 
-            internal DeleteUserStagingContentByIDBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteUserStagingContentByIDAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteUserStagingContentByIDBuilder
+            where TImpl : DeleteUserStagingContentByIDAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteUserStagingContentByIDAbstractBuilder() { }
+
+            public DeleteUserStagingContentByIDAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteUserStagingContentByIDBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteUserStagingContentByID.Response Execute(
+            protected DeleteUserStagingContentByID.Response InternalExecute(
                 string contentId,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteUserStagingContentByID.Response> ExecuteAsync(
+            protected async Task<DeleteUserStagingContentByID.Response> InternalExecuteAsync(
                 string contentId,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private DeleteUserStagingContentByID(DeleteUserStagingContentByIDBuilder builder,
+        public class DeleteUserStagingContentByIDBuilder : DeleteUserStagingContentByIDAbstractBuilder<DeleteUserStagingContentByIDBuilder>
+        {
+            public DeleteUserStagingContentByIDBuilder() : base() { }
+
+            public DeleteUserStagingContentByIDBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteUserStagingContentByID.Response Execute(
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    contentId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DeleteUserStagingContentByID.Response> ExecuteAsync(
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    contentId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteUserStagingContentByID(IDeleteUserStagingContentByIDBuilder builder,
             string contentId,
             string namespace_,
             string userId
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

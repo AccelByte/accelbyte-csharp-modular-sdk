@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static SearchUserBuilder Builder { get => new SearchUserBuilder(); }
 
-        public class SearchUserBuilder
-            : OperationBuilder<SearchUserBuilder>
+        public interface ISearchUserBuilder
+        {
+
+            string? Query { get; }
+
+
+
+
+
+        }
+
+        public abstract class SearchUserAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISearchUserBuilder
+            where TImpl : SearchUserAbstractBuilder<TImpl>
         {
 
             public string? Query { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal SearchUserBuilder() { }
+            public SearchUserAbstractBuilder() { }
 
-            internal SearchUserBuilder(IAccelByteSdk sdk)
+            public SearchUserAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SearchUserBuilder SetQuery(string _query)
+            public TImpl SetQuery(string _query)
             {
                 Query = _query;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,12 +83,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SearchUserBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public SearchUser.Response Execute(
+            protected SearchUser.Response InternalExecute(
                 string namespace_
             )
             {
@@ -93,7 +105,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SearchUser.Response> ExecuteAsync(
+            protected async Task<SearchUser.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -112,7 +124,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private SearchUser(SearchUserBuilder builder,
+        public class SearchUserBuilder : SearchUserAbstractBuilder<SearchUserBuilder>
+        {
+            public SearchUserBuilder() : base() { }
+
+            public SearchUserBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public SearchUser.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<SearchUser.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public SearchUser(ISearchUserBuilder builder,
             string namespace_
         )
         {
@@ -184,22 +222,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

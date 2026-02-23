@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SelectRecordBuilder Builder { get => new SelectRecordBuilder(); }
 
-        public class SelectRecordBuilder
-            : OperationBuilder<SelectRecordBuilder>
+        public interface ISelectRecordBuilder
         {
 
 
 
 
 
-            internal SelectRecordBuilder() { }
+        }
 
-            internal SelectRecordBuilder(IAccelByteSdk sdk)
+        public abstract class SelectRecordAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISelectRecordBuilder
+            where TImpl : SelectRecordAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SelectRecordAbstractBuilder() { }
+
+            public SelectRecordAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<SelectRecordBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SelectRecord.Response Execute(
+            protected SelectRecord.Response InternalExecute(
                 string changeId,
                 string namespace_,
                 string storeId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SelectRecord.Response> ExecuteAsync(
+            protected async Task<SelectRecord.Response> InternalExecuteAsync(
                 string changeId,
                 string namespace_,
                 string storeId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SelectRecord(SelectRecordBuilder builder,
+        public class SelectRecordBuilder : SelectRecordAbstractBuilder<SelectRecordBuilder>
+        {
+            public SelectRecordBuilder() : base() { }
+
+            public SelectRecordBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SelectRecord.Response Execute(
+                string changeId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    changeId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<SelectRecord.Response> ExecuteAsync(
+                string changeId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    changeId,
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public SelectRecord(ISelectRecordBuilder builder,
             string changeId,
             string namespace_,
             string storeId
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

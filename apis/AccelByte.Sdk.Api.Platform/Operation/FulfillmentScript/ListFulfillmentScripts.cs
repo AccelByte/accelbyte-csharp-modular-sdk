@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListFulfillmentScriptsBuilder Builder { get => new ListFulfillmentScriptsBuilder(); }
 
-        public class ListFulfillmentScriptsBuilder
-            : OperationBuilder<ListFulfillmentScriptsBuilder>
+        public interface IListFulfillmentScriptsBuilder
         {
 
 
 
 
 
-            internal ListFulfillmentScriptsBuilder() { }
+        }
 
-            internal ListFulfillmentScriptsBuilder(IAccelByteSdk sdk)
+        public abstract class ListFulfillmentScriptsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListFulfillmentScriptsBuilder
+            where TImpl : ListFulfillmentScriptsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ListFulfillmentScriptsAbstractBuilder() { }
+
+            public ListFulfillmentScriptsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 ListFulfillmentScripts op = new ListFulfillmentScripts(this
                 );
 
-                op.SetBaseFields<ListFulfillmentScriptsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListFulfillmentScripts.Response Execute(
+            protected ListFulfillmentScripts.Response InternalExecute(
             )
             {
                 ListFulfillmentScripts op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListFulfillmentScripts.Response> ExecuteAsync(
+            protected async Task<ListFulfillmentScripts.Response> InternalExecuteAsync(
             )
             {
                 ListFulfillmentScripts op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListFulfillmentScripts(ListFulfillmentScriptsBuilder builder
+        public class ListFulfillmentScriptsBuilder : ListFulfillmentScriptsAbstractBuilder<ListFulfillmentScriptsBuilder>
+        {
+            public ListFulfillmentScriptsBuilder() : base() { }
+
+            public ListFulfillmentScriptsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListFulfillmentScripts.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<ListFulfillmentScripts.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public ListFulfillmentScripts(IListFulfillmentScriptsBuilder builder
         )
         {
             
@@ -151,7 +182,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.FulfillmentScriptInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.FulfillmentScriptInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

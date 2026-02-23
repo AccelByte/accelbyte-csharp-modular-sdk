@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminListAllDistinctPlatformAccountsV3Builder Builder { get => new AdminListAllDistinctPlatformAccountsV3Builder(); }
 
-        public class AdminListAllDistinctPlatformAccountsV3Builder
-            : OperationBuilder<AdminListAllDistinctPlatformAccountsV3Builder>
+        public interface IAdminListAllDistinctPlatformAccountsV3Builder
+        {
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListAllDistinctPlatformAccountsV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListAllDistinctPlatformAccountsV3Builder
+            where TImpl : AdminListAllDistinctPlatformAccountsV3AbstractBuilder<TImpl>
         {
 
             public string? Status { get; set; }
@@ -47,18 +59,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminListAllDistinctPlatformAccountsV3Builder() { }
+            public AdminListAllDistinctPlatformAccountsV3AbstractBuilder() { }
 
-            internal AdminListAllDistinctPlatformAccountsV3Builder(IAccelByteSdk sdk)
+            public AdminListAllDistinctPlatformAccountsV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListAllDistinctPlatformAccountsV3Builder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -75,11 +87,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminListAllDistinctPlatformAccountsV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListAllDistinctPlatformAccountsV3.Response Execute(
+            protected AdminListAllDistinctPlatformAccountsV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListAllDistinctPlatformAccountsV3.Response> ExecuteAsync(
+            protected async Task<AdminListAllDistinctPlatformAccountsV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -119,7 +131,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminListAllDistinctPlatformAccountsV3(AdminListAllDistinctPlatformAccountsV3Builder builder,
+        public class AdminListAllDistinctPlatformAccountsV3Builder : AdminListAllDistinctPlatformAccountsV3AbstractBuilder<AdminListAllDistinctPlatformAccountsV3Builder>
+        {
+            public AdminListAllDistinctPlatformAccountsV3Builder() : base() { }
+
+            public AdminListAllDistinctPlatformAccountsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListAllDistinctPlatformAccountsV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminListAllDistinctPlatformAccountsV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminListAllDistinctPlatformAccountsV3(IAdminListAllDistinctPlatformAccountsV3Builder builder,
             string namespace_,
             string userId
         )
@@ -199,32 +240,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonDistinctPlatformResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonDistinctPlatformResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

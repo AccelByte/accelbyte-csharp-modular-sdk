@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RequestTokenByOneTimeLinkCodeResponseV3Builder Builder { get => new RequestTokenByOneTimeLinkCodeResponseV3Builder(); }
 
-        public class RequestTokenByOneTimeLinkCodeResponseV3Builder
-            : OperationBuilder<RequestTokenByOneTimeLinkCodeResponseV3Builder>
+        public interface IRequestTokenByOneTimeLinkCodeResponseV3Builder
+        {
+
+
+
+            string? AdditionalData { get; }
+
+            bool? IsTransient { get; }
+
+
+
+        }
+
+        public abstract class RequestTokenByOneTimeLinkCodeResponseV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRequestTokenByOneTimeLinkCodeResponseV3Builder
+            where TImpl : RequestTokenByOneTimeLinkCodeResponseV3AbstractBuilder<TImpl>
         {
 
 
@@ -47,9 +61,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal RequestTokenByOneTimeLinkCodeResponseV3Builder() { }
+            public RequestTokenByOneTimeLinkCodeResponseV3AbstractBuilder() { }
 
-            internal RequestTokenByOneTimeLinkCodeResponseV3Builder(IAccelByteSdk sdk)
+            public RequestTokenByOneTimeLinkCodeResponseV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,16 +71,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public RequestTokenByOneTimeLinkCodeResponseV3Builder SetAdditionalData(string _additionalData)
+            public TImpl SetAdditionalData(string _additionalData)
             {
                 AdditionalData = _additionalData;
-                return this;
+                return (TImpl)this;
             }
 
-            public RequestTokenByOneTimeLinkCodeResponseV3Builder SetIsTransient(bool _isTransient)
+            public TImpl SetIsTransient(bool _isTransient)
             {
                 IsTransient = _isTransient;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     oneTimeLinkCode                    
                 );
 
-                op.SetBaseFields<RequestTokenByOneTimeLinkCodeResponseV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RequestTokenByOneTimeLinkCodeResponseV3.Response Execute(
+            protected RequestTokenByOneTimeLinkCodeResponseV3.Response InternalExecute(
                 string clientId,
                 string oneTimeLinkCode
             )
@@ -104,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RequestTokenByOneTimeLinkCodeResponseV3.Response> ExecuteAsync(
+            protected async Task<RequestTokenByOneTimeLinkCodeResponseV3.Response> InternalExecuteAsync(
                 string clientId,
                 string oneTimeLinkCode
             )
@@ -125,7 +139,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RequestTokenByOneTimeLinkCodeResponseV3(RequestTokenByOneTimeLinkCodeResponseV3Builder builder,
+        public class RequestTokenByOneTimeLinkCodeResponseV3Builder : RequestTokenByOneTimeLinkCodeResponseV3AbstractBuilder<RequestTokenByOneTimeLinkCodeResponseV3Builder>
+        {
+            public RequestTokenByOneTimeLinkCodeResponseV3Builder() : base() { }
+
+            public RequestTokenByOneTimeLinkCodeResponseV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RequestTokenByOneTimeLinkCodeResponseV3.Response Execute(
+                string clientId,
+                string oneTimeLinkCode
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    oneTimeLinkCode
+                );
+            }
+            public async Task<RequestTokenByOneTimeLinkCodeResponseV3.Response> ExecuteAsync(
+                string clientId,
+                string oneTimeLinkCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    oneTimeLinkCode
+                );
+            }
+        }
+
+
+        public RequestTokenByOneTimeLinkCodeResponseV3(IRequestTokenByOneTimeLinkCodeResponseV3Builder builder,
             string clientId,
             string oneTimeLinkCode
         )
@@ -196,7 +239,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

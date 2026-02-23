@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -43,17 +43,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PlatformTokenRefreshV3Builder Builder { get => new PlatformTokenRefreshV3Builder(); }
 
-        public class PlatformTokenRefreshV3Builder
-            : OperationBuilder<PlatformTokenRefreshV3Builder>
+        public interface IPlatformTokenRefreshV3Builder
         {
 
 
 
 
 
-            internal PlatformTokenRefreshV3Builder() { }
+        }
 
-            internal PlatformTokenRefreshV3Builder(IAccelByteSdk sdk)
+        public abstract class PlatformTokenRefreshV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPlatformTokenRefreshV3Builder
+            where TImpl : PlatformTokenRefreshV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PlatformTokenRefreshV3AbstractBuilder() { }
+
+            public PlatformTokenRefreshV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -73,11 +83,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<PlatformTokenRefreshV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PlatformTokenRefreshV3.Response Execute(
+            protected PlatformTokenRefreshV3.Response InternalExecute(
                 string platformToken,
                 string platformId
             )
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PlatformTokenRefreshV3.Response> ExecuteAsync(
+            protected async Task<PlatformTokenRefreshV3.Response> InternalExecuteAsync(
                 string platformToken,
                 string platformId
             )
@@ -117,7 +127,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PlatformTokenRefreshV3(PlatformTokenRefreshV3Builder builder,
+        public class PlatformTokenRefreshV3Builder : PlatformTokenRefreshV3AbstractBuilder<PlatformTokenRefreshV3Builder>
+        {
+            public PlatformTokenRefreshV3Builder() : base() { }
+
+            public PlatformTokenRefreshV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PlatformTokenRefreshV3.Response Execute(
+                string platformToken,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    platformToken,
+                    platformId
+                );
+            }
+            public async Task<PlatformTokenRefreshV3.Response> ExecuteAsync(
+                string platformToken,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformToken,
+                    platformId
+                );
+            }
+        }
+
+
+        public PlatformTokenRefreshV3(IPlatformTokenRefreshV3Builder builder,
             string platformToken,
             string platformId
         )
@@ -192,27 +231,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelPlatformTokenRefreshResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelPlatformTokenRefreshResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)503)
             {
-                response.Error503 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error503 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error503!.TranslateToApiError();
             }
 

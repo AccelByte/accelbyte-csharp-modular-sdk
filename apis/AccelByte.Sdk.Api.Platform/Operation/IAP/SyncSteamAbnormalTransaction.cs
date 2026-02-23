@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncSteamAbnormalTransactionBuilder Builder { get => new SyncSteamAbnormalTransactionBuilder(); }
 
-        public class SyncSteamAbnormalTransactionBuilder
-            : OperationBuilder<SyncSteamAbnormalTransactionBuilder>
+        public interface ISyncSteamAbnormalTransactionBuilder
         {
 
 
 
 
 
-            internal SyncSteamAbnormalTransactionBuilder() { }
+        }
 
-            internal SyncSteamAbnormalTransactionBuilder(IAccelByteSdk sdk)
+        public abstract class SyncSteamAbnormalTransactionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncSteamAbnormalTransactionBuilder
+            where TImpl : SyncSteamAbnormalTransactionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncSteamAbnormalTransactionAbstractBuilder() { }
+
+            public SyncSteamAbnormalTransactionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncSteamAbnormalTransactionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncSteamAbnormalTransaction.Response Execute(
+            protected SyncSteamAbnormalTransaction.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncSteamAbnormalTransaction.Response> ExecuteAsync(
+            protected async Task<SyncSteamAbnormalTransaction.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -102,7 +112,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncSteamAbnormalTransaction(SyncSteamAbnormalTransactionBuilder builder,
+        public class SyncSteamAbnormalTransactionBuilder : SyncSteamAbnormalTransactionAbstractBuilder<SyncSteamAbnormalTransactionBuilder>
+        {
+            public SyncSteamAbnormalTransactionBuilder() : base() { }
+
+            public SyncSteamAbnormalTransactionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncSteamAbnormalTransaction.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncSteamAbnormalTransaction.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncSteamAbnormalTransaction(ISyncSteamAbnormalTransactionBuilder builder,
             string namespace_,
             string userId
         )
@@ -175,22 +214,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPOrderShortInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPOrderShortInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

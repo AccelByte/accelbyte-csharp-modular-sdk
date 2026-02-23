@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetGameNamespacesBuilder Builder { get => new GetGameNamespacesBuilder(); }
 
-        public class GetGameNamespacesBuilder
-            : OperationBuilder<GetGameNamespacesBuilder>
+        public interface IGetGameNamespacesBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetGameNamespacesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetGameNamespacesBuilder
+            where TImpl : GetGameNamespacesAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal GetGameNamespacesBuilder() { }
+            public GetGameNamespacesAbstractBuilder() { }
 
-            internal GetGameNamespacesBuilder(IAccelByteSdk sdk)
+            public GetGameNamespacesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetGameNamespacesBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetGameNamespacesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetGameNamespaces.Response Execute(
+            protected GetGameNamespaces.Response InternalExecute(
                 string namespace_
             )
             {
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetGameNamespaces.Response> ExecuteAsync(
+            protected async Task<GetGameNamespaces.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -111,7 +123,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetGameNamespaces(GetGameNamespacesBuilder builder,
+        public class GetGameNamespacesBuilder : GetGameNamespacesAbstractBuilder<GetGameNamespacesBuilder>
+        {
+            public GetGameNamespacesBuilder() : base() { }
+
+            public GetGameNamespacesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetGameNamespaces.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetGameNamespaces.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetGameNamespaces(IGetGameNamespacesBuilder builder,
             string namespace_
         )
         {
@@ -181,17 +218,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.NamespaceInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.NamespaceInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

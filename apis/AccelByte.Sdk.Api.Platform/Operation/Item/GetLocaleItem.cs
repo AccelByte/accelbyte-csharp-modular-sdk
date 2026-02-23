@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetLocaleItemBuilder Builder { get => new GetLocaleItemBuilder(); }
 
-        public class GetLocaleItemBuilder
-            : OperationBuilder<GetLocaleItemBuilder>
+        public interface IGetLocaleItemBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? Language { get; }
+
+            bool? PopulateBundle { get; }
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetLocaleItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLocaleItemBuilder
+            where TImpl : GetLocaleItemAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetLocaleItemBuilder() { }
+            public GetLocaleItemAbstractBuilder() { }
 
-            internal GetLocaleItemBuilder(IAccelByteSdk sdk)
+            public GetLocaleItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetLocaleItemBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBuilder SetPopulateBundle(bool _populateBundle)
+            public TImpl SetPopulateBundle(bool _populateBundle)
             {
                 PopulateBundle = _populateBundle;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -104,11 +124,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLocaleItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLocaleItem.Response Execute(
+            protected GetLocaleItem.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -127,7 +147,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLocaleItem.Response> ExecuteAsync(
+            protected async Task<GetLocaleItem.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -147,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetLocaleItem.Response<T1, T2> Execute<T1, T2>(
+            protected GetLocaleItem.Response<T1, T2> InternalExecute<T1, T2>(
                 string itemId,
                 string namespace_
             )
@@ -166,7 +186,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLocaleItem.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<GetLocaleItem.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string itemId,
                 string namespace_
             )
@@ -187,7 +207,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetLocaleItem(GetLocaleItemBuilder builder,
+        public class GetLocaleItemBuilder : GetLocaleItemAbstractBuilder<GetLocaleItemBuilder>
+        {
+            public GetLocaleItemBuilder() : base() { }
+
+            public GetLocaleItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLocaleItem.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<GetLocaleItem.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+
+            public GetLocaleItem.Response<T1, T2> Execute<T1, T2>(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<GetLocaleItem.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLocaleItem(IGetLocaleItemBuilder builder,
             string itemId,
             string namespace_
         )
@@ -278,12 +348,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -304,12 +376,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

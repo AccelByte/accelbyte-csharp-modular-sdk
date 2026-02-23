@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminQueryTopicBuilder Builder { get => new AdminQueryTopicBuilder(); }
 
-        public class AdminQueryTopicBuilder
-            : OperationBuilder<AdminQueryTopicBuilder>
+        public interface IAdminQueryTopicBuilder
+        {
+
+            bool? IncludeMembers { get; }
+
+            bool? IncludePastMembers { get; }
+
+            bool? IncludePastTopics { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            List<string>? Topic { get; }
+
+            AdminQueryTopicTopicSubType? TopicSubType { get; }
+
+            AdminQueryTopicTopicType? TopicType { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminQueryTopicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminQueryTopicBuilder
+            where TImpl : AdminQueryTopicAbstractBuilder<TImpl>
         {
 
             public bool? IncludeMembers { get; set; }
@@ -56,66 +84,66 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal AdminQueryTopicBuilder() { }
+            public AdminQueryTopicAbstractBuilder() { }
 
-            internal AdminQueryTopicBuilder(IAccelByteSdk sdk)
+            public AdminQueryTopicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminQueryTopicBuilder SetIncludeMembers(bool _includeMembers)
+            public TImpl SetIncludeMembers(bool _includeMembers)
             {
                 IncludeMembers = _includeMembers;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetIncludePastMembers(bool _includePastMembers)
+            public TImpl SetIncludePastMembers(bool _includePastMembers)
             {
                 IncludePastMembers = _includePastMembers;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetIncludePastTopics(bool _includePastTopics)
+            public TImpl SetIncludePastTopics(bool _includePastTopics)
             {
                 IncludePastTopics = _includePastTopics;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetTopic(List<string> _topic)
+            public TImpl SetTopic(List<string> _topic)
             {
                 Topic = _topic;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetTopicSubType(AdminQueryTopicTopicSubType _topicSubType)
+            public TImpl SetTopicSubType(AdminQueryTopicTopicSubType _topicSubType)
             {
                 TopicSubType = _topicSubType;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetTopicType(AdminQueryTopicTopicType _topicType)
+            public TImpl SetTopicType(AdminQueryTopicTopicType _topicType)
             {
                 TopicType = _topicType;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryTopicBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -130,11 +158,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryTopicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminQueryTopic.Response Execute(
+            protected AdminQueryTopic.Response InternalExecute(
                 string namespace_
             )
             {
@@ -151,7 +179,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryTopic.Response> ExecuteAsync(
+            protected async Task<AdminQueryTopic.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -170,7 +198,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminQueryTopic(AdminQueryTopicBuilder builder,
+        public class AdminQueryTopicBuilder : AdminQueryTopicAbstractBuilder<AdminQueryTopicBuilder>
+        {
+            public AdminQueryTopicBuilder() : base() { }
+
+            public AdminQueryTopicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminQueryTopic.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminQueryTopic.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminQueryTopic(IAdminQueryTopicBuilder builder,
             string namespace_
         )
         {
@@ -270,27 +323,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsTopicInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsTopicInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

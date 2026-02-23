@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static BulkDisableCodesBuilder Builder { get => new BulkDisableCodesBuilder(); }
 
-        public class BulkDisableCodesBuilder
-            : OperationBuilder<BulkDisableCodesBuilder>
+        public interface IBulkDisableCodesBuilder
+        {
+
+            string? BatchName { get; }
+
+            List<int>? BatchNo { get; }
+
+
+
+
+
+        }
+
+        public abstract class BulkDisableCodesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkDisableCodesBuilder
+            where TImpl : BulkDisableCodesAbstractBuilder<TImpl>
         {
 
             public string? BatchName { get; set; }
@@ -47,24 +61,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal BulkDisableCodesBuilder() { }
+            public BulkDisableCodesAbstractBuilder() { }
 
-            internal BulkDisableCodesBuilder(IAccelByteSdk sdk)
+            public BulkDisableCodesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public BulkDisableCodesBuilder SetBatchName(string _batchName)
+            public TImpl SetBatchName(string _batchName)
             {
                 BatchName = _batchName;
-                return this;
+                return (TImpl)this;
             }
 
-            public BulkDisableCodesBuilder SetBatchNo(List<int> _batchNo)
+            public TImpl SetBatchNo(List<int> _batchNo)
             {
                 BatchNo = _batchNo;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<BulkDisableCodesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkDisableCodes.Response Execute(
+            protected BulkDisableCodes.Response InternalExecute(
                 string campaignId,
                 string namespace_
             )
@@ -104,7 +118,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkDisableCodes.Response> ExecuteAsync(
+            protected async Task<BulkDisableCodes.Response> InternalExecuteAsync(
                 string campaignId,
                 string namespace_
             )
@@ -125,7 +139,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private BulkDisableCodes(BulkDisableCodesBuilder builder,
+        public class BulkDisableCodesBuilder : BulkDisableCodesAbstractBuilder<BulkDisableCodesBuilder>
+        {
+            public BulkDisableCodesBuilder() : base() { }
+
+            public BulkDisableCodesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkDisableCodes.Response Execute(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<BulkDisableCodes.Response> ExecuteAsync(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public BulkDisableCodes(IBulkDisableCodesBuilder builder,
             string campaignId,
             string namespace_
         )
@@ -200,7 +243,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

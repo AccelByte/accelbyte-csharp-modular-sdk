@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static AdminPatchConfigV1Builder Builder { get => new AdminPatchConfigV1Builder(); }
 
-        public class AdminPatchConfigV1Builder
-            : OperationBuilder<AdminPatchConfigV1Builder>
+        public interface IAdminPatchConfigV1Builder
         {
 
 
 
 
 
-            internal AdminPatchConfigV1Builder() { }
+        }
 
-            internal AdminPatchConfigV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminPatchConfigV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPatchConfigV1Builder
+            where TImpl : AdminPatchConfigV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPatchConfigV1AbstractBuilder() { }
+
+            public AdminPatchConfigV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminPatchConfigV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminPatchConfigV1.Response Execute(
+            protected AdminPatchConfigV1.Response InternalExecute(
                 ApiPatchNamespaceConfigRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPatchConfigV1.Response> ExecuteAsync(
+            protected async Task<AdminPatchConfigV1.Response> InternalExecuteAsync(
                 ApiPatchNamespaceConfigRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private AdminPatchConfigV1(AdminPatchConfigV1Builder builder,
+        public class AdminPatchConfigV1Builder : AdminPatchConfigV1AbstractBuilder<AdminPatchConfigV1Builder>
+        {
+            public AdminPatchConfigV1Builder() : base() { }
+
+            public AdminPatchConfigV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminPatchConfigV1.Response Execute(
+                ApiPatchNamespaceConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminPatchConfigV1.Response> ExecuteAsync(
+                ApiPatchNamespaceConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminPatchConfigV1(IAdminPatchConfigV1Builder builder,
             ApiPatchNamespaceConfigRequest body,
             string namespace_
         )
@@ -177,22 +216,26 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ConfigmodelsNamespaceConfig>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ConfigmodelsNamespaceConfig>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static MockPlayStationStreamEventBuilder Builder { get => new MockPlayStationStreamEventBuilder(); }
 
-        public class MockPlayStationStreamEventBuilder
-            : OperationBuilder<MockPlayStationStreamEventBuilder>
+        public interface IMockPlayStationStreamEventBuilder
+        {
+
+
+            Model.StreamEvent? Body { get; }
+
+
+
+
+        }
+
+        public abstract class MockPlayStationStreamEventAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IMockPlayStationStreamEventBuilder
+            where TImpl : MockPlayStationStreamEventAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal MockPlayStationStreamEventBuilder() { }
+            public MockPlayStationStreamEventAbstractBuilder() { }
 
-            internal MockPlayStationStreamEventBuilder(IAccelByteSdk sdk)
+            public MockPlayStationStreamEventAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public MockPlayStationStreamEventBuilder SetBody(Model.StreamEvent _body)
+            public TImpl SetBody(Model.StreamEvent _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<MockPlayStationStreamEventBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public MockPlayStationStreamEvent.Response Execute(
+            protected MockPlayStationStreamEvent.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<MockPlayStationStreamEvent.Response> ExecuteAsync(
+            protected async Task<MockPlayStationStreamEvent.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -105,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public MockPlayStationStreamEvent.Response<T1, T2> Execute<T1, T2>(
+            protected MockPlayStationStreamEvent.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_
             )
             {
@@ -122,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<MockPlayStationStreamEvent.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<MockPlayStationStreamEvent.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_
             )
             {
@@ -141,7 +153,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private MockPlayStationStreamEvent(MockPlayStationStreamEventBuilder builder,
+        public class MockPlayStationStreamEventBuilder : MockPlayStationStreamEventAbstractBuilder<MockPlayStationStreamEventBuilder>
+        {
+            public MockPlayStationStreamEventBuilder() : base() { }
+
+            public MockPlayStationStreamEventBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public MockPlayStationStreamEvent.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<MockPlayStationStreamEvent.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+
+            public MockPlayStationStreamEvent.Response<T1, T2> Execute<T1, T2>(
+                string namespace_
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_
+                );
+            }
+            public async Task<MockPlayStationStreamEvent.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_
+                );
+            }
+        }
+
+
+        public MockPlayStationStreamEvent(IMockPlayStationStreamEventBuilder builder,
             string namespace_
         )
         {
@@ -212,7 +266,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
@@ -233,7 +288,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             

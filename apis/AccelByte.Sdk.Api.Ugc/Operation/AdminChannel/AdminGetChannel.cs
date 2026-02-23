@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminGetChannelBuilder Builder { get => new AdminGetChannelBuilder(); }
 
-        public class AdminGetChannelBuilder
-            : OperationBuilder<AdminGetChannelBuilder>
+        public interface IAdminGetChannelBuilder
+        {
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetChannelAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetChannelBuilder
+            where TImpl : AdminGetChannelAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal AdminGetChannelBuilder() { }
+            public AdminGetChannelAbstractBuilder() { }
 
-            internal AdminGetChannelBuilder(IAccelByteSdk sdk)
+            public AdminGetChannelAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetChannelBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetChannelBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetChannelBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetChannelBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetChannel.Response Execute(
+            protected AdminGetChannel.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetChannel.Response> ExecuteAsync(
+            protected async Task<AdminGetChannel.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -128,7 +144,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminGetChannel(AdminGetChannelBuilder builder,
+        public class AdminGetChannelBuilder : AdminGetChannelAbstractBuilder<AdminGetChannelBuilder>
+        {
+            public AdminGetChannelBuilder() : base() { }
+
+            public AdminGetChannelBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetChannel.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetChannel.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetChannel(IAdminGetChannelBuilder builder,
             string namespace_,
             string userId
         )
@@ -210,22 +255,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedGetChannelResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedGetChannelResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

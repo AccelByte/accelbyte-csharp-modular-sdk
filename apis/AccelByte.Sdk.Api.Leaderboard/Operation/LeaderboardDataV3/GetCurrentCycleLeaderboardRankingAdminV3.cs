@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,24 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static GetCurrentCycleLeaderboardRankingAdminV3Builder Builder { get => new GetCurrentCycleLeaderboardRankingAdminV3Builder(); }
 
-        public class GetCurrentCycleLeaderboardRankingAdminV3Builder
-            : OperationBuilder<GetCurrentCycleLeaderboardRankingAdminV3Builder>
+        public interface IGetCurrentCycleLeaderboardRankingAdminV3Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            long? PreviousVersion { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetCurrentCycleLeaderboardRankingAdminV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCurrentCycleLeaderboardRankingAdminV3Builder
+            where TImpl : GetCurrentCycleLeaderboardRankingAdminV3AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -46,30 +62,30 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
 
 
-            internal GetCurrentCycleLeaderboardRankingAdminV3Builder() { }
+            public GetCurrentCycleLeaderboardRankingAdminV3AbstractBuilder() { }
 
-            internal GetCurrentCycleLeaderboardRankingAdminV3Builder(IAccelByteSdk sdk)
+            public GetCurrentCycleLeaderboardRankingAdminV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetCurrentCycleLeaderboardRankingAdminV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetCurrentCycleLeaderboardRankingAdminV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetCurrentCycleLeaderboardRankingAdminV3Builder SetPreviousVersion(long _previousVersion)
+            public TImpl SetPreviousVersion(long _previousVersion)
             {
                 PreviousVersion = _previousVersion;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +104,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCurrentCycleLeaderboardRankingAdminV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCurrentCycleLeaderboardRankingAdminV3.Response Execute(
+            protected GetCurrentCycleLeaderboardRankingAdminV3.Response InternalExecute(
                 string cycleId,
                 string leaderboardCode,
                 string namespace_
@@ -113,7 +129,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCurrentCycleLeaderboardRankingAdminV3.Response> ExecuteAsync(
+            protected async Task<GetCurrentCycleLeaderboardRankingAdminV3.Response> InternalExecuteAsync(
                 string cycleId,
                 string leaderboardCode,
                 string namespace_
@@ -136,7 +152,40 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private GetCurrentCycleLeaderboardRankingAdminV3(GetCurrentCycleLeaderboardRankingAdminV3Builder builder,
+        public class GetCurrentCycleLeaderboardRankingAdminV3Builder : GetCurrentCycleLeaderboardRankingAdminV3AbstractBuilder<GetCurrentCycleLeaderboardRankingAdminV3Builder>
+        {
+            public GetCurrentCycleLeaderboardRankingAdminV3Builder() : base() { }
+
+            public GetCurrentCycleLeaderboardRankingAdminV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCurrentCycleLeaderboardRankingAdminV3.Response Execute(
+                string cycleId,
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    cycleId,
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+            public async Task<GetCurrentCycleLeaderboardRankingAdminV3.Response> ExecuteAsync(
+                string cycleId,
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    cycleId,
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCurrentCycleLeaderboardRankingAdminV3(IGetCurrentCycleLeaderboardRankingAdminV3Builder builder,
             string cycleId,
             string leaderboardCode,
             string namespace_
@@ -226,32 +275,38 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetLeaderboardRankingResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetLeaderboardRankingResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

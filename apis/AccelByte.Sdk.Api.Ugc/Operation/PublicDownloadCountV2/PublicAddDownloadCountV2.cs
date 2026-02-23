@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicAddDownloadCountV2Builder Builder { get => new PublicAddDownloadCountV2Builder(); }
 
-        public class PublicAddDownloadCountV2Builder
-            : OperationBuilder<PublicAddDownloadCountV2Builder>
+        public interface IPublicAddDownloadCountV2Builder
         {
 
 
 
 
 
-            internal PublicAddDownloadCountV2Builder() { }
+        }
 
-            internal PublicAddDownloadCountV2Builder(IAccelByteSdk sdk)
+        public abstract class PublicAddDownloadCountV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicAddDownloadCountV2Builder
+            where TImpl : PublicAddDownloadCountV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicAddDownloadCountV2AbstractBuilder() { }
+
+            public PublicAddDownloadCountV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicAddDownloadCountV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicAddDownloadCountV2.Response Execute(
+            protected PublicAddDownloadCountV2.Response InternalExecute(
                 string contentId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicAddDownloadCountV2.Response> ExecuteAsync(
+            protected async Task<PublicAddDownloadCountV2.Response> InternalExecuteAsync(
                 string contentId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicAddDownloadCountV2(PublicAddDownloadCountV2Builder builder,
+        public class PublicAddDownloadCountV2Builder : PublicAddDownloadCountV2AbstractBuilder<PublicAddDownloadCountV2Builder>
+        {
+            public PublicAddDownloadCountV2Builder() : base() { }
+
+            public PublicAddDownloadCountV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicAddDownloadCountV2.Response Execute(
+                string contentId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    contentId,
+                    namespace_
+                );
+            }
+            public async Task<PublicAddDownloadCountV2.Response> ExecuteAsync(
+                string contentId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    contentId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicAddDownloadCountV2(IPublicAddDownloadCountV2Builder builder,
             string contentId,
             string namespace_
         )
@@ -179,27 +218,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsAddDownloadCountResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsAddDownloadCountResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

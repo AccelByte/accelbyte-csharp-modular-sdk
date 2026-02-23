@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAcceptedAgreementsBuilder Builder { get => new RetrieveAcceptedAgreementsBuilder(); }
 
-        public class RetrieveAcceptedAgreementsBuilder
-            : OperationBuilder<RetrieveAcceptedAgreementsBuilder>
+        public interface IRetrieveAcceptedAgreementsBuilder
+        {
+
+            bool? ExcludeOtherNamespacesPolicies { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveAcceptedAgreementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAcceptedAgreementsBuilder
+            where TImpl : RetrieveAcceptedAgreementsAbstractBuilder<TImpl>
         {
 
             public bool? ExcludeOtherNamespacesPolicies { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveAcceptedAgreementsBuilder() { }
+            public RetrieveAcceptedAgreementsAbstractBuilder() { }
 
-            internal RetrieveAcceptedAgreementsBuilder(IAccelByteSdk sdk)
+            public RetrieveAcceptedAgreementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveAcceptedAgreementsBuilder SetExcludeOtherNamespacesPolicies(bool _excludeOtherNamespacesPolicies)
+            public TImpl SetExcludeOtherNamespacesPolicies(bool _excludeOtherNamespacesPolicies)
             {
                 ExcludeOtherNamespacesPolicies = _excludeOtherNamespacesPolicies;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RetrieveAcceptedAgreementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAcceptedAgreements.Response Execute(
+            protected RetrieveAcceptedAgreements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAcceptedAgreements.Response> ExecuteAsync(
+            protected async Task<RetrieveAcceptedAgreements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAcceptedAgreements(RetrieveAcceptedAgreementsBuilder builder,
+        public class RetrieveAcceptedAgreementsBuilder : RetrieveAcceptedAgreementsAbstractBuilder<RetrieveAcceptedAgreementsBuilder>
+        {
+            public RetrieveAcceptedAgreementsBuilder() : base() { }
+
+            public RetrieveAcceptedAgreementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAcceptedAgreements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RetrieveAcceptedAgreements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RetrieveAcceptedAgreements(IRetrieveAcceptedAgreementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -182,7 +223,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

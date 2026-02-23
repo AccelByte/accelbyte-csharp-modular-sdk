@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static GetReportsByTicketBuilder Builder { get => new GetReportsByTicketBuilder(); }
 
-        public class GetReportsByTicketBuilder
-            : OperationBuilder<GetReportsByTicketBuilder>
+        public interface IGetReportsByTicketBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetReportsByTicketAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetReportsByTicketBuilder
+            where TImpl : GetReportsByTicketAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal GetReportsByTicketBuilder() { }
+            public GetReportsByTicketAbstractBuilder() { }
 
-            internal GetReportsByTicketBuilder(IAccelByteSdk sdk)
+            public GetReportsByTicketAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetReportsByTicketBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetReportsByTicketBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ticketId                    
                 );
 
-                op.SetBaseFields<GetReportsByTicketBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetReportsByTicket.Response Execute(
+            protected GetReportsByTicket.Response InternalExecute(
                 string namespace_,
                 string ticketId
             )
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetReportsByTicket.Response> ExecuteAsync(
+            protected async Task<GetReportsByTicket.Response> InternalExecuteAsync(
                 string namespace_,
                 string ticketId
             )
@@ -120,7 +134,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private GetReportsByTicket(GetReportsByTicketBuilder builder,
+        public class GetReportsByTicketBuilder : GetReportsByTicketAbstractBuilder<GetReportsByTicketBuilder>
+        {
+            public GetReportsByTicketBuilder() : base() { }
+
+            public GetReportsByTicketBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetReportsByTicket.Response Execute(
+                string namespace_,
+                string ticketId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    ticketId
+                );
+            }
+            public async Task<GetReportsByTicket.Response> ExecuteAsync(
+                string namespace_,
+                string ticketId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    ticketId
+                );
+            }
+        }
+
+
+        public GetReportsByTicket(IGetReportsByTicketBuilder builder,
             string namespace_,
             string ticketId
         )
@@ -195,12 +238,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiReportListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiReportListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

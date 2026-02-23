@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetXblIAPConfigBuilder Builder { get => new GetXblIAPConfigBuilder(); }
 
-        public class GetXblIAPConfigBuilder
-            : OperationBuilder<GetXblIAPConfigBuilder>
+        public interface IGetXblIAPConfigBuilder
         {
 
 
 
 
 
-            internal GetXblIAPConfigBuilder() { }
+        }
 
-            internal GetXblIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetXblIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetXblIAPConfigBuilder
+            where TImpl : GetXblIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetXblIAPConfigAbstractBuilder() { }
+
+            public GetXblIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetXblIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetXblIAPConfig.Response Execute(
+            protected GetXblIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetXblIAPConfig.Response> ExecuteAsync(
+            protected async Task<GetXblIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetXblIAPConfig(GetXblIAPConfigBuilder builder,
+        public class GetXblIAPConfigBuilder : GetXblIAPConfigAbstractBuilder<GetXblIAPConfigBuilder>
+        {
+            public GetXblIAPConfigBuilder() : base() { }
+
+            public GetXblIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetXblIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetXblIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetXblIAPConfig(IGetXblIAPConfigBuilder builder,
             string namespace_
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.XblIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.XblIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

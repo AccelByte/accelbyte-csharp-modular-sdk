@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicEnableMyEmailV4Builder Builder { get => new PublicEnableMyEmailV4Builder(); }
 
-        public class PublicEnableMyEmailV4Builder
-            : OperationBuilder<PublicEnableMyEmailV4Builder>
+        public interface IPublicEnableMyEmailV4Builder
         {
 
 
 
 
 
-            internal PublicEnableMyEmailV4Builder() { }
+        }
 
-            internal PublicEnableMyEmailV4Builder(IAccelByteSdk sdk)
+        public abstract class PublicEnableMyEmailV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicEnableMyEmailV4Builder
+            where TImpl : PublicEnableMyEmailV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicEnableMyEmailV4AbstractBuilder() { }
+
+            public PublicEnableMyEmailV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicEnableMyEmailV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicEnableMyEmailV4.Response Execute(
+            protected PublicEnableMyEmailV4.Response InternalExecute(
                 string code,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicEnableMyEmailV4.Response> ExecuteAsync(
+            protected async Task<PublicEnableMyEmailV4.Response> InternalExecuteAsync(
                 string code,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicEnableMyEmailV4(PublicEnableMyEmailV4Builder builder,
+        public class PublicEnableMyEmailV4Builder : PublicEnableMyEmailV4AbstractBuilder<PublicEnableMyEmailV4Builder>
+        {
+            public PublicEnableMyEmailV4Builder() : base() { }
+
+            public PublicEnableMyEmailV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicEnableMyEmailV4.Response Execute(
+                string code,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    code,
+                    namespace_
+                );
+            }
+            public async Task<PublicEnableMyEmailV4.Response> ExecuteAsync(
+                string code,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicEnableMyEmailV4(IPublicEnableMyEmailV4Builder builder,
             string code,
             string namespace_
         )
@@ -184,32 +223,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

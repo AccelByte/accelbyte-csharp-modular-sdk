@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,38 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #region Builder Part
         public static GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder Builder { get => new GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder(); }
 
-        public class GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder
-            : OperationBuilder<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder>
+        public interface IGetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder
+        {
+
+            string? DeviceType { get; }
+
+            string? EndTime { get; }
+
+            string? EventId { get; }
+
+            string? EventName { get; }
+
+            string? EventPayload { get; }
+
+            string? FlightId { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? StartTime { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder
+            where TImpl : GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAbstractBuilder<TImpl>
         {
 
             public string? DeviceType { get; set; }
@@ -59,72 +89,72 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
 
 
-            internal GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder() { }
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAbstractBuilder() { }
 
-            internal GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder(IAccelByteSdk sdk)
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetDeviceType(string _deviceType)
+            public TImpl SetDeviceType(string _deviceType)
             {
                 DeviceType = _deviceType;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetEventId(string _eventId)
+            public TImpl SetEventId(string _eventId)
             {
                 EventId = _eventId;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetEventName(string _eventName)
+            public TImpl SetEventName(string _eventName)
             {
                 EventName = _eventName;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetEventPayload(string _eventPayload)
+            public TImpl SetEventPayload(string _eventPayload)
             {
                 EventPayload = _eventPayload;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetFlightId(string _flightId)
+            public TImpl SetFlightId(string _flightId)
             {
                 FlightId = _flightId;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -139,11 +169,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response Execute(
+            protected GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response InternalExecute(
                 string namespace_
             )
             {
@@ -160,7 +190,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response> ExecuteAsync(
+            protected async Task<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -179,7 +209,32 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
         }
 
-        private GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder builder,
+        public class GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder : GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetAbstractBuilder<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder>
+        {
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder() : base() { }
+
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGet(IGetEventsGameTelemetryV1AdminNamespacesNamespaceEventsGetBuilder builder,
             string namespace_
         )
         {
@@ -278,17 +333,20 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PagedResponseGetNamespaceEventResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PagedResponseGetNamespaceEventResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<BaseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<HTTPValidationError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<HTTPValidationError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

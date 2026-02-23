@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicSplitUserEntitlementBuilder Builder { get => new PublicSplitUserEntitlementBuilder(); }
 
-        public class PublicSplitUserEntitlementBuilder
-            : OperationBuilder<PublicSplitUserEntitlementBuilder>
+        public interface IPublicSplitUserEntitlementBuilder
         {
 
 
 
 
 
-            internal PublicSplitUserEntitlementBuilder() { }
+        }
 
-            internal PublicSplitUserEntitlementBuilder(IAccelByteSdk sdk)
+        public abstract class PublicSplitUserEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSplitUserEntitlementBuilder
+            where TImpl : PublicSplitUserEntitlementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicSplitUserEntitlementAbstractBuilder() { }
+
+            public PublicSplitUserEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicSplitUserEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSplitUserEntitlement.Response Execute(
+            protected PublicSplitUserEntitlement.Response InternalExecute(
                 EntitlementSplitRequest body,
                 string entitlementId,
                 string namespace_,
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSplitUserEntitlement.Response> ExecuteAsync(
+            protected async Task<PublicSplitUserEntitlement.Response> InternalExecuteAsync(
                 EntitlementSplitRequest body,
                 string entitlementId,
                 string namespace_,
@@ -117,7 +127,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicSplitUserEntitlement(PublicSplitUserEntitlementBuilder builder,
+        public class PublicSplitUserEntitlementBuilder : PublicSplitUserEntitlementAbstractBuilder<PublicSplitUserEntitlementBuilder>
+        {
+            public PublicSplitUserEntitlementBuilder() : base() { }
+
+            public PublicSplitUserEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSplitUserEntitlement.Response Execute(
+                EntitlementSplitRequest body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicSplitUserEntitlement.Response> ExecuteAsync(
+                EntitlementSplitRequest body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicSplitUserEntitlement(IPublicSplitUserEntitlementBuilder builder,
             EntitlementSplitRequest body,
             string entitlementId,
             string namespace_,
@@ -196,17 +243,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementSplitResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementSplitResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

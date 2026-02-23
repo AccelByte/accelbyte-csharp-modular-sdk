@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteServicePluginConfigBuilder Builder { get => new DeleteServicePluginConfigBuilder(); }
 
-        public class DeleteServicePluginConfigBuilder
-            : OperationBuilder<DeleteServicePluginConfigBuilder>
+        public interface IDeleteServicePluginConfigBuilder
         {
 
 
 
 
 
-            internal DeleteServicePluginConfigBuilder() { }
+        }
 
-            internal DeleteServicePluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteServicePluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteServicePluginConfigBuilder
+            where TImpl : DeleteServicePluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteServicePluginConfigAbstractBuilder() { }
+
+            public DeleteServicePluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,12 +69,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteServicePluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteServicePluginConfig.Response Execute(
+            protected DeleteServicePluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteServicePluginConfig.Response> ExecuteAsync(
+            protected async Task<DeleteServicePluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteServicePluginConfig(DeleteServicePluginConfigBuilder builder,
+        public class DeleteServicePluginConfigBuilder : DeleteServicePluginConfigAbstractBuilder<DeleteServicePluginConfigBuilder>
+        {
+            public DeleteServicePluginConfigBuilder() : base() { }
+
+            public DeleteServicePluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteServicePluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteServicePluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteServicePluginConfig(IDeleteServicePluginConfigBuilder builder,
             string namespace_
         )
         {

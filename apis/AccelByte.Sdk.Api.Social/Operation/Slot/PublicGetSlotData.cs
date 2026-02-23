@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicGetSlotDataBuilder Builder { get => new PublicGetSlotDataBuilder(); }
 
-        public class PublicGetSlotDataBuilder
-            : OperationBuilder<PublicGetSlotDataBuilder>
+        public interface IPublicGetSlotDataBuilder
         {
 
 
 
 
 
-            internal PublicGetSlotDataBuilder() { }
+        }
 
-            internal PublicGetSlotDataBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetSlotDataAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetSlotDataBuilder
+            where TImpl : PublicGetSlotDataAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetSlotDataAbstractBuilder() { }
+
+            public PublicGetSlotDataAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,12 +80,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetSlotDataBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicGetSlotData.Response Execute(
+            protected PublicGetSlotData.Response InternalExecute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetSlotData.Response> ExecuteAsync(
+            protected async Task<PublicGetSlotData.Response> InternalExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -119,7 +129,41 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicGetSlotData(PublicGetSlotDataBuilder builder,
+        public class PublicGetSlotDataBuilder : PublicGetSlotDataAbstractBuilder<PublicGetSlotDataBuilder>
+        {
+            public PublicGetSlotDataBuilder() : base() { }
+
+            public PublicGetSlotDataBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetSlotData.Response Execute(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+            public async Task<PublicGetSlotData.Response> ExecuteAsync(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetSlotData(IPublicGetSlotDataBuilder builder,
             string namespace_,
             string slotId,
             string userId
@@ -210,7 +254,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

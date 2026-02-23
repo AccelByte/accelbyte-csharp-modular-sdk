@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPsnEntitlementOwnershipBuilder Builder { get => new GetPsnEntitlementOwnershipBuilder(); }
 
-        public class GetPsnEntitlementOwnershipBuilder
-            : OperationBuilder<GetPsnEntitlementOwnershipBuilder>
+        public interface IGetPsnEntitlementOwnershipBuilder
         {
 
 
 
 
 
-            internal GetPsnEntitlementOwnershipBuilder() { }
+        }
 
-            internal GetPsnEntitlementOwnershipBuilder(IAccelByteSdk sdk)
+        public abstract class GetPsnEntitlementOwnershipAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPsnEntitlementOwnershipBuilder
+            where TImpl : GetPsnEntitlementOwnershipAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPsnEntitlementOwnershipAbstractBuilder() { }
+
+            public GetPsnEntitlementOwnershipAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetPsnEntitlementOwnershipBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPsnEntitlementOwnership.Response Execute(
+            protected GetPsnEntitlementOwnership.Response InternalExecute(
                 PsnEntitlementOwnershipRequest body,
                 string entitlementLabel,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPsnEntitlementOwnership.Response> ExecuteAsync(
+            protected async Task<GetPsnEntitlementOwnership.Response> InternalExecuteAsync(
                 PsnEntitlementOwnershipRequest body,
                 string entitlementLabel,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPsnEntitlementOwnership(GetPsnEntitlementOwnershipBuilder builder,
+        public class GetPsnEntitlementOwnershipBuilder : GetPsnEntitlementOwnershipAbstractBuilder<GetPsnEntitlementOwnershipBuilder>
+        {
+            public GetPsnEntitlementOwnershipBuilder() : base() { }
+
+            public GetPsnEntitlementOwnershipBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPsnEntitlementOwnership.Response Execute(
+                PsnEntitlementOwnershipRequest body,
+                string entitlementLabel,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    entitlementLabel,
+                    namespace_
+                );
+            }
+            public async Task<GetPsnEntitlementOwnership.Response> ExecuteAsync(
+                PsnEntitlementOwnershipRequest body,
+                string entitlementLabel,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    entitlementLabel,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetPsnEntitlementOwnership(IGetPsnEntitlementOwnershipBuilder builder,
             PsnEntitlementOwnershipRequest body,
             string entitlementLabel,
             string namespace_
@@ -181,7 +224,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.Ownership>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

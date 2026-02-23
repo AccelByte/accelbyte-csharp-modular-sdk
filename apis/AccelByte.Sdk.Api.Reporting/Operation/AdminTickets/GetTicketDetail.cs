@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static GetTicketDetailBuilder Builder { get => new GetTicketDetailBuilder(); }
 
-        public class GetTicketDetailBuilder
-            : OperationBuilder<GetTicketDetailBuilder>
+        public interface IGetTicketDetailBuilder
         {
 
 
 
 
 
-            internal GetTicketDetailBuilder() { }
+        }
 
-            internal GetTicketDetailBuilder(IAccelByteSdk sdk)
+        public abstract class GetTicketDetailAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTicketDetailBuilder
+            where TImpl : GetTicketDetailAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetTicketDetailAbstractBuilder() { }
+
+            public GetTicketDetailAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ticketId                    
                 );
 
-                op.SetBaseFields<GetTicketDetailBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTicketDetail.Response Execute(
+            protected GetTicketDetail.Response InternalExecute(
                 string namespace_,
                 string ticketId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTicketDetail.Response> ExecuteAsync(
+            protected async Task<GetTicketDetail.Response> InternalExecuteAsync(
                 string namespace_,
                 string ticketId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private GetTicketDetail(GetTicketDetailBuilder builder,
+        public class GetTicketDetailBuilder : GetTicketDetailAbstractBuilder<GetTicketDetailBuilder>
+        {
+            public GetTicketDetailBuilder() : base() { }
+
+            public GetTicketDetailBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTicketDetail.Response Execute(
+                string namespace_,
+                string ticketId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    ticketId
+                );
+            }
+            public async Task<GetTicketDetail.Response> ExecuteAsync(
+                string namespace_,
+                string ticketId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    ticketId
+                );
+            }
+        }
+
+
+        public GetTicketDetail(IGetTicketDetailBuilder builder,
             string namespace_,
             string ticketId
         )
@@ -175,17 +214,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

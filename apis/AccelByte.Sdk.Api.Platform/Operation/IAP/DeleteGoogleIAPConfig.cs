@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteGoogleIAPConfigBuilder Builder { get => new DeleteGoogleIAPConfigBuilder(); }
 
-        public class DeleteGoogleIAPConfigBuilder
-            : OperationBuilder<DeleteGoogleIAPConfigBuilder>
+        public interface IDeleteGoogleIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeleteGoogleIAPConfigBuilder() { }
+        }
 
-            internal DeleteGoogleIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteGoogleIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteGoogleIAPConfigBuilder
+            where TImpl : DeleteGoogleIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteGoogleIAPConfigAbstractBuilder() { }
+
+            public DeleteGoogleIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteGoogleIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteGoogleIAPConfig.Response Execute(
+            protected DeleteGoogleIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteGoogleIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeleteGoogleIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteGoogleIAPConfig(DeleteGoogleIAPConfigBuilder builder,
+        public class DeleteGoogleIAPConfigBuilder : DeleteGoogleIAPConfigAbstractBuilder<DeleteGoogleIAPConfigBuilder>
+        {
+            public DeleteGoogleIAPConfigBuilder() : base() { }
+
+            public DeleteGoogleIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteGoogleIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteGoogleIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteGoogleIAPConfig(IDeleteGoogleIAPConfigBuilder builder,
             string namespace_
         )
         {

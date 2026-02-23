@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicQueryUserOrdersBuilder Builder { get => new PublicQueryUserOrdersBuilder(); }
 
-        public class PublicQueryUserOrdersBuilder
-            : OperationBuilder<PublicQueryUserOrdersBuilder>
+        public interface IPublicQueryUserOrdersBuilder
+        {
+
+            bool? Discounted { get; }
+
+            string? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            PublicQueryUserOrdersStatus? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryUserOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryUserOrdersBuilder
+            where TImpl : PublicQueryUserOrdersAbstractBuilder<TImpl>
         {
 
             public bool? Discounted { get; set; }
@@ -51,42 +71,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicQueryUserOrdersBuilder() { }
+            public PublicQueryUserOrdersAbstractBuilder() { }
 
-            internal PublicQueryUserOrdersBuilder(IAccelByteSdk sdk)
+            public PublicQueryUserOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryUserOrdersBuilder SetDiscounted(bool _discounted)
+            public TImpl SetDiscounted(bool _discounted)
             {
                 Discounted = _discounted;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserOrdersBuilder SetItemId(string _itemId)
+            public TImpl SetItemId(string _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserOrdersBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserOrdersBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserOrdersBuilder SetStatus(PublicQueryUserOrdersStatus _status)
+            public TImpl SetStatus(PublicQueryUserOrdersStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -103,11 +123,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicQueryUserOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryUserOrders.Response Execute(
+            protected PublicQueryUserOrders.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -126,7 +146,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryUserOrders.Response> ExecuteAsync(
+            protected async Task<PublicQueryUserOrders.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -147,7 +167,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicQueryUserOrders(PublicQueryUserOrdersBuilder builder,
+        public class PublicQueryUserOrdersBuilder : PublicQueryUserOrdersAbstractBuilder<PublicQueryUserOrdersBuilder>
+        {
+            public PublicQueryUserOrdersBuilder() : base() { }
+
+            public PublicQueryUserOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryUserOrders.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicQueryUserOrders.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicQueryUserOrders(IPublicQueryUserOrdersBuilder builder,
             string namespace_,
             string userId
         )
@@ -229,7 +278,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

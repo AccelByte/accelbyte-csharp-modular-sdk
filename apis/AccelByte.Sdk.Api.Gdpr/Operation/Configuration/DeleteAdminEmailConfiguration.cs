@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static DeleteAdminEmailConfigurationBuilder Builder { get => new DeleteAdminEmailConfigurationBuilder(); }
 
-        public class DeleteAdminEmailConfigurationBuilder
-            : OperationBuilder<DeleteAdminEmailConfigurationBuilder>
+        public interface IDeleteAdminEmailConfigurationBuilder
         {
 
 
 
 
 
-            internal DeleteAdminEmailConfigurationBuilder() { }
+        }
 
-            internal DeleteAdminEmailConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteAdminEmailConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteAdminEmailConfigurationBuilder
+            where TImpl : DeleteAdminEmailConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteAdminEmailConfigurationAbstractBuilder() { }
+
+            public DeleteAdminEmailConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     emails                    
                 );
 
-                op.SetBaseFields<DeleteAdminEmailConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteAdminEmailConfiguration.Response Execute(
+            protected DeleteAdminEmailConfiguration.Response InternalExecute(
                 string namespace_,
                 List<string> emails
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteAdminEmailConfiguration.Response> ExecuteAsync(
+            protected async Task<DeleteAdminEmailConfiguration.Response> InternalExecuteAsync(
                 string namespace_,
                 List<string> emails
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private DeleteAdminEmailConfiguration(DeleteAdminEmailConfigurationBuilder builder,
+        public class DeleteAdminEmailConfigurationBuilder : DeleteAdminEmailConfigurationAbstractBuilder<DeleteAdminEmailConfigurationBuilder>
+        {
+            public DeleteAdminEmailConfigurationBuilder() : base() { }
+
+            public DeleteAdminEmailConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteAdminEmailConfiguration.Response Execute(
+                string namespace_,
+                List<string> emails
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    emails
+                );
+            }
+            public async Task<DeleteAdminEmailConfiguration.Response> ExecuteAsync(
+                string namespace_,
+                List<string> emails
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    emails
+                );
+            }
+        }
+
+
+        public DeleteAdminEmailConfiguration(IDeleteAdminEmailConfigurationBuilder builder,
             string namespace_,
             List<string> emails
         )
@@ -185,27 +224,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentCustomizationBuilder Builder { get => new GetPaymentCustomizationBuilder(); }
 
-        public class GetPaymentCustomizationBuilder
-            : OperationBuilder<GetPaymentCustomizationBuilder>
+        public interface IGetPaymentCustomizationBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetPaymentCustomizationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentCustomizationBuilder
+            where TImpl : GetPaymentCustomizationAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetPaymentCustomizationBuilder() { }
+            public GetPaymentCustomizationAbstractBuilder() { }
 
-            internal GetPaymentCustomizationBuilder(IAccelByteSdk sdk)
+            public GetPaymentCustomizationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetPaymentCustomizationBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,12 +86,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     region                    
                 );
 
-                op.SetBaseFields<GetPaymentCustomizationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetPaymentCustomization.Response Execute(
+            protected GetPaymentCustomization.Response InternalExecute(
                 string namespace_,
                 string paymentProvider,
                 string region
@@ -100,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentCustomization.Response> ExecuteAsync(
+            protected async Task<GetPaymentCustomization.Response> InternalExecuteAsync(
                 string namespace_,
                 string paymentProvider,
                 string region
@@ -123,7 +135,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentCustomization(GetPaymentCustomizationBuilder builder,
+        public class GetPaymentCustomizationBuilder : GetPaymentCustomizationAbstractBuilder<GetPaymentCustomizationBuilder>
+        {
+            public GetPaymentCustomizationBuilder() : base() { }
+
+            public GetPaymentCustomizationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetPaymentCustomization.Response Execute(
+                string namespace_,
+                string paymentProvider,
+                string region
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    paymentProvider,
+                    region
+                );
+            }
+            public async Task<GetPaymentCustomization.Response> ExecuteAsync(
+                string namespace_,
+                string paymentProvider,
+                string region
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    paymentProvider,
+                    region
+                );
+            }
+        }
+
+
+        public GetPaymentCustomization(IGetPaymentCustomizationBuilder builder,
             string namespace_,
             GetPaymentCustomizationPaymentProvider paymentProvider,
             string region
@@ -195,7 +241,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.Customization>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.Customization>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RevokeTokenBuilder Builder { get => new RevokeTokenBuilder(); }
 
-        public class RevokeTokenBuilder
-            : OperationBuilder<RevokeTokenBuilder>
+        public interface IRevokeTokenBuilder
         {
 
 
 
 
 
-            internal RevokeTokenBuilder() { }
+        }
 
-            internal RevokeTokenBuilder(IAccelByteSdk sdk)
+        public abstract class RevokeTokenAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeTokenBuilder
+            where TImpl : RevokeTokenAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RevokeTokenAbstractBuilder() { }
+
+            public RevokeTokenAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,12 +74,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     token                    
                 );
 
-                op.SetBaseFields<RevokeTokenBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public RevokeToken.Response Execute(
+            protected RevokeToken.Response InternalExecute(
                 string token
             )
             {
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeToken.Response> ExecuteAsync(
+            protected async Task<RevokeToken.Response> InternalExecuteAsync(
                 string token
             )
             {
@@ -105,7 +115,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RevokeToken(RevokeTokenBuilder builder,
+        public class RevokeTokenBuilder : RevokeTokenAbstractBuilder<RevokeTokenBuilder>
+        {
+            public RevokeTokenBuilder() : base() { }
+
+            public RevokeTokenBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public RevokeToken.Response Execute(
+                string token
+            )
+            {
+                return InternalExecute(
+                    token
+                );
+            }
+            public async Task<RevokeToken.Response> ExecuteAsync(
+                string token
+            )
+            {
+                return await InternalExecuteAsync(
+                    token
+                );
+            }
+        }
+
+
+        public RevokeToken(IRevokeTokenBuilder builder,
             string token
         )
         {
@@ -173,12 +209,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error401 = response.Payload;
                 response.Error = new ApiError("-1", response.Error401!);
             }
 

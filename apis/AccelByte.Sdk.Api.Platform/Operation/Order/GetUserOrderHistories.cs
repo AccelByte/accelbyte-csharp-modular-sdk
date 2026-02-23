@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserOrderHistoriesBuilder Builder { get => new GetUserOrderHistoriesBuilder(); }
 
-        public class GetUserOrderHistoriesBuilder
-            : OperationBuilder<GetUserOrderHistoriesBuilder>
+        public interface IGetUserOrderHistoriesBuilder
         {
 
 
 
 
 
-            internal GetUserOrderHistoriesBuilder() { }
+        }
 
-            internal GetUserOrderHistoriesBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserOrderHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserOrderHistoriesBuilder
+            where TImpl : GetUserOrderHistoriesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserOrderHistoriesAbstractBuilder() { }
+
+            public GetUserOrderHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserOrderHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserOrderHistories.Response Execute(
+            protected GetUserOrderHistories.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserOrderHistories.Response> ExecuteAsync(
+            protected async Task<GetUserOrderHistories.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserOrderHistories(GetUserOrderHistoriesBuilder builder,
+        public class GetUserOrderHistoriesBuilder : GetUserOrderHistoriesAbstractBuilder<GetUserOrderHistoriesBuilder>
+        {
+            public GetUserOrderHistoriesBuilder() : base() { }
+
+            public GetUserOrderHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserOrderHistories.Response Execute(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<GetUserOrderHistories.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserOrderHistories(IGetUserOrderHistoriesBuilder builder,
             string namespace_,
             string orderNo,
             string userId
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.OrderHistoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.OrderHistoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

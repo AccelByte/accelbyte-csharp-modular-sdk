@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicGetUserNamespaceSlotsBuilder Builder { get => new PublicGetUserNamespaceSlotsBuilder(); }
 
-        public class PublicGetUserNamespaceSlotsBuilder
-            : OperationBuilder<PublicGetUserNamespaceSlotsBuilder>
+        public interface IPublicGetUserNamespaceSlotsBuilder
         {
 
 
 
 
 
-            internal PublicGetUserNamespaceSlotsBuilder() { }
+        }
 
-            internal PublicGetUserNamespaceSlotsBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetUserNamespaceSlotsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserNamespaceSlotsBuilder
+            where TImpl : PublicGetUserNamespaceSlotsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetUserNamespaceSlotsAbstractBuilder() { }
+
+            public PublicGetUserNamespaceSlotsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,12 +78,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserNamespaceSlotsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicGetUserNamespaceSlots.Response Execute(
+            protected PublicGetUserNamespaceSlots.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserNamespaceSlots.Response> ExecuteAsync(
+            protected async Task<PublicGetUserNamespaceSlots.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -113,7 +123,37 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicGetUserNamespaceSlots(PublicGetUserNamespaceSlotsBuilder builder,
+        public class PublicGetUserNamespaceSlotsBuilder : PublicGetUserNamespaceSlotsAbstractBuilder<PublicGetUserNamespaceSlotsBuilder>
+        {
+            public PublicGetUserNamespaceSlotsBuilder() : base() { }
+
+            public PublicGetUserNamespaceSlotsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetUserNamespaceSlots.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserNamespaceSlots.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserNamespaceSlots(IPublicGetUserNamespaceSlotsBuilder builder,
             string namespace_,
             string userId
         )
@@ -180,7 +220,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.SlotInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.SlotInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateXblBPCertFileBuilder Builder { get => new UpdateXblBPCertFileBuilder(); }
 
-        public class UpdateXblBPCertFileBuilder
-            : OperationBuilder<UpdateXblBPCertFileBuilder>
+        public interface IUpdateXblBPCertFileBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+            string? Password { get; }
+
+
+
+        }
+
+        public abstract class UpdateXblBPCertFileAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateXblBPCertFileBuilder
+            where TImpl : UpdateXblBPCertFileAbstractBuilder<TImpl>
         {
 
 
@@ -45,9 +59,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateXblBPCertFileBuilder() { }
+            public UpdateXblBPCertFileAbstractBuilder() { }
 
-            internal UpdateXblBPCertFileBuilder(IAccelByteSdk sdk)
+            public UpdateXblBPCertFileAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -55,16 +69,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateXblBPCertFileBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
-            public UpdateXblBPCertFileBuilder SetPassword(string _password)
+            public TImpl SetPassword(string _password)
             {
                 Password = _password;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -77,11 +91,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateXblBPCertFileBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateXblBPCertFile.Response Execute(
+            protected UpdateXblBPCertFile.Response InternalExecute(
                 string namespace_
             )
             {
@@ -98,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateXblBPCertFile.Response> ExecuteAsync(
+            protected async Task<UpdateXblBPCertFile.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -117,7 +131,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateXblBPCertFile(UpdateXblBPCertFileBuilder builder,
+        public class UpdateXblBPCertFileBuilder : UpdateXblBPCertFileAbstractBuilder<UpdateXblBPCertFileBuilder>
+        {
+            public UpdateXblBPCertFileBuilder() : base() { }
+
+            public UpdateXblBPCertFileBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateXblBPCertFile.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<UpdateXblBPCertFile.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateXblBPCertFile(IUpdateXblBPCertFileBuilder builder,
             string namespace_
         )
         {
@@ -188,12 +227,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.XblIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.XblIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateSteamIAPConfigBuilder Builder { get => new UpdateSteamIAPConfigBuilder(); }
 
-        public class UpdateSteamIAPConfigBuilder
-            : OperationBuilder<UpdateSteamIAPConfigBuilder>
+        public interface IUpdateSteamIAPConfigBuilder
         {
 
 
 
 
 
-            internal UpdateSteamIAPConfigBuilder() { }
+        }
 
-            internal UpdateSteamIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateSteamIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateSteamIAPConfigBuilder
+            where TImpl : UpdateSteamIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateSteamIAPConfigAbstractBuilder() { }
+
+            public UpdateSteamIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateSteamIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateSteamIAPConfig.Response Execute(
+            protected UpdateSteamIAPConfig.Response InternalExecute(
                 SteamIAPConfigRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateSteamIAPConfig.Response> ExecuteAsync(
+            protected async Task<UpdateSteamIAPConfig.Response> InternalExecuteAsync(
                 SteamIAPConfigRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateSteamIAPConfig(UpdateSteamIAPConfigBuilder builder,
+        public class UpdateSteamIAPConfigBuilder : UpdateSteamIAPConfigAbstractBuilder<UpdateSteamIAPConfigBuilder>
+        {
+            public UpdateSteamIAPConfigBuilder() : base() { }
+
+            public UpdateSteamIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateSteamIAPConfig.Response Execute(
+                SteamIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateSteamIAPConfig.Response> ExecuteAsync(
+                SteamIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateSteamIAPConfig(IUpdateSteamIAPConfigBuilder builder,
             SteamIAPConfigRequest body,
             string namespace_
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SteamIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SteamIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetCountryLocationV3Builder Builder { get => new GetCountryLocationV3Builder(); }
 
-        public class GetCountryLocationV3Builder
-            : OperationBuilder<GetCountryLocationV3Builder>
+        public interface IGetCountryLocationV3Builder
         {
 
 
 
 
 
-            internal GetCountryLocationV3Builder() { }
+        }
 
-            internal GetCountryLocationV3Builder(IAccelByteSdk sdk)
+        public abstract class GetCountryLocationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCountryLocationV3Builder
+            where TImpl : GetCountryLocationV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetCountryLocationV3AbstractBuilder() { }
+
+            public GetCountryLocationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetCountryLocationV3 op = new GetCountryLocationV3(this
                 );
 
-                op.SetBaseFields<GetCountryLocationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCountryLocationV3.Response Execute(
+            protected GetCountryLocationV3.Response InternalExecute(
             )
             {
                 GetCountryLocationV3 op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCountryLocationV3.Response> ExecuteAsync(
+            protected async Task<GetCountryLocationV3.Response> InternalExecuteAsync(
             )
             {
                 GetCountryLocationV3 op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetCountryLocationV3(GetCountryLocationV3Builder builder
+        public class GetCountryLocationV3Builder : GetCountryLocationV3AbstractBuilder<GetCountryLocationV3Builder>
+        {
+            public GetCountryLocationV3Builder() : base() { }
+
+            public GetCountryLocationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCountryLocationV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetCountryLocationV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetCountryLocationV3(IGetCountryLocationV3Builder builder
         )
         {
             
@@ -151,7 +182,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelCountryLocationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelCountryLocationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

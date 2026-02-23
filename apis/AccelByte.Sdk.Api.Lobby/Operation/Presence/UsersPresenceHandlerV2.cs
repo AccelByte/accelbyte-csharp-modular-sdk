@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UsersPresenceHandlerV2Builder Builder { get => new UsersPresenceHandlerV2Builder(); }
 
-        public class UsersPresenceHandlerV2Builder
-            : OperationBuilder<UsersPresenceHandlerV2Builder>
+        public interface IUsersPresenceHandlerV2Builder
+        {
+
+            bool? CountOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class UsersPresenceHandlerV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUsersPresenceHandlerV2Builder
+            where TImpl : UsersPresenceHandlerV2AbstractBuilder<TImpl>
         {
 
             public bool? CountOnly { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal UsersPresenceHandlerV2Builder() { }
+            public UsersPresenceHandlerV2AbstractBuilder() { }
 
-            internal UsersPresenceHandlerV2Builder(IAccelByteSdk sdk)
+            public UsersPresenceHandlerV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UsersPresenceHandlerV2Builder SetCountOnly(bool _countOnly)
+            public TImpl SetCountOnly(bool _countOnly)
             {
                 CountOnly = _countOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UsersPresenceHandlerV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UsersPresenceHandlerV2.Response Execute(
+            protected UsersPresenceHandlerV2.Response InternalExecute(
                 ModelRequestUserPresence body,
                 string namespace_
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UsersPresenceHandlerV2.Response> ExecuteAsync(
+            protected async Task<UsersPresenceHandlerV2.Response> InternalExecuteAsync(
                 ModelRequestUserPresence body,
                 string namespace_
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UsersPresenceHandlerV2(UsersPresenceHandlerV2Builder builder,
+        public class UsersPresenceHandlerV2Builder : UsersPresenceHandlerV2AbstractBuilder<UsersPresenceHandlerV2Builder>
+        {
+            public UsersPresenceHandlerV2Builder() : base() { }
+
+            public UsersPresenceHandlerV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UsersPresenceHandlerV2.Response Execute(
+                ModelRequestUserPresence body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UsersPresenceHandlerV2.Response> ExecuteAsync(
+                ModelRequestUserPresence body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UsersPresenceHandlerV2(IUsersPresenceHandlerV2Builder builder,
             ModelRequestUserPresence body,
             string namespace_
         )
@@ -188,22 +229,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.HandlersGetUsersPresenceResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.HandlersGetUsersPresenceResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

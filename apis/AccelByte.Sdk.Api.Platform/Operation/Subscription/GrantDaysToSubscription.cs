@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GrantDaysToSubscriptionBuilder Builder { get => new GrantDaysToSubscriptionBuilder(); }
 
-        public class GrantDaysToSubscriptionBuilder
-            : OperationBuilder<GrantDaysToSubscriptionBuilder>
+        public interface IGrantDaysToSubscriptionBuilder
         {
 
 
 
 
 
-            internal GrantDaysToSubscriptionBuilder() { }
+        }
 
-            internal GrantDaysToSubscriptionBuilder(IAccelByteSdk sdk)
+        public abstract class GrantDaysToSubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGrantDaysToSubscriptionBuilder
+            where TImpl : GrantDaysToSubscriptionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GrantDaysToSubscriptionAbstractBuilder() { }
+
+            public GrantDaysToSubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GrantDaysToSubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GrantDaysToSubscription.Response Execute(
+            protected GrantDaysToSubscription.Response InternalExecute(
                 GrantSubscriptionDaysRequest body,
                 string namespace_,
                 string subscriptionId,
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GrantDaysToSubscription.Response> ExecuteAsync(
+            protected async Task<GrantDaysToSubscription.Response> InternalExecuteAsync(
                 GrantSubscriptionDaysRequest body,
                 string namespace_,
                 string subscriptionId,
@@ -120,7 +130,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GrantDaysToSubscription(GrantDaysToSubscriptionBuilder builder,
+        public class GrantDaysToSubscriptionBuilder : GrantDaysToSubscriptionAbstractBuilder<GrantDaysToSubscriptionBuilder>
+        {
+            public GrantDaysToSubscriptionBuilder() : base() { }
+
+            public GrantDaysToSubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GrantDaysToSubscription.Response Execute(
+                GrantSubscriptionDaysRequest body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<GrantDaysToSubscription.Response> ExecuteAsync(
+                GrantSubscriptionDaysRequest body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public GrantDaysToSubscription(IGrantDaysToSubscriptionBuilder builder,
             GrantSubscriptionDaysRequest body,
             string namespace_,
             string subscriptionId,
@@ -197,12 +244,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static AddCountryGroupBuilder Builder { get => new AddCountryGroupBuilder(); }
 
-        public class AddCountryGroupBuilder
-            : OperationBuilder<AddCountryGroupBuilder>
+        public interface IAddCountryGroupBuilder
+        {
+
+
+            Model.AddCountryGroupRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class AddCountryGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAddCountryGroupBuilder
+            where TImpl : AddCountryGroupAbstractBuilder<TImpl>
         {
 
 
@@ -45,19 +57,19 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal AddCountryGroupBuilder() { }
+            public AddCountryGroupAbstractBuilder() { }
 
-            internal AddCountryGroupBuilder(IAccelByteSdk sdk)
+            public AddCountryGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public AddCountryGroupBuilder SetBody(Model.AddCountryGroupRequest _body)
+            public TImpl SetBody(Model.AddCountryGroupRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AddCountryGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AddCountryGroup.Response Execute(
+            protected AddCountryGroup.Response InternalExecute(
                 string namespace_
             )
             {
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AddCountryGroup.Response> ExecuteAsync(
+            protected async Task<AddCountryGroup.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -111,7 +123,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private AddCountryGroup(AddCountryGroupBuilder builder,
+        public class AddCountryGroupBuilder : AddCountryGroupAbstractBuilder<AddCountryGroupBuilder>
+        {
+            public AddCountryGroupBuilder() : base() { }
+
+            public AddCountryGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AddCountryGroup.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AddCountryGroup.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AddCountryGroup(IAddCountryGroupBuilder builder,
             string namespace_
         )
         {
@@ -185,27 +222,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AddCountryGroupResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AddCountryGroupResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

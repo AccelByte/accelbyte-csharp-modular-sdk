@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDeleteUserInformationV3Builder Builder { get => new AdminDeleteUserInformationV3Builder(); }
 
-        public class AdminDeleteUserInformationV3Builder
-            : OperationBuilder<AdminDeleteUserInformationV3Builder>
+        public interface IAdminDeleteUserInformationV3Builder
         {
 
 
 
 
 
-            internal AdminDeleteUserInformationV3Builder() { }
+        }
 
-            internal AdminDeleteUserInformationV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteUserInformationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteUserInformationV3Builder
+            where TImpl : AdminDeleteUserInformationV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteUserInformationV3AbstractBuilder() { }
+
+            public AdminDeleteUserInformationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminDeleteUserInformationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteUserInformationV3.Response Execute(
+            protected AdminDeleteUserInformationV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteUserInformationV3.Response> ExecuteAsync(
+            protected async Task<AdminDeleteUserInformationV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDeleteUserInformationV3(AdminDeleteUserInformationV3Builder builder,
+        public class AdminDeleteUserInformationV3Builder : AdminDeleteUserInformationV3AbstractBuilder<AdminDeleteUserInformationV3Builder>
+        {
+            public AdminDeleteUserInformationV3Builder() : base() { }
+
+            public AdminDeleteUserInformationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteUserInformationV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminDeleteUserInformationV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminDeleteUserInformationV3(IAdminDeleteUserInformationV3Builder builder,
             string namespace_,
             string userId
         )
@@ -178,17 +217,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

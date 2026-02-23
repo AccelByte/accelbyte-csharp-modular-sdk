@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminUnsendInboxMessageBuilder Builder { get => new AdminUnsendInboxMessageBuilder(); }
 
-        public class AdminUnsendInboxMessageBuilder
-            : OperationBuilder<AdminUnsendInboxMessageBuilder>
+        public interface IAdminUnsendInboxMessageBuilder
         {
 
 
 
 
 
-            internal AdminUnsendInboxMessageBuilder() { }
+        }
 
-            internal AdminUnsendInboxMessageBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUnsendInboxMessageAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUnsendInboxMessageBuilder
+            where TImpl : AdminUnsendInboxMessageAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUnsendInboxMessageAbstractBuilder() { }
+
+            public AdminUnsendInboxMessageAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUnsendInboxMessageBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUnsendInboxMessage.Response Execute(
+            protected AdminUnsendInboxMessage.Response InternalExecute(
                 ModelsUnsendInboxMessageRequest body,
                 string inbox,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUnsendInboxMessage.Response> ExecuteAsync(
+            protected async Task<AdminUnsendInboxMessage.Response> InternalExecuteAsync(
                 ModelsUnsendInboxMessageRequest body,
                 string inbox,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminUnsendInboxMessage(AdminUnsendInboxMessageBuilder builder,
+        public class AdminUnsendInboxMessageBuilder : AdminUnsendInboxMessageAbstractBuilder<AdminUnsendInboxMessageBuilder>
+        {
+            public AdminUnsendInboxMessageBuilder() : base() { }
+
+            public AdminUnsendInboxMessageBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUnsendInboxMessage.Response Execute(
+                ModelsUnsendInboxMessageRequest body,
+                string inbox,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inbox,
+                    namespace_
+                );
+            }
+            public async Task<AdminUnsendInboxMessage.Response> ExecuteAsync(
+                ModelsUnsendInboxMessageRequest body,
+                string inbox,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inbox,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUnsendInboxMessage(IAdminUnsendInboxMessageBuilder builder,
             ModelsUnsendInboxMessageRequest body,
             string inbox,
             string namespace_
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUnsendInboxMessageResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUnsendInboxMessageResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

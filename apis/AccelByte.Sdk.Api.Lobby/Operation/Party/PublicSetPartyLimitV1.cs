@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static PublicSetPartyLimitV1Builder Builder { get => new PublicSetPartyLimitV1Builder(); }
 
-        public class PublicSetPartyLimitV1Builder
-            : OperationBuilder<PublicSetPartyLimitV1Builder>
+        public interface IPublicSetPartyLimitV1Builder
         {
 
 
 
 
 
-            internal PublicSetPartyLimitV1Builder() { }
+        }
 
-            internal PublicSetPartyLimitV1Builder(IAccelByteSdk sdk)
+        public abstract class PublicSetPartyLimitV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSetPartyLimitV1Builder
+            where TImpl : PublicSetPartyLimitV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicSetPartyLimitV1AbstractBuilder() { }
+
+            public PublicSetPartyLimitV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,12 +76,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     partyId                    
                 );
 
-                op.SetBaseFields<PublicSetPartyLimitV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicSetPartyLimitV1.Response Execute(
+            protected PublicSetPartyLimitV1.Response InternalExecute(
                 ModelsPartyPUTLimitSizeRequest body,
                 string namespace_,
                 string partyId
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSetPartyLimitV1.Response> ExecuteAsync(
+            protected async Task<PublicSetPartyLimitV1.Response> InternalExecuteAsync(
                 ModelsPartyPUTLimitSizeRequest body,
                 string namespace_,
                 string partyId
@@ -115,7 +125,41 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private PublicSetPartyLimitV1(PublicSetPartyLimitV1Builder builder,
+        public class PublicSetPartyLimitV1Builder : PublicSetPartyLimitV1AbstractBuilder<PublicSetPartyLimitV1Builder>
+        {
+            public PublicSetPartyLimitV1Builder() : base() { }
+
+            public PublicSetPartyLimitV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicSetPartyLimitV1.Response Execute(
+                ModelsPartyPUTLimitSizeRequest body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+            public async Task<PublicSetPartyLimitV1.Response> ExecuteAsync(
+                ModelsPartyPUTLimitSizeRequest body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+        }
+
+
+        public PublicSetPartyLimitV1(IPublicSetPartyLimitV1Builder builder,
             ModelsPartyPUTLimitSizeRequest body,
             string namespace_,
             string partyId
@@ -197,27 +241,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

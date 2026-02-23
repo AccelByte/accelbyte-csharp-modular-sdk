@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,26 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveLatestPoliciesBuilder Builder { get => new RetrieveLatestPoliciesBuilder(); }
 
-        public class RetrieveLatestPoliciesBuilder
-            : OperationBuilder<RetrieveLatestPoliciesBuilder>
+        public interface IRetrieveLatestPoliciesBuilder
+        {
+
+            bool? DefaultOnEmpty { get; }
+
+            RetrieveLatestPoliciesPolicyType? PolicyType { get; }
+
+            string? Tags { get; }
+
+            bool? VisibleOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveLatestPoliciesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveLatestPoliciesBuilder
+            where TImpl : RetrieveLatestPoliciesAbstractBuilder<TImpl>
         {
 
             public bool? DefaultOnEmpty { get; set; }
@@ -51,36 +69,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveLatestPoliciesBuilder() { }
+            public RetrieveLatestPoliciesAbstractBuilder() { }
 
-            internal RetrieveLatestPoliciesBuilder(IAccelByteSdk sdk)
+            public RetrieveLatestPoliciesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveLatestPoliciesBuilder SetDefaultOnEmpty(bool _defaultOnEmpty)
+            public TImpl SetDefaultOnEmpty(bool _defaultOnEmpty)
             {
                 DefaultOnEmpty = _defaultOnEmpty;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesBuilder SetPolicyType(RetrieveLatestPoliciesPolicyType _policyType)
+            public TImpl SetPolicyType(RetrieveLatestPoliciesPolicyType _policyType)
             {
                 PolicyType = _policyType;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesBuilder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesBuilder SetVisibleOnly(bool _visibleOnly)
+            public TImpl SetVisibleOnly(bool _visibleOnly)
             {
                 VisibleOnly = _visibleOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -95,11 +113,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     countryCode                    
                 );
 
-                op.SetBaseFields<RetrieveLatestPoliciesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveLatestPolicies.Response Execute(
+            protected RetrieveLatestPolicies.Response InternalExecute(
                 string countryCode
             )
             {
@@ -116,7 +134,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveLatestPolicies.Response> ExecuteAsync(
+            protected async Task<RetrieveLatestPolicies.Response> InternalExecuteAsync(
                 string countryCode
             )
             {
@@ -135,7 +153,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveLatestPolicies(RetrieveLatestPoliciesBuilder builder,
+        public class RetrieveLatestPoliciesBuilder : RetrieveLatestPoliciesAbstractBuilder<RetrieveLatestPoliciesBuilder>
+        {
+            public RetrieveLatestPoliciesBuilder() : base() { }
+
+            public RetrieveLatestPoliciesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveLatestPolicies.Response Execute(
+                string countryCode
+            )
+            {
+                return InternalExecute(
+                    countryCode
+                );
+            }
+            public async Task<RetrieveLatestPolicies.Response> ExecuteAsync(
+                string countryCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    countryCode
+                );
+            }
+        }
+
+
+        public RetrieveLatestPolicies(IRetrieveLatestPoliciesBuilder builder,
             string countryCode
         )
         {
@@ -208,7 +251,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

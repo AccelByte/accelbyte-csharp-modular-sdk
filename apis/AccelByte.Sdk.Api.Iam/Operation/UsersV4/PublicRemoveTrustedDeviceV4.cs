@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicRemoveTrustedDeviceV4Builder Builder { get => new PublicRemoveTrustedDeviceV4Builder(); }
 
-        public class PublicRemoveTrustedDeviceV4Builder
-            : OperationBuilder<PublicRemoveTrustedDeviceV4Builder>
+        public interface IPublicRemoveTrustedDeviceV4Builder
         {
 
 
 
 
 
-            internal PublicRemoveTrustedDeviceV4Builder() { }
+        }
 
-            internal PublicRemoveTrustedDeviceV4Builder(IAccelByteSdk sdk)
+        public abstract class PublicRemoveTrustedDeviceV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicRemoveTrustedDeviceV4Builder
+            where TImpl : PublicRemoveTrustedDeviceV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicRemoveTrustedDeviceV4AbstractBuilder() { }
+
+            public PublicRemoveTrustedDeviceV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     deviceToken
                 );
 
-                op.SetBaseFields<PublicRemoveTrustedDeviceV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicRemoveTrustedDeviceV4.Response Execute(
+            protected PublicRemoveTrustedDeviceV4.Response InternalExecute(
                 string namespace_,
                 string deviceToken
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicRemoveTrustedDeviceV4.Response> ExecuteAsync(
+            protected async Task<PublicRemoveTrustedDeviceV4.Response> InternalExecuteAsync(
                 string namespace_,
                 string deviceToken
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicRemoveTrustedDeviceV4(PublicRemoveTrustedDeviceV4Builder builder,
+        public class PublicRemoveTrustedDeviceV4Builder : PublicRemoveTrustedDeviceV4AbstractBuilder<PublicRemoveTrustedDeviceV4Builder>
+        {
+            public PublicRemoveTrustedDeviceV4Builder() : base() { }
+
+            public PublicRemoveTrustedDeviceV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicRemoveTrustedDeviceV4.Response Execute(
+                string namespace_,
+                string deviceToken
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    deviceToken                    
+                );
+            }
+            public async Task<PublicRemoveTrustedDeviceV4.Response> ExecuteAsync(
+                string namespace_,
+                string deviceToken
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    deviceToken                    
+                );
+            }
+        }
+
+
+        public PublicRemoveTrustedDeviceV4(IPublicRemoveTrustedDeviceV4Builder builder,
             string namespace_,
             string deviceToken            
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static DeleteGroupBuilder Builder { get => new DeleteGroupBuilder(); }
 
-        public class DeleteGroupBuilder
-            : OperationBuilder<DeleteGroupBuilder>
+        public interface IDeleteGroupBuilder
         {
 
 
 
 
 
-            internal DeleteGroupBuilder() { }
+        }
 
-            internal DeleteGroupBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteGroupBuilder
+            where TImpl : DeleteGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteGroupAbstractBuilder() { }
+
+            public DeleteGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteGroup.Response Execute(
+            protected DeleteGroup.Response InternalExecute(
                 string groupId,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteGroup.Response> ExecuteAsync(
+            protected async Task<DeleteGroup.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private DeleteGroup(DeleteGroupBuilder builder,
+        public class DeleteGroupBuilder : DeleteGroupAbstractBuilder<DeleteGroupBuilder>
+        {
+            public DeleteGroupBuilder() : base() { }
+
+            public DeleteGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteGroup.Response Execute(
+                string groupId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DeleteGroup.Response> ExecuteAsync(
+                string groupId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteGroup(IDeleteGroupBuilder builder,
             string groupId,
             string namespace_,
             string userId
@@ -188,17 +231,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static AdminFindExtensionCategoryListBuilder Builder { get => new AdminFindExtensionCategoryListBuilder(); }
 
-        public class AdminFindExtensionCategoryListBuilder
-            : OperationBuilder<AdminFindExtensionCategoryListBuilder>
+        public interface IAdminFindExtensionCategoryListBuilder
+        {
+
+            AdminFindExtensionCategoryListOrder? Order { get; }
+
+            AdminFindExtensionCategoryListSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminFindExtensionCategoryListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminFindExtensionCategoryListBuilder
+            where TImpl : AdminFindExtensionCategoryListAbstractBuilder<TImpl>
         {
 
             public AdminFindExtensionCategoryListOrder? Order { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal AdminFindExtensionCategoryListBuilder() { }
+            public AdminFindExtensionCategoryListAbstractBuilder() { }
 
-            internal AdminFindExtensionCategoryListBuilder(IAccelByteSdk sdk)
+            public AdminFindExtensionCategoryListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminFindExtensionCategoryListBuilder SetOrder(AdminFindExtensionCategoryListOrder _order)
+            public TImpl SetOrder(AdminFindExtensionCategoryListOrder _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminFindExtensionCategoryListBuilder SetSortBy(AdminFindExtensionCategoryListSortBy _sortBy)
+            public TImpl SetSortBy(AdminFindExtensionCategoryListSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +86,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 AdminFindExtensionCategoryList op = new AdminFindExtensionCategoryList(this
                 );
 
-                op.SetBaseFields<AdminFindExtensionCategoryListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminFindExtensionCategoryList.Response Execute(
+            protected AdminFindExtensionCategoryList.Response InternalExecute(
             )
             {
                 AdminFindExtensionCategoryList op = Build(
@@ -91,7 +105,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminFindExtensionCategoryList.Response> ExecuteAsync(
+            protected async Task<AdminFindExtensionCategoryList.Response> InternalExecuteAsync(
             )
             {
                 AdminFindExtensionCategoryList op = Build(
@@ -108,7 +122,28 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private AdminFindExtensionCategoryList(AdminFindExtensionCategoryListBuilder builder
+        public class AdminFindExtensionCategoryListBuilder : AdminFindExtensionCategoryListAbstractBuilder<AdminFindExtensionCategoryListBuilder>
+        {
+            public AdminFindExtensionCategoryListBuilder() : base() { }
+
+            public AdminFindExtensionCategoryListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminFindExtensionCategoryList.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminFindExtensionCategoryList.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminFindExtensionCategoryList(IAdminFindExtensionCategoryListBuilder builder
         )
         {
             
@@ -177,17 +212,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiExtensionCategoryListApiResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiExtensionCategoryListApiResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

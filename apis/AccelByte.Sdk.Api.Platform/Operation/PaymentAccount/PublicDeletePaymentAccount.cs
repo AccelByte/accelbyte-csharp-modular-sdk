@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicDeletePaymentAccountBuilder Builder { get => new PublicDeletePaymentAccountBuilder(); }
 
-        public class PublicDeletePaymentAccountBuilder
-            : OperationBuilder<PublicDeletePaymentAccountBuilder>
+        public interface IPublicDeletePaymentAccountBuilder
         {
 
 
 
 
 
-            internal PublicDeletePaymentAccountBuilder() { }
+        }
 
-            internal PublicDeletePaymentAccountBuilder(IAccelByteSdk sdk)
+        public abstract class PublicDeletePaymentAccountAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicDeletePaymentAccountBuilder
+            where TImpl : PublicDeletePaymentAccountAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicDeletePaymentAccountAbstractBuilder() { }
+
+            public PublicDeletePaymentAccountAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicDeletePaymentAccountBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicDeletePaymentAccount.Response Execute(
+            protected PublicDeletePaymentAccount.Response InternalExecute(
                 string id,
                 string namespace_,
                 string type,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicDeletePaymentAccount.Response> ExecuteAsync(
+            protected async Task<PublicDeletePaymentAccount.Response> InternalExecuteAsync(
                 string id,
                 string namespace_,
                 string type,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicDeletePaymentAccount(PublicDeletePaymentAccountBuilder builder,
+        public class PublicDeletePaymentAccountBuilder : PublicDeletePaymentAccountAbstractBuilder<PublicDeletePaymentAccountBuilder>
+        {
+            public PublicDeletePaymentAccountBuilder() : base() { }
+
+            public PublicDeletePaymentAccountBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicDeletePaymentAccount.Response Execute(
+                string id,
+                string namespace_,
+                string type,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    id,
+                    namespace_,
+                    type,
+                    userId
+                );
+            }
+            public async Task<PublicDeletePaymentAccount.Response> ExecuteAsync(
+                string id,
+                string namespace_,
+                string type,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    id,
+                    namespace_,
+                    type,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicDeletePaymentAccount(IPublicDeletePaymentAccountBuilder builder,
             string id,
             string namespace_,
             PublicDeletePaymentAccountType type,

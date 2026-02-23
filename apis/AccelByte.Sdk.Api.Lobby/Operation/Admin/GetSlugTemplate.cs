@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static GetSlugTemplateBuilder Builder { get => new GetSlugTemplateBuilder(); }
 
-        public class GetSlugTemplateBuilder
-            : OperationBuilder<GetSlugTemplateBuilder>
+        public interface IGetSlugTemplateBuilder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetSlugTemplateAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetSlugTemplateBuilder
+            where TImpl : GetSlugTemplateAbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal GetSlugTemplateBuilder() { }
+            public GetSlugTemplateAbstractBuilder() { }
 
-            internal GetSlugTemplateBuilder(IAccelByteSdk sdk)
+            public GetSlugTemplateAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetSlugTemplateBuilder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetSlugTemplateBuilder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetSlugTemplateBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<GetSlugTemplateBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetSlugTemplate.Response Execute(
+            protected GetSlugTemplate.Response InternalExecute(
                 string namespace_,
                 string templateSlug
             )
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetSlugTemplate.Response> ExecuteAsync(
+            protected async Task<GetSlugTemplate.Response> InternalExecuteAsync(
                 string namespace_,
                 string templateSlug
             )
@@ -128,7 +144,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private GetSlugTemplate(GetSlugTemplateBuilder builder,
+        public class GetSlugTemplateBuilder : GetSlugTemplateAbstractBuilder<GetSlugTemplateBuilder>
+        {
+            public GetSlugTemplateBuilder() : base() { }
+
+            public GetSlugTemplateBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetSlugTemplate.Response Execute(
+                string namespace_,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    templateSlug
+                );
+            }
+            public async Task<GetSlugTemplate.Response> ExecuteAsync(
+                string namespace_,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public GetSlugTemplate(IGetSlugTemplateBuilder builder,
             string namespace_,
             string templateSlug
         )
@@ -212,27 +257,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelTemplateLocalizationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelTemplateLocalizationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

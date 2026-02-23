@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetTicketDynamicBuilder Builder { get => new GetTicketDynamicBuilder(); }
 
-        public class GetTicketDynamicBuilder
-            : OperationBuilder<GetTicketDynamicBuilder>
+        public interface IGetTicketDynamicBuilder
         {
 
 
 
 
 
-            internal GetTicketDynamicBuilder() { }
+        }
 
-            internal GetTicketDynamicBuilder(IAccelByteSdk sdk)
+        public abstract class GetTicketDynamicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTicketDynamicBuilder
+            where TImpl : GetTicketDynamicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetTicketDynamicAbstractBuilder() { }
+
+            public GetTicketDynamicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetTicketDynamicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTicketDynamic.Response Execute(
+            protected GetTicketDynamic.Response InternalExecute(
                 string boothName,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTicketDynamic.Response> ExecuteAsync(
+            protected async Task<GetTicketDynamic.Response> InternalExecuteAsync(
                 string boothName,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetTicketDynamic(GetTicketDynamicBuilder builder,
+        public class GetTicketDynamicBuilder : GetTicketDynamicAbstractBuilder<GetTicketDynamicBuilder>
+        {
+            public GetTicketDynamicBuilder() : base() { }
+
+            public GetTicketDynamicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTicketDynamic.Response Execute(
+                string boothName,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    boothName,
+                    namespace_
+                );
+            }
+            public async Task<GetTicketDynamic.Response> ExecuteAsync(
+                string boothName,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    boothName,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetTicketDynamic(IGetTicketDynamicBuilder builder,
             string boothName,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TicketDynamicInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TicketDynamicInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static AnonymizeUserAgreementBuilder Builder { get => new AnonymizeUserAgreementBuilder(); }
 
-        public class AnonymizeUserAgreementBuilder
-            : OperationBuilder<AnonymizeUserAgreementBuilder>
+        public interface IAnonymizeUserAgreementBuilder
         {
 
 
 
 
 
-            internal AnonymizeUserAgreementBuilder() { }
+        }
 
-            internal AnonymizeUserAgreementBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeUserAgreementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeUserAgreementBuilder
+            where TImpl : AnonymizeUserAgreementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeUserAgreementAbstractBuilder() { }
+
+            public AnonymizeUserAgreementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeUserAgreementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeUserAgreement.Response Execute(
+            protected AnonymizeUserAgreement.Response InternalExecute(
                 string userId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeUserAgreement.Response> ExecuteAsync(
+            protected async Task<AnonymizeUserAgreement.Response> InternalExecuteAsync(
                 string userId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private AnonymizeUserAgreement(AnonymizeUserAgreementBuilder builder,
+        public class AnonymizeUserAgreementBuilder : AnonymizeUserAgreementAbstractBuilder<AnonymizeUserAgreementBuilder>
+        {
+            public AnonymizeUserAgreementBuilder() : base() { }
+
+            public AnonymizeUserAgreementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeUserAgreement.Response Execute(
+                string userId
+            )
+            {
+                return InternalExecute(
+                    userId
+                );
+            }
+            public async Task<AnonymizeUserAgreement.Response> ExecuteAsync(
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeUserAgreement(IAnonymizeUserAgreementBuilder builder,
             string userId
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -49,8 +49,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicDeletePlatformLinkV2Builder Builder { get => new PublicDeletePlatformLinkV2Builder(); }
 
-        public class PublicDeletePlatformLinkV2Builder
-            : OperationBuilder<PublicDeletePlatformLinkV2Builder>
+        public interface IPublicDeletePlatformLinkV2Builder
+        {
+
+
+
+            string? PlatformNamespace { get; }
+
+
+
+        }
+
+        public abstract class PublicDeletePlatformLinkV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicDeletePlatformLinkV2Builder
+            where TImpl : PublicDeletePlatformLinkV2AbstractBuilder<TImpl>
         {
 
 
@@ -59,9 +71,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicDeletePlatformLinkV2Builder() { }
+            public PublicDeletePlatformLinkV2AbstractBuilder() { }
 
-            internal PublicDeletePlatformLinkV2Builder(IAccelByteSdk sdk)
+            public PublicDeletePlatformLinkV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,10 +81,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public PublicDeletePlatformLinkV2Builder SetPlatformNamespace(string _platformNamespace)
+            public TImpl SetPlatformNamespace(string _platformNamespace)
             {
                 PlatformNamespace = _platformNamespace;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -89,12 +101,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicDeletePlatformLinkV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicDeletePlatformLinkV2.Response Execute(
+            protected PublicDeletePlatformLinkV2.Response InternalExecute(
                 string namespace_,
                 string platformId,
                 string userId
@@ -115,7 +127,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicDeletePlatformLinkV2.Response> ExecuteAsync(
+            protected async Task<PublicDeletePlatformLinkV2.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId,
                 string userId
@@ -138,7 +150,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicDeletePlatformLinkV2(PublicDeletePlatformLinkV2Builder builder,
+        public class PublicDeletePlatformLinkV2Builder : PublicDeletePlatformLinkV2AbstractBuilder<PublicDeletePlatformLinkV2Builder>
+        {
+            public PublicDeletePlatformLinkV2Builder() : base() { }
+
+            public PublicDeletePlatformLinkV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicDeletePlatformLinkV2.Response Execute(
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+            public async Task<PublicDeletePlatformLinkV2.Response> ExecuteAsync(
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicDeletePlatformLinkV2(IPublicDeletePlatformLinkV2Builder builder,
             string namespace_,
             string platformId,
             string userId
@@ -223,27 +269,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

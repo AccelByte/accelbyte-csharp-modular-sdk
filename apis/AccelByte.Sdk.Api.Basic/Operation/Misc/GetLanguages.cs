@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetLanguagesBuilder Builder { get => new GetLanguagesBuilder(); }
 
-        public class GetLanguagesBuilder
-            : OperationBuilder<GetLanguagesBuilder>
+        public interface IGetLanguagesBuilder
         {
 
 
 
 
 
-            internal GetLanguagesBuilder() { }
+        }
 
-            internal GetLanguagesBuilder(IAccelByteSdk sdk)
+        public abstract class GetLanguagesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLanguagesBuilder
+            where TImpl : GetLanguagesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetLanguagesAbstractBuilder() { }
+
+            public GetLanguagesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLanguagesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLanguages.Response Execute(
+            protected GetLanguages.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLanguages.Response> ExecuteAsync(
+            protected async Task<GetLanguages.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetLanguages(GetLanguagesBuilder builder,
+        public class GetLanguagesBuilder : GetLanguagesAbstractBuilder<GetLanguagesBuilder>
+        {
+            public GetLanguagesBuilder() : base() { }
+
+            public GetLanguagesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLanguages.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetLanguages.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLanguages(IGetLanguagesBuilder builder,
             string namespace_
         )
         {
@@ -169,17 +204,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

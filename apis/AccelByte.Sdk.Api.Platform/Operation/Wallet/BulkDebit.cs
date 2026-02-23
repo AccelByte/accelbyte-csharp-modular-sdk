@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static BulkDebitBuilder Builder { get => new BulkDebitBuilder(); }
 
-        public class BulkDebitBuilder
-            : OperationBuilder<BulkDebitBuilder>
+        public interface IBulkDebitBuilder
         {
 
 
 
 
 
-            internal BulkDebitBuilder() { }
+        }
 
-            internal BulkDebitBuilder(IAccelByteSdk sdk)
+        public abstract class BulkDebitAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkDebitBuilder
+            where TImpl : BulkDebitAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public BulkDebitAbstractBuilder() { }
+
+            public BulkDebitAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<BulkDebitBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkDebit.Response Execute(
+            protected BulkDebit.Response InternalExecute(
                 List<BulkDebitRequest> body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkDebit.Response> ExecuteAsync(
+            protected async Task<BulkDebit.Response> InternalExecuteAsync(
                 List<BulkDebitRequest> body,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private BulkDebit(BulkDebitBuilder builder,
+        public class BulkDebitBuilder : BulkDebitAbstractBuilder<BulkDebitBuilder>
+        {
+            public BulkDebitBuilder() : base() { }
+
+            public BulkDebitBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkDebit.Response Execute(
+                List<BulkDebitRequest> body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<BulkDebit.Response> ExecuteAsync(
+                List<BulkDebitRequest> body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public BulkDebit(IBulkDebitBuilder builder,
             List<BulkDebitRequest> body,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkDebitResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkDebitResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

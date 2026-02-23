@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static AdminFindActionListBuilder Builder { get => new AdminFindActionListBuilder(); }
 
-        public class AdminFindActionListBuilder
-            : OperationBuilder<AdminFindActionListBuilder>
+        public interface IAdminFindActionListBuilder
         {
 
 
 
 
 
-            internal AdminFindActionListBuilder() { }
+        }
 
-            internal AdminFindActionListBuilder(IAccelByteSdk sdk)
+        public abstract class AdminFindActionListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminFindActionListBuilder
+            where TImpl : AdminFindActionListAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminFindActionListAbstractBuilder() { }
+
+            public AdminFindActionListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                 AdminFindActionList op = new AdminFindActionList(this
                 );
 
-                op.SetBaseFields<AdminFindActionListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminFindActionList.Response Execute(
+            protected AdminFindActionList.Response InternalExecute(
             )
             {
                 AdminFindActionList op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminFindActionList.Response> ExecuteAsync(
+            protected async Task<AdminFindActionList.Response> InternalExecuteAsync(
             )
             {
                 AdminFindActionList op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private AdminFindActionList(AdminFindActionListBuilder builder
+        public class AdminFindActionListBuilder : AdminFindActionListAbstractBuilder<AdminFindActionListBuilder>
+        {
+            public AdminFindActionListBuilder() : base() { }
+
+            public AdminFindActionListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminFindActionList.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminFindActionList.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminFindActionList(IAdminFindActionListBuilder builder
         )
         {
             
@@ -155,17 +186,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiActionListApiResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiActionListApiResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

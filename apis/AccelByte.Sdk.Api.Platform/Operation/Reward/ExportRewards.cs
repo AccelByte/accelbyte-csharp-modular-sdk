@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ExportRewardsBuilder Builder { get => new ExportRewardsBuilder(); }
 
-        public class ExportRewardsBuilder
-            : OperationBuilder<ExportRewardsBuilder>
+        public interface IExportRewardsBuilder
         {
 
 
 
 
 
-            internal ExportRewardsBuilder() { }
+        }
 
-            internal ExportRewardsBuilder(IAccelByteSdk sdk)
+        public abstract class ExportRewardsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExportRewardsBuilder
+            where TImpl : ExportRewardsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ExportRewardsAbstractBuilder() { }
+
+            public ExportRewardsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ExportRewardsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ExportRewards.Response Execute(
+            protected ExportRewards.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExportRewards.Response> ExecuteAsync(
+            protected async Task<ExportRewards.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ExportRewards(ExportRewardsBuilder builder,
+        public class ExportRewardsBuilder : ExportRewardsAbstractBuilder<ExportRewardsBuilder>
+        {
+            public ExportRewardsBuilder() : base() { }
+
+            public ExportRewardsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ExportRewards.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ExportRewards.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ExportRewards(IExportRewardsBuilder builder,
             string namespace_
         )
         {

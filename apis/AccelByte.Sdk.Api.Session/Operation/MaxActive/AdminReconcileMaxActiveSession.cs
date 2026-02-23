@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminReconcileMaxActiveSessionBuilder Builder { get => new AdminReconcileMaxActiveSessionBuilder(); }
 
-        public class AdminReconcileMaxActiveSessionBuilder
-            : OperationBuilder<AdminReconcileMaxActiveSessionBuilder>
+        public interface IAdminReconcileMaxActiveSessionBuilder
         {
 
 
 
 
 
-            internal AdminReconcileMaxActiveSessionBuilder() { }
+        }
 
-            internal AdminReconcileMaxActiveSessionBuilder(IAccelByteSdk sdk)
+        public abstract class AdminReconcileMaxActiveSessionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminReconcileMaxActiveSessionBuilder
+            where TImpl : AdminReconcileMaxActiveSessionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminReconcileMaxActiveSessionAbstractBuilder() { }
+
+            public AdminReconcileMaxActiveSessionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminReconcileMaxActiveSessionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminReconcileMaxActiveSession.Response Execute(
+            protected AdminReconcileMaxActiveSession.Response InternalExecute(
                 ModelsRequestReconcileMaxActiveSession body,
                 string name,
                 string namespace_
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminReconcileMaxActiveSession.Response> ExecuteAsync(
+            protected async Task<AdminReconcileMaxActiveSession.Response> InternalExecuteAsync(
                 ModelsRequestReconcileMaxActiveSession body,
                 string name,
                 string namespace_
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminReconcileMaxActiveSession(AdminReconcileMaxActiveSessionBuilder builder,
+        public class AdminReconcileMaxActiveSessionBuilder : AdminReconcileMaxActiveSessionAbstractBuilder<AdminReconcileMaxActiveSessionBuilder>
+        {
+            public AdminReconcileMaxActiveSessionBuilder() : base() { }
+
+            public AdminReconcileMaxActiveSessionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminReconcileMaxActiveSession.Response Execute(
+                ModelsRequestReconcileMaxActiveSession body,
+                string name,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    name,
+                    namespace_
+                );
+            }
+            public async Task<AdminReconcileMaxActiveSession.Response> ExecuteAsync(
+                ModelsRequestReconcileMaxActiveSession body,
+                string name,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    name,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminReconcileMaxActiveSession(IAdminReconcileMaxActiveSessionBuilder builder,
             ModelsRequestReconcileMaxActiveSession body,
             string name,
             string namespace_
@@ -189,17 +232,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateAdyenConfigBuilder Builder { get => new UpdateAdyenConfigBuilder(); }
 
-        public class UpdateAdyenConfigBuilder
-            : OperationBuilder<UpdateAdyenConfigBuilder>
+        public interface IUpdateAdyenConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+            bool? Validate { get; }
+
+
+
+
+
+        }
+
+        public abstract class UpdateAdyenConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateAdyenConfigBuilder
+            where TImpl : UpdateAdyenConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateAdyenConfigBuilder() { }
+            public UpdateAdyenConfigAbstractBuilder() { }
 
-            internal UpdateAdyenConfigBuilder(IAccelByteSdk sdk)
+            public UpdateAdyenConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UpdateAdyenConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
-            public UpdateAdyenConfigBuilder SetValidate(bool _validate)
+            public TImpl SetValidate(bool _validate)
             {
                 Validate = _validate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateAdyenConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateAdyenConfig.Response Execute(
+            protected UpdateAdyenConfig.Response InternalExecute(
                 AdyenConfig body,
                 string id
             )
@@ -102,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateAdyenConfig.Response> ExecuteAsync(
+            protected async Task<UpdateAdyenConfig.Response> InternalExecuteAsync(
                 AdyenConfig body,
                 string id
             )
@@ -123,7 +137,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateAdyenConfig(UpdateAdyenConfigBuilder builder,
+        public class UpdateAdyenConfigBuilder : UpdateAdyenConfigAbstractBuilder<UpdateAdyenConfigBuilder>
+        {
+            public UpdateAdyenConfigBuilder() : base() { }
+
+            public UpdateAdyenConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateAdyenConfig.Response Execute(
+                AdyenConfig body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateAdyenConfig.Response> ExecuteAsync(
+                AdyenConfig body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateAdyenConfig(IUpdateAdyenConfigBuilder builder,
             AdyenConfig body,
             string id
         )
@@ -198,12 +241,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

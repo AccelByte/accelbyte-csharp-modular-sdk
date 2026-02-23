@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicGetUserContentBuilder Builder { get => new PublicGetUserContentBuilder(); }
 
-        public class PublicGetUserContentBuilder
-            : OperationBuilder<PublicGetUserContentBuilder>
+        public interface IPublicGetUserContentBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetUserContentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserContentBuilder
+            where TImpl : PublicGetUserContentAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal PublicGetUserContentBuilder() { }
+            public PublicGetUserContentAbstractBuilder() { }
 
-            internal PublicGetUserContentBuilder(IAccelByteSdk sdk)
+            public PublicGetUserContentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetUserContentBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetUserContentBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserContentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserContent.Response Execute(
+            protected PublicGetUserContent.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserContent.Response> ExecuteAsync(
+            protected async Task<PublicGetUserContent.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -120,7 +134,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicGetUserContent(PublicGetUserContentBuilder builder,
+        public class PublicGetUserContentBuilder : PublicGetUserContentAbstractBuilder<PublicGetUserContentBuilder>
+        {
+            public PublicGetUserContentBuilder() : base() { }
+
+            public PublicGetUserContentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserContent.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserContent.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserContent(IPublicGetUserContentBuilder builder,
             string namespace_,
             string userId
         )
@@ -199,22 +242,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

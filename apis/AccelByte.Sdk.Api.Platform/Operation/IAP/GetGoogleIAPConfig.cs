@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetGoogleIAPConfigBuilder Builder { get => new GetGoogleIAPConfigBuilder(); }
 
-        public class GetGoogleIAPConfigBuilder
-            : OperationBuilder<GetGoogleIAPConfigBuilder>
+        public interface IGetGoogleIAPConfigBuilder
         {
 
 
 
 
 
-            internal GetGoogleIAPConfigBuilder() { }
+        }
 
-            internal GetGoogleIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetGoogleIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetGoogleIAPConfigBuilder
+            where TImpl : GetGoogleIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetGoogleIAPConfigAbstractBuilder() { }
+
+            public GetGoogleIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetGoogleIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetGoogleIAPConfig.Response Execute(
+            protected GetGoogleIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetGoogleIAPConfig.Response> ExecuteAsync(
+            protected async Task<GetGoogleIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetGoogleIAPConfig(GetGoogleIAPConfigBuilder builder,
+        public class GetGoogleIAPConfigBuilder : GetGoogleIAPConfigAbstractBuilder<GetGoogleIAPConfigBuilder>
+        {
+            public GetGoogleIAPConfigBuilder() : base() { }
+
+            public GetGoogleIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetGoogleIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetGoogleIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetGoogleIAPConfig(IGetGoogleIAPConfigBuilder builder,
             string namespace_
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GoogleIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.GoogleIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

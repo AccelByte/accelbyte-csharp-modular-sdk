@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static DeleteStatCycleBuilder Builder { get => new DeleteStatCycleBuilder(); }
 
-        public class DeleteStatCycleBuilder
-            : OperationBuilder<DeleteStatCycleBuilder>
+        public interface IDeleteStatCycleBuilder
         {
 
 
 
 
 
-            internal DeleteStatCycleBuilder() { }
+        }
 
-            internal DeleteStatCycleBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteStatCycleAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteStatCycleBuilder
+            where TImpl : DeleteStatCycleAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteStatCycleAbstractBuilder() { }
+
+            public DeleteStatCycleAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteStatCycleBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteStatCycle.Response Execute(
+            protected DeleteStatCycle.Response InternalExecute(
                 string cycleId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteStatCycle.Response> ExecuteAsync(
+            protected async Task<DeleteStatCycle.Response> InternalExecuteAsync(
                 string cycleId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private DeleteStatCycle(DeleteStatCycleBuilder builder,
+        public class DeleteStatCycleBuilder : DeleteStatCycleAbstractBuilder<DeleteStatCycleBuilder>
+        {
+            public DeleteStatCycleBuilder() : base() { }
+
+            public DeleteStatCycleBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteStatCycle.Response Execute(
+                string cycleId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    cycleId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteStatCycle.Response> ExecuteAsync(
+                string cycleId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    cycleId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteStatCycle(IDeleteStatCycleBuilder builder,
             string cycleId,
             string namespace_
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

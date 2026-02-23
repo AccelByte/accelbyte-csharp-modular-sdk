@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveAllUsersByPolicyVersionBuilder Builder { get => new OldRetrieveAllUsersByPolicyVersionBuilder(); }
 
-        public class OldRetrieveAllUsersByPolicyVersionBuilder
-            : OperationBuilder<OldRetrieveAllUsersByPolicyVersionBuilder>
+        public interface IOldRetrieveAllUsersByPolicyVersionBuilder
+        {
+
+            string? Keyword { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class OldRetrieveAllUsersByPolicyVersionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveAllUsersByPolicyVersionBuilder
+            where TImpl : OldRetrieveAllUsersByPolicyVersionAbstractBuilder<TImpl>
         {
 
             public string? Keyword { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal OldRetrieveAllUsersByPolicyVersionBuilder() { }
+            public OldRetrieveAllUsersByPolicyVersionAbstractBuilder() { }
 
-            internal OldRetrieveAllUsersByPolicyVersionBuilder(IAccelByteSdk sdk)
+            public OldRetrieveAllUsersByPolicyVersionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public OldRetrieveAllUsersByPolicyVersionBuilder SetKeyword(string _keyword)
+            public TImpl SetKeyword(string _keyword)
             {
                 Keyword = _keyword;
-                return this;
+                return (TImpl)this;
             }
 
-            public OldRetrieveAllUsersByPolicyVersionBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public OldRetrieveAllUsersByPolicyVersionBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyVersionId                    
                 );
 
-                op.SetBaseFields<OldRetrieveAllUsersByPolicyVersionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveAllUsersByPolicyVersion.Response Execute(
+            protected OldRetrieveAllUsersByPolicyVersion.Response InternalExecute(
                 string policyVersionId
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveAllUsersByPolicyVersion.Response> ExecuteAsync(
+            protected async Task<OldRetrieveAllUsersByPolicyVersion.Response> InternalExecuteAsync(
                 string policyVersionId
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveAllUsersByPolicyVersion(OldRetrieveAllUsersByPolicyVersionBuilder builder,
+        public class OldRetrieveAllUsersByPolicyVersionBuilder : OldRetrieveAllUsersByPolicyVersionAbstractBuilder<OldRetrieveAllUsersByPolicyVersionBuilder>
+        {
+            public OldRetrieveAllUsersByPolicyVersionBuilder() : base() { }
+
+            public OldRetrieveAllUsersByPolicyVersionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveAllUsersByPolicyVersion.Response Execute(
+                string policyVersionId
+            )
+            {
+                return InternalExecute(
+                    policyVersionId
+                );
+            }
+            public async Task<OldRetrieveAllUsersByPolicyVersion.Response> ExecuteAsync(
+                string policyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    policyVersionId
+                );
+            }
+        }
+
+
+        public OldRetrieveAllUsersByPolicyVersion(IOldRetrieveAllUsersByPolicyVersionBuilder builder,
             string policyVersionId
         )
         {
@@ -196,12 +237,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static BulkResetUserStatItem1Builder Builder { get => new BulkResetUserStatItem1Builder(); }
 
-        public class BulkResetUserStatItem1Builder
-            : OperationBuilder<BulkResetUserStatItem1Builder>
+        public interface IBulkResetUserStatItem1Builder
         {
 
 
 
 
 
-            internal BulkResetUserStatItem1Builder() { }
+        }
 
-            internal BulkResetUserStatItem1Builder(IAccelByteSdk sdk)
+        public abstract class BulkResetUserStatItem1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkResetUserStatItem1Builder
+            where TImpl : BulkResetUserStatItem1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public BulkResetUserStatItem1AbstractBuilder() { }
+
+            public BulkResetUserStatItem1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<BulkResetUserStatItem1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkResetUserStatItem1.Response Execute(
+            protected BulkResetUserStatItem1.Response InternalExecute(
                 List<BulkStatItemReset> body,
                 string namespace_,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkResetUserStatItem1.Response> ExecuteAsync(
+            protected async Task<BulkResetUserStatItem1.Response> InternalExecuteAsync(
                 List<BulkStatItemReset> body,
                 string namespace_,
                 string userId
@@ -111,7 +121,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.Payload);
             }
 
-            public BulkResetUserStatItem1.Response<T1> Execute<T1>(
+            protected BulkResetUserStatItem1.Response<T1> InternalExecute<T1>(
                 List<BulkStatItemReset> body,
                 string namespace_,
                 string userId
@@ -132,7 +142,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkResetUserStatItem1.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<BulkResetUserStatItem1.Response<T1>> InternalExecuteAsync<T1>(
                 List<BulkStatItemReset> body,
                 string namespace_,
                 string userId
@@ -155,7 +165,65 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private BulkResetUserStatItem1(BulkResetUserStatItem1Builder builder,
+        public class BulkResetUserStatItem1Builder : BulkResetUserStatItem1AbstractBuilder<BulkResetUserStatItem1Builder>
+        {
+            public BulkResetUserStatItem1Builder() : base() { }
+
+            public BulkResetUserStatItem1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkResetUserStatItem1.Response Execute(
+                List<BulkStatItemReset> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<BulkResetUserStatItem1.Response> ExecuteAsync(
+                List<BulkStatItemReset> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+
+            public BulkResetUserStatItem1.Response<T1> Execute<T1>(
+                List<BulkStatItemReset> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<BulkResetUserStatItem1.Response<T1>> ExecuteAsync<T1>(
+                List<BulkStatItemReset> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public BulkResetUserStatItem1(IBulkResetUserStatItem1Builder builder,
             List<BulkStatItemReset> body,
             string namespace_,
             string userId
@@ -251,32 +319,38 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.BulkStatOperationResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.BulkStatOperationResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -297,32 +371,38 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.BulkStatOperationResult<T1>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.BulkStatOperationResult<T1>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

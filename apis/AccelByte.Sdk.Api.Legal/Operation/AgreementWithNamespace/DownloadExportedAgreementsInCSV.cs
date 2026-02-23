@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static DownloadExportedAgreementsInCSVBuilder Builder { get => new DownloadExportedAgreementsInCSVBuilder(); }
 
-        public class DownloadExportedAgreementsInCSVBuilder
-            : OperationBuilder<DownloadExportedAgreementsInCSVBuilder>
+        public interface IDownloadExportedAgreementsInCSVBuilder
         {
 
 
 
 
 
-            internal DownloadExportedAgreementsInCSVBuilder() { }
+        }
 
-            internal DownloadExportedAgreementsInCSVBuilder(IAccelByteSdk sdk)
+        public abstract class DownloadExportedAgreementsInCSVAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDownloadExportedAgreementsInCSVBuilder
+            where TImpl : DownloadExportedAgreementsInCSVAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DownloadExportedAgreementsInCSVAbstractBuilder() { }
+
+            public DownloadExportedAgreementsInCSVAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     exportId                    
                 );
 
-                op.SetBaseFields<DownloadExportedAgreementsInCSVBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DownloadExportedAgreementsInCSV.Response Execute(
+            protected DownloadExportedAgreementsInCSV.Response InternalExecute(
                 string namespace_,
                 string exportId
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DownloadExportedAgreementsInCSV.Response> ExecuteAsync(
+            protected async Task<DownloadExportedAgreementsInCSV.Response> InternalExecuteAsync(
                 string namespace_,
                 string exportId
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private DownloadExportedAgreementsInCSV(DownloadExportedAgreementsInCSVBuilder builder,
+        public class DownloadExportedAgreementsInCSVBuilder : DownloadExportedAgreementsInCSVAbstractBuilder<DownloadExportedAgreementsInCSVBuilder>
+        {
+            public DownloadExportedAgreementsInCSVBuilder() : base() { }
+
+            public DownloadExportedAgreementsInCSVBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DownloadExportedAgreementsInCSV.Response Execute(
+                string namespace_,
+                string exportId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    exportId
+                );
+            }
+            public async Task<DownloadExportedAgreementsInCSV.Response> ExecuteAsync(
+                string namespace_,
+                string exportId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    exportId
+                );
+            }
+        }
+
+
+        public DownloadExportedAgreementsInCSV(IDownloadExportedAgreementsInCSVBuilder builder,
             string namespace_,
             string exportId
         )
@@ -174,12 +213,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DownloadExportedAgreementsInCSVResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DownloadExportedAgreementsInCSVResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

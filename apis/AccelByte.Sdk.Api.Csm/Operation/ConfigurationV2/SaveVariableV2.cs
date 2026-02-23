@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static SaveVariableV2Builder Builder { get => new SaveVariableV2Builder(); }
 
-        public class SaveVariableV2Builder
-            : OperationBuilder<SaveVariableV2Builder>
+        public interface ISaveVariableV2Builder
         {
 
 
 
 
 
-            internal SaveVariableV2Builder() { }
+        }
 
-            internal SaveVariableV2Builder(IAccelByteSdk sdk)
+        public abstract class SaveVariableV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISaveVariableV2Builder
+            where TImpl : SaveVariableV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SaveVariableV2AbstractBuilder() { }
+
+            public SaveVariableV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,11 +80,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SaveVariableV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SaveVariableV2.Response Execute(
+            protected SaveVariableV2.Response InternalExecute(
                 ApimodelSaveConfigurationV2Request body,
                 string app,
                 string namespace_
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SaveVariableV2.Response> ExecuteAsync(
+            protected async Task<SaveVariableV2.Response> InternalExecuteAsync(
                 ApimodelSaveConfigurationV2Request body,
                 string app,
                 string namespace_
@@ -118,7 +128,40 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private SaveVariableV2(SaveVariableV2Builder builder,
+        public class SaveVariableV2Builder : SaveVariableV2AbstractBuilder<SaveVariableV2Builder>
+        {
+            public SaveVariableV2Builder() : base() { }
+
+            public SaveVariableV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SaveVariableV2.Response Execute(
+                ApimodelSaveConfigurationV2Request body,
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<SaveVariableV2.Response> ExecuteAsync(
+                ApimodelSaveConfigurationV2Request body,
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SaveVariableV2(ISaveVariableV2Builder builder,
             ApimodelSaveConfigurationV2Request body,
             string app,
             string namespace_
@@ -197,27 +240,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelSaveConfigurationV2Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelSaveConfigurationV2Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

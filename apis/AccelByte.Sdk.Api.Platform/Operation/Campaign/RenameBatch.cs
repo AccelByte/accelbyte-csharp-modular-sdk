@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RenameBatchBuilder Builder { get => new RenameBatchBuilder(); }
 
-        public class RenameBatchBuilder
-            : OperationBuilder<RenameBatchBuilder>
+        public interface IRenameBatchBuilder
         {
 
 
 
 
 
-            internal RenameBatchBuilder() { }
+        }
 
-            internal RenameBatchBuilder(IAccelByteSdk sdk)
+        public abstract class RenameBatchAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRenameBatchBuilder
+            where TImpl : RenameBatchAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RenameBatchAbstractBuilder() { }
+
+            public RenameBatchAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RenameBatchBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RenameBatch.Response Execute(
+            protected RenameBatch.Response InternalExecute(
                 CampaignBatchNameChange body,
                 string campaignId,
                 string namespace_
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RenameBatch.Response> ExecuteAsync(
+            protected async Task<RenameBatch.Response> InternalExecuteAsync(
                 CampaignBatchNameChange body,
                 string campaignId,
                 string namespace_
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RenameBatch(RenameBatchBuilder builder,
+        public class RenameBatchBuilder : RenameBatchAbstractBuilder<RenameBatchBuilder>
+        {
+            public RenameBatchBuilder() : base() { }
+
+            public RenameBatchBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RenameBatch.Response Execute(
+                CampaignBatchNameChange body,
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<RenameBatch.Response> ExecuteAsync(
+                CampaignBatchNameChange body,
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public RenameBatch(IRenameBatchBuilder builder,
             CampaignBatchNameChange body,
             string campaignId,
             string namespace_
@@ -185,7 +228,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

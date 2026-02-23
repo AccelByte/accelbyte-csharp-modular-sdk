@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminEvaluateProgressBuilder Builder { get => new AdminEvaluateProgressBuilder(); }
 
-        public class AdminEvaluateProgressBuilder
-            : OperationBuilder<AdminEvaluateProgressBuilder>
+        public interface IAdminEvaluateProgressBuilder
+        {
+
+            List<string>? ChallengeCode { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminEvaluateProgressAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminEvaluateProgressBuilder
+            where TImpl : AdminEvaluateProgressAbstractBuilder<TImpl>
         {
 
             public List<string>? ChallengeCode { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
 
 
-            internal AdminEvaluateProgressBuilder() { }
+            public AdminEvaluateProgressAbstractBuilder() { }
 
-            internal AdminEvaluateProgressBuilder(IAccelByteSdk sdk)
+            public AdminEvaluateProgressAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminEvaluateProgressBuilder SetChallengeCode(List<string> _challengeCode)
+            public TImpl SetChallengeCode(List<string> _challengeCode)
             {
                 ChallengeCode = _challengeCode;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminEvaluateProgressBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminEvaluateProgress.Response Execute(
+            protected AdminEvaluateProgress.Response InternalExecute(
                 ModelEvaluatePlayerProgressionRequest body,
                 string namespace_
             )
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminEvaluateProgress.Response> ExecuteAsync(
+            protected async Task<AdminEvaluateProgress.Response> InternalExecuteAsync(
                 ModelEvaluatePlayerProgressionRequest body,
                 string namespace_
             )
@@ -113,7 +125,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminEvaluateProgress(AdminEvaluateProgressBuilder builder,
+        public class AdminEvaluateProgressBuilder : AdminEvaluateProgressAbstractBuilder<AdminEvaluateProgressBuilder>
+        {
+            public AdminEvaluateProgressBuilder() : base() { }
+
+            public AdminEvaluateProgressBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminEvaluateProgress.Response Execute(
+                ModelEvaluatePlayerProgressionRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminEvaluateProgress.Response> ExecuteAsync(
+                ModelEvaluatePlayerProgressionRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminEvaluateProgress(IAdminEvaluateProgressBuilder builder,
             ModelEvaluatePlayerProgressionRequest body,
             string namespace_
         )
@@ -196,27 +237,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

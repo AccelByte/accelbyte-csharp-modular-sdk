@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static DeleteUserRankingsAdminV1Builder Builder { get => new DeleteUserRankingsAdminV1Builder(); }
 
-        public class DeleteUserRankingsAdminV1Builder
-            : OperationBuilder<DeleteUserRankingsAdminV1Builder>
+        public interface IDeleteUserRankingsAdminV1Builder
         {
 
 
 
 
 
-            internal DeleteUserRankingsAdminV1Builder() { }
+        }
 
-            internal DeleteUserRankingsAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class DeleteUserRankingsAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteUserRankingsAdminV1Builder
+            where TImpl : DeleteUserRankingsAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteUserRankingsAdminV1AbstractBuilder() { }
+
+            public DeleteUserRankingsAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     leaderboardCode                    
                 );
 
-                op.SetBaseFields<DeleteUserRankingsAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteUserRankingsAdminV1.Response Execute(
+            protected DeleteUserRankingsAdminV1.Response InternalExecute(
                 string namespace_,
                 string userId,
                 List<string> leaderboardCode
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteUserRankingsAdminV1.Response> ExecuteAsync(
+            protected async Task<DeleteUserRankingsAdminV1.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 List<string> leaderboardCode
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private DeleteUserRankingsAdminV1(DeleteUserRankingsAdminV1Builder builder,
+        public class DeleteUserRankingsAdminV1Builder : DeleteUserRankingsAdminV1AbstractBuilder<DeleteUserRankingsAdminV1Builder>
+        {
+            public DeleteUserRankingsAdminV1Builder() : base() { }
+
+            public DeleteUserRankingsAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteUserRankingsAdminV1.Response Execute(
+                string namespace_,
+                string userId,
+                List<string> leaderboardCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    leaderboardCode
+                );
+            }
+            public async Task<DeleteUserRankingsAdminV1.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                List<string> leaderboardCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    leaderboardCode
+                );
+            }
+        }
+
+
+        public DeleteUserRankingsAdminV1(IDeleteUserRankingsAdminV1Builder builder,
             string namespace_,
             string userId,
             List<string> leaderboardCode
@@ -192,17 +235,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

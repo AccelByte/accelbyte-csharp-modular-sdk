@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicGetRecentTeamPlayerBuilder Builder { get => new PublicGetRecentTeamPlayerBuilder(); }
 
-        public class PublicGetRecentTeamPlayerBuilder
-            : OperationBuilder<PublicGetRecentTeamPlayerBuilder>
+        public interface IPublicGetRecentTeamPlayerBuilder
+        {
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetRecentTeamPlayerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetRecentTeamPlayerBuilder
+            where TImpl : PublicGetRecentTeamPlayerAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal PublicGetRecentTeamPlayerBuilder() { }
+            public PublicGetRecentTeamPlayerAbstractBuilder() { }
 
-            internal PublicGetRecentTeamPlayerBuilder(IAccelByteSdk sdk)
+            public PublicGetRecentTeamPlayerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetRecentTeamPlayerBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetRecentTeamPlayerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetRecentTeamPlayer.Response Execute(
+            protected PublicGetRecentTeamPlayer.Response InternalExecute(
                 string namespace_
             )
             {
@@ -89,7 +101,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetRecentTeamPlayer.Response> ExecuteAsync(
+            protected async Task<PublicGetRecentTeamPlayer.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -108,7 +120,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicGetRecentTeamPlayer(PublicGetRecentTeamPlayerBuilder builder,
+        public class PublicGetRecentTeamPlayerBuilder : PublicGetRecentTeamPlayerAbstractBuilder<PublicGetRecentTeamPlayerBuilder>
+        {
+            public PublicGetRecentTeamPlayerBuilder() : base() { }
+
+            public PublicGetRecentTeamPlayerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetRecentTeamPlayer.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetRecentTeamPlayer.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetRecentTeamPlayer(IPublicGetRecentTeamPlayerBuilder builder,
             string namespace_
         )
         {
@@ -182,27 +219,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsRecentPlayerQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsRecentPlayerQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

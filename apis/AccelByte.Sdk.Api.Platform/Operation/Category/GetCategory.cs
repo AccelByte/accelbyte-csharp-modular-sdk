@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetCategoryBuilder Builder { get => new GetCategoryBuilder(); }
 
-        public class GetCategoryBuilder
-            : OperationBuilder<GetCategoryBuilder>
+        public interface IGetCategoryBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetCategoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCategoryBuilder
+            where TImpl : GetCategoryAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetCategoryBuilder() { }
+            public GetCategoryAbstractBuilder() { }
 
-            internal GetCategoryBuilder(IAccelByteSdk sdk)
+            public GetCategoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetCategoryBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCategoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCategory.Response Execute(
+            protected GetCategory.Response InternalExecute(
                 string categoryPath,
                 string namespace_
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCategory.Response> ExecuteAsync(
+            protected async Task<GetCategory.Response> InternalExecuteAsync(
                 string categoryPath,
                 string namespace_
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetCategory(GetCategoryBuilder builder,
+        public class GetCategoryBuilder : GetCategoryAbstractBuilder<GetCategoryBuilder>
+        {
+            public GetCategoryBuilder() : base() { }
+
+            public GetCategoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCategory.Response Execute(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    categoryPath,
+                    namespace_
+                );
+            }
+            public async Task<GetCategory.Response> ExecuteAsync(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    categoryPath,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCategory(IGetCategoryBuilder builder,
             string categoryPath,
             string namespace_
         )
@@ -188,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullCategoryInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullCategoryInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

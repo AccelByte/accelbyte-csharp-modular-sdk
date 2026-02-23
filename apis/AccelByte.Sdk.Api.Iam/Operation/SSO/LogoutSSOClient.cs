@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static LogoutSSOClientBuilder Builder { get => new LogoutSSOClientBuilder(); }
 
-        public class LogoutSSOClientBuilder
-            : OperationBuilder<LogoutSSOClientBuilder>
+        public interface ILogoutSSOClientBuilder
         {
 
 
 
 
 
-            internal LogoutSSOClientBuilder() { }
+        }
 
-            internal LogoutSSOClientBuilder(IAccelByteSdk sdk)
+        public abstract class LogoutSSOClientAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ILogoutSSOClientBuilder
+            where TImpl : LogoutSSOClientAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public LogoutSSOClientAbstractBuilder() { }
+
+            public LogoutSSOClientAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<LogoutSSOClientBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public LogoutSSOClient.Response Execute(
+            protected LogoutSSOClient.Response InternalExecute(
                 string platformId
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<LogoutSSOClient.Response> ExecuteAsync(
+            protected async Task<LogoutSSOClient.Response> InternalExecuteAsync(
                 string platformId
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private LogoutSSOClient(LogoutSSOClientBuilder builder,
+        public class LogoutSSOClientBuilder : LogoutSSOClientAbstractBuilder<LogoutSSOClientBuilder>
+        {
+            public LogoutSSOClientBuilder() : base() { }
+
+            public LogoutSSOClientBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public LogoutSSOClient.Response Execute(
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    platformId
+                );
+            }
+            public async Task<LogoutSSOClient.Response> ExecuteAsync(
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId
+                );
+            }
+        }
+
+
+        public LogoutSSOClient(ILogoutSSOClientBuilder builder,
             string platformId
         )
         {
@@ -171,17 +206,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

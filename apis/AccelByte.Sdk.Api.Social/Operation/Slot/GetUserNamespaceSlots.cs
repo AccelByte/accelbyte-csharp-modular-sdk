@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static GetUserNamespaceSlotsBuilder Builder { get => new GetUserNamespaceSlotsBuilder(); }
 
-        public class GetUserNamespaceSlotsBuilder
-            : OperationBuilder<GetUserNamespaceSlotsBuilder>
+        public interface IGetUserNamespaceSlotsBuilder
         {
 
 
 
 
 
-            internal GetUserNamespaceSlotsBuilder() { }
+        }
 
-            internal GetUserNamespaceSlotsBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserNamespaceSlotsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserNamespaceSlotsBuilder
+            where TImpl : GetUserNamespaceSlotsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserNamespaceSlotsAbstractBuilder() { }
+
+            public GetUserNamespaceSlotsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,12 +78,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserNamespaceSlotsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetUserNamespaceSlots.Response Execute(
+            protected GetUserNamespaceSlots.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserNamespaceSlots.Response> ExecuteAsync(
+            protected async Task<GetUserNamespaceSlots.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -113,7 +123,37 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private GetUserNamespaceSlots(GetUserNamespaceSlotsBuilder builder,
+        public class GetUserNamespaceSlotsBuilder : GetUserNamespaceSlotsAbstractBuilder<GetUserNamespaceSlotsBuilder>
+        {
+            public GetUserNamespaceSlotsBuilder() : base() { }
+
+            public GetUserNamespaceSlotsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUserNamespaceSlots.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserNamespaceSlots.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserNamespaceSlots(IGetUserNamespaceSlotsBuilder builder,
             string namespace_,
             string userId
         )
@@ -180,7 +220,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.SlotInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.SlotInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

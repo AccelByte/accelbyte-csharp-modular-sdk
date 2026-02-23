@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -58,17 +58,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AddUserPermissionBuilder Builder { get => new AddUserPermissionBuilder(); }
 
-        public class AddUserPermissionBuilder
-            : OperationBuilder<AddUserPermissionBuilder>
+        public interface IAddUserPermissionBuilder
         {
 
 
 
 
 
-            internal AddUserPermissionBuilder() { }
+        }
 
-            internal AddUserPermissionBuilder(IAccelByteSdk sdk)
+        public abstract class AddUserPermissionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAddUserPermissionBuilder
+            where TImpl : AddUserPermissionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AddUserPermissionAbstractBuilder() { }
+
+            public AddUserPermissionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -94,12 +104,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AddUserPermissionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AddUserPermission.Response Execute(
+            protected AddUserPermission.Response InternalExecute(
                 ModelUpdatePermissionScheduleRequest body,
                 long action,
                 string namespace_,
@@ -124,7 +134,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AddUserPermission.Response> ExecuteAsync(
+            protected async Task<AddUserPermission.Response> InternalExecuteAsync(
                 ModelUpdatePermissionScheduleRequest body,
                 long action,
                 string namespace_,
@@ -151,7 +161,49 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AddUserPermission(AddUserPermissionBuilder builder,
+        public class AddUserPermissionBuilder : AddUserPermissionAbstractBuilder<AddUserPermissionBuilder>
+        {
+            public AddUserPermissionBuilder() : base() { }
+
+            public AddUserPermissionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AddUserPermission.Response Execute(
+                ModelUpdatePermissionScheduleRequest body,
+                long action,
+                string namespace_,
+                string resource,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    action,
+                    namespace_,
+                    resource,
+                    userId
+                );
+            }
+            public async Task<AddUserPermission.Response> ExecuteAsync(
+                ModelUpdatePermissionScheduleRequest body,
+                long action,
+                string namespace_,
+                string resource,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    action,
+                    namespace_,
+                    resource,
+                    userId
+                );
+            }
+        }
+
+
+        public AddUserPermission(IAddUserPermissionBuilder builder,
             ModelUpdatePermissionScheduleRequest body,
             long action,
             string namespace_,
@@ -239,22 +291,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

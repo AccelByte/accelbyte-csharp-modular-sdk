@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetOpenidUserInfoV3Builder Builder { get => new PublicGetOpenidUserInfoV3Builder(); }
 
-        public class PublicGetOpenidUserInfoV3Builder
-            : OperationBuilder<PublicGetOpenidUserInfoV3Builder>
+        public interface IPublicGetOpenidUserInfoV3Builder
         {
 
 
 
 
 
-            internal PublicGetOpenidUserInfoV3Builder() { }
+        }
 
-            internal PublicGetOpenidUserInfoV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetOpenidUserInfoV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetOpenidUserInfoV3Builder
+            where TImpl : PublicGetOpenidUserInfoV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetOpenidUserInfoV3AbstractBuilder() { }
+
+            public PublicGetOpenidUserInfoV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetOpenidUserInfoV3 op = new PublicGetOpenidUserInfoV3(this
                 );
 
-                op.SetBaseFields<PublicGetOpenidUserInfoV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetOpenidUserInfoV3.Response Execute(
+            protected PublicGetOpenidUserInfoV3.Response InternalExecute(
             )
             {
                 PublicGetOpenidUserInfoV3 op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetOpenidUserInfoV3.Response> ExecuteAsync(
+            protected async Task<PublicGetOpenidUserInfoV3.Response> InternalExecuteAsync(
             )
             {
                 PublicGetOpenidUserInfoV3 op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetOpenidUserInfoV3(PublicGetOpenidUserInfoV3Builder builder
+        public class PublicGetOpenidUserInfoV3Builder : PublicGetOpenidUserInfoV3AbstractBuilder<PublicGetOpenidUserInfoV3Builder>
+        {
+            public PublicGetOpenidUserInfoV3Builder() : base() { }
+
+            public PublicGetOpenidUserInfoV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetOpenidUserInfoV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetOpenidUserInfoV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetOpenidUserInfoV3(IPublicGetOpenidUserInfoV3Builder builder
         )
         {
             
@@ -155,17 +186,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelPublicOpenIDUserInfoResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelPublicOpenIDUserInfoResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

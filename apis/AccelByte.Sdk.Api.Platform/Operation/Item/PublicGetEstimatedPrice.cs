@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetEstimatedPriceBuilder Builder { get => new PublicGetEstimatedPriceBuilder(); }
 
-        public class PublicGetEstimatedPriceBuilder
-            : OperationBuilder<PublicGetEstimatedPriceBuilder>
+        public interface IPublicGetEstimatedPriceBuilder
+        {
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetEstimatedPriceAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetEstimatedPriceBuilder
+            where TImpl : PublicGetEstimatedPriceAbstractBuilder<TImpl>
         {
 
             public string? Region { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetEstimatedPriceBuilder() { }
+            public PublicGetEstimatedPriceAbstractBuilder() { }
 
-            internal PublicGetEstimatedPriceBuilder(IAccelByteSdk sdk)
+            public PublicGetEstimatedPriceAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetEstimatedPriceBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetEstimatedPriceBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemIds                    
                 );
 
-                op.SetBaseFields<PublicGetEstimatedPriceBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetEstimatedPrice.Response Execute(
+            protected PublicGetEstimatedPrice.Response InternalExecute(
                 string namespace_,
                 string itemIds
             )
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetEstimatedPrice.Response> ExecuteAsync(
+            protected async Task<PublicGetEstimatedPrice.Response> InternalExecuteAsync(
                 string namespace_,
                 string itemIds
             )
@@ -120,7 +134,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetEstimatedPrice(PublicGetEstimatedPriceBuilder builder,
+        public class PublicGetEstimatedPriceBuilder : PublicGetEstimatedPriceAbstractBuilder<PublicGetEstimatedPriceBuilder>
+        {
+            public PublicGetEstimatedPriceBuilder() : base() { }
+
+            public PublicGetEstimatedPriceBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetEstimatedPrice.Response Execute(
+                string namespace_,
+                string itemIds
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    itemIds
+                );
+            }
+            public async Task<PublicGetEstimatedPrice.Response> ExecuteAsync(
+                string namespace_,
+                string itemIds
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    itemIds
+                );
+            }
+        }
+
+
+        public PublicGetEstimatedPrice(IPublicGetEstimatedPriceBuilder builder,
             string namespace_,
             string itemIds
         )
@@ -195,12 +238,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.EstimatedPriceInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.EstimatedPriceInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

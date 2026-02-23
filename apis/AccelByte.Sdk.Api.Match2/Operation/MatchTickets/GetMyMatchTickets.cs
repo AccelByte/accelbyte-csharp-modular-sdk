@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static GetMyMatchTicketsBuilder Builder { get => new GetMyMatchTicketsBuilder(); }
 
-        public class GetMyMatchTicketsBuilder
-            : OperationBuilder<GetMyMatchTicketsBuilder>
+        public interface IGetMyMatchTicketsBuilder
+        {
+
+            long? Limit { get; }
+
+            string? MatchPool { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetMyMatchTicketsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetMyMatchTicketsBuilder
+            where TImpl : GetMyMatchTicketsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
 
 
-            internal GetMyMatchTicketsBuilder() { }
+            public GetMyMatchTicketsAbstractBuilder() { }
 
-            internal GetMyMatchTicketsBuilder(IAccelByteSdk sdk)
+            public GetMyMatchTicketsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetMyMatchTicketsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetMyMatchTicketsBuilder SetMatchPool(string _matchPool)
+            public TImpl SetMatchPool(string _matchPool)
             {
                 MatchPool = _matchPool;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetMyMatchTicketsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetMyMatchTicketsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetMyMatchTickets.Response Execute(
+            protected GetMyMatchTickets.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetMyMatchTickets.Response> ExecuteAsync(
+            protected async Task<GetMyMatchTickets.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private GetMyMatchTickets(GetMyMatchTicketsBuilder builder,
+        public class GetMyMatchTicketsBuilder : GetMyMatchTicketsAbstractBuilder<GetMyMatchTicketsBuilder>
+        {
+            public GetMyMatchTicketsBuilder() : base() { }
+
+            public GetMyMatchTicketsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetMyMatchTickets.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetMyMatchTickets.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetMyMatchTickets(IGetMyMatchTicketsBuilder builder,
             string namespace_
         )
         {
@@ -200,22 +241,26 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiMatchTicketStatuses>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiMatchTicketStatuses>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

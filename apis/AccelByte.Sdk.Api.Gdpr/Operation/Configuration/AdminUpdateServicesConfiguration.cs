@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminUpdateServicesConfigurationBuilder Builder { get => new AdminUpdateServicesConfigurationBuilder(); }
 
-        public class AdminUpdateServicesConfigurationBuilder
-            : OperationBuilder<AdminUpdateServicesConfigurationBuilder>
+        public interface IAdminUpdateServicesConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminUpdateServicesConfigurationBuilder() { }
+        }
 
-            internal AdminUpdateServicesConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateServicesConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateServicesConfigurationBuilder
+            where TImpl : AdminUpdateServicesConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateServicesConfigurationAbstractBuilder() { }
+
+            public AdminUpdateServicesConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateServicesConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateServicesConfiguration.Response Execute(
+            protected AdminUpdateServicesConfiguration.Response InternalExecute(
                 DtoServiceConfigurationUpdateRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateServicesConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminUpdateServicesConfiguration.Response> InternalExecuteAsync(
                 DtoServiceConfigurationUpdateRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminUpdateServicesConfiguration(AdminUpdateServicesConfigurationBuilder builder,
+        public class AdminUpdateServicesConfigurationBuilder : AdminUpdateServicesConfigurationAbstractBuilder<AdminUpdateServicesConfigurationBuilder>
+        {
+            public AdminUpdateServicesConfigurationBuilder() : base() { }
+
+            public AdminUpdateServicesConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateServicesConfiguration.Response Execute(
+                DtoServiceConfigurationUpdateRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateServicesConfiguration.Response> ExecuteAsync(
+                DtoServiceConfigurationUpdateRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateServicesConfiguration(IAdminUpdateServicesConfigurationBuilder builder,
             DtoServiceConfigurationUpdateRequest body,
             string namespace_
         )
@@ -178,22 +217,26 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DtoServiceConfigurationUpdateRequest>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DtoServiceConfigurationUpdateRequest>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

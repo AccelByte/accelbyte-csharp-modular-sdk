@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminGetContentBulkByShareCodesV2Builder Builder { get => new AdminGetContentBulkByShareCodesV2Builder(); }
 
-        public class AdminGetContentBulkByShareCodesV2Builder
-            : OperationBuilder<AdminGetContentBulkByShareCodesV2Builder>
+        public interface IAdminGetContentBulkByShareCodesV2Builder
         {
 
 
 
 
 
-            internal AdminGetContentBulkByShareCodesV2Builder() { }
+        }
 
-            internal AdminGetContentBulkByShareCodesV2Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetContentBulkByShareCodesV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetContentBulkByShareCodesV2Builder
+            where TImpl : AdminGetContentBulkByShareCodesV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetContentBulkByShareCodesV2AbstractBuilder() { }
+
+            public AdminGetContentBulkByShareCodesV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetContentBulkByShareCodesV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetContentBulkByShareCodesV2.Response Execute(
+            protected AdminGetContentBulkByShareCodesV2.Response InternalExecute(
                 ModelsGetContentBulkByShareCodesRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetContentBulkByShareCodesV2.Response> ExecuteAsync(
+            protected async Task<AdminGetContentBulkByShareCodesV2.Response> InternalExecuteAsync(
                 ModelsGetContentBulkByShareCodesRequest body,
                 string namespace_
             )
@@ -103,7 +113,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.Payload);
             }
 
-            public AdminGetContentBulkByShareCodesV2.Response<T1> Execute<T1>(
+            protected AdminGetContentBulkByShareCodesV2.Response<T1> InternalExecute<T1>(
                 ModelsGetContentBulkByShareCodesRequest body,
                 string namespace_
             )
@@ -122,7 +132,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetContentBulkByShareCodesV2.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminGetContentBulkByShareCodesV2.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsGetContentBulkByShareCodesRequest body,
                 string namespace_
             )
@@ -143,7 +153,57 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminGetContentBulkByShareCodesV2(AdminGetContentBulkByShareCodesV2Builder builder,
+        public class AdminGetContentBulkByShareCodesV2Builder : AdminGetContentBulkByShareCodesV2AbstractBuilder<AdminGetContentBulkByShareCodesV2Builder>
+        {
+            public AdminGetContentBulkByShareCodesV2Builder() : base() { }
+
+            public AdminGetContentBulkByShareCodesV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetContentBulkByShareCodesV2.Response Execute(
+                ModelsGetContentBulkByShareCodesRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminGetContentBulkByShareCodesV2.Response> ExecuteAsync(
+                ModelsGetContentBulkByShareCodesRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+
+            public AdminGetContentBulkByShareCodesV2.Response<T1> Execute<T1>(
+                ModelsGetContentBulkByShareCodesRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminGetContentBulkByShareCodesV2.Response<T1>> ExecuteAsync<T1>(
+                ModelsGetContentBulkByShareCodesRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetContentBulkByShareCodesV2(IAdminGetContentBulkByShareCodesV2Builder builder,
             ModelsGetContentBulkByShareCodesRequest body,
             string namespace_
         )
@@ -231,27 +291,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponseV2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponseV2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -272,27 +337,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponseV2<T1>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsContentDownloadResponseV2<T1>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetBansTypeV3Builder Builder { get => new AdminGetBansTypeV3Builder(); }
 
-        public class AdminGetBansTypeV3Builder
-            : OperationBuilder<AdminGetBansTypeV3Builder>
+        public interface IAdminGetBansTypeV3Builder
         {
 
 
 
 
 
-            internal AdminGetBansTypeV3Builder() { }
+        }
 
-            internal AdminGetBansTypeV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetBansTypeV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetBansTypeV3Builder
+            where TImpl : AdminGetBansTypeV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetBansTypeV3AbstractBuilder() { }
+
+            public AdminGetBansTypeV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetBansTypeV3 op = new AdminGetBansTypeV3(this
                 );
 
-                op.SetBaseFields<AdminGetBansTypeV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetBansTypeV3.Response Execute(
+            protected AdminGetBansTypeV3.Response InternalExecute(
             )
             {
                 AdminGetBansTypeV3 op = Build(
@@ -77,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetBansTypeV3.Response> ExecuteAsync(
+            protected async Task<AdminGetBansTypeV3.Response> InternalExecuteAsync(
             )
             {
                 AdminGetBansTypeV3 op = Build(
@@ -94,7 +104,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetBansTypeV3(AdminGetBansTypeV3Builder builder
+        public class AdminGetBansTypeV3Builder : AdminGetBansTypeV3AbstractBuilder<AdminGetBansTypeV3Builder>
+        {
+            public AdminGetBansTypeV3Builder() : base() { }
+
+            public AdminGetBansTypeV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetBansTypeV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGetBansTypeV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGetBansTypeV3(IAdminGetBansTypeV3Builder builder
         )
         {
             
@@ -159,22 +190,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonBansV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonBansV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

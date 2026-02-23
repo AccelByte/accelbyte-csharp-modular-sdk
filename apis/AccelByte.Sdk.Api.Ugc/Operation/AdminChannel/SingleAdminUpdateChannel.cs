@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static SingleAdminUpdateChannelBuilder Builder { get => new SingleAdminUpdateChannelBuilder(); }
 
-        public class SingleAdminUpdateChannelBuilder
-            : OperationBuilder<SingleAdminUpdateChannelBuilder>
+        public interface ISingleAdminUpdateChannelBuilder
         {
 
 
 
 
 
-            internal SingleAdminUpdateChannelBuilder() { }
+        }
 
-            internal SingleAdminUpdateChannelBuilder(IAccelByteSdk sdk)
+        public abstract class SingleAdminUpdateChannelAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISingleAdminUpdateChannelBuilder
+            where TImpl : SingleAdminUpdateChannelAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SingleAdminUpdateChannelAbstractBuilder() { }
+
+            public SingleAdminUpdateChannelAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SingleAdminUpdateChannelBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SingleAdminUpdateChannel.Response Execute(
+            protected SingleAdminUpdateChannel.Response InternalExecute(
                 ModelsUpdateChannelRequest body,
                 string channelId,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SingleAdminUpdateChannel.Response> ExecuteAsync(
+            protected async Task<SingleAdminUpdateChannel.Response> InternalExecuteAsync(
                 ModelsUpdateChannelRequest body,
                 string channelId,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private SingleAdminUpdateChannel(SingleAdminUpdateChannelBuilder builder,
+        public class SingleAdminUpdateChannelBuilder : SingleAdminUpdateChannelAbstractBuilder<SingleAdminUpdateChannelBuilder>
+        {
+            public SingleAdminUpdateChannelBuilder() : base() { }
+
+            public SingleAdminUpdateChannelBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SingleAdminUpdateChannel.Response Execute(
+                ModelsUpdateChannelRequest body,
+                string channelId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    channelId,
+                    namespace_
+                );
+            }
+            public async Task<SingleAdminUpdateChannel.Response> ExecuteAsync(
+                ModelsUpdateChannelRequest body,
+                string channelId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    channelId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SingleAdminUpdateChannel(ISingleAdminUpdateChannelBuilder builder,
             ModelsUpdateChannelRequest body,
             string channelId,
             string namespace_
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

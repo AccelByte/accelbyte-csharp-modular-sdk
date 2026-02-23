@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetRewardByCodeBuilder Builder { get => new GetRewardByCodeBuilder(); }
 
-        public class GetRewardByCodeBuilder
-            : OperationBuilder<GetRewardByCodeBuilder>
+        public interface IGetRewardByCodeBuilder
         {
 
 
 
 
 
-            internal GetRewardByCodeBuilder() { }
+        }
 
-            internal GetRewardByCodeBuilder(IAccelByteSdk sdk)
+        public abstract class GetRewardByCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRewardByCodeBuilder
+            where TImpl : GetRewardByCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetRewardByCodeAbstractBuilder() { }
+
+            public GetRewardByCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     rewardCode                    
                 );
 
-                op.SetBaseFields<GetRewardByCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetRewardByCode.Response Execute(
+            protected GetRewardByCode.Response InternalExecute(
                 string namespace_,
                 string rewardCode
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRewardByCode.Response> ExecuteAsync(
+            protected async Task<GetRewardByCode.Response> InternalExecuteAsync(
                 string namespace_,
                 string rewardCode
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetRewardByCode(GetRewardByCodeBuilder builder,
+        public class GetRewardByCodeBuilder : GetRewardByCodeAbstractBuilder<GetRewardByCodeBuilder>
+        {
+            public GetRewardByCodeBuilder() : base() { }
+
+            public GetRewardByCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetRewardByCode.Response Execute(
+                string namespace_,
+                string rewardCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    rewardCode
+                );
+            }
+            public async Task<GetRewardByCode.Response> ExecuteAsync(
+                string namespace_,
+                string rewardCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    rewardCode
+                );
+            }
+        }
+
+
+        public GetRewardByCode(IGetRewardByCodeBuilder builder,
             string namespace_,
             string rewardCode
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RewardInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RewardInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

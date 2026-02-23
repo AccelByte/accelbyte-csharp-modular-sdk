@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeletePublishedStoreBuilder Builder { get => new DeletePublishedStoreBuilder(); }
 
-        public class DeletePublishedStoreBuilder
-            : OperationBuilder<DeletePublishedStoreBuilder>
+        public interface IDeletePublishedStoreBuilder
         {
 
 
 
 
 
-            internal DeletePublishedStoreBuilder() { }
+        }
 
-            internal DeletePublishedStoreBuilder(IAccelByteSdk sdk)
+        public abstract class DeletePublishedStoreAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeletePublishedStoreBuilder
+            where TImpl : DeletePublishedStoreAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeletePublishedStoreAbstractBuilder() { }
+
+            public DeletePublishedStoreAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeletePublishedStoreBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeletePublishedStore.Response Execute(
+            protected DeletePublishedStore.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeletePublishedStore.Response> ExecuteAsync(
+            protected async Task<DeletePublishedStore.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeletePublishedStore(DeletePublishedStoreBuilder builder,
+        public class DeletePublishedStoreBuilder : DeletePublishedStoreAbstractBuilder<DeletePublishedStoreBuilder>
+        {
+            public DeletePublishedStoreBuilder() : base() { }
+
+            public DeletePublishedStoreBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeletePublishedStore.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeletePublishedStore.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeletePublishedStore(IDeletePublishedStoreBuilder builder,
             string namespace_
         )
         {
@@ -165,12 +200,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

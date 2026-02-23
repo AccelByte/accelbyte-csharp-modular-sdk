@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static QueryUserExpGrantHistoryTagBuilder Builder { get => new QueryUserExpGrantHistoryTagBuilder(); }
 
-        public class QueryUserExpGrantHistoryTagBuilder
-            : OperationBuilder<QueryUserExpGrantHistoryTagBuilder>
+        public interface IQueryUserExpGrantHistoryTagBuilder
+        {
+
+            string? SeasonId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserExpGrantHistoryTagAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserExpGrantHistoryTagBuilder
+            where TImpl : QueryUserExpGrantHistoryTagAbstractBuilder<TImpl>
         {
 
             public string? SeasonId { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal QueryUserExpGrantHistoryTagBuilder() { }
+            public QueryUserExpGrantHistoryTagAbstractBuilder() { }
 
-            internal QueryUserExpGrantHistoryTagBuilder(IAccelByteSdk sdk)
+            public QueryUserExpGrantHistoryTagAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserExpGrantHistoryTagBuilder SetSeasonId(string _seasonId)
+            public TImpl SetSeasonId(string _seasonId)
             {
                 SeasonId = _seasonId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserExpGrantHistoryTagBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserExpGrantHistoryTag.Response Execute(
+            protected QueryUserExpGrantHistoryTag.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -96,7 +108,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserExpGrantHistoryTag.Response> ExecuteAsync(
+            protected async Task<QueryUserExpGrantHistoryTag.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -117,7 +129,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private QueryUserExpGrantHistoryTag(QueryUserExpGrantHistoryTagBuilder builder,
+        public class QueryUserExpGrantHistoryTagBuilder : QueryUserExpGrantHistoryTagAbstractBuilder<QueryUserExpGrantHistoryTagBuilder>
+        {
+            public QueryUserExpGrantHistoryTagBuilder() : base() { }
+
+            public QueryUserExpGrantHistoryTagBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserExpGrantHistoryTag.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserExpGrantHistoryTag.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserExpGrantHistoryTag(IQueryUserExpGrantHistoryTagBuilder builder,
             string namespace_,
             string userId
         )
@@ -189,12 +230,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ReasonTagsResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ReasonTagsResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static SendPartyTemplatedNotificationV1AdminBuilder Builder { get => new SendPartyTemplatedNotificationV1AdminBuilder(); }
 
-        public class SendPartyTemplatedNotificationV1AdminBuilder
-            : OperationBuilder<SendPartyTemplatedNotificationV1AdminBuilder>
+        public interface ISendPartyTemplatedNotificationV1AdminBuilder
         {
 
 
 
 
 
-            internal SendPartyTemplatedNotificationV1AdminBuilder() { }
+        }
 
-            internal SendPartyTemplatedNotificationV1AdminBuilder(IAccelByteSdk sdk)
+        public abstract class SendPartyTemplatedNotificationV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISendPartyTemplatedNotificationV1AdminBuilder
+            where TImpl : SendPartyTemplatedNotificationV1AdminAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SendPartyTemplatedNotificationV1AdminAbstractBuilder() { }
+
+            public SendPartyTemplatedNotificationV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,12 +78,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     partyId                    
                 );
 
-                op.SetBaseFields<SendPartyTemplatedNotificationV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public SendPartyTemplatedNotificationV1Admin.Response Execute(
+            protected SendPartyTemplatedNotificationV1Admin.Response InternalExecute(
                 ModelNotificationWithTemplateRequestV1 body,
                 string namespace_,
                 string partyId
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SendPartyTemplatedNotificationV1Admin.Response> ExecuteAsync(
+            protected async Task<SendPartyTemplatedNotificationV1Admin.Response> InternalExecuteAsync(
                 ModelNotificationWithTemplateRequestV1 body,
                 string namespace_,
                 string partyId
@@ -117,7 +127,41 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private SendPartyTemplatedNotificationV1Admin(SendPartyTemplatedNotificationV1AdminBuilder builder,
+        public class SendPartyTemplatedNotificationV1AdminBuilder : SendPartyTemplatedNotificationV1AdminAbstractBuilder<SendPartyTemplatedNotificationV1AdminBuilder>
+        {
+            public SendPartyTemplatedNotificationV1AdminBuilder() : base() { }
+
+            public SendPartyTemplatedNotificationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public SendPartyTemplatedNotificationV1Admin.Response Execute(
+                ModelNotificationWithTemplateRequestV1 body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+            public async Task<SendPartyTemplatedNotificationV1Admin.Response> ExecuteAsync(
+                ModelNotificationWithTemplateRequestV1 body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+        }
+
+
+        public SendPartyTemplatedNotificationV1Admin(ISendPartyTemplatedNotificationV1AdminBuilder builder,
             ModelNotificationWithTemplateRequestV1 body,
             string namespace_,
             string partyId
@@ -197,22 +241,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

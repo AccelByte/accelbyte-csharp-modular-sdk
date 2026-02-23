@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -43,17 +43,27 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static ClaimGlobalAchievementRewardBuilder Builder { get => new ClaimGlobalAchievementRewardBuilder(); }
 
-        public class ClaimGlobalAchievementRewardBuilder
-            : OperationBuilder<ClaimGlobalAchievementRewardBuilder>
+        public interface IClaimGlobalAchievementRewardBuilder
         {
 
 
 
 
 
-            internal ClaimGlobalAchievementRewardBuilder() { }
+        }
 
-            internal ClaimGlobalAchievementRewardBuilder(IAccelByteSdk sdk)
+        public abstract class ClaimGlobalAchievementRewardAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IClaimGlobalAchievementRewardBuilder
+            where TImpl : ClaimGlobalAchievementRewardAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ClaimGlobalAchievementRewardAbstractBuilder() { }
+
+            public ClaimGlobalAchievementRewardAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -75,11 +85,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ClaimGlobalAchievementRewardBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ClaimGlobalAchievementReward.Response Execute(
+            protected ClaimGlobalAchievementReward.Response InternalExecute(
                 string achievementCode,
                 string namespace_,
                 string userId
@@ -100,7 +110,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ClaimGlobalAchievementReward.Response> ExecuteAsync(
+            protected async Task<ClaimGlobalAchievementReward.Response> InternalExecuteAsync(
                 string achievementCode,
                 string namespace_,
                 string userId
@@ -123,7 +133,40 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private ClaimGlobalAchievementReward(ClaimGlobalAchievementRewardBuilder builder,
+        public class ClaimGlobalAchievementRewardBuilder : ClaimGlobalAchievementRewardAbstractBuilder<ClaimGlobalAchievementRewardBuilder>
+        {
+            public ClaimGlobalAchievementRewardBuilder() : base() { }
+
+            public ClaimGlobalAchievementRewardBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ClaimGlobalAchievementReward.Response Execute(
+                string achievementCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    achievementCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ClaimGlobalAchievementReward.Response> ExecuteAsync(
+                string achievementCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    achievementCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ClaimGlobalAchievementReward(IClaimGlobalAchievementRewardBuilder builder,
             string achievementCode,
             string namespace_,
             string userId
@@ -201,17 +244,20 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

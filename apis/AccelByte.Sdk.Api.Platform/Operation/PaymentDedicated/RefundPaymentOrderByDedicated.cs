@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -173,17 +173,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RefundPaymentOrderByDedicatedBuilder Builder { get => new RefundPaymentOrderByDedicatedBuilder(); }
 
-        public class RefundPaymentOrderByDedicatedBuilder
-            : OperationBuilder<RefundPaymentOrderByDedicatedBuilder>
+        public interface IRefundPaymentOrderByDedicatedBuilder
         {
 
 
 
 
 
-            internal RefundPaymentOrderByDedicatedBuilder() { }
+        }
 
-            internal RefundPaymentOrderByDedicatedBuilder(IAccelByteSdk sdk)
+        public abstract class RefundPaymentOrderByDedicatedAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRefundPaymentOrderByDedicatedBuilder
+            where TImpl : RefundPaymentOrderByDedicatedAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RefundPaymentOrderByDedicatedAbstractBuilder() { }
+
+            public RefundPaymentOrderByDedicatedAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -205,11 +215,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentOrderNo                    
                 );
 
-                op.SetBaseFields<RefundPaymentOrderByDedicatedBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RefundPaymentOrderByDedicated.Response Execute(
+            protected RefundPaymentOrderByDedicated.Response InternalExecute(
                 PaymentOrderRefund body,
                 string namespace_,
                 string paymentOrderNo
@@ -230,7 +240,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RefundPaymentOrderByDedicated.Response> ExecuteAsync(
+            protected async Task<RefundPaymentOrderByDedicated.Response> InternalExecuteAsync(
                 PaymentOrderRefund body,
                 string namespace_,
                 string paymentOrderNo
@@ -253,7 +263,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RefundPaymentOrderByDedicated(RefundPaymentOrderByDedicatedBuilder builder,
+        public class RefundPaymentOrderByDedicatedBuilder : RefundPaymentOrderByDedicatedAbstractBuilder<RefundPaymentOrderByDedicatedBuilder>
+        {
+            public RefundPaymentOrderByDedicatedBuilder() : base() { }
+
+            public RefundPaymentOrderByDedicatedBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RefundPaymentOrderByDedicated.Response Execute(
+                PaymentOrderRefund body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+            public async Task<RefundPaymentOrderByDedicated.Response> ExecuteAsync(
+                PaymentOrderRefund body,
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+        }
+
+
+        public RefundPaymentOrderByDedicated(IRefundPaymentOrderByDedicatedBuilder builder,
             PaymentOrderRefund body,
             string namespace_,
             string paymentOrderNo
@@ -330,22 +373,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderRefundResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderRefundResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

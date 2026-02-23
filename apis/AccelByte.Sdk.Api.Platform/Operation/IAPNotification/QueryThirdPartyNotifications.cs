@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryThirdPartyNotificationsBuilder Builder { get => new QueryThirdPartyNotificationsBuilder(); }
 
-        public class QueryThirdPartyNotificationsBuilder
-            : OperationBuilder<QueryThirdPartyNotificationsBuilder>
+        public interface IQueryThirdPartyNotificationsBuilder
+        {
+
+            string? EndDate { get; }
+
+            string? ExternalId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryThirdPartyNotificationsSource? Source { get; }
+
+            string? StartDate { get; }
+
+            QueryThirdPartyNotificationsStatus? Status { get; }
+
+            string? Type { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryThirdPartyNotificationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryThirdPartyNotificationsBuilder
+            where TImpl : QueryThirdPartyNotificationsAbstractBuilder<TImpl>
         {
 
             public string? EndDate { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryThirdPartyNotificationsBuilder() { }
+            public QueryThirdPartyNotificationsAbstractBuilder() { }
 
-            internal QueryThirdPartyNotificationsBuilder(IAccelByteSdk sdk)
+            public QueryThirdPartyNotificationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryThirdPartyNotificationsBuilder SetEndDate(string _endDate)
+            public TImpl SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetExternalId(string _externalId)
+            public TImpl SetExternalId(string _externalId)
             {
                 ExternalId = _externalId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetSource(QueryThirdPartyNotificationsSource _source)
+            public TImpl SetSource(QueryThirdPartyNotificationsSource _source)
             {
                 Source = _source;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetStartDate(string _startDate)
+            public TImpl SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetStatus(QueryThirdPartyNotificationsStatus _status)
+            public TImpl SetStatus(QueryThirdPartyNotificationsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryThirdPartyNotificationsBuilder SetType(string _type)
+            public TImpl SetType(string _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -125,11 +151,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryThirdPartyNotificationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryThirdPartyNotifications.Response Execute(
+            protected QueryThirdPartyNotifications.Response InternalExecute(
                 string namespace_
             )
             {
@@ -146,7 +172,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryThirdPartyNotifications.Response> ExecuteAsync(
+            protected async Task<QueryThirdPartyNotifications.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -165,7 +191,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryThirdPartyNotifications(QueryThirdPartyNotificationsBuilder builder,
+        public class QueryThirdPartyNotificationsBuilder : QueryThirdPartyNotificationsAbstractBuilder<QueryThirdPartyNotificationsBuilder>
+        {
+            public QueryThirdPartyNotificationsBuilder() : base() { }
+
+            public QueryThirdPartyNotificationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryThirdPartyNotifications.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryThirdPartyNotifications.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryThirdPartyNotifications(IQueryThirdPartyNotificationsBuilder builder,
             string namespace_
         )
         {
@@ -252,7 +303,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.NotificationPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.NotificationPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

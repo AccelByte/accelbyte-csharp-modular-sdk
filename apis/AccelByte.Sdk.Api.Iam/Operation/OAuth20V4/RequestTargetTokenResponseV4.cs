@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RequestTargetTokenResponseV4Builder Builder { get => new RequestTargetTokenResponseV4Builder(); }
 
-        public class RequestTargetTokenResponseV4Builder
-            : OperationBuilder<RequestTargetTokenResponseV4Builder>
+        public interface IRequestTargetTokenResponseV4Builder
+        {
+
+
+
+            string? AdditionalData { get; }
+
+
+
+        }
+
+        public abstract class RequestTargetTokenResponseV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRequestTargetTokenResponseV4Builder
+            where TImpl : RequestTargetTokenResponseV4AbstractBuilder<TImpl>
         {
 
 
@@ -42,9 +54,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal RequestTargetTokenResponseV4Builder() { }
+            public RequestTargetTokenResponseV4AbstractBuilder() { }
 
-            internal RequestTargetTokenResponseV4Builder(IAccelByteSdk sdk)
+            public RequestTargetTokenResponseV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -52,10 +64,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public RequestTargetTokenResponseV4Builder SetAdditionalData(string _additionalData)
+            public TImpl SetAdditionalData(string _additionalData)
             {
                 AdditionalData = _additionalData;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     code                    
                 );
 
-                op.SetBaseFields<RequestTargetTokenResponseV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RequestTargetTokenResponseV4.Response Execute(
+            protected RequestTargetTokenResponseV4.Response InternalExecute(
                 string code
             )
             {
@@ -89,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RequestTargetTokenResponseV4.Response> ExecuteAsync(
+            protected async Task<RequestTargetTokenResponseV4.Response> InternalExecuteAsync(
                 string code
             )
             {
@@ -108,7 +120,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RequestTargetTokenResponseV4(RequestTargetTokenResponseV4Builder builder,
+        public class RequestTargetTokenResponseV4Builder : RequestTargetTokenResponseV4AbstractBuilder<RequestTargetTokenResponseV4Builder>
+        {
+            public RequestTargetTokenResponseV4Builder() : base() { }
+
+            public RequestTargetTokenResponseV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RequestTargetTokenResponseV4.Response Execute(
+                string code
+            )
+            {
+                return InternalExecute(
+                    code
+                );
+            }
+            public async Task<RequestTargetTokenResponseV4.Response> ExecuteAsync(
+                string code
+            )
+            {
+                return await InternalExecuteAsync(
+                    code
+                );
+            }
+        }
+
+
+        public RequestTargetTokenResponseV4(IRequestTargetTokenResponseV4Builder builder,
             string code
         )
         {
@@ -174,7 +211,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

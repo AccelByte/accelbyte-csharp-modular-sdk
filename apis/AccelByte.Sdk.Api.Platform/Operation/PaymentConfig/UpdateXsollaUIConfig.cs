@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateXsollaUIConfigBuilder Builder { get => new UpdateXsollaUIConfigBuilder(); }
 
-        public class UpdateXsollaUIConfigBuilder
-            : OperationBuilder<UpdateXsollaUIConfigBuilder>
+        public interface IUpdateXsollaUIConfigBuilder
         {
 
 
 
 
 
-            internal UpdateXsollaUIConfigBuilder() { }
+        }
 
-            internal UpdateXsollaUIConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateXsollaUIConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateXsollaUIConfigBuilder
+            where TImpl : UpdateXsollaUIConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateXsollaUIConfigAbstractBuilder() { }
+
+            public UpdateXsollaUIConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateXsollaUIConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateXsollaUIConfig.Response Execute(
+            protected UpdateXsollaUIConfig.Response InternalExecute(
                 XsollaPaywallConfigRequest body,
                 string id
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateXsollaUIConfig.Response> ExecuteAsync(
+            protected async Task<UpdateXsollaUIConfig.Response> InternalExecuteAsync(
                 XsollaPaywallConfigRequest body,
                 string id
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateXsollaUIConfig(UpdateXsollaUIConfigBuilder builder,
+        public class UpdateXsollaUIConfigBuilder : UpdateXsollaUIConfigAbstractBuilder<UpdateXsollaUIConfigBuilder>
+        {
+            public UpdateXsollaUIConfigBuilder() : base() { }
+
+            public UpdateXsollaUIConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateXsollaUIConfig.Response Execute(
+                XsollaPaywallConfigRequest body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateXsollaUIConfig.Response> ExecuteAsync(
+                XsollaPaywallConfigRequest body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateXsollaUIConfig(IUpdateXsollaUIConfigBuilder builder,
             XsollaPaywallConfigRequest body,
             string id
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

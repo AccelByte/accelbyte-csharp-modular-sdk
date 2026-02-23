@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestWxPayConfigBuilder Builder { get => new TestWxPayConfigBuilder(); }
 
-        public class TestWxPayConfigBuilder
-            : OperationBuilder<TestWxPayConfigBuilder>
+        public interface ITestWxPayConfigBuilder
         {
 
 
 
 
 
-            internal TestWxPayConfigBuilder() { }
+        }
 
-            internal TestWxPayConfigBuilder(IAccelByteSdk sdk)
+        public abstract class TestWxPayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestWxPayConfigBuilder
+            where TImpl : TestWxPayConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public TestWxPayConfigAbstractBuilder() { }
+
+            public TestWxPayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestWxPayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestWxPayConfig.Response Execute(
+            protected TestWxPayConfig.Response InternalExecute(
                 WxPayConfigRequest body
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestWxPayConfig.Response> ExecuteAsync(
+            protected async Task<TestWxPayConfig.Response> InternalExecuteAsync(
                 WxPayConfigRequest body
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestWxPayConfig(TestWxPayConfigBuilder builder,
+        public class TestWxPayConfigBuilder : TestWxPayConfigAbstractBuilder<TestWxPayConfigBuilder>
+        {
+            public TestWxPayConfigBuilder() : base() { }
+
+            public TestWxPayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestWxPayConfig.Response Execute(
+                WxPayConfigRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestWxPayConfig.Response> ExecuteAsync(
+                WxPayConfigRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestWxPayConfig(ITestWxPayConfigBuilder builder,
             WxPayConfigRequest body
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

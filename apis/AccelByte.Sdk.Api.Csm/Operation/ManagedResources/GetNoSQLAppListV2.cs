@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,8 +42,26 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetNoSQLAppListV2Builder Builder { get => new GetNoSQLAppListV2Builder(); }
 
-        public class GetNoSQLAppListV2Builder
-            : OperationBuilder<GetNoSQLAppListV2Builder>
+        public interface IGetNoSQLAppListV2Builder
+        {
+
+            string? AppName { get; }
+
+            long? Limit { get; }
+
+            string? Namespace { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetNoSQLAppListV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetNoSQLAppListV2Builder
+            where TImpl : GetNoSQLAppListV2AbstractBuilder<TImpl>
         {
 
             public string? AppName { get; set; }
@@ -58,36 +76,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal GetNoSQLAppListV2Builder() { }
+            public GetNoSQLAppListV2AbstractBuilder() { }
 
-            internal GetNoSQLAppListV2Builder(IAccelByteSdk sdk)
+            public GetNoSQLAppListV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetNoSQLAppListV2Builder SetAppName(string _appName)
+            public TImpl SetAppName(string _appName)
             {
                 AppName = _appName;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetNoSQLAppListV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetNoSQLAppListV2Builder SetNamespace(string _namespace_)
+            public TImpl SetNamespace(string _namespace_)
             {
                 Namespace = _namespace_;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetNoSQLAppListV2Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -104,11 +122,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     studioName                    
                 );
 
-                op.SetBaseFields<GetNoSQLAppListV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetNoSQLAppListV2.Response Execute(
+            protected GetNoSQLAppListV2.Response InternalExecute(
                 string resourceId,
                 string studioName
             )
@@ -127,7 +145,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetNoSQLAppListV2.Response> ExecuteAsync(
+            protected async Task<GetNoSQLAppListV2.Response> InternalExecuteAsync(
                 string resourceId,
                 string studioName
             )
@@ -148,7 +166,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetNoSQLAppListV2(GetNoSQLAppListV2Builder builder,
+        public class GetNoSQLAppListV2Builder : GetNoSQLAppListV2AbstractBuilder<GetNoSQLAppListV2Builder>
+        {
+            public GetNoSQLAppListV2Builder() : base() { }
+
+            public GetNoSQLAppListV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetNoSQLAppListV2.Response Execute(
+                string resourceId,
+                string studioName
+            )
+            {
+                return InternalExecute(
+                    resourceId,
+                    studioName
+                );
+            }
+            public async Task<GetNoSQLAppListV2.Response> ExecuteAsync(
+                string resourceId,
+                string studioName
+            )
+            {
+                return await InternalExecuteAsync(
+                    resourceId,
+                    studioName
+                );
+            }
+        }
+
+
+        public GetNoSQLAppListV2(IGetNoSQLAppListV2Builder builder,
             string resourceId,
             string studioName
         )
@@ -235,27 +282,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelNoSQLAppListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelNoSQLAppListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

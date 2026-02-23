@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminListAdminUserRecordsV1Builder Builder { get => new AdminListAdminUserRecordsV1Builder(); }
 
-        public class AdminListAdminUserRecordsV1Builder
-            : OperationBuilder<AdminListAdminUserRecordsV1Builder>
+        public interface IAdminListAdminUserRecordsV1Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? Query { get; }
+
+            List<string>? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListAdminUserRecordsV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListAdminUserRecordsV1Builder
+            where TImpl : AdminListAdminUserRecordsV1AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
 
 
-            internal AdminListAdminUserRecordsV1Builder() { }
+            public AdminListAdminUserRecordsV1AbstractBuilder() { }
 
-            internal AdminListAdminUserRecordsV1Builder(IAccelByteSdk sdk)
+            public AdminListAdminUserRecordsV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListAdminUserRecordsV1Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListAdminUserRecordsV1Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListAdminUserRecordsV1Builder SetQuery(string _query)
+            public TImpl SetQuery(string _query)
             {
                 Query = _query;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListAdminUserRecordsV1Builder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminListAdminUserRecordsV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListAdminUserRecordsV1.Response Execute(
+            protected AdminListAdminUserRecordsV1.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListAdminUserRecordsV1.Response> ExecuteAsync(
+            protected async Task<AdminListAdminUserRecordsV1.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminListAdminUserRecordsV1(AdminListAdminUserRecordsV1Builder builder,
+        public class AdminListAdminUserRecordsV1Builder : AdminListAdminUserRecordsV1AbstractBuilder<AdminListAdminUserRecordsV1Builder>
+        {
+            public AdminListAdminUserRecordsV1Builder() : base() { }
+
+            public AdminListAdminUserRecordsV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListAdminUserRecordsV1.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminListAdminUserRecordsV1.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminListAdminUserRecordsV1(IAdminListAdminUserRecordsV1Builder builder,
             string namespace_,
             string userId
         )
@@ -225,27 +272,32 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsListAdminPlayerRecordKeysResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsListAdminPlayerRecordKeysResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

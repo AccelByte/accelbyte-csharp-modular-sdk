@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAllLegalPoliciesBuilder Builder { get => new RetrieveAllLegalPoliciesBuilder(); }
 
-        public class RetrieveAllLegalPoliciesBuilder
-            : OperationBuilder<RetrieveAllLegalPoliciesBuilder>
+        public interface IRetrieveAllLegalPoliciesBuilder
+        {
+
+            bool? VisibleOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveAllLegalPoliciesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAllLegalPoliciesBuilder
+            where TImpl : RetrieveAllLegalPoliciesAbstractBuilder<TImpl>
         {
 
             public bool? VisibleOnly { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveAllLegalPoliciesBuilder() { }
+            public RetrieveAllLegalPoliciesAbstractBuilder() { }
 
-            internal RetrieveAllLegalPoliciesBuilder(IAccelByteSdk sdk)
+            public RetrieveAllLegalPoliciesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveAllLegalPoliciesBuilder SetVisibleOnly(bool _visibleOnly)
+            public TImpl SetVisibleOnly(bool _visibleOnly)
             {
                 VisibleOnly = _visibleOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -64,11 +76,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 RetrieveAllLegalPolicies op = new RetrieveAllLegalPolicies(this
                 );
 
-                op.SetBaseFields<RetrieveAllLegalPoliciesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAllLegalPolicies.Response Execute(
+            protected RetrieveAllLegalPolicies.Response InternalExecute(
             )
             {
                 RetrieveAllLegalPolicies op = Build(
@@ -83,7 +95,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAllLegalPolicies.Response> ExecuteAsync(
+            protected async Task<RetrieveAllLegalPolicies.Response> InternalExecuteAsync(
             )
             {
                 RetrieveAllLegalPolicies op = Build(
@@ -100,7 +112,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAllLegalPolicies(RetrieveAllLegalPoliciesBuilder builder
+        public class RetrieveAllLegalPoliciesBuilder : RetrieveAllLegalPoliciesAbstractBuilder<RetrieveAllLegalPoliciesBuilder>
+        {
+            public RetrieveAllLegalPoliciesBuilder() : base() { }
+
+            public RetrieveAllLegalPoliciesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAllLegalPolicies.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<RetrieveAllLegalPolicies.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public RetrieveAllLegalPolicies(IRetrieveAllLegalPoliciesBuilder builder
         )
         {
             
@@ -162,7 +195,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

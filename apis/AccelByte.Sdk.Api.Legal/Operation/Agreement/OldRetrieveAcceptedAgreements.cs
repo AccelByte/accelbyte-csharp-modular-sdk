@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveAcceptedAgreementsBuilder Builder { get => new OldRetrieveAcceptedAgreementsBuilder(); }
 
-        public class OldRetrieveAcceptedAgreementsBuilder
-            : OperationBuilder<OldRetrieveAcceptedAgreementsBuilder>
+        public interface IOldRetrieveAcceptedAgreementsBuilder
         {
 
 
 
 
 
-            internal OldRetrieveAcceptedAgreementsBuilder() { }
+        }
 
-            internal OldRetrieveAcceptedAgreementsBuilder(IAccelByteSdk sdk)
+        public abstract class OldRetrieveAcceptedAgreementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveAcceptedAgreementsBuilder
+            where TImpl : OldRetrieveAcceptedAgreementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public OldRetrieveAcceptedAgreementsAbstractBuilder() { }
+
+            public OldRetrieveAcceptedAgreementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<OldRetrieveAcceptedAgreementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveAcceptedAgreements.Response Execute(
+            protected OldRetrieveAcceptedAgreements.Response InternalExecute(
                 string userId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveAcceptedAgreements.Response> ExecuteAsync(
+            protected async Task<OldRetrieveAcceptedAgreements.Response> InternalExecuteAsync(
                 string userId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveAcceptedAgreements(OldRetrieveAcceptedAgreementsBuilder builder,
+        public class OldRetrieveAcceptedAgreementsBuilder : OldRetrieveAcceptedAgreementsAbstractBuilder<OldRetrieveAcceptedAgreementsBuilder>
+        {
+            public OldRetrieveAcceptedAgreementsBuilder() : base() { }
+
+            public OldRetrieveAcceptedAgreementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveAcceptedAgreements.Response Execute(
+                string userId
+            )
+            {
+                return InternalExecute(
+                    userId
+                );
+            }
+            public async Task<OldRetrieveAcceptedAgreements.Response> ExecuteAsync(
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    userId
+                );
+            }
+        }
+
+
+        public OldRetrieveAcceptedAgreements(IOldRetrieveAcceptedAgreementsBuilder builder,
             string userId
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveAcceptedAgreementResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

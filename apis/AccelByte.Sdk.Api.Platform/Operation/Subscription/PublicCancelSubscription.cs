@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicCancelSubscriptionBuilder Builder { get => new PublicCancelSubscriptionBuilder(); }
 
-        public class PublicCancelSubscriptionBuilder
-            : OperationBuilder<PublicCancelSubscriptionBuilder>
+        public interface IPublicCancelSubscriptionBuilder
         {
 
 
 
 
 
-            internal PublicCancelSubscriptionBuilder() { }
+        }
 
-            internal PublicCancelSubscriptionBuilder(IAccelByteSdk sdk)
+        public abstract class PublicCancelSubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCancelSubscriptionBuilder
+            where TImpl : PublicCancelSubscriptionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicCancelSubscriptionAbstractBuilder() { }
+
+            public PublicCancelSubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicCancelSubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicCancelSubscription.Response Execute(
+            protected PublicCancelSubscription.Response InternalExecute(
                 CancelRequest body,
                 string namespace_,
                 string subscriptionId,
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCancelSubscription.Response> ExecuteAsync(
+            protected async Task<PublicCancelSubscription.Response> InternalExecuteAsync(
                 CancelRequest body,
                 string namespace_,
                 string subscriptionId,
@@ -120,7 +130,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicCancelSubscription(PublicCancelSubscriptionBuilder builder,
+        public class PublicCancelSubscriptionBuilder : PublicCancelSubscriptionAbstractBuilder<PublicCancelSubscriptionBuilder>
+        {
+            public PublicCancelSubscriptionBuilder() : base() { }
+
+            public PublicCancelSubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicCancelSubscription.Response Execute(
+                CancelRequest body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<PublicCancelSubscription.Response> ExecuteAsync(
+                CancelRequest body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicCancelSubscription(IPublicCancelSubscriptionBuilder builder,
             CancelRequest body,
             string namespace_,
             string subscriptionId,
@@ -199,17 +246,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

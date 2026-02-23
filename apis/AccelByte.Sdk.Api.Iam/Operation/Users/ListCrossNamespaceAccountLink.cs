@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static ListCrossNamespaceAccountLinkBuilder Builder { get => new ListCrossNamespaceAccountLinkBuilder(); }
 
-        public class ListCrossNamespaceAccountLinkBuilder
-            : OperationBuilder<ListCrossNamespaceAccountLinkBuilder>
+        public interface IListCrossNamespaceAccountLinkBuilder
+        {
+
+
+
+            string? PlatformId { get; }
+
+
+
+        }
+
+        public abstract class ListCrossNamespaceAccountLinkAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListCrossNamespaceAccountLinkBuilder
+            where TImpl : ListCrossNamespaceAccountLinkAbstractBuilder<TImpl>
         {
 
 
@@ -47,9 +59,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal ListCrossNamespaceAccountLinkBuilder() { }
+            public ListCrossNamespaceAccountLinkAbstractBuilder() { }
 
-            internal ListCrossNamespaceAccountLinkBuilder(IAccelByteSdk sdk)
+            public ListCrossNamespaceAccountLinkAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,10 +69,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public ListCrossNamespaceAccountLinkBuilder SetPlatformId(string _platformId)
+            public TImpl SetPlatformId(string _platformId)
             {
                 PlatformId = _platformId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -77,12 +89,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ListCrossNamespaceAccountLinkBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public ListCrossNamespaceAccountLink.Response Execute(
+            protected ListCrossNamespaceAccountLink.Response InternalExecute(
                 string linkingToken,
                 string namespace_,
                 string userId
@@ -103,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListCrossNamespaceAccountLink.Response> ExecuteAsync(
+            protected async Task<ListCrossNamespaceAccountLink.Response> InternalExecuteAsync(
                 string linkingToken,
                 string namespace_,
                 string userId
@@ -126,7 +138,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private ListCrossNamespaceAccountLink(ListCrossNamespaceAccountLinkBuilder builder,
+        public class ListCrossNamespaceAccountLinkBuilder : ListCrossNamespaceAccountLinkAbstractBuilder<ListCrossNamespaceAccountLinkBuilder>
+        {
+            public ListCrossNamespaceAccountLinkBuilder() : base() { }
+
+            public ListCrossNamespaceAccountLinkBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public ListCrossNamespaceAccountLink.Response Execute(
+                string linkingToken,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    linkingToken,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ListCrossNamespaceAccountLink.Response> ExecuteAsync(
+                string linkingToken,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    linkingToken,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ListCrossNamespaceAccountLink(IListCrossNamespaceAccountLinkBuilder builder,
             string linkingToken,
             string namespace_,
             string userId
@@ -209,22 +255,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

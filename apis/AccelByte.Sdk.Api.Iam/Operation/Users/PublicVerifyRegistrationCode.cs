@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicVerifyRegistrationCodeBuilder Builder { get => new PublicVerifyRegistrationCodeBuilder(); }
 
-        public class PublicVerifyRegistrationCodeBuilder
-            : OperationBuilder<PublicVerifyRegistrationCodeBuilder>
+        public interface IPublicVerifyRegistrationCodeBuilder
         {
 
 
 
 
 
-            internal PublicVerifyRegistrationCodeBuilder() { }
+        }
 
-            internal PublicVerifyRegistrationCodeBuilder(IAccelByteSdk sdk)
+        public abstract class PublicVerifyRegistrationCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicVerifyRegistrationCodeBuilder
+            where TImpl : PublicVerifyRegistrationCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicVerifyRegistrationCodeAbstractBuilder() { }
+
+            public PublicVerifyRegistrationCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicVerifyRegistrationCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicVerifyRegistrationCode.Response Execute(
+            protected PublicVerifyRegistrationCode.Response InternalExecute(
                 ModelVerifyRegistrationCode body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicVerifyRegistrationCode.Response> ExecuteAsync(
+            protected async Task<PublicVerifyRegistrationCode.Response> InternalExecuteAsync(
                 ModelVerifyRegistrationCode body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicVerifyRegistrationCode(PublicVerifyRegistrationCodeBuilder builder,
+        public class PublicVerifyRegistrationCodeBuilder : PublicVerifyRegistrationCodeAbstractBuilder<PublicVerifyRegistrationCodeBuilder>
+        {
+            public PublicVerifyRegistrationCodeBuilder() : base() { }
+
+            public PublicVerifyRegistrationCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicVerifyRegistrationCode.Response Execute(
+                ModelVerifyRegistrationCode body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicVerifyRegistrationCode.Response> ExecuteAsync(
+                ModelVerifyRegistrationCode body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicVerifyRegistrationCode(IPublicVerifyRegistrationCodeBuilder builder,
             ModelVerifyRegistrationCode body,
             string namespace_
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

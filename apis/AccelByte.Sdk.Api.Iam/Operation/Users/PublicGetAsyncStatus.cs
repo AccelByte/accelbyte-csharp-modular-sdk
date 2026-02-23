@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetAsyncStatusBuilder Builder { get => new PublicGetAsyncStatusBuilder(); }
 
-        public class PublicGetAsyncStatusBuilder
-            : OperationBuilder<PublicGetAsyncStatusBuilder>
+        public interface IPublicGetAsyncStatusBuilder
         {
 
 
 
 
 
-            internal PublicGetAsyncStatusBuilder() { }
+        }
 
-            internal PublicGetAsyncStatusBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetAsyncStatusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetAsyncStatusBuilder
+            where TImpl : PublicGetAsyncStatusAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetAsyncStatusAbstractBuilder() { }
+
+            public PublicGetAsyncStatusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     requestId                    
                 );
 
-                op.SetBaseFields<PublicGetAsyncStatusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetAsyncStatus.Response Execute(
+            protected PublicGetAsyncStatus.Response InternalExecute(
                 string namespace_,
                 string requestId
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetAsyncStatus.Response> ExecuteAsync(
+            protected async Task<PublicGetAsyncStatus.Response> InternalExecuteAsync(
                 string namespace_,
                 string requestId
             )
@@ -104,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.Payload);
             }
 
-            public PublicGetAsyncStatus.Response<T1> Execute<T1>(
+            protected PublicGetAsyncStatus.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string requestId
             )
@@ -123,7 +133,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetAsyncStatus.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicGetAsyncStatus.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string requestId
             )
@@ -144,7 +154,57 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetAsyncStatus(PublicGetAsyncStatusBuilder builder,
+        public class PublicGetAsyncStatusBuilder : PublicGetAsyncStatusAbstractBuilder<PublicGetAsyncStatusBuilder>
+        {
+            public PublicGetAsyncStatusBuilder() : base() { }
+
+            public PublicGetAsyncStatusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetAsyncStatus.Response Execute(
+                string namespace_,
+                string requestId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    requestId
+                );
+            }
+            public async Task<PublicGetAsyncStatus.Response> ExecuteAsync(
+                string namespace_,
+                string requestId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    requestId
+                );
+            }
+
+            public PublicGetAsyncStatus.Response<T1> Execute<T1>(
+                string namespace_,
+                string requestId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    requestId
+                );
+            }
+            public async Task<PublicGetAsyncStatus.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string requestId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    requestId
+                );
+            }
+        }
+
+
+        public PublicGetAsyncStatus(IPublicGetAsyncStatusBuilder builder,
             string namespace_,
             string requestId
         )
@@ -228,22 +288,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelLinkRequest>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelLinkRequest>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -264,22 +328,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelLinkRequest<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelLinkRequest<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RestoreDLCItemConfigHistoryBuilder Builder { get => new RestoreDLCItemConfigHistoryBuilder(); }
 
-        public class RestoreDLCItemConfigHistoryBuilder
-            : OperationBuilder<RestoreDLCItemConfigHistoryBuilder>
+        public interface IRestoreDLCItemConfigHistoryBuilder
         {
 
 
 
 
 
-            internal RestoreDLCItemConfigHistoryBuilder() { }
+        }
 
-            internal RestoreDLCItemConfigHistoryBuilder(IAccelByteSdk sdk)
+        public abstract class RestoreDLCItemConfigHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRestoreDLCItemConfigHistoryBuilder
+            where TImpl : RestoreDLCItemConfigHistoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RestoreDLCItemConfigHistoryAbstractBuilder() { }
+
+            public RestoreDLCItemConfigHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RestoreDLCItemConfigHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RestoreDLCItemConfigHistory.Response Execute(
+            protected RestoreDLCItemConfigHistory.Response InternalExecute(
                 string id,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RestoreDLCItemConfigHistory.Response> ExecuteAsync(
+            protected async Task<RestoreDLCItemConfigHistory.Response> InternalExecuteAsync(
                 string id,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RestoreDLCItemConfigHistory(RestoreDLCItemConfigHistoryBuilder builder,
+        public class RestoreDLCItemConfigHistoryBuilder : RestoreDLCItemConfigHistoryAbstractBuilder<RestoreDLCItemConfigHistoryBuilder>
+        {
+            public RestoreDLCItemConfigHistoryBuilder() : base() { }
+
+            public RestoreDLCItemConfigHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RestoreDLCItemConfigHistory.Response Execute(
+                string id,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    id,
+                    namespace_
+                );
+            }
+            public async Task<RestoreDLCItemConfigHistory.Response> ExecuteAsync(
+                string id,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    id,
+                    namespace_
+                );
+            }
+        }
+
+
+        public RestoreDLCItemConfigHistory(IRestoreDLCItemConfigHistoryBuilder builder,
             string id,
             string namespace_
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

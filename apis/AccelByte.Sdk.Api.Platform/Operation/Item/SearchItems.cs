@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SearchItemsBuilder Builder { get => new SearchItemsBuilder(); }
 
-        public class SearchItemsBuilder
-            : OperationBuilder<SearchItemsBuilder>
+        public interface ISearchItemsBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            SearchItemsItemType? ItemType { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? SortBy { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class SearchItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISearchItemsBuilder
+            where TImpl : SearchItemsAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -54,48 +76,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SearchItemsBuilder() { }
+            public SearchItemsAbstractBuilder() { }
 
-            internal SearchItemsBuilder(IAccelByteSdk sdk)
+            public SearchItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SearchItemsBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public SearchItemsBuilder SetItemType(SearchItemsItemType _itemType)
+            public TImpl SetItemType(SearchItemsItemType _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public SearchItemsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public SearchItemsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public SearchItemsBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public SearchItemsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -114,11 +136,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     language                    
                 );
 
-                op.SetBaseFields<SearchItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SearchItems.Response Execute(
+            protected SearchItems.Response InternalExecute(
                 string namespace_,
                 string keyword,
                 string language
@@ -139,7 +161,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SearchItems.Response> ExecuteAsync(
+            protected async Task<SearchItems.Response> InternalExecuteAsync(
                 string namespace_,
                 string keyword,
                 string language
@@ -162,7 +184,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SearchItems(SearchItemsBuilder builder,
+        public class SearchItemsBuilder : SearchItemsAbstractBuilder<SearchItemsBuilder>
+        {
+            public SearchItemsBuilder() : base() { }
+
+            public SearchItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SearchItems.Response Execute(
+                string namespace_,
+                string keyword,
+                string language
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    keyword,
+                    language
+                );
+            }
+            public async Task<SearchItems.Response> ExecuteAsync(
+                string namespace_,
+                string keyword,
+                string language
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    keyword,
+                    language
+                );
+            }
+        }
+
+
+        public SearchItems(ISearchItemsBuilder builder,
             string namespace_,
             string keyword,
             string language
@@ -253,12 +308,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

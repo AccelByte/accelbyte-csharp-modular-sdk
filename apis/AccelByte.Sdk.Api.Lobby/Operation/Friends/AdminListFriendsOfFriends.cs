@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminListFriendsOfFriendsBuilder Builder { get => new AdminListFriendsOfFriendsBuilder(); }
 
-        public class AdminListFriendsOfFriendsBuilder
-            : OperationBuilder<AdminListFriendsOfFriendsBuilder>
+        public interface IAdminListFriendsOfFriendsBuilder
+        {
+
+            string? FriendId { get; }
+
+            long? Limit { get; }
+
+            bool? Nopaging { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListFriendsOfFriendsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListFriendsOfFriendsBuilder
+            where TImpl : AdminListFriendsOfFriendsAbstractBuilder<TImpl>
         {
 
             public string? FriendId { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal AdminListFriendsOfFriendsBuilder() { }
+            public AdminListFriendsOfFriendsAbstractBuilder() { }
 
-            internal AdminListFriendsOfFriendsBuilder(IAccelByteSdk sdk)
+            public AdminListFriendsOfFriendsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListFriendsOfFriendsBuilder SetFriendId(string _friendId)
+            public TImpl SetFriendId(string _friendId)
             {
                 FriendId = _friendId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListFriendsOfFriendsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListFriendsOfFriendsBuilder SetNopaging(bool _nopaging)
+            public TImpl SetNopaging(bool _nopaging)
             {
                 Nopaging = _nopaging;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListFriendsOfFriendsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminListFriendsOfFriendsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListFriendsOfFriends.Response Execute(
+            protected AdminListFriendsOfFriends.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListFriendsOfFriends.Response> ExecuteAsync(
+            protected async Task<AdminListFriendsOfFriends.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminListFriendsOfFriends(AdminListFriendsOfFriendsBuilder builder,
+        public class AdminListFriendsOfFriendsBuilder : AdminListFriendsOfFriendsAbstractBuilder<AdminListFriendsOfFriendsBuilder>
+        {
+            public AdminListFriendsOfFriendsBuilder() : base() { }
+
+            public AdminListFriendsOfFriendsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListFriendsOfFriends.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminListFriendsOfFriends.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminListFriendsOfFriends(IAdminListFriendsOfFriendsBuilder builder,
             string namespace_,
             string userId
         )
@@ -223,27 +270,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelFriendshipConnectionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelFriendshipConnectionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static QuerySeasonsBuilder Builder { get => new QuerySeasonsBuilder(); }
 
-        public class QuerySeasonsBuilder
-            : OperationBuilder<QuerySeasonsBuilder>
+        public interface IQuerySeasonsBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            List<QuerySeasonsStatus>? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class QuerySeasonsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQuerySeasonsBuilder
+            where TImpl : QuerySeasonsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal QuerySeasonsBuilder() { }
+            public QuerySeasonsAbstractBuilder() { }
 
-            internal QuerySeasonsBuilder(IAccelByteSdk sdk)
+            public QuerySeasonsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QuerySeasonsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySeasonsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySeasonsBuilder SetStatus(List<QuerySeasonsStatus> _status)
+            public TImpl SetStatus(List<QuerySeasonsStatus> _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -86,11 +102,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QuerySeasonsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QuerySeasons.Response Execute(
+            protected QuerySeasons.Response InternalExecute(
                 string namespace_
             )
             {
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QuerySeasons.Response> ExecuteAsync(
+            protected async Task<QuerySeasons.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -126,7 +142,32 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private QuerySeasons(QuerySeasonsBuilder builder,
+        public class QuerySeasonsBuilder : QuerySeasonsAbstractBuilder<QuerySeasonsBuilder>
+        {
+            public QuerySeasonsBuilder() : base() { }
+
+            public QuerySeasonsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QuerySeasons.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QuerySeasons.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QuerySeasons(IQuerySeasonsBuilder builder,
             string namespace_
         )
         {
@@ -202,12 +243,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ListSeasonInfoPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ListSeasonInfoPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

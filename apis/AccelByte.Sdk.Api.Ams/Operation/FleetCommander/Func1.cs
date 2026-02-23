@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static Func1Builder Builder { get => new Func1Builder(); }
 
-        public class Func1Builder
-            : OperationBuilder<Func1Builder>
+        public interface IFunc1Builder
         {
 
 
 
 
 
-            internal Func1Builder() { }
+        }
 
-            internal Func1Builder(IAccelByteSdk sdk)
+        public abstract class Func1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IFunc1Builder
+            where TImpl : Func1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public Func1AbstractBuilder() { }
+
+            public Func1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 Func1 op = new Func1(this
                 );
 
-                op.SetBaseFields<Func1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Func1.Response Execute(
+            protected Func1.Response InternalExecute(
             )
             {
                 Func1 op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Func1.Response> ExecuteAsync(
+            protected async Task<Func1.Response> InternalExecuteAsync(
             )
             {
                 Func1 op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private Func1(Func1Builder builder
+        public class Func1Builder : Func1AbstractBuilder<Func1Builder>
+        {
+            public Func1Builder() : base() { }
+
+            public Func1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Func1.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<Func1.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public Func1(IFunc1Builder builder
         )
         {
             

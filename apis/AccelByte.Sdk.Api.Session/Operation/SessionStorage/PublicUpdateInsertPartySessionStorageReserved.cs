@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,17 +50,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicUpdateInsertPartySessionStorageReservedBuilder Builder { get => new PublicUpdateInsertPartySessionStorageReservedBuilder(); }
 
-        public class PublicUpdateInsertPartySessionStorageReservedBuilder
-            : OperationBuilder<PublicUpdateInsertPartySessionStorageReservedBuilder>
+        public interface IPublicUpdateInsertPartySessionStorageReservedBuilder
         {
 
 
 
 
 
-            internal PublicUpdateInsertPartySessionStorageReservedBuilder() { }
+        }
 
-            internal PublicUpdateInsertPartySessionStorageReservedBuilder(IAccelByteSdk sdk)
+        public abstract class PublicUpdateInsertPartySessionStorageReservedAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdateInsertPartySessionStorageReservedBuilder
+            where TImpl : PublicUpdateInsertPartySessionStorageReservedAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicUpdateInsertPartySessionStorageReservedAbstractBuilder() { }
+
+            public PublicUpdateInsertPartySessionStorageReservedAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -84,11 +94,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdateInsertPartySessionStorageReservedBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUpdateInsertPartySessionStorageReserved.Response Execute(
+            protected PublicUpdateInsertPartySessionStorageReserved.Response InternalExecute(
                 Dictionary<string, object> body,
                 string namespace_,
                 string partyId,
@@ -111,7 +121,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateInsertPartySessionStorageReserved.Response> ExecuteAsync(
+            protected async Task<PublicUpdateInsertPartySessionStorageReserved.Response> InternalExecuteAsync(
                 Dictionary<string, object> body,
                 string namespace_,
                 string partyId,
@@ -136,7 +146,44 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicUpdateInsertPartySessionStorageReserved(PublicUpdateInsertPartySessionStorageReservedBuilder builder,
+        public class PublicUpdateInsertPartySessionStorageReservedBuilder : PublicUpdateInsertPartySessionStorageReservedAbstractBuilder<PublicUpdateInsertPartySessionStorageReservedBuilder>
+        {
+            public PublicUpdateInsertPartySessionStorageReservedBuilder() : base() { }
+
+            public PublicUpdateInsertPartySessionStorageReservedBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUpdateInsertPartySessionStorageReserved.Response Execute(
+                Dictionary<string, object> body,
+                string namespace_,
+                string partyId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    partyId,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateInsertPartySessionStorageReserved.Response> ExecuteAsync(
+                Dictionary<string, object> body,
+                string namespace_,
+                string partyId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    partyId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdateInsertPartySessionStorageReserved(IPublicUpdateInsertPartySessionStorageReservedBuilder builder,
             Dictionary<string, object> body,
             string namespace_,
             string partyId,
@@ -221,32 +268,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

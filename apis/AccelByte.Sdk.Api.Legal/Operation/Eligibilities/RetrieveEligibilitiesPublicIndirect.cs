@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveEligibilitiesPublicIndirectBuilder Builder { get => new RetrieveEligibilitiesPublicIndirectBuilder(); }
 
-        public class RetrieveEligibilitiesPublicIndirectBuilder
-            : OperationBuilder<RetrieveEligibilitiesPublicIndirectBuilder>
+        public interface IRetrieveEligibilitiesPublicIndirectBuilder
         {
 
 
 
 
 
-            internal RetrieveEligibilitiesPublicIndirectBuilder() { }
+        }
 
-            internal RetrieveEligibilitiesPublicIndirectBuilder(IAccelByteSdk sdk)
+        public abstract class RetrieveEligibilitiesPublicIndirectAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveEligibilitiesPublicIndirectBuilder
+            where TImpl : RetrieveEligibilitiesPublicIndirectAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveEligibilitiesPublicIndirectAbstractBuilder() { }
+
+            public RetrieveEligibilitiesPublicIndirectAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RetrieveEligibilitiesPublicIndirectBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveEligibilitiesPublicIndirect.Response Execute(
+            protected RetrieveEligibilitiesPublicIndirect.Response InternalExecute(
                 string clientId,
                 string countryCode,
                 string namespace_,
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveEligibilitiesPublicIndirect.Response> ExecuteAsync(
+            protected async Task<RetrieveEligibilitiesPublicIndirect.Response> InternalExecuteAsync(
                 string clientId,
                 string countryCode,
                 string namespace_,
@@ -117,7 +127,44 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveEligibilitiesPublicIndirect(RetrieveEligibilitiesPublicIndirectBuilder builder,
+        public class RetrieveEligibilitiesPublicIndirectBuilder : RetrieveEligibilitiesPublicIndirectAbstractBuilder<RetrieveEligibilitiesPublicIndirectBuilder>
+        {
+            public RetrieveEligibilitiesPublicIndirectBuilder() : base() { }
+
+            public RetrieveEligibilitiesPublicIndirectBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveEligibilitiesPublicIndirect.Response Execute(
+                string clientId,
+                string countryCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    countryCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RetrieveEligibilitiesPublicIndirect.Response> ExecuteAsync(
+                string clientId,
+                string countryCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    countryCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RetrieveEligibilitiesPublicIndirect(IRetrieveEligibilitiesPublicIndirectBuilder builder,
             string clientId,
             string countryCode,
             string namespace_,
@@ -194,12 +241,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RetrieveUserEligibilitiesIndirectResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RetrieveUserEligibilitiesIndirectResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

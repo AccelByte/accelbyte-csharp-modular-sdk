@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static UpdateContentLikeStatusV2Builder Builder { get => new UpdateContentLikeStatusV2Builder(); }
 
-        public class UpdateContentLikeStatusV2Builder
-            : OperationBuilder<UpdateContentLikeStatusV2Builder>
+        public interface IUpdateContentLikeStatusV2Builder
         {
 
 
 
 
 
-            internal UpdateContentLikeStatusV2Builder() { }
+        }
 
-            internal UpdateContentLikeStatusV2Builder(IAccelByteSdk sdk)
+        public abstract class UpdateContentLikeStatusV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateContentLikeStatusV2Builder
+            where TImpl : UpdateContentLikeStatusV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateContentLikeStatusV2AbstractBuilder() { }
+
+            public UpdateContentLikeStatusV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateContentLikeStatusV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateContentLikeStatusV2.Response Execute(
+            protected UpdateContentLikeStatusV2.Response InternalExecute(
                 ModelsContentLikeRequest body,
                 string contentId,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateContentLikeStatusV2.Response> ExecuteAsync(
+            protected async Task<UpdateContentLikeStatusV2.Response> InternalExecuteAsync(
                 ModelsContentLikeRequest body,
                 string contentId,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private UpdateContentLikeStatusV2(UpdateContentLikeStatusV2Builder builder,
+        public class UpdateContentLikeStatusV2Builder : UpdateContentLikeStatusV2AbstractBuilder<UpdateContentLikeStatusV2Builder>
+        {
+            public UpdateContentLikeStatusV2Builder() : base() { }
+
+            public UpdateContentLikeStatusV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateContentLikeStatusV2.Response Execute(
+                ModelsContentLikeRequest body,
+                string contentId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    contentId,
+                    namespace_
+                );
+            }
+            public async Task<UpdateContentLikeStatusV2.Response> ExecuteAsync(
+                ModelsContentLikeRequest body,
+                string contentId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    contentId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateContentLikeStatusV2(IUpdateContentLikeStatusV2Builder builder,
             ModelsContentLikeRequest body,
             string contentId,
             string namespace_
@@ -191,32 +234,38 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsContentLikeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsContentLikeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -54,17 +54,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePaymentProviderConfigBuilder Builder { get => new UpdatePaymentProviderConfigBuilder(); }
 
-        public class UpdatePaymentProviderConfigBuilder
-            : OperationBuilder<UpdatePaymentProviderConfigBuilder>
+        public interface IUpdatePaymentProviderConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePaymentProviderConfigBuilder() { }
+        }
 
-            internal UpdatePaymentProviderConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePaymentProviderConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePaymentProviderConfigBuilder
+            where TImpl : UpdatePaymentProviderConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePaymentProviderConfigAbstractBuilder() { }
+
+            public UpdatePaymentProviderConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -84,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdatePaymentProviderConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePaymentProviderConfig.Response Execute(
+            protected UpdatePaymentProviderConfig.Response InternalExecute(
                 PaymentProviderConfigEdit body,
                 string id
             )
@@ -107,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePaymentProviderConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePaymentProviderConfig.Response> InternalExecuteAsync(
                 PaymentProviderConfigEdit body,
                 string id
             )
@@ -128,7 +138,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePaymentProviderConfig(UpdatePaymentProviderConfigBuilder builder,
+        public class UpdatePaymentProviderConfigBuilder : UpdatePaymentProviderConfigAbstractBuilder<UpdatePaymentProviderConfigBuilder>
+        {
+            public UpdatePaymentProviderConfigBuilder() : base() { }
+
+            public UpdatePaymentProviderConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePaymentProviderConfig.Response Execute(
+                PaymentProviderConfigEdit body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdatePaymentProviderConfig.Response> ExecuteAsync(
+                PaymentProviderConfigEdit body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdatePaymentProviderConfig(IUpdatePaymentProviderConfigBuilder builder,
             PaymentProviderConfigEdit body,
             string id
         )
@@ -203,27 +242,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

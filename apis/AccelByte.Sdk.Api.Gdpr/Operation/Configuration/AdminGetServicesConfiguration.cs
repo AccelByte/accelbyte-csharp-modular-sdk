@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminGetServicesConfigurationBuilder Builder { get => new AdminGetServicesConfigurationBuilder(); }
 
-        public class AdminGetServicesConfigurationBuilder
-            : OperationBuilder<AdminGetServicesConfigurationBuilder>
+        public interface IAdminGetServicesConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminGetServicesConfigurationBuilder() { }
+        }
 
-            internal AdminGetServicesConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetServicesConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetServicesConfigurationBuilder
+            where TImpl : AdminGetServicesConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetServicesConfigurationAbstractBuilder() { }
+
+            public AdminGetServicesConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetServicesConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetServicesConfiguration.Response Execute(
+            protected AdminGetServicesConfiguration.Response InternalExecute(
                 string namespace_
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetServicesConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminGetServicesConfiguration.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminGetServicesConfiguration(AdminGetServicesConfigurationBuilder builder,
+        public class AdminGetServicesConfigurationBuilder : AdminGetServicesConfigurationAbstractBuilder<AdminGetServicesConfigurationBuilder>
+        {
+            public AdminGetServicesConfigurationBuilder() : base() { }
+
+            public AdminGetServicesConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetServicesConfiguration.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetServicesConfiguration.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetServicesConfiguration(IAdminGetServicesConfigurationBuilder builder,
             string namespace_
         )
         {
@@ -168,22 +203,26 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DtoServicesConfigurationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DtoServicesConfigurationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

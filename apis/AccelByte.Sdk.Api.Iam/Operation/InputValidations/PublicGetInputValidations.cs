@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetInputValidationsBuilder Builder { get => new PublicGetInputValidationsBuilder(); }
 
-        public class PublicGetInputValidationsBuilder
-            : OperationBuilder<PublicGetInputValidationsBuilder>
+        public interface IPublicGetInputValidationsBuilder
+        {
+
+            bool? DefaultOnEmpty { get; }
+
+            string? LanguageCode { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetInputValidationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetInputValidationsBuilder
+            where TImpl : PublicGetInputValidationsAbstractBuilder<TImpl>
         {
 
             public bool? DefaultOnEmpty { get; set; }
@@ -44,24 +58,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicGetInputValidationsBuilder() { }
+            public PublicGetInputValidationsAbstractBuilder() { }
 
-            internal PublicGetInputValidationsBuilder(IAccelByteSdk sdk)
+            public PublicGetInputValidationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetInputValidationsBuilder SetDefaultOnEmpty(bool _defaultOnEmpty)
+            public TImpl SetDefaultOnEmpty(bool _defaultOnEmpty)
             {
                 DefaultOnEmpty = _defaultOnEmpty;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetInputValidationsBuilder SetLanguageCode(string _languageCode)
+            public TImpl SetLanguageCode(string _languageCode)
             {
                 LanguageCode = _languageCode;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +88,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetInputValidations op = new PublicGetInputValidations(this
                 );
 
-                op.SetBaseFields<PublicGetInputValidationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetInputValidations.Response Execute(
+            protected PublicGetInputValidations.Response InternalExecute(
             )
             {
                 PublicGetInputValidations op = Build(
@@ -93,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetInputValidations.Response> ExecuteAsync(
+            protected async Task<PublicGetInputValidations.Response> InternalExecuteAsync(
             )
             {
                 PublicGetInputValidations op = Build(
@@ -110,7 +124,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetInputValidations(PublicGetInputValidationsBuilder builder
+        public class PublicGetInputValidationsBuilder : PublicGetInputValidationsAbstractBuilder<PublicGetInputValidationsBuilder>
+        {
+            public PublicGetInputValidationsBuilder() : base() { }
+
+            public PublicGetInputValidationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetInputValidations.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetInputValidations.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetInputValidations(IPublicGetInputValidationsBuilder builder
         )
         {
             
@@ -177,17 +212,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelInputValidationsPublicResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelInputValidationsPublicResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

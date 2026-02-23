@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminBulkRemoveItemsBuilder Builder { get => new AdminBulkRemoveItemsBuilder(); }
 
-        public class AdminBulkRemoveItemsBuilder
-            : OperationBuilder<AdminBulkRemoveItemsBuilder>
+        public interface IAdminBulkRemoveItemsBuilder
         {
 
 
 
 
 
-            internal AdminBulkRemoveItemsBuilder() { }
+        }
 
-            internal AdminBulkRemoveItemsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminBulkRemoveItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBulkRemoveItemsBuilder
+            where TImpl : AdminBulkRemoveItemsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBulkRemoveItemsAbstractBuilder() { }
+
+            public AdminBulkRemoveItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminBulkRemoveItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBulkRemoveItems.Response Execute(
+            protected AdminBulkRemoveItems.Response InternalExecute(
                 List<ApimodelsRemoveInventoryItemReq> body,
                 string inventoryId,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBulkRemoveItems.Response> ExecuteAsync(
+            protected async Task<AdminBulkRemoveItems.Response> InternalExecuteAsync(
                 List<ApimodelsRemoveInventoryItemReq> body,
                 string inventoryId,
                 string namespace_,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminBulkRemoveItems(AdminBulkRemoveItemsBuilder builder,
+        public class AdminBulkRemoveItemsBuilder : AdminBulkRemoveItemsAbstractBuilder<AdminBulkRemoveItemsBuilder>
+        {
+            public AdminBulkRemoveItemsBuilder() : base() { }
+
+            public AdminBulkRemoveItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBulkRemoveItems.Response Execute(
+                List<ApimodelsRemoveInventoryItemReq> body,
+                string inventoryId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminBulkRemoveItems.Response> ExecuteAsync(
+                List<ApimodelsRemoveInventoryItemReq> body,
+                string inventoryId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminBulkRemoveItems(IAdminBulkRemoveItemsBuilder builder,
             List<ApimodelsRemoveInventoryItemReq> body,
             string inventoryId,
             string namespace_,
@@ -200,22 +247,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ApimodelsUpdateItemResp>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ApimodelsUpdateItemResp>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

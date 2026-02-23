@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetUsersByLoginIdsBuilder Builder { get => new GetUsersByLoginIdsBuilder(); }
 
-        public class GetUsersByLoginIdsBuilder
-            : OperationBuilder<GetUsersByLoginIdsBuilder>
+        public interface IGetUsersByLoginIdsBuilder
+        {
+
+            string? LoginIds { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUsersByLoginIdsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUsersByLoginIdsBuilder
+            where TImpl : GetUsersByLoginIdsAbstractBuilder<TImpl>
         {
 
             public string? LoginIds { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal GetUsersByLoginIdsBuilder() { }
+            public GetUsersByLoginIdsAbstractBuilder() { }
 
-            internal GetUsersByLoginIdsBuilder(IAccelByteSdk sdk)
+            public GetUsersByLoginIdsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUsersByLoginIdsBuilder SetLoginIds(string _loginIds)
+            public TImpl SetLoginIds(string _loginIds)
             {
                 LoginIds = _loginIds;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,12 +82,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetUsersByLoginIdsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetUsersByLoginIds.Response Execute(
+            protected GetUsersByLoginIds.Response InternalExecute(
                 string namespace_
             )
             {
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUsersByLoginIds.Response> ExecuteAsync(
+            protected async Task<GetUsersByLoginIds.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -111,7 +123,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetUsersByLoginIds(GetUsersByLoginIdsBuilder builder,
+        public class GetUsersByLoginIdsBuilder : GetUsersByLoginIdsAbstractBuilder<GetUsersByLoginIdsBuilder>
+        {
+            public GetUsersByLoginIdsBuilder() : base() { }
+
+            public GetUsersByLoginIdsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUsersByLoginIds.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetUsersByLoginIds.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetUsersByLoginIds(IGetUsersByLoginIdsBuilder builder,
             string namespace_
         )
         {
@@ -183,22 +221,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelPublicUsersResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelPublicUsersResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

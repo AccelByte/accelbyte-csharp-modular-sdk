@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListViewsBuilder Builder { get => new ListViewsBuilder(); }
 
-        public class ListViewsBuilder
-            : OperationBuilder<ListViewsBuilder>
+        public interface IListViewsBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListViewsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListViewsBuilder
+            where TImpl : ListViewsAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListViewsBuilder() { }
+            public ListViewsAbstractBuilder() { }
 
-            internal ListViewsBuilder(IAccelByteSdk sdk)
+            public ListViewsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListViewsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListViewsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListViews.Response Execute(
+            protected ListViews.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListViews.Response> ExecuteAsync(
+            protected async Task<ListViews.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListViews(ListViewsBuilder builder,
+        public class ListViewsBuilder : ListViewsAbstractBuilder<ListViewsBuilder>
+        {
+            public ListViewsBuilder() : base() { }
+
+            public ListViewsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListViews.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListViews.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListViews(IListViewsBuilder builder,
             string namespace_
         )
         {
@@ -180,17 +217,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ListViewInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ListViewInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

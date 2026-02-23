@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static CloneSeasonBuilder Builder { get => new CloneSeasonBuilder(); }
 
-        public class CloneSeasonBuilder
-            : OperationBuilder<CloneSeasonBuilder>
+        public interface ICloneSeasonBuilder
+        {
+
+
+            Model.SeasonCloneRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class CloneSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICloneSeasonBuilder
+            where TImpl : CloneSeasonAbstractBuilder<TImpl>
         {
 
 
@@ -44,19 +56,19 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal CloneSeasonBuilder() { }
+            public CloneSeasonAbstractBuilder() { }
 
-            internal CloneSeasonBuilder(IAccelByteSdk sdk)
+            public CloneSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public CloneSeasonBuilder SetBody(Model.SeasonCloneRequest _body)
+            public TImpl SetBody(Model.SeasonCloneRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<CloneSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CloneSeason.Response Execute(
+            protected CloneSeason.Response InternalExecute(
                 string namespace_,
                 string seasonId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CloneSeason.Response> ExecuteAsync(
+            protected async Task<CloneSeason.Response> InternalExecuteAsync(
                 string namespace_,
                 string seasonId
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private CloneSeason(CloneSeasonBuilder builder,
+        public class CloneSeasonBuilder : CloneSeasonAbstractBuilder<CloneSeasonBuilder>
+        {
+            public CloneSeasonBuilder() : base() { }
+
+            public CloneSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CloneSeason.Response Execute(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<CloneSeason.Response> ExecuteAsync(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public CloneSeason(ICloneSeasonBuilder builder,
             string namespace_,
             string seasonId
         )
@@ -192,22 +233,26 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SeasonInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SeasonInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

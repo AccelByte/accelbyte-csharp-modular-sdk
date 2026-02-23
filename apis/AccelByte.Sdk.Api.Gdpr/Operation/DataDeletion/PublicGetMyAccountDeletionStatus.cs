@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static PublicGetMyAccountDeletionStatusBuilder Builder { get => new PublicGetMyAccountDeletionStatusBuilder(); }
 
-        public class PublicGetMyAccountDeletionStatusBuilder
-            : OperationBuilder<PublicGetMyAccountDeletionStatusBuilder>
+        public interface IPublicGetMyAccountDeletionStatusBuilder
         {
 
 
 
 
 
-            internal PublicGetMyAccountDeletionStatusBuilder() { }
+        }
 
-            internal PublicGetMyAccountDeletionStatusBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetMyAccountDeletionStatusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetMyAccountDeletionStatusBuilder
+            where TImpl : PublicGetMyAccountDeletionStatusAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetMyAccountDeletionStatusAbstractBuilder() { }
+
+            public PublicGetMyAccountDeletionStatusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,11 +67,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                 PublicGetMyAccountDeletionStatus op = new PublicGetMyAccountDeletionStatus(this
                 );
 
-                op.SetBaseFields<PublicGetMyAccountDeletionStatusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetMyAccountDeletionStatus.Response Execute(
+            protected PublicGetMyAccountDeletionStatus.Response InternalExecute(
             )
             {
                 PublicGetMyAccountDeletionStatus op = Build(
@@ -76,7 +86,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetMyAccountDeletionStatus.Response> ExecuteAsync(
+            protected async Task<PublicGetMyAccountDeletionStatus.Response> InternalExecuteAsync(
             )
             {
                 PublicGetMyAccountDeletionStatus op = Build(
@@ -93,7 +103,28 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private PublicGetMyAccountDeletionStatus(PublicGetMyAccountDeletionStatusBuilder builder
+        public class PublicGetMyAccountDeletionStatusBuilder : PublicGetMyAccountDeletionStatusAbstractBuilder<PublicGetMyAccountDeletionStatusBuilder>
+        {
+            public PublicGetMyAccountDeletionStatusBuilder() : base() { }
+
+            public PublicGetMyAccountDeletionStatusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetMyAccountDeletionStatus.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetMyAccountDeletionStatus.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetMyAccountDeletionStatus(IPublicGetMyAccountDeletionStatusBuilder builder
         )
         {
             
@@ -158,22 +189,26 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsDeletionStatus>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsDeletionStatus>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

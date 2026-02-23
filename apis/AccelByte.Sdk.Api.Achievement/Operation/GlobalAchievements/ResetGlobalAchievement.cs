@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static ResetGlobalAchievementBuilder Builder { get => new ResetGlobalAchievementBuilder(); }
 
-        public class ResetGlobalAchievementBuilder
-            : OperationBuilder<ResetGlobalAchievementBuilder>
+        public interface IResetGlobalAchievementBuilder
         {
 
 
 
 
 
-            internal ResetGlobalAchievementBuilder() { }
+        }
 
-            internal ResetGlobalAchievementBuilder(IAccelByteSdk sdk)
+        public abstract class ResetGlobalAchievementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IResetGlobalAchievementBuilder
+            where TImpl : ResetGlobalAchievementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ResetGlobalAchievementAbstractBuilder() { }
+
+            public ResetGlobalAchievementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ResetGlobalAchievementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ResetGlobalAchievement.Response Execute(
+            protected ResetGlobalAchievement.Response InternalExecute(
                 string achievementCode,
                 string namespace_
             )
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ResetGlobalAchievement.Response> ExecuteAsync(
+            protected async Task<ResetGlobalAchievement.Response> InternalExecuteAsync(
                 string achievementCode,
                 string namespace_
             )
@@ -112,7 +122,36 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private ResetGlobalAchievement(ResetGlobalAchievementBuilder builder,
+        public class ResetGlobalAchievementBuilder : ResetGlobalAchievementAbstractBuilder<ResetGlobalAchievementBuilder>
+        {
+            public ResetGlobalAchievementBuilder() : base() { }
+
+            public ResetGlobalAchievementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ResetGlobalAchievement.Response Execute(
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    achievementCode,
+                    namespace_
+                );
+            }
+            public async Task<ResetGlobalAchievement.Response> ExecuteAsync(
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    achievementCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ResetGlobalAchievement(IResetGlobalAchievementBuilder builder,
             string achievementCode,
             string namespace_
         )
@@ -186,17 +225,20 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

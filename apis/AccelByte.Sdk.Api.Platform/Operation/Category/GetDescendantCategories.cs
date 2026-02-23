@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetDescendantCategoriesBuilder Builder { get => new GetDescendantCategoriesBuilder(); }
 
-        public class GetDescendantCategoriesBuilder
-            : OperationBuilder<GetDescendantCategoriesBuilder>
+        public interface IGetDescendantCategoriesBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetDescendantCategoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetDescendantCategoriesBuilder
+            where TImpl : GetDescendantCategoriesAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetDescendantCategoriesBuilder() { }
+            public GetDescendantCategoriesAbstractBuilder() { }
 
-            internal GetDescendantCategoriesBuilder(IAccelByteSdk sdk)
+            public GetDescendantCategoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetDescendantCategoriesBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetDescendantCategoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetDescendantCategories.Response Execute(
+            protected GetDescendantCategories.Response InternalExecute(
                 string categoryPath,
                 string namespace_
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetDescendantCategories.Response> ExecuteAsync(
+            protected async Task<GetDescendantCategories.Response> InternalExecuteAsync(
                 string categoryPath,
                 string namespace_
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetDescendantCategories(GetDescendantCategoriesBuilder builder,
+        public class GetDescendantCategoriesBuilder : GetDescendantCategoriesAbstractBuilder<GetDescendantCategoriesBuilder>
+        {
+            public GetDescendantCategoriesBuilder() : base() { }
+
+            public GetDescendantCategoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetDescendantCategories.Response Execute(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    categoryPath,
+                    namespace_
+                );
+            }
+            public async Task<GetDescendantCategories.Response> ExecuteAsync(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    categoryPath,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetDescendantCategories(IGetDescendantCategoriesBuilder builder,
             string categoryPath,
             string namespace_
         )
@@ -186,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

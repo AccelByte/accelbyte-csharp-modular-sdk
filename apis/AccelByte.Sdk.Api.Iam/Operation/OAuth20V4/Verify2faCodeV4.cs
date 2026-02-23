@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static Verify2faCodeV4Builder Builder { get => new Verify2faCodeV4Builder(); }
 
-        public class Verify2faCodeV4Builder
-            : OperationBuilder<Verify2faCodeV4Builder>
+        public interface IVerify2faCodeV4Builder
         {
 
 
 
 
 
-            internal Verify2faCodeV4Builder() { }
+        }
 
-            internal Verify2faCodeV4Builder(IAccelByteSdk sdk)
+        public abstract class Verify2faCodeV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IVerify2faCodeV4Builder
+            where TImpl : Verify2faCodeV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public Verify2faCodeV4AbstractBuilder() { }
+
+            public Verify2faCodeV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     rememberDevice                    
                 );
 
-                op.SetBaseFields<Verify2faCodeV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Verify2faCodeV4.Response Execute(
+            protected Verify2faCodeV4.Response InternalExecute(
                 string code,
                 string factor,
                 string mfaToken,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Verify2faCodeV4.Response> ExecuteAsync(
+            protected async Task<Verify2faCodeV4.Response> InternalExecuteAsync(
                 string code,
                 string factor,
                 string mfaToken,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private Verify2faCodeV4(Verify2faCodeV4Builder builder,
+        public class Verify2faCodeV4Builder : Verify2faCodeV4AbstractBuilder<Verify2faCodeV4Builder>
+        {
+            public Verify2faCodeV4Builder() : base() { }
+
+            public Verify2faCodeV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Verify2faCodeV4.Response Execute(
+                string code,
+                string factor,
+                string mfaToken,
+                bool rememberDevice
+            )
+            {
+                return InternalExecute(
+                    code,
+                    factor,
+                    mfaToken,
+                    rememberDevice
+                );
+            }
+            public async Task<Verify2faCodeV4.Response> ExecuteAsync(
+                string code,
+                string factor,
+                string mfaToken,
+                bool rememberDevice
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    factor,
+                    mfaToken,
+                    rememberDevice
+                );
+            }
+        }
+
+
+        public Verify2faCodeV4(IVerify2faCodeV4Builder builder,
             string code,
             string factor,
             string mfaToken,
@@ -196,12 +243,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

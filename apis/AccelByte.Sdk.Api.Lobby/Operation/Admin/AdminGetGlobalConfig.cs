@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminGetGlobalConfigBuilder Builder { get => new AdminGetGlobalConfigBuilder(); }
 
-        public class AdminGetGlobalConfigBuilder
-            : OperationBuilder<AdminGetGlobalConfigBuilder>
+        public interface IAdminGetGlobalConfigBuilder
         {
 
 
 
 
 
-            internal AdminGetGlobalConfigBuilder() { }
+        }
 
-            internal AdminGetGlobalConfigBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetGlobalConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetGlobalConfigBuilder
+            where TImpl : AdminGetGlobalConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetGlobalConfigAbstractBuilder() { }
+
+            public AdminGetGlobalConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,12 +67,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 AdminGetGlobalConfig op = new AdminGetGlobalConfig(this
                 );
 
-                op.SetBaseFields<AdminGetGlobalConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminGetGlobalConfig.Response Execute(
+            protected AdminGetGlobalConfig.Response InternalExecute(
             )
             {
                 AdminGetGlobalConfig op = Build(
@@ -77,7 +87,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetGlobalConfig.Response> ExecuteAsync(
+            protected async Task<AdminGetGlobalConfig.Response> InternalExecuteAsync(
             )
             {
                 AdminGetGlobalConfig op = Build(
@@ -94,7 +104,29 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminGetGlobalConfig(AdminGetGlobalConfigBuilder builder
+        public class AdminGetGlobalConfigBuilder : AdminGetGlobalConfigAbstractBuilder<AdminGetGlobalConfigBuilder>
+        {
+            public AdminGetGlobalConfigBuilder() : base() { }
+
+            public AdminGetGlobalConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminGetGlobalConfig.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGetGlobalConfig.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGetGlobalConfig(IAdminGetGlobalConfigBuilder builder
         )
         {
             
@@ -163,32 +195,38 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

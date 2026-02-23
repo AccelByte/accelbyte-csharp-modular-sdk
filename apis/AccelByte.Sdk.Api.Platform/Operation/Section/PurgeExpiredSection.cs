@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PurgeExpiredSectionBuilder Builder { get => new PurgeExpiredSectionBuilder(); }
 
-        public class PurgeExpiredSectionBuilder
-            : OperationBuilder<PurgeExpiredSectionBuilder>
+        public interface IPurgeExpiredSectionBuilder
         {
 
 
 
 
 
-            internal PurgeExpiredSectionBuilder() { }
+        }
 
-            internal PurgeExpiredSectionBuilder(IAccelByteSdk sdk)
+        public abstract class PurgeExpiredSectionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPurgeExpiredSectionBuilder
+            where TImpl : PurgeExpiredSectionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PurgeExpiredSectionAbstractBuilder() { }
+
+            public PurgeExpiredSectionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<PurgeExpiredSectionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PurgeExpiredSection.Response Execute(
+            protected PurgeExpiredSection.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PurgeExpiredSection.Response> ExecuteAsync(
+            protected async Task<PurgeExpiredSection.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PurgeExpiredSection(PurgeExpiredSectionBuilder builder,
+        public class PurgeExpiredSectionBuilder : PurgeExpiredSectionAbstractBuilder<PurgeExpiredSectionBuilder>
+        {
+            public PurgeExpiredSectionBuilder() : base() { }
+
+            public PurgeExpiredSectionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PurgeExpiredSection.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<PurgeExpiredSection.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public PurgeExpiredSection(IPurgeExpiredSectionBuilder builder,
             string namespace_,
             string storeId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

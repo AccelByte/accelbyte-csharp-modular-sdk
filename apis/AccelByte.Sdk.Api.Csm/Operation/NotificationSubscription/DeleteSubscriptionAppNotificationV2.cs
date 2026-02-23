@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static DeleteSubscriptionAppNotificationV2Builder Builder { get => new DeleteSubscriptionAppNotificationV2Builder(); }
 
-        public class DeleteSubscriptionAppNotificationV2Builder
-            : OperationBuilder<DeleteSubscriptionAppNotificationV2Builder>
+        public interface IDeleteSubscriptionAppNotificationV2Builder
         {
 
 
 
 
 
-            internal DeleteSubscriptionAppNotificationV2Builder() { }
+        }
 
-            internal DeleteSubscriptionAppNotificationV2Builder(IAccelByteSdk sdk)
+        public abstract class DeleteSubscriptionAppNotificationV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteSubscriptionAppNotificationV2Builder
+            where TImpl : DeleteSubscriptionAppNotificationV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteSubscriptionAppNotificationV2AbstractBuilder() { }
+
+            public DeleteSubscriptionAppNotificationV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     subscriptionId                    
                 );
 
-                op.SetBaseFields<DeleteSubscriptionAppNotificationV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteSubscriptionAppNotificationV2.Response Execute(
+            protected DeleteSubscriptionAppNotificationV2.Response InternalExecute(
                 string app,
                 string namespace_,
                 string subscriptionId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteSubscriptionAppNotificationV2.Response> ExecuteAsync(
+            protected async Task<DeleteSubscriptionAppNotificationV2.Response> InternalExecuteAsync(
                 string app,
                 string namespace_,
                 string subscriptionId
@@ -114,7 +124,41 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private DeleteSubscriptionAppNotificationV2(DeleteSubscriptionAppNotificationV2Builder builder,
+        public class DeleteSubscriptionAppNotificationV2Builder : DeleteSubscriptionAppNotificationV2AbstractBuilder<DeleteSubscriptionAppNotificationV2Builder>
+        {
+            public DeleteSubscriptionAppNotificationV2Builder() : base() { }
+
+            public DeleteSubscriptionAppNotificationV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteSubscriptionAppNotificationV2.Response Execute(
+                string app,
+                string namespace_,
+                string subscriptionId
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_,
+                    subscriptionId
+                );
+            }
+            public async Task<DeleteSubscriptionAppNotificationV2.Response> ExecuteAsync(
+                string app,
+                string namespace_,
+                string subscriptionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_,
+                    subscriptionId
+                );
+            }
+        }
+
+
+        public DeleteSubscriptionAppNotificationV2(IDeleteSubscriptionAppNotificationV2Builder builder,
             string app,
             string namespace_,
             string subscriptionId
@@ -194,22 +238,26 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

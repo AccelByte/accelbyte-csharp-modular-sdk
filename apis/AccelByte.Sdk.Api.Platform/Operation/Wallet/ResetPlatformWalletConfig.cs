@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ResetPlatformWalletConfigBuilder Builder { get => new ResetPlatformWalletConfigBuilder(); }
 
-        public class ResetPlatformWalletConfigBuilder
-            : OperationBuilder<ResetPlatformWalletConfigBuilder>
+        public interface IResetPlatformWalletConfigBuilder
         {
 
 
 
 
 
-            internal ResetPlatformWalletConfigBuilder() { }
+        }
 
-            internal ResetPlatformWalletConfigBuilder(IAccelByteSdk sdk)
+        public abstract class ResetPlatformWalletConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IResetPlatformWalletConfigBuilder
+            where TImpl : ResetPlatformWalletConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ResetPlatformWalletConfigAbstractBuilder() { }
+
+            public ResetPlatformWalletConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     platform                    
                 );
 
-                op.SetBaseFields<ResetPlatformWalletConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ResetPlatformWalletConfig.Response Execute(
+            protected ResetPlatformWalletConfig.Response InternalExecute(
                 string namespace_,
                 string platform
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ResetPlatformWalletConfig.Response> ExecuteAsync(
+            protected async Task<ResetPlatformWalletConfig.Response> InternalExecuteAsync(
                 string namespace_,
                 string platform
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ResetPlatformWalletConfig(ResetPlatformWalletConfigBuilder builder,
+        public class ResetPlatformWalletConfigBuilder : ResetPlatformWalletConfigAbstractBuilder<ResetPlatformWalletConfigBuilder>
+        {
+            public ResetPlatformWalletConfigBuilder() : base() { }
+
+            public ResetPlatformWalletConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ResetPlatformWalletConfig.Response Execute(
+                string namespace_,
+                string platform
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platform
+                );
+            }
+            public async Task<ResetPlatformWalletConfig.Response> ExecuteAsync(
+                string namespace_,
+                string platform
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platform
+                );
+            }
+        }
+
+
+        public ResetPlatformWalletConfig(IResetPlatformWalletConfigBuilder builder,
             string namespace_,
             ResetPlatformWalletConfigPlatform platform
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlatformWalletConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

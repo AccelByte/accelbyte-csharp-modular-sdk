@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static GetUserParticipatedSeasonsBuilder Builder { get => new GetUserParticipatedSeasonsBuilder(); }
 
-        public class GetUserParticipatedSeasonsBuilder
-            : OperationBuilder<GetUserParticipatedSeasonsBuilder>
+        public interface IGetUserParticipatedSeasonsBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserParticipatedSeasonsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserParticipatedSeasonsBuilder
+            where TImpl : GetUserParticipatedSeasonsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal GetUserParticipatedSeasonsBuilder() { }
+            public GetUserParticipatedSeasonsAbstractBuilder() { }
 
-            internal GetUserParticipatedSeasonsBuilder(IAccelByteSdk sdk)
+            public GetUserParticipatedSeasonsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserParticipatedSeasonsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserParticipatedSeasonsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserParticipatedSeasonsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserParticipatedSeasons.Response Execute(
+            protected GetUserParticipatedSeasons.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserParticipatedSeasons.Response> ExecuteAsync(
+            protected async Task<GetUserParticipatedSeasons.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -124,7 +138,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private GetUserParticipatedSeasons(GetUserParticipatedSeasonsBuilder builder,
+        public class GetUserParticipatedSeasonsBuilder : GetUserParticipatedSeasonsAbstractBuilder<GetUserParticipatedSeasonsBuilder>
+        {
+            public GetUserParticipatedSeasonsBuilder() : base() { }
+
+            public GetUserParticipatedSeasonsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserParticipatedSeasons.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserParticipatedSeasons.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserParticipatedSeasons(IGetUserParticipatedSeasonsBuilder builder,
             string namespace_,
             string userId
         )
@@ -199,12 +242,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ListUserSeasonInfoPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ListUserSeasonInfoPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

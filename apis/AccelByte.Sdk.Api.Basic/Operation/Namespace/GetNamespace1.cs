@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetNamespace1Builder Builder { get => new GetNamespace1Builder(); }
 
-        public class GetNamespace1Builder
-            : OperationBuilder<GetNamespace1Builder>
+        public interface IGetNamespace1Builder
         {
 
 
 
 
 
-            internal GetNamespace1Builder() { }
+        }
 
-            internal GetNamespace1Builder(IAccelByteSdk sdk)
+        public abstract class GetNamespace1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetNamespace1Builder
+            where TImpl : GetNamespace1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetNamespace1AbstractBuilder() { }
+
+            public GetNamespace1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetNamespace1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetNamespace1.Response Execute(
+            protected GetNamespace1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetNamespace1.Response> ExecuteAsync(
+            protected async Task<GetNamespace1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetNamespace1(GetNamespace1Builder builder,
+        public class GetNamespace1Builder : GetNamespace1AbstractBuilder<GetNamespace1Builder>
+        {
+            public GetNamespace1Builder() : base() { }
+
+            public GetNamespace1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetNamespace1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetNamespace1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetNamespace1(IGetNamespace1Builder builder,
             string namespace_
         )
         {
@@ -164,12 +199,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.NamespaceSimpleInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.NamespaceSimpleInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

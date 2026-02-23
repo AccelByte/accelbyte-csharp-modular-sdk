@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -48,8 +48,28 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static PublicListUserAchievementsBuilder Builder { get => new PublicListUserAchievementsBuilder(); }
 
-        public class PublicListUserAchievementsBuilder
-            : OperationBuilder<PublicListUserAchievementsBuilder>
+        public interface IPublicListUserAchievementsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            bool? PreferUnlocked { get; }
+
+            PublicListUserAchievementsSortBy? SortBy { get; }
+
+            List<string>? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListUserAchievementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListUserAchievementsBuilder
+            where TImpl : PublicListUserAchievementsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -66,42 +86,42 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal PublicListUserAchievementsBuilder() { }
+            public PublicListUserAchievementsAbstractBuilder() { }
 
-            internal PublicListUserAchievementsBuilder(IAccelByteSdk sdk)
+            public PublicListUserAchievementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListUserAchievementsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListUserAchievementsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListUserAchievementsBuilder SetPreferUnlocked(bool _preferUnlocked)
+            public TImpl SetPreferUnlocked(bool _preferUnlocked)
             {
                 PreferUnlocked = _preferUnlocked;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListUserAchievementsBuilder SetSortBy(PublicListUserAchievementsSortBy _sortBy)
+            public TImpl SetSortBy(PublicListUserAchievementsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListUserAchievementsBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -118,11 +138,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicListUserAchievementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListUserAchievements.Response Execute(
+            protected PublicListUserAchievements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -141,7 +161,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListUserAchievements.Response> ExecuteAsync(
+            protected async Task<PublicListUserAchievements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -162,7 +182,36 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private PublicListUserAchievements(PublicListUserAchievementsBuilder builder,
+        public class PublicListUserAchievementsBuilder : PublicListUserAchievementsAbstractBuilder<PublicListUserAchievementsBuilder>
+        {
+            public PublicListUserAchievementsBuilder() : base() { }
+
+            public PublicListUserAchievementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListUserAchievements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicListUserAchievements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicListUserAchievements(IPublicListUserAchievementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -254,27 +303,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedUserAchievementResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedUserAchievementResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

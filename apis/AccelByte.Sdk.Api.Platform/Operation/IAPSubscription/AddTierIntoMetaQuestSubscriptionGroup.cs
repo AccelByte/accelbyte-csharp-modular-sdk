@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AddTierIntoMetaQuestSubscriptionGroupBuilder Builder { get => new AddTierIntoMetaQuestSubscriptionGroupBuilder(); }
 
-        public class AddTierIntoMetaQuestSubscriptionGroupBuilder
-            : OperationBuilder<AddTierIntoMetaQuestSubscriptionGroupBuilder>
+        public interface IAddTierIntoMetaQuestSubscriptionGroupBuilder
+        {
+
+
+            Model.ThirdPartySubscriptionTierCreate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class AddTierIntoMetaQuestSubscriptionGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAddTierIntoMetaQuestSubscriptionGroupBuilder
+            where TImpl : AddTierIntoMetaQuestSubscriptionGroupAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal AddTierIntoMetaQuestSubscriptionGroupBuilder() { }
+            public AddTierIntoMetaQuestSubscriptionGroupAbstractBuilder() { }
 
-            internal AddTierIntoMetaQuestSubscriptionGroupBuilder(IAccelByteSdk sdk)
+            public AddTierIntoMetaQuestSubscriptionGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public AddTierIntoMetaQuestSubscriptionGroupBuilder SetBody(Model.ThirdPartySubscriptionTierCreate _body)
+            public TImpl SetBody(Model.ThirdPartySubscriptionTierCreate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AddTierIntoMetaQuestSubscriptionGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AddTierIntoMetaQuestSubscriptionGroup.Response Execute(
+            protected AddTierIntoMetaQuestSubscriptionGroup.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AddTierIntoMetaQuestSubscriptionGroup.Response> ExecuteAsync(
+            protected async Task<AddTierIntoMetaQuestSubscriptionGroup.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AddTierIntoMetaQuestSubscriptionGroup(AddTierIntoMetaQuestSubscriptionGroupBuilder builder,
+        public class AddTierIntoMetaQuestSubscriptionGroupBuilder : AddTierIntoMetaQuestSubscriptionGroupAbstractBuilder<AddTierIntoMetaQuestSubscriptionGroupBuilder>
+        {
+            public AddTierIntoMetaQuestSubscriptionGroupBuilder() : base() { }
+
+            public AddTierIntoMetaQuestSubscriptionGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AddTierIntoMetaQuestSubscriptionGroup.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AddTierIntoMetaQuestSubscriptionGroup.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AddTierIntoMetaQuestSubscriptionGroup(IAddTierIntoMetaQuestSubscriptionGroupBuilder builder,
             string namespace_
         )
         {
@@ -174,12 +211,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTierInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTierInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

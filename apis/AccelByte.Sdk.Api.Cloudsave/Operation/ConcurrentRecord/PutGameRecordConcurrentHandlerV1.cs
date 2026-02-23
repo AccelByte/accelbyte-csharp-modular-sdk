@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -74,17 +74,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static PutGameRecordConcurrentHandlerV1Builder Builder { get => new PutGameRecordConcurrentHandlerV1Builder(); }
 
-        public class PutGameRecordConcurrentHandlerV1Builder
-            : OperationBuilder<PutGameRecordConcurrentHandlerV1Builder>
+        public interface IPutGameRecordConcurrentHandlerV1Builder
         {
 
 
 
 
 
-            internal PutGameRecordConcurrentHandlerV1Builder() { }
+        }
 
-            internal PutGameRecordConcurrentHandlerV1Builder(IAccelByteSdk sdk)
+        public abstract class PutGameRecordConcurrentHandlerV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPutGameRecordConcurrentHandlerV1Builder
+            where TImpl : PutGameRecordConcurrentHandlerV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PutGameRecordConcurrentHandlerV1AbstractBuilder() { }
+
+            public PutGameRecordConcurrentHandlerV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -106,11 +116,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PutGameRecordConcurrentHandlerV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PutGameRecordConcurrentHandlerV1.Response Execute(
+            protected PutGameRecordConcurrentHandlerV1.Response InternalExecute(
                 ModelsConcurrentRecordRequest body,
                 string key,
                 string namespace_
@@ -131,7 +141,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PutGameRecordConcurrentHandlerV1.Response> ExecuteAsync(
+            protected async Task<PutGameRecordConcurrentHandlerV1.Response> InternalExecuteAsync(
                 ModelsConcurrentRecordRequest body,
                 string key,
                 string namespace_
@@ -154,7 +164,40 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private PutGameRecordConcurrentHandlerV1(PutGameRecordConcurrentHandlerV1Builder builder,
+        public class PutGameRecordConcurrentHandlerV1Builder : PutGameRecordConcurrentHandlerV1AbstractBuilder<PutGameRecordConcurrentHandlerV1Builder>
+        {
+            public PutGameRecordConcurrentHandlerV1Builder() : base() { }
+
+            public PutGameRecordConcurrentHandlerV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PutGameRecordConcurrentHandlerV1.Response Execute(
+                ModelsConcurrentRecordRequest body,
+                string key,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    key,
+                    namespace_
+                );
+            }
+            public async Task<PutGameRecordConcurrentHandlerV1.Response> ExecuteAsync(
+                ModelsConcurrentRecordRequest body,
+                string key,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    key,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PutGameRecordConcurrentHandlerV1(IPutGameRecordConcurrentHandlerV1Builder builder,
             ModelsConcurrentRecordRequest body,
             string key,
             string namespace_
@@ -236,27 +279,32 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)412)
             {
-                response.Error412 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error412 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error412!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

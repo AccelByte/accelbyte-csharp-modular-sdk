@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ProcessUserOrderNotificationBuilder Builder { get => new ProcessUserOrderNotificationBuilder(); }
 
-        public class ProcessUserOrderNotificationBuilder
-            : OperationBuilder<ProcessUserOrderNotificationBuilder>
+        public interface IProcessUserOrderNotificationBuilder
         {
 
 
 
 
 
-            internal ProcessUserOrderNotificationBuilder() { }
+        }
 
-            internal ProcessUserOrderNotificationBuilder(IAccelByteSdk sdk)
+        public abstract class ProcessUserOrderNotificationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IProcessUserOrderNotificationBuilder
+            where TImpl : ProcessUserOrderNotificationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ProcessUserOrderNotificationAbstractBuilder() { }
+
+            public ProcessUserOrderNotificationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ProcessUserOrderNotificationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ProcessUserOrderNotification.Response Execute(
+            protected ProcessUserOrderNotification.Response InternalExecute(
                 TradeNotification body,
                 string namespace_,
                 string orderNo,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ProcessUserOrderNotification.Response> ExecuteAsync(
+            protected async Task<ProcessUserOrderNotification.Response> InternalExecuteAsync(
                 TradeNotification body,
                 string namespace_,
                 string orderNo,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ProcessUserOrderNotification(ProcessUserOrderNotificationBuilder builder,
+        public class ProcessUserOrderNotificationBuilder : ProcessUserOrderNotificationAbstractBuilder<ProcessUserOrderNotificationBuilder>
+        {
+            public ProcessUserOrderNotificationBuilder() : base() { }
+
+            public ProcessUserOrderNotificationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ProcessUserOrderNotification.Response Execute(
+                TradeNotification body,
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<ProcessUserOrderNotification.Response> ExecuteAsync(
+                TradeNotification body,
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public ProcessUserOrderNotification(IProcessUserOrderNotificationBuilder builder,
             TradeNotification body,
             string namespace_,
             string orderNo,
@@ -197,7 +244,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeletePlatformDLCConfigBuilder Builder { get => new DeletePlatformDLCConfigBuilder(); }
 
-        public class DeletePlatformDLCConfigBuilder
-            : OperationBuilder<DeletePlatformDLCConfigBuilder>
+        public interface IDeletePlatformDLCConfigBuilder
         {
 
 
 
 
 
-            internal DeletePlatformDLCConfigBuilder() { }
+        }
 
-            internal DeletePlatformDLCConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeletePlatformDLCConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeletePlatformDLCConfigBuilder
+            where TImpl : DeletePlatformDLCConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeletePlatformDLCConfigAbstractBuilder() { }
+
+            public DeletePlatformDLCConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeletePlatformDLCConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeletePlatformDLCConfig.Response Execute(
+            protected DeletePlatformDLCConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeletePlatformDLCConfig.Response> ExecuteAsync(
+            protected async Task<DeletePlatformDLCConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeletePlatformDLCConfig(DeletePlatformDLCConfigBuilder builder,
+        public class DeletePlatformDLCConfigBuilder : DeletePlatformDLCConfigAbstractBuilder<DeletePlatformDLCConfigBuilder>
+        {
+            public DeletePlatformDLCConfigBuilder() : base() { }
+
+            public DeletePlatformDLCConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeletePlatformDLCConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeletePlatformDLCConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeletePlatformDLCConfig(IDeletePlatformDLCConfigBuilder builder,
             string namespace_
         )
         {

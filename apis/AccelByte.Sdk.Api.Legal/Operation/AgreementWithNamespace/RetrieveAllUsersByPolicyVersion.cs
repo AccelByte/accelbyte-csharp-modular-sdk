@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAllUsersByPolicyVersionBuilder Builder { get => new RetrieveAllUsersByPolicyVersionBuilder(); }
 
-        public class RetrieveAllUsersByPolicyVersionBuilder
-            : OperationBuilder<RetrieveAllUsersByPolicyVersionBuilder>
+        public interface IRetrieveAllUsersByPolicyVersionBuilder
+        {
+
+            bool? ConvertGameUserId { get; }
+
+            string? Keyword { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveAllUsersByPolicyVersionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAllUsersByPolicyVersionBuilder
+            where TImpl : RetrieveAllUsersByPolicyVersionAbstractBuilder<TImpl>
         {
 
             public bool? ConvertGameUserId { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveAllUsersByPolicyVersionBuilder() { }
+            public RetrieveAllUsersByPolicyVersionAbstractBuilder() { }
 
-            internal RetrieveAllUsersByPolicyVersionBuilder(IAccelByteSdk sdk)
+            public RetrieveAllUsersByPolicyVersionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveAllUsersByPolicyVersionBuilder SetConvertGameUserId(bool _convertGameUserId)
+            public TImpl SetConvertGameUserId(bool _convertGameUserId)
             {
                 ConvertGameUserId = _convertGameUserId;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveAllUsersByPolicyVersionBuilder SetKeyword(string _keyword)
+            public TImpl SetKeyword(string _keyword)
             {
                 Keyword = _keyword;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveAllUsersByPolicyVersionBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveAllUsersByPolicyVersionBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyVersionId                    
                 );
 
-                op.SetBaseFields<RetrieveAllUsersByPolicyVersionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAllUsersByPolicyVersion.Response Execute(
+            protected RetrieveAllUsersByPolicyVersion.Response InternalExecute(
                 string namespace_,
                 string policyVersionId
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAllUsersByPolicyVersion.Response> ExecuteAsync(
+            protected async Task<RetrieveAllUsersByPolicyVersion.Response> InternalExecuteAsync(
                 string namespace_,
                 string policyVersionId
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAllUsersByPolicyVersion(RetrieveAllUsersByPolicyVersionBuilder builder,
+        public class RetrieveAllUsersByPolicyVersionBuilder : RetrieveAllUsersByPolicyVersionAbstractBuilder<RetrieveAllUsersByPolicyVersionBuilder>
+        {
+            public RetrieveAllUsersByPolicyVersionBuilder() : base() { }
+
+            public RetrieveAllUsersByPolicyVersionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAllUsersByPolicyVersion.Response Execute(
+                string namespace_,
+                string policyVersionId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    policyVersionId
+                );
+            }
+            public async Task<RetrieveAllUsersByPolicyVersion.Response> ExecuteAsync(
+                string namespace_,
+                string policyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    policyVersionId
+                );
+            }
+        }
+
+
+        public RetrieveAllUsersByPolicyVersion(IRetrieveAllUsersByPolicyVersionBuilder builder,
             string namespace_,
             string policyVersionId
         )
@@ -217,12 +264,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PagedRetrieveUserAcceptedAgreementResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

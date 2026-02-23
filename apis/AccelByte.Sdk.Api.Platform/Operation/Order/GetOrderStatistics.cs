@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetOrderStatisticsBuilder Builder { get => new GetOrderStatisticsBuilder(); }
 
-        public class GetOrderStatisticsBuilder
-            : OperationBuilder<GetOrderStatisticsBuilder>
+        public interface IGetOrderStatisticsBuilder
         {
 
 
 
 
 
-            internal GetOrderStatisticsBuilder() { }
+        }
 
-            internal GetOrderStatisticsBuilder(IAccelByteSdk sdk)
+        public abstract class GetOrderStatisticsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetOrderStatisticsBuilder
+            where TImpl : GetOrderStatisticsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetOrderStatisticsAbstractBuilder() { }
+
+            public GetOrderStatisticsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetOrderStatisticsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetOrderStatistics.Response Execute(
+            protected GetOrderStatistics.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetOrderStatistics.Response> ExecuteAsync(
+            protected async Task<GetOrderStatistics.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetOrderStatistics(GetOrderStatisticsBuilder builder,
+        public class GetOrderStatisticsBuilder : GetOrderStatisticsAbstractBuilder<GetOrderStatisticsBuilder>
+        {
+            public GetOrderStatisticsBuilder() : base() { }
+
+            public GetOrderStatisticsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetOrderStatistics.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetOrderStatistics.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetOrderStatistics(IGetOrderStatisticsBuilder builder,
             string namespace_
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderStatistics>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderStatistics>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

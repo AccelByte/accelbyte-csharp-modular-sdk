@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static GetLeaderboardConfigurationAdminV1Builder Builder { get => new GetLeaderboardConfigurationAdminV1Builder(); }
 
-        public class GetLeaderboardConfigurationAdminV1Builder
-            : OperationBuilder<GetLeaderboardConfigurationAdminV1Builder>
+        public interface IGetLeaderboardConfigurationAdminV1Builder
         {
 
 
 
 
 
-            internal GetLeaderboardConfigurationAdminV1Builder() { }
+        }
 
-            internal GetLeaderboardConfigurationAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class GetLeaderboardConfigurationAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLeaderboardConfigurationAdminV1Builder
+            where TImpl : GetLeaderboardConfigurationAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetLeaderboardConfigurationAdminV1AbstractBuilder() { }
+
+            public GetLeaderboardConfigurationAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLeaderboardConfigurationAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLeaderboardConfigurationAdminV1.Response Execute(
+            protected GetLeaderboardConfigurationAdminV1.Response InternalExecute(
                 string leaderboardCode,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLeaderboardConfigurationAdminV1.Response> ExecuteAsync(
+            protected async Task<GetLeaderboardConfigurationAdminV1.Response> InternalExecuteAsync(
                 string leaderboardCode,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private GetLeaderboardConfigurationAdminV1(GetLeaderboardConfigurationAdminV1Builder builder,
+        public class GetLeaderboardConfigurationAdminV1Builder : GetLeaderboardConfigurationAdminV1AbstractBuilder<GetLeaderboardConfigurationAdminV1Builder>
+        {
+            public GetLeaderboardConfigurationAdminV1Builder() : base() { }
+
+            public GetLeaderboardConfigurationAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLeaderboardConfigurationAdminV1.Response Execute(
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+            public async Task<GetLeaderboardConfigurationAdminV1.Response> ExecuteAsync(
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLeaderboardConfigurationAdminV1(IGetLeaderboardConfigurationAdminV1Builder builder,
             string leaderboardCode,
             string namespace_
         )
@@ -183,32 +222,38 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetLeaderboardConfigResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetLeaderboardConfigResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryImportHistoryBuilder Builder { get => new QueryImportHistoryBuilder(); }
 
-        public class QueryImportHistoryBuilder
-            : OperationBuilder<QueryImportHistoryBuilder>
+        public interface IQueryImportHistoryBuilder
+        {
+
+            string? End { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? SortBy { get; }
+
+            string? Start { get; }
+
+            bool? Success { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryImportHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryImportHistoryBuilder
+            where TImpl : QueryImportHistoryAbstractBuilder<TImpl>
         {
 
             public string? End { get; set; }
@@ -50,48 +72,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryImportHistoryBuilder() { }
+            public QueryImportHistoryAbstractBuilder() { }
 
-            internal QueryImportHistoryBuilder(IAccelByteSdk sdk)
+            public QueryImportHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryImportHistoryBuilder SetEnd(string _end)
+            public TImpl SetEnd(string _end)
             {
                 End = _end;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryImportHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryImportHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryImportHistoryBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryImportHistoryBuilder SetStart(string _start)
+            public TImpl SetStart(string _start)
             {
                 Start = _start;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryImportHistoryBuilder SetSuccess(bool _success)
+            public TImpl SetSuccess(bool _success)
             {
                 Success = _success;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -108,11 +130,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<QueryImportHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryImportHistory.Response Execute(
+            protected QueryImportHistory.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -131,7 +153,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryImportHistory.Response> ExecuteAsync(
+            protected async Task<QueryImportHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -152,7 +174,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryImportHistory(QueryImportHistoryBuilder builder,
+        public class QueryImportHistoryBuilder : QueryImportHistoryAbstractBuilder<QueryImportHistoryBuilder>
+        {
+            public QueryImportHistoryBuilder() : base() { }
+
+            public QueryImportHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryImportHistory.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<QueryImportHistory.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public QueryImportHistory(IQueryImportHistoryBuilder builder,
             string namespace_,
             string storeId
         )
@@ -239,12 +290,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ImportStoreHistoryPagingResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ImportStoreHistoryPagingResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

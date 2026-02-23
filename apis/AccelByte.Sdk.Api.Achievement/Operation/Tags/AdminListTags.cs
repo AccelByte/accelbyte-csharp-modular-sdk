@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static AdminListTagsBuilder Builder { get => new AdminListTagsBuilder(); }
 
-        public class AdminListTagsBuilder
-            : OperationBuilder<AdminListTagsBuilder>
+        public interface IAdminListTagsBuilder
+        {
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            AdminListTagsSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListTagsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListTagsBuilder
+            where TImpl : AdminListTagsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal AdminListTagsBuilder() { }
+            public AdminListTagsAbstractBuilder() { }
 
-            internal AdminListTagsBuilder(IAccelByteSdk sdk)
+            public AdminListTagsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListTagsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListTagsBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListTagsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListTagsBuilder SetSortBy(AdminListTagsSortBy _sortBy)
+            public TImpl SetSortBy(AdminListTagsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -93,11 +111,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminListTagsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListTags.Response Execute(
+            protected AdminListTags.Response InternalExecute(
                 string namespace_
             )
             {
@@ -114,7 +132,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListTags.Response> ExecuteAsync(
+            protected async Task<AdminListTags.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -133,7 +151,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private AdminListTags(AdminListTagsBuilder builder,
+        public class AdminListTagsBuilder : AdminListTagsAbstractBuilder<AdminListTagsBuilder>
+        {
+            public AdminListTagsBuilder() : base() { }
+
+            public AdminListTagsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListTags.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminListTags.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminListTags(IAdminListTagsBuilder builder,
             string namespace_
         )
         {
@@ -216,27 +259,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedTagResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedTagResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

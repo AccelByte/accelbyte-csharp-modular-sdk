@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static DeleteRuleSetBuilder Builder { get => new DeleteRuleSetBuilder(); }
 
-        public class DeleteRuleSetBuilder
-            : OperationBuilder<DeleteRuleSetBuilder>
+        public interface IDeleteRuleSetBuilder
         {
 
 
 
 
 
-            internal DeleteRuleSetBuilder() { }
+        }
 
-            internal DeleteRuleSetBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteRuleSetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteRuleSetBuilder
+            where TImpl : DeleteRuleSetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteRuleSetAbstractBuilder() { }
+
+            public DeleteRuleSetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     ruleset                    
                 );
 
-                op.SetBaseFields<DeleteRuleSetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteRuleSet.Response Execute(
+            protected DeleteRuleSet.Response InternalExecute(
                 string namespace_,
                 string ruleset
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteRuleSet.Response> ExecuteAsync(
+            protected async Task<DeleteRuleSet.Response> InternalExecuteAsync(
                 string namespace_,
                 string ruleset
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private DeleteRuleSet(DeleteRuleSetBuilder builder,
+        public class DeleteRuleSetBuilder : DeleteRuleSetAbstractBuilder<DeleteRuleSetBuilder>
+        {
+            public DeleteRuleSetBuilder() : base() { }
+
+            public DeleteRuleSetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteRuleSet.Response Execute(
+                string namespace_,
+                string ruleset
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    ruleset
+                );
+            }
+            public async Task<DeleteRuleSet.Response> ExecuteAsync(
+                string namespace_,
+                string ruleset
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    ruleset
+                );
+            }
+        }
+
+
+        public DeleteRuleSet(IDeleteRuleSetBuilder builder,
             string namespace_,
             string ruleset
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

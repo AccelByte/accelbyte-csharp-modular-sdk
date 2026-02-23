@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static AdminUpdateXRayConfigBuilder Builder { get => new AdminUpdateXRayConfigBuilder(); }
 
-        public class AdminUpdateXRayConfigBuilder
-            : OperationBuilder<AdminUpdateXRayConfigBuilder>
+        public interface IAdminUpdateXRayConfigBuilder
         {
 
 
 
 
 
-            internal AdminUpdateXRayConfigBuilder() { }
+        }
 
-            internal AdminUpdateXRayConfigBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateXRayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateXRayConfigBuilder
+            where TImpl : AdminUpdateXRayConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateXRayConfigAbstractBuilder() { }
+
+            public AdminUpdateXRayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateXRayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateXRayConfig.Response Execute(
+            protected AdminUpdateXRayConfig.Response InternalExecute(
                 ModelsXRayConfigHttpUpdateRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateXRayConfig.Response> ExecuteAsync(
+            protected async Task<AdminUpdateXRayConfig.Response> InternalExecuteAsync(
                 ModelsXRayConfigHttpUpdateRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private AdminUpdateXRayConfig(AdminUpdateXRayConfigBuilder builder,
+        public class AdminUpdateXRayConfigBuilder : AdminUpdateXRayConfigAbstractBuilder<AdminUpdateXRayConfigBuilder>
+        {
+            public AdminUpdateXRayConfigBuilder() : base() { }
+
+            public AdminUpdateXRayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateXRayConfig.Response Execute(
+                ModelsXRayConfigHttpUpdateRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateXRayConfig.Response> ExecuteAsync(
+                ModelsXRayConfigHttpUpdateRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateXRayConfig(IAdminUpdateXRayConfigBuilder builder,
             ModelsXRayConfigHttpUpdateRequest body,
             string namespace_
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicCancelUserOrderBuilder Builder { get => new PublicCancelUserOrderBuilder(); }
 
-        public class PublicCancelUserOrderBuilder
-            : OperationBuilder<PublicCancelUserOrderBuilder>
+        public interface IPublicCancelUserOrderBuilder
         {
 
 
 
 
 
-            internal PublicCancelUserOrderBuilder() { }
+        }
 
-            internal PublicCancelUserOrderBuilder(IAccelByteSdk sdk)
+        public abstract class PublicCancelUserOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCancelUserOrderBuilder
+            where TImpl : PublicCancelUserOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicCancelUserOrderAbstractBuilder() { }
+
+            public PublicCancelUserOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicCancelUserOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicCancelUserOrder.Response Execute(
+            protected PublicCancelUserOrder.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCancelUserOrder.Response> ExecuteAsync(
+            protected async Task<PublicCancelUserOrder.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -112,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public PublicCancelUserOrder.Response<T1> Execute<T1>(
+            protected PublicCancelUserOrder.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCancelUserOrder.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicCancelUserOrder.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -156,7 +166,65 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicCancelUserOrder(PublicCancelUserOrderBuilder builder,
+        public class PublicCancelUserOrderBuilder : PublicCancelUserOrderAbstractBuilder<PublicCancelUserOrderBuilder>
+        {
+            public PublicCancelUserOrderBuilder() : base() { }
+
+            public PublicCancelUserOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicCancelUserOrder.Response Execute(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<PublicCancelUserOrder.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+
+            public PublicCancelUserOrder.Response<T1> Execute<T1>(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<PublicCancelUserOrder.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicCancelUserOrder(IPublicCancelUserOrderBuilder builder,
             string namespace_,
             string orderNo,
             string userId
@@ -240,17 +308,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 
@@ -271,17 +342,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             

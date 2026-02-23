@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,30 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static GetChallengesBuilder Builder { get => new GetChallengesBuilder(); }
 
-        public class GetChallengesBuilder
-            : OperationBuilder<GetChallengesBuilder>
+        public interface IGetChallengesBuilder
+        {
+
+            string? Keyword { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            GetChallengesSortBy? SortBy { get; }
+
+            GetChallengesStatus? Status { get; }
+
+            List<string>? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetChallengesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetChallengesBuilder
+            where TImpl : GetChallengesAbstractBuilder<TImpl>
         {
 
             public string? Keyword { get; set; }
@@ -50,48 +72,48 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
 
 
-            internal GetChallengesBuilder() { }
+            public GetChallengesAbstractBuilder() { }
 
-            internal GetChallengesBuilder(IAccelByteSdk sdk)
+            public GetChallengesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetChallengesBuilder SetKeyword(string _keyword)
+            public TImpl SetKeyword(string _keyword)
             {
                 Keyword = _keyword;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetChallengesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetChallengesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetChallengesBuilder SetSortBy(GetChallengesSortBy _sortBy)
+            public TImpl SetSortBy(GetChallengesSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetChallengesBuilder SetStatus(GetChallengesStatus _status)
+            public TImpl SetStatus(GetChallengesStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetChallengesBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -106,11 +128,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetChallengesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetChallenges.Response Execute(
+            protected GetChallenges.Response InternalExecute(
                 string namespace_
             )
             {
@@ -127,7 +149,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetChallenges.Response> ExecuteAsync(
+            protected async Task<GetChallenges.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -146,7 +168,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private GetChallenges(GetChallengesBuilder builder,
+        public class GetChallengesBuilder : GetChallengesAbstractBuilder<GetChallengesBuilder>
+        {
+            public GetChallengesBuilder() : base() { }
+
+            public GetChallengesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetChallenges.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetChallenges.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetChallenges(IGetChallengesBuilder builder,
             string namespace_
         )
         {
@@ -237,27 +284,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListChallengeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListChallengeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

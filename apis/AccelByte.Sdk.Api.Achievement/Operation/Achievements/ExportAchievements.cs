@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,20 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static ExportAchievementsBuilder Builder { get => new ExportAchievementsBuilder(); }
 
-        public class ExportAchievementsBuilder
-            : OperationBuilder<ExportAchievementsBuilder>
+        public interface IExportAchievementsBuilder
+        {
+
+            List<string>? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class ExportAchievementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExportAchievementsBuilder
+            where TImpl : ExportAchievementsAbstractBuilder<TImpl>
         {
 
             public List<string>? Tags { get; set; }
@@ -47,18 +59,18 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal ExportAchievementsBuilder() { }
+            public ExportAchievementsAbstractBuilder() { }
 
-            internal ExportAchievementsBuilder(IAccelByteSdk sdk)
+            public ExportAchievementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ExportAchievementsBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ExportAchievementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ExportAchievements.Response Execute(
+            protected ExportAchievements.Response InternalExecute(
                 string namespace_
             )
             {
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExportAchievements.Response> ExecuteAsync(
+            protected async Task<ExportAchievements.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -113,7 +125,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private ExportAchievements(ExportAchievementsBuilder builder,
+        public class ExportAchievementsBuilder : ExportAchievementsAbstractBuilder<ExportAchievementsBuilder>
+        {
+            public ExportAchievementsBuilder() : base() { }
+
+            public ExportAchievementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ExportAchievements.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ExportAchievements.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ExportAchievements(IExportAchievementsBuilder builder,
             string namespace_
         )
         {
@@ -192,17 +229,20 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ImportStoreBuilder Builder { get => new ImportStoreBuilder(); }
 
-        public class ImportStoreBuilder
-            : OperationBuilder<ImportStoreBuilder>
+        public interface IImportStoreBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class ImportStoreAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImportStoreBuilder
+            where TImpl : ImportStoreAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -45,26 +59,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ImportStoreBuilder() { }
+            public ImportStoreAbstractBuilder() { }
 
-            internal ImportStoreBuilder(IAccelByteSdk sdk)
+            public ImportStoreAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ImportStoreBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
 
-            public ImportStoreBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -77,12 +91,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ImportStoreBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public ImportStore.Response Execute(
+            protected ImportStore.Response InternalExecute(
                 string namespace_
             )
             {
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImportStore.Response> ExecuteAsync(
+            protected async Task<ImportStore.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -118,7 +132,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ImportStore(ImportStoreBuilder builder,
+        public class ImportStoreBuilder : ImportStoreAbstractBuilder<ImportStoreBuilder>
+        {
+            public ImportStoreBuilder() : base() { }
+
+            public ImportStoreBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public ImportStore.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ImportStore.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ImportStore(IImportStoreBuilder builder,
             string namespace_
         )
         {
@@ -191,17 +231,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

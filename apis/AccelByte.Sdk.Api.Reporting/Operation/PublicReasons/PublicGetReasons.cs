@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,8 +28,26 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static PublicGetReasonsBuilder Builder { get => new PublicGetReasonsBuilder(); }
 
-        public class PublicGetReasonsBuilder
-            : OperationBuilder<PublicGetReasonsBuilder>
+        public interface IPublicGetReasonsBuilder
+        {
+
+            string? Group { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? Title { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetReasonsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetReasonsBuilder
+            where TImpl : PublicGetReasonsAbstractBuilder<TImpl>
         {
 
             public string? Group { get; set; }
@@ -44,36 +62,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal PublicGetReasonsBuilder() { }
+            public PublicGetReasonsAbstractBuilder() { }
 
-            internal PublicGetReasonsBuilder(IAccelByteSdk sdk)
+            public PublicGetReasonsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetReasonsBuilder SetGroup(string _group)
+            public TImpl SetGroup(string _group)
             {
                 Group = _group;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetReasonsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetReasonsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetReasonsBuilder SetTitle(string _title)
+            public TImpl SetTitle(string _title)
             {
                 Title = _title;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +106,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetReasonsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetReasons.Response Execute(
+            protected PublicGetReasons.Response InternalExecute(
                 string namespace_
             )
             {
@@ -109,7 +127,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetReasons.Response> ExecuteAsync(
+            protected async Task<PublicGetReasons.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -128,7 +146,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private PublicGetReasons(PublicGetReasonsBuilder builder,
+        public class PublicGetReasonsBuilder : PublicGetReasonsAbstractBuilder<PublicGetReasonsBuilder>
+        {
+            public PublicGetReasonsBuilder() : base() { }
+
+            public PublicGetReasonsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetReasons.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetReasons.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetReasons(IPublicGetReasonsBuilder builder,
             string namespace_
         )
         {
@@ -207,17 +250,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiPublicReasonListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiPublicReasonListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

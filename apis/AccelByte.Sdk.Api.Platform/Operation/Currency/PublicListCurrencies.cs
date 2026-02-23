@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicListCurrenciesBuilder Builder { get => new PublicListCurrenciesBuilder(); }
 
-        public class PublicListCurrenciesBuilder
-            : OperationBuilder<PublicListCurrenciesBuilder>
+        public interface IPublicListCurrenciesBuilder
+        {
+
+            PublicListCurrenciesCurrencyType? CurrencyType { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListCurrenciesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListCurrenciesBuilder
+            where TImpl : PublicListCurrenciesAbstractBuilder<TImpl>
         {
 
             public PublicListCurrenciesCurrencyType? CurrencyType { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicListCurrenciesBuilder() { }
+            public PublicListCurrenciesAbstractBuilder() { }
 
-            internal PublicListCurrenciesBuilder(IAccelByteSdk sdk)
+            public PublicListCurrenciesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListCurrenciesBuilder SetCurrencyType(PublicListCurrenciesCurrencyType _currencyType)
+            public TImpl SetCurrencyType(PublicListCurrenciesCurrencyType _currencyType)
             {
                 CurrencyType = _currencyType;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListCurrenciesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListCurrencies.Response Execute(
+            protected PublicListCurrencies.Response InternalExecute(
                 string namespace_
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListCurrencies.Response> ExecuteAsync(
+            protected async Task<PublicListCurrencies.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicListCurrencies(PublicListCurrenciesBuilder builder,
+        public class PublicListCurrenciesBuilder : PublicListCurrenciesAbstractBuilder<PublicListCurrenciesBuilder>
+        {
+            public PublicListCurrenciesBuilder() : base() { }
+
+            public PublicListCurrenciesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListCurrencies.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListCurrencies.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListCurrencies(IPublicListCurrenciesBuilder builder,
             string namespace_
         )
         {
@@ -173,7 +210,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.CurrencyInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static BasicHealthCheckBuilder Builder { get => new BasicHealthCheckBuilder(); }
 
-        public class BasicHealthCheckBuilder
-            : OperationBuilder<BasicHealthCheckBuilder>
+        public interface IBasicHealthCheckBuilder
         {
 
 
 
 
 
-            internal BasicHealthCheckBuilder() { }
+        }
 
-            internal BasicHealthCheckBuilder(IAccelByteSdk sdk)
+        public abstract class BasicHealthCheckAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBasicHealthCheckBuilder
+            where TImpl : BasicHealthCheckAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public BasicHealthCheckAbstractBuilder() { }
+
+            public BasicHealthCheckAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 BasicHealthCheck op = new BasicHealthCheck(this
                 );
 
-                op.SetBaseFields<BasicHealthCheckBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BasicHealthCheck.Response Execute(
+            protected BasicHealthCheck.Response InternalExecute(
             )
             {
                 BasicHealthCheck op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BasicHealthCheck.Response> ExecuteAsync(
+            protected async Task<BasicHealthCheck.Response> InternalExecuteAsync(
             )
             {
                 BasicHealthCheck op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private BasicHealthCheck(BasicHealthCheckBuilder builder
+        public class BasicHealthCheckBuilder : BasicHealthCheckAbstractBuilder<BasicHealthCheckBuilder>
+        {
+            public BasicHealthCheckBuilder() : base() { }
+
+            public BasicHealthCheckBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BasicHealthCheck.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<BasicHealthCheck.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public BasicHealthCheck(IBasicHealthCheckBuilder builder
         )
         {
             

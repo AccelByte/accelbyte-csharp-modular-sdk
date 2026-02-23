@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static RetireSeasonBuilder Builder { get => new RetireSeasonBuilder(); }
 
-        public class RetireSeasonBuilder
-            : OperationBuilder<RetireSeasonBuilder>
+        public interface IRetireSeasonBuilder
+        {
+
+            bool? Force { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetireSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetireSeasonBuilder
+            where TImpl : RetireSeasonAbstractBuilder<TImpl>
         {
 
             public bool? Force { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal RetireSeasonBuilder() { }
+            public RetireSeasonAbstractBuilder() { }
 
-            internal RetireSeasonBuilder(IAccelByteSdk sdk)
+            public RetireSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetireSeasonBuilder SetForce(bool _force)
+            public TImpl SetForce(bool _force)
             {
                 Force = _force;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<RetireSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetireSeason.Response Execute(
+            protected RetireSeason.Response InternalExecute(
                 string namespace_,
                 string seasonId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetireSeason.Response> ExecuteAsync(
+            protected async Task<RetireSeason.Response> InternalExecuteAsync(
                 string namespace_,
                 string seasonId
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private RetireSeason(RetireSeasonBuilder builder,
+        public class RetireSeasonBuilder : RetireSeasonAbstractBuilder<RetireSeasonBuilder>
+        {
+            public RetireSeasonBuilder() : base() { }
+
+            public RetireSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetireSeason.Response Execute(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<RetireSeason.Response> ExecuteAsync(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public RetireSeason(IRetireSeasonBuilder builder,
             string namespace_,
             string seasonId
         )
@@ -192,22 +233,26 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SeasonInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SeasonInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

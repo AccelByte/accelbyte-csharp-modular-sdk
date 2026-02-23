@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateAppleP8FileBuilder Builder { get => new UpdateAppleP8FileBuilder(); }
 
-        public class UpdateAppleP8FileBuilder
-            : OperationBuilder<UpdateAppleP8FileBuilder>
+        public interface IUpdateAppleP8FileBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class UpdateAppleP8FileAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateAppleP8FileBuilder
+            where TImpl : UpdateAppleP8FileAbstractBuilder<TImpl>
         {
 
 
@@ -43,9 +55,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateAppleP8FileBuilder() { }
+            public UpdateAppleP8FileAbstractBuilder() { }
 
-            internal UpdateAppleP8FileBuilder(IAccelByteSdk sdk)
+            public UpdateAppleP8FileAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -53,10 +65,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UpdateAppleP8FileBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateAppleP8FileBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateAppleP8File.Response Execute(
+            protected UpdateAppleP8File.Response InternalExecute(
                 string namespace_
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateAppleP8File.Response> ExecuteAsync(
+            protected async Task<UpdateAppleP8File.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateAppleP8File(UpdateAppleP8FileBuilder builder,
+        public class UpdateAppleP8FileBuilder : UpdateAppleP8FileAbstractBuilder<UpdateAppleP8FileBuilder>
+        {
+            public UpdateAppleP8FileBuilder() : base() { }
+
+            public UpdateAppleP8FileBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateAppleP8File.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<UpdateAppleP8File.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateAppleP8File(IUpdateAppleP8FileBuilder builder,
             string namespace_
         )
         {
@@ -175,7 +212,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AppleIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AppleIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -55,8 +55,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PlatformAuthenticationV3Builder Builder { get => new PlatformAuthenticationV3Builder(); }
 
-        public class PlatformAuthenticationV3Builder
-            : OperationBuilder<PlatformAuthenticationV3Builder>
+        public interface IPlatformAuthenticationV3Builder
+        {
+
+            string? Code { get; }
+
+            string? Error { get; }
+
+            string? OpenidAssocHandle { get; }
+
+            string? OpenidClaimedId { get; }
+
+            string? OpenidIdentity { get; }
+
+            string? OpenidMode { get; }
+
+            string? OpenidNs { get; }
+
+            string? OpenidOpEndpoint { get; }
+
+            string? OpenidResponseNonce { get; }
+
+            string? OpenidReturnTo { get; }
+
+            string? OpenidSig { get; }
+
+            string? OpenidSigned { get; }
+
+
+
+
+
+        }
+
+        public abstract class PlatformAuthenticationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPlatformAuthenticationV3Builder
+            where TImpl : PlatformAuthenticationV3AbstractBuilder<TImpl>
         {
 
             public string? Code { get; set; }
@@ -87,84 +121,84 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PlatformAuthenticationV3Builder() { }
+            public PlatformAuthenticationV3AbstractBuilder() { }
 
-            internal PlatformAuthenticationV3Builder(IAccelByteSdk sdk)
+            public PlatformAuthenticationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PlatformAuthenticationV3Builder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetError(string _error)
+            public TImpl SetError(string _error)
             {
                 Error = _error;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidAssocHandle(string _openidAssocHandle)
+            public TImpl SetOpenidAssocHandle(string _openidAssocHandle)
             {
                 OpenidAssocHandle = _openidAssocHandle;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidClaimedId(string _openidClaimedId)
+            public TImpl SetOpenidClaimedId(string _openidClaimedId)
             {
                 OpenidClaimedId = _openidClaimedId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidIdentity(string _openidIdentity)
+            public TImpl SetOpenidIdentity(string _openidIdentity)
             {
                 OpenidIdentity = _openidIdentity;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidMode(string _openidMode)
+            public TImpl SetOpenidMode(string _openidMode)
             {
                 OpenidMode = _openidMode;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidNs(string _openidNs)
+            public TImpl SetOpenidNs(string _openidNs)
             {
                 OpenidNs = _openidNs;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidOpEndpoint(string _openidOpEndpoint)
+            public TImpl SetOpenidOpEndpoint(string _openidOpEndpoint)
             {
                 OpenidOpEndpoint = _openidOpEndpoint;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidResponseNonce(string _openidResponseNonce)
+            public TImpl SetOpenidResponseNonce(string _openidResponseNonce)
             {
                 OpenidResponseNonce = _openidResponseNonce;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidReturnTo(string _openidReturnTo)
+            public TImpl SetOpenidReturnTo(string _openidReturnTo)
             {
                 OpenidReturnTo = _openidReturnTo;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidSig(string _openidSig)
+            public TImpl SetOpenidSig(string _openidSig)
             {
                 OpenidSig = _openidSig;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticationV3Builder SetOpenidSigned(string _openidSigned)
+            public TImpl SetOpenidSigned(string _openidSigned)
             {
                 OpenidSigned = _openidSigned;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -181,11 +215,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     state                    
                 );
 
-                op.SetBaseFields<PlatformAuthenticationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PlatformAuthenticationV3.Response Execute(
+            protected PlatformAuthenticationV3.Response InternalExecute(
                 string platformId,
                 string state
             )
@@ -204,7 +238,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PlatformAuthenticationV3.Response> ExecuteAsync(
+            protected async Task<PlatformAuthenticationV3.Response> InternalExecuteAsync(
                 string platformId,
                 string state
             )
@@ -225,7 +259,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PlatformAuthenticationV3(PlatformAuthenticationV3Builder builder,
+        public class PlatformAuthenticationV3Builder : PlatformAuthenticationV3AbstractBuilder<PlatformAuthenticationV3Builder>
+        {
+            public PlatformAuthenticationV3Builder() : base() { }
+
+            public PlatformAuthenticationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PlatformAuthenticationV3.Response Execute(
+                string platformId,
+                string state
+            )
+            {
+                return InternalExecute(
+                    platformId,
+                    state
+                );
+            }
+            public async Task<PlatformAuthenticationV3.Response> ExecuteAsync(
+                string platformId,
+                string state
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId,
+                    state
+                );
+            }
+        }
+
+
+        public PlatformAuthenticationV3(IPlatformAuthenticationV3Builder builder,
             string platformId,
             string state
         )

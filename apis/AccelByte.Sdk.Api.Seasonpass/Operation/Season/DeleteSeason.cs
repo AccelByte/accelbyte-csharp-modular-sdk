@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static DeleteSeasonBuilder Builder { get => new DeleteSeasonBuilder(); }
 
-        public class DeleteSeasonBuilder
-            : OperationBuilder<DeleteSeasonBuilder>
+        public interface IDeleteSeasonBuilder
         {
 
 
 
 
 
-            internal DeleteSeasonBuilder() { }
+        }
 
-            internal DeleteSeasonBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteSeasonBuilder
+            where TImpl : DeleteSeasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteSeasonAbstractBuilder() { }
+
+            public DeleteSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<DeleteSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteSeason.Response Execute(
+            protected DeleteSeason.Response InternalExecute(
                 string namespace_,
                 string seasonId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteSeason.Response> ExecuteAsync(
+            protected async Task<DeleteSeason.Response> InternalExecuteAsync(
                 string namespace_,
                 string seasonId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private DeleteSeason(DeleteSeasonBuilder builder,
+        public class DeleteSeasonBuilder : DeleteSeasonAbstractBuilder<DeleteSeasonBuilder>
+        {
+            public DeleteSeasonBuilder() : base() { }
+
+            public DeleteSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteSeason.Response Execute(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<DeleteSeason.Response> ExecuteAsync(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public DeleteSeason(IDeleteSeasonBuilder builder,
             string namespace_,
             string seasonId
         )
@@ -178,17 +217,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

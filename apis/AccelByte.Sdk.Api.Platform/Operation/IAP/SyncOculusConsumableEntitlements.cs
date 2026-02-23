@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncOculusConsumableEntitlementsBuilder Builder { get => new SyncOculusConsumableEntitlementsBuilder(); }
 
-        public class SyncOculusConsumableEntitlementsBuilder
-            : OperationBuilder<SyncOculusConsumableEntitlementsBuilder>
+        public interface ISyncOculusConsumableEntitlementsBuilder
         {
 
 
 
 
 
-            internal SyncOculusConsumableEntitlementsBuilder() { }
+        }
 
-            internal SyncOculusConsumableEntitlementsBuilder(IAccelByteSdk sdk)
+        public abstract class SyncOculusConsumableEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncOculusConsumableEntitlementsBuilder
+            where TImpl : SyncOculusConsumableEntitlementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncOculusConsumableEntitlementsAbstractBuilder() { }
+
+            public SyncOculusConsumableEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncOculusConsumableEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncOculusConsumableEntitlements.Response Execute(
+            protected SyncOculusConsumableEntitlements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncOculusConsumableEntitlements.Response> ExecuteAsync(
+            protected async Task<SyncOculusConsumableEntitlements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncOculusConsumableEntitlements(SyncOculusConsumableEntitlementsBuilder builder,
+        public class SyncOculusConsumableEntitlementsBuilder : SyncOculusConsumableEntitlementsAbstractBuilder<SyncOculusConsumableEntitlementsBuilder>
+        {
+            public SyncOculusConsumableEntitlementsBuilder() : base() { }
+
+            public SyncOculusConsumableEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncOculusConsumableEntitlements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncOculusConsumableEntitlements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncOculusConsumableEntitlements(ISyncOculusConsumableEntitlementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -176,17 +215,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.OculusReconcileResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.OculusReconcileResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

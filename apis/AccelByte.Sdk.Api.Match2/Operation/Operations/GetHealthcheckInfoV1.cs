@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static GetHealthcheckInfoV1Builder Builder { get => new GetHealthcheckInfoV1Builder(); }
 
-        public class GetHealthcheckInfoV1Builder
-            : OperationBuilder<GetHealthcheckInfoV1Builder>
+        public interface IGetHealthcheckInfoV1Builder
         {
 
 
 
 
 
-            internal GetHealthcheckInfoV1Builder() { }
+        }
 
-            internal GetHealthcheckInfoV1Builder(IAccelByteSdk sdk)
+        public abstract class GetHealthcheckInfoV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetHealthcheckInfoV1Builder
+            where TImpl : GetHealthcheckInfoV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetHealthcheckInfoV1AbstractBuilder() { }
+
+            public GetHealthcheckInfoV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 GetHealthcheckInfoV1 op = new GetHealthcheckInfoV1(this
                 );
 
-                op.SetBaseFields<GetHealthcheckInfoV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetHealthcheckInfoV1.Response Execute(
+            protected GetHealthcheckInfoV1.Response InternalExecute(
             )
             {
                 GetHealthcheckInfoV1 op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetHealthcheckInfoV1.Response> ExecuteAsync(
+            protected async Task<GetHealthcheckInfoV1.Response> InternalExecuteAsync(
             )
             {
                 GetHealthcheckInfoV1 op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private GetHealthcheckInfoV1(GetHealthcheckInfoV1Builder builder
+        public class GetHealthcheckInfoV1Builder : GetHealthcheckInfoV1AbstractBuilder<GetHealthcheckInfoV1Builder>
+        {
+            public GetHealthcheckInfoV1Builder() : base() { }
+
+            public GetHealthcheckInfoV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetHealthcheckInfoV1.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetHealthcheckInfoV1.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetHealthcheckInfoV1(IGetHealthcheckInfoV1Builder builder
         )
         {
             

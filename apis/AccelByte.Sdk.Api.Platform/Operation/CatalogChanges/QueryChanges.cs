@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryChangesBuilder Builder { get => new QueryChangesBuilder(); }
 
-        public class QueryChangesBuilder
-            : OperationBuilder<QueryChangesBuilder>
+        public interface IQueryChangesBuilder
+        {
+
+            QueryChangesAction? Action { get; }
+
+            string? ItemSku { get; }
+
+            QueryChangesItemType? ItemType { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            bool? Selected { get; }
+
+            List<QueryChangesSortBy>? SortBy { get; }
+
+            QueryChangesStatus? Status { get; }
+
+            QueryChangesType? Type { get; }
+
+            string? UpdatedAtEnd { get; }
+
+            string? UpdatedAtStart { get; }
+
+            bool? WithTotal { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryChangesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryChangesBuilder
+            where TImpl : QueryChangesAbstractBuilder<TImpl>
         {
 
             public QueryChangesAction? Action { get; set; }
@@ -66,84 +100,84 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryChangesBuilder() { }
+            public QueryChangesAbstractBuilder() { }
 
-            internal QueryChangesBuilder(IAccelByteSdk sdk)
+            public QueryChangesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryChangesBuilder SetAction(QueryChangesAction _action)
+            public TImpl SetAction(QueryChangesAction _action)
             {
                 Action = _action;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetItemSku(string _itemSku)
+            public TImpl SetItemSku(string _itemSku)
             {
                 ItemSku = _itemSku;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetItemType(QueryChangesItemType _itemType)
+            public TImpl SetItemType(QueryChangesItemType _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetSelected(bool _selected)
+            public TImpl SetSelected(bool _selected)
             {
                 Selected = _selected;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetSortBy(List<QueryChangesSortBy> _sortBy)
+            public TImpl SetSortBy(List<QueryChangesSortBy> _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetStatus(QueryChangesStatus _status)
+            public TImpl SetStatus(QueryChangesStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetType(QueryChangesType _type)
+            public TImpl SetType(QueryChangesType _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetUpdatedAtEnd(string _updatedAtEnd)
+            public TImpl SetUpdatedAtEnd(string _updatedAtEnd)
             {
                 UpdatedAtEnd = _updatedAtEnd;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetUpdatedAtStart(string _updatedAtStart)
+            public TImpl SetUpdatedAtStart(string _updatedAtStart)
             {
                 UpdatedAtStart = _updatedAtStart;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryChangesBuilder SetWithTotal(bool _withTotal)
+            public TImpl SetWithTotal(bool _withTotal)
             {
                 WithTotal = _withTotal;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -160,11 +194,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<QueryChangesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryChanges.Response Execute(
+            protected QueryChanges.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -183,7 +217,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryChanges.Response> ExecuteAsync(
+            protected async Task<QueryChanges.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -204,7 +238,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryChanges(QueryChangesBuilder builder,
+        public class QueryChangesBuilder : QueryChangesAbstractBuilder<QueryChangesBuilder>
+        {
+            public QueryChangesBuilder() : base() { }
+
+            public QueryChangesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryChanges.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<QueryChanges.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public QueryChanges(IQueryChangesBuilder builder,
             string namespace_,
             string storeId
         )
@@ -309,7 +372,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CatalogChangePagingResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CatalogChangePagingResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

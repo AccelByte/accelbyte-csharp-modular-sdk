@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ExportStoreByCSVBuilder Builder { get => new ExportStoreByCSVBuilder(); }
 
-        public class ExportStoreByCSVBuilder
-            : OperationBuilder<ExportStoreByCSVBuilder>
+        public interface IExportStoreByCSVBuilder
         {
 
 
 
 
 
-            internal ExportStoreByCSVBuilder() { }
+        }
 
-            internal ExportStoreByCSVBuilder(IAccelByteSdk sdk)
+        public abstract class ExportStoreByCSVAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExportStoreByCSVBuilder
+            where TImpl : ExportStoreByCSVAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ExportStoreByCSVAbstractBuilder() { }
+
+            public ExportStoreByCSVAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ExportStoreByCSVBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ExportStoreByCSV.Response Execute(
+            protected ExportStoreByCSV.Response InternalExecute(
                 ExportStoreToCSVRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExportStoreByCSV.Response> ExecuteAsync(
+            protected async Task<ExportStoreByCSV.Response> InternalExecuteAsync(
                 ExportStoreToCSVRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ExportStoreByCSV(ExportStoreByCSVBuilder builder,
+        public class ExportStoreByCSVBuilder : ExportStoreByCSVAbstractBuilder<ExportStoreByCSVBuilder>
+        {
+            public ExportStoreByCSVBuilder() : base() { }
+
+            public ExportStoreByCSVBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ExportStoreByCSV.Response Execute(
+                ExportStoreToCSVRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<ExportStoreByCSV.Response> ExecuteAsync(
+                ExportStoreToCSVRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ExportStoreByCSV(IExportStoreByCSVBuilder builder,
             ExportStoreToCSVRequest body,
             string namespace_
         )
@@ -182,17 +221,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

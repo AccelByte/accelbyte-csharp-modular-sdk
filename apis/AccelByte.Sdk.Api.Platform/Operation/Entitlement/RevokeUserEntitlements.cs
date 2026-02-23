@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RevokeUserEntitlementsBuilder Builder { get => new RevokeUserEntitlementsBuilder(); }
 
-        public class RevokeUserEntitlementsBuilder
-            : OperationBuilder<RevokeUserEntitlementsBuilder>
+        public interface IRevokeUserEntitlementsBuilder
         {
 
 
 
 
 
-            internal RevokeUserEntitlementsBuilder() { }
+        }
 
-            internal RevokeUserEntitlementsBuilder(IAccelByteSdk sdk)
+        public abstract class RevokeUserEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeUserEntitlementsBuilder
+            where TImpl : RevokeUserEntitlementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RevokeUserEntitlementsAbstractBuilder() { }
+
+            public RevokeUserEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     entitlementIds                    
                 );
 
-                op.SetBaseFields<RevokeUserEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RevokeUserEntitlements.Response Execute(
+            protected RevokeUserEntitlements.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string entitlementIds
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeUserEntitlements.Response> ExecuteAsync(
+            protected async Task<RevokeUserEntitlements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string entitlementIds
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RevokeUserEntitlements(RevokeUserEntitlementsBuilder builder,
+        public class RevokeUserEntitlementsBuilder : RevokeUserEntitlementsAbstractBuilder<RevokeUserEntitlementsBuilder>
+        {
+            public RevokeUserEntitlementsBuilder() : base() { }
+
+            public RevokeUserEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RevokeUserEntitlements.Response Execute(
+                string namespace_,
+                string userId,
+                string entitlementIds
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    entitlementIds
+                );
+            }
+            public async Task<RevokeUserEntitlements.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string entitlementIds
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    entitlementIds
+                );
+            }
+        }
+
+
+        public RevokeUserEntitlements(IRevokeUserEntitlementsBuilder builder,
             string namespace_,
             string userId,
             string entitlementIds
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkOperationResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

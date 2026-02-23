@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
         #region Builder Part
         public static CancelTicketBuilder Builder { get => new CancelTicketBuilder(); }
 
-        public class CancelTicketBuilder
-            : OperationBuilder<CancelTicketBuilder>
+        public interface ICancelTicketBuilder
         {
 
 
 
 
 
-            internal CancelTicketBuilder() { }
+        }
 
-            internal CancelTicketBuilder(IAccelByteSdk sdk)
+        public abstract class CancelTicketAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICancelTicketBuilder
+            where TImpl : CancelTicketAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CancelTicketAbstractBuilder() { }
+
+            public CancelTicketAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CancelTicketBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CancelTicket.Response Execute(
+            protected CancelTicket.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CancelTicket.Response> ExecuteAsync(
+            protected async Task<CancelTicket.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             }
         }
 
-        private CancelTicket(CancelTicketBuilder builder,
+        public class CancelTicketBuilder : CancelTicketAbstractBuilder<CancelTicketBuilder>
+        {
+            public CancelTicketBuilder() : base() { }
+
+            public CancelTicketBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CancelTicket.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<CancelTicket.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public CancelTicket(ICancelTicketBuilder builder,
             string namespace_
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

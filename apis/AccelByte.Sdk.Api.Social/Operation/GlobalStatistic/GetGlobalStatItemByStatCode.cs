@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static GetGlobalStatItemByStatCodeBuilder Builder { get => new GetGlobalStatItemByStatCodeBuilder(); }
 
-        public class GetGlobalStatItemByStatCodeBuilder
-            : OperationBuilder<GetGlobalStatItemByStatCodeBuilder>
+        public interface IGetGlobalStatItemByStatCodeBuilder
         {
 
 
 
 
 
-            internal GetGlobalStatItemByStatCodeBuilder() { }
+        }
 
-            internal GetGlobalStatItemByStatCodeBuilder(IAccelByteSdk sdk)
+        public abstract class GetGlobalStatItemByStatCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetGlobalStatItemByStatCodeBuilder
+            where TImpl : GetGlobalStatItemByStatCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetGlobalStatItemByStatCodeAbstractBuilder() { }
+
+            public GetGlobalStatItemByStatCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     statCode                    
                 );
 
-                op.SetBaseFields<GetGlobalStatItemByStatCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetGlobalStatItemByStatCode.Response Execute(
+            protected GetGlobalStatItemByStatCode.Response InternalExecute(
                 string namespace_,
                 string statCode
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetGlobalStatItemByStatCode.Response> ExecuteAsync(
+            protected async Task<GetGlobalStatItemByStatCode.Response> InternalExecuteAsync(
                 string namespace_,
                 string statCode
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private GetGlobalStatItemByStatCode(GetGlobalStatItemByStatCodeBuilder builder,
+        public class GetGlobalStatItemByStatCodeBuilder : GetGlobalStatItemByStatCodeAbstractBuilder<GetGlobalStatItemByStatCodeBuilder>
+        {
+            public GetGlobalStatItemByStatCodeBuilder() : base() { }
+
+            public GetGlobalStatItemByStatCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetGlobalStatItemByStatCode.Response Execute(
+                string namespace_,
+                string statCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    statCode
+                );
+            }
+            public async Task<GetGlobalStatItemByStatCode.Response> ExecuteAsync(
+                string namespace_,
+                string statCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    statCode
+                );
+            }
+        }
+
+
+        public GetGlobalStatItemByStatCode(IGetGlobalStatItemByStatCodeBuilder builder,
             string namespace_,
             string statCode
         )
@@ -181,27 +220,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GlobalStatItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.GlobalStatItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

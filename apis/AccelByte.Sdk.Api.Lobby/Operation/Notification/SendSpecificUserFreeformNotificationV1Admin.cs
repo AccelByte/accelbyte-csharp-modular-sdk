@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static SendSpecificUserFreeformNotificationV1AdminBuilder Builder { get => new SendSpecificUserFreeformNotificationV1AdminBuilder(); }
 
-        public class SendSpecificUserFreeformNotificationV1AdminBuilder
-            : OperationBuilder<SendSpecificUserFreeformNotificationV1AdminBuilder>
+        public interface ISendSpecificUserFreeformNotificationV1AdminBuilder
         {
 
 
 
 
 
-            internal SendSpecificUserFreeformNotificationV1AdminBuilder() { }
+        }
 
-            internal SendSpecificUserFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk)
+        public abstract class SendSpecificUserFreeformNotificationV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISendSpecificUserFreeformNotificationV1AdminBuilder
+            where TImpl : SendSpecificUserFreeformNotificationV1AdminAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SendSpecificUserFreeformNotificationV1AdminAbstractBuilder() { }
+
+            public SendSpecificUserFreeformNotificationV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SendSpecificUserFreeformNotificationV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SendSpecificUserFreeformNotificationV1Admin.Response Execute(
+            protected SendSpecificUserFreeformNotificationV1Admin.Response InternalExecute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SendSpecificUserFreeformNotificationV1Admin.Response> ExecuteAsync(
+            protected async Task<SendSpecificUserFreeformNotificationV1Admin.Response> InternalExecuteAsync(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private SendSpecificUserFreeformNotificationV1Admin(SendSpecificUserFreeformNotificationV1AdminBuilder builder,
+        public class SendSpecificUserFreeformNotificationV1AdminBuilder : SendSpecificUserFreeformNotificationV1AdminAbstractBuilder<SendSpecificUserFreeformNotificationV1AdminBuilder>
+        {
+            public SendSpecificUserFreeformNotificationV1AdminBuilder() : base() { }
+
+            public SendSpecificUserFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SendSpecificUserFreeformNotificationV1Admin.Response Execute(
+                ModelFreeFormNotificationRequestV1 body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SendSpecificUserFreeformNotificationV1Admin.Response> ExecuteAsync(
+                ModelFreeFormNotificationRequestV1 body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SendSpecificUserFreeformNotificationV1Admin(ISendSpecificUserFreeformNotificationV1AdminBuilder builder,
             ModelFreeFormNotificationRequestV1 body,
             string namespace_,
             string userId
@@ -191,22 +234,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicGetRecentPlayerBuilder Builder { get => new PublicGetRecentPlayerBuilder(); }
 
-        public class PublicGetRecentPlayerBuilder
-            : OperationBuilder<PublicGetRecentPlayerBuilder>
+        public interface IPublicGetRecentPlayerBuilder
+        {
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetRecentPlayerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetRecentPlayerBuilder
+            where TImpl : PublicGetRecentPlayerAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal PublicGetRecentPlayerBuilder() { }
+            public PublicGetRecentPlayerAbstractBuilder() { }
 
-            internal PublicGetRecentPlayerBuilder(IAccelByteSdk sdk)
+            public PublicGetRecentPlayerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetRecentPlayerBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetRecentPlayerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetRecentPlayer.Response Execute(
+            protected PublicGetRecentPlayer.Response InternalExecute(
                 string namespace_
             )
             {
@@ -89,7 +101,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetRecentPlayer.Response> ExecuteAsync(
+            protected async Task<PublicGetRecentPlayer.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -108,7 +120,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicGetRecentPlayer(PublicGetRecentPlayerBuilder builder,
+        public class PublicGetRecentPlayerBuilder : PublicGetRecentPlayerAbstractBuilder<PublicGetRecentPlayerBuilder>
+        {
+            public PublicGetRecentPlayerBuilder() : base() { }
+
+            public PublicGetRecentPlayerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetRecentPlayer.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetRecentPlayer.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetRecentPlayer(IPublicGetRecentPlayerBuilder builder,
             string namespace_
         )
         {
@@ -182,27 +219,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsRecentPlayerQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsRecentPlayerQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

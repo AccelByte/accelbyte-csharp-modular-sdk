@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static BulkFleetDeleteBuilder Builder { get => new BulkFleetDeleteBuilder(); }
 
-        public class BulkFleetDeleteBuilder
-            : OperationBuilder<BulkFleetDeleteBuilder>
+        public interface IBulkFleetDeleteBuilder
         {
 
 
 
 
 
-            internal BulkFleetDeleteBuilder() { }
+        }
 
-            internal BulkFleetDeleteBuilder(IAccelByteSdk sdk)
+        public abstract class BulkFleetDeleteAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkFleetDeleteBuilder
+            where TImpl : BulkFleetDeleteAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public BulkFleetDeleteAbstractBuilder() { }
+
+            public BulkFleetDeleteAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<BulkFleetDeleteBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkFleetDelete.Response Execute(
+            protected BulkFleetDelete.Response InternalExecute(
                 ApiFleetBulkDeleteRequest body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkFleetDelete.Response> ExecuteAsync(
+            protected async Task<BulkFleetDelete.Response> InternalExecuteAsync(
                 ApiFleetBulkDeleteRequest body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private BulkFleetDelete(BulkFleetDeleteBuilder builder,
+        public class BulkFleetDeleteBuilder : BulkFleetDeleteAbstractBuilder<BulkFleetDeleteBuilder>
+        {
+            public BulkFleetDeleteBuilder() : base() { }
+
+            public BulkFleetDeleteBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkFleetDelete.Response Execute(
+                ApiFleetBulkDeleteRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<BulkFleetDelete.Response> ExecuteAsync(
+                ApiFleetBulkDeleteRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public BulkFleetDelete(IBulkFleetDeleteBuilder builder,
             ApiFleetBulkDeleteRequest body,
             string namespace_
         )
@@ -185,37 +224,44 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiFleetBulkDeleteResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiFleetBulkDeleteResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)207)
             {
-                response.Error207 = JsonSerializer.Deserialize<ApiFleetBulkDeleteResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error207 = JsonSerializer.Deserialize<ApiFleetBulkDeleteResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error207!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ApiFleetBulkDeleteResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ApiFleetBulkDeleteResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

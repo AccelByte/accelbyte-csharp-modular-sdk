@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CreateOculusSubscriptionGroupBuilder Builder { get => new CreateOculusSubscriptionGroupBuilder(); }
 
-        public class CreateOculusSubscriptionGroupBuilder
-            : OperationBuilder<CreateOculusSubscriptionGroupBuilder>
+        public interface ICreateOculusSubscriptionGroupBuilder
+        {
+
+
+            Model.ThirdPartySubscriptionGroupCreate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class CreateOculusSubscriptionGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateOculusSubscriptionGroupBuilder
+            where TImpl : CreateOculusSubscriptionGroupAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal CreateOculusSubscriptionGroupBuilder() { }
+            public CreateOculusSubscriptionGroupAbstractBuilder() { }
 
-            internal CreateOculusSubscriptionGroupBuilder(IAccelByteSdk sdk)
+            public CreateOculusSubscriptionGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public CreateOculusSubscriptionGroupBuilder SetBody(Model.ThirdPartySubscriptionGroupCreate _body)
+            public TImpl SetBody(Model.ThirdPartySubscriptionGroupCreate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateOculusSubscriptionGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateOculusSubscriptionGroup.Response Execute(
+            protected CreateOculusSubscriptionGroup.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateOculusSubscriptionGroup.Response> ExecuteAsync(
+            protected async Task<CreateOculusSubscriptionGroup.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CreateOculusSubscriptionGroup(CreateOculusSubscriptionGroupBuilder builder,
+        public class CreateOculusSubscriptionGroupBuilder : CreateOculusSubscriptionGroupAbstractBuilder<CreateOculusSubscriptionGroupBuilder>
+        {
+            public CreateOculusSubscriptionGroupBuilder() : base() { }
+
+            public CreateOculusSubscriptionGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateOculusSubscriptionGroup.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<CreateOculusSubscriptionGroup.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateOculusSubscriptionGroup(ICreateOculusSubscriptionGroupBuilder builder,
             string namespace_
         )
         {
@@ -174,12 +211,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionGroupInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionGroupInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

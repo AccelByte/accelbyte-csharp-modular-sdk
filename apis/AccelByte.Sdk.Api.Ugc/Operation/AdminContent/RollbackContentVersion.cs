@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static RollbackContentVersionBuilder Builder { get => new RollbackContentVersionBuilder(); }
 
-        public class RollbackContentVersionBuilder
-            : OperationBuilder<RollbackContentVersionBuilder>
+        public interface IRollbackContentVersionBuilder
         {
 
 
 
 
 
-            internal RollbackContentVersionBuilder() { }
+        }
 
-            internal RollbackContentVersionBuilder(IAccelByteSdk sdk)
+        public abstract class RollbackContentVersionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRollbackContentVersionBuilder
+            where TImpl : RollbackContentVersionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RollbackContentVersionAbstractBuilder() { }
+
+            public RollbackContentVersionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     versionId                    
                 );
 
-                op.SetBaseFields<RollbackContentVersionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RollbackContentVersion.Response Execute(
+            protected RollbackContentVersion.Response InternalExecute(
                 string contentId,
                 string namespace_,
                 string versionId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RollbackContentVersion.Response> ExecuteAsync(
+            protected async Task<RollbackContentVersion.Response> InternalExecuteAsync(
                 string contentId,
                 string namespace_,
                 string versionId
@@ -110,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.Payload);
             }
 
-            public RollbackContentVersion.Response<T1> Execute<T1>(
+            protected RollbackContentVersion.Response<T1> InternalExecute<T1>(
                 string contentId,
                 string namespace_,
                 string versionId
@@ -131,7 +141,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RollbackContentVersion.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<RollbackContentVersion.Response<T1>> InternalExecuteAsync<T1>(
                 string contentId,
                 string namespace_,
                 string versionId
@@ -154,7 +164,65 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private RollbackContentVersion(RollbackContentVersionBuilder builder,
+        public class RollbackContentVersionBuilder : RollbackContentVersionAbstractBuilder<RollbackContentVersionBuilder>
+        {
+            public RollbackContentVersionBuilder() : base() { }
+
+            public RollbackContentVersionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RollbackContentVersion.Response Execute(
+                string contentId,
+                string namespace_,
+                string versionId
+            )
+            {
+                return InternalExecute(
+                    contentId,
+                    namespace_,
+                    versionId
+                );
+            }
+            public async Task<RollbackContentVersion.Response> ExecuteAsync(
+                string contentId,
+                string namespace_,
+                string versionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    contentId,
+                    namespace_,
+                    versionId
+                );
+            }
+
+            public RollbackContentVersion.Response<T1> Execute<T1>(
+                string contentId,
+                string namespace_,
+                string versionId
+            )
+            {
+                return InternalExecute<T1>(
+                    contentId,
+                    namespace_,
+                    versionId
+                );
+            }
+            public async Task<RollbackContentVersion.Response<T1>> ExecuteAsync<T1>(
+                string contentId,
+                string namespace_,
+                string versionId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    contentId,
+                    namespace_,
+                    versionId
+                );
+            }
+        }
+
+
+        public RollbackContentVersion(IRollbackContentVersionBuilder builder,
             string contentId,
             string namespace_,
             string versionId
@@ -246,27 +314,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsContentDownloadResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -287,27 +360,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsContentDownloadResponse<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsContentDownloadResponse<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

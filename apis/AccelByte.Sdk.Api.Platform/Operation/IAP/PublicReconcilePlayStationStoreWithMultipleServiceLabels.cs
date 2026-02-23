@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder Builder { get => new PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder(); }
 
-        public class PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder
-            : OperationBuilder<PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder>
+        public interface IPublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder
         {
 
 
 
 
 
-            internal PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder() { }
+        }
 
-            internal PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder(IAccelByteSdk sdk)
+        public abstract class PublicReconcilePlayStationStoreWithMultipleServiceLabelsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder
+            where TImpl : PublicReconcilePlayStationStoreWithMultipleServiceLabelsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicReconcilePlayStationStoreWithMultipleServiceLabelsAbstractBuilder() { }
+
+            public PublicReconcilePlayStationStoreWithMultipleServiceLabelsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response Execute(
+            protected PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response InternalExecute(
                 PlayStationMultiServiceLabelsReconcileRequest body,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response> ExecuteAsync(
+            protected async Task<PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response> InternalExecuteAsync(
                 PlayStationMultiServiceLabelsReconcileRequest body,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicReconcilePlayStationStoreWithMultipleServiceLabels(PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder builder,
+        public class PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder : PublicReconcilePlayStationStoreWithMultipleServiceLabelsAbstractBuilder<PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder>
+        {
+            public PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder() : base() { }
+
+            public PublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response Execute(
+                PlayStationMultiServiceLabelsReconcileRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicReconcilePlayStationStoreWithMultipleServiceLabels.Response> ExecuteAsync(
+                PlayStationMultiServiceLabelsReconcileRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicReconcilePlayStationStoreWithMultipleServiceLabels(IPublicReconcilePlayStationStoreWithMultipleServiceLabelsBuilder builder,
             PlayStationMultiServiceLabelsReconcileRequest body,
             string namespace_,
             string userId
@@ -186,17 +229,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.PlayStationReconcileResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.PlayStationReconcileResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

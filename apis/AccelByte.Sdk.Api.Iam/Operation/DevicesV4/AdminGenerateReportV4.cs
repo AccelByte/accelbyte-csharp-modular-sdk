@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGenerateReportV4Builder Builder { get => new AdminGenerateReportV4Builder(); }
 
-        public class AdminGenerateReportV4Builder
-            : OperationBuilder<AdminGenerateReportV4Builder>
+        public interface IAdminGenerateReportV4Builder
+        {
+
+            string? EndDate { get; }
+
+            string? StartDate { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGenerateReportV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGenerateReportV4Builder
+            where TImpl : AdminGenerateReportV4AbstractBuilder<TImpl>
         {
 
             public string? EndDate { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGenerateReportV4Builder() { }
+            public AdminGenerateReportV4AbstractBuilder() { }
 
-            internal AdminGenerateReportV4Builder(IAccelByteSdk sdk)
+            public AdminGenerateReportV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGenerateReportV4Builder SetEndDate(string _endDate)
+            public TImpl SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGenerateReportV4Builder SetStartDate(string _startDate)
+            public TImpl SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     deviceType                    
                 );
 
-                op.SetBaseFields<AdminGenerateReportV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGenerateReportV4.Response Execute(
+            protected AdminGenerateReportV4.Response InternalExecute(
                 string namespace_,
                 string deviceType
             )
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGenerateReportV4.Response> ExecuteAsync(
+            protected async Task<AdminGenerateReportV4.Response> InternalExecuteAsync(
                 string namespace_,
                 string deviceType
             )
@@ -120,7 +134,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGenerateReportV4(AdminGenerateReportV4Builder builder,
+        public class AdminGenerateReportV4Builder : AdminGenerateReportV4AbstractBuilder<AdminGenerateReportV4Builder>
+        {
+            public AdminGenerateReportV4Builder() : base() { }
+
+            public AdminGenerateReportV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGenerateReportV4.Response Execute(
+                string namespace_,
+                string deviceType
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    deviceType
+                );
+            }
+            public async Task<AdminGenerateReportV4.Response> ExecuteAsync(
+                string namespace_,
+                string deviceType
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    deviceType
+                );
+            }
+        }
+
+
+        public AdminGenerateReportV4(IAdminGenerateReportV4Builder builder,
             string namespace_,
             string deviceType
         )
@@ -204,27 +247,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

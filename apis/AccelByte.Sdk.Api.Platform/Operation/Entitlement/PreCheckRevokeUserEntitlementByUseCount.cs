@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PreCheckRevokeUserEntitlementByUseCountBuilder Builder { get => new PreCheckRevokeUserEntitlementByUseCountBuilder(); }
 
-        public class PreCheckRevokeUserEntitlementByUseCountBuilder
-            : OperationBuilder<PreCheckRevokeUserEntitlementByUseCountBuilder>
+        public interface IPreCheckRevokeUserEntitlementByUseCountBuilder
         {
 
 
 
 
 
-            internal PreCheckRevokeUserEntitlementByUseCountBuilder() { }
+        }
 
-            internal PreCheckRevokeUserEntitlementByUseCountBuilder(IAccelByteSdk sdk)
+        public abstract class PreCheckRevokeUserEntitlementByUseCountAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPreCheckRevokeUserEntitlementByUseCountBuilder
+            where TImpl : PreCheckRevokeUserEntitlementByUseCountAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PreCheckRevokeUserEntitlementByUseCountAbstractBuilder() { }
+
+            public PreCheckRevokeUserEntitlementByUseCountAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     quantity                    
                 );
 
-                op.SetBaseFields<PreCheckRevokeUserEntitlementByUseCountBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PreCheckRevokeUserEntitlementByUseCount.Response Execute(
+            protected PreCheckRevokeUserEntitlementByUseCount.Response InternalExecute(
                 string entitlementId,
                 string namespace_,
                 string userId,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PreCheckRevokeUserEntitlementByUseCount.Response> ExecuteAsync(
+            protected async Task<PreCheckRevokeUserEntitlementByUseCount.Response> InternalExecuteAsync(
                 string entitlementId,
                 string namespace_,
                 string userId,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PreCheckRevokeUserEntitlementByUseCount(PreCheckRevokeUserEntitlementByUseCountBuilder builder,
+        public class PreCheckRevokeUserEntitlementByUseCountBuilder : PreCheckRevokeUserEntitlementByUseCountAbstractBuilder<PreCheckRevokeUserEntitlementByUseCountBuilder>
+        {
+            public PreCheckRevokeUserEntitlementByUseCountBuilder() : base() { }
+
+            public PreCheckRevokeUserEntitlementByUseCountBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PreCheckRevokeUserEntitlementByUseCount.Response Execute(
+                string entitlementId,
+                string namespace_,
+                string userId,
+                int quantity
+            )
+            {
+                return InternalExecute(
+                    entitlementId,
+                    namespace_,
+                    userId,
+                    quantity
+                );
+            }
+            public async Task<PreCheckRevokeUserEntitlementByUseCount.Response> ExecuteAsync(
+                string entitlementId,
+                string namespace_,
+                string userId,
+                int quantity
+            )
+            {
+                return await InternalExecuteAsync(
+                    entitlementId,
+                    namespace_,
+                    userId,
+                    quantity
+                );
+            }
+        }
+
+
+        public PreCheckRevokeUserEntitlementByUseCount(IPreCheckRevokeUserEntitlementByUseCountBuilder builder,
             string entitlementId,
             string namespace_,
             string userId,
@@ -198,12 +245,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementPrechekResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementPrechekResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

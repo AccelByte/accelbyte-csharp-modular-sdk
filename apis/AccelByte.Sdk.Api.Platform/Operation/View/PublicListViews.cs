@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicListViewsBuilder Builder { get => new PublicListViewsBuilder(); }
 
-        public class PublicListViewsBuilder
-            : OperationBuilder<PublicListViewsBuilder>
+        public interface IPublicListViewsBuilder
+        {
+
+            string? Language { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListViewsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListViewsBuilder
+            where TImpl : PublicListViewsAbstractBuilder<TImpl>
         {
 
             public string? Language { get; set; }
@@ -48,24 +62,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicListViewsBuilder() { }
+            public PublicListViewsAbstractBuilder() { }
 
-            internal PublicListViewsBuilder(IAccelByteSdk sdk)
+            public PublicListViewsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListViewsBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListViewsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +96,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicListViewsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListViews.Response Execute(
+            protected PublicListViews.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -105,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListViews.Response> ExecuteAsync(
+            protected async Task<PublicListViews.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -125,7 +139,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public PublicListViews.Response<T1> Execute<T1>(
+            protected PublicListViews.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string userId
             )
@@ -144,7 +158,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListViews.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicListViews.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -165,7 +179,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicListViews(PublicListViewsBuilder builder,
+        public class PublicListViewsBuilder : PublicListViewsAbstractBuilder<PublicListViewsBuilder>
+        {
+            public PublicListViewsBuilder() : base() { }
+
+            public PublicListViewsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListViews.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicListViews.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public PublicListViews.Response<T1> Execute<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicListViews.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicListViews(IPublicListViewsBuilder builder,
             string namespace_,
             string userId
         )
@@ -243,7 +307,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ViewInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ViewInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
@@ -264,7 +329,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ViewInfo<T1>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ViewInfo<T1>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             

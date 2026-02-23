@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static UnsubscribeTopicHandlerBuilder Builder { get => new UnsubscribeTopicHandlerBuilder(); }
 
-        public class UnsubscribeTopicHandlerBuilder
-            : OperationBuilder<UnsubscribeTopicHandlerBuilder>
+        public interface IUnsubscribeTopicHandlerBuilder
         {
 
 
 
 
 
-            internal UnsubscribeTopicHandlerBuilder() { }
+        }
 
-            internal UnsubscribeTopicHandlerBuilder(IAccelByteSdk sdk)
+        public abstract class UnsubscribeTopicHandlerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUnsubscribeTopicHandlerBuilder
+            where TImpl : UnsubscribeTopicHandlerAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UnsubscribeTopicHandlerAbstractBuilder() { }
+
+            public UnsubscribeTopicHandlerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     topicName                    
                 );
 
-                op.SetBaseFields<UnsubscribeTopicHandlerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UnsubscribeTopicHandler.Response Execute(
+            protected UnsubscribeTopicHandler.Response InternalExecute(
                 string app,
                 string namespace_,
                 string topicName
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UnsubscribeTopicHandler.Response> ExecuteAsync(
+            protected async Task<UnsubscribeTopicHandler.Response> InternalExecuteAsync(
                 string app,
                 string namespace_,
                 string topicName
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private UnsubscribeTopicHandler(UnsubscribeTopicHandlerBuilder builder,
+        public class UnsubscribeTopicHandlerBuilder : UnsubscribeTopicHandlerAbstractBuilder<UnsubscribeTopicHandlerBuilder>
+        {
+            public UnsubscribeTopicHandlerBuilder() : base() { }
+
+            public UnsubscribeTopicHandlerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UnsubscribeTopicHandler.Response Execute(
+                string app,
+                string namespace_,
+                string topicName
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_,
+                    topicName
+                );
+            }
+            public async Task<UnsubscribeTopicHandler.Response> ExecuteAsync(
+                string app,
+                string namespace_,
+                string topicName
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_,
+                    topicName
+                );
+            }
+        }
+
+
+        public UnsubscribeTopicHandler(IUnsubscribeTopicHandlerBuilder builder,
             string app,
             string namespace_,
             string topicName
@@ -191,27 +234,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelTopicSubscription>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelTopicSubscription>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

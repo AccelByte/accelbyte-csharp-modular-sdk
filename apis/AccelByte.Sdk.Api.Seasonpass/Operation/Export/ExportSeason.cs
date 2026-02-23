@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static ExportSeasonBuilder Builder { get => new ExportSeasonBuilder(); }
 
-        public class ExportSeasonBuilder
-            : OperationBuilder<ExportSeasonBuilder>
+        public interface IExportSeasonBuilder
         {
 
 
 
 
 
-            internal ExportSeasonBuilder() { }
+        }
 
-            internal ExportSeasonBuilder(IAccelByteSdk sdk)
+        public abstract class ExportSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IExportSeasonBuilder
+            where TImpl : ExportSeasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ExportSeasonAbstractBuilder() { }
+
+            public ExportSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ExportSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ExportSeason.Response Execute(
+            protected ExportSeason.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ExportSeason.Response> ExecuteAsync(
+            protected async Task<ExportSeason.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private ExportSeason(ExportSeasonBuilder builder,
+        public class ExportSeasonBuilder : ExportSeasonAbstractBuilder<ExportSeasonBuilder>
+        {
+            public ExportSeasonBuilder() : base() { }
+
+            public ExportSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ExportSeason.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ExportSeason.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ExportSeason(IExportSeasonBuilder builder,
             string namespace_
         )
         {
@@ -168,7 +203,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static AnonymizeUserProfileBuilder Builder { get => new AnonymizeUserProfileBuilder(); }
 
-        public class AnonymizeUserProfileBuilder
-            : OperationBuilder<AnonymizeUserProfileBuilder>
+        public interface IAnonymizeUserProfileBuilder
         {
 
 
 
 
 
-            internal AnonymizeUserProfileBuilder() { }
+        }
 
-            internal AnonymizeUserProfileBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeUserProfileAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeUserProfileBuilder
+            where TImpl : AnonymizeUserProfileAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeUserProfileAbstractBuilder() { }
+
+            public AnonymizeUserProfileAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeUserProfileBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeUserProfile.Response Execute(
+            protected AnonymizeUserProfile.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeUserProfile.Response> ExecuteAsync(
+            protected async Task<AnonymizeUserProfile.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private AnonymizeUserProfile(AnonymizeUserProfileBuilder builder,
+        public class AnonymizeUserProfileBuilder : AnonymizeUserProfileAbstractBuilder<AnonymizeUserProfileBuilder>
+        {
+            public AnonymizeUserProfileBuilder() : base() { }
+
+            public AnonymizeUserProfileBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeUserProfile.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeUserProfile.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeUserProfile(IAnonymizeUserProfileBuilder builder,
             string namespace_,
             string userId
         )
@@ -181,17 +220,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static PublicBulkClaimUserRewardsBuilder Builder { get => new PublicBulkClaimUserRewardsBuilder(); }
 
-        public class PublicBulkClaimUserRewardsBuilder
-            : OperationBuilder<PublicBulkClaimUserRewardsBuilder>
+        public interface IPublicBulkClaimUserRewardsBuilder
         {
 
 
 
 
 
-            internal PublicBulkClaimUserRewardsBuilder() { }
+        }
 
-            internal PublicBulkClaimUserRewardsBuilder(IAccelByteSdk sdk)
+        public abstract class PublicBulkClaimUserRewardsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicBulkClaimUserRewardsBuilder
+            where TImpl : PublicBulkClaimUserRewardsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicBulkClaimUserRewardsAbstractBuilder() { }
+
+            public PublicBulkClaimUserRewardsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicBulkClaimUserRewardsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicBulkClaimUserRewards.Response Execute(
+            protected PublicBulkClaimUserRewards.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicBulkClaimUserRewards.Response> ExecuteAsync(
+            protected async Task<PublicBulkClaimUserRewards.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -107,7 +117,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.Payload);
             }
 
-            public PublicBulkClaimUserRewards.Response<T1, T2> Execute<T1, T2>(
+            protected PublicBulkClaimUserRewards.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_,
                 string userId
             )
@@ -126,7 +136,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicBulkClaimUserRewards.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<PublicBulkClaimUserRewards.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_,
                 string userId
             )
@@ -147,7 +157,57 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private PublicBulkClaimUserRewards(PublicBulkClaimUserRewardsBuilder builder,
+        public class PublicBulkClaimUserRewardsBuilder : PublicBulkClaimUserRewardsAbstractBuilder<PublicBulkClaimUserRewardsBuilder>
+        {
+            public PublicBulkClaimUserRewardsBuilder() : base() { }
+
+            public PublicBulkClaimUserRewardsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicBulkClaimUserRewards.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicBulkClaimUserRewards.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public PublicBulkClaimUserRewards.Response<T1, T2> Execute<T1, T2>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicBulkClaimUserRewards.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicBulkClaimUserRewards(IPublicBulkClaimUserRewardsBuilder builder,
             string namespace_,
             string userId
         )
@@ -227,17 +287,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClaimableRewards>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClaimableRewards>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -258,17 +321,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClaimableRewards<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClaimableRewards<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

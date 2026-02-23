@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,17 +42,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static SendVerificationCodeBuilder Builder { get => new SendVerificationCodeBuilder(); }
 
-        public class SendVerificationCodeBuilder
-            : OperationBuilder<SendVerificationCodeBuilder>
+        public interface ISendVerificationCodeBuilder
         {
 
 
 
 
 
-            internal SendVerificationCodeBuilder() { }
+        }
 
-            internal SendVerificationCodeBuilder(IAccelByteSdk sdk)
+        public abstract class SendVerificationCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISendVerificationCodeBuilder
+            where TImpl : SendVerificationCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SendVerificationCodeAbstractBuilder() { }
+
+            public SendVerificationCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -74,12 +84,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SendVerificationCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public SendVerificationCode.Response Execute(
+            protected SendVerificationCode.Response InternalExecute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_,
                 string userId
@@ -100,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SendVerificationCode.Response> ExecuteAsync(
+            protected async Task<SendVerificationCode.Response> InternalExecuteAsync(
                 ModelSendVerificationCodeRequest body,
                 string namespace_,
                 string userId
@@ -123,7 +133,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private SendVerificationCode(SendVerificationCodeBuilder builder,
+        public class SendVerificationCodeBuilder : SendVerificationCodeAbstractBuilder<SendVerificationCodeBuilder>
+        {
+            public SendVerificationCodeBuilder() : base() { }
+
+            public SendVerificationCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public SendVerificationCode.Response Execute(
+                ModelSendVerificationCodeRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SendVerificationCode.Response> ExecuteAsync(
+                ModelSendVerificationCodeRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SendVerificationCode(ISendVerificationCodeBuilder builder,
             ModelSendVerificationCodeRequest body,
             string namespace_,
             string userId
@@ -209,37 +253,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error403 = response.Payload;
                 response.Error = new ApiError("-1", response.Error403!);
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error409 = response.Payload;
                 response.Error = new ApiError("-1", response.Error409!);
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error429 = response.Payload;
                 response.Error = new ApiError("-1", response.Error429!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

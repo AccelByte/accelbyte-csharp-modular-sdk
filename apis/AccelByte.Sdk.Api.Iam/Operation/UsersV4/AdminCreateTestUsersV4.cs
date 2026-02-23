@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminCreateTestUsersV4Builder Builder { get => new AdminCreateTestUsersV4Builder(); }
 
-        public class AdminCreateTestUsersV4Builder
-            : OperationBuilder<AdminCreateTestUsersV4Builder>
+        public interface IAdminCreateTestUsersV4Builder
         {
 
 
 
 
 
-            internal AdminCreateTestUsersV4Builder() { }
+        }
 
-            internal AdminCreateTestUsersV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminCreateTestUsersV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateTestUsersV4Builder
+            where TImpl : AdminCreateTestUsersV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateTestUsersV4AbstractBuilder() { }
+
+            public AdminCreateTestUsersV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateTestUsersV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateTestUsersV4.Response Execute(
+            protected AdminCreateTestUsersV4.Response InternalExecute(
                 AccountCreateTestUsersRequestV4 body,
                 string namespace_
             )
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateTestUsersV4.Response> ExecuteAsync(
+            protected async Task<AdminCreateTestUsersV4.Response> InternalExecuteAsync(
                 AccountCreateTestUsersRequestV4 body,
                 string namespace_
             )
@@ -110,7 +120,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminCreateTestUsersV4(AdminCreateTestUsersV4Builder builder,
+        public class AdminCreateTestUsersV4Builder : AdminCreateTestUsersV4AbstractBuilder<AdminCreateTestUsersV4Builder>
+        {
+            public AdminCreateTestUsersV4Builder() : base() { }
+
+            public AdminCreateTestUsersV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateTestUsersV4.Response Execute(
+                AccountCreateTestUsersRequestV4 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateTestUsersV4.Response> ExecuteAsync(
+                AccountCreateTestUsersRequestV4 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateTestUsersV4(IAdminCreateTestUsersV4Builder builder,
             AccountCreateTestUsersRequestV4 body,
             string namespace_
         )
@@ -183,22 +222,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountCreateTestUsersResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountCreateTestUsersResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)501)
             {
-                response.Error501 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error501 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error501!.TranslateToApiError();
             }
 

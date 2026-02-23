@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetItemBuilder Builder { get => new GetItemBuilder(); }
 
-        public class GetItemBuilder
-            : OperationBuilder<GetItemBuilder>
+        public interface IGetItemBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetItemBuilder
+            where TImpl : GetItemAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetItemBuilder() { }
+            public GetItemAbstractBuilder() { }
 
-            internal GetItemBuilder(IAccelByteSdk sdk)
+            public GetItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetItemBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetItemBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetItem.Response Execute(
+            protected GetItem.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItem.Response> ExecuteAsync(
+            protected async Task<GetItem.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -123,7 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetItem.Response<T1> Execute<T1>(
+            protected GetItem.Response<T1> InternalExecute<T1>(
                 string itemId,
                 string namespace_
             )
@@ -142,7 +156,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItem.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<GetItem.Response<T1>> InternalExecuteAsync<T1>(
                 string itemId,
                 string namespace_
             )
@@ -163,7 +177,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetItem(GetItemBuilder builder,
+        public class GetItemBuilder : GetItemAbstractBuilder<GetItemBuilder>
+        {
+            public GetItemBuilder() : base() { }
+
+            public GetItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetItem.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<GetItem.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+
+            public GetItem.Response<T1> Execute<T1>(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<GetItem.Response<T1>> ExecuteAsync<T1>(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetItem(IGetItemBuilder builder,
             string itemId,
             string namespace_
         )
@@ -245,12 +309,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -271,12 +337,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static PublicGetMessagesBuilder Builder { get => new PublicGetMessagesBuilder(); }
 
-        public class PublicGetMessagesBuilder
-            : OperationBuilder<PublicGetMessagesBuilder>
+        public interface IPublicGetMessagesBuilder
         {
 
 
 
 
 
-            internal PublicGetMessagesBuilder() { }
+        }
 
-            internal PublicGetMessagesBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetMessagesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetMessagesBuilder
+            where TImpl : PublicGetMessagesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetMessagesAbstractBuilder() { }
+
+            public PublicGetMessagesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 PublicGetMessages op = new PublicGetMessages(this
                 );
 
-                op.SetBaseFields<PublicGetMessagesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetMessages.Response Execute(
+            protected PublicGetMessages.Response InternalExecute(
             )
             {
                 PublicGetMessages op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetMessages.Response> ExecuteAsync(
+            protected async Task<PublicGetMessages.Response> InternalExecuteAsync(
             )
             {
                 PublicGetMessages op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private PublicGetMessages(PublicGetMessagesBuilder builder
+        public class PublicGetMessagesBuilder : PublicGetMessagesAbstractBuilder<PublicGetMessagesBuilder>
+        {
+            public PublicGetMessagesBuilder() : base() { }
+
+            public PublicGetMessagesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetMessages.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetMessages.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetMessages(IPublicGetMessagesBuilder builder
         )
         {
             
@@ -153,12 +184,14 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.LogAppMessageDeclaration>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.LogAppMessageDeclaration>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

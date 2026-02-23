@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ImportRewardsBuilder Builder { get => new ImportRewardsBuilder(); }
 
-        public class ImportRewardsBuilder
-            : OperationBuilder<ImportRewardsBuilder>
+        public interface IImportRewardsBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class ImportRewardsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImportRewardsBuilder
+            where TImpl : ImportRewardsAbstractBuilder<TImpl>
         {
 
 
@@ -40,9 +52,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ImportRewardsBuilder() { }
+            public ImportRewardsAbstractBuilder() { }
 
-            internal ImportRewardsBuilder(IAccelByteSdk sdk)
+            public ImportRewardsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -50,10 +62,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public ImportRewardsBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     replaceExisting                    
                 );
 
-                op.SetBaseFields<ImportRewardsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImportRewards.Response Execute(
+            protected ImportRewards.Response InternalExecute(
                 string namespace_,
                 bool replaceExisting
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImportRewards.Response> ExecuteAsync(
+            protected async Task<ImportRewards.Response> InternalExecuteAsync(
                 string namespace_,
                 bool replaceExisting
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ImportRewards(ImportRewardsBuilder builder,
+        public class ImportRewardsBuilder : ImportRewardsAbstractBuilder<ImportRewardsBuilder>
+        {
+            public ImportRewardsBuilder() : base() { }
+
+            public ImportRewardsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImportRewards.Response Execute(
+                string namespace_,
+                bool replaceExisting
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    replaceExisting
+                );
+            }
+            public async Task<ImportRewards.Response> ExecuteAsync(
+                string namespace_,
+                bool replaceExisting
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    replaceExisting
+                );
+            }
+        }
+
+
+        public ImportRewards(IImportRewardsBuilder builder,
             string namespace_,
             bool replaceExisting
         )
@@ -189,12 +230,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

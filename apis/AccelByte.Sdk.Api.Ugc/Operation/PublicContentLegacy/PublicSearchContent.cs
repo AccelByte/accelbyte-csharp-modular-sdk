@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,8 +50,42 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicSearchContentBuilder Builder { get => new PublicSearchContentBuilder(); }
 
-        public class PublicSearchContentBuilder
-            : OperationBuilder<PublicSearchContentBuilder>
+        public interface IPublicSearchContentBuilder
+        {
+
+            string? Creator { get; }
+
+            string? Ishidden { get; }
+
+            string? Isofficial { get; }
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            string? Orderby { get; }
+
+            string? Sortby { get; }
+
+            string? Subtype { get; }
+
+            List<string>? Tags { get; }
+
+            string? Type { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicSearchContentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSearchContentBuilder
+            where TImpl : PublicSearchContentAbstractBuilder<TImpl>
         {
 
             public string? Creator { get; set; }
@@ -82,84 +116,84 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal PublicSearchContentBuilder() { }
+            public PublicSearchContentAbstractBuilder() { }
 
-            internal PublicSearchContentBuilder(IAccelByteSdk sdk)
+            public PublicSearchContentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicSearchContentBuilder SetCreator(string _creator)
+            public TImpl SetCreator(string _creator)
             {
                 Creator = _creator;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetIshidden(string _ishidden)
+            public TImpl SetIshidden(string _ishidden)
             {
                 Ishidden = _ishidden;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetIsofficial(string _isofficial)
+            public TImpl SetIsofficial(string _isofficial)
             {
                 Isofficial = _isofficial;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetOrderby(string _orderby)
+            public TImpl SetOrderby(string _orderby)
             {
                 Orderby = _orderby;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetSortby(string _sortby)
+            public TImpl SetSortby(string _sortby)
             {
                 Sortby = _sortby;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetSubtype(string _subtype)
+            public TImpl SetSubtype(string _subtype)
             {
                 Subtype = _subtype;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetType(string _type)
+            public TImpl SetType(string _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchContentBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -174,11 +208,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicSearchContentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSearchContent.Response Execute(
+            protected PublicSearchContent.Response InternalExecute(
                 string namespace_
             )
             {
@@ -195,7 +229,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSearchContent.Response> ExecuteAsync(
+            protected async Task<PublicSearchContent.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -214,7 +248,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicSearchContent(PublicSearchContentBuilder builder,
+        public class PublicSearchContentBuilder : PublicSearchContentAbstractBuilder<PublicSearchContentBuilder>
+        {
+            public PublicSearchContentBuilder() : base() { }
+
+            public PublicSearchContentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSearchContent.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicSearchContent.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicSearchContent(IPublicSearchContentBuilder builder,
             string namespace_
         )
         {
@@ -321,22 +380,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

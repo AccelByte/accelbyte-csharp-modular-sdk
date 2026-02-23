@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static VerifyTokenV3Builder Builder { get => new VerifyTokenV3Builder(); }
 
-        public class VerifyTokenV3Builder
-            : OperationBuilder<VerifyTokenV3Builder>
+        public interface IVerifyTokenV3Builder
         {
 
 
 
 
 
-            internal VerifyTokenV3Builder() { }
+        }
 
-            internal VerifyTokenV3Builder(IAccelByteSdk sdk)
+        public abstract class VerifyTokenV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IVerifyTokenV3Builder
+            where TImpl : VerifyTokenV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public VerifyTokenV3AbstractBuilder() { }
+
+            public VerifyTokenV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     token                    
                 );
 
-                op.SetBaseFields<VerifyTokenV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public VerifyTokenV3.Response Execute(
+            protected VerifyTokenV3.Response InternalExecute(
                 string token
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<VerifyTokenV3.Response> ExecuteAsync(
+            protected async Task<VerifyTokenV3.Response> InternalExecuteAsync(
                 string token
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private VerifyTokenV3(VerifyTokenV3Builder builder,
+        public class VerifyTokenV3Builder : VerifyTokenV3AbstractBuilder<VerifyTokenV3Builder>
+        {
+            public VerifyTokenV3Builder() : base() { }
+
+            public VerifyTokenV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public VerifyTokenV3.Response Execute(
+                string token
+            )
+            {
+                return InternalExecute(
+                    token
+                );
+            }
+            public async Task<VerifyTokenV3.Response> ExecuteAsync(
+                string token
+            )
+            {
+                return await InternalExecuteAsync(
+                    token
+                );
+            }
+        }
+
+
+        public VerifyTokenV3(IVerifyTokenV3Builder builder,
             string token
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
 

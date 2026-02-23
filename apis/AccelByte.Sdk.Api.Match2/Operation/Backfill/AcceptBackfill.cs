@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static AcceptBackfillBuilder Builder { get => new AcceptBackfillBuilder(); }
 
-        public class AcceptBackfillBuilder
-            : OperationBuilder<AcceptBackfillBuilder>
+        public interface IAcceptBackfillBuilder
         {
 
 
 
 
 
-            internal AcceptBackfillBuilder() { }
+        }
 
-            internal AcceptBackfillBuilder(IAccelByteSdk sdk)
+        public abstract class AcceptBackfillAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAcceptBackfillBuilder
+            where TImpl : AcceptBackfillAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AcceptBackfillAbstractBuilder() { }
+
+            public AcceptBackfillAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AcceptBackfillBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AcceptBackfill.Response Execute(
+            protected AcceptBackfill.Response InternalExecute(
                 ApiBackFillAcceptRequest body,
                 string backfillID,
                 string namespace_
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AcceptBackfill.Response> ExecuteAsync(
+            protected async Task<AcceptBackfill.Response> InternalExecuteAsync(
                 ApiBackFillAcceptRequest body,
                 string backfillID,
                 string namespace_
@@ -111,7 +121,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.Payload);
             }
 
-            public AcceptBackfill.Response<T1> Execute<T1>(
+            protected AcceptBackfill.Response<T1> InternalExecute<T1>(
                 ApiBackFillAcceptRequest body,
                 string backfillID,
                 string namespace_
@@ -132,7 +142,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AcceptBackfill.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AcceptBackfill.Response<T1>> InternalExecuteAsync<T1>(
                 ApiBackFillAcceptRequest body,
                 string backfillID,
                 string namespace_
@@ -155,7 +165,65 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private AcceptBackfill(AcceptBackfillBuilder builder,
+        public class AcceptBackfillBuilder : AcceptBackfillAbstractBuilder<AcceptBackfillBuilder>
+        {
+            public AcceptBackfillBuilder() : base() { }
+
+            public AcceptBackfillBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AcceptBackfill.Response Execute(
+                ApiBackFillAcceptRequest body,
+                string backfillID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    backfillID,
+                    namespace_
+                );
+            }
+            public async Task<AcceptBackfill.Response> ExecuteAsync(
+                ApiBackFillAcceptRequest body,
+                string backfillID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    backfillID,
+                    namespace_
+                );
+            }
+
+            public AcceptBackfill.Response<T1> Execute<T1>(
+                ApiBackFillAcceptRequest body,
+                string backfillID,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    backfillID,
+                    namespace_
+                );
+            }
+            public async Task<AcceptBackfill.Response<T1>> ExecuteAsync<T1>(
+                ApiBackFillAcceptRequest body,
+                string backfillID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    backfillID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AcceptBackfill(IAcceptBackfillBuilder builder,
             ApiBackFillAcceptRequest body,
             string backfillID,
             string namespace_
@@ -251,32 +319,38 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGameSession>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGameSession>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -297,32 +371,38 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGameSession<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGameSession<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

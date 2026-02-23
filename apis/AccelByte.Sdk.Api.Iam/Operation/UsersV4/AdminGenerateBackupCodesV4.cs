@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGenerateBackupCodesV4Builder Builder { get => new AdminGenerateBackupCodesV4Builder(); }
 
-        public class AdminGenerateBackupCodesV4Builder
-            : OperationBuilder<AdminGenerateBackupCodesV4Builder>
+        public interface IAdminGenerateBackupCodesV4Builder
+        {
+
+            string? LanguageTag { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGenerateBackupCodesV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGenerateBackupCodesV4Builder
+            where TImpl : AdminGenerateBackupCodesV4AbstractBuilder<TImpl>
         {
 
             public string? LanguageTag { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGenerateBackupCodesV4Builder() { }
+            public AdminGenerateBackupCodesV4AbstractBuilder() { }
 
-            internal AdminGenerateBackupCodesV4Builder(IAccelByteSdk sdk)
+            public AdminGenerateBackupCodesV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGenerateBackupCodesV4Builder SetLanguageTag(string _languageTag)
+            public TImpl SetLanguageTag(string _languageTag)
             {
                 LanguageTag = _languageTag;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -65,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGenerateBackupCodesV4 op = new AdminGenerateBackupCodesV4(this
                 );
 
-                op.SetBaseFields<AdminGenerateBackupCodesV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGenerateBackupCodesV4.Response Execute(
+            protected AdminGenerateBackupCodesV4.Response InternalExecute(
             )
             {
                 AdminGenerateBackupCodesV4 op = Build(
@@ -84,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGenerateBackupCodesV4.Response> ExecuteAsync(
+            protected async Task<AdminGenerateBackupCodesV4.Response> InternalExecuteAsync(
             )
             {
                 AdminGenerateBackupCodesV4 op = Build(
@@ -101,7 +113,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGenerateBackupCodesV4(AdminGenerateBackupCodesV4Builder builder
+        public class AdminGenerateBackupCodesV4Builder : AdminGenerateBackupCodesV4AbstractBuilder<AdminGenerateBackupCodesV4Builder>
+        {
+            public AdminGenerateBackupCodesV4Builder() : base() { }
+
+            public AdminGenerateBackupCodesV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGenerateBackupCodesV4.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGenerateBackupCodesV4.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGenerateBackupCodesV4(IAdminGenerateBackupCodesV4Builder builder
         )
         {
             
@@ -174,27 +207,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

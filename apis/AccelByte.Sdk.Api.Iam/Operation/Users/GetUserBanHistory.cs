@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetUserBanHistoryBuilder Builder { get => new GetUserBanHistoryBuilder(); }
 
-        public class GetUserBanHistoryBuilder
-            : OperationBuilder<GetUserBanHistoryBuilder>
+        public interface IGetUserBanHistoryBuilder
         {
 
 
 
 
 
-            internal GetUserBanHistoryBuilder() { }
+        }
 
-            internal GetUserBanHistoryBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserBanHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserBanHistoryBuilder
+            where TImpl : GetUserBanHistoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserBanHistoryAbstractBuilder() { }
+
+            public GetUserBanHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserBanHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetUserBanHistory.Response Execute(
+            protected GetUserBanHistory.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserBanHistory.Response> ExecuteAsync(
+            protected async Task<GetUserBanHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -108,7 +118,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetUserBanHistory(GetUserBanHistoryBuilder builder,
+        public class GetUserBanHistoryBuilder : GetUserBanHistoryAbstractBuilder<GetUserBanHistoryBuilder>
+        {
+            public GetUserBanHistoryBuilder() : base() { }
+
+            public GetUserBanHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUserBanHistory.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserBanHistory.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserBanHistory(IGetUserBanHistoryBuilder builder,
             string namespace_,
             string userId
         )
@@ -181,22 +221,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelUserBanResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelUserBanResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

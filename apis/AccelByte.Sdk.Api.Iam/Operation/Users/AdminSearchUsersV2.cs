@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminSearchUsersV2Builder Builder { get => new AdminSearchUsersV2Builder(); }
 
-        public class AdminSearchUsersV2Builder
-            : OperationBuilder<AdminSearchUsersV2Builder>
+        public interface IAdminSearchUsersV2Builder
+        {
+
+            string? After { get; }
+
+            string? Before { get; }
+
+            string? DisplayName { get; }
+
+            long? Limit { get; }
+
+            string? LoginId { get; }
+
+            string? PlatformUserId { get; }
+
+            string? RoleId { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminSearchUsersV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSearchUsersV2Builder
+            where TImpl : AdminSearchUsersV2AbstractBuilder<TImpl>
         {
 
             public string? After { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminSearchUsersV2Builder() { }
+            public AdminSearchUsersV2AbstractBuilder() { }
 
-            internal AdminSearchUsersV2Builder(IAccelByteSdk sdk)
+            public AdminSearchUsersV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminSearchUsersV2Builder SetAfter(string _after)
+            public TImpl SetAfter(string _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetBefore(string _before)
+            public TImpl SetBefore(string _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetDisplayName(string _displayName)
+            public TImpl SetDisplayName(string _displayName)
             {
                 DisplayName = _displayName;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetLoginId(string _loginId)
+            public TImpl SetLoginId(string _loginId)
             {
                 LoginId = _loginId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetPlatformUserId(string _platformUserId)
+            public TImpl SetPlatformUserId(string _platformUserId)
             {
                 PlatformUserId = _platformUserId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetRoleId(string _roleId)
+            public TImpl SetRoleId(string _roleId)
             {
                 RoleId = _roleId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminSearchUsersV2Builder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -127,12 +153,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<AdminSearchUsersV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminSearchUsersV2.Response Execute(
+            protected AdminSearchUsersV2.Response InternalExecute(
                 string namespace_,
                 string platformId
             )
@@ -151,7 +177,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSearchUsersV2.Response> ExecuteAsync(
+            protected async Task<AdminSearchUsersV2.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId
             )
@@ -172,7 +198,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminSearchUsersV2(AdminSearchUsersV2Builder builder,
+        public class AdminSearchUsersV2Builder : AdminSearchUsersV2AbstractBuilder<AdminSearchUsersV2Builder>
+        {
+            public AdminSearchUsersV2Builder() : base() { }
+
+            public AdminSearchUsersV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminSearchUsersV2.Response Execute(
+                string namespace_,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId
+                );
+            }
+            public async Task<AdminSearchUsersV2.Response> ExecuteAsync(
+                string namespace_,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId
+                );
+            }
+        }
+
+
+        public AdminSearchUsersV2(IAdminSearchUsersV2Builder builder,
             string namespace_,
             string platformId
         )
@@ -269,22 +325,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersByPlatformIDResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelSearchUsersByPlatformIDResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

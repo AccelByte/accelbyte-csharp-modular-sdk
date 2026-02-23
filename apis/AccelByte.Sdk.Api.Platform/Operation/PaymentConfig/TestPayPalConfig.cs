@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -44,8 +44,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestPayPalConfigBuilder Builder { get => new TestPayPalConfigBuilder(); }
 
-        public class TestPayPalConfigBuilder
-            : OperationBuilder<TestPayPalConfigBuilder>
+        public interface ITestPayPalConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestPayPalConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestPayPalConfigBuilder
+            where TImpl : TestPayPalConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -54,18 +66,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestPayPalConfigBuilder() { }
+            public TestPayPalConfigAbstractBuilder() { }
 
-            internal TestPayPalConfigBuilder(IAccelByteSdk sdk)
+            public TestPayPalConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestPayPalConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +92,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestPayPalConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestPayPalConfig.Response Execute(
+            protected TestPayPalConfig.Response InternalExecute(
                 PayPalConfig body
             )
             {
@@ -101,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestPayPalConfig.Response> ExecuteAsync(
+            protected async Task<TestPayPalConfig.Response> InternalExecuteAsync(
                 PayPalConfig body
             )
             {
@@ -120,7 +132,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestPayPalConfig(TestPayPalConfigBuilder builder,
+        public class TestPayPalConfigBuilder : TestPayPalConfigAbstractBuilder<TestPayPalConfigBuilder>
+        {
+            public TestPayPalConfigBuilder() : base() { }
+
+            public TestPayPalConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestPayPalConfig.Response Execute(
+                PayPalConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestPayPalConfig.Response> ExecuteAsync(
+                PayPalConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestPayPalConfig(ITestPayPalConfigBuilder builder,
             PayPalConfig body
         )
         {
@@ -186,7 +223,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

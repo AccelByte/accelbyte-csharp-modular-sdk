@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static CreateTopicHandlerBuilder Builder { get => new CreateTopicHandlerBuilder(); }
 
-        public class CreateTopicHandlerBuilder
-            : OperationBuilder<CreateTopicHandlerBuilder>
+        public interface ICreateTopicHandlerBuilder
         {
 
 
 
 
 
-            internal CreateTopicHandlerBuilder() { }
+        }
 
-            internal CreateTopicHandlerBuilder(IAccelByteSdk sdk)
+        public abstract class CreateTopicHandlerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateTopicHandlerBuilder
+            where TImpl : CreateTopicHandlerAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateTopicHandlerAbstractBuilder() { }
+
+            public CreateTopicHandlerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateTopicHandlerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateTopicHandler.Response Execute(
+            protected CreateTopicHandler.Response InternalExecute(
                 ApimodelCreateTopicRequest body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateTopicHandler.Response> ExecuteAsync(
+            protected async Task<CreateTopicHandler.Response> InternalExecuteAsync(
                 ApimodelCreateTopicRequest body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private CreateTopicHandler(CreateTopicHandlerBuilder builder,
+        public class CreateTopicHandlerBuilder : CreateTopicHandlerAbstractBuilder<CreateTopicHandlerBuilder>
+        {
+            public CreateTopicHandlerBuilder() : base() { }
+
+            public CreateTopicHandlerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateTopicHandler.Response Execute(
+                ApimodelCreateTopicRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateTopicHandler.Response> ExecuteAsync(
+                ApimodelCreateTopicRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateTopicHandler(ICreateTopicHandlerBuilder builder,
             ApimodelCreateTopicRequest body,
             string namespace_
         )
@@ -183,32 +222,38 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelTopicResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelTopicResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

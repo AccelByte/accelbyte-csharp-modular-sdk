@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryFulfillmentsBuilder Builder { get => new QueryFulfillmentsBuilder(); }
 
-        public class QueryFulfillmentsBuilder
-            : OperationBuilder<QueryFulfillmentsBuilder>
+        public interface IQueryFulfillmentsBuilder
+        {
+
+            string? EndTime { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? StartTime { get; }
+
+            QueryFulfillmentsState? State { get; }
+
+            string? TransactionId { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryFulfillmentsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryFulfillmentsBuilder
+            where TImpl : QueryFulfillmentsAbstractBuilder<TImpl>
         {
 
             public string? EndTime { get; set; }
@@ -57,54 +81,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryFulfillmentsBuilder() { }
+            public QueryFulfillmentsAbstractBuilder() { }
 
-            internal QueryFulfillmentsBuilder(IAccelByteSdk sdk)
+            public QueryFulfillmentsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryFulfillmentsBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentsBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentsBuilder SetState(QueryFulfillmentsState _state)
+            public TImpl SetState(QueryFulfillmentsState _state)
             {
                 State = _state;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentsBuilder SetTransactionId(string _transactionId)
+            public TImpl SetTransactionId(string _transactionId)
             {
                 TransactionId = _transactionId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentsBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -119,11 +143,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryFulfillmentsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryFulfillments.Response Execute(
+            protected QueryFulfillments.Response InternalExecute(
                 string namespace_
             )
             {
@@ -140,7 +164,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryFulfillments.Response> ExecuteAsync(
+            protected async Task<QueryFulfillments.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -159,7 +183,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryFulfillments(QueryFulfillmentsBuilder builder,
+        public class QueryFulfillmentsBuilder : QueryFulfillmentsAbstractBuilder<QueryFulfillmentsBuilder>
+        {
+            public QueryFulfillmentsBuilder() : base() { }
+
+            public QueryFulfillmentsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryFulfillments.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryFulfillments.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryFulfillments(IQueryFulfillmentsBuilder builder,
             string namespace_
         )
         {
@@ -243,7 +292,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

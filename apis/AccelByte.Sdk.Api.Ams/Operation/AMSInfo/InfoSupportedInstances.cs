@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static InfoSupportedInstancesBuilder Builder { get => new InfoSupportedInstancesBuilder(); }
 
-        public class InfoSupportedInstancesBuilder
-            : OperationBuilder<InfoSupportedInstancesBuilder>
+        public interface IInfoSupportedInstancesBuilder
         {
 
 
 
 
 
-            internal InfoSupportedInstancesBuilder() { }
+        }
 
-            internal InfoSupportedInstancesBuilder(IAccelByteSdk sdk)
+        public abstract class InfoSupportedInstancesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IInfoSupportedInstancesBuilder
+            where TImpl : InfoSupportedInstancesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public InfoSupportedInstancesAbstractBuilder() { }
+
+            public InfoSupportedInstancesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<InfoSupportedInstancesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public InfoSupportedInstances.Response Execute(
+            protected InfoSupportedInstances.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<InfoSupportedInstances.Response> ExecuteAsync(
+            protected async Task<InfoSupportedInstances.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private InfoSupportedInstances(InfoSupportedInstancesBuilder builder,
+        public class InfoSupportedInstancesBuilder : InfoSupportedInstancesAbstractBuilder<InfoSupportedInstancesBuilder>
+        {
+            public InfoSupportedInstancesBuilder() : base() { }
+
+            public InfoSupportedInstancesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public InfoSupportedInstances.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<InfoSupportedInstances.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public InfoSupportedInstances(IInfoSupportedInstancesBuilder builder,
             string namespace_
         )
         {
@@ -167,22 +202,26 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiInstanceTypesResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiInstanceTypesResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

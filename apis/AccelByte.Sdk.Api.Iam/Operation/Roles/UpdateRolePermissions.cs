@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -59,17 +59,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static UpdateRolePermissionsBuilder Builder { get => new UpdateRolePermissionsBuilder(); }
 
-        public class UpdateRolePermissionsBuilder
-            : OperationBuilder<UpdateRolePermissionsBuilder>
+        public interface IUpdateRolePermissionsBuilder
         {
 
 
 
 
 
-            internal UpdateRolePermissionsBuilder() { }
+        }
 
-            internal UpdateRolePermissionsBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateRolePermissionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateRolePermissionsBuilder
+            where TImpl : UpdateRolePermissionsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateRolePermissionsAbstractBuilder() { }
+
+            public UpdateRolePermissionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -89,12 +99,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<UpdateRolePermissionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpdateRolePermissions.Response Execute(
+            protected UpdateRolePermissions.Response InternalExecute(
                 AccountcommonPermissions body,
                 string roleId
             )
@@ -113,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateRolePermissions.Response> ExecuteAsync(
+            protected async Task<UpdateRolePermissions.Response> InternalExecuteAsync(
                 AccountcommonPermissions body,
                 string roleId
             )
@@ -134,7 +144,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private UpdateRolePermissions(UpdateRolePermissionsBuilder builder,
+        public class UpdateRolePermissionsBuilder : UpdateRolePermissionsAbstractBuilder<UpdateRolePermissionsBuilder>
+        {
+            public UpdateRolePermissionsBuilder() : base() { }
+
+            public UpdateRolePermissionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateRolePermissions.Response Execute(
+                AccountcommonPermissions body,
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    roleId
+                );
+            }
+            public async Task<UpdateRolePermissions.Response> ExecuteAsync(
+                AccountcommonPermissions body,
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    roleId
+                );
+            }
+        }
+
+
+        public UpdateRolePermissions(IUpdateRolePermissionsBuilder builder,
             AccountcommonPermissions body,
             string roleId
         )
@@ -210,22 +250,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static AdminCreateExtensionCategoryBuilder Builder { get => new AdminCreateExtensionCategoryBuilder(); }
 
-        public class AdminCreateExtensionCategoryBuilder
-            : OperationBuilder<AdminCreateExtensionCategoryBuilder>
+        public interface IAdminCreateExtensionCategoryBuilder
         {
 
 
 
 
 
-            internal AdminCreateExtensionCategoryBuilder() { }
+        }
 
-            internal AdminCreateExtensionCategoryBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateExtensionCategoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateExtensionCategoryBuilder
+            where TImpl : AdminCreateExtensionCategoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateExtensionCategoryAbstractBuilder() { }
+
+            public AdminCreateExtensionCategoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminCreateExtensionCategoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateExtensionCategory.Response Execute(
+            protected AdminCreateExtensionCategory.Response InternalExecute(
                 RestapiExtensionCategoryApiRequest body
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateExtensionCategory.Response> ExecuteAsync(
+            protected async Task<AdminCreateExtensionCategory.Response> InternalExecuteAsync(
                 RestapiExtensionCategoryApiRequest body
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private AdminCreateExtensionCategory(AdminCreateExtensionCategoryBuilder builder,
+        public class AdminCreateExtensionCategoryBuilder : AdminCreateExtensionCategoryAbstractBuilder<AdminCreateExtensionCategoryBuilder>
+        {
+            public AdminCreateExtensionCategoryBuilder() : base() { }
+
+            public AdminCreateExtensionCategoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateExtensionCategory.Response Execute(
+                RestapiExtensionCategoryApiRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminCreateExtensionCategory.Response> ExecuteAsync(
+                RestapiExtensionCategoryApiRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminCreateExtensionCategory(IAdminCreateExtensionCategoryBuilder builder,
             RestapiExtensionCategoryApiRequest body
         )
         {
@@ -165,17 +200,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiExtensionCategoryApiResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiExtensionCategoryApiResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

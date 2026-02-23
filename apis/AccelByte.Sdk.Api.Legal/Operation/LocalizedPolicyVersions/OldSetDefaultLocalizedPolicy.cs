@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldSetDefaultLocalizedPolicyBuilder Builder { get => new OldSetDefaultLocalizedPolicyBuilder(); }
 
-        public class OldSetDefaultLocalizedPolicyBuilder
-            : OperationBuilder<OldSetDefaultLocalizedPolicyBuilder>
+        public interface IOldSetDefaultLocalizedPolicyBuilder
         {
 
 
 
 
 
-            internal OldSetDefaultLocalizedPolicyBuilder() { }
+        }
 
-            internal OldSetDefaultLocalizedPolicyBuilder(IAccelByteSdk sdk)
+        public abstract class OldSetDefaultLocalizedPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldSetDefaultLocalizedPolicyBuilder
+            where TImpl : OldSetDefaultLocalizedPolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public OldSetDefaultLocalizedPolicyAbstractBuilder() { }
+
+            public OldSetDefaultLocalizedPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     localizedPolicyVersionId                    
                 );
 
-                op.SetBaseFields<OldSetDefaultLocalizedPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldSetDefaultLocalizedPolicy.Response Execute(
+            protected OldSetDefaultLocalizedPolicy.Response InternalExecute(
                 string localizedPolicyVersionId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldSetDefaultLocalizedPolicy.Response> ExecuteAsync(
+            protected async Task<OldSetDefaultLocalizedPolicy.Response> InternalExecuteAsync(
                 string localizedPolicyVersionId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldSetDefaultLocalizedPolicy(OldSetDefaultLocalizedPolicyBuilder builder,
+        public class OldSetDefaultLocalizedPolicyBuilder : OldSetDefaultLocalizedPolicyAbstractBuilder<OldSetDefaultLocalizedPolicyBuilder>
+        {
+            public OldSetDefaultLocalizedPolicyBuilder() : base() { }
+
+            public OldSetDefaultLocalizedPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldSetDefaultLocalizedPolicy.Response Execute(
+                string localizedPolicyVersionId
+            )
+            {
+                return InternalExecute(
+                    localizedPolicyVersionId
+                );
+            }
+            public async Task<OldSetDefaultLocalizedPolicy.Response> ExecuteAsync(
+                string localizedPolicyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    localizedPolicyVersionId
+                );
+            }
+        }
+
+
+        public OldSetDefaultLocalizedPolicy(IOldSetDefaultLocalizedPolicyBuilder builder,
             string localizedPolicyVersionId
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

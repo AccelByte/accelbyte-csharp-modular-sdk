@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static PublicCreateUserProfileBuilder Builder { get => new PublicCreateUserProfileBuilder(); }
 
-        public class PublicCreateUserProfileBuilder
-            : OperationBuilder<PublicCreateUserProfileBuilder>
+        public interface IPublicCreateUserProfileBuilder
+        {
+
+
+            Model.UserProfileCreate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PublicCreateUserProfileAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCreateUserProfileBuilder
+            where TImpl : PublicCreateUserProfileAbstractBuilder<TImpl>
         {
 
 
@@ -46,19 +58,19 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal PublicCreateUserProfileBuilder() { }
+            public PublicCreateUserProfileAbstractBuilder() { }
 
-            internal PublicCreateUserProfileBuilder(IAccelByteSdk sdk)
+            public PublicCreateUserProfileAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PublicCreateUserProfileBuilder SetBody(Model.UserProfileCreate _body)
+            public TImpl SetBody(Model.UserProfileCreate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +86,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicCreateUserProfileBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicCreateUserProfile.Response Execute(
+            protected PublicCreateUserProfile.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -97,7 +109,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCreateUserProfile.Response> ExecuteAsync(
+            protected async Task<PublicCreateUserProfile.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -117,7 +129,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.Payload);
             }
 
-            public PublicCreateUserProfile.Response<T1> Execute<T1>(
+            protected PublicCreateUserProfile.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string userId
             )
@@ -136,7 +148,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCreateUserProfile.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicCreateUserProfile.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -157,7 +169,57 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private PublicCreateUserProfile(PublicCreateUserProfileBuilder builder,
+        public class PublicCreateUserProfileBuilder : PublicCreateUserProfileAbstractBuilder<PublicCreateUserProfileBuilder>
+        {
+            public PublicCreateUserProfileBuilder() : base() { }
+
+            public PublicCreateUserProfileBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicCreateUserProfile.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicCreateUserProfile.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public PublicCreateUserProfile.Response<T1> Execute<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicCreateUserProfile.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicCreateUserProfile(IPublicCreateUserProfileBuilder builder,
             string namespace_,
             string userId
         )
@@ -248,27 +310,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 
@@ -289,27 +356,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserProfileInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             

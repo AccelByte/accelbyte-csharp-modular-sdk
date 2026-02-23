@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UnlockSteamUserAchievementBuilder Builder { get => new UnlockSteamUserAchievementBuilder(); }
 
-        public class UnlockSteamUserAchievementBuilder
-            : OperationBuilder<UnlockSteamUserAchievementBuilder>
+        public interface IUnlockSteamUserAchievementBuilder
         {
 
 
 
 
 
-            internal UnlockSteamUserAchievementBuilder() { }
+        }
 
-            internal UnlockSteamUserAchievementBuilder(IAccelByteSdk sdk)
+        public abstract class UnlockSteamUserAchievementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUnlockSteamUserAchievementBuilder
+            where TImpl : UnlockSteamUserAchievementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UnlockSteamUserAchievementAbstractBuilder() { }
+
+            public UnlockSteamUserAchievementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UnlockSteamUserAchievementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UnlockSteamUserAchievement.Response Execute(
+            protected UnlockSteamUserAchievement.Response InternalExecute(
                 SteamAchievementUpdateRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UnlockSteamUserAchievement.Response> ExecuteAsync(
+            protected async Task<UnlockSteamUserAchievement.Response> InternalExecuteAsync(
                 SteamAchievementUpdateRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UnlockSteamUserAchievement(UnlockSteamUserAchievementBuilder builder,
+        public class UnlockSteamUserAchievementBuilder : UnlockSteamUserAchievementAbstractBuilder<UnlockSteamUserAchievementBuilder>
+        {
+            public UnlockSteamUserAchievementBuilder() : base() { }
+
+            public UnlockSteamUserAchievementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UnlockSteamUserAchievement.Response Execute(
+                SteamAchievementUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UnlockSteamUserAchievement.Response> ExecuteAsync(
+                SteamAchievementUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UnlockSteamUserAchievement(IUnlockSteamUserAchievementBuilder builder,
             SteamAchievementUpdateRequest body,
             string namespace_,
             string userId
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,8 +42,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveLatestPoliciesPublicBuilder Builder { get => new RetrieveLatestPoliciesPublicBuilder(); }
 
-        public class RetrieveLatestPoliciesPublicBuilder
-            : OperationBuilder<RetrieveLatestPoliciesPublicBuilder>
+        public interface IRetrieveLatestPoliciesPublicBuilder
+        {
+
+            bool? AlwaysIncludeDefault { get; }
+
+            bool? DefaultOnEmpty { get; }
+
+            RetrieveLatestPoliciesPublicPolicyType? PolicyType { get; }
+
+            string? Tags { get; }
+
+            bool? VisibleOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveLatestPoliciesPublicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveLatestPoliciesPublicBuilder
+            where TImpl : RetrieveLatestPoliciesPublicAbstractBuilder<TImpl>
         {
 
             public bool? AlwaysIncludeDefault { get; set; }
@@ -60,42 +80,42 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveLatestPoliciesPublicBuilder() { }
+            public RetrieveLatestPoliciesPublicAbstractBuilder() { }
 
-            internal RetrieveLatestPoliciesPublicBuilder(IAccelByteSdk sdk)
+            public RetrieveLatestPoliciesPublicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveLatestPoliciesPublicBuilder SetAlwaysIncludeDefault(bool _alwaysIncludeDefault)
+            public TImpl SetAlwaysIncludeDefault(bool _alwaysIncludeDefault)
             {
                 AlwaysIncludeDefault = _alwaysIncludeDefault;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesPublicBuilder SetDefaultOnEmpty(bool _defaultOnEmpty)
+            public TImpl SetDefaultOnEmpty(bool _defaultOnEmpty)
             {
                 DefaultOnEmpty = _defaultOnEmpty;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesPublicBuilder SetPolicyType(RetrieveLatestPoliciesPublicPolicyType _policyType)
+            public TImpl SetPolicyType(RetrieveLatestPoliciesPublicPolicyType _policyType)
             {
                 PolicyType = _policyType;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesPublicBuilder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveLatestPoliciesPublicBuilder SetVisibleOnly(bool _visibleOnly)
+            public TImpl SetVisibleOnly(bool _visibleOnly)
             {
                 VisibleOnly = _visibleOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -110,11 +130,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RetrieveLatestPoliciesPublicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveLatestPoliciesPublic.Response Execute(
+            protected RetrieveLatestPoliciesPublic.Response InternalExecute(
                 string namespace_
             )
             {
@@ -131,7 +151,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveLatestPoliciesPublic.Response> ExecuteAsync(
+            protected async Task<RetrieveLatestPoliciesPublic.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -150,7 +170,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveLatestPoliciesPublic(RetrieveLatestPoliciesPublicBuilder builder,
+        public class RetrieveLatestPoliciesPublicBuilder : RetrieveLatestPoliciesPublicAbstractBuilder<RetrieveLatestPoliciesPublicBuilder>
+        {
+            public RetrieveLatestPoliciesPublicBuilder() : base() { }
+
+            public RetrieveLatestPoliciesPublicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveLatestPoliciesPublic.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RetrieveLatestPoliciesPublic.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RetrieveLatestPoliciesPublic(IRetrieveLatestPoliciesPublicBuilder builder,
             string namespace_
         )
         {
@@ -230,12 +275,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

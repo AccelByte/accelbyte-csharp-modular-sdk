@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static DeleteGroupPredefinedRulePublicV1Builder Builder { get => new DeleteGroupPredefinedRulePublicV1Builder(); }
 
-        public class DeleteGroupPredefinedRulePublicV1Builder
-            : OperationBuilder<DeleteGroupPredefinedRulePublicV1Builder>
+        public interface IDeleteGroupPredefinedRulePublicV1Builder
         {
 
 
 
 
 
-            internal DeleteGroupPredefinedRulePublicV1Builder() { }
+        }
 
-            internal DeleteGroupPredefinedRulePublicV1Builder(IAccelByteSdk sdk)
+        public abstract class DeleteGroupPredefinedRulePublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteGroupPredefinedRulePublicV1Builder
+            where TImpl : DeleteGroupPredefinedRulePublicV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteGroupPredefinedRulePublicV1AbstractBuilder() { }
+
+            public DeleteGroupPredefinedRulePublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteGroupPredefinedRulePublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteGroupPredefinedRulePublicV1.Response Execute(
+            protected DeleteGroupPredefinedRulePublicV1.Response InternalExecute(
                 string allowedAction,
                 string groupId,
                 string namespace_
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteGroupPredefinedRulePublicV1.Response> ExecuteAsync(
+            protected async Task<DeleteGroupPredefinedRulePublicV1.Response> InternalExecuteAsync(
                 string allowedAction,
                 string groupId,
                 string namespace_
@@ -116,7 +126,40 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private DeleteGroupPredefinedRulePublicV1(DeleteGroupPredefinedRulePublicV1Builder builder,
+        public class DeleteGroupPredefinedRulePublicV1Builder : DeleteGroupPredefinedRulePublicV1AbstractBuilder<DeleteGroupPredefinedRulePublicV1Builder>
+        {
+            public DeleteGroupPredefinedRulePublicV1Builder() : base() { }
+
+            public DeleteGroupPredefinedRulePublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteGroupPredefinedRulePublicV1.Response Execute(
+                string allowedAction,
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    allowedAction,
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteGroupPredefinedRulePublicV1.Response> ExecuteAsync(
+                string allowedAction,
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    allowedAction,
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteGroupPredefinedRulePublicV1(IDeleteGroupPredefinedRulePublicV1Builder builder,
             string allowedAction,
             string groupId,
             string namespace_
@@ -198,27 +241,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

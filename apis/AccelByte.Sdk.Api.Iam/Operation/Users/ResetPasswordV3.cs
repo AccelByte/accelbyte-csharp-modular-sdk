@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static ResetPasswordV3Builder Builder { get => new ResetPasswordV3Builder(); }
 
-        public class ResetPasswordV3Builder
-            : OperationBuilder<ResetPasswordV3Builder>
+        public interface IResetPasswordV3Builder
         {
 
 
 
 
 
-            internal ResetPasswordV3Builder() { }
+        }
 
-            internal ResetPasswordV3Builder(IAccelByteSdk sdk)
+        public abstract class ResetPasswordV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IResetPasswordV3Builder
+            where TImpl : ResetPasswordV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ResetPasswordV3AbstractBuilder() { }
+
+            public ResetPasswordV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ResetPasswordV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ResetPasswordV3.Response Execute(
+            protected ResetPasswordV3.Response InternalExecute(
                 ModelResetPasswordRequestV3 body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ResetPasswordV3.Response> ExecuteAsync(
+            protected async Task<ResetPasswordV3.Response> InternalExecuteAsync(
                 ModelResetPasswordRequestV3 body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private ResetPasswordV3(ResetPasswordV3Builder builder,
+        public class ResetPasswordV3Builder : ResetPasswordV3AbstractBuilder<ResetPasswordV3Builder>
+        {
+            public ResetPasswordV3Builder() : base() { }
+
+            public ResetPasswordV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ResetPasswordV3.Response Execute(
+                ModelResetPasswordRequestV3 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<ResetPasswordV3.Response> ExecuteAsync(
+                ModelResetPasswordRequestV3 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ResetPasswordV3(IResetPasswordV3Builder builder,
             ModelResetPasswordRequestV3 body,
             string namespace_
         )
@@ -178,17 +217,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

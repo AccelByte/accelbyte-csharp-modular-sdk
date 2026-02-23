@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetRevocationConfigBuilder Builder { get => new GetRevocationConfigBuilder(); }
 
-        public class GetRevocationConfigBuilder
-            : OperationBuilder<GetRevocationConfigBuilder>
+        public interface IGetRevocationConfigBuilder
         {
 
 
 
 
 
-            internal GetRevocationConfigBuilder() { }
+        }
 
-            internal GetRevocationConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetRevocationConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRevocationConfigBuilder
+            where TImpl : GetRevocationConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetRevocationConfigAbstractBuilder() { }
+
+            public GetRevocationConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetRevocationConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetRevocationConfig.Response Execute(
+            protected GetRevocationConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRevocationConfig.Response> ExecuteAsync(
+            protected async Task<GetRevocationConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetRevocationConfig(GetRevocationConfigBuilder builder,
+        public class GetRevocationConfigBuilder : GetRevocationConfigAbstractBuilder<GetRevocationConfigBuilder>
+        {
+            public GetRevocationConfigBuilder() : base() { }
+
+            public GetRevocationConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetRevocationConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetRevocationConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetRevocationConfig(IGetRevocationConfigBuilder builder,
             string namespace_
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

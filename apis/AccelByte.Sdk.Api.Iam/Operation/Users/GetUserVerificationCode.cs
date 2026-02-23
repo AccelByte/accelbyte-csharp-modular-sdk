@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetUserVerificationCodeBuilder Builder { get => new GetUserVerificationCodeBuilder(); }
 
-        public class GetUserVerificationCodeBuilder
-            : OperationBuilder<GetUserVerificationCodeBuilder>
+        public interface IGetUserVerificationCodeBuilder
         {
 
 
 
 
 
-            internal GetUserVerificationCodeBuilder() { }
+        }
 
-            internal GetUserVerificationCodeBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserVerificationCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserVerificationCodeBuilder
+            where TImpl : GetUserVerificationCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserVerificationCodeAbstractBuilder() { }
+
+            public GetUserVerificationCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,11 +81,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserVerificationCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserVerificationCode.Response Execute(
+            protected GetUserVerificationCode.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserVerificationCode.Response> ExecuteAsync(
+            protected async Task<GetUserVerificationCode.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -115,7 +125,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetUserVerificationCode(GetUserVerificationCodeBuilder builder,
+        public class GetUserVerificationCodeBuilder : GetUserVerificationCodeAbstractBuilder<GetUserVerificationCodeBuilder>
+        {
+            public GetUserVerificationCodeBuilder() : base() { }
+
+            public GetUserVerificationCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserVerificationCode.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserVerificationCode.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserVerificationCode(IGetUserVerificationCodeBuilder builder,
             string namespace_,
             string userId
         )
@@ -190,27 +229,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelVerificationCodeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelVerificationCodeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

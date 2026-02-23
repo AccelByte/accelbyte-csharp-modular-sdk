@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static GetCurrentUserSeasonProgressionBuilder Builder { get => new GetCurrentUserSeasonProgressionBuilder(); }
 
-        public class GetCurrentUserSeasonProgressionBuilder
-            : OperationBuilder<GetCurrentUserSeasonProgressionBuilder>
+        public interface IGetCurrentUserSeasonProgressionBuilder
         {
 
 
 
 
 
-            internal GetCurrentUserSeasonProgressionBuilder() { }
+        }
 
-            internal GetCurrentUserSeasonProgressionBuilder(IAccelByteSdk sdk)
+        public abstract class GetCurrentUserSeasonProgressionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCurrentUserSeasonProgressionBuilder
+            where TImpl : GetCurrentUserSeasonProgressionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetCurrentUserSeasonProgressionAbstractBuilder() { }
+
+            public GetCurrentUserSeasonProgressionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetCurrentUserSeasonProgressionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCurrentUserSeasonProgression.Response Execute(
+            protected GetCurrentUserSeasonProgression.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCurrentUserSeasonProgression.Response> ExecuteAsync(
+            protected async Task<GetCurrentUserSeasonProgression.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private GetCurrentUserSeasonProgression(GetCurrentUserSeasonProgressionBuilder builder,
+        public class GetCurrentUserSeasonProgressionBuilder : GetCurrentUserSeasonProgressionAbstractBuilder<GetCurrentUserSeasonProgressionBuilder>
+        {
+            public GetCurrentUserSeasonProgressionBuilder() : base() { }
+
+            public GetCurrentUserSeasonProgressionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCurrentUserSeasonProgression.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetCurrentUserSeasonProgression.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetCurrentUserSeasonProgression(IGetCurrentUserSeasonProgressionBuilder builder,
             string namespace_,
             string userId
         )
@@ -179,17 +218,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserSeasonSummary>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserSeasonSummary>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

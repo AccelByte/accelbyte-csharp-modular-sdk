@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateKeyGroupBuilder Builder { get => new UpdateKeyGroupBuilder(); }
 
-        public class UpdateKeyGroupBuilder
-            : OperationBuilder<UpdateKeyGroupBuilder>
+        public interface IUpdateKeyGroupBuilder
         {
 
 
 
 
 
-            internal UpdateKeyGroupBuilder() { }
+        }
 
-            internal UpdateKeyGroupBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateKeyGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateKeyGroupBuilder
+            where TImpl : UpdateKeyGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateKeyGroupAbstractBuilder() { }
+
+            public UpdateKeyGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateKeyGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateKeyGroup.Response Execute(
+            protected UpdateKeyGroup.Response InternalExecute(
                 KeyGroupUpdate body,
                 string keyGroupId,
                 string namespace_
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateKeyGroup.Response> ExecuteAsync(
+            protected async Task<UpdateKeyGroup.Response> InternalExecuteAsync(
                 KeyGroupUpdate body,
                 string keyGroupId,
                 string namespace_
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateKeyGroup(UpdateKeyGroupBuilder builder,
+        public class UpdateKeyGroupBuilder : UpdateKeyGroupAbstractBuilder<UpdateKeyGroupBuilder>
+        {
+            public UpdateKeyGroupBuilder() : base() { }
+
+            public UpdateKeyGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateKeyGroup.Response Execute(
+                KeyGroupUpdate body,
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    keyGroupId,
+                    namespace_
+                );
+            }
+            public async Task<UpdateKeyGroup.Response> ExecuteAsync(
+                KeyGroupUpdate body,
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    keyGroupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateKeyGroup(IUpdateKeyGroupBuilder builder,
             KeyGroupUpdate body,
             string keyGroupId,
             string namespace_
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

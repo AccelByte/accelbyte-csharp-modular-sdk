@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminDeleteProfanityListBuilder Builder { get => new AdminDeleteProfanityListBuilder(); }
 
-        public class AdminDeleteProfanityListBuilder
-            : OperationBuilder<AdminDeleteProfanityListBuilder>
+        public interface IAdminDeleteProfanityListBuilder
         {
 
 
 
 
 
-            internal AdminDeleteProfanityListBuilder() { }
+        }
 
-            internal AdminDeleteProfanityListBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteProfanityListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteProfanityListBuilder
+            where TImpl : AdminDeleteProfanityListAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteProfanityListAbstractBuilder() { }
+
+            public AdminDeleteProfanityListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteProfanityListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminDeleteProfanityList.Response Execute(
+            protected AdminDeleteProfanityList.Response InternalExecute(
                 string list,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteProfanityList.Response> ExecuteAsync(
+            protected async Task<AdminDeleteProfanityList.Response> InternalExecuteAsync(
                 string list,
                 string namespace_
             )
@@ -106,7 +116,37 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminDeleteProfanityList(AdminDeleteProfanityListBuilder builder,
+        public class AdminDeleteProfanityListBuilder : AdminDeleteProfanityListAbstractBuilder<AdminDeleteProfanityListBuilder>
+        {
+            public AdminDeleteProfanityListBuilder() : base() { }
+
+            public AdminDeleteProfanityListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminDeleteProfanityList.Response Execute(
+                string list,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    list,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteProfanityList.Response> ExecuteAsync(
+                string list,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    list,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteProfanityList(IAdminDeleteProfanityListBuilder builder,
             string list,
             string namespace_
         )
@@ -184,27 +224,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

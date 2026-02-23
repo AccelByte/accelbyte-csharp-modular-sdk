@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ValidateItemPurchaseConditionBuilder Builder { get => new ValidateItemPurchaseConditionBuilder(); }
 
-        public class ValidateItemPurchaseConditionBuilder
-            : OperationBuilder<ValidateItemPurchaseConditionBuilder>
+        public interface IValidateItemPurchaseConditionBuilder
+        {
+
+            string? Platform { get; }
+
+
+
+
+
+        }
+
+        public abstract class ValidateItemPurchaseConditionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IValidateItemPurchaseConditionBuilder
+            where TImpl : ValidateItemPurchaseConditionAbstractBuilder<TImpl>
         {
 
             public string? Platform { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ValidateItemPurchaseConditionBuilder() { }
+            public ValidateItemPurchaseConditionAbstractBuilder() { }
 
-            internal ValidateItemPurchaseConditionBuilder(IAccelByteSdk sdk)
+            public ValidateItemPurchaseConditionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ValidateItemPurchaseConditionBuilder SetPlatform(string _platform)
+            public TImpl SetPlatform(string _platform)
             {
                 Platform = _platform;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ValidateItemPurchaseConditionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ValidateItemPurchaseCondition.Response Execute(
+            protected ValidateItemPurchaseCondition.Response InternalExecute(
                 ItemPurchaseConditionValidateRequest body,
                 string namespace_,
                 string userId
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ValidateItemPurchaseCondition.Response> ExecuteAsync(
+            protected async Task<ValidateItemPurchaseCondition.Response> InternalExecuteAsync(
                 ItemPurchaseConditionValidateRequest body,
                 string namespace_,
                 string userId
@@ -118,7 +130,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ValidateItemPurchaseCondition(ValidateItemPurchaseConditionBuilder builder,
+        public class ValidateItemPurchaseConditionBuilder : ValidateItemPurchaseConditionAbstractBuilder<ValidateItemPurchaseConditionBuilder>
+        {
+            public ValidateItemPurchaseConditionBuilder() : base() { }
+
+            public ValidateItemPurchaseConditionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ValidateItemPurchaseCondition.Response Execute(
+                ItemPurchaseConditionValidateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ValidateItemPurchaseCondition.Response> ExecuteAsync(
+                ItemPurchaseConditionValidateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ValidateItemPurchaseCondition(IValidateItemPurchaseConditionBuilder builder,
             ItemPurchaseConditionValidateRequest body,
             string namespace_,
             string userId
@@ -194,12 +239,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ItemPurchaseConditionValidateResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemPurchaseConditionValidateResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

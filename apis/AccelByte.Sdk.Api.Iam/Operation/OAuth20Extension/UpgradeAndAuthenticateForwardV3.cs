@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static UpgradeAndAuthenticateForwardV3Builder Builder { get => new UpgradeAndAuthenticateForwardV3Builder(); }
 
-        public class UpgradeAndAuthenticateForwardV3Builder
-            : OperationBuilder<UpgradeAndAuthenticateForwardV3Builder>
+        public interface IUpgradeAndAuthenticateForwardV3Builder
         {
 
 
 
 
 
-            internal UpgradeAndAuthenticateForwardV3Builder() { }
+        }
 
-            internal UpgradeAndAuthenticateForwardV3Builder(IAccelByteSdk sdk)
+        public abstract class UpgradeAndAuthenticateForwardV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpgradeAndAuthenticateForwardV3Builder
+            where TImpl : UpgradeAndAuthenticateForwardV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpgradeAndAuthenticateForwardV3AbstractBuilder() { }
+
+            public UpgradeAndAuthenticateForwardV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     upgradeSuccessToken                    
                 );
 
-                op.SetBaseFields<UpgradeAndAuthenticateForwardV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpgradeAndAuthenticateForwardV3.Response Execute(
+            protected UpgradeAndAuthenticateForwardV3.Response InternalExecute(
                 string clientId,
                 string upgradeSuccessToken
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpgradeAndAuthenticateForwardV3.Response> ExecuteAsync(
+            protected async Task<UpgradeAndAuthenticateForwardV3.Response> InternalExecuteAsync(
                 string clientId,
                 string upgradeSuccessToken
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private UpgradeAndAuthenticateForwardV3(UpgradeAndAuthenticateForwardV3Builder builder,
+        public class UpgradeAndAuthenticateForwardV3Builder : UpgradeAndAuthenticateForwardV3AbstractBuilder<UpgradeAndAuthenticateForwardV3Builder>
+        {
+            public UpgradeAndAuthenticateForwardV3Builder() : base() { }
+
+            public UpgradeAndAuthenticateForwardV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpgradeAndAuthenticateForwardV3.Response Execute(
+                string clientId,
+                string upgradeSuccessToken
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    upgradeSuccessToken
+                );
+            }
+            public async Task<UpgradeAndAuthenticateForwardV3.Response> ExecuteAsync(
+                string clientId,
+                string upgradeSuccessToken
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    upgradeSuccessToken
+                );
+            }
+        }
+
+
+        public UpgradeAndAuthenticateForwardV3(IUpgradeAndAuthenticateForwardV3Builder builder,
             string clientId,
             string upgradeSuccessToken
         )

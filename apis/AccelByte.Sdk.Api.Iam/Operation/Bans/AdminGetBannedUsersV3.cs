@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetBannedUsersV3Builder Builder { get => new AdminGetBannedUsersV3Builder(); }
 
-        public class AdminGetBannedUsersV3Builder
-            : OperationBuilder<AdminGetBannedUsersV3Builder>
+        public interface IAdminGetBannedUsersV3Builder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? BanType { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetBannedUsersV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetBannedUsersV3Builder
+            where TImpl : AdminGetBannedUsersV3AbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -48,36 +66,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGetBannedUsersV3Builder() { }
+            public AdminGetBannedUsersV3AbstractBuilder() { }
 
-            internal AdminGetBannedUsersV3Builder(IAccelByteSdk sdk)
+            public AdminGetBannedUsersV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetBannedUsersV3Builder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetBannedUsersV3Builder SetBanType(string _banType)
+            public TImpl SetBanType(string _banType)
             {
                 BanType = _banType;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetBannedUsersV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetBannedUsersV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetBannedUsersV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetBannedUsersV3.Response Execute(
+            protected AdminGetBannedUsersV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -113,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetBannedUsersV3.Response> ExecuteAsync(
+            protected async Task<AdminGetBannedUsersV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -132,7 +150,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetBannedUsersV3(AdminGetBannedUsersV3Builder builder,
+        public class AdminGetBannedUsersV3Builder : AdminGetBannedUsersV3AbstractBuilder<AdminGetBannedUsersV3Builder>
+        {
+            public AdminGetBannedUsersV3Builder() : base() { }
+
+            public AdminGetBannedUsersV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetBannedUsersV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetBannedUsersV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetBannedUsersV3(IAdminGetBannedUsersV3Builder builder,
             string namespace_
         )
         {
@@ -213,22 +256,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserBanV3Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserBanV3Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

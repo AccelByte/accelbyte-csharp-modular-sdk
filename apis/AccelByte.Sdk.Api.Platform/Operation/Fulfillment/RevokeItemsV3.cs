@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RevokeItemsV3Builder Builder { get => new RevokeItemsV3Builder(); }
 
-        public class RevokeItemsV3Builder
-            : OperationBuilder<RevokeItemsV3Builder>
+        public interface IRevokeItemsV3Builder
         {
 
 
 
 
 
-            internal RevokeItemsV3Builder() { }
+        }
 
-            internal RevokeItemsV3Builder(IAccelByteSdk sdk)
+        public abstract class RevokeItemsV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeItemsV3Builder
+            where TImpl : RevokeItemsV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RevokeItemsV3AbstractBuilder() { }
+
+            public RevokeItemsV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RevokeItemsV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RevokeItemsV3.Response Execute(
+            protected RevokeItemsV3.Response InternalExecute(
                 string namespace_,
                 string transactionId,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeItemsV3.Response> ExecuteAsync(
+            protected async Task<RevokeItemsV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string transactionId,
                 string userId
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RevokeItemsV3(RevokeItemsV3Builder builder,
+        public class RevokeItemsV3Builder : RevokeItemsV3AbstractBuilder<RevokeItemsV3Builder>
+        {
+            public RevokeItemsV3Builder() : base() { }
+
+            public RevokeItemsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RevokeItemsV3.Response Execute(
+                string namespace_,
+                string transactionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    transactionId,
+                    userId
+                );
+            }
+            public async Task<RevokeItemsV3.Response> ExecuteAsync(
+                string namespace_,
+                string transactionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    transactionId,
+                    userId
+                );
+            }
+        }
+
+
+        public RevokeItemsV3(IRevokeItemsV3Builder builder,
             string namespace_,
             string transactionId,
             string userId
@@ -185,12 +228,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevokeFulfillmentV2Result>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevokeFulfillmentV2Result>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

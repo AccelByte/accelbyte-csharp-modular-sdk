@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CreditUserWalletBuilder Builder { get => new CreditUserWalletBuilder(); }
 
-        public class CreditUserWalletBuilder
-            : OperationBuilder<CreditUserWalletBuilder>
+        public interface ICreditUserWalletBuilder
         {
 
 
 
 
 
-            internal CreditUserWalletBuilder() { }
+        }
 
-            internal CreditUserWalletBuilder(IAccelByteSdk sdk)
+        public abstract class CreditUserWalletAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreditUserWalletBuilder
+            where TImpl : CreditUserWalletAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreditUserWalletAbstractBuilder() { }
+
+            public CreditUserWalletAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<CreditUserWalletBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreditUserWallet.Response Execute(
+            protected CreditUserWallet.Response InternalExecute(
                 CreditRequest body,
                 string currencyCode,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreditUserWallet.Response> ExecuteAsync(
+            protected async Task<CreditUserWallet.Response> InternalExecuteAsync(
                 CreditRequest body,
                 string currencyCode,
                 string namespace_,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CreditUserWallet(CreditUserWalletBuilder builder,
+        public class CreditUserWalletBuilder : CreditUserWalletAbstractBuilder<CreditUserWalletBuilder>
+        {
+            public CreditUserWalletBuilder() : base() { }
+
+            public CreditUserWalletBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreditUserWallet.Response Execute(
+                CreditRequest body,
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<CreditUserWallet.Response> ExecuteAsync(
+                CreditRequest body,
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public CreditUserWallet(ICreditUserWalletBuilder builder,
             CreditRequest body,
             string currencyCode,
             string namespace_,
@@ -198,17 +245,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.WalletInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.WalletInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

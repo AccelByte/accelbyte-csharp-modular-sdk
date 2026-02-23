@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryCodesBuilder Builder { get => new QueryCodesBuilder(); }
 
-        public class QueryCodesBuilder
-            : OperationBuilder<QueryCodesBuilder>
+        public interface IQueryCodesBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? BatchName { get; }
+
+            List<int>? BatchNo { get; }
+
+            string? Code { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            bool? WithBatchName { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryCodesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryCodesBuilder
+            where TImpl : QueryCodesAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -56,54 +80,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryCodesBuilder() { }
+            public QueryCodesAbstractBuilder() { }
 
-            internal QueryCodesBuilder(IAccelByteSdk sdk)
+            public QueryCodesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryCodesBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCodesBuilder SetBatchName(string _batchName)
+            public TImpl SetBatchName(string _batchName)
             {
                 BatchName = _batchName;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCodesBuilder SetBatchNo(List<int> _batchNo)
+            public TImpl SetBatchNo(List<int> _batchNo)
             {
                 BatchNo = _batchNo;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCodesBuilder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCodesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCodesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCodesBuilder SetWithBatchName(bool _withBatchName)
+            public TImpl SetWithBatchName(bool _withBatchName)
             {
                 WithBatchName = _withBatchName;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -120,11 +144,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryCodesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryCodes.Response Execute(
+            protected QueryCodes.Response InternalExecute(
                 string campaignId,
                 string namespace_
             )
@@ -143,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryCodes.Response> ExecuteAsync(
+            protected async Task<QueryCodes.Response> InternalExecuteAsync(
                 string campaignId,
                 string namespace_
             )
@@ -164,7 +188,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryCodes(QueryCodesBuilder builder,
+        public class QueryCodesBuilder : QueryCodesAbstractBuilder<QueryCodesBuilder>
+        {
+            public QueryCodesBuilder() : base() { }
+
+            public QueryCodesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryCodes.Response Execute(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<QueryCodes.Response> ExecuteAsync(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryCodes(IQueryCodesBuilder builder,
             string campaignId,
             string namespace_
         )
@@ -254,7 +307,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CodeInfoPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CodeInfoPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

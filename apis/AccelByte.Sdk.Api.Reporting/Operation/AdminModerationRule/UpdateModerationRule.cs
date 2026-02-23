@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static UpdateModerationRuleBuilder Builder { get => new UpdateModerationRuleBuilder(); }
 
-        public class UpdateModerationRuleBuilder
-            : OperationBuilder<UpdateModerationRuleBuilder>
+        public interface IUpdateModerationRuleBuilder
         {
 
 
 
 
 
-            internal UpdateModerationRuleBuilder() { }
+        }
 
-            internal UpdateModerationRuleBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateModerationRuleAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateModerationRuleBuilder
+            where TImpl : UpdateModerationRuleAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateModerationRuleAbstractBuilder() { }
+
+            public UpdateModerationRuleAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,11 +80,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ruleId                    
                 );
 
-                op.SetBaseFields<UpdateModerationRuleBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateModerationRule.Response Execute(
+            protected UpdateModerationRule.Response InternalExecute(
                 RestapiModerationRuleRequest body,
                 string namespace_,
                 string ruleId
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateModerationRule.Response> ExecuteAsync(
+            protected async Task<UpdateModerationRule.Response> InternalExecuteAsync(
                 RestapiModerationRuleRequest body,
                 string namespace_,
                 string ruleId
@@ -118,7 +128,40 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private UpdateModerationRule(UpdateModerationRuleBuilder builder,
+        public class UpdateModerationRuleBuilder : UpdateModerationRuleAbstractBuilder<UpdateModerationRuleBuilder>
+        {
+            public UpdateModerationRuleBuilder() : base() { }
+
+            public UpdateModerationRuleBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateModerationRule.Response Execute(
+                RestapiModerationRuleRequest body,
+                string namespace_,
+                string ruleId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    ruleId
+                );
+            }
+            public async Task<UpdateModerationRule.Response> ExecuteAsync(
+                RestapiModerationRuleRequest body,
+                string namespace_,
+                string ruleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    ruleId
+                );
+            }
+        }
+
+
+        public UpdateModerationRule(IUpdateModerationRuleBuilder builder,
             RestapiModerationRuleRequest body,
             string namespace_,
             string ruleId
@@ -197,27 +240,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiModerationRuleResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiModerationRuleResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

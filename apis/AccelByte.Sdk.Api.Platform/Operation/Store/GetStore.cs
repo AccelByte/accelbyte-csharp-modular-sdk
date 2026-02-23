@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetStoreBuilder Builder { get => new GetStoreBuilder(); }
 
-        public class GetStoreBuilder
-            : OperationBuilder<GetStoreBuilder>
+        public interface IGetStoreBuilder
         {
 
 
 
 
 
-            internal GetStoreBuilder() { }
+        }
 
-            internal GetStoreBuilder(IAccelByteSdk sdk)
+        public abstract class GetStoreAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetStoreBuilder
+            where TImpl : GetStoreAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetStoreAbstractBuilder() { }
+
+            public GetStoreAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<GetStoreBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetStore.Response Execute(
+            protected GetStore.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetStore.Response> ExecuteAsync(
+            protected async Task<GetStore.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetStore(GetStoreBuilder builder,
+        public class GetStoreBuilder : GetStoreAbstractBuilder<GetStoreBuilder>
+        {
+            public GetStoreBuilder() : base() { }
+
+            public GetStoreBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetStore.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<GetStore.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public GetStore(IGetStoreBuilder builder,
             string namespace_,
             string storeId
         )
@@ -177,12 +216,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

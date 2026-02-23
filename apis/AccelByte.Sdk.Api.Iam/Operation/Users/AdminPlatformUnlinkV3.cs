@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -53,17 +53,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminPlatformUnlinkV3Builder Builder { get => new AdminPlatformUnlinkV3Builder(); }
 
-        public class AdminPlatformUnlinkV3Builder
-            : OperationBuilder<AdminPlatformUnlinkV3Builder>
+        public interface IAdminPlatformUnlinkV3Builder
         {
 
 
 
 
 
-            internal AdminPlatformUnlinkV3Builder() { }
+        }
 
-            internal AdminPlatformUnlinkV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminPlatformUnlinkV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPlatformUnlinkV3Builder
+            where TImpl : AdminPlatformUnlinkV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPlatformUnlinkV3AbstractBuilder() { }
+
+            public AdminPlatformUnlinkV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -87,12 +97,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminPlatformUnlinkV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminPlatformUnlinkV3.Response Execute(
+            protected AdminPlatformUnlinkV3.Response InternalExecute(
                 ModelUnlinkUserPlatformRequest body,
                 string namespace_,
                 string platformId,
@@ -115,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPlatformUnlinkV3.Response> ExecuteAsync(
+            protected async Task<AdminPlatformUnlinkV3.Response> InternalExecuteAsync(
                 ModelUnlinkUserPlatformRequest body,
                 string namespace_,
                 string platformId,
@@ -140,7 +150,45 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminPlatformUnlinkV3(AdminPlatformUnlinkV3Builder builder,
+        public class AdminPlatformUnlinkV3Builder : AdminPlatformUnlinkV3AbstractBuilder<AdminPlatformUnlinkV3Builder>
+        {
+            public AdminPlatformUnlinkV3Builder() : base() { }
+
+            public AdminPlatformUnlinkV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminPlatformUnlinkV3.Response Execute(
+                ModelUnlinkUserPlatformRequest body,
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+            public async Task<AdminPlatformUnlinkV3.Response> ExecuteAsync(
+                ModelUnlinkUserPlatformRequest body,
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminPlatformUnlinkV3(IAdminPlatformUnlinkV3Builder builder,
             ModelUnlinkUserPlatformRequest body,
             string namespace_,
             string platformId,
@@ -226,27 +274,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

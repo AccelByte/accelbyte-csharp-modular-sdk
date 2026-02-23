@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -56,8 +56,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AuthCodeRequestV3Builder Builder { get => new AuthCodeRequestV3Builder(); }
 
-        public class AuthCodeRequestV3Builder
-            : OperationBuilder<AuthCodeRequestV3Builder>
+        public interface IAuthCodeRequestV3Builder
+        {
+
+            string? ClientId { get; }
+
+            string? RedirectUri { get; }
+
+
+
+
+
+        }
+
+        public abstract class AuthCodeRequestV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAuthCodeRequestV3Builder
+            where TImpl : AuthCodeRequestV3AbstractBuilder<TImpl>
         {
 
             public string? ClientId { get; set; }
@@ -68,24 +82,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AuthCodeRequestV3Builder() { }
+            public AuthCodeRequestV3AbstractBuilder() { }
 
-            internal AuthCodeRequestV3Builder(IAccelByteSdk sdk)
+            public AuthCodeRequestV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AuthCodeRequestV3Builder SetClientId(string _clientId)
+            public TImpl SetClientId(string _clientId)
             {
                 ClientId = _clientId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthCodeRequestV3Builder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,11 +116,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     requestId                    
                 );
 
-                op.SetBaseFields<AuthCodeRequestV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AuthCodeRequestV3.Response Execute(
+            protected AuthCodeRequestV3.Response InternalExecute(
                 string platformId,
                 string requestId
             )
@@ -125,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AuthCodeRequestV3.Response> ExecuteAsync(
+            protected async Task<AuthCodeRequestV3.Response> InternalExecuteAsync(
                 string platformId,
                 string requestId
             )
@@ -146,7 +160,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AuthCodeRequestV3(AuthCodeRequestV3Builder builder,
+        public class AuthCodeRequestV3Builder : AuthCodeRequestV3AbstractBuilder<AuthCodeRequestV3Builder>
+        {
+            public AuthCodeRequestV3Builder() : base() { }
+
+            public AuthCodeRequestV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AuthCodeRequestV3.Response Execute(
+                string platformId,
+                string requestId
+            )
+            {
+                return InternalExecute(
+                    platformId,
+                    requestId
+                );
+            }
+            public async Task<AuthCodeRequestV3.Response> ExecuteAsync(
+                string platformId,
+                string requestId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId,
+                    requestId
+                );
+            }
+        }
+
+
+        public AuthCodeRequestV3(IAuthCodeRequestV3Builder builder,
             string platformId,
             string requestId
         )

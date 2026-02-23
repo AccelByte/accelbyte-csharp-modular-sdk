@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicUpdatePasswordV3Builder Builder { get => new PublicUpdatePasswordV3Builder(); }
 
-        public class PublicUpdatePasswordV3Builder
-            : OperationBuilder<PublicUpdatePasswordV3Builder>
+        public interface IPublicUpdatePasswordV3Builder
         {
 
 
 
 
 
-            internal PublicUpdatePasswordV3Builder() { }
+        }
 
-            internal PublicUpdatePasswordV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicUpdatePasswordV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdatePasswordV3Builder
+            where TImpl : PublicUpdatePasswordV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicUpdatePasswordV3AbstractBuilder() { }
+
+            public PublicUpdatePasswordV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicUpdatePasswordV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicUpdatePasswordV3.Response Execute(
+            protected PublicUpdatePasswordV3.Response InternalExecute(
                 ModelUserPasswordUpdateV3Request body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdatePasswordV3.Response> ExecuteAsync(
+            protected async Task<PublicUpdatePasswordV3.Response> InternalExecuteAsync(
                 ModelUserPasswordUpdateV3Request body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicUpdatePasswordV3(PublicUpdatePasswordV3Builder builder,
+        public class PublicUpdatePasswordV3Builder : PublicUpdatePasswordV3AbstractBuilder<PublicUpdatePasswordV3Builder>
+        {
+            public PublicUpdatePasswordV3Builder() : base() { }
+
+            public PublicUpdatePasswordV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicUpdatePasswordV3.Response Execute(
+                ModelUserPasswordUpdateV3Request body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicUpdatePasswordV3.Response> ExecuteAsync(
+                ModelUserPasswordUpdateV3Request body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicUpdatePasswordV3(IPublicUpdatePasswordV3Builder builder,
             ModelUserPasswordUpdateV3Request body,
             string namespace_
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

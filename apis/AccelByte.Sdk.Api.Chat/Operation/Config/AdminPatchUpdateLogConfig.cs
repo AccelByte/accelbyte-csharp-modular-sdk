@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminPatchUpdateLogConfigBuilder Builder { get => new AdminPatchUpdateLogConfigBuilder(); }
 
-        public class AdminPatchUpdateLogConfigBuilder
-            : OperationBuilder<AdminPatchUpdateLogConfigBuilder>
+        public interface IAdminPatchUpdateLogConfigBuilder
         {
 
 
 
 
 
-            internal AdminPatchUpdateLogConfigBuilder() { }
+        }
 
-            internal AdminPatchUpdateLogConfigBuilder(IAccelByteSdk sdk)
+        public abstract class AdminPatchUpdateLogConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPatchUpdateLogConfigBuilder
+            where TImpl : AdminPatchUpdateLogConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPatchUpdateLogConfigAbstractBuilder() { }
+
+            public AdminPatchUpdateLogConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminPatchUpdateLogConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminPatchUpdateLogConfig.Response Execute(
+            protected AdminPatchUpdateLogConfig.Response InternalExecute(
                 LogconfigConfiguration body
             )
             {
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPatchUpdateLogConfig.Response> ExecuteAsync(
+            protected async Task<AdminPatchUpdateLogConfig.Response> InternalExecuteAsync(
                 LogconfigConfiguration body
             )
             {
@@ -104,7 +114,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminPatchUpdateLogConfig(AdminPatchUpdateLogConfigBuilder builder,
+        public class AdminPatchUpdateLogConfigBuilder : AdminPatchUpdateLogConfigAbstractBuilder<AdminPatchUpdateLogConfigBuilder>
+        {
+            public AdminPatchUpdateLogConfigBuilder() : base() { }
+
+            public AdminPatchUpdateLogConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminPatchUpdateLogConfig.Response Execute(
+                LogconfigConfiguration body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminPatchUpdateLogConfig.Response> ExecuteAsync(
+                LogconfigConfiguration body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminPatchUpdateLogConfig(IAdminPatchUpdateLogConfigBuilder builder,
             LogconfigConfiguration body
         )
         {
@@ -167,7 +202,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.LogconfigConfiguration>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.LogconfigConfiguration>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

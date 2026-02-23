@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -45,17 +45,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static UpdateMatchPoolBuilder Builder { get => new UpdateMatchPoolBuilder(); }
 
-        public class UpdateMatchPoolBuilder
-            : OperationBuilder<UpdateMatchPoolBuilder>
+        public interface IUpdateMatchPoolBuilder
         {
 
 
 
 
 
-            internal UpdateMatchPoolBuilder() { }
+        }
 
-            internal UpdateMatchPoolBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateMatchPoolAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateMatchPoolBuilder
+            where TImpl : UpdateMatchPoolAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateMatchPoolAbstractBuilder() { }
+
+            public UpdateMatchPoolAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -77,11 +87,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     pool                    
                 );
 
-                op.SetBaseFields<UpdateMatchPoolBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateMatchPool.Response Execute(
+            protected UpdateMatchPool.Response InternalExecute(
                 ApiMatchPoolConfig body,
                 string namespace_,
                 string pool
@@ -102,7 +112,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateMatchPool.Response> ExecuteAsync(
+            protected async Task<UpdateMatchPool.Response> InternalExecuteAsync(
                 ApiMatchPoolConfig body,
                 string namespace_,
                 string pool
@@ -125,7 +135,40 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private UpdateMatchPool(UpdateMatchPoolBuilder builder,
+        public class UpdateMatchPoolBuilder : UpdateMatchPoolAbstractBuilder<UpdateMatchPoolBuilder>
+        {
+            public UpdateMatchPoolBuilder() : base() { }
+
+            public UpdateMatchPoolBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateMatchPool.Response Execute(
+                ApiMatchPoolConfig body,
+                string namespace_,
+                string pool
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    pool
+                );
+            }
+            public async Task<UpdateMatchPool.Response> ExecuteAsync(
+                ApiMatchPoolConfig body,
+                string namespace_,
+                string pool
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    pool
+                );
+            }
+        }
+
+
+        public UpdateMatchPool(IUpdateMatchPoolBuilder builder,
             ApiMatchPoolConfig body,
             string namespace_,
             string pool
@@ -206,32 +249,38 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiMatchPool>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiMatchPool>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

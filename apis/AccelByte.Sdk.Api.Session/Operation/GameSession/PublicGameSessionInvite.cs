@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicGameSessionInviteBuilder Builder { get => new PublicGameSessionInviteBuilder(); }
 
-        public class PublicGameSessionInviteBuilder
-            : OperationBuilder<PublicGameSessionInviteBuilder>
+        public interface IPublicGameSessionInviteBuilder
         {
 
 
 
 
 
-            internal PublicGameSessionInviteBuilder() { }
+        }
 
-            internal PublicGameSessionInviteBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGameSessionInviteAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGameSessionInviteBuilder
+            where TImpl : PublicGameSessionInviteAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGameSessionInviteAbstractBuilder() { }
+
+            public PublicGameSessionInviteAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId                    
                 );
 
-                op.SetBaseFields<PublicGameSessionInviteBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGameSessionInvite.Response Execute(
+            protected PublicGameSessionInvite.Response InternalExecute(
                 ApimodelsSessionInviteRequest body,
                 string namespace_,
                 string sessionId
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGameSessionInvite.Response> ExecuteAsync(
+            protected async Task<PublicGameSessionInvite.Response> InternalExecuteAsync(
                 ApimodelsSessionInviteRequest body,
                 string namespace_,
                 string sessionId
@@ -116,7 +126,40 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicGameSessionInvite(PublicGameSessionInviteBuilder builder,
+        public class PublicGameSessionInviteBuilder : PublicGameSessionInviteAbstractBuilder<PublicGameSessionInviteBuilder>
+        {
+            public PublicGameSessionInviteBuilder() : base() { }
+
+            public PublicGameSessionInviteBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGameSessionInvite.Response Execute(
+                ApimodelsSessionInviteRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+            }
+            public async Task<PublicGameSessionInvite.Response> ExecuteAsync(
+                ApimodelsSessionInviteRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+            }
+        }
+
+
+        public PublicGameSessionInvite(IPublicGameSessionInviteBuilder builder,
             ApimodelsSessionInviteRequest body,
             string namespace_,
             string sessionId
@@ -196,22 +239,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

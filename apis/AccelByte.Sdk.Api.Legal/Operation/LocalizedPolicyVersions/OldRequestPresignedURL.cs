@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRequestPresignedURLBuilder Builder { get => new OldRequestPresignedURLBuilder(); }
 
-        public class OldRequestPresignedURLBuilder
-            : OperationBuilder<OldRequestPresignedURLBuilder>
+        public interface IOldRequestPresignedURLBuilder
+        {
+
+
+            Model.UploadPolicyVersionAttachmentRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class OldRequestPresignedURLAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRequestPresignedURLBuilder
+            where TImpl : OldRequestPresignedURLAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal OldRequestPresignedURLBuilder() { }
+            public OldRequestPresignedURLAbstractBuilder() { }
 
-            internal OldRequestPresignedURLBuilder(IAccelByteSdk sdk)
+            public OldRequestPresignedURLAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public OldRequestPresignedURLBuilder SetBody(Model.UploadPolicyVersionAttachmentRequest _body)
+            public TImpl SetBody(Model.UploadPolicyVersionAttachmentRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     localizedPolicyVersionId                    
                 );
 
-                op.SetBaseFields<OldRequestPresignedURLBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRequestPresignedURL.Response Execute(
+            protected OldRequestPresignedURL.Response InternalExecute(
                 string localizedPolicyVersionId
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRequestPresignedURL.Response> ExecuteAsync(
+            protected async Task<OldRequestPresignedURL.Response> InternalExecuteAsync(
                 string localizedPolicyVersionId
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRequestPresignedURL(OldRequestPresignedURLBuilder builder,
+        public class OldRequestPresignedURLBuilder : OldRequestPresignedURLAbstractBuilder<OldRequestPresignedURLBuilder>
+        {
+            public OldRequestPresignedURLBuilder() : base() { }
+
+            public OldRequestPresignedURLBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRequestPresignedURL.Response Execute(
+                string localizedPolicyVersionId
+            )
+            {
+                return InternalExecute(
+                    localizedPolicyVersionId
+                );
+            }
+            public async Task<OldRequestPresignedURL.Response> ExecuteAsync(
+                string localizedPolicyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    localizedPolicyVersionId
+                );
+            }
+        }
+
+
+        public OldRequestPresignedURL(IOldRequestPresignedURLBuilder builder,
             string localizedPolicyVersionId
         )
         {
@@ -174,12 +211,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UploadLocalizedPolicyVersionAttachmentResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UploadLocalizedPolicyVersionAttachmentResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateXblUserAchievementBuilder Builder { get => new UpdateXblUserAchievementBuilder(); }
 
-        public class UpdateXblUserAchievementBuilder
-            : OperationBuilder<UpdateXblUserAchievementBuilder>
+        public interface IUpdateXblUserAchievementBuilder
         {
 
 
 
 
 
-            internal UpdateXblUserAchievementBuilder() { }
+        }
 
-            internal UpdateXblUserAchievementBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateXblUserAchievementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateXblUserAchievementBuilder
+            where TImpl : UpdateXblUserAchievementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateXblUserAchievementAbstractBuilder() { }
+
+            public UpdateXblUserAchievementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpdateXblUserAchievementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateXblUserAchievement.Response Execute(
+            protected UpdateXblUserAchievement.Response InternalExecute(
                 XblAchievementUpdateRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateXblUserAchievement.Response> ExecuteAsync(
+            protected async Task<UpdateXblUserAchievement.Response> InternalExecuteAsync(
                 XblAchievementUpdateRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateXblUserAchievement(UpdateXblUserAchievementBuilder builder,
+        public class UpdateXblUserAchievementBuilder : UpdateXblUserAchievementAbstractBuilder<UpdateXblUserAchievementBuilder>
+        {
+            public UpdateXblUserAchievementBuilder() : base() { }
+
+            public UpdateXblUserAchievementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateXblUserAchievement.Response Execute(
+                XblAchievementUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpdateXblUserAchievement.Response> ExecuteAsync(
+                XblAchievementUpdateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpdateXblUserAchievement(IUpdateXblUserAchievementBuilder builder,
             XblAchievementUpdateRequest body,
             string namespace_,
             string userId
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

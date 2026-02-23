@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static DeleteReasonBuilder Builder { get => new DeleteReasonBuilder(); }
 
-        public class DeleteReasonBuilder
-            : OperationBuilder<DeleteReasonBuilder>
+        public interface IDeleteReasonBuilder
         {
 
 
 
 
 
-            internal DeleteReasonBuilder() { }
+        }
 
-            internal DeleteReasonBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteReasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteReasonBuilder
+            where TImpl : DeleteReasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteReasonAbstractBuilder() { }
+
+            public DeleteReasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     reasonId                    
                 );
 
-                op.SetBaseFields<DeleteReasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteReason.Response Execute(
+            protected DeleteReason.Response InternalExecute(
                 string namespace_,
                 string reasonId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteReason.Response> ExecuteAsync(
+            protected async Task<DeleteReason.Response> InternalExecuteAsync(
                 string namespace_,
                 string reasonId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private DeleteReason(DeleteReasonBuilder builder,
+        public class DeleteReasonBuilder : DeleteReasonAbstractBuilder<DeleteReasonBuilder>
+        {
+            public DeleteReasonBuilder() : base() { }
+
+            public DeleteReasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteReason.Response Execute(
+                string namespace_,
+                string reasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    reasonId
+                );
+            }
+            public async Task<DeleteReason.Response> ExecuteAsync(
+                string namespace_,
+                string reasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    reasonId
+                );
+            }
+        }
+
+
+        public DeleteReason(IDeleteReasonBuilder builder,
             string namespace_,
             string reasonId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

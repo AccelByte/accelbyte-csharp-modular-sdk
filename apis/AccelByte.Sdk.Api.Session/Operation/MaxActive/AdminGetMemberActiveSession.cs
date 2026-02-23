@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminGetMemberActiveSessionBuilder Builder { get => new AdminGetMemberActiveSessionBuilder(); }
 
-        public class AdminGetMemberActiveSessionBuilder
-            : OperationBuilder<AdminGetMemberActiveSessionBuilder>
+        public interface IAdminGetMemberActiveSessionBuilder
         {
 
 
 
 
 
-            internal AdminGetMemberActiveSessionBuilder() { }
+        }
 
-            internal AdminGetMemberActiveSessionBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetMemberActiveSessionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetMemberActiveSessionBuilder
+            where TImpl : AdminGetMemberActiveSessionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetMemberActiveSessionAbstractBuilder() { }
+
+            public AdminGetMemberActiveSessionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetMemberActiveSessionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetMemberActiveSession.Response Execute(
+            protected AdminGetMemberActiveSession.Response InternalExecute(
                 string name,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetMemberActiveSession.Response> ExecuteAsync(
+            protected async Task<AdminGetMemberActiveSession.Response> InternalExecuteAsync(
                 string name,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminGetMemberActiveSession(AdminGetMemberActiveSessionBuilder builder,
+        public class AdminGetMemberActiveSessionBuilder : AdminGetMemberActiveSessionAbstractBuilder<AdminGetMemberActiveSessionBuilder>
+        {
+            public AdminGetMemberActiveSessionBuilder() : base() { }
+
+            public AdminGetMemberActiveSessionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetMemberActiveSession.Response Execute(
+                string name,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    name,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetMemberActiveSession.Response> ExecuteAsync(
+                string name,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    name,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetMemberActiveSession(IAdminGetMemberActiveSessionBuilder builder,
             string name,
             string namespace_,
             string userId
@@ -188,22 +231,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsMemberActiveSession>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsMemberActiveSession>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

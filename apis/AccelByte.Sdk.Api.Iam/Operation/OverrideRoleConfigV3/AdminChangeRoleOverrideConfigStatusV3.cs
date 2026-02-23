@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminChangeRoleOverrideConfigStatusV3Builder Builder { get => new AdminChangeRoleOverrideConfigStatusV3Builder(); }
 
-        public class AdminChangeRoleOverrideConfigStatusV3Builder
-            : OperationBuilder<AdminChangeRoleOverrideConfigStatusV3Builder>
+        public interface IAdminChangeRoleOverrideConfigStatusV3Builder
         {
 
 
 
 
 
-            internal AdminChangeRoleOverrideConfigStatusV3Builder() { }
+        }
 
-            internal AdminChangeRoleOverrideConfigStatusV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminChangeRoleOverrideConfigStatusV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminChangeRoleOverrideConfigStatusV3Builder
+            where TImpl : AdminChangeRoleOverrideConfigStatusV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminChangeRoleOverrideConfigStatusV3AbstractBuilder() { }
+
+            public AdminChangeRoleOverrideConfigStatusV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     identity                    
                 );
 
-                op.SetBaseFields<AdminChangeRoleOverrideConfigStatusV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminChangeRoleOverrideConfigStatusV3.Response Execute(
+            protected AdminChangeRoleOverrideConfigStatusV3.Response InternalExecute(
                 ModelRoleOverrideStatsUpdateRequest body,
                 string namespace_,
                 string identity
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminChangeRoleOverrideConfigStatusV3.Response> ExecuteAsync(
+            protected async Task<AdminChangeRoleOverrideConfigStatusV3.Response> InternalExecuteAsync(
                 ModelRoleOverrideStatsUpdateRequest body,
                 string namespace_,
                 string identity
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminChangeRoleOverrideConfigStatusV3(AdminChangeRoleOverrideConfigStatusV3Builder builder,
+        public class AdminChangeRoleOverrideConfigStatusV3Builder : AdminChangeRoleOverrideConfigStatusV3AbstractBuilder<AdminChangeRoleOverrideConfigStatusV3Builder>
+        {
+            public AdminChangeRoleOverrideConfigStatusV3Builder() : base() { }
+
+            public AdminChangeRoleOverrideConfigStatusV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminChangeRoleOverrideConfigStatusV3.Response Execute(
+                ModelRoleOverrideStatsUpdateRequest body,
+                string namespace_,
+                string identity
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    identity
+                );
+            }
+            public async Task<AdminChangeRoleOverrideConfigStatusV3.Response> ExecuteAsync(
+                ModelRoleOverrideStatsUpdateRequest body,
+                string namespace_,
+                string identity
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    identity
+                );
+            }
+        }
+
+
+        public AdminChangeRoleOverrideConfigStatusV3(IAdminChangeRoleOverrideConfigStatusV3Builder builder,
             ModelRoleOverrideStatsUpdateRequest body,
             string namespace_,
             AdminChangeRoleOverrideConfigStatusV3Identity identity
@@ -189,22 +232,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelRoleOverrideResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelRoleOverrideResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

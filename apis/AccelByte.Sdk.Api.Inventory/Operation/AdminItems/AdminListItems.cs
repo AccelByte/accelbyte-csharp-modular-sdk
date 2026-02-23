@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminListItemsBuilder Builder { get => new AdminListItemsBuilder(); }
 
-        public class AdminListItemsBuilder
-            : OperationBuilder<AdminListItemsBuilder>
+        public interface IAdminListItemsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            AdminListItemsSortBy? SortBy { get; }
+
+            string? SourceItemId { get; }
+
+            string? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListItemsBuilder
+            where TImpl : AdminListItemsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal AdminListItemsBuilder() { }
+            public AdminListItemsAbstractBuilder() { }
 
-            internal AdminListItemsBuilder(IAccelByteSdk sdk)
+            public AdminListItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListItemsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListItemsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListItemsBuilder SetSortBy(AdminListItemsSortBy _sortBy)
+            public TImpl SetSortBy(AdminListItemsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListItemsBuilder SetSourceItemId(string _sourceItemId)
+            public TImpl SetSourceItemId(string _sourceItemId)
             {
                 SourceItemId = _sourceItemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListItemsBuilder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -104,11 +124,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminListItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListItems.Response Execute(
+            protected AdminListItems.Response InternalExecute(
                 string inventoryId,
                 string namespace_
             )
@@ -127,7 +147,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListItems.Response> ExecuteAsync(
+            protected async Task<AdminListItems.Response> InternalExecuteAsync(
                 string inventoryId,
                 string namespace_
             )
@@ -148,7 +168,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminListItems(AdminListItemsBuilder builder,
+        public class AdminListItemsBuilder : AdminListItemsAbstractBuilder<AdminListItemsBuilder>
+        {
+            public AdminListItemsBuilder() : base() { }
+
+            public AdminListItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListItems.Response Execute(
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<AdminListItems.Response> ExecuteAsync(
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    inventoryId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminListItems(IAdminListItemsBuilder builder,
             string inventoryId,
             string namespace_
         )
@@ -234,17 +283,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

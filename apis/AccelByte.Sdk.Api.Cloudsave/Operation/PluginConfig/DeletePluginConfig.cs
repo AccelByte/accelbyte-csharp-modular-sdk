@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static DeletePluginConfigBuilder Builder { get => new DeletePluginConfigBuilder(); }
 
-        public class DeletePluginConfigBuilder
-            : OperationBuilder<DeletePluginConfigBuilder>
+        public interface IDeletePluginConfigBuilder
         {
 
 
 
 
 
-            internal DeletePluginConfigBuilder() { }
+        }
 
-            internal DeletePluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeletePluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeletePluginConfigBuilder
+            where TImpl : DeletePluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeletePluginConfigAbstractBuilder() { }
+
+            public DeletePluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeletePluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeletePluginConfig.Response Execute(
+            protected DeletePluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeletePluginConfig.Response> ExecuteAsync(
+            protected async Task<DeletePluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private DeletePluginConfig(DeletePluginConfigBuilder builder,
+        public class DeletePluginConfigBuilder : DeletePluginConfigAbstractBuilder<DeletePluginConfigBuilder>
+        {
+            public DeletePluginConfigBuilder() : base() { }
+
+            public DeletePluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeletePluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeletePluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeletePluginConfig(IDeletePluginConfigBuilder builder,
             string namespace_
         )
         {
@@ -172,22 +207,26 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

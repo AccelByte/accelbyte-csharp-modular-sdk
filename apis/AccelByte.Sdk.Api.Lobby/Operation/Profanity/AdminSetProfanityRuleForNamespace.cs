@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminSetProfanityRuleForNamespaceBuilder Builder { get => new AdminSetProfanityRuleForNamespaceBuilder(); }
 
-        public class AdminSetProfanityRuleForNamespaceBuilder
-            : OperationBuilder<AdminSetProfanityRuleForNamespaceBuilder>
+        public interface IAdminSetProfanityRuleForNamespaceBuilder
         {
 
 
 
 
 
-            internal AdminSetProfanityRuleForNamespaceBuilder() { }
+        }
 
-            internal AdminSetProfanityRuleForNamespaceBuilder(IAccelByteSdk sdk)
+        public abstract class AdminSetProfanityRuleForNamespaceAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSetProfanityRuleForNamespaceBuilder
+            where TImpl : AdminSetProfanityRuleForNamespaceAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminSetProfanityRuleForNamespaceAbstractBuilder() { }
+
+            public AdminSetProfanityRuleForNamespaceAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminSetProfanityRuleForNamespaceBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminSetProfanityRuleForNamespace.Response Execute(
+            protected AdminSetProfanityRuleForNamespace.Response InternalExecute(
                 ModelsAdminSetProfanityRuleForNamespaceRequest body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSetProfanityRuleForNamespace.Response> ExecuteAsync(
+            protected async Task<AdminSetProfanityRuleForNamespace.Response> InternalExecuteAsync(
                 ModelsAdminSetProfanityRuleForNamespaceRequest body,
                 string namespace_
             )
@@ -106,7 +116,37 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminSetProfanityRuleForNamespace(AdminSetProfanityRuleForNamespaceBuilder builder,
+        public class AdminSetProfanityRuleForNamespaceBuilder : AdminSetProfanityRuleForNamespaceAbstractBuilder<AdminSetProfanityRuleForNamespaceBuilder>
+        {
+            public AdminSetProfanityRuleForNamespaceBuilder() : base() { }
+
+            public AdminSetProfanityRuleForNamespaceBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminSetProfanityRuleForNamespace.Response Execute(
+                ModelsAdminSetProfanityRuleForNamespaceRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminSetProfanityRuleForNamespace.Response> ExecuteAsync(
+                ModelsAdminSetProfanityRuleForNamespaceRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminSetProfanityRuleForNamespace(IAdminSetProfanityRuleForNamespaceBuilder builder,
             ModelsAdminSetProfanityRuleForNamespaceRequest body,
             string namespace_
         )
@@ -184,27 +224,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

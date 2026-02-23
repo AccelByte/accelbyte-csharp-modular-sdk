@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetUserMappingBuilder Builder { get => new AdminGetUserMappingBuilder(); }
 
-        public class AdminGetUserMappingBuilder
-            : OperationBuilder<AdminGetUserMappingBuilder>
+        public interface IAdminGetUserMappingBuilder
+        {
+
+            bool? CreateIfNotFound { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetUserMappingAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUserMappingBuilder
+            where TImpl : AdminGetUserMappingAbstractBuilder<TImpl>
         {
 
             public bool? CreateIfNotFound { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGetUserMappingBuilder() { }
+            public AdminGetUserMappingAbstractBuilder() { }
 
-            internal AdminGetUserMappingBuilder(IAccelByteSdk sdk)
+            public AdminGetUserMappingAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetUserMappingBuilder SetCreateIfNotFound(bool _createIfNotFound)
+            public TImpl SetCreateIfNotFound(bool _createIfNotFound)
             {
                 CreateIfNotFound = _createIfNotFound;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetUserMappingBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUserMapping.Response Execute(
+            protected AdminGetUserMapping.Response InternalExecute(
                 string namespace_,
                 string targetNamespace,
                 string userId
@@ -97,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserMapping.Response> ExecuteAsync(
+            protected async Task<AdminGetUserMapping.Response> InternalExecuteAsync(
                 string namespace_,
                 string targetNamespace,
                 string userId
@@ -120,7 +132,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetUserMapping(AdminGetUserMappingBuilder builder,
+        public class AdminGetUserMappingBuilder : AdminGetUserMappingAbstractBuilder<AdminGetUserMappingBuilder>
+        {
+            public AdminGetUserMappingBuilder() : base() { }
+
+            public AdminGetUserMappingBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUserMapping.Response Execute(
+                string namespace_,
+                string targetNamespace,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    targetNamespace,
+                    userId
+                );
+            }
+            public async Task<AdminGetUserMapping.Response> ExecuteAsync(
+                string namespace_,
+                string targetNamespace,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    targetNamespace,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetUserMapping(IAdminGetUserMappingBuilder builder,
             string namespace_,
             string targetNamespace,
             string userId
@@ -202,27 +247,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserMappingV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserMappingV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

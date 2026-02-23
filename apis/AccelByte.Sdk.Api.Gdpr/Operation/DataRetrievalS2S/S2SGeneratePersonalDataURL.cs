@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static S2SGeneratePersonalDataURLBuilder Builder { get => new S2SGeneratePersonalDataURLBuilder(); }
 
-        public class S2SGeneratePersonalDataURLBuilder
-            : OperationBuilder<S2SGeneratePersonalDataURLBuilder>
+        public interface IS2SGeneratePersonalDataURLBuilder
         {
 
 
 
 
 
-            internal S2SGeneratePersonalDataURLBuilder() { }
+        }
 
-            internal S2SGeneratePersonalDataURLBuilder(IAccelByteSdk sdk)
+        public abstract class S2SGeneratePersonalDataURLAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IS2SGeneratePersonalDataURLBuilder
+            where TImpl : S2SGeneratePersonalDataURLAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public S2SGeneratePersonalDataURLAbstractBuilder() { }
+
+            public S2SGeneratePersonalDataURLAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,11 +79,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<S2SGeneratePersonalDataURLBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public S2SGeneratePersonalDataURL.Response Execute(
+            protected S2SGeneratePersonalDataURL.Response InternalExecute(
                 string namespace_,
                 string requestDate,
                 string userId
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<S2SGeneratePersonalDataURL.Response> ExecuteAsync(
+            protected async Task<S2SGeneratePersonalDataURL.Response> InternalExecuteAsync(
                 string namespace_,
                 string requestDate,
                 string userId
@@ -117,7 +127,40 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private S2SGeneratePersonalDataURL(S2SGeneratePersonalDataURLBuilder builder,
+        public class S2SGeneratePersonalDataURLBuilder : S2SGeneratePersonalDataURLAbstractBuilder<S2SGeneratePersonalDataURLBuilder>
+        {
+            public S2SGeneratePersonalDataURLBuilder() : base() { }
+
+            public S2SGeneratePersonalDataURLBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public S2SGeneratePersonalDataURL.Response Execute(
+                string namespace_,
+                string requestDate,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    requestDate,
+                    userId
+                );
+            }
+            public async Task<S2SGeneratePersonalDataURL.Response> ExecuteAsync(
+                string namespace_,
+                string requestDate,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    requestDate,
+                    userId
+                );
+            }
+        }
+
+
+        public S2SGeneratePersonalDataURL(IS2SGeneratePersonalDataURLBuilder builder,
             string namespace_,
             string requestDate,
             string userId
@@ -196,27 +239,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsS2SUserDataURL>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsS2SUserDataURL>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

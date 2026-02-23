@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListCategoriesBasicBuilder Builder { get => new ListCategoriesBasicBuilder(); }
 
-        public class ListCategoriesBasicBuilder
-            : OperationBuilder<ListCategoriesBasicBuilder>
+        public interface IListCategoriesBasicBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListCategoriesBasicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListCategoriesBasicBuilder
+            where TImpl : ListCategoriesBasicAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListCategoriesBasicBuilder() { }
+            public ListCategoriesBasicAbstractBuilder() { }
 
-            internal ListCategoriesBasicBuilder(IAccelByteSdk sdk)
+            public ListCategoriesBasicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListCategoriesBasicBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListCategoriesBasicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListCategoriesBasic.Response Execute(
+            protected ListCategoriesBasic.Response InternalExecute(
                 string namespace_
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListCategoriesBasic.Response> ExecuteAsync(
+            protected async Task<ListCategoriesBasic.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListCategoriesBasic(ListCategoriesBasicBuilder builder,
+        public class ListCategoriesBasicBuilder : ListCategoriesBasicAbstractBuilder<ListCategoriesBasicBuilder>
+        {
+            public ListCategoriesBasicBuilder() : base() { }
+
+            public ListCategoriesBasicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListCategoriesBasic.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListCategoriesBasic.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListCategoriesBasic(IListCategoriesBasicBuilder builder,
             string namespace_
         )
         {
@@ -176,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.BasicCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.BasicCategoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

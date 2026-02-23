@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicSendCodeForwardV3Builder Builder { get => new PublicSendCodeForwardV3Builder(); }
 
-        public class PublicSendCodeForwardV3Builder
-            : OperationBuilder<PublicSendCodeForwardV3Builder>
+        public interface IPublicSendCodeForwardV3Builder
         {
 
 
 
 
 
-            internal PublicSendCodeForwardV3Builder() { }
+        }
 
-            internal PublicSendCodeForwardV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicSendCodeForwardV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSendCodeForwardV3Builder
+            where TImpl : PublicSendCodeForwardV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicSendCodeForwardV3AbstractBuilder() { }
+
+            public PublicSendCodeForwardV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<PublicSendCodeForwardV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSendCodeForwardV3.Response Execute(
+            protected PublicSendCodeForwardV3.Response InternalExecute(
                 ModelSendVerificationCodeRequestV3 body
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSendCodeForwardV3.Response> ExecuteAsync(
+            protected async Task<PublicSendCodeForwardV3.Response> InternalExecuteAsync(
                 ModelSendVerificationCodeRequestV3 body
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicSendCodeForwardV3(PublicSendCodeForwardV3Builder builder,
+        public class PublicSendCodeForwardV3Builder : PublicSendCodeForwardV3AbstractBuilder<PublicSendCodeForwardV3Builder>
+        {
+            public PublicSendCodeForwardV3Builder() : base() { }
+
+            public PublicSendCodeForwardV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSendCodeForwardV3.Response Execute(
+                ModelSendVerificationCodeRequestV3 body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<PublicSendCodeForwardV3.Response> ExecuteAsync(
+                ModelSendVerificationCodeRequestV3 body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public PublicSendCodeForwardV3(IPublicSendCodeForwardV3Builder builder,
             ModelSendVerificationCodeRequestV3 body
         )
         {

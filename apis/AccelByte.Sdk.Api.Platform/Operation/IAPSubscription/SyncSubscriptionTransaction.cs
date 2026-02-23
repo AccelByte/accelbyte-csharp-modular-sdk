@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncSubscriptionTransactionBuilder Builder { get => new SyncSubscriptionTransactionBuilder(); }
 
-        public class SyncSubscriptionTransactionBuilder
-            : OperationBuilder<SyncSubscriptionTransactionBuilder>
+        public interface ISyncSubscriptionTransactionBuilder
         {
 
 
 
 
 
-            internal SyncSubscriptionTransactionBuilder() { }
+        }
 
-            internal SyncSubscriptionTransactionBuilder(IAccelByteSdk sdk)
+        public abstract class SyncSubscriptionTransactionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncSubscriptionTransactionBuilder
+            where TImpl : SyncSubscriptionTransactionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncSubscriptionTransactionAbstractBuilder() { }
+
+            public SyncSubscriptionTransactionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncSubscriptionTransactionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncSubscriptionTransaction.Response Execute(
+            protected SyncSubscriptionTransaction.Response InternalExecute(
                 string id,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncSubscriptionTransaction.Response> ExecuteAsync(
+            protected async Task<SyncSubscriptionTransaction.Response> InternalExecuteAsync(
                 string id,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncSubscriptionTransaction(SyncSubscriptionTransactionBuilder builder,
+        public class SyncSubscriptionTransactionBuilder : SyncSubscriptionTransactionAbstractBuilder<SyncSubscriptionTransactionBuilder>
+        {
+            public SyncSubscriptionTransactionBuilder() : base() { }
+
+            public SyncSubscriptionTransactionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncSubscriptionTransaction.Response Execute(
+                string id,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    id,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncSubscriptionTransaction.Response> ExecuteAsync(
+                string id,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    id,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncSubscriptionTransaction(ISyncSubscriptionTransactionBuilder builder,
             string id,
             string namespace_,
             string userId
@@ -185,17 +228,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

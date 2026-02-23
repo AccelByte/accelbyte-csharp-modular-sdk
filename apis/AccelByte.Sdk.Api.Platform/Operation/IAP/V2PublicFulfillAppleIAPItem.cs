@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static V2PublicFulfillAppleIAPItemBuilder Builder { get => new V2PublicFulfillAppleIAPItemBuilder(); }
 
-        public class V2PublicFulfillAppleIAPItemBuilder
-            : OperationBuilder<V2PublicFulfillAppleIAPItemBuilder>
+        public interface IV2PublicFulfillAppleIAPItemBuilder
+        {
+
+
+            Model.AppleIAPRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class V2PublicFulfillAppleIAPItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IV2PublicFulfillAppleIAPItemBuilder
+            where TImpl : V2PublicFulfillAppleIAPItemAbstractBuilder<TImpl>
         {
 
 
@@ -41,19 +53,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal V2PublicFulfillAppleIAPItemBuilder() { }
+            public V2PublicFulfillAppleIAPItemAbstractBuilder() { }
 
-            internal V2PublicFulfillAppleIAPItemBuilder(IAccelByteSdk sdk)
+            public V2PublicFulfillAppleIAPItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public V2PublicFulfillAppleIAPItemBuilder SetBody(Model.AppleIAPRequest _body)
+            public TImpl SetBody(Model.AppleIAPRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<V2PublicFulfillAppleIAPItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public V2PublicFulfillAppleIAPItem.Response Execute(
+            protected V2PublicFulfillAppleIAPItem.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<V2PublicFulfillAppleIAPItem.Response> ExecuteAsync(
+            protected async Task<V2PublicFulfillAppleIAPItem.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -113,7 +125,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private V2PublicFulfillAppleIAPItem(V2PublicFulfillAppleIAPItemBuilder builder,
+        public class V2PublicFulfillAppleIAPItemBuilder : V2PublicFulfillAppleIAPItemAbstractBuilder<V2PublicFulfillAppleIAPItemBuilder>
+        {
+            public V2PublicFulfillAppleIAPItemBuilder() : base() { }
+
+            public V2PublicFulfillAppleIAPItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public V2PublicFulfillAppleIAPItem.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<V2PublicFulfillAppleIAPItem.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public V2PublicFulfillAppleIAPItem(IV2PublicFulfillAppleIAPItemBuilder builder,
             string namespace_,
             string userId
         )
@@ -190,17 +231,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

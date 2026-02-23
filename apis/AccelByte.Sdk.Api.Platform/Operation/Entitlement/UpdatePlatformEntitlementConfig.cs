@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePlatformEntitlementConfigBuilder Builder { get => new UpdatePlatformEntitlementConfigBuilder(); }
 
-        public class UpdatePlatformEntitlementConfigBuilder
-            : OperationBuilder<UpdatePlatformEntitlementConfigBuilder>
+        public interface IUpdatePlatformEntitlementConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePlatformEntitlementConfigBuilder() { }
+        }
 
-            internal UpdatePlatformEntitlementConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePlatformEntitlementConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePlatformEntitlementConfigBuilder
+            where TImpl : UpdatePlatformEntitlementConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePlatformEntitlementConfigAbstractBuilder() { }
+
+            public UpdatePlatformEntitlementConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     platform                    
                 );
 
-                op.SetBaseFields<UpdatePlatformEntitlementConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePlatformEntitlementConfig.Response Execute(
+            protected UpdatePlatformEntitlementConfig.Response InternalExecute(
                 EntitlementPlatformConfigUpdate body,
                 string namespace_,
                 string platform
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePlatformEntitlementConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePlatformEntitlementConfig.Response> InternalExecuteAsync(
                 EntitlementPlatformConfigUpdate body,
                 string namespace_,
                 string platform
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePlatformEntitlementConfig(UpdatePlatformEntitlementConfigBuilder builder,
+        public class UpdatePlatformEntitlementConfigBuilder : UpdatePlatformEntitlementConfigAbstractBuilder<UpdatePlatformEntitlementConfigBuilder>
+        {
+            public UpdatePlatformEntitlementConfigBuilder() : base() { }
+
+            public UpdatePlatformEntitlementConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePlatformEntitlementConfig.Response Execute(
+                EntitlementPlatformConfigUpdate body,
+                string namespace_,
+                string platform
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    platform
+                );
+            }
+            public async Task<UpdatePlatformEntitlementConfig.Response> ExecuteAsync(
+                EntitlementPlatformConfigUpdate body,
+                string namespace_,
+                string platform
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    platform
+                );
+            }
+        }
+
+
+        public UpdatePlatformEntitlementConfig(IUpdatePlatformEntitlementConfigBuilder builder,
             EntitlementPlatformConfigUpdate body,
             string namespace_,
             UpdatePlatformEntitlementConfigPlatform platform
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementPlatformConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementPlatformConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

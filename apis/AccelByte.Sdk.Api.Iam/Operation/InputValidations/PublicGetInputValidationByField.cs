@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetInputValidationByFieldBuilder Builder { get => new PublicGetInputValidationByFieldBuilder(); }
 
-        public class PublicGetInputValidationByFieldBuilder
-            : OperationBuilder<PublicGetInputValidationByFieldBuilder>
+        public interface IPublicGetInputValidationByFieldBuilder
         {
 
 
 
 
 
-            internal PublicGetInputValidationByFieldBuilder() { }
+        }
 
-            internal PublicGetInputValidationByFieldBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetInputValidationByFieldAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetInputValidationByFieldBuilder
+            where TImpl : PublicGetInputValidationByFieldAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetInputValidationByFieldAbstractBuilder() { }
+
+            public PublicGetInputValidationByFieldAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     field                    
                 );
 
-                op.SetBaseFields<PublicGetInputValidationByFieldBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetInputValidationByField.Response Execute(
+            protected PublicGetInputValidationByField.Response InternalExecute(
                 string field
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetInputValidationByField.Response> ExecuteAsync(
+            protected async Task<PublicGetInputValidationByField.Response> InternalExecuteAsync(
                 string field
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetInputValidationByField(PublicGetInputValidationByFieldBuilder builder,
+        public class PublicGetInputValidationByFieldBuilder : PublicGetInputValidationByFieldAbstractBuilder<PublicGetInputValidationByFieldBuilder>
+        {
+            public PublicGetInputValidationByFieldBuilder() : base() { }
+
+            public PublicGetInputValidationByFieldBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetInputValidationByField.Response Execute(
+                string field
+            )
+            {
+                return InternalExecute(
+                    field
+                );
+            }
+            public async Task<PublicGetInputValidationByField.Response> ExecuteAsync(
+                string field
+            )
+            {
+                return await InternalExecuteAsync(
+                    field
+                );
+            }
+        }
+
+
+        public PublicGetInputValidationByField(IPublicGetInputValidationByFieldBuilder builder,
             string field
         )
         {
@@ -165,17 +200,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelInputValidationConfigVersion>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelInputValidationConfigVersion>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminProfanityQueryBuilder Builder { get => new AdminProfanityQueryBuilder(); }
 
-        public class AdminProfanityQueryBuilder
-            : OperationBuilder<AdminProfanityQueryBuilder>
+        public interface IAdminProfanityQueryBuilder
+        {
+
+            string? FilterMask { get; }
+
+            bool? IncludeChildren { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? ParentId { get; }
+
+            string? StartWith { get; }
+
+            string? WordType { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminProfanityQueryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminProfanityQueryBuilder
+            where TImpl : AdminProfanityQueryAbstractBuilder<TImpl>
         {
 
             public string? FilterMask { get; set; }
@@ -52,54 +76,54 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal AdminProfanityQueryBuilder() { }
+            public AdminProfanityQueryAbstractBuilder() { }
 
-            internal AdminProfanityQueryBuilder(IAccelByteSdk sdk)
+            public AdminProfanityQueryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminProfanityQueryBuilder SetFilterMask(string _filterMask)
+            public TImpl SetFilterMask(string _filterMask)
             {
                 FilterMask = _filterMask;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminProfanityQueryBuilder SetIncludeChildren(bool _includeChildren)
+            public TImpl SetIncludeChildren(bool _includeChildren)
             {
                 IncludeChildren = _includeChildren;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminProfanityQueryBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminProfanityQueryBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminProfanityQueryBuilder SetParentId(string _parentId)
+            public TImpl SetParentId(string _parentId)
             {
                 ParentId = _parentId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminProfanityQueryBuilder SetStartWith(string _startWith)
+            public TImpl SetStartWith(string _startWith)
             {
                 StartWith = _startWith;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminProfanityQueryBuilder SetWordType(string _wordType)
+            public TImpl SetWordType(string _wordType)
             {
                 WordType = _wordType;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -114,11 +138,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminProfanityQueryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminProfanityQuery.Response Execute(
+            protected AdminProfanityQuery.Response InternalExecute(
                 string namespace_
             )
             {
@@ -135,7 +159,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminProfanityQuery.Response> ExecuteAsync(
+            protected async Task<AdminProfanityQuery.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -154,7 +178,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminProfanityQuery(AdminProfanityQueryBuilder builder,
+        public class AdminProfanityQueryBuilder : AdminProfanityQueryAbstractBuilder<AdminProfanityQueryBuilder>
+        {
+            public AdminProfanityQueryBuilder() : base() { }
+
+            public AdminProfanityQueryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminProfanityQuery.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminProfanityQuery.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminProfanityQuery(IAdminProfanityQueryBuilder builder,
             string namespace_
         )
         {
@@ -248,32 +297,38 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsDictionaryQueryResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsDictionaryQueryResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

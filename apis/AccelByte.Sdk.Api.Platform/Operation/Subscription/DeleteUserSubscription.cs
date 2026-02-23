@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteUserSubscriptionBuilder Builder { get => new DeleteUserSubscriptionBuilder(); }
 
-        public class DeleteUserSubscriptionBuilder
-            : OperationBuilder<DeleteUserSubscriptionBuilder>
+        public interface IDeleteUserSubscriptionBuilder
         {
 
 
 
 
 
-            internal DeleteUserSubscriptionBuilder() { }
+        }
 
-            internal DeleteUserSubscriptionBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteUserSubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteUserSubscriptionBuilder
+            where TImpl : DeleteUserSubscriptionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteUserSubscriptionAbstractBuilder() { }
+
+            public DeleteUserSubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteUserSubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteUserSubscription.Response Execute(
+            protected DeleteUserSubscription.Response InternalExecute(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteUserSubscription.Response> ExecuteAsync(
+            protected async Task<DeleteUserSubscription.Response> InternalExecuteAsync(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteUserSubscription(DeleteUserSubscriptionBuilder builder,
+        public class DeleteUserSubscriptionBuilder : DeleteUserSubscriptionAbstractBuilder<DeleteUserSubscriptionBuilder>
+        {
+            public DeleteUserSubscriptionBuilder() : base() { }
+
+            public DeleteUserSubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteUserSubscription.Response Execute(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<DeleteUserSubscription.Response> ExecuteAsync(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteUserSubscription(IDeleteUserSubscriptionBuilder builder,
             string namespace_,
             string subscriptionId,
             string userId

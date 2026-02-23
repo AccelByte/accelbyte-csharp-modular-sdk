@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDecryptDeviceV4Builder Builder { get => new AdminDecryptDeviceV4Builder(); }
 
-        public class AdminDecryptDeviceV4Builder
-            : OperationBuilder<AdminDecryptDeviceV4Builder>
+        public interface IAdminDecryptDeviceV4Builder
         {
 
 
 
 
 
-            internal AdminDecryptDeviceV4Builder() { }
+        }
 
-            internal AdminDecryptDeviceV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminDecryptDeviceV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDecryptDeviceV4Builder
+            where TImpl : AdminDecryptDeviceV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDecryptDeviceV4AbstractBuilder() { }
+
+            public AdminDecryptDeviceV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDecryptDeviceV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminDecryptDeviceV4.Response Execute(
+            protected AdminDecryptDeviceV4.Response InternalExecute(
                 string deviceId,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDecryptDeviceV4.Response> ExecuteAsync(
+            protected async Task<AdminDecryptDeviceV4.Response> InternalExecuteAsync(
                 string deviceId,
                 string namespace_
             )
@@ -106,7 +116,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDecryptDeviceV4(AdminDecryptDeviceV4Builder builder,
+        public class AdminDecryptDeviceV4Builder : AdminDecryptDeviceV4AbstractBuilder<AdminDecryptDeviceV4Builder>
+        {
+            public AdminDecryptDeviceV4Builder() : base() { }
+
+            public AdminDecryptDeviceV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminDecryptDeviceV4.Response Execute(
+                string deviceId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    deviceId,
+                    namespace_
+                );
+            }
+            public async Task<AdminDecryptDeviceV4.Response> ExecuteAsync(
+                string deviceId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    deviceId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDecryptDeviceV4(IAdminDecryptDeviceV4Builder builder,
             string deviceId,
             string namespace_
         )
@@ -181,27 +221,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelDeviceIDDecryptResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelDeviceIDDecryptResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

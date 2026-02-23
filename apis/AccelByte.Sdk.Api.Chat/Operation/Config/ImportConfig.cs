@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static ImportConfigBuilder Builder { get => new ImportConfigBuilder(); }
 
-        public class ImportConfigBuilder
-            : OperationBuilder<ImportConfigBuilder>
+        public interface IImportConfigBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class ImportConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImportConfigBuilder
+            where TImpl : ImportConfigAbstractBuilder<TImpl>
         {
 
 
@@ -42,9 +54,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal ImportConfigBuilder() { }
+            public ImportConfigAbstractBuilder() { }
 
-            internal ImportConfigBuilder(IAccelByteSdk sdk)
+            public ImportConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -52,10 +64,10 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            public ImportConfigBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ImportConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImportConfig.Response Execute(
+            protected ImportConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -89,7 +101,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImportConfig.Response> ExecuteAsync(
+            protected async Task<ImportConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -108,7 +120,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private ImportConfig(ImportConfigBuilder builder,
+        public class ImportConfigBuilder : ImportConfigAbstractBuilder<ImportConfigBuilder>
+        {
+            public ImportConfigBuilder() : base() { }
+
+            public ImportConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImportConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ImportConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ImportConfig(IImportConfigBuilder builder,
             string namespace_
         )
         {
@@ -180,22 +217,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsImportConfigResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

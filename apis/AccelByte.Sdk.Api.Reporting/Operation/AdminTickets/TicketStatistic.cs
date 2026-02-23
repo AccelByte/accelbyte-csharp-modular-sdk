@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static TicketStatisticBuilder Builder { get => new TicketStatisticBuilder(); }
 
-        public class TicketStatisticBuilder
-            : OperationBuilder<TicketStatisticBuilder>
+        public interface ITicketStatisticBuilder
+        {
+
+            string? ExtensionCategory { get; }
+
+
+
+
+
+        }
+
+        public abstract class TicketStatisticAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITicketStatisticBuilder
+            where TImpl : TicketStatisticAbstractBuilder<TImpl>
         {
 
             public string? ExtensionCategory { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal TicketStatisticBuilder() { }
+            public TicketStatisticAbstractBuilder() { }
 
-            internal TicketStatisticBuilder(IAccelByteSdk sdk)
+            public TicketStatisticAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TicketStatisticBuilder SetExtensionCategory(string _extensionCategory)
+            public TImpl SetExtensionCategory(string _extensionCategory)
             {
                 ExtensionCategory = _extensionCategory;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     category                    
                 );
 
-                op.SetBaseFields<TicketStatisticBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TicketStatistic.Response Execute(
+            protected TicketStatistic.Response InternalExecute(
                 string namespace_,
                 string category
             )
@@ -93,7 +105,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TicketStatistic.Response> ExecuteAsync(
+            protected async Task<TicketStatistic.Response> InternalExecuteAsync(
                 string namespace_,
                 string category
             )
@@ -114,7 +126,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private TicketStatistic(TicketStatisticBuilder builder,
+        public class TicketStatisticBuilder : TicketStatisticAbstractBuilder<TicketStatisticBuilder>
+        {
+            public TicketStatisticBuilder() : base() { }
+
+            public TicketStatisticBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TicketStatistic.Response Execute(
+                string namespace_,
+                string category
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    category
+                );
+            }
+            public async Task<TicketStatistic.Response> ExecuteAsync(
+                string namespace_,
+                string category
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    category
+                );
+            }
+        }
+
+
+        public TicketStatistic(ITicketStatisticBuilder builder,
             string namespace_,
             string category
         )
@@ -186,12 +227,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketStatisticResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketStatisticResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

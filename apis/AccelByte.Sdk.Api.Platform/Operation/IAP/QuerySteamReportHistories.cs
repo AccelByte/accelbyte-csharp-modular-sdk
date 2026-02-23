@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,8 +28,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QuerySteamReportHistoriesBuilder Builder { get => new QuerySteamReportHistoriesBuilder(); }
 
-        public class QuerySteamReportHistoriesBuilder
-            : OperationBuilder<QuerySteamReportHistoriesBuilder>
+        public interface IQuerySteamReportHistoriesBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? OrderId { get; }
+
+            QuerySteamReportHistoriesProcessStatus? ProcessStatus { get; }
+
+            string? SteamId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QuerySteamReportHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQuerySteamReportHistoriesBuilder
+            where TImpl : QuerySteamReportHistoriesAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -46,42 +66,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QuerySteamReportHistoriesBuilder() { }
+            public QuerySteamReportHistoriesAbstractBuilder() { }
 
-            internal QuerySteamReportHistoriesBuilder(IAccelByteSdk sdk)
+            public QuerySteamReportHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QuerySteamReportHistoriesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySteamReportHistoriesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySteamReportHistoriesBuilder SetOrderId(string _orderId)
+            public TImpl SetOrderId(string _orderId)
             {
                 OrderId = _orderId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySteamReportHistoriesBuilder SetProcessStatus(QuerySteamReportHistoriesProcessStatus _processStatus)
+            public TImpl SetProcessStatus(QuerySteamReportHistoriesProcessStatus _processStatus)
             {
                 ProcessStatus = _processStatus;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySteamReportHistoriesBuilder SetSteamId(string _steamId)
+            public TImpl SetSteamId(string _steamId)
             {
                 SteamId = _steamId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -96,11 +116,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QuerySteamReportHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QuerySteamReportHistories.Response Execute(
+            protected QuerySteamReportHistories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -117,7 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QuerySteamReportHistories.Response> ExecuteAsync(
+            protected async Task<QuerySteamReportHistories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -136,7 +156,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QuerySteamReportHistories(QuerySteamReportHistoriesBuilder builder,
+        public class QuerySteamReportHistoriesBuilder : QuerySteamReportHistoriesAbstractBuilder<QuerySteamReportHistoriesBuilder>
+        {
+            public QuerySteamReportHistoriesBuilder() : base() { }
+
+            public QuerySteamReportHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QuerySteamReportHistories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QuerySteamReportHistories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QuerySteamReportHistories(IQuerySteamReportHistoriesBuilder builder,
             string namespace_
         )
         {
@@ -214,7 +259,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SteamReportInfoPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SteamReportInfoPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

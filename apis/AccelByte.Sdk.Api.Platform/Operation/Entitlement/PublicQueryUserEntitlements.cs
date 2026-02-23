@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicQueryUserEntitlementsBuilder Builder { get => new PublicQueryUserEntitlementsBuilder(); }
 
-        public class PublicQueryUserEntitlementsBuilder
-            : OperationBuilder<PublicQueryUserEntitlementsBuilder>
+        public interface IPublicQueryUserEntitlementsBuilder
+        {
+
+            PublicQueryUserEntitlementsAppType? AppType { get; }
+
+            PublicQueryUserEntitlementsEntitlementClazz? EntitlementClazz { get; }
+
+            string? EntitlementName { get; }
+
+            List<string>? Features { get; }
+
+            List<string>? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryUserEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryUserEntitlementsBuilder
+            where TImpl : PublicQueryUserEntitlementsAbstractBuilder<TImpl>
         {
 
             public PublicQueryUserEntitlementsAppType? AppType { get; set; }
@@ -56,54 +80,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicQueryUserEntitlementsBuilder() { }
+            public PublicQueryUserEntitlementsAbstractBuilder() { }
 
-            internal PublicQueryUserEntitlementsBuilder(IAccelByteSdk sdk)
+            public PublicQueryUserEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryUserEntitlementsBuilder SetAppType(PublicQueryUserEntitlementsAppType _appType)
+            public TImpl SetAppType(PublicQueryUserEntitlementsAppType _appType)
             {
                 AppType = _appType;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserEntitlementsBuilder SetEntitlementClazz(PublicQueryUserEntitlementsEntitlementClazz _entitlementClazz)
+            public TImpl SetEntitlementClazz(PublicQueryUserEntitlementsEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserEntitlementsBuilder SetEntitlementName(string _entitlementName)
+            public TImpl SetEntitlementName(string _entitlementName)
             {
                 EntitlementName = _entitlementName;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserEntitlementsBuilder SetFeatures(List<string> _features)
+            public TImpl SetFeatures(List<string> _features)
             {
                 Features = _features;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserEntitlementsBuilder SetItemId(List<string> _itemId)
+            public TImpl SetItemId(List<string> _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserEntitlementsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserEntitlementsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -120,11 +144,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicQueryUserEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryUserEntitlements.Response Execute(
+            protected PublicQueryUserEntitlements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -143,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryUserEntitlements.Response> ExecuteAsync(
+            protected async Task<PublicQueryUserEntitlements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -164,7 +188,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicQueryUserEntitlements(PublicQueryUserEntitlementsBuilder builder,
+        public class PublicQueryUserEntitlementsBuilder : PublicQueryUserEntitlementsAbstractBuilder<PublicQueryUserEntitlementsBuilder>
+        {
+            public PublicQueryUserEntitlementsBuilder() : base() { }
+
+            public PublicQueryUserEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryUserEntitlements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicQueryUserEntitlements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicQueryUserEntitlements(IPublicQueryUserEntitlementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -256,7 +309,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryEntitlementsBuilder Builder { get => new QueryEntitlementsBuilder(); }
 
-        public class QueryEntitlementsBuilder
-            : OperationBuilder<QueryEntitlementsBuilder>
+        public interface IQueryEntitlementsBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            QueryEntitlementsAppType? AppType { get; }
+
+            QueryEntitlementsEntitlementClazz? EntitlementClazz { get; }
+
+            string? EntitlementName { get; }
+
+            List<string>? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryEntitlementsOrigin? Origin { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryEntitlementsBuilder
+            where TImpl : QueryEntitlementsAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -60,66 +88,66 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryEntitlementsBuilder() { }
+            public QueryEntitlementsAbstractBuilder() { }
 
-            internal QueryEntitlementsBuilder(IAccelByteSdk sdk)
+            public QueryEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryEntitlementsBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetAppType(QueryEntitlementsAppType _appType)
+            public TImpl SetAppType(QueryEntitlementsAppType _appType)
             {
                 AppType = _appType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetEntitlementClazz(QueryEntitlementsEntitlementClazz _entitlementClazz)
+            public TImpl SetEntitlementClazz(QueryEntitlementsEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetEntitlementName(string _entitlementName)
+            public TImpl SetEntitlementName(string _entitlementName)
             {
                 EntitlementName = _entitlementName;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetItemId(List<string> _itemId)
+            public TImpl SetItemId(List<string> _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetOrigin(QueryEntitlementsOrigin _origin)
+            public TImpl SetOrigin(QueryEntitlementsOrigin _origin)
             {
                 Origin = _origin;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryEntitlementsBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -134,11 +162,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryEntitlements.Response Execute(
+            protected QueryEntitlements.Response InternalExecute(
                 string namespace_
             )
             {
@@ -155,7 +183,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryEntitlements.Response> ExecuteAsync(
+            protected async Task<QueryEntitlements.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -174,7 +202,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryEntitlements(QueryEntitlementsBuilder builder,
+        public class QueryEntitlementsBuilder : QueryEntitlementsAbstractBuilder<QueryEntitlementsBuilder>
+        {
+            public QueryEntitlementsBuilder() : base() { }
+
+            public QueryEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryEntitlements.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryEntitlements.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryEntitlements(IQueryEntitlementsBuilder builder,
             string namespace_
         )
         {
@@ -266,7 +319,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

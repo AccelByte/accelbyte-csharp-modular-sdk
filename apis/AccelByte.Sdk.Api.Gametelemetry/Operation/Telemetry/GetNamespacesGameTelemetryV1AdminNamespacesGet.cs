@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #region Builder Part
         public static GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder Builder { get => new GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder(); }
 
-        public class GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder
-            : OperationBuilder<GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder>
+        public interface IGetNamespacesGameTelemetryV1AdminNamespacesGetBuilder
         {
 
 
 
 
 
-            internal GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder() { }
+        }
 
-            internal GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder(IAccelByteSdk sdk)
+        public abstract class GetNamespacesGameTelemetryV1AdminNamespacesGetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetNamespacesGameTelemetryV1AdminNamespacesGetBuilder
+            where TImpl : GetNamespacesGameTelemetryV1AdminNamespacesGetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetNamespacesGameTelemetryV1AdminNamespacesGetAbstractBuilder() { }
+
+            public GetNamespacesGameTelemetryV1AdminNamespacesGetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,11 +67,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = new GetNamespacesGameTelemetryV1AdminNamespacesGet(this
                 );
 
-                op.SetBaseFields<GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetNamespacesGameTelemetryV1AdminNamespacesGet.Response Execute(
+            protected GetNamespacesGameTelemetryV1AdminNamespacesGet.Response InternalExecute(
             )
             {
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = Build(
@@ -76,7 +86,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetNamespacesGameTelemetryV1AdminNamespacesGet.Response> ExecuteAsync(
+            protected async Task<GetNamespacesGameTelemetryV1AdminNamespacesGet.Response> InternalExecuteAsync(
             )
             {
                 GetNamespacesGameTelemetryV1AdminNamespacesGet op = Build(
@@ -93,7 +103,28 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
         }
 
-        private GetNamespacesGameTelemetryV1AdminNamespacesGet(GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder builder
+        public class GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder : GetNamespacesGameTelemetryV1AdminNamespacesGetAbstractBuilder<GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder>
+        {
+            public GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder() : base() { }
+
+            public GetNamespacesGameTelemetryV1AdminNamespacesGetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetNamespacesGameTelemetryV1AdminNamespacesGet.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetNamespacesGameTelemetryV1AdminNamespacesGet.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetNamespacesGameTelemetryV1AdminNamespacesGet(IGetNamespacesGameTelemetryV1AdminNamespacesGetBuilder builder
         )
         {
             
@@ -156,12 +187,14 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ListBaseResponseStr>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ListBaseResponseStr>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

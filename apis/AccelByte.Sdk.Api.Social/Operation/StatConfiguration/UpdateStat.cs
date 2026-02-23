@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static UpdateStatBuilder Builder { get => new UpdateStatBuilder(); }
 
-        public class UpdateStatBuilder
-            : OperationBuilder<UpdateStatBuilder>
+        public interface IUpdateStatBuilder
         {
 
 
 
 
 
-            internal UpdateStatBuilder() { }
+        }
 
-            internal UpdateStatBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateStatAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateStatBuilder
+            where TImpl : UpdateStatAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateStatAbstractBuilder() { }
+
+            public UpdateStatAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     statCode                    
                 );
 
-                op.SetBaseFields<UpdateStatBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateStat.Response Execute(
+            protected UpdateStat.Response InternalExecute(
                 StatUpdate body,
                 string namespace_,
                 string statCode
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateStat.Response> ExecuteAsync(
+            protected async Task<UpdateStat.Response> InternalExecuteAsync(
                 StatUpdate body,
                 string namespace_,
                 string statCode
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private UpdateStat(UpdateStatBuilder builder,
+        public class UpdateStatBuilder : UpdateStatAbstractBuilder<UpdateStatBuilder>
+        {
+            public UpdateStatBuilder() : base() { }
+
+            public UpdateStatBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateStat.Response Execute(
+                StatUpdate body,
+                string namespace_,
+                string statCode
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    statCode
+                );
+            }
+            public async Task<UpdateStat.Response> ExecuteAsync(
+                StatUpdate body,
+                string namespace_,
+                string statCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    statCode
+                );
+            }
+        }
+
+
+        public UpdateStat(IUpdateStatBuilder builder,
             StatUpdate body,
             string namespace_,
             string statCode
@@ -197,37 +240,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StatInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StatInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static LocalWatchdogConnectBuilder Builder { get => new LocalWatchdogConnectBuilder(); }
 
-        public class LocalWatchdogConnectBuilder
-            : OperationBuilder<LocalWatchdogConnectBuilder>
+        public interface ILocalWatchdogConnectBuilder
         {
 
 
 
 
 
-            internal LocalWatchdogConnectBuilder() { }
+        }
 
-            internal LocalWatchdogConnectBuilder(IAccelByteSdk sdk)
+        public abstract class LocalWatchdogConnectAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ILocalWatchdogConnectBuilder
+            where TImpl : LocalWatchdogConnectAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public LocalWatchdogConnectAbstractBuilder() { }
+
+            public LocalWatchdogConnectAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     watchdogID                    
                 );
 
-                op.SetBaseFields<LocalWatchdogConnectBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public LocalWatchdogConnect.Response Execute(
+            protected LocalWatchdogConnect.Response InternalExecute(
                 string namespace_,
                 string watchdogID
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<LocalWatchdogConnect.Response> ExecuteAsync(
+            protected async Task<LocalWatchdogConnect.Response> InternalExecuteAsync(
                 string namespace_,
                 string watchdogID
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private LocalWatchdogConnect(LocalWatchdogConnectBuilder builder,
+        public class LocalWatchdogConnectBuilder : LocalWatchdogConnectAbstractBuilder<LocalWatchdogConnectBuilder>
+        {
+            public LocalWatchdogConnectBuilder() : base() { }
+
+            public LocalWatchdogConnectBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public LocalWatchdogConnect.Response Execute(
+                string namespace_,
+                string watchdogID
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    watchdogID
+                );
+            }
+            public async Task<LocalWatchdogConnect.Response> ExecuteAsync(
+                string namespace_,
+                string watchdogID
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    watchdogID
+                );
+            }
+        }
+
+
+        public LocalWatchdogConnect(ILocalWatchdogConnectBuilder builder,
             string namespace_,
             string watchdogID
         )

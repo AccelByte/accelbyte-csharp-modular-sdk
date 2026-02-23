@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicPartyInviteBuilder Builder { get => new PublicPartyInviteBuilder(); }
 
-        public class PublicPartyInviteBuilder
-            : OperationBuilder<PublicPartyInviteBuilder>
+        public interface IPublicPartyInviteBuilder
         {
 
 
 
 
 
-            internal PublicPartyInviteBuilder() { }
+        }
 
-            internal PublicPartyInviteBuilder(IAccelByteSdk sdk)
+        public abstract class PublicPartyInviteAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicPartyInviteBuilder
+            where TImpl : PublicPartyInviteAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicPartyInviteAbstractBuilder() { }
+
+            public PublicPartyInviteAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     partyId                    
                 );
 
-                op.SetBaseFields<PublicPartyInviteBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicPartyInvite.Response Execute(
+            protected PublicPartyInvite.Response InternalExecute(
                 ApimodelsSessionInviteRequest body,
                 string namespace_,
                 string partyId
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicPartyInvite.Response> ExecuteAsync(
+            protected async Task<PublicPartyInvite.Response> InternalExecuteAsync(
                 ApimodelsSessionInviteRequest body,
                 string namespace_,
                 string partyId
@@ -116,7 +126,40 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicPartyInvite(PublicPartyInviteBuilder builder,
+        public class PublicPartyInviteBuilder : PublicPartyInviteAbstractBuilder<PublicPartyInviteBuilder>
+        {
+            public PublicPartyInviteBuilder() : base() { }
+
+            public PublicPartyInviteBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicPartyInvite.Response Execute(
+                ApimodelsSessionInviteRequest body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+            public async Task<PublicPartyInvite.Response> ExecuteAsync(
+                ApimodelsSessionInviteRequest body,
+                string namespace_,
+                string partyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    partyId
+                );
+            }
+        }
+
+
+        public PublicPartyInvite(IPublicPartyInviteBuilder builder,
             ApimodelsSessionInviteRequest body,
             string namespace_,
             string partyId
@@ -195,27 +238,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsSessionInviteResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsSessionInviteResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

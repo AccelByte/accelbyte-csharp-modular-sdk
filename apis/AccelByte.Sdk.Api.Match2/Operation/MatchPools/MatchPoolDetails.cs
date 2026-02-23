@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static MatchPoolDetailsBuilder Builder { get => new MatchPoolDetailsBuilder(); }
 
-        public class MatchPoolDetailsBuilder
-            : OperationBuilder<MatchPoolDetailsBuilder>
+        public interface IMatchPoolDetailsBuilder
         {
 
 
 
 
 
-            internal MatchPoolDetailsBuilder() { }
+        }
 
-            internal MatchPoolDetailsBuilder(IAccelByteSdk sdk)
+        public abstract class MatchPoolDetailsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IMatchPoolDetailsBuilder
+            where TImpl : MatchPoolDetailsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public MatchPoolDetailsAbstractBuilder() { }
+
+            public MatchPoolDetailsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     pool                    
                 );
 
-                op.SetBaseFields<MatchPoolDetailsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public MatchPoolDetails.Response Execute(
+            protected MatchPoolDetails.Response InternalExecute(
                 string namespace_,
                 string pool
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<MatchPoolDetails.Response> ExecuteAsync(
+            protected async Task<MatchPoolDetails.Response> InternalExecuteAsync(
                 string namespace_,
                 string pool
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private MatchPoolDetails(MatchPoolDetailsBuilder builder,
+        public class MatchPoolDetailsBuilder : MatchPoolDetailsAbstractBuilder<MatchPoolDetailsBuilder>
+        {
+            public MatchPoolDetailsBuilder() : base() { }
+
+            public MatchPoolDetailsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public MatchPoolDetails.Response Execute(
+                string namespace_,
+                string pool
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    pool
+                );
+            }
+            public async Task<MatchPoolDetails.Response> ExecuteAsync(
+                string namespace_,
+                string pool
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    pool
+                );
+            }
+        }
+
+
+        public MatchPoolDetails(IMatchPoolDetailsBuilder builder,
             string namespace_,
             string pool
         )
@@ -179,27 +218,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiMatchPool>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiMatchPool>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

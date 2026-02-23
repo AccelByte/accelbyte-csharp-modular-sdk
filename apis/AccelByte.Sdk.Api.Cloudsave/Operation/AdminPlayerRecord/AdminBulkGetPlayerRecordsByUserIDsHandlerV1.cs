@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder Builder { get => new AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder(); }
 
-        public class AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder
-            : OperationBuilder<AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder>
+        public interface IAdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder
         {
 
 
 
 
 
-            internal AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder() { }
+        }
 
-            internal AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminBulkGetPlayerRecordsByUserIDsHandlerV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder
+            where TImpl : AdminBulkGetPlayerRecordsByUserIDsHandlerV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBulkGetPlayerRecordsByUserIDsHandlerV1AbstractBuilder() { }
+
+            public AdminBulkGetPlayerRecordsByUserIDsHandlerV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBulkGetPlayerRecordsByUserIDsHandlerV1.Response Execute(
+            protected AdminBulkGetPlayerRecordsByUserIDsHandlerV1.Response InternalExecute(
                 ModelsBulkUserIDsRequest body,
                 string key,
                 string namespace_
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBulkGetPlayerRecordsByUserIDsHandlerV1.Response> ExecuteAsync(
+            protected async Task<AdminBulkGetPlayerRecordsByUserIDsHandlerV1.Response> InternalExecuteAsync(
                 ModelsBulkUserIDsRequest body,
                 string key,
                 string namespace_
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminBulkGetPlayerRecordsByUserIDsHandlerV1(AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder builder,
+        public class AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder : AdminBulkGetPlayerRecordsByUserIDsHandlerV1AbstractBuilder<AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder>
+        {
+            public AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder() : base() { }
+
+            public AdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBulkGetPlayerRecordsByUserIDsHandlerV1.Response Execute(
+                ModelsBulkUserIDsRequest body,
+                string key,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    key,
+                    namespace_
+                );
+            }
+            public async Task<AdminBulkGetPlayerRecordsByUserIDsHandlerV1.Response> ExecuteAsync(
+                ModelsBulkUserIDsRequest body,
+                string key,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    key,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminBulkGetPlayerRecordsByUserIDsHandlerV1(IAdminBulkGetPlayerRecordsByUserIDsHandlerV1Builder builder,
             ModelsBulkUserIDsRequest body,
             string key,
             string namespace_
@@ -190,27 +233,32 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsBulkGetPlayerRecordResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsBulkGetPlayerRecordResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

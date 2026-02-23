@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicSendRegistrationCodeBuilder Builder { get => new PublicSendRegistrationCodeBuilder(); }
 
-        public class PublicSendRegistrationCodeBuilder
-            : OperationBuilder<PublicSendRegistrationCodeBuilder>
+        public interface IPublicSendRegistrationCodeBuilder
         {
 
 
 
 
 
-            internal PublicSendRegistrationCodeBuilder() { }
+        }
 
-            internal PublicSendRegistrationCodeBuilder(IAccelByteSdk sdk)
+        public abstract class PublicSendRegistrationCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSendRegistrationCodeBuilder
+            where TImpl : PublicSendRegistrationCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicSendRegistrationCodeAbstractBuilder() { }
+
+            public PublicSendRegistrationCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicSendRegistrationCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSendRegistrationCode.Response Execute(
+            protected PublicSendRegistrationCode.Response InternalExecute(
                 ModelSendRegisterVerificationCodeRequest body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSendRegistrationCode.Response> ExecuteAsync(
+            protected async Task<PublicSendRegistrationCode.Response> InternalExecuteAsync(
                 ModelSendRegisterVerificationCodeRequest body,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicSendRegistrationCode(PublicSendRegistrationCodeBuilder builder,
+        public class PublicSendRegistrationCodeBuilder : PublicSendRegistrationCodeAbstractBuilder<PublicSendRegistrationCodeBuilder>
+        {
+            public PublicSendRegistrationCodeBuilder() : base() { }
+
+            public PublicSendRegistrationCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSendRegistrationCode.Response Execute(
+                ModelSendRegisterVerificationCodeRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicSendRegistrationCode.Response> ExecuteAsync(
+                ModelSendRegisterVerificationCodeRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicSendRegistrationCode(IPublicSendRegistrationCodeBuilder builder,
             ModelSendRegisterVerificationCodeRequest body,
             string namespace_
         )
@@ -181,17 +220,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
 

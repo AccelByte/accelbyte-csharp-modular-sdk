@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static QoSRegionsUpdateBuilder Builder { get => new QoSRegionsUpdateBuilder(); }
 
-        public class QoSRegionsUpdateBuilder
-            : OperationBuilder<QoSRegionsUpdateBuilder>
+        public interface IQoSRegionsUpdateBuilder
         {
 
 
 
 
 
-            internal QoSRegionsUpdateBuilder() { }
+        }
 
-            internal QoSRegionsUpdateBuilder(IAccelByteSdk sdk)
+        public abstract class QoSRegionsUpdateAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQoSRegionsUpdateBuilder
+            where TImpl : QoSRegionsUpdateAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public QoSRegionsUpdateAbstractBuilder() { }
+
+            public QoSRegionsUpdateAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     region                    
                 );
 
-                op.SetBaseFields<QoSRegionsUpdateBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QoSRegionsUpdate.Response Execute(
+            protected QoSRegionsUpdate.Response InternalExecute(
                 ApiUpdateServerRequest body,
                 string namespace_,
                 string region
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QoSRegionsUpdate.Response> ExecuteAsync(
+            protected async Task<QoSRegionsUpdate.Response> InternalExecuteAsync(
                 ApiUpdateServerRequest body,
                 string namespace_,
                 string region
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private QoSRegionsUpdate(QoSRegionsUpdateBuilder builder,
+        public class QoSRegionsUpdateBuilder : QoSRegionsUpdateAbstractBuilder<QoSRegionsUpdateBuilder>
+        {
+            public QoSRegionsUpdateBuilder() : base() { }
+
+            public QoSRegionsUpdateBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QoSRegionsUpdate.Response Execute(
+                ApiUpdateServerRequest body,
+                string namespace_,
+                string region
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    region
+                );
+            }
+            public async Task<QoSRegionsUpdate.Response> ExecuteAsync(
+                ApiUpdateServerRequest body,
+                string namespace_,
+                string region
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    region
+                );
+            }
+        }
+
+
+        public QoSRegionsUpdate(IQoSRegionsUpdateBuilder builder,
             ApiUpdateServerRequest body,
             string namespace_,
             string region
@@ -195,27 +238,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

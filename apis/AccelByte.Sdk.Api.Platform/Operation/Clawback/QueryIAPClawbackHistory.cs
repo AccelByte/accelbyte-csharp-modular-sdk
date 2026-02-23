@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryIAPClawbackHistoryBuilder Builder { get => new QueryIAPClawbackHistoryBuilder(); }
 
-        public class QueryIAPClawbackHistoryBuilder
-            : OperationBuilder<QueryIAPClawbackHistoryBuilder>
+        public interface IQueryIAPClawbackHistoryBuilder
+        {
+
+            string? EndTime { get; }
+
+            QueryIAPClawbackHistoryEventType? EventType { get; }
+
+            string? ExternalOrderId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? StartTime { get; }
+
+            QueryIAPClawbackHistoryStatus? Status { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryIAPClawbackHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryIAPClawbackHistoryBuilder
+            where TImpl : QueryIAPClawbackHistoryAbstractBuilder<TImpl>
         {
 
             public string? EndTime { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryIAPClawbackHistoryBuilder() { }
+            public QueryIAPClawbackHistoryAbstractBuilder() { }
 
-            internal QueryIAPClawbackHistoryBuilder(IAccelByteSdk sdk)
+            public QueryIAPClawbackHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryIAPClawbackHistoryBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetEventType(QueryIAPClawbackHistoryEventType _eventType)
+            public TImpl SetEventType(QueryIAPClawbackHistoryEventType _eventType)
             {
                 EventType = _eventType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetExternalOrderId(string _externalOrderId)
+            public TImpl SetExternalOrderId(string _externalOrderId)
             {
                 ExternalOrderId = _externalOrderId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetStatus(QueryIAPClawbackHistoryStatus _status)
+            public TImpl SetStatus(QueryIAPClawbackHistoryStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryIAPClawbackHistoryBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -125,11 +151,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryIAPClawbackHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryIAPClawbackHistory.Response Execute(
+            protected QueryIAPClawbackHistory.Response InternalExecute(
                 string namespace_
             )
             {
@@ -146,7 +172,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryIAPClawbackHistory.Response> ExecuteAsync(
+            protected async Task<QueryIAPClawbackHistory.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -165,7 +191,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryIAPClawbackHistory(QueryIAPClawbackHistoryBuilder builder,
+        public class QueryIAPClawbackHistoryBuilder : QueryIAPClawbackHistoryAbstractBuilder<QueryIAPClawbackHistoryBuilder>
+        {
+            public QueryIAPClawbackHistoryBuilder() : base() { }
+
+            public QueryIAPClawbackHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryIAPClawbackHistory.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryIAPClawbackHistory.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryIAPClawbackHistory(IQueryIAPClawbackHistoryBuilder builder,
             string namespace_
         )
         {
@@ -252,7 +303,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPClawbackPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPClawbackPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

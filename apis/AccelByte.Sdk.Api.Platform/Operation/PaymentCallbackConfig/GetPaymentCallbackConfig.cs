@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentCallbackConfigBuilder Builder { get => new GetPaymentCallbackConfigBuilder(); }
 
-        public class GetPaymentCallbackConfigBuilder
-            : OperationBuilder<GetPaymentCallbackConfigBuilder>
+        public interface IGetPaymentCallbackConfigBuilder
         {
 
 
 
 
 
-            internal GetPaymentCallbackConfigBuilder() { }
+        }
 
-            internal GetPaymentCallbackConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetPaymentCallbackConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentCallbackConfigBuilder
+            where TImpl : GetPaymentCallbackConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPaymentCallbackConfigAbstractBuilder() { }
+
+            public GetPaymentCallbackConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,12 +76,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetPaymentCallbackConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetPaymentCallbackConfig.Response Execute(
+            protected GetPaymentCallbackConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentCallbackConfig.Response> ExecuteAsync(
+            protected async Task<GetPaymentCallbackConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -107,7 +117,33 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentCallbackConfig(GetPaymentCallbackConfigBuilder builder,
+        public class GetPaymentCallbackConfigBuilder : GetPaymentCallbackConfigAbstractBuilder<GetPaymentCallbackConfigBuilder>
+        {
+            public GetPaymentCallbackConfigBuilder() : base() { }
+
+            public GetPaymentCallbackConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetPaymentCallbackConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetPaymentCallbackConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetPaymentCallbackConfig(IGetPaymentCallbackConfigBuilder builder,
             string namespace_
         )
         {
@@ -172,12 +208,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentCallbackConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentCallbackConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

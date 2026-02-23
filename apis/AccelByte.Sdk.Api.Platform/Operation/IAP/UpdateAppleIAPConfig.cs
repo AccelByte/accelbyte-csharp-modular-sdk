@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateAppleIAPConfigBuilder Builder { get => new UpdateAppleIAPConfigBuilder(); }
 
-        public class UpdateAppleIAPConfigBuilder
-            : OperationBuilder<UpdateAppleIAPConfigBuilder>
+        public interface IUpdateAppleIAPConfigBuilder
         {
 
 
 
 
 
-            internal UpdateAppleIAPConfigBuilder() { }
+        }
 
-            internal UpdateAppleIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateAppleIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateAppleIAPConfigBuilder
+            where TImpl : UpdateAppleIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateAppleIAPConfigAbstractBuilder() { }
+
+            public UpdateAppleIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateAppleIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateAppleIAPConfig.Response Execute(
+            protected UpdateAppleIAPConfig.Response InternalExecute(
                 AppleIAPConfigRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateAppleIAPConfig.Response> ExecuteAsync(
+            protected async Task<UpdateAppleIAPConfig.Response> InternalExecuteAsync(
                 AppleIAPConfigRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateAppleIAPConfig(UpdateAppleIAPConfigBuilder builder,
+        public class UpdateAppleIAPConfigBuilder : UpdateAppleIAPConfigAbstractBuilder<UpdateAppleIAPConfigBuilder>
+        {
+            public UpdateAppleIAPConfigBuilder() : base() { }
+
+            public UpdateAppleIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateAppleIAPConfig.Response Execute(
+                AppleIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateAppleIAPConfig.Response> ExecuteAsync(
+                AppleIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateAppleIAPConfig(IUpdateAppleIAPConfigBuilder builder,
             AppleIAPConfigRequest body,
             string namespace_
         )
@@ -172,7 +211,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AppleIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AppleIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

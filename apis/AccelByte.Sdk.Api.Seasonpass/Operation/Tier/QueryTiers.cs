@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static QueryTiersBuilder Builder { get => new QueryTiersBuilder(); }
 
-        public class QueryTiersBuilder
-            : OperationBuilder<QueryTiersBuilder>
+        public interface IQueryTiersBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryTiersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryTiersBuilder
+            where TImpl : QueryTiersAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal QueryTiersBuilder() { }
+            public QueryTiersAbstractBuilder() { }
 
-            internal QueryTiersBuilder(IAccelByteSdk sdk)
+            public QueryTiersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryTiersBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryTiersBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<QueryTiersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryTiers.Response Execute(
+            protected QueryTiers.Response InternalExecute(
                 string namespace_,
                 string seasonId
             )
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryTiers.Response> ExecuteAsync(
+            protected async Task<QueryTiers.Response> InternalExecuteAsync(
                 string namespace_,
                 string seasonId
             )
@@ -124,7 +138,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private QueryTiers(QueryTiersBuilder builder,
+        public class QueryTiersBuilder : QueryTiersAbstractBuilder<QueryTiersBuilder>
+        {
+            public QueryTiersBuilder() : base() { }
+
+            public QueryTiersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryTiers.Response Execute(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<QueryTiers.Response> ExecuteAsync(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public QueryTiers(IQueryTiersBuilder builder,
             string namespace_,
             string seasonId
         )
@@ -201,17 +244,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TierPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TierPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

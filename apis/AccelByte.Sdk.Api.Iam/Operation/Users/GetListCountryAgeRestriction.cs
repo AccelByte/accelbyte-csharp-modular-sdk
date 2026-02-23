@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetListCountryAgeRestrictionBuilder Builder { get => new GetListCountryAgeRestrictionBuilder(); }
 
-        public class GetListCountryAgeRestrictionBuilder
-            : OperationBuilder<GetListCountryAgeRestrictionBuilder>
+        public interface IGetListCountryAgeRestrictionBuilder
         {
 
 
 
 
 
-            internal GetListCountryAgeRestrictionBuilder() { }
+        }
 
-            internal GetListCountryAgeRestrictionBuilder(IAccelByteSdk sdk)
+        public abstract class GetListCountryAgeRestrictionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetListCountryAgeRestrictionBuilder
+            where TImpl : GetListCountryAgeRestrictionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetListCountryAgeRestrictionAbstractBuilder() { }
+
+            public GetListCountryAgeRestrictionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetListCountryAgeRestrictionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetListCountryAgeRestriction.Response Execute(
+            protected GetListCountryAgeRestriction.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetListCountryAgeRestriction.Response> ExecuteAsync(
+            protected async Task<GetListCountryAgeRestriction.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetListCountryAgeRestriction(GetListCountryAgeRestrictionBuilder builder,
+        public class GetListCountryAgeRestrictionBuilder : GetListCountryAgeRestrictionAbstractBuilder<GetListCountryAgeRestrictionBuilder>
+        {
+            public GetListCountryAgeRestrictionBuilder() : base() { }
+
+            public GetListCountryAgeRestrictionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetListCountryAgeRestriction.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetListCountryAgeRestriction.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetListCountryAgeRestriction(IGetListCountryAgeRestrictionBuilder builder,
             string namespace_
         )
         {
@@ -171,22 +207,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.AccountcommonCountryAgeRestriction>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.AccountcommonCountryAgeRestriction>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

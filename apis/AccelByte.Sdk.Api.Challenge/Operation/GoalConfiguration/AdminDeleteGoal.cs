@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminDeleteGoalBuilder Builder { get => new AdminDeleteGoalBuilder(); }
 
-        public class AdminDeleteGoalBuilder
-            : OperationBuilder<AdminDeleteGoalBuilder>
+        public interface IAdminDeleteGoalBuilder
         {
 
 
 
 
 
-            internal AdminDeleteGoalBuilder() { }
+        }
 
-            internal AdminDeleteGoalBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteGoalAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteGoalBuilder
+            where TImpl : AdminDeleteGoalAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteGoalAbstractBuilder() { }
+
+            public AdminDeleteGoalAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteGoalBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteGoal.Response Execute(
+            protected AdminDeleteGoal.Response InternalExecute(
                 string challengeCode,
                 string code,
                 string namespace_
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteGoal.Response> ExecuteAsync(
+            protected async Task<AdminDeleteGoal.Response> InternalExecuteAsync(
                 string challengeCode,
                 string code,
                 string namespace_
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminDeleteGoal(AdminDeleteGoalBuilder builder,
+        public class AdminDeleteGoalBuilder : AdminDeleteGoalAbstractBuilder<AdminDeleteGoalBuilder>
+        {
+            public AdminDeleteGoalBuilder() : base() { }
+
+            public AdminDeleteGoalBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteGoal.Response Execute(
+                string challengeCode,
+                string code,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    challengeCode,
+                    code,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteGoal.Response> ExecuteAsync(
+                string challengeCode,
+                string code,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    challengeCode,
+                    code,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteGoal(IAdminDeleteGoalBuilder builder,
             string challengeCode,
             string code,
             string namespace_
@@ -191,17 +234,20 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static GetItemReferencesBuilder Builder { get => new GetItemReferencesBuilder(); }
 
-        public class GetItemReferencesBuilder
-            : OperationBuilder<GetItemReferencesBuilder>
+        public interface IGetItemReferencesBuilder
         {
 
 
 
 
 
-            internal GetItemReferencesBuilder() { }
+        }
 
-            internal GetItemReferencesBuilder(IAccelByteSdk sdk)
+        public abstract class GetItemReferencesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetItemReferencesBuilder
+            where TImpl : GetItemReferencesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetItemReferencesAbstractBuilder() { }
+
+            public GetItemReferencesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     itemId                    
                 );
 
-                op.SetBaseFields<GetItemReferencesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetItemReferences.Response Execute(
+            protected GetItemReferences.Response InternalExecute(
                 string namespace_,
                 string itemId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItemReferences.Response> ExecuteAsync(
+            protected async Task<GetItemReferences.Response> InternalExecuteAsync(
                 string namespace_,
                 string itemId
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private GetItemReferences(GetItemReferencesBuilder builder,
+        public class GetItemReferencesBuilder : GetItemReferencesAbstractBuilder<GetItemReferencesBuilder>
+        {
+            public GetItemReferencesBuilder() : base() { }
+
+            public GetItemReferencesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetItemReferences.Response Execute(
+                string namespace_,
+                string itemId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    itemId
+                );
+            }
+            public async Task<GetItemReferences.Response> ExecuteAsync(
+                string namespace_,
+                string itemId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    itemId
+                );
+            }
+        }
+
+
+        public GetItemReferences(IGetItemReferencesBuilder builder,
             string namespace_,
             string itemId
         )
@@ -177,12 +216,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemReferenceInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemReferenceInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static UpdateVariableV1Builder Builder { get => new UpdateVariableV1Builder(); }
 
-        public class UpdateVariableV1Builder
-            : OperationBuilder<UpdateVariableV1Builder>
+        public interface IUpdateVariableV1Builder
         {
 
 
 
 
 
-            internal UpdateVariableV1Builder() { }
+        }
 
-            internal UpdateVariableV1Builder(IAccelByteSdk sdk)
+        public abstract class UpdateVariableV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateVariableV1Builder
+            where TImpl : UpdateVariableV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateVariableV1AbstractBuilder() { }
+
+            public UpdateVariableV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,12 +81,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateVariableV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpdateVariableV1.Response Execute(
+            protected UpdateVariableV1.Response InternalExecute(
                 GeneratedUpdateConfigurationV1Request body,
                 string app,
                 string configId,
@@ -99,7 +109,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateVariableV1.Response> ExecuteAsync(
+            protected async Task<UpdateVariableV1.Response> InternalExecuteAsync(
                 GeneratedUpdateConfigurationV1Request body,
                 string app,
                 string configId,
@@ -124,7 +134,45 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private UpdateVariableV1(UpdateVariableV1Builder builder,
+        public class UpdateVariableV1Builder : UpdateVariableV1AbstractBuilder<UpdateVariableV1Builder>
+        {
+            public UpdateVariableV1Builder() : base() { }
+
+            public UpdateVariableV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateVariableV1.Response Execute(
+                GeneratedUpdateConfigurationV1Request body,
+                string app,
+                string configId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    app,
+                    configId,
+                    namespace_
+                );
+            }
+            public async Task<UpdateVariableV1.Response> ExecuteAsync(
+                GeneratedUpdateConfigurationV1Request body,
+                string app,
+                string configId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    app,
+                    configId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateVariableV1(IUpdateVariableV1Builder builder,
             GeneratedUpdateConfigurationV1Request body,
             string app,
             string configId,
@@ -207,27 +255,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GeneratedUpdateConfigurationV1Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.GeneratedUpdateConfigurationV1Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

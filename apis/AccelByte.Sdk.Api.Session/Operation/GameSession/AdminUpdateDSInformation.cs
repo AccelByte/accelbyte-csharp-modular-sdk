@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminUpdateDSInformationBuilder Builder { get => new AdminUpdateDSInformationBuilder(); }
 
-        public class AdminUpdateDSInformationBuilder
-            : OperationBuilder<AdminUpdateDSInformationBuilder>
+        public interface IAdminUpdateDSInformationBuilder
         {
 
 
 
 
 
-            internal AdminUpdateDSInformationBuilder() { }
+        }
 
-            internal AdminUpdateDSInformationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateDSInformationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateDSInformationBuilder
+            where TImpl : AdminUpdateDSInformationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateDSInformationAbstractBuilder() { }
+
+            public AdminUpdateDSInformationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId                    
                 );
 
-                op.SetBaseFields<AdminUpdateDSInformationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateDSInformation.Response Execute(
+            protected AdminUpdateDSInformation.Response InternalExecute(
                 ApimodelsUpdateGamesessionDSInformationRequest body,
                 string namespace_,
                 string sessionId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateDSInformation.Response> ExecuteAsync(
+            protected async Task<AdminUpdateDSInformation.Response> InternalExecuteAsync(
                 ApimodelsUpdateGamesessionDSInformationRequest body,
                 string namespace_,
                 string sessionId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminUpdateDSInformation(AdminUpdateDSInformationBuilder builder,
+        public class AdminUpdateDSInformationBuilder : AdminUpdateDSInformationAbstractBuilder<AdminUpdateDSInformationBuilder>
+        {
+            public AdminUpdateDSInformationBuilder() : base() { }
+
+            public AdminUpdateDSInformationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateDSInformation.Response Execute(
+                ApimodelsUpdateGamesessionDSInformationRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+            }
+            public async Task<AdminUpdateDSInformation.Response> ExecuteAsync(
+                ApimodelsUpdateGamesessionDSInformationRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+            }
+        }
+
+
+        public AdminUpdateDSInformation(IAdminUpdateDSInformationBuilder builder,
             ApimodelsUpdateGamesessionDSInformationRequest body,
             string namespace_,
             string sessionId
@@ -192,27 +235,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static DeleteInventoryBuilder Builder { get => new DeleteInventoryBuilder(); }
 
-        public class DeleteInventoryBuilder
-            : OperationBuilder<DeleteInventoryBuilder>
+        public interface IDeleteInventoryBuilder
         {
 
 
 
 
 
-            internal DeleteInventoryBuilder() { }
+        }
 
-            internal DeleteInventoryBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteInventoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteInventoryBuilder
+            where TImpl : DeleteInventoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteInventoryAbstractBuilder() { }
+
+            public DeleteInventoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteInventoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteInventory.Response Execute(
+            protected DeleteInventory.Response InternalExecute(
                 ApimodelsDeleteInventoryReq body,
                 string inventoryId,
                 string namespace_
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteInventory.Response> ExecuteAsync(
+            protected async Task<DeleteInventory.Response> InternalExecuteAsync(
                 ApimodelsDeleteInventoryReq body,
                 string inventoryId,
                 string namespace_
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private DeleteInventory(DeleteInventoryBuilder builder,
+        public class DeleteInventoryBuilder : DeleteInventoryAbstractBuilder<DeleteInventoryBuilder>
+        {
+            public DeleteInventoryBuilder() : base() { }
+
+            public DeleteInventoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteInventory.Response Execute(
+                ApimodelsDeleteInventoryReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteInventory.Response> ExecuteAsync(
+                ApimodelsDeleteInventoryReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteInventory(IDeleteInventoryBuilder builder,
             ApimodelsDeleteInventoryReq body,
             string inventoryId,
             string namespace_
@@ -192,17 +235,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

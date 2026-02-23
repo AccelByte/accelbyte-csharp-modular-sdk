@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetRolesBuilder Builder { get => new GetRolesBuilder(); }
 
-        public class GetRolesBuilder
-            : OperationBuilder<GetRolesBuilder>
+        public interface IGetRolesBuilder
+        {
+
+            string? IsWildcard { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetRolesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRolesBuilder
+            where TImpl : GetRolesAbstractBuilder<TImpl>
         {
 
             public string? IsWildcard { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal GetRolesBuilder() { }
+            public GetRolesAbstractBuilder() { }
 
-            internal GetRolesBuilder(IAccelByteSdk sdk)
+            public GetRolesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetRolesBuilder SetIsWildcard(string _isWildcard)
+            public TImpl SetIsWildcard(string _isWildcard)
             {
                 IsWildcard = _isWildcard;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -67,12 +79,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetRoles op = new GetRoles(this
                 );
 
-                op.SetBaseFields<GetRolesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetRoles.Response Execute(
+            protected GetRoles.Response InternalExecute(
             )
             {
                 GetRoles op = Build(
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRoles.Response> ExecuteAsync(
+            protected async Task<GetRoles.Response> InternalExecuteAsync(
             )
             {
                 GetRoles op = Build(
@@ -104,7 +116,29 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetRoles(GetRolesBuilder builder
+        public class GetRolesBuilder : GetRolesAbstractBuilder<GetRolesBuilder>
+        {
+            public GetRolesBuilder() : base() { }
+
+            public GetRolesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetRoles.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetRoles.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetRoles(IGetRolesBuilder builder
         )
         {
             
@@ -170,17 +204,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelRoleResponseWithManagers>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelRoleResponseWithManagers>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetEntitlementConfigInfoBuilder Builder { get => new GetEntitlementConfigInfoBuilder(); }
 
-        public class GetEntitlementConfigInfoBuilder
-            : OperationBuilder<GetEntitlementConfigInfoBuilder>
+        public interface IGetEntitlementConfigInfoBuilder
+        {
+
+            bool? WithoutCache { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetEntitlementConfigInfoAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetEntitlementConfigInfoBuilder
+            where TImpl : GetEntitlementConfigInfoAbstractBuilder<TImpl>
         {
 
             public bool? WithoutCache { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetEntitlementConfigInfoBuilder() { }
+            public GetEntitlementConfigInfoAbstractBuilder() { }
 
-            internal GetEntitlementConfigInfoBuilder(IAccelByteSdk sdk)
+            public GetEntitlementConfigInfoAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetEntitlementConfigInfoBuilder SetWithoutCache(bool _withoutCache)
+            public TImpl SetWithoutCache(bool _withoutCache)
             {
                 WithoutCache = _withoutCache;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetEntitlementConfigInfoBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetEntitlementConfigInfo.Response Execute(
+            protected GetEntitlementConfigInfo.Response InternalExecute(
                 string namespace_
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetEntitlementConfigInfo.Response> ExecuteAsync(
+            protected async Task<GetEntitlementConfigInfo.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetEntitlementConfigInfo(GetEntitlementConfigInfoBuilder builder,
+        public class GetEntitlementConfigInfoBuilder : GetEntitlementConfigInfoAbstractBuilder<GetEntitlementConfigInfoBuilder>
+        {
+            public GetEntitlementConfigInfoBuilder() : base() { }
+
+            public GetEntitlementConfigInfoBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetEntitlementConfigInfo.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetEntitlementConfigInfo.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetEntitlementConfigInfo(IGetEntitlementConfigInfoBuilder builder,
             string namespace_
         )
         {
@@ -175,7 +212,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

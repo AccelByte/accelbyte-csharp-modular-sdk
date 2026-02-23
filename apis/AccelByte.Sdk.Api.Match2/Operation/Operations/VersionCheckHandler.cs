@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static VersionCheckHandlerBuilder Builder { get => new VersionCheckHandlerBuilder(); }
 
-        public class VersionCheckHandlerBuilder
-            : OperationBuilder<VersionCheckHandlerBuilder>
+        public interface IVersionCheckHandlerBuilder
         {
 
 
 
 
 
-            internal VersionCheckHandlerBuilder() { }
+        }
 
-            internal VersionCheckHandlerBuilder(IAccelByteSdk sdk)
+        public abstract class VersionCheckHandlerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IVersionCheckHandlerBuilder
+            where TImpl : VersionCheckHandlerAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public VersionCheckHandlerAbstractBuilder() { }
+
+            public VersionCheckHandlerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                 VersionCheckHandler op = new VersionCheckHandler(this
                 );
 
-                op.SetBaseFields<VersionCheckHandlerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public VersionCheckHandler.Response Execute(
+            protected VersionCheckHandler.Response InternalExecute(
             )
             {
                 VersionCheckHandler op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<VersionCheckHandler.Response> ExecuteAsync(
+            protected async Task<VersionCheckHandler.Response> InternalExecuteAsync(
             )
             {
                 VersionCheckHandler op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private VersionCheckHandler(VersionCheckHandlerBuilder builder
+        public class VersionCheckHandlerBuilder : VersionCheckHandlerAbstractBuilder<VersionCheckHandlerBuilder>
+        {
+            public VersionCheckHandlerBuilder() : base() { }
+
+            public VersionCheckHandlerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public VersionCheckHandler.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<VersionCheckHandler.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public VersionCheckHandler(IVersionCheckHandlerBuilder builder
         )
         {
             

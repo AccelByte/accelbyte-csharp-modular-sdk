@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicPreviewOrderPriceBuilder Builder { get => new PublicPreviewOrderPriceBuilder(); }
 
-        public class PublicPreviewOrderPriceBuilder
-            : OperationBuilder<PublicPreviewOrderPriceBuilder>
+        public interface IPublicPreviewOrderPriceBuilder
         {
 
 
 
 
 
-            internal PublicPreviewOrderPriceBuilder() { }
+        }
 
-            internal PublicPreviewOrderPriceBuilder(IAccelByteSdk sdk)
+        public abstract class PublicPreviewOrderPriceAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicPreviewOrderPriceBuilder
+            where TImpl : PublicPreviewOrderPriceAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicPreviewOrderPriceAbstractBuilder() { }
+
+            public PublicPreviewOrderPriceAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicPreviewOrderPriceBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicPreviewOrderPrice.Response Execute(
+            protected PublicPreviewOrderPrice.Response InternalExecute(
                 OrderDiscountPreviewRequest body,
                 string namespace_,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicPreviewOrderPrice.Response> ExecuteAsync(
+            protected async Task<PublicPreviewOrderPrice.Response> InternalExecuteAsync(
                 OrderDiscountPreviewRequest body,
                 string namespace_,
                 string userId
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicPreviewOrderPrice(PublicPreviewOrderPriceBuilder builder,
+        public class PublicPreviewOrderPriceBuilder : PublicPreviewOrderPriceAbstractBuilder<PublicPreviewOrderPriceBuilder>
+        {
+            public PublicPreviewOrderPriceBuilder() : base() { }
+
+            public PublicPreviewOrderPriceBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicPreviewOrderPrice.Response Execute(
+                OrderDiscountPreviewRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicPreviewOrderPrice.Response> ExecuteAsync(
+                OrderDiscountPreviewRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicPreviewOrderPrice(IPublicPreviewOrderPriceBuilder builder,
             OrderDiscountPreviewRequest body,
             string namespace_,
             string userId
@@ -193,32 +236,38 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderDiscountPreviewResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderDiscountPreviewResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

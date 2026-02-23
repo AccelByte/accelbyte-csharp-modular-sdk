@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static IndirectBulkAcceptVersionedPolicyBuilder Builder { get => new IndirectBulkAcceptVersionedPolicyBuilder(); }
 
-        public class IndirectBulkAcceptVersionedPolicyBuilder
-            : OperationBuilder<IndirectBulkAcceptVersionedPolicyBuilder>
+        public interface IIndirectBulkAcceptVersionedPolicyBuilder
+        {
+
+            string? PublisherUserId { get; }
+
+
+            List<Model.AcceptAgreementRequest>? Body { get; }
+
+
+
+
+        }
+
+        public abstract class IndirectBulkAcceptVersionedPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IIndirectBulkAcceptVersionedPolicyBuilder
+            where TImpl : IndirectBulkAcceptVersionedPolicyAbstractBuilder<TImpl>
         {
 
             public string? PublisherUserId { get; set; }
@@ -42,25 +56,25 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal IndirectBulkAcceptVersionedPolicyBuilder() { }
+            public IndirectBulkAcceptVersionedPolicyAbstractBuilder() { }
 
-            internal IndirectBulkAcceptVersionedPolicyBuilder(IAccelByteSdk sdk)
+            public IndirectBulkAcceptVersionedPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public IndirectBulkAcceptVersionedPolicyBuilder SetPublisherUserId(string _publisherUserId)
+            public TImpl SetPublisherUserId(string _publisherUserId)
             {
                 PublisherUserId = _publisherUserId;
-                return this;
+                return (TImpl)this;
             }
 
 
-            public IndirectBulkAcceptVersionedPolicyBuilder SetBody(List<Model.AcceptAgreementRequest> _body)
+            public TImpl SetBody(List<Model.AcceptAgreementRequest> _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     countryCode                    
                 );
 
-                op.SetBaseFields<IndirectBulkAcceptVersionedPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public IndirectBulkAcceptVersionedPolicy.Response Execute(
+            protected IndirectBulkAcceptVersionedPolicy.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string clientId,
@@ -107,7 +121,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<IndirectBulkAcceptVersionedPolicy.Response> ExecuteAsync(
+            protected async Task<IndirectBulkAcceptVersionedPolicy.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string clientId,
@@ -132,7 +146,44 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private IndirectBulkAcceptVersionedPolicy(IndirectBulkAcceptVersionedPolicyBuilder builder,
+        public class IndirectBulkAcceptVersionedPolicyBuilder : IndirectBulkAcceptVersionedPolicyAbstractBuilder<IndirectBulkAcceptVersionedPolicyBuilder>
+        {
+            public IndirectBulkAcceptVersionedPolicyBuilder() : base() { }
+
+            public IndirectBulkAcceptVersionedPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public IndirectBulkAcceptVersionedPolicy.Response Execute(
+                string namespace_,
+                string userId,
+                string clientId,
+                string countryCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    clientId,
+                    countryCode
+                );
+            }
+            public async Task<IndirectBulkAcceptVersionedPolicy.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string clientId,
+                string countryCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    clientId,
+                    countryCode
+                );
+            }
+        }
+
+
+        public IndirectBulkAcceptVersionedPolicy(IIndirectBulkAcceptVersionedPolicyBuilder builder,
             string namespace_,
             string userId,
             string clientId,
@@ -213,7 +264,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AcceptAgreementResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

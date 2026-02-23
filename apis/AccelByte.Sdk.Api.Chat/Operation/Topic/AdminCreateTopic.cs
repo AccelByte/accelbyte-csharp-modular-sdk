@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminCreateTopicBuilder Builder { get => new AdminCreateTopicBuilder(); }
 
-        public class AdminCreateTopicBuilder
-            : OperationBuilder<AdminCreateTopicBuilder>
+        public interface IAdminCreateTopicBuilder
         {
 
 
 
 
 
-            internal AdminCreateTopicBuilder() { }
+        }
 
-            internal AdminCreateTopicBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateTopicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateTopicBuilder
+            where TImpl : AdminCreateTopicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateTopicAbstractBuilder() { }
+
+            public AdminCreateTopicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateTopicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateTopic.Response Execute(
+            protected AdminCreateTopic.Response InternalExecute(
                 ApiCreateTopicParams body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateTopic.Response> ExecuteAsync(
+            protected async Task<AdminCreateTopic.Response> InternalExecuteAsync(
                 ApiCreateTopicParams body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminCreateTopic(AdminCreateTopicBuilder builder,
+        public class AdminCreateTopicBuilder : AdminCreateTopicAbstractBuilder<AdminCreateTopicBuilder>
+        {
+            public AdminCreateTopicBuilder() : base() { }
+
+            public AdminCreateTopicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateTopic.Response Execute(
+                ApiCreateTopicParams body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateTopic.Response> ExecuteAsync(
+                ApiCreateTopicParams body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateTopic(IAdminCreateTopicBuilder builder,
             ApiCreateTopicParams body,
             string namespace_
         )
@@ -171,7 +210,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiCreateTopicResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiCreateTopicResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

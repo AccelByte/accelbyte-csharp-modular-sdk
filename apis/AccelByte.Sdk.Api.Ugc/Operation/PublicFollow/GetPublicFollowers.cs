@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,8 +28,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static GetPublicFollowersBuilder Builder { get => new GetPublicFollowersBuilder(); }
 
-        public class GetPublicFollowersBuilder
-            : OperationBuilder<GetPublicFollowersBuilder>
+        public interface IGetPublicFollowersBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetPublicFollowersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPublicFollowersBuilder
+            where TImpl : GetPublicFollowersAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -40,24 +54,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal GetPublicFollowersBuilder() { }
+            public GetPublicFollowersAbstractBuilder() { }
 
-            internal GetPublicFollowersBuilder(IAccelByteSdk sdk)
+            public GetPublicFollowersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetPublicFollowersBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetPublicFollowersBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +88,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetPublicFollowersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPublicFollowers.Response Execute(
+            protected GetPublicFollowers.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -97,7 +111,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPublicFollowers.Response> ExecuteAsync(
+            protected async Task<GetPublicFollowers.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -118,7 +132,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private GetPublicFollowers(GetPublicFollowersBuilder builder,
+        public class GetPublicFollowersBuilder : GetPublicFollowersAbstractBuilder<GetPublicFollowersBuilder>
+        {
+            public GetPublicFollowersBuilder() : base() { }
+
+            public GetPublicFollowersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPublicFollowers.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetPublicFollowers.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetPublicFollowers(IGetPublicFollowersBuilder builder,
             string namespace_,
             string userId
         )
@@ -197,22 +240,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedCreatorOverviewResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedCreatorOverviewResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

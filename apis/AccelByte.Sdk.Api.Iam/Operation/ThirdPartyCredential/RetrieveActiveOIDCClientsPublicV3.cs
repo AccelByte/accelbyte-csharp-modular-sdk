@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RetrieveActiveOIDCClientsPublicV3Builder Builder { get => new RetrieveActiveOIDCClientsPublicV3Builder(); }
 
-        public class RetrieveActiveOIDCClientsPublicV3Builder
-            : OperationBuilder<RetrieveActiveOIDCClientsPublicV3Builder>
+        public interface IRetrieveActiveOIDCClientsPublicV3Builder
         {
 
 
 
 
 
-            internal RetrieveActiveOIDCClientsPublicV3Builder() { }
+        }
 
-            internal RetrieveActiveOIDCClientsPublicV3Builder(IAccelByteSdk sdk)
+        public abstract class RetrieveActiveOIDCClientsPublicV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveActiveOIDCClientsPublicV3Builder
+            where TImpl : RetrieveActiveOIDCClientsPublicV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveActiveOIDCClientsPublicV3AbstractBuilder() { }
+
+            public RetrieveActiveOIDCClientsPublicV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     clientId                    
                 );
 
-                op.SetBaseFields<RetrieveActiveOIDCClientsPublicV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveActiveOIDCClientsPublicV3.Response Execute(
+            protected RetrieveActiveOIDCClientsPublicV3.Response InternalExecute(
                 string namespace_,
                 string clientId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveActiveOIDCClientsPublicV3.Response> ExecuteAsync(
+            protected async Task<RetrieveActiveOIDCClientsPublicV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string clientId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RetrieveActiveOIDCClientsPublicV3(RetrieveActiveOIDCClientsPublicV3Builder builder,
+        public class RetrieveActiveOIDCClientsPublicV3Builder : RetrieveActiveOIDCClientsPublicV3AbstractBuilder<RetrieveActiveOIDCClientsPublicV3Builder>
+        {
+            public RetrieveActiveOIDCClientsPublicV3Builder() : base() { }
+
+            public RetrieveActiveOIDCClientsPublicV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveActiveOIDCClientsPublicV3.Response Execute(
+                string namespace_,
+                string clientId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    clientId
+                );
+            }
+            public async Task<RetrieveActiveOIDCClientsPublicV3.Response> ExecuteAsync(
+                string namespace_,
+                string clientId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    clientId
+                );
+            }
+        }
+
+
+        public RetrieveActiveOIDCClientsPublicV3(IRetrieveActiveOIDCClientsPublicV3Builder builder,
             string namespace_,
             string clientId
         )
@@ -175,17 +214,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelPublicThirdPartyPlatformInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelPublicThirdPartyPlatformInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

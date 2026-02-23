@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static BulkUpdateRegionDataBuilder Builder { get => new BulkUpdateRegionDataBuilder(); }
 
-        public class BulkUpdateRegionDataBuilder
-            : OperationBuilder<BulkUpdateRegionDataBuilder>
+        public interface IBulkUpdateRegionDataBuilder
+        {
+
+
+            Model.BulkRegionDataChangeRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class BulkUpdateRegionDataAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkUpdateRegionDataBuilder
+            where TImpl : BulkUpdateRegionDataAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal BulkUpdateRegionDataBuilder() { }
+            public BulkUpdateRegionDataAbstractBuilder() { }
 
-            internal BulkUpdateRegionDataBuilder(IAccelByteSdk sdk)
+            public BulkUpdateRegionDataAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public BulkUpdateRegionDataBuilder SetBody(Model.BulkRegionDataChangeRequest _body)
+            public TImpl SetBody(Model.BulkRegionDataChangeRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<BulkUpdateRegionDataBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkUpdateRegionData.Response Execute(
+            protected BulkUpdateRegionData.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkUpdateRegionData.Response> ExecuteAsync(
+            protected async Task<BulkUpdateRegionData.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private BulkUpdateRegionData(BulkUpdateRegionDataBuilder builder,
+        public class BulkUpdateRegionDataBuilder : BulkUpdateRegionDataAbstractBuilder<BulkUpdateRegionDataBuilder>
+        {
+            public BulkUpdateRegionDataBuilder() : base() { }
+
+            public BulkUpdateRegionDataBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkUpdateRegionData.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<BulkUpdateRegionData.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public BulkUpdateRegionData(IBulkUpdateRegionDataBuilder builder,
             string namespace_,
             string storeId
         )
@@ -191,22 +232,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

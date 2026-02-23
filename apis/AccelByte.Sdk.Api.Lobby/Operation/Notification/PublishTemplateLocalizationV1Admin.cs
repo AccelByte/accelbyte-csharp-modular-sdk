@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static PublishTemplateLocalizationV1AdminBuilder Builder { get => new PublishTemplateLocalizationV1AdminBuilder(); }
 
-        public class PublishTemplateLocalizationV1AdminBuilder
-            : OperationBuilder<PublishTemplateLocalizationV1AdminBuilder>
+        public interface IPublishTemplateLocalizationV1AdminBuilder
         {
 
 
 
 
 
-            internal PublishTemplateLocalizationV1AdminBuilder() { }
+        }
 
-            internal PublishTemplateLocalizationV1AdminBuilder(IAccelByteSdk sdk)
+        public abstract class PublishTemplateLocalizationV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublishTemplateLocalizationV1AdminBuilder
+            where TImpl : PublishTemplateLocalizationV1AdminAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublishTemplateLocalizationV1AdminAbstractBuilder() { }
+
+            public PublishTemplateLocalizationV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<PublishTemplateLocalizationV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublishTemplateLocalizationV1Admin.Response Execute(
+            protected PublishTemplateLocalizationV1Admin.Response InternalExecute(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublishTemplateLocalizationV1Admin.Response> ExecuteAsync(
+            protected async Task<PublishTemplateLocalizationV1Admin.Response> InternalExecuteAsync(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private PublishTemplateLocalizationV1Admin(PublishTemplateLocalizationV1AdminBuilder builder,
+        public class PublishTemplateLocalizationV1AdminBuilder : PublishTemplateLocalizationV1AdminAbstractBuilder<PublishTemplateLocalizationV1AdminBuilder>
+        {
+            public PublishTemplateLocalizationV1AdminBuilder() : base() { }
+
+            public PublishTemplateLocalizationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublishTemplateLocalizationV1Admin.Response Execute(
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+            public async Task<PublishTemplateLocalizationV1Admin.Response> ExecuteAsync(
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public PublishTemplateLocalizationV1Admin(IPublishTemplateLocalizationV1AdminBuilder builder,
             string namespace_,
             string templateLanguage,
             string templateSlug
@@ -192,22 +235,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

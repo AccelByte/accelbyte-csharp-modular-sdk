@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetFulfillmentScriptBuilder Builder { get => new GetFulfillmentScriptBuilder(); }
 
-        public class GetFulfillmentScriptBuilder
-            : OperationBuilder<GetFulfillmentScriptBuilder>
+        public interface IGetFulfillmentScriptBuilder
         {
 
 
 
 
 
-            internal GetFulfillmentScriptBuilder() { }
+        }
 
-            internal GetFulfillmentScriptBuilder(IAccelByteSdk sdk)
+        public abstract class GetFulfillmentScriptAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetFulfillmentScriptBuilder
+            where TImpl : GetFulfillmentScriptAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetFulfillmentScriptAbstractBuilder() { }
+
+            public GetFulfillmentScriptAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<GetFulfillmentScriptBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetFulfillmentScript.Response Execute(
+            protected GetFulfillmentScript.Response InternalExecute(
                 string id
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetFulfillmentScript.Response> ExecuteAsync(
+            protected async Task<GetFulfillmentScript.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetFulfillmentScript(GetFulfillmentScriptBuilder builder,
+        public class GetFulfillmentScriptBuilder : GetFulfillmentScriptAbstractBuilder<GetFulfillmentScriptBuilder>
+        {
+            public GetFulfillmentScriptBuilder() : base() { }
+
+            public GetFulfillmentScriptBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetFulfillmentScript.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<GetFulfillmentScript.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public GetFulfillmentScript(IGetFulfillmentScriptBuilder builder,
             string id
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

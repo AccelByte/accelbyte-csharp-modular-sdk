@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QuerySubscriptionsBuilder Builder { get => new QuerySubscriptionsBuilder(); }
 
-        public class QuerySubscriptionsBuilder
-            : OperationBuilder<QuerySubscriptionsBuilder>
+        public interface IQuerySubscriptionsBuilder
+        {
+
+            QuerySubscriptionsChargeStatus? ChargeStatus { get; }
+
+            string? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Sku { get; }
+
+            QuerySubscriptionsStatus? Status { get; }
+
+            QuerySubscriptionsSubscribedBy? SubscribedBy { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QuerySubscriptionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQuerySubscriptionsBuilder
+            where TImpl : QuerySubscriptionsAbstractBuilder<TImpl>
         {
 
             public QuerySubscriptionsChargeStatus? ChargeStatus { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QuerySubscriptionsBuilder() { }
+            public QuerySubscriptionsAbstractBuilder() { }
 
-            internal QuerySubscriptionsBuilder(IAccelByteSdk sdk)
+            public QuerySubscriptionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QuerySubscriptionsBuilder SetChargeStatus(QuerySubscriptionsChargeStatus _chargeStatus)
+            public TImpl SetChargeStatus(QuerySubscriptionsChargeStatus _chargeStatus)
             {
                 ChargeStatus = _chargeStatus;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetItemId(string _itemId)
+            public TImpl SetItemId(string _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetSku(string _sku)
+            public TImpl SetSku(string _sku)
             {
                 Sku = _sku;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetStatus(QuerySubscriptionsStatus _status)
+            public TImpl SetStatus(QuerySubscriptionsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetSubscribedBy(QuerySubscriptionsSubscribedBy _subscribedBy)
+            public TImpl SetSubscribedBy(QuerySubscriptionsSubscribedBy _subscribedBy)
             {
                 SubscribedBy = _subscribedBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySubscriptionsBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -125,11 +151,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QuerySubscriptionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QuerySubscriptions.Response Execute(
+            protected QuerySubscriptions.Response InternalExecute(
                 string namespace_
             )
             {
@@ -146,7 +172,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QuerySubscriptions.Response> ExecuteAsync(
+            protected async Task<QuerySubscriptions.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -165,7 +191,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QuerySubscriptions(QuerySubscriptionsBuilder builder,
+        public class QuerySubscriptionsBuilder : QuerySubscriptionsAbstractBuilder<QuerySubscriptionsBuilder>
+        {
+            public QuerySubscriptionsBuilder() : base() { }
+
+            public QuerySubscriptionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QuerySubscriptions.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QuerySubscriptions.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QuerySubscriptions(IQuerySubscriptionsBuilder builder,
             string namespace_
         )
         {
@@ -252,7 +303,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

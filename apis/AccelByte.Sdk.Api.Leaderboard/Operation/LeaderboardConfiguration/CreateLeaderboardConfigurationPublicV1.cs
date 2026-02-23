@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -63,17 +63,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static CreateLeaderboardConfigurationPublicV1Builder Builder { get => new CreateLeaderboardConfigurationPublicV1Builder(); }
 
-        public class CreateLeaderboardConfigurationPublicV1Builder
-            : OperationBuilder<CreateLeaderboardConfigurationPublicV1Builder>
+        public interface ICreateLeaderboardConfigurationPublicV1Builder
         {
 
 
 
 
 
-            internal CreateLeaderboardConfigurationPublicV1Builder() { }
+        }
 
-            internal CreateLeaderboardConfigurationPublicV1Builder(IAccelByteSdk sdk)
+        public abstract class CreateLeaderboardConfigurationPublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateLeaderboardConfigurationPublicV1Builder
+            where TImpl : CreateLeaderboardConfigurationPublicV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateLeaderboardConfigurationPublicV1AbstractBuilder() { }
+
+            public CreateLeaderboardConfigurationPublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -93,11 +103,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateLeaderboardConfigurationPublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateLeaderboardConfigurationPublicV1.Response Execute(
+            protected CreateLeaderboardConfigurationPublicV1.Response InternalExecute(
                 ModelsLeaderboardConfigReq body,
                 string namespace_
             )
@@ -116,7 +126,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateLeaderboardConfigurationPublicV1.Response> ExecuteAsync(
+            protected async Task<CreateLeaderboardConfigurationPublicV1.Response> InternalExecuteAsync(
                 ModelsLeaderboardConfigReq body,
                 string namespace_
             )
@@ -137,7 +147,36 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private CreateLeaderboardConfigurationPublicV1(CreateLeaderboardConfigurationPublicV1Builder builder,
+        public class CreateLeaderboardConfigurationPublicV1Builder : CreateLeaderboardConfigurationPublicV1AbstractBuilder<CreateLeaderboardConfigurationPublicV1Builder>
+        {
+            public CreateLeaderboardConfigurationPublicV1Builder() : base() { }
+
+            public CreateLeaderboardConfigurationPublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateLeaderboardConfigurationPublicV1.Response Execute(
+                ModelsLeaderboardConfigReq body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateLeaderboardConfigurationPublicV1.Response> ExecuteAsync(
+                ModelsLeaderboardConfigReq body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateLeaderboardConfigurationPublicV1(ICreateLeaderboardConfigurationPublicV1Builder builder,
             ModelsLeaderboardConfigReq body,
             string namespace_
         )
@@ -214,32 +253,38 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsLeaderboardConfigReq>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsLeaderboardConfigReq>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

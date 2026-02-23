@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminCreateTagBuilder Builder { get => new AdminCreateTagBuilder(); }
 
-        public class AdminCreateTagBuilder
-            : OperationBuilder<AdminCreateTagBuilder>
+        public interface IAdminCreateTagBuilder
         {
 
 
 
 
 
-            internal AdminCreateTagBuilder() { }
+        }
 
-            internal AdminCreateTagBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateTagAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateTagBuilder
+            where TImpl : AdminCreateTagAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateTagAbstractBuilder() { }
+
+            public AdminCreateTagAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateTagBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateTag.Response Execute(
+            protected AdminCreateTag.Response InternalExecute(
                 ApimodelsCreateTagReq body,
                 string namespace_
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateTag.Response> ExecuteAsync(
+            protected async Task<AdminCreateTag.Response> InternalExecuteAsync(
                 ApimodelsCreateTagReq body,
                 string namespace_
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminCreateTag(AdminCreateTagBuilder builder,
+        public class AdminCreateTagBuilder : AdminCreateTagAbstractBuilder<AdminCreateTagBuilder>
+        {
+            public AdminCreateTagBuilder() : base() { }
+
+            public AdminCreateTagBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateTag.Response Execute(
+                ApimodelsCreateTagReq body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateTag.Response> ExecuteAsync(
+                ApimodelsCreateTagReq body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateTag(IAdminCreateTagBuilder builder,
             ApimodelsCreateTagReq body,
             string namespace_
         )
@@ -182,22 +221,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsCreateTagResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsCreateTagResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

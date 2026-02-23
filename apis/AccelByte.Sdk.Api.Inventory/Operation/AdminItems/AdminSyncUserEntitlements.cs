@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminSyncUserEntitlementsBuilder Builder { get => new AdminSyncUserEntitlementsBuilder(); }
 
-        public class AdminSyncUserEntitlementsBuilder
-            : OperationBuilder<AdminSyncUserEntitlementsBuilder>
+        public interface IAdminSyncUserEntitlementsBuilder
         {
 
 
 
 
 
-            internal AdminSyncUserEntitlementsBuilder() { }
+        }
 
-            internal AdminSyncUserEntitlementsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminSyncUserEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSyncUserEntitlementsBuilder
+            where TImpl : AdminSyncUserEntitlementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminSyncUserEntitlementsAbstractBuilder() { }
+
+            public AdminSyncUserEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminSyncUserEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSyncUserEntitlements.Response Execute(
+            protected AdminSyncUserEntitlements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSyncUserEntitlements.Response> ExecuteAsync(
+            protected async Task<AdminSyncUserEntitlements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminSyncUserEntitlements(AdminSyncUserEntitlementsBuilder builder,
+        public class AdminSyncUserEntitlementsBuilder : AdminSyncUserEntitlementsAbstractBuilder<AdminSyncUserEntitlementsBuilder>
+        {
+            public AdminSyncUserEntitlementsBuilder() : base() { }
+
+            public AdminSyncUserEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSyncUserEntitlements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminSyncUserEntitlements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminSyncUserEntitlements(IAdminSyncUserEntitlementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -185,27 +224,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

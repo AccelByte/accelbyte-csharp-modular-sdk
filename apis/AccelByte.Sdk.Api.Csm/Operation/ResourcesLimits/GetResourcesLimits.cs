@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetResourcesLimitsBuilder Builder { get => new GetResourcesLimitsBuilder(); }
 
-        public class GetResourcesLimitsBuilder
-            : OperationBuilder<GetResourcesLimitsBuilder>
+        public interface IGetResourcesLimitsBuilder
         {
 
 
 
 
 
-            internal GetResourcesLimitsBuilder() { }
+        }
 
-            internal GetResourcesLimitsBuilder(IAccelByteSdk sdk)
+        public abstract class GetResourcesLimitsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetResourcesLimitsBuilder
+            where TImpl : GetResourcesLimitsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetResourcesLimitsAbstractBuilder() { }
+
+            public GetResourcesLimitsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetResourcesLimitsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetResourcesLimits.Response Execute(
+            protected GetResourcesLimits.Response InternalExecute(
                 string namespace_
             )
             {
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetResourcesLimits.Response> ExecuteAsync(
+            protected async Task<GetResourcesLimits.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -103,7 +113,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetResourcesLimits(GetResourcesLimitsBuilder builder,
+        public class GetResourcesLimitsBuilder : GetResourcesLimitsAbstractBuilder<GetResourcesLimitsBuilder>
+        {
+            public GetResourcesLimitsBuilder() : base() { }
+
+            public GetResourcesLimitsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetResourcesLimits.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetResourcesLimits.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetResourcesLimits(IGetResourcesLimitsBuilder builder,
             string namespace_
         )
         {
@@ -174,27 +209,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelCSMAppLimitsResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelCSMAppLimitsResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)402)
             {
-                response.Error402 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error402 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error402!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

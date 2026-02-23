@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminDeleteContentByShareCodeV2Builder Builder { get => new AdminDeleteContentByShareCodeV2Builder(); }
 
-        public class AdminDeleteContentByShareCodeV2Builder
-            : OperationBuilder<AdminDeleteContentByShareCodeV2Builder>
+        public interface IAdminDeleteContentByShareCodeV2Builder
         {
 
 
 
 
 
-            internal AdminDeleteContentByShareCodeV2Builder() { }
+        }
 
-            internal AdminDeleteContentByShareCodeV2Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteContentByShareCodeV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteContentByShareCodeV2Builder
+            where TImpl : AdminDeleteContentByShareCodeV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteContentByShareCodeV2AbstractBuilder() { }
+
+            public AdminDeleteContentByShareCodeV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminDeleteContentByShareCodeV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteContentByShareCodeV2.Response Execute(
+            protected AdminDeleteContentByShareCodeV2.Response InternalExecute(
                 string channelId,
                 string namespace_,
                 string shareCode,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteContentByShareCodeV2.Response> ExecuteAsync(
+            protected async Task<AdminDeleteContentByShareCodeV2.Response> InternalExecuteAsync(
                 string channelId,
                 string namespace_,
                 string shareCode,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminDeleteContentByShareCodeV2(AdminDeleteContentByShareCodeV2Builder builder,
+        public class AdminDeleteContentByShareCodeV2Builder : AdminDeleteContentByShareCodeV2AbstractBuilder<AdminDeleteContentByShareCodeV2Builder>
+        {
+            public AdminDeleteContentByShareCodeV2Builder() : base() { }
+
+            public AdminDeleteContentByShareCodeV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteContentByShareCodeV2.Response Execute(
+                string channelId,
+                string namespace_,
+                string shareCode,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
+                );
+            }
+            public async Task<AdminDeleteContentByShareCodeV2.Response> ExecuteAsync(
+                string channelId,
+                string namespace_,
+                string shareCode,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminDeleteContentByShareCodeV2(IAdminDeleteContentByShareCodeV2Builder builder,
             string channelId,
             string namespace_,
             string shareCode,
@@ -198,17 +245,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetUserMappingBuilder Builder { get => new GetUserMappingBuilder(); }
 
-        public class GetUserMappingBuilder
-            : OperationBuilder<GetUserMappingBuilder>
+        public interface IGetUserMappingBuilder
         {
 
 
 
 
 
-            internal GetUserMappingBuilder() { }
+        }
 
-            internal GetUserMappingBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserMappingAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserMappingBuilder
+            where TImpl : GetUserMappingAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserMappingAbstractBuilder() { }
+
+            public GetUserMappingAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,12 +80,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserMappingBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetUserMapping.Response Execute(
+            protected GetUserMapping.Response InternalExecute(
                 string namespace_,
                 string targetNamespace,
                 string userId
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserMapping.Response> ExecuteAsync(
+            protected async Task<GetUserMapping.Response> InternalExecuteAsync(
                 string namespace_,
                 string targetNamespace,
                 string userId
@@ -119,7 +129,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetUserMapping(GetUserMappingBuilder builder,
+        public class GetUserMappingBuilder : GetUserMappingAbstractBuilder<GetUserMappingBuilder>
+        {
+            public GetUserMappingBuilder() : base() { }
+
+            public GetUserMappingBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetUserMapping.Response Execute(
+                string namespace_,
+                string targetNamespace,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    targetNamespace,
+                    userId
+                );
+            }
+            public async Task<GetUserMapping.Response> ExecuteAsync(
+                string namespace_,
+                string targetNamespace,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    targetNamespace,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserMapping(IGetUserMappingBuilder builder,
             string namespace_,
             string targetNamespace,
             string userId
@@ -198,27 +242,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserMapping>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetUserMapping>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

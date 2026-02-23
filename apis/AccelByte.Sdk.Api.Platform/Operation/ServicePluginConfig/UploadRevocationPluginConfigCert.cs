@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UploadRevocationPluginConfigCertBuilder Builder { get => new UploadRevocationPluginConfigCertBuilder(); }
 
-        public class UploadRevocationPluginConfigCertBuilder
-            : OperationBuilder<UploadRevocationPluginConfigCertBuilder>
+        public interface IUploadRevocationPluginConfigCertBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class UploadRevocationPluginConfigCertAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUploadRevocationPluginConfigCertBuilder
+            where TImpl : UploadRevocationPluginConfigCertAbstractBuilder<TImpl>
         {
 
 
@@ -41,9 +53,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UploadRevocationPluginConfigCertBuilder() { }
+            public UploadRevocationPluginConfigCertAbstractBuilder() { }
 
-            internal UploadRevocationPluginConfigCertBuilder(IAccelByteSdk sdk)
+            public UploadRevocationPluginConfigCertAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -51,10 +63,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UploadRevocationPluginConfigCertBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -67,11 +79,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UploadRevocationPluginConfigCertBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UploadRevocationPluginConfigCert.Response Execute(
+            protected UploadRevocationPluginConfigCert.Response InternalExecute(
                 string namespace_
             )
             {
@@ -88,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UploadRevocationPluginConfigCert.Response> ExecuteAsync(
+            protected async Task<UploadRevocationPluginConfigCert.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -107,7 +119,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UploadRevocationPluginConfigCert(UploadRevocationPluginConfigCertBuilder builder,
+        public class UploadRevocationPluginConfigCertBuilder : UploadRevocationPluginConfigCertAbstractBuilder<UploadRevocationPluginConfigCertBuilder>
+        {
+            public UploadRevocationPluginConfigCertBuilder() : base() { }
+
+            public UploadRevocationPluginConfigCertBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UploadRevocationPluginConfigCert.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<UploadRevocationPluginConfigCert.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public UploadRevocationPluginConfigCert(IUploadRevocationPluginConfigCertBuilder builder,
             string namespace_
         )
         {
@@ -175,12 +212,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

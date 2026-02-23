@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetCategoryBuilder Builder { get => new PublicGetCategoryBuilder(); }
 
-        public class PublicGetCategoryBuilder
-            : OperationBuilder<PublicGetCategoryBuilder>
+        public interface IPublicGetCategoryBuilder
+        {
+
+            string? Language { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetCategoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetCategoryBuilder
+            where TImpl : PublicGetCategoryAbstractBuilder<TImpl>
         {
 
             public string? Language { get; set; }
@@ -48,24 +62,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetCategoryBuilder() { }
+            public PublicGetCategoryAbstractBuilder() { }
 
-            internal PublicGetCategoryBuilder(IAccelByteSdk sdk)
+            public PublicGetCategoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetCategoryBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetCategoryBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +96,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetCategoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetCategory.Response Execute(
+            protected PublicGetCategory.Response InternalExecute(
                 string categoryPath,
                 string namespace_
             )
@@ -105,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetCategory.Response> ExecuteAsync(
+            protected async Task<PublicGetCategory.Response> InternalExecuteAsync(
                 string categoryPath,
                 string namespace_
             )
@@ -126,7 +140,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetCategory(PublicGetCategoryBuilder builder,
+        public class PublicGetCategoryBuilder : PublicGetCategoryAbstractBuilder<PublicGetCategoryBuilder>
+        {
+            public PublicGetCategoryBuilder() : base() { }
+
+            public PublicGetCategoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetCategory.Response Execute(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    categoryPath,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetCategory.Response> ExecuteAsync(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    categoryPath,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetCategory(IPublicGetCategoryBuilder builder,
             string categoryPath,
             string namespace_
         )
@@ -199,12 +242,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CategoryInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CategoryInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

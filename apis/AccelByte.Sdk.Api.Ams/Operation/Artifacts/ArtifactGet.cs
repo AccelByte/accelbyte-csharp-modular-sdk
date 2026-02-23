@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,46 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static ArtifactGetBuilder Builder { get => new ArtifactGetBuilder(); }
 
-        public class ArtifactGetBuilder
-            : OperationBuilder<ArtifactGetBuilder>
+        public interface IArtifactGetBuilder
+        {
+
+            string? ArtifactType { get; }
+
+            long? Count { get; }
+
+            string? EndDate { get; }
+
+            string? FleetID { get; }
+
+            string? ImageID { get; }
+
+            long? MaxSize { get; }
+
+            long? MinSize { get; }
+
+            long? Offset { get; }
+
+            string? Region { get; }
+
+            string? ServerId { get; }
+
+            string? SortBy { get; }
+
+            ArtifactGetSortDirection? SortDirection { get; }
+
+            string? StartDate { get; }
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class ArtifactGetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IArtifactGetBuilder
+            where TImpl : ArtifactGetAbstractBuilder<TImpl>
         {
 
             public string? ArtifactType { get; set; }
@@ -68,96 +106,96 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal ArtifactGetBuilder() { }
+            public ArtifactGetAbstractBuilder() { }
 
-            internal ArtifactGetBuilder(IAccelByteSdk sdk)
+            public ArtifactGetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ArtifactGetBuilder SetArtifactType(string _artifactType)
+            public TImpl SetArtifactType(string _artifactType)
             {
                 ArtifactType = _artifactType;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetCount(long _count)
+            public TImpl SetCount(long _count)
             {
                 Count = _count;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetEndDate(string _endDate)
+            public TImpl SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetFleetID(string _fleetID)
+            public TImpl SetFleetID(string _fleetID)
             {
                 FleetID = _fleetID;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetImageID(string _imageID)
+            public TImpl SetImageID(string _imageID)
             {
                 ImageID = _imageID;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetMaxSize(long _maxSize)
+            public TImpl SetMaxSize(long _maxSize)
             {
                 MaxSize = _maxSize;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetMinSize(long _minSize)
+            public TImpl SetMinSize(long _minSize)
             {
                 MinSize = _minSize;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetServerId(string _serverId)
+            public TImpl SetServerId(string _serverId)
             {
                 ServerId = _serverId;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetSortDirection(ArtifactGetSortDirection _sortDirection)
+            public TImpl SetSortDirection(ArtifactGetSortDirection _sortDirection)
             {
                 SortDirection = _sortDirection;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetStartDate(string _startDate)
+            public TImpl SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactGetBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -172,11 +210,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ArtifactGetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ArtifactGet.Response Execute(
+            protected ArtifactGet.Response InternalExecute(
                 string namespace_
             )
             {
@@ -193,7 +231,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ArtifactGet.Response> ExecuteAsync(
+            protected async Task<ArtifactGet.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -212,7 +250,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private ArtifactGet(ArtifactGetBuilder builder,
+        public class ArtifactGetBuilder : ArtifactGetAbstractBuilder<ArtifactGetBuilder>
+        {
+            public ArtifactGetBuilder() : base() { }
+
+            public ArtifactGetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ArtifactGet.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ArtifactGet.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ArtifactGet(IArtifactGetBuilder builder,
             string namespace_
         )
         {
@@ -325,27 +388,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiArtifactListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiArtifactListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

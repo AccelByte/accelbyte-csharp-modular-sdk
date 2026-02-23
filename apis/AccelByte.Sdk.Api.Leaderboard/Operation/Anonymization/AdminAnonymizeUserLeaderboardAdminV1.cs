@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static AdminAnonymizeUserLeaderboardAdminV1Builder Builder { get => new AdminAnonymizeUserLeaderboardAdminV1Builder(); }
 
-        public class AdminAnonymizeUserLeaderboardAdminV1Builder
-            : OperationBuilder<AdminAnonymizeUserLeaderboardAdminV1Builder>
+        public interface IAdminAnonymizeUserLeaderboardAdminV1Builder
         {
 
 
 
 
 
-            internal AdminAnonymizeUserLeaderboardAdminV1Builder() { }
+        }
 
-            internal AdminAnonymizeUserLeaderboardAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminAnonymizeUserLeaderboardAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminAnonymizeUserLeaderboardAdminV1Builder
+            where TImpl : AdminAnonymizeUserLeaderboardAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminAnonymizeUserLeaderboardAdminV1AbstractBuilder() { }
+
+            public AdminAnonymizeUserLeaderboardAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminAnonymizeUserLeaderboardAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminAnonymizeUserLeaderboardAdminV1.Response Execute(
+            protected AdminAnonymizeUserLeaderboardAdminV1.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminAnonymizeUserLeaderboardAdminV1.Response> ExecuteAsync(
+            protected async Task<AdminAnonymizeUserLeaderboardAdminV1.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private AdminAnonymizeUserLeaderboardAdminV1(AdminAnonymizeUserLeaderboardAdminV1Builder builder,
+        public class AdminAnonymizeUserLeaderboardAdminV1Builder : AdminAnonymizeUserLeaderboardAdminV1AbstractBuilder<AdminAnonymizeUserLeaderboardAdminV1Builder>
+        {
+            public AdminAnonymizeUserLeaderboardAdminV1Builder() : base() { }
+
+            public AdminAnonymizeUserLeaderboardAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminAnonymizeUserLeaderboardAdminV1.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminAnonymizeUserLeaderboardAdminV1.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminAnonymizeUserLeaderboardAdminV1(IAdminAnonymizeUserLeaderboardAdminV1Builder builder,
             string namespace_,
             string userId
         )
@@ -180,17 +219,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

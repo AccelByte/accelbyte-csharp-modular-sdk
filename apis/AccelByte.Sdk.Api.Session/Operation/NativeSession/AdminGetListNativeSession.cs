@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminGetListNativeSessionBuilder Builder { get => new AdminGetListNativeSessionBuilder(); }
 
-        public class AdminGetListNativeSessionBuilder
-            : OperationBuilder<AdminGetListNativeSessionBuilder>
+        public interface IAdminGetListNativeSessionBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? Order { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetListNativeSessionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetListNativeSessionBuilder
+            where TImpl : AdminGetListNativeSessionAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal AdminGetListNativeSessionBuilder() { }
+            public AdminGetListNativeSessionAbstractBuilder() { }
 
-            internal AdminGetListNativeSessionBuilder(IAccelByteSdk sdk)
+            public AdminGetListNativeSessionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetListNativeSessionBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetListNativeSessionBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetListNativeSessionBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetListNativeSessionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetListNativeSession.Response Execute(
+            protected AdminGetListNativeSession.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetListNativeSession.Response> ExecuteAsync(
+            protected async Task<AdminGetListNativeSession.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminGetListNativeSession(AdminGetListNativeSessionBuilder builder,
+        public class AdminGetListNativeSessionBuilder : AdminGetListNativeSessionAbstractBuilder<AdminGetListNativeSessionBuilder>
+        {
+            public AdminGetListNativeSessionBuilder() : base() { }
+
+            public AdminGetListNativeSessionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetListNativeSession.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetListNativeSession.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetListNativeSession(IAdminGetListNativeSessionBuilder builder,
             string namespace_
         )
         {
@@ -198,17 +239,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsNativeSessionPagingResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsNativeSessionPagingResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

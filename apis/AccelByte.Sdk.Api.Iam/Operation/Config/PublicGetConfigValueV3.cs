@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -39,17 +39,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetConfigValueV3Builder Builder { get => new PublicGetConfigValueV3Builder(); }
 
-        public class PublicGetConfigValueV3Builder
-            : OperationBuilder<PublicGetConfigValueV3Builder>
+        public interface IPublicGetConfigValueV3Builder
         {
 
 
 
 
 
-            internal PublicGetConfigValueV3Builder() { }
+        }
 
-            internal PublicGetConfigValueV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetConfigValueV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetConfigValueV3Builder
+            where TImpl : PublicGetConfigValueV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetConfigValueV3AbstractBuilder() { }
+
+            public PublicGetConfigValueV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,11 +79,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetConfigValueV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetConfigValueV3.Response Execute(
+            protected PublicGetConfigValueV3.Response InternalExecute(
                 string configKey,
                 string namespace_
             )
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetConfigValueV3.Response> ExecuteAsync(
+            protected async Task<PublicGetConfigValueV3.Response> InternalExecuteAsync(
                 string configKey,
                 string namespace_
             )
@@ -112,7 +122,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.Payload);
             }
 
-            public PublicGetConfigValueV3.Response<T1> Execute<T1>(
+            protected PublicGetConfigValueV3.Response<T1> InternalExecute<T1>(
                 string configKey,
                 string namespace_
             )
@@ -131,7 +141,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetConfigValueV3.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicGetConfigValueV3.Response<T1>> InternalExecuteAsync<T1>(
                 string configKey,
                 string namespace_
             )
@@ -152,7 +162,57 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetConfigValueV3(PublicGetConfigValueV3Builder builder,
+        public class PublicGetConfigValueV3Builder : PublicGetConfigValueV3AbstractBuilder<PublicGetConfigValueV3Builder>
+        {
+            public PublicGetConfigValueV3Builder() : base() { }
+
+            public PublicGetConfigValueV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetConfigValueV3.Response Execute(
+                string configKey,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    configKey,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetConfigValueV3.Response> ExecuteAsync(
+                string configKey,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    configKey,
+                    namespace_
+                );
+            }
+
+            public PublicGetConfigValueV3.Response<T1> Execute<T1>(
+                string configKey,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    configKey,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetConfigValueV3.Response<T1>> ExecuteAsync<T1>(
+                string configKey,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    configKey,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetConfigValueV3(IPublicGetConfigValueV3Builder builder,
             string configKey,
             string namespace_
         )
@@ -232,17 +292,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelConfigValueResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelConfigValueResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -263,17 +326,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelConfigValueResponseV3<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelConfigValueResponseV3<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

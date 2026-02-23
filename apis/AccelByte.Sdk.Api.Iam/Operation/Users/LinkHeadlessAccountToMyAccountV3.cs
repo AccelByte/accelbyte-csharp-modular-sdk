@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static LinkHeadlessAccountToMyAccountV3Builder Builder { get => new LinkHeadlessAccountToMyAccountV3Builder(); }
 
-        public class LinkHeadlessAccountToMyAccountV3Builder
-            : OperationBuilder<LinkHeadlessAccountToMyAccountV3Builder>
+        public interface ILinkHeadlessAccountToMyAccountV3Builder
         {
 
 
 
 
 
-            internal LinkHeadlessAccountToMyAccountV3Builder() { }
+        }
 
-            internal LinkHeadlessAccountToMyAccountV3Builder(IAccelByteSdk sdk)
+        public abstract class LinkHeadlessAccountToMyAccountV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ILinkHeadlessAccountToMyAccountV3Builder
+            where TImpl : LinkHeadlessAccountToMyAccountV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public LinkHeadlessAccountToMyAccountV3AbstractBuilder() { }
+
+            public LinkHeadlessAccountToMyAccountV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<LinkHeadlessAccountToMyAccountV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public LinkHeadlessAccountToMyAccountV3.Response Execute(
+            protected LinkHeadlessAccountToMyAccountV3.Response InternalExecute(
                 ModelLinkHeadlessAccountRequest body
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<LinkHeadlessAccountToMyAccountV3.Response> ExecuteAsync(
+            protected async Task<LinkHeadlessAccountToMyAccountV3.Response> InternalExecuteAsync(
                 ModelLinkHeadlessAccountRequest body
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private LinkHeadlessAccountToMyAccountV3(LinkHeadlessAccountToMyAccountV3Builder builder,
+        public class LinkHeadlessAccountToMyAccountV3Builder : LinkHeadlessAccountToMyAccountV3AbstractBuilder<LinkHeadlessAccountToMyAccountV3Builder>
+        {
+            public LinkHeadlessAccountToMyAccountV3Builder() : base() { }
+
+            public LinkHeadlessAccountToMyAccountV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public LinkHeadlessAccountToMyAccountV3.Response Execute(
+                ModelLinkHeadlessAccountRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<LinkHeadlessAccountToMyAccountV3.Response> ExecuteAsync(
+                ModelLinkHeadlessAccountRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public LinkHeadlessAccountToMyAccountV3(ILinkHeadlessAccountToMyAccountV3Builder builder,
             ModelLinkHeadlessAccountRequest body
         )
         {
@@ -172,22 +207,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,17 +42,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static AcceptGroupInvitationPublicV1Builder Builder { get => new AcceptGroupInvitationPublicV1Builder(); }
 
-        public class AcceptGroupInvitationPublicV1Builder
-            : OperationBuilder<AcceptGroupInvitationPublicV1Builder>
+        public interface IAcceptGroupInvitationPublicV1Builder
         {
 
 
 
 
 
-            internal AcceptGroupInvitationPublicV1Builder() { }
+        }
 
-            internal AcceptGroupInvitationPublicV1Builder(IAccelByteSdk sdk)
+        public abstract class AcceptGroupInvitationPublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAcceptGroupInvitationPublicV1Builder
+            where TImpl : AcceptGroupInvitationPublicV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AcceptGroupInvitationPublicV1AbstractBuilder() { }
+
+            public AcceptGroupInvitationPublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -72,11 +82,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AcceptGroupInvitationPublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AcceptGroupInvitationPublicV1.Response Execute(
+            protected AcceptGroupInvitationPublicV1.Response InternalExecute(
                 string groupId,
                 string namespace_
             )
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AcceptGroupInvitationPublicV1.Response> ExecuteAsync(
+            protected async Task<AcceptGroupInvitationPublicV1.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_
             )
@@ -116,7 +126,36 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private AcceptGroupInvitationPublicV1(AcceptGroupInvitationPublicV1Builder builder,
+        public class AcceptGroupInvitationPublicV1Builder : AcceptGroupInvitationPublicV1AbstractBuilder<AcceptGroupInvitationPublicV1Builder>
+        {
+            public AcceptGroupInvitationPublicV1Builder() : base() { }
+
+            public AcceptGroupInvitationPublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AcceptGroupInvitationPublicV1.Response Execute(
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<AcceptGroupInvitationPublicV1.Response> ExecuteAsync(
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AcceptGroupInvitationPublicV1(IAcceptGroupInvitationPublicV1Builder builder,
             string groupId,
             string namespace_
         )
@@ -195,37 +234,44 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsMemberRequestGroupResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsMemberRequestGroupResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

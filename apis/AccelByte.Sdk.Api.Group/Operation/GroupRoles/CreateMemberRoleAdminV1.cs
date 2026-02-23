@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,17 +42,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static CreateMemberRoleAdminV1Builder Builder { get => new CreateMemberRoleAdminV1Builder(); }
 
-        public class CreateMemberRoleAdminV1Builder
-            : OperationBuilder<CreateMemberRoleAdminV1Builder>
+        public interface ICreateMemberRoleAdminV1Builder
         {
 
 
 
 
 
-            internal CreateMemberRoleAdminV1Builder() { }
+        }
 
-            internal CreateMemberRoleAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class CreateMemberRoleAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateMemberRoleAdminV1Builder
+            where TImpl : CreateMemberRoleAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateMemberRoleAdminV1AbstractBuilder() { }
+
+            public CreateMemberRoleAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -72,11 +82,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateMemberRoleAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateMemberRoleAdminV1.Response Execute(
+            protected CreateMemberRoleAdminV1.Response InternalExecute(
                 ModelsCreateMemberRoleRequestV1 body,
                 string namespace_
             )
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateMemberRoleAdminV1.Response> ExecuteAsync(
+            protected async Task<CreateMemberRoleAdminV1.Response> InternalExecuteAsync(
                 ModelsCreateMemberRoleRequestV1 body,
                 string namespace_
             )
@@ -116,7 +126,36 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private CreateMemberRoleAdminV1(CreateMemberRoleAdminV1Builder builder,
+        public class CreateMemberRoleAdminV1Builder : CreateMemberRoleAdminV1AbstractBuilder<CreateMemberRoleAdminV1Builder>
+        {
+            public CreateMemberRoleAdminV1Builder() : base() { }
+
+            public CreateMemberRoleAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateMemberRoleAdminV1.Response Execute(
+                ModelsCreateMemberRoleRequestV1 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateMemberRoleAdminV1.Response> ExecuteAsync(
+                ModelsCreateMemberRoleRequestV1 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateMemberRoleAdminV1(ICreateMemberRoleAdminV1Builder builder,
             ModelsCreateMemberRoleRequestV1 body,
             string namespace_
         )
@@ -191,27 +230,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsMemberRoleResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsMemberRoleResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

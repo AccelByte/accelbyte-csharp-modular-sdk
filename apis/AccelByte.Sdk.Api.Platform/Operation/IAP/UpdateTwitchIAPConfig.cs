@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateTwitchIAPConfigBuilder Builder { get => new UpdateTwitchIAPConfigBuilder(); }
 
-        public class UpdateTwitchIAPConfigBuilder
-            : OperationBuilder<UpdateTwitchIAPConfigBuilder>
+        public interface IUpdateTwitchIAPConfigBuilder
         {
 
 
 
 
 
-            internal UpdateTwitchIAPConfigBuilder() { }
+        }
 
-            internal UpdateTwitchIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateTwitchIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateTwitchIAPConfigBuilder
+            where TImpl : UpdateTwitchIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateTwitchIAPConfigAbstractBuilder() { }
+
+            public UpdateTwitchIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateTwitchIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateTwitchIAPConfig.Response Execute(
+            protected UpdateTwitchIAPConfig.Response InternalExecute(
                 TwitchIAPConfigRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateTwitchIAPConfig.Response> ExecuteAsync(
+            protected async Task<UpdateTwitchIAPConfig.Response> InternalExecuteAsync(
                 TwitchIAPConfigRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateTwitchIAPConfig(UpdateTwitchIAPConfigBuilder builder,
+        public class UpdateTwitchIAPConfigBuilder : UpdateTwitchIAPConfigAbstractBuilder<UpdateTwitchIAPConfigBuilder>
+        {
+            public UpdateTwitchIAPConfigBuilder() : base() { }
+
+            public UpdateTwitchIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateTwitchIAPConfig.Response Execute(
+                TwitchIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateTwitchIAPConfig.Response> ExecuteAsync(
+                TwitchIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateTwitchIAPConfig(IUpdateTwitchIAPConfigBuilder builder,
             TwitchIAPConfigRequest body,
             string namespace_
         )
@@ -172,7 +211,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TwitchIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TwitchIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

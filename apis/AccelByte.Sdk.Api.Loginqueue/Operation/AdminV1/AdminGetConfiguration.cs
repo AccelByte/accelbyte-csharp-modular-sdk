@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
         #region Builder Part
         public static AdminGetConfigurationBuilder Builder { get => new AdminGetConfigurationBuilder(); }
 
-        public class AdminGetConfigurationBuilder
-            : OperationBuilder<AdminGetConfigurationBuilder>
+        public interface IAdminGetConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminGetConfigurationBuilder() { }
+        }
 
-            internal AdminGetConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetConfigurationBuilder
+            where TImpl : AdminGetConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetConfigurationAbstractBuilder() { }
+
+            public AdminGetConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetConfiguration.Response Execute(
+            protected AdminGetConfiguration.Response InternalExecute(
                 string namespace_
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminGetConfiguration.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             }
         }
 
-        private AdminGetConfiguration(AdminGetConfigurationBuilder builder,
+        public class AdminGetConfigurationBuilder : AdminGetConfigurationAbstractBuilder<AdminGetConfigurationBuilder>
+        {
+            public AdminGetConfigurationBuilder() : base() { }
+
+            public AdminGetConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetConfiguration.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetConfiguration.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetConfiguration(IAdminGetConfigurationBuilder builder,
             string namespace_
         )
         {
@@ -168,22 +203,26 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsConfigurationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsConfigurationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

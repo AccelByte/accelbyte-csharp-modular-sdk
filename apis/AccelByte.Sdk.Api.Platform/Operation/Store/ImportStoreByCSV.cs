@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ImportStoreByCSVBuilder Builder { get => new ImportStoreByCSVBuilder(); }
 
-        public class ImportStoreByCSVBuilder
-            : OperationBuilder<ImportStoreByCSVBuilder>
+        public interface IImportStoreByCSVBuilder
+        {
+
+
+
+            Stream? Category { get; }
+
+            Stream? Display { get; }
+
+            Stream? Item { get; }
+
+            string? Notes { get; }
+
+            Stream? Section { get; }
+
+
+
+        }
+
+        public abstract class ImportStoreByCSVAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImportStoreByCSVBuilder
+            where TImpl : ImportStoreByCSVAbstractBuilder<TImpl>
         {
 
 
@@ -48,9 +68,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ImportStoreByCSVBuilder() { }
+            public ImportStoreByCSVAbstractBuilder() { }
 
-            internal ImportStoreByCSVBuilder(IAccelByteSdk sdk)
+            public ImportStoreByCSVAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,34 +78,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public ImportStoreByCSVBuilder SetCategory(Stream _category)
+            public TImpl SetCategory(Stream _category)
             {
                 Category = _category;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImportStoreByCSVBuilder SetDisplay(Stream _display)
+            public TImpl SetDisplay(Stream _display)
             {
                 Display = _display;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImportStoreByCSVBuilder SetItem(Stream _item)
+            public TImpl SetItem(Stream _item)
             {
                 Item = _item;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImportStoreByCSVBuilder SetNotes(string _notes)
+            public TImpl SetNotes(string _notes)
             {
                 Notes = _notes;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImportStoreByCSVBuilder SetSection(Stream _section)
+            public TImpl SetSection(Stream _section)
             {
                 Section = _section;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -100,11 +120,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<ImportStoreByCSVBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImportStoreByCSV.Response Execute(
+            protected ImportStoreByCSV.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -123,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImportStoreByCSV.Response> ExecuteAsync(
+            protected async Task<ImportStoreByCSV.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -144,7 +164,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ImportStoreByCSV(ImportStoreByCSVBuilder builder,
+        public class ImportStoreByCSVBuilder : ImportStoreByCSVAbstractBuilder<ImportStoreByCSVBuilder>
+        {
+            public ImportStoreByCSVBuilder() : base() { }
+
+            public ImportStoreByCSVBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImportStoreByCSV.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<ImportStoreByCSV.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public ImportStoreByCSV(IImportStoreByCSVBuilder builder,
             string namespace_,
             string storeId
         )
@@ -232,22 +281,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ImportStoreResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ImportStoreResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

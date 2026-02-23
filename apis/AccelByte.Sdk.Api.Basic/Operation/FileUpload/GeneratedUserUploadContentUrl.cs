@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GeneratedUserUploadContentUrlBuilder Builder { get => new GeneratedUserUploadContentUrlBuilder(); }
 
-        public class GeneratedUserUploadContentUrlBuilder
-            : OperationBuilder<GeneratedUserUploadContentUrlBuilder>
+        public interface IGeneratedUserUploadContentUrlBuilder
+        {
+
+            string? Category { get; }
+
+
+
+
+
+        }
+
+        public abstract class GeneratedUserUploadContentUrlAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGeneratedUserUploadContentUrlBuilder
+            where TImpl : GeneratedUserUploadContentUrlAbstractBuilder<TImpl>
         {
 
             public string? Category { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal GeneratedUserUploadContentUrlBuilder() { }
+            public GeneratedUserUploadContentUrlAbstractBuilder() { }
 
-            internal GeneratedUserUploadContentUrlBuilder(IAccelByteSdk sdk)
+            public GeneratedUserUploadContentUrlAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GeneratedUserUploadContentUrlBuilder SetCategory(string _category)
+            public TImpl SetCategory(string _category)
             {
                 Category = _category;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +86,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     fileType                    
                 );
 
-                op.SetBaseFields<GeneratedUserUploadContentUrlBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GeneratedUserUploadContentUrl.Response Execute(
+            protected GeneratedUserUploadContentUrl.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string fileType
@@ -99,7 +111,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GeneratedUserUploadContentUrl.Response> ExecuteAsync(
+            protected async Task<GeneratedUserUploadContentUrl.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string fileType
@@ -122,7 +134,40 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GeneratedUserUploadContentUrl(GeneratedUserUploadContentUrlBuilder builder,
+        public class GeneratedUserUploadContentUrlBuilder : GeneratedUserUploadContentUrlAbstractBuilder<GeneratedUserUploadContentUrlBuilder>
+        {
+            public GeneratedUserUploadContentUrlBuilder() : base() { }
+
+            public GeneratedUserUploadContentUrlBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GeneratedUserUploadContentUrl.Response Execute(
+                string namespace_,
+                string userId,
+                string fileType
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    fileType
+                );
+            }
+            public async Task<GeneratedUserUploadContentUrl.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string fileType
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    fileType
+                );
+            }
+        }
+
+
+        public GeneratedUserUploadContentUrl(IGeneratedUserUploadContentUrlBuilder builder,
             string namespace_,
             string userId,
             string fileType
@@ -206,32 +251,38 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

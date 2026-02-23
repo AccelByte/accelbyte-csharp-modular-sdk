@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static UpdateAppResourcesResourceLimitFormV2Builder Builder { get => new UpdateAppResourcesResourceLimitFormV2Builder(); }
 
-        public class UpdateAppResourcesResourceLimitFormV2Builder
-            : OperationBuilder<UpdateAppResourcesResourceLimitFormV2Builder>
+        public interface IUpdateAppResourcesResourceLimitFormV2Builder
         {
 
 
 
 
 
-            internal UpdateAppResourcesResourceLimitFormV2Builder() { }
+        }
 
-            internal UpdateAppResourcesResourceLimitFormV2Builder(IAccelByteSdk sdk)
+        public abstract class UpdateAppResourcesResourceLimitFormV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateAppResourcesResourceLimitFormV2Builder
+            where TImpl : UpdateAppResourcesResourceLimitFormV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateAppResourcesResourceLimitFormV2AbstractBuilder() { }
+
+            public UpdateAppResourcesResourceLimitFormV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateAppResourcesResourceLimitFormV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateAppResourcesResourceLimitFormV2.Response Execute(
+            protected UpdateAppResourcesResourceLimitFormV2.Response InternalExecute(
                 ApimodelIncreaseLimitFormRequest body,
                 string app,
                 string namespace_
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateAppResourcesResourceLimitFormV2.Response> ExecuteAsync(
+            protected async Task<UpdateAppResourcesResourceLimitFormV2.Response> InternalExecuteAsync(
                 ApimodelIncreaseLimitFormRequest body,
                 string app,
                 string namespace_
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private UpdateAppResourcesResourceLimitFormV2(UpdateAppResourcesResourceLimitFormV2Builder builder,
+        public class UpdateAppResourcesResourceLimitFormV2Builder : UpdateAppResourcesResourceLimitFormV2AbstractBuilder<UpdateAppResourcesResourceLimitFormV2Builder>
+        {
+            public UpdateAppResourcesResourceLimitFormV2Builder() : base() { }
+
+            public UpdateAppResourcesResourceLimitFormV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateAppResourcesResourceLimitFormV2.Response Execute(
+                ApimodelIncreaseLimitFormRequest body,
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<UpdateAppResourcesResourceLimitFormV2.Response> ExecuteAsync(
+                ApimodelIncreaseLimitFormRequest body,
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateAppResourcesResourceLimitFormV2(IUpdateAppResourcesResourceLimitFormV2Builder builder,
             ApimodelIncreaseLimitFormRequest body,
             string app,
             string namespace_
@@ -194,27 +237,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

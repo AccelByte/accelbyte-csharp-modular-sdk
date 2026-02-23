@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserSubscriptionBillingHistoriesBuilder Builder { get => new GetUserSubscriptionBillingHistoriesBuilder(); }
 
-        public class GetUserSubscriptionBillingHistoriesBuilder
-            : OperationBuilder<GetUserSubscriptionBillingHistoriesBuilder>
+        public interface IGetUserSubscriptionBillingHistoriesBuilder
+        {
+
+            bool? ExcludeFree { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserSubscriptionBillingHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserSubscriptionBillingHistoriesBuilder
+            where TImpl : GetUserSubscriptionBillingHistoriesAbstractBuilder<TImpl>
         {
 
             public bool? ExcludeFree { get; set; }
@@ -47,30 +63,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetUserSubscriptionBillingHistoriesBuilder() { }
+            public GetUserSubscriptionBillingHistoriesAbstractBuilder() { }
 
-            internal GetUserSubscriptionBillingHistoriesBuilder(IAccelByteSdk sdk)
+            public GetUserSubscriptionBillingHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserSubscriptionBillingHistoriesBuilder SetExcludeFree(bool _excludeFree)
+            public TImpl SetExcludeFree(bool _excludeFree)
             {
                 ExcludeFree = _excludeFree;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserSubscriptionBillingHistoriesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserSubscriptionBillingHistoriesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -89,11 +105,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserSubscriptionBillingHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserSubscriptionBillingHistories.Response Execute(
+            protected GetUserSubscriptionBillingHistories.Response InternalExecute(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -114,7 +130,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserSubscriptionBillingHistories.Response> ExecuteAsync(
+            protected async Task<GetUserSubscriptionBillingHistories.Response> InternalExecuteAsync(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -137,7 +153,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserSubscriptionBillingHistories(GetUserSubscriptionBillingHistoriesBuilder builder,
+        public class GetUserSubscriptionBillingHistoriesBuilder : GetUserSubscriptionBillingHistoriesAbstractBuilder<GetUserSubscriptionBillingHistoriesBuilder>
+        {
+            public GetUserSubscriptionBillingHistoriesBuilder() : base() { }
+
+            public GetUserSubscriptionBillingHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserSubscriptionBillingHistories.Response Execute(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<GetUserSubscriptionBillingHistories.Response> ExecuteAsync(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserSubscriptionBillingHistories(IGetUserSubscriptionBillingHistoriesBuilder builder,
             string namespace_,
             string subscriptionId,
             string userId
@@ -217,7 +266,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BillingHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BillingHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

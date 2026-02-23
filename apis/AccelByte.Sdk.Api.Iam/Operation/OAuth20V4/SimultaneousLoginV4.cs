@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -55,8 +55,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static SimultaneousLoginV4Builder Builder { get => new SimultaneousLoginV4Builder(); }
 
-        public class SimultaneousLoginV4Builder
-            : OperationBuilder<SimultaneousLoginV4Builder>
+        public interface ISimultaneousLoginV4Builder
+        {
+
+            string? CodeChallenge { get; }
+
+            SimultaneousLoginV4CodeChallengeMethod? CodeChallengeMethod { get; }
+
+
+
+            string? SimultaneousPlatform { get; }
+
+            string? SimultaneousTicket { get; }
+
+
+
+        }
+
+        public abstract class SimultaneousLoginV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISimultaneousLoginV4Builder
+            where TImpl : SimultaneousLoginV4AbstractBuilder<TImpl>
         {
 
             public string? CodeChallenge { get; set; }
@@ -71,38 +89,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal SimultaneousLoginV4Builder() { }
+            public SimultaneousLoginV4AbstractBuilder() { }
 
-            internal SimultaneousLoginV4Builder(IAccelByteSdk sdk)
+            public SimultaneousLoginV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SimultaneousLoginV4Builder SetCodeChallenge(string _codeChallenge)
+            public TImpl SetCodeChallenge(string _codeChallenge)
             {
                 CodeChallenge = _codeChallenge;
-                return this;
+                return (TImpl)this;
             }
 
-            public SimultaneousLoginV4Builder SetCodeChallengeMethod(SimultaneousLoginV4CodeChallengeMethod _codeChallengeMethod)
+            public TImpl SetCodeChallengeMethod(SimultaneousLoginV4CodeChallengeMethod _codeChallengeMethod)
             {
                 CodeChallengeMethod = _codeChallengeMethod;
-                return this;
+                return (TImpl)this;
             }
 
 
 
-            public SimultaneousLoginV4Builder SetSimultaneousPlatform(string _simultaneousPlatform)
+            public TImpl SetSimultaneousPlatform(string _simultaneousPlatform)
             {
                 SimultaneousPlatform = _simultaneousPlatform;
-                return this;
+                return (TImpl)this;
             }
 
-            public SimultaneousLoginV4Builder SetSimultaneousTicket(string _simultaneousTicket)
+            public TImpl SetSimultaneousTicket(string _simultaneousTicket)
             {
                 SimultaneousTicket = _simultaneousTicket;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -117,11 +135,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     nativePlatformTicket                    
                 );
 
-                op.SetBaseFields<SimultaneousLoginV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SimultaneousLoginV4.Response Execute(
+            protected SimultaneousLoginV4.Response InternalExecute(
                 string nativePlatform,
                 string nativePlatformTicket
             )
@@ -140,7 +158,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SimultaneousLoginV4.Response> ExecuteAsync(
+            protected async Task<SimultaneousLoginV4.Response> InternalExecuteAsync(
                 string nativePlatform,
                 string nativePlatformTicket
             )
@@ -161,7 +179,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private SimultaneousLoginV4(SimultaneousLoginV4Builder builder,
+        public class SimultaneousLoginV4Builder : SimultaneousLoginV4AbstractBuilder<SimultaneousLoginV4Builder>
+        {
+            public SimultaneousLoginV4Builder() : base() { }
+
+            public SimultaneousLoginV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SimultaneousLoginV4.Response Execute(
+                string nativePlatform,
+                string nativePlatformTicket
+            )
+            {
+                return InternalExecute(
+                    nativePlatform,
+                    nativePlatformTicket
+                );
+            }
+            public async Task<SimultaneousLoginV4.Response> ExecuteAsync(
+                string nativePlatform,
+                string nativePlatformTicket
+            )
+            {
+                return await InternalExecuteAsync(
+                    nativePlatform,
+                    nativePlatformTicket
+                );
+            }
+        }
+
+
+        public SimultaneousLoginV4(ISimultaneousLoginV4Builder builder,
             SimultaneousLoginV4NativePlatform nativePlatform,
             string nativePlatformTicket
         )
@@ -248,27 +295,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

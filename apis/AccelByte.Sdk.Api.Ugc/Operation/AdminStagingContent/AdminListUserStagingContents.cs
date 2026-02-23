@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminListUserStagingContentsBuilder Builder { get => new AdminListUserStagingContentsBuilder(); }
 
-        public class AdminListUserStagingContentsBuilder
-            : OperationBuilder<AdminListUserStagingContentsBuilder>
+        public interface IAdminListUserStagingContentsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? SortBy { get; }
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListUserStagingContentsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListUserStagingContentsBuilder
+            where TImpl : AdminListUserStagingContentsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal AdminListUserStagingContentsBuilder() { }
+            public AdminListUserStagingContentsAbstractBuilder() { }
 
-            internal AdminListUserStagingContentsBuilder(IAccelByteSdk sdk)
+            public AdminListUserStagingContentsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListUserStagingContentsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListUserStagingContentsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListUserStagingContentsBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListUserStagingContentsBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminListUserStagingContentsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListUserStagingContents.Response Execute(
+            protected AdminListUserStagingContents.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListUserStagingContents.Response> ExecuteAsync(
+            protected async Task<AdminListUserStagingContents.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminListUserStagingContents(AdminListUserStagingContentsBuilder builder,
+        public class AdminListUserStagingContentsBuilder : AdminListUserStagingContentsAbstractBuilder<AdminListUserStagingContentsBuilder>
+        {
+            public AdminListUserStagingContentsBuilder() : base() { }
+
+            public AdminListUserStagingContentsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListUserStagingContents.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminListUserStagingContents.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminListUserStagingContents(IAdminListUserStagingContentsBuilder builder,
             string namespace_,
             string userId
         )
@@ -223,27 +270,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedListStagingContentResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedListStagingContentResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

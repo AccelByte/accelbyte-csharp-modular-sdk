@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateIAPItemConfigBuilder Builder { get => new UpdateIAPItemConfigBuilder(); }
 
-        public class UpdateIAPItemConfigBuilder
-            : OperationBuilder<UpdateIAPItemConfigBuilder>
+        public interface IUpdateIAPItemConfigBuilder
         {
 
 
 
 
 
-            internal UpdateIAPItemConfigBuilder() { }
+        }
 
-            internal UpdateIAPItemConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateIAPItemConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateIAPItemConfigBuilder
+            where TImpl : UpdateIAPItemConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateIAPItemConfigAbstractBuilder() { }
+
+            public UpdateIAPItemConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateIAPItemConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateIAPItemConfig.Response Execute(
+            protected UpdateIAPItemConfig.Response InternalExecute(
                 IAPItemConfigUpdate body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateIAPItemConfig.Response> ExecuteAsync(
+            protected async Task<UpdateIAPItemConfig.Response> InternalExecuteAsync(
                 IAPItemConfigUpdate body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateIAPItemConfig(UpdateIAPItemConfigBuilder builder,
+        public class UpdateIAPItemConfigBuilder : UpdateIAPItemConfigAbstractBuilder<UpdateIAPItemConfigBuilder>
+        {
+            public UpdateIAPItemConfigBuilder() : base() { }
+
+            public UpdateIAPItemConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateIAPItemConfig.Response Execute(
+                IAPItemConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateIAPItemConfig.Response> ExecuteAsync(
+                IAPItemConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateIAPItemConfig(IUpdateIAPItemConfigBuilder builder,
             IAPItemConfigUpdate body,
             string namespace_
         )
@@ -178,22 +217,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPItemConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPItemConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

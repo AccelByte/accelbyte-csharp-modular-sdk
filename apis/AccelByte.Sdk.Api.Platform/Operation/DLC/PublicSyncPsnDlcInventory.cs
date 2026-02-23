@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicSyncPsnDlcInventoryBuilder Builder { get => new PublicSyncPsnDlcInventoryBuilder(); }
 
-        public class PublicSyncPsnDlcInventoryBuilder
-            : OperationBuilder<PublicSyncPsnDlcInventoryBuilder>
+        public interface IPublicSyncPsnDlcInventoryBuilder
+        {
+
+
+            Model.PlayStationDLCSyncRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PublicSyncPsnDlcInventoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSyncPsnDlcInventoryBuilder
+            where TImpl : PublicSyncPsnDlcInventoryAbstractBuilder<TImpl>
         {
 
 
@@ -41,19 +53,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicSyncPsnDlcInventoryBuilder() { }
+            public PublicSyncPsnDlcInventoryAbstractBuilder() { }
 
-            internal PublicSyncPsnDlcInventoryBuilder(IAccelByteSdk sdk)
+            public PublicSyncPsnDlcInventoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PublicSyncPsnDlcInventoryBuilder SetBody(Model.PlayStationDLCSyncRequest _body)
+            public TImpl SetBody(Model.PlayStationDLCSyncRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicSyncPsnDlcInventoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSyncPsnDlcInventory.Response Execute(
+            protected PublicSyncPsnDlcInventory.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSyncPsnDlcInventory.Response> ExecuteAsync(
+            protected async Task<PublicSyncPsnDlcInventory.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -113,7 +125,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicSyncPsnDlcInventory(PublicSyncPsnDlcInventoryBuilder builder,
+        public class PublicSyncPsnDlcInventoryBuilder : PublicSyncPsnDlcInventoryAbstractBuilder<PublicSyncPsnDlcInventoryBuilder>
+        {
+            public PublicSyncPsnDlcInventoryBuilder() : base() { }
+
+            public PublicSyncPsnDlcInventoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSyncPsnDlcInventory.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicSyncPsnDlcInventory.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicSyncPsnDlcInventory(IPublicSyncPsnDlcInventoryBuilder builder,
             string namespace_,
             string userId
         )
@@ -188,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

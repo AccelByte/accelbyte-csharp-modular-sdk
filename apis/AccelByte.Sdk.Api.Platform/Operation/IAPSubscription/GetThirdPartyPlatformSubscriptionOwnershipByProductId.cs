@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder Builder { get => new GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder(); }
 
-        public class GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder
-            : OperationBuilder<GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder>
+        public interface IGetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder
         {
 
 
 
 
 
-            internal GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder() { }
+        }
 
-            internal GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder(IAccelByteSdk sdk)
+        public abstract class GetThirdPartyPlatformSubscriptionOwnershipByProductIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder
+            where TImpl : GetThirdPartyPlatformSubscriptionOwnershipByProductIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetThirdPartyPlatformSubscriptionOwnershipByProductIdAbstractBuilder() { }
+
+            public GetThirdPartyPlatformSubscriptionOwnershipByProductIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     productId                    
                 );
 
-                op.SetBaseFields<GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response Execute(
+            protected GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response InternalExecute(
                 string namespace_,
                 string platform,
                 string userId,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response> ExecuteAsync(
+            protected async Task<GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response> InternalExecuteAsync(
                 string namespace_,
                 string platform,
                 string userId,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetThirdPartyPlatformSubscriptionOwnershipByProductId(GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder builder,
+        public class GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder : GetThirdPartyPlatformSubscriptionOwnershipByProductIdAbstractBuilder<GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder>
+        {
+            public GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder() : base() { }
+
+            public GetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response Execute(
+                string namespace_,
+                string platform,
+                string userId,
+                string productId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platform,
+                    userId,
+                    productId
+                );
+            }
+            public async Task<GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response> ExecuteAsync(
+                string namespace_,
+                string platform,
+                string userId,
+                string productId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platform,
+                    userId,
+                    productId
+                );
+            }
+        }
+
+
+        public GetThirdPartyPlatformSubscriptionOwnershipByProductId(IGetThirdPartyPlatformSubscriptionOwnershipByProductIdBuilder builder,
             string namespace_,
             GetThirdPartyPlatformSubscriptionOwnershipByProductIdPlatform platform,
             string userId,
@@ -191,7 +238,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionOwnership>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionOwnership>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

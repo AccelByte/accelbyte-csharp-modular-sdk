@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static VerifyTokenBuilder Builder { get => new VerifyTokenBuilder(); }
 
-        public class VerifyTokenBuilder
-            : OperationBuilder<VerifyTokenBuilder>
+        public interface IVerifyTokenBuilder
         {
 
 
 
 
 
-            internal VerifyTokenBuilder() { }
+        }
 
-            internal VerifyTokenBuilder(IAccelByteSdk sdk)
+        public abstract class VerifyTokenAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IVerifyTokenBuilder
+            where TImpl : VerifyTokenAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public VerifyTokenAbstractBuilder() { }
+
+            public VerifyTokenAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,12 +74,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     token                    
                 );
 
-                op.SetBaseFields<VerifyTokenBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public VerifyToken.Response Execute(
+            protected VerifyToken.Response InternalExecute(
                 string token
             )
             {
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<VerifyToken.Response> ExecuteAsync(
+            protected async Task<VerifyToken.Response> InternalExecuteAsync(
                 string token
             )
             {
@@ -105,7 +115,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private VerifyToken(VerifyTokenBuilder builder,
+        public class VerifyTokenBuilder : VerifyTokenAbstractBuilder<VerifyTokenBuilder>
+        {
+            public VerifyTokenBuilder() : base() { }
+
+            public VerifyTokenBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public VerifyToken.Response Execute(
+                string token
+            )
+            {
+                return InternalExecute(
+                    token
+                );
+            }
+            public async Task<VerifyToken.Response> ExecuteAsync(
+                string token
+            )
+            {
+                return await InternalExecuteAsync(
+                    token
+                );
+            }
+        }
+
+
+        public VerifyToken(IVerifyTokenBuilder builder,
             string token
         )
         {
@@ -170,12 +206,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
 

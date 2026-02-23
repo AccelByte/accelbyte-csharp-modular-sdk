@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public DataDeletion(IAccelByteSdk sdk)
         {

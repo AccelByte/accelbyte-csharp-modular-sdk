@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static GetModerationRulesBuilder Builder { get => new GetModerationRulesBuilder(); }
 
-        public class GetModerationRulesBuilder
-            : OperationBuilder<GetModerationRulesBuilder>
+        public interface IGetModerationRulesBuilder
+        {
+
+            string? Category { get; }
+
+            string? ExtensionCategory { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetModerationRulesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetModerationRulesBuilder
+            where TImpl : GetModerationRulesAbstractBuilder<TImpl>
         {
 
             public string? Category { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal GetModerationRulesBuilder() { }
+            public GetModerationRulesAbstractBuilder() { }
 
-            internal GetModerationRulesBuilder(IAccelByteSdk sdk)
+            public GetModerationRulesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetModerationRulesBuilder SetCategory(string _category)
+            public TImpl SetCategory(string _category)
             {
                 Category = _category;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetModerationRulesBuilder SetExtensionCategory(string _extensionCategory)
+            public TImpl SetExtensionCategory(string _extensionCategory)
             {
                 ExtensionCategory = _extensionCategory;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetModerationRulesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetModerationRulesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -90,11 +108,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetModerationRulesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetModerationRules.Response Execute(
+            protected GetModerationRules.Response InternalExecute(
                 string namespace_
             )
             {
@@ -111,7 +129,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetModerationRules.Response> ExecuteAsync(
+            protected async Task<GetModerationRules.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -130,7 +148,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private GetModerationRules(GetModerationRulesBuilder builder,
+        public class GetModerationRulesBuilder : GetModerationRulesAbstractBuilder<GetModerationRulesBuilder>
+        {
+            public GetModerationRulesBuilder() : base() { }
+
+            public GetModerationRulesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetModerationRules.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetModerationRules.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetModerationRules(IGetModerationRulesBuilder builder,
             string namespace_
         )
         {
@@ -211,22 +254,26 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiModerationRulesList>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiModerationRulesList>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

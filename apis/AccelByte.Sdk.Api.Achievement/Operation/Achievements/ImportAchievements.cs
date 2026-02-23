@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,22 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static ImportAchievementsBuilder Builder { get => new ImportAchievementsBuilder(); }
 
-        public class ImportAchievementsBuilder
-            : OperationBuilder<ImportAchievementsBuilder>
+        public interface IImportAchievementsBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+            string? Strategy { get; }
+
+
+
+        }
+
+        public abstract class ImportAchievementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImportAchievementsBuilder
+            where TImpl : ImportAchievementsAbstractBuilder<TImpl>
         {
 
 
@@ -50,9 +64,9 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal ImportAchievementsBuilder() { }
+            public ImportAchievementsAbstractBuilder() { }
 
-            internal ImportAchievementsBuilder(IAccelByteSdk sdk)
+            public ImportAchievementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,16 +74,16 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            public ImportAchievementsBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImportAchievementsBuilder SetStrategy(string _strategy)
+            public TImpl SetStrategy(string _strategy)
             {
                 Strategy = _strategy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +96,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ImportAchievementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImportAchievements.Response Execute(
+            protected ImportAchievements.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImportAchievements.Response> ExecuteAsync(
+            protected async Task<ImportAchievements.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +136,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private ImportAchievements(ImportAchievementsBuilder builder,
+        public class ImportAchievementsBuilder : ImportAchievementsAbstractBuilder<ImportAchievementsBuilder>
+        {
+            public ImportAchievementsBuilder() : base() { }
+
+            public ImportAchievementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImportAchievements.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ImportAchievements.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ImportAchievements(IImportAchievementsBuilder builder,
             string namespace_
         )
         {
@@ -199,27 +238,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ServiceImportConfigResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ServiceImportConfigResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

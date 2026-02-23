@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminChatHistoryBuilder Builder { get => new AdminChatHistoryBuilder(); }
 
-        public class AdminChatHistoryBuilder
-            : OperationBuilder<AdminChatHistoryBuilder>
+        public interface IAdminChatHistoryBuilder
+        {
+
+            List<string>? ChatId { get; }
+
+            long? EndCreatedAt { get; }
+
+            string? Keyword { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? Order { get; }
+
+            string? SenderUserId { get; }
+
+            string? ShardId { get; }
+
+            long? StartCreatedAt { get; }
+
+            List<string>? Topic { get; }
+
+            bool? Unfiltered { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminChatHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminChatHistoryBuilder
+            where TImpl : AdminChatHistoryAbstractBuilder<TImpl>
         {
 
             public List<string>? ChatId { get; set; }
@@ -60,78 +92,78 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
 
 
-            internal AdminChatHistoryBuilder() { }
+            public AdminChatHistoryAbstractBuilder() { }
 
-            internal AdminChatHistoryBuilder(IAccelByteSdk sdk)
+            public AdminChatHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminChatHistoryBuilder SetChatId(List<string> _chatId)
+            public TImpl SetChatId(List<string> _chatId)
             {
                 ChatId = _chatId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetEndCreatedAt(long _endCreatedAt)
+            public TImpl SetEndCreatedAt(long _endCreatedAt)
             {
                 EndCreatedAt = _endCreatedAt;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetKeyword(string _keyword)
+            public TImpl SetKeyword(string _keyword)
             {
                 Keyword = _keyword;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetSenderUserId(string _senderUserId)
+            public TImpl SetSenderUserId(string _senderUserId)
             {
                 SenderUserId = _senderUserId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetShardId(string _shardId)
+            public TImpl SetShardId(string _shardId)
             {
                 ShardId = _shardId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetStartCreatedAt(long _startCreatedAt)
+            public TImpl SetStartCreatedAt(long _startCreatedAt)
             {
                 StartCreatedAt = _startCreatedAt;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetTopic(List<string> _topic)
+            public TImpl SetTopic(List<string> _topic)
             {
                 Topic = _topic;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminChatHistoryBuilder SetUnfiltered(bool _unfiltered)
+            public TImpl SetUnfiltered(bool _unfiltered)
             {
                 Unfiltered = _unfiltered;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -146,11 +178,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminChatHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminChatHistory.Response Execute(
+            protected AdminChatHistory.Response InternalExecute(
                 string namespace_
             )
             {
@@ -167,7 +199,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminChatHistory.Response> ExecuteAsync(
+            protected async Task<AdminChatHistory.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -186,7 +218,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminChatHistory(AdminChatHistoryBuilder builder,
+        public class AdminChatHistoryBuilder : AdminChatHistoryAbstractBuilder<AdminChatHistoryBuilder>
+        {
+            public AdminChatHistoryBuilder() : base() { }
+
+            public AdminChatHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminChatHistory.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminChatHistory.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminChatHistory(IAdminChatHistoryBuilder builder,
             string namespace_
         )
         {
@@ -294,27 +351,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsChatMessageWithPaginationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChatMessageWithPaginationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

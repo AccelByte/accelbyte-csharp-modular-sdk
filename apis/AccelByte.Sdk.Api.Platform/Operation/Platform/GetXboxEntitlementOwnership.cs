@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetXboxEntitlementOwnershipBuilder Builder { get => new GetXboxEntitlementOwnershipBuilder(); }
 
-        public class GetXboxEntitlementOwnershipBuilder
-            : OperationBuilder<GetXboxEntitlementOwnershipBuilder>
+        public interface IGetXboxEntitlementOwnershipBuilder
         {
 
 
 
 
 
-            internal GetXboxEntitlementOwnershipBuilder() { }
+        }
 
-            internal GetXboxEntitlementOwnershipBuilder(IAccelByteSdk sdk)
+        public abstract class GetXboxEntitlementOwnershipAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetXboxEntitlementOwnershipBuilder
+            where TImpl : GetXboxEntitlementOwnershipAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetXboxEntitlementOwnershipAbstractBuilder() { }
+
+            public GetXboxEntitlementOwnershipAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     productSku                    
                 );
 
-                op.SetBaseFields<GetXboxEntitlementOwnershipBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetXboxEntitlementOwnership.Response Execute(
+            protected GetXboxEntitlementOwnership.Response InternalExecute(
                 XblEntitlementOwnershipRequest body,
                 string namespace_,
                 string productSku
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetXboxEntitlementOwnership.Response> ExecuteAsync(
+            protected async Task<GetXboxEntitlementOwnership.Response> InternalExecuteAsync(
                 XblEntitlementOwnershipRequest body,
                 string namespace_,
                 string productSku
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetXboxEntitlementOwnership(GetXboxEntitlementOwnershipBuilder builder,
+        public class GetXboxEntitlementOwnershipBuilder : GetXboxEntitlementOwnershipAbstractBuilder<GetXboxEntitlementOwnershipBuilder>
+        {
+            public GetXboxEntitlementOwnershipBuilder() : base() { }
+
+            public GetXboxEntitlementOwnershipBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetXboxEntitlementOwnership.Response Execute(
+                XblEntitlementOwnershipRequest body,
+                string namespace_,
+                string productSku
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    productSku
+                );
+            }
+            public async Task<GetXboxEntitlementOwnership.Response> ExecuteAsync(
+                XblEntitlementOwnershipRequest body,
+                string namespace_,
+                string productSku
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    productSku
+                );
+            }
+        }
+
+
+        public GetXboxEntitlementOwnership(IGetXboxEntitlementOwnershipBuilder builder,
             XblEntitlementOwnershipRequest body,
             string namespace_,
             string productSku
@@ -181,7 +224,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlatformOwnership>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlatformOwnership>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

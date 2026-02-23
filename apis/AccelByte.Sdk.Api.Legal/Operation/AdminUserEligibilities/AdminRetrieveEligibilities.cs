@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static AdminRetrieveEligibilitiesBuilder Builder { get => new AdminRetrieveEligibilitiesBuilder(); }
 
-        public class AdminRetrieveEligibilitiesBuilder
-            : OperationBuilder<AdminRetrieveEligibilitiesBuilder>
+        public interface IAdminRetrieveEligibilitiesBuilder
+        {
+
+            string? PublisherUserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminRetrieveEligibilitiesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminRetrieveEligibilitiesBuilder
+            where TImpl : AdminRetrieveEligibilitiesAbstractBuilder<TImpl>
         {
 
             public string? PublisherUserId { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal AdminRetrieveEligibilitiesBuilder() { }
+            public AdminRetrieveEligibilitiesAbstractBuilder() { }
 
-            internal AdminRetrieveEligibilitiesBuilder(IAccelByteSdk sdk)
+            public AdminRetrieveEligibilitiesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminRetrieveEligibilitiesBuilder SetPublisherUserId(string _publisherUserId)
+            public TImpl SetPublisherUserId(string _publisherUserId)
             {
                 PublisherUserId = _publisherUserId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     countryCode                    
                 );
 
-                op.SetBaseFields<AdminRetrieveEligibilitiesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminRetrieveEligibilities.Response Execute(
+            protected AdminRetrieveEligibilities.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string clientId,
@@ -100,7 +112,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminRetrieveEligibilities.Response> ExecuteAsync(
+            protected async Task<AdminRetrieveEligibilities.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string clientId,
@@ -125,7 +137,44 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private AdminRetrieveEligibilities(AdminRetrieveEligibilitiesBuilder builder,
+        public class AdminRetrieveEligibilitiesBuilder : AdminRetrieveEligibilitiesAbstractBuilder<AdminRetrieveEligibilitiesBuilder>
+        {
+            public AdminRetrieveEligibilitiesBuilder() : base() { }
+
+            public AdminRetrieveEligibilitiesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminRetrieveEligibilities.Response Execute(
+                string namespace_,
+                string userId,
+                string clientId,
+                string countryCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    clientId,
+                    countryCode
+                );
+            }
+            public async Task<AdminRetrieveEligibilities.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string clientId,
+                string countryCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    clientId,
+                    countryCode
+                );
+            }
+        }
+
+
+        public AdminRetrieveEligibilities(IAdminRetrieveEligibilitiesBuilder builder,
             string namespace_,
             string userId,
             string clientId,
@@ -205,12 +254,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RetrieveUserEligibilitiesIndirectResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RetrieveUserEligibilitiesIndirectResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

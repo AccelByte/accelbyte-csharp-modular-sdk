@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SearchItemTypeConfigBuilder Builder { get => new SearchItemTypeConfigBuilder(); }
 
-        public class SearchItemTypeConfigBuilder
-            : OperationBuilder<SearchItemTypeConfigBuilder>
+        public interface ISearchItemTypeConfigBuilder
+        {
+
+            string? Clazz { get; }
+
+
+
+
+
+        }
+
+        public abstract class SearchItemTypeConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISearchItemTypeConfigBuilder
+            where TImpl : SearchItemTypeConfigAbstractBuilder<TImpl>
         {
 
             public string? Clazz { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SearchItemTypeConfigBuilder() { }
+            public SearchItemTypeConfigAbstractBuilder() { }
 
-            internal SearchItemTypeConfigBuilder(IAccelByteSdk sdk)
+            public SearchItemTypeConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SearchItemTypeConfigBuilder SetClazz(string _clazz)
+            public TImpl SetClazz(string _clazz)
             {
                 Clazz = _clazz;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -70,11 +82,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemType                    
                 );
 
-                op.SetBaseFields<SearchItemTypeConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SearchItemTypeConfig.Response Execute(
+            protected SearchItemTypeConfig.Response InternalExecute(
                 string itemType
             )
             {
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SearchItemTypeConfig.Response> ExecuteAsync(
+            protected async Task<SearchItemTypeConfig.Response> InternalExecuteAsync(
                 string itemType
             )
             {
@@ -110,7 +122,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SearchItemTypeConfig(SearchItemTypeConfigBuilder builder,
+        public class SearchItemTypeConfigBuilder : SearchItemTypeConfigAbstractBuilder<SearchItemTypeConfigBuilder>
+        {
+            public SearchItemTypeConfigBuilder() : base() { }
+
+            public SearchItemTypeConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SearchItemTypeConfig.Response Execute(
+                string itemType
+            )
+            {
+                return InternalExecute(
+                    itemType
+                );
+            }
+            public async Task<SearchItemTypeConfig.Response> ExecuteAsync(
+                string itemType
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemType
+                );
+            }
+        }
+
+
+        public SearchItemTypeConfig(ISearchItemTypeConfigBuilder builder,
             SearchItemTypeConfigItemType itemType
         )
         {
@@ -178,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemTypeConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

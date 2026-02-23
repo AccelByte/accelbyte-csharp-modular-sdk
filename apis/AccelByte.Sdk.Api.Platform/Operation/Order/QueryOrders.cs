@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryOrdersBuilder Builder { get => new QueryOrdersBuilder(); }
 
-        public class QueryOrdersBuilder
-            : OperationBuilder<QueryOrdersBuilder>
+        public interface IQueryOrdersBuilder
+        {
+
+            string? EndTime { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            List<string>? OrderNos { get; }
+
+            string? SortBy { get; }
+
+            string? StartTime { get; }
+
+            QueryOrdersStatus? Status { get; }
+
+            bool? WithTotal { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryOrdersBuilder
+            where TImpl : QueryOrdersAbstractBuilder<TImpl>
         {
 
             public string? EndTime { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryOrdersBuilder() { }
+            public QueryOrdersAbstractBuilder() { }
 
-            internal QueryOrdersBuilder(IAccelByteSdk sdk)
+            public QueryOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryOrdersBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetOrderNos(List<string> _orderNos)
+            public TImpl SetOrderNos(List<string> _orderNos)
             {
                 OrderNos = _orderNos;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetStatus(QueryOrdersStatus _status)
+            public TImpl SetStatus(QueryOrdersStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryOrdersBuilder SetWithTotal(bool _withTotal)
+            public TImpl SetWithTotal(bool _withTotal)
             {
                 WithTotal = _withTotal;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -125,11 +151,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryOrders.Response Execute(
+            protected QueryOrders.Response InternalExecute(
                 string namespace_
             )
             {
@@ -146,7 +172,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryOrders.Response> ExecuteAsync(
+            protected async Task<QueryOrders.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -165,7 +191,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryOrders(QueryOrdersBuilder builder,
+        public class QueryOrdersBuilder : QueryOrdersAbstractBuilder<QueryOrdersBuilder>
+        {
+            public QueryOrdersBuilder() : base() { }
+
+            public QueryOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryOrders.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryOrders.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryOrders(IQueryOrdersBuilder builder,
             string namespace_
         )
         {
@@ -256,12 +307,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderPagingResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderPagingResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

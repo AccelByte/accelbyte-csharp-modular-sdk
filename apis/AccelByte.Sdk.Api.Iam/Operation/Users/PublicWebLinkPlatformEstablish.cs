@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -43,8 +43,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicWebLinkPlatformEstablishBuilder Builder { get => new PublicWebLinkPlatformEstablishBuilder(); }
 
-        public class PublicWebLinkPlatformEstablishBuilder
-            : OperationBuilder<PublicWebLinkPlatformEstablishBuilder>
+        public interface IPublicWebLinkPlatformEstablishBuilder
+        {
+
+            string? Code { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicWebLinkPlatformEstablishAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicWebLinkPlatformEstablishBuilder
+            where TImpl : PublicWebLinkPlatformEstablishAbstractBuilder<TImpl>
         {
 
             public string? Code { get; set; }
@@ -53,18 +65,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicWebLinkPlatformEstablishBuilder() { }
+            public PublicWebLinkPlatformEstablishAbstractBuilder() { }
 
-            internal PublicWebLinkPlatformEstablishBuilder(IAccelByteSdk sdk)
+            public PublicWebLinkPlatformEstablishAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicWebLinkPlatformEstablishBuilder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -83,11 +95,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     state                    
                 );
 
-                op.SetBaseFields<PublicWebLinkPlatformEstablishBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicWebLinkPlatformEstablish.Response Execute(
+            protected PublicWebLinkPlatformEstablish.Response InternalExecute(
                 string namespace_,
                 string platformId,
                 string state
@@ -108,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicWebLinkPlatformEstablish.Response> ExecuteAsync(
+            protected async Task<PublicWebLinkPlatformEstablish.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId,
                 string state
@@ -131,7 +143,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicWebLinkPlatformEstablish(PublicWebLinkPlatformEstablishBuilder builder,
+        public class PublicWebLinkPlatformEstablishBuilder : PublicWebLinkPlatformEstablishAbstractBuilder<PublicWebLinkPlatformEstablishBuilder>
+        {
+            public PublicWebLinkPlatformEstablishBuilder() : base() { }
+
+            public PublicWebLinkPlatformEstablishBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicWebLinkPlatformEstablish.Response Execute(
+                string namespace_,
+                string platformId,
+                string state
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId,
+                    state
+                );
+            }
+            public async Task<PublicWebLinkPlatformEstablish.Response> ExecuteAsync(
+                string namespace_,
+                string platformId,
+                string state
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId,
+                    state
+                );
+            }
+        }
+
+
+        public PublicWebLinkPlatformEstablish(IPublicWebLinkPlatformEstablishBuilder builder,
             string namespace_,
             string platformId,
             string state

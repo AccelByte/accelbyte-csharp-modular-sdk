@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetItemByAppIdBuilder Builder { get => new GetItemByAppIdBuilder(); }
 
-        public class GetItemByAppIdBuilder
-            : OperationBuilder<GetItemByAppIdBuilder>
+        public interface IGetItemByAppIdBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetItemByAppIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetItemByAppIdBuilder
+            where TImpl : GetItemByAppIdAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetItemByAppIdBuilder() { }
+            public GetItemByAppIdAbstractBuilder() { }
 
-            internal GetItemByAppIdBuilder(IAccelByteSdk sdk)
+            public GetItemByAppIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetItemByAppIdBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetItemByAppIdBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     appId                    
                 );
 
-                op.SetBaseFields<GetItemByAppIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetItemByAppId.Response Execute(
+            protected GetItemByAppId.Response InternalExecute(
                 string namespace_,
                 string appId
             )
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItemByAppId.Response> ExecuteAsync(
+            protected async Task<GetItemByAppId.Response> InternalExecuteAsync(
                 string namespace_,
                 string appId
             )
@@ -123,7 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetItemByAppId.Response<T1> Execute<T1>(
+            protected GetItemByAppId.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string appId
             )
@@ -142,7 +156,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetItemByAppId.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<GetItemByAppId.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string appId
             )
@@ -163,7 +177,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetItemByAppId(GetItemByAppIdBuilder builder,
+        public class GetItemByAppIdBuilder : GetItemByAppIdAbstractBuilder<GetItemByAppIdBuilder>
+        {
+            public GetItemByAppIdBuilder() : base() { }
+
+            public GetItemByAppIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetItemByAppId.Response Execute(
+                string namespace_,
+                string appId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    appId
+                );
+            }
+            public async Task<GetItemByAppId.Response> ExecuteAsync(
+                string namespace_,
+                string appId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    appId
+                );
+            }
+
+            public GetItemByAppId.Response<T1> Execute<T1>(
+                string namespace_,
+                string appId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    appId
+                );
+            }
+            public async Task<GetItemByAppId.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string appId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    appId
+                );
+            }
+        }
+
+
+        public GetItemByAppId(IGetItemByAppIdBuilder builder,
             string namespace_,
             string appId
         )
@@ -245,12 +309,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -271,12 +337,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

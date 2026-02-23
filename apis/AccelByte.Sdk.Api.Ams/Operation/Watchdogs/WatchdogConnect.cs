@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static WatchdogConnectBuilder Builder { get => new WatchdogConnectBuilder(); }
 
-        public class WatchdogConnectBuilder
-            : OperationBuilder<WatchdogConnectBuilder>
+        public interface IWatchdogConnectBuilder
         {
 
 
 
 
 
-            internal WatchdogConnectBuilder() { }
+        }
 
-            internal WatchdogConnectBuilder(IAccelByteSdk sdk)
+        public abstract class WatchdogConnectAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IWatchdogConnectBuilder
+            where TImpl : WatchdogConnectAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public WatchdogConnectAbstractBuilder() { }
+
+            public WatchdogConnectAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     watchdogID                    
                 );
 
-                op.SetBaseFields<WatchdogConnectBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public WatchdogConnect.Response Execute(
+            protected WatchdogConnect.Response InternalExecute(
                 string namespace_,
                 string watchdogID
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<WatchdogConnect.Response> ExecuteAsync(
+            protected async Task<WatchdogConnect.Response> InternalExecuteAsync(
                 string namespace_,
                 string watchdogID
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private WatchdogConnect(WatchdogConnectBuilder builder,
+        public class WatchdogConnectBuilder : WatchdogConnectAbstractBuilder<WatchdogConnectBuilder>
+        {
+            public WatchdogConnectBuilder() : base() { }
+
+            public WatchdogConnectBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public WatchdogConnect.Response Execute(
+                string namespace_,
+                string watchdogID
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    watchdogID
+                );
+            }
+            public async Task<WatchdogConnect.Response> ExecuteAsync(
+                string namespace_,
+                string watchdogID
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    watchdogID
+                );
+            }
+        }
+
+
+        public WatchdogConnect(IWatchdogConnectBuilder builder,
             string namespace_,
             string watchdogID
         )

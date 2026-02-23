@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CreateFulfillmentScriptBuilder Builder { get => new CreateFulfillmentScriptBuilder(); }
 
-        public class CreateFulfillmentScriptBuilder
-            : OperationBuilder<CreateFulfillmentScriptBuilder>
+        public interface ICreateFulfillmentScriptBuilder
+        {
+
+
+            Model.FulfillmentScriptCreate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class CreateFulfillmentScriptAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateFulfillmentScriptBuilder
+            where TImpl : CreateFulfillmentScriptAbstractBuilder<TImpl>
         {
 
 
@@ -46,19 +58,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal CreateFulfillmentScriptBuilder() { }
+            public CreateFulfillmentScriptAbstractBuilder() { }
 
-            internal CreateFulfillmentScriptBuilder(IAccelByteSdk sdk)
+            public CreateFulfillmentScriptAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public CreateFulfillmentScriptBuilder SetBody(Model.FulfillmentScriptCreate _body)
+            public TImpl SetBody(Model.FulfillmentScriptCreate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<CreateFulfillmentScriptBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateFulfillmentScript.Response Execute(
+            protected CreateFulfillmentScript.Response InternalExecute(
                 string id
             )
             {
@@ -93,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateFulfillmentScript.Response> ExecuteAsync(
+            protected async Task<CreateFulfillmentScript.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -112,7 +124,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CreateFulfillmentScript(CreateFulfillmentScriptBuilder builder,
+        public class CreateFulfillmentScriptBuilder : CreateFulfillmentScriptAbstractBuilder<CreateFulfillmentScriptBuilder>
+        {
+            public CreateFulfillmentScriptBuilder() : base() { }
+
+            public CreateFulfillmentScriptBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateFulfillmentScript.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<CreateFulfillmentScript.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public CreateFulfillmentScript(ICreateFulfillmentScriptBuilder builder,
             string id
         )
         {
@@ -180,12 +217,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

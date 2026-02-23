@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,17 +50,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DebitByWalletPlatformBuilder Builder { get => new DebitByWalletPlatformBuilder(); }
 
-        public class DebitByWalletPlatformBuilder
-            : OperationBuilder<DebitByWalletPlatformBuilder>
+        public interface IDebitByWalletPlatformBuilder
         {
 
 
 
 
 
-            internal DebitByWalletPlatformBuilder() { }
+        }
 
-            internal DebitByWalletPlatformBuilder(IAccelByteSdk sdk)
+        public abstract class DebitByWalletPlatformAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDebitByWalletPlatformBuilder
+            where TImpl : DebitByWalletPlatformAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DebitByWalletPlatformAbstractBuilder() { }
+
+            public DebitByWalletPlatformAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -84,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DebitByWalletPlatformBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DebitByWalletPlatform.Response Execute(
+            protected DebitByWalletPlatform.Response InternalExecute(
                 DebitByWalletPlatformRequest request,
                 string currencyCode,
                 string namespace_,
@@ -111,7 +121,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DebitByWalletPlatform.Response> ExecuteAsync(
+            protected async Task<DebitByWalletPlatform.Response> InternalExecuteAsync(
                 DebitByWalletPlatformRequest request,
                 string currencyCode,
                 string namespace_,
@@ -136,7 +146,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DebitByWalletPlatform(DebitByWalletPlatformBuilder builder,
+        public class DebitByWalletPlatformBuilder : DebitByWalletPlatformAbstractBuilder<DebitByWalletPlatformBuilder>
+        {
+            public DebitByWalletPlatformBuilder() : base() { }
+
+            public DebitByWalletPlatformBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DebitByWalletPlatform.Response Execute(
+                DebitByWalletPlatformRequest request,
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    request,
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DebitByWalletPlatform.Response> ExecuteAsync(
+                DebitByWalletPlatformRequest request,
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    request,
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DebitByWalletPlatform(IDebitByWalletPlatformBuilder builder,
             DebitByWalletPlatformRequest request,
             string currencyCode,
             string namespace_,
@@ -215,17 +262,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PlatformWallet>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PlatformWallet>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

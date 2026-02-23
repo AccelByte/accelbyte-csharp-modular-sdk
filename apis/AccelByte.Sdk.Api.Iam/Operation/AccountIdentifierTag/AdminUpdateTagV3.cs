@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateTagV3Builder Builder { get => new AdminUpdateTagV3Builder(); }
 
-        public class AdminUpdateTagV3Builder
-            : OperationBuilder<AdminUpdateTagV3Builder>
+        public interface IAdminUpdateTagV3Builder
         {
 
 
 
 
 
-            internal AdminUpdateTagV3Builder() { }
+        }
 
-            internal AdminUpdateTagV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateTagV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateTagV3Builder
+            where TImpl : AdminUpdateTagV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateTagV3AbstractBuilder() { }
+
+            public AdminUpdateTagV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     tagId                    
                 );
 
-                op.SetBaseFields<AdminUpdateTagV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateTagV3.Response Execute(
+            protected AdminUpdateTagV3.Response InternalExecute(
                 ModelTagUpdateRequestV3 body,
                 string namespace_,
                 string tagId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateTagV3.Response> ExecuteAsync(
+            protected async Task<AdminUpdateTagV3.Response> InternalExecuteAsync(
                 ModelTagUpdateRequestV3 body,
                 string namespace_,
                 string tagId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateTagV3(AdminUpdateTagV3Builder builder,
+        public class AdminUpdateTagV3Builder : AdminUpdateTagV3AbstractBuilder<AdminUpdateTagV3Builder>
+        {
+            public AdminUpdateTagV3Builder() : base() { }
+
+            public AdminUpdateTagV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateTagV3.Response Execute(
+                ModelTagUpdateRequestV3 body,
+                string namespace_,
+                string tagId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    tagId
+                );
+            }
+            public async Task<AdminUpdateTagV3.Response> ExecuteAsync(
+                ModelTagUpdateRequestV3 body,
+                string namespace_,
+                string tagId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    tagId
+                );
+            }
+        }
+
+
+        public AdminUpdateTagV3(IAdminUpdateTagV3Builder builder,
             ModelTagUpdateRequestV3 body,
             string namespace_,
             string tagId
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonTagResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonTagResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

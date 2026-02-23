@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static GetReasonGroupBuilder Builder { get => new GetReasonGroupBuilder(); }
 
-        public class GetReasonGroupBuilder
-            : OperationBuilder<GetReasonGroupBuilder>
+        public interface IGetReasonGroupBuilder
         {
 
 
 
 
 
-            internal GetReasonGroupBuilder() { }
+        }
 
-            internal GetReasonGroupBuilder(IAccelByteSdk sdk)
+        public abstract class GetReasonGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetReasonGroupBuilder
+            where TImpl : GetReasonGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetReasonGroupAbstractBuilder() { }
+
+            public GetReasonGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetReasonGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetReasonGroup.Response Execute(
+            protected GetReasonGroup.Response InternalExecute(
                 string groupId,
                 string namespace_
             )
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetReasonGroup.Response> ExecuteAsync(
+            protected async Task<GetReasonGroup.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_
             )
@@ -102,7 +112,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private GetReasonGroup(GetReasonGroupBuilder builder,
+        public class GetReasonGroupBuilder : GetReasonGroupAbstractBuilder<GetReasonGroupBuilder>
+        {
+            public GetReasonGroupBuilder() : base() { }
+
+            public GetReasonGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetReasonGroup.Response Execute(
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<GetReasonGroup.Response> ExecuteAsync(
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetReasonGroup(IGetReasonGroupBuilder builder,
             string groupId,
             string namespace_
         )
@@ -173,17 +212,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiReasonGroupResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiReasonGroupResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

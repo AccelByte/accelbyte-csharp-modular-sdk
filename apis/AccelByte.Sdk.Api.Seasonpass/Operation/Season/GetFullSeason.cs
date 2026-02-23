@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static GetFullSeasonBuilder Builder { get => new GetFullSeasonBuilder(); }
 
-        public class GetFullSeasonBuilder
-            : OperationBuilder<GetFullSeasonBuilder>
+        public interface IGetFullSeasonBuilder
         {
 
 
 
 
 
-            internal GetFullSeasonBuilder() { }
+        }
 
-            internal GetFullSeasonBuilder(IAccelByteSdk sdk)
+        public abstract class GetFullSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetFullSeasonBuilder
+            where TImpl : GetFullSeasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetFullSeasonAbstractBuilder() { }
+
+            public GetFullSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<GetFullSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetFullSeason.Response Execute(
+            protected GetFullSeason.Response InternalExecute(
                 string namespace_,
                 string seasonId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetFullSeason.Response> ExecuteAsync(
+            protected async Task<GetFullSeason.Response> InternalExecuteAsync(
                 string namespace_,
                 string seasonId
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private GetFullSeason(GetFullSeasonBuilder builder,
+        public class GetFullSeasonBuilder : GetFullSeasonAbstractBuilder<GetFullSeasonBuilder>
+        {
+            public GetFullSeasonBuilder() : base() { }
+
+            public GetFullSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetFullSeason.Response Execute(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<GetFullSeason.Response> ExecuteAsync(
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public GetFullSeason(IGetFullSeasonBuilder builder,
             string namespace_,
             string seasonId
         )
@@ -179,17 +218,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullSeasonInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullSeasonInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteItemBuilder Builder { get => new DeleteItemBuilder(); }
 
-        public class DeleteItemBuilder
-            : OperationBuilder<DeleteItemBuilder>
+        public interface IDeleteItemBuilder
+        {
+
+            List<DeleteItemFeaturesToCheck>? FeaturesToCheck { get; }
+
+            bool? Force { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class DeleteItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteItemBuilder
+            where TImpl : DeleteItemAbstractBuilder<TImpl>
         {
 
             public List<DeleteItemFeaturesToCheck>? FeaturesToCheck { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal DeleteItemBuilder() { }
+            public DeleteItemAbstractBuilder() { }
 
-            internal DeleteItemBuilder(IAccelByteSdk sdk)
+            public DeleteItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DeleteItemBuilder SetFeaturesToCheck(List<DeleteItemFeaturesToCheck> _featuresToCheck)
+            public TImpl SetFeaturesToCheck(List<DeleteItemFeaturesToCheck> _featuresToCheck)
             {
                 FeaturesToCheck = _featuresToCheck;
-                return this;
+                return (TImpl)this;
             }
 
-            public DeleteItemBuilder SetForce(bool _force)
+            public TImpl SetForce(bool _force)
             {
                 Force = _force;
-                return this;
+                return (TImpl)this;
             }
 
-            public DeleteItemBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +104,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteItem.Response Execute(
+            protected DeleteItem.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -111,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteItem.Response> ExecuteAsync(
+            protected async Task<DeleteItem.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -132,7 +148,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteItem(DeleteItemBuilder builder,
+        public class DeleteItemBuilder : DeleteItemAbstractBuilder<DeleteItemBuilder>
+        {
+            public DeleteItemBuilder() : base() { }
+
+            public DeleteItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteItem.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteItem.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteItem(IDeleteItemBuilder builder,
             string itemId,
             string namespace_
         )
@@ -215,12 +260,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

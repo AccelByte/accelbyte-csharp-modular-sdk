@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static PublicGetTimeBuilder Builder { get => new PublicGetTimeBuilder(); }
 
-        public class PublicGetTimeBuilder
-            : OperationBuilder<PublicGetTimeBuilder>
+        public interface IPublicGetTimeBuilder
         {
 
 
 
 
 
-            internal PublicGetTimeBuilder() { }
+        }
 
-            internal PublicGetTimeBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetTimeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetTimeBuilder
+            where TImpl : PublicGetTimeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetTimeAbstractBuilder() { }
+
+            public PublicGetTimeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 PublicGetTime op = new PublicGetTime(this
                 );
 
-                op.SetBaseFields<PublicGetTimeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetTime.Response Execute(
+            protected PublicGetTime.Response InternalExecute(
             )
             {
                 PublicGetTime op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetTime.Response> ExecuteAsync(
+            protected async Task<PublicGetTime.Response> InternalExecuteAsync(
             )
             {
                 PublicGetTime op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private PublicGetTime(PublicGetTimeBuilder builder
+        public class PublicGetTimeBuilder : PublicGetTimeAbstractBuilder<PublicGetTimeBuilder>
+        {
+            public PublicGetTimeBuilder() : base() { }
+
+            public PublicGetTimeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetTime.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetTime.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetTime(IPublicGetTimeBuilder builder
         )
         {
             
@@ -149,7 +180,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RetrieveTimeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RetrieveTimeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

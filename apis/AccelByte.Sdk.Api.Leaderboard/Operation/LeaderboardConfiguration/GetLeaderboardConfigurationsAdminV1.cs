@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static GetLeaderboardConfigurationsAdminV1Builder Builder { get => new GetLeaderboardConfigurationsAdminV1Builder(); }
 
-        public class GetLeaderboardConfigurationsAdminV1Builder
-            : OperationBuilder<GetLeaderboardConfigurationsAdminV1Builder>
+        public interface IGetLeaderboardConfigurationsAdminV1Builder
+        {
+
+            bool? IsArchived { get; }
+
+            bool? IsDeleted { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetLeaderboardConfigurationsAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLeaderboardConfigurationsAdminV1Builder
+            where TImpl : GetLeaderboardConfigurationsAdminV1AbstractBuilder<TImpl>
         {
 
             public bool? IsArchived { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
 
 
-            internal GetLeaderboardConfigurationsAdminV1Builder() { }
+            public GetLeaderboardConfigurationsAdminV1AbstractBuilder() { }
 
-            internal GetLeaderboardConfigurationsAdminV1Builder(IAccelByteSdk sdk)
+            public GetLeaderboardConfigurationsAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetLeaderboardConfigurationsAdminV1Builder SetIsArchived(bool _isArchived)
+            public TImpl SetIsArchived(bool _isArchived)
             {
                 IsArchived = _isArchived;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLeaderboardConfigurationsAdminV1Builder SetIsDeleted(bool _isDeleted)
+            public TImpl SetIsDeleted(bool _isDeleted)
             {
                 IsDeleted = _isDeleted;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLeaderboardConfigurationsAdminV1Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLeaderboardConfigurationsAdminV1Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -90,11 +108,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLeaderboardConfigurationsAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLeaderboardConfigurationsAdminV1.Response Execute(
+            protected GetLeaderboardConfigurationsAdminV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -111,7 +129,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLeaderboardConfigurationsAdminV1.Response> ExecuteAsync(
+            protected async Task<GetLeaderboardConfigurationsAdminV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -130,7 +148,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private GetLeaderboardConfigurationsAdminV1(GetLeaderboardConfigurationsAdminV1Builder builder,
+        public class GetLeaderboardConfigurationsAdminV1Builder : GetLeaderboardConfigurationsAdminV1AbstractBuilder<GetLeaderboardConfigurationsAdminV1Builder>
+        {
+            public GetLeaderboardConfigurationsAdminV1Builder() : base() { }
+
+            public GetLeaderboardConfigurationsAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLeaderboardConfigurationsAdminV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetLeaderboardConfigurationsAdminV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLeaderboardConfigurationsAdminV1(IGetLeaderboardConfigurationsAdminV1Builder builder,
             string namespace_
         )
         {
@@ -213,27 +256,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetAllLeaderboardConfigsResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetAllLeaderboardConfigsResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

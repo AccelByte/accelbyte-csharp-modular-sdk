@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,22 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminGetActiveChallengesBuilder Builder { get => new AdminGetActiveChallengesBuilder(); }
 
-        public class AdminGetActiveChallengesBuilder
-            : OperationBuilder<AdminGetActiveChallengesBuilder>
+        public interface IAdminGetActiveChallengesBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetActiveChallengesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetActiveChallengesBuilder
+            where TImpl : AdminGetActiveChallengesAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -43,24 +57,24 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
 
 
-            internal AdminGetActiveChallengesBuilder() { }
+            public AdminGetActiveChallengesAbstractBuilder() { }
 
-            internal AdminGetActiveChallengesBuilder(IAccelByteSdk sdk)
+            public AdminGetActiveChallengesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetActiveChallengesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetActiveChallengesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -77,11 +91,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetActiveChallengesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetActiveChallenges.Response Execute(
+            protected AdminGetActiveChallenges.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -100,7 +114,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetActiveChallenges.Response> ExecuteAsync(
+            protected async Task<AdminGetActiveChallenges.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -121,7 +135,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminGetActiveChallenges(AdminGetActiveChallengesBuilder builder,
+        public class AdminGetActiveChallengesBuilder : AdminGetActiveChallengesAbstractBuilder<AdminGetActiveChallengesBuilder>
+        {
+            public AdminGetActiveChallengesBuilder() : base() { }
+
+            public AdminGetActiveChallengesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetActiveChallenges.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetActiveChallenges.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetActiveChallenges(IAdminGetActiveChallengesBuilder builder,
             string namespace_,
             string userId
         )
@@ -200,22 +243,26 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListChallengeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListChallengeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

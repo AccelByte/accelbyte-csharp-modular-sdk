@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -104,8 +104,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static TokenGrantBuilder Builder { get => new TokenGrantBuilder(); }
 
-        public class TokenGrantBuilder
-            : OperationBuilder<TokenGrantBuilder>
+        public interface ITokenGrantBuilder
+        {
+
+
+
+            string? Code { get; }
+
+            bool? ExtendExp { get; }
+
+            string? Namespace { get; }
+
+            string? Password { get; }
+
+            string? RedirectUri { get; }
+
+            string? RefreshToken { get; }
+
+            string? Username { get; }
+
+
+
+        }
+
+        public abstract class TokenGrantAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITokenGrantBuilder
+            where TImpl : TokenGrantAbstractBuilder<TImpl>
         {
 
 
@@ -126,9 +150,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal TokenGrantBuilder() { }
+            public TokenGrantAbstractBuilder() { }
 
-            internal TokenGrantBuilder(IAccelByteSdk sdk)
+            public TokenGrantAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -136,46 +160,46 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public TokenGrantBuilder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantBuilder SetExtendExp(bool _extendExp)
+            public TImpl SetExtendExp(bool _extendExp)
             {
                 ExtendExp = _extendExp;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantBuilder SetNamespace(string _namespace_)
+            public TImpl SetNamespace(string _namespace_)
             {
                 Namespace = _namespace_;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantBuilder SetPassword(string _password)
+            public TImpl SetPassword(string _password)
             {
                 Password = _password;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantBuilder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantBuilder SetRefreshToken(string _refreshToken)
+            public TImpl SetRefreshToken(string _refreshToken)
             {
                 RefreshToken = _refreshToken;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantBuilder SetUsername(string _username)
+            public TImpl SetUsername(string _username)
             {
                 Username = _username;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -188,12 +212,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     grantType                    
                 );
 
-                op.SetBaseFields<TokenGrantBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public TokenGrant.Response Execute(
+            protected TokenGrant.Response InternalExecute(
                 string grantType
             )
             {
@@ -210,7 +234,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TokenGrant.Response> ExecuteAsync(
+            protected async Task<TokenGrant.Response> InternalExecuteAsync(
                 string grantType
             )
             {
@@ -229,7 +253,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private TokenGrant(TokenGrantBuilder builder,
+        public class TokenGrantBuilder : TokenGrantAbstractBuilder<TokenGrantBuilder>
+        {
+            public TokenGrantBuilder() : base() { }
+
+            public TokenGrantBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public TokenGrant.Response Execute(
+                string grantType
+            )
+            {
+                return InternalExecute(
+                    grantType
+                );
+            }
+            public async Task<TokenGrant.Response> ExecuteAsync(
+                string grantType
+            )
+            {
+                return await InternalExecuteAsync(
+                    grantType
+                );
+            }
+        }
+
+
+        public TokenGrant(ITokenGrantBuilder builder,
             TokenGrantGrantType grantType
         )
         {
@@ -317,17 +367,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

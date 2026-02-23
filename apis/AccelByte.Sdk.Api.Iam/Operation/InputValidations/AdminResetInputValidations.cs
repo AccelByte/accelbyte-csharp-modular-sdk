@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminResetInputValidationsBuilder Builder { get => new AdminResetInputValidationsBuilder(); }
 
-        public class AdminResetInputValidationsBuilder
-            : OperationBuilder<AdminResetInputValidationsBuilder>
+        public interface IAdminResetInputValidationsBuilder
         {
 
 
 
 
 
-            internal AdminResetInputValidationsBuilder() { }
+        }
 
-            internal AdminResetInputValidationsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminResetInputValidationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminResetInputValidationsBuilder
+            where TImpl : AdminResetInputValidationsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminResetInputValidationsAbstractBuilder() { }
+
+            public AdminResetInputValidationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     field                    
                 );
 
-                op.SetBaseFields<AdminResetInputValidationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminResetInputValidations.Response Execute(
+            protected AdminResetInputValidations.Response InternalExecute(
                 string field
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminResetInputValidations.Response> ExecuteAsync(
+            protected async Task<AdminResetInputValidations.Response> InternalExecuteAsync(
                 string field
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminResetInputValidations(AdminResetInputValidationsBuilder builder,
+        public class AdminResetInputValidationsBuilder : AdminResetInputValidationsAbstractBuilder<AdminResetInputValidationsBuilder>
+        {
+            public AdminResetInputValidationsBuilder() : base() { }
+
+            public AdminResetInputValidationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminResetInputValidations.Response Execute(
+                string field
+            )
+            {
+                return InternalExecute(
+                    field
+                );
+            }
+            public async Task<AdminResetInputValidations.Response> ExecuteAsync(
+                string field
+            )
+            {
+                return await InternalExecuteAsync(
+                    field
+                );
+            }
+        }
+
+
+        public AdminResetInputValidations(IAdminResetInputValidationsBuilder builder,
             string field
         )
         {
@@ -168,17 +203,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

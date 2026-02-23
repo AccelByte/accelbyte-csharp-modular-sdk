@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UplodLootBoxPluginConfigCertBuilder Builder { get => new UplodLootBoxPluginConfigCertBuilder(); }
 
-        public class UplodLootBoxPluginConfigCertBuilder
-            : OperationBuilder<UplodLootBoxPluginConfigCertBuilder>
+        public interface IUplodLootBoxPluginConfigCertBuilder
+        {
+
+
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class UplodLootBoxPluginConfigCertAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUplodLootBoxPluginConfigCertBuilder
+            where TImpl : UplodLootBoxPluginConfigCertAbstractBuilder<TImpl>
         {
 
 
@@ -41,9 +53,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UplodLootBoxPluginConfigCertBuilder() { }
+            public UplodLootBoxPluginConfigCertAbstractBuilder() { }
 
-            internal UplodLootBoxPluginConfigCertBuilder(IAccelByteSdk sdk)
+            public UplodLootBoxPluginConfigCertAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -51,10 +63,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UplodLootBoxPluginConfigCertBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -67,11 +79,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UplodLootBoxPluginConfigCertBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UplodLootBoxPluginConfigCert.Response Execute(
+            protected UplodLootBoxPluginConfigCert.Response InternalExecute(
                 string namespace_
             )
             {
@@ -88,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UplodLootBoxPluginConfigCert.Response> ExecuteAsync(
+            protected async Task<UplodLootBoxPluginConfigCert.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -107,7 +119,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UplodLootBoxPluginConfigCert(UplodLootBoxPluginConfigCertBuilder builder,
+        public class UplodLootBoxPluginConfigCertBuilder : UplodLootBoxPluginConfigCertAbstractBuilder<UplodLootBoxPluginConfigCertBuilder>
+        {
+            public UplodLootBoxPluginConfigCertBuilder() : base() { }
+
+            public UplodLootBoxPluginConfigCertBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UplodLootBoxPluginConfigCert.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<UplodLootBoxPluginConfigCert.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public UplodLootBoxPluginConfigCert(IUplodLootBoxPluginConfigCertBuilder builder,
             string namespace_
         )
         {
@@ -175,12 +212,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.LootBoxPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.LootBoxPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

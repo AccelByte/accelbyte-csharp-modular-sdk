@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentOrderBuilder Builder { get => new GetPaymentOrderBuilder(); }
 
-        public class GetPaymentOrderBuilder
-            : OperationBuilder<GetPaymentOrderBuilder>
+        public interface IGetPaymentOrderBuilder
         {
 
 
 
 
 
-            internal GetPaymentOrderBuilder() { }
+        }
 
-            internal GetPaymentOrderBuilder(IAccelByteSdk sdk)
+        public abstract class GetPaymentOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentOrderBuilder
+            where TImpl : GetPaymentOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPaymentOrderAbstractBuilder() { }
+
+            public GetPaymentOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     paymentOrderNo                    
                 );
 
-                op.SetBaseFields<GetPaymentOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPaymentOrder.Response Execute(
+            protected GetPaymentOrder.Response InternalExecute(
                 string namespace_,
                 string paymentOrderNo
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentOrder.Response> ExecuteAsync(
+            protected async Task<GetPaymentOrder.Response> InternalExecuteAsync(
                 string namespace_,
                 string paymentOrderNo
             )
@@ -106,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetPaymentOrder.Response<T1> Execute<T1>(
+            protected GetPaymentOrder.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string paymentOrderNo
             )
@@ -125,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentOrder.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<GetPaymentOrder.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string paymentOrderNo
             )
@@ -146,7 +156,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentOrder(GetPaymentOrderBuilder builder,
+        public class GetPaymentOrderBuilder : GetPaymentOrderAbstractBuilder<GetPaymentOrderBuilder>
+        {
+            public GetPaymentOrderBuilder() : base() { }
+
+            public GetPaymentOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPaymentOrder.Response Execute(
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+            public async Task<GetPaymentOrder.Response> ExecuteAsync(
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+
+            public GetPaymentOrder.Response<T1> Execute<T1>(
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+            public async Task<GetPaymentOrder.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string paymentOrderNo
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    paymentOrderNo
+                );
+            }
+        }
+
+
+        public GetPaymentOrder(IGetPaymentOrderBuilder builder,
             string namespace_,
             string paymentOrderNo
         )
@@ -222,12 +282,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -248,12 +310,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentOrderInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

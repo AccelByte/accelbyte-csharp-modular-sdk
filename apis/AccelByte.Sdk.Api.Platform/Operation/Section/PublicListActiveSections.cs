@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicListActiveSectionsBuilder Builder { get => new PublicListActiveSectionsBuilder(); }
 
-        public class PublicListActiveSectionsBuilder
-            : OperationBuilder<PublicListActiveSectionsBuilder>
+        public interface IPublicListActiveSectionsBuilder
+        {
+
+            bool? AutoCalcEstimatedPrice { get; }
+
+            string? Language { get; }
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+            string? ViewId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListActiveSectionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListActiveSectionsBuilder
+            where TImpl : PublicListActiveSectionsAbstractBuilder<TImpl>
         {
 
             public bool? AutoCalcEstimatedPrice { get; set; }
@@ -54,42 +74,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicListActiveSectionsBuilder() { }
+            public PublicListActiveSectionsAbstractBuilder() { }
 
-            internal PublicListActiveSectionsBuilder(IAccelByteSdk sdk)
+            public PublicListActiveSectionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListActiveSectionsBuilder SetAutoCalcEstimatedPrice(bool _autoCalcEstimatedPrice)
+            public TImpl SetAutoCalcEstimatedPrice(bool _autoCalcEstimatedPrice)
             {
                 AutoCalcEstimatedPrice = _autoCalcEstimatedPrice;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListActiveSectionsBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListActiveSectionsBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListActiveSectionsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListActiveSectionsBuilder SetViewId(string _viewId)
+            public TImpl SetViewId(string _viewId)
             {
                 ViewId = _viewId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -106,11 +126,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicListActiveSectionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListActiveSections.Response Execute(
+            protected PublicListActiveSections.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -129,7 +149,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListActiveSections.Response> ExecuteAsync(
+            protected async Task<PublicListActiveSections.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -149,7 +169,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public PublicListActiveSections.Response<T1, T2> Execute<T1, T2>(
+            protected PublicListActiveSections.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_,
                 string userId
             )
@@ -168,7 +188,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListActiveSections.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<PublicListActiveSections.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_,
                 string userId
             )
@@ -189,7 +209,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicListActiveSections(PublicListActiveSectionsBuilder builder,
+        public class PublicListActiveSectionsBuilder : PublicListActiveSectionsAbstractBuilder<PublicListActiveSectionsBuilder>
+        {
+            public PublicListActiveSectionsBuilder() : base() { }
+
+            public PublicListActiveSectionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListActiveSections.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicListActiveSections.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public PublicListActiveSections.Response<T1, T2> Execute<T1, T2>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicListActiveSections.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicListActiveSections(IPublicListActiveSectionsBuilder builder,
             string namespace_,
             string userId
         )
@@ -280,12 +350,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.SectionInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.SectionInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -306,12 +378,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.SectionInfo<T1, T2>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.SectionInfo<T1, T2>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

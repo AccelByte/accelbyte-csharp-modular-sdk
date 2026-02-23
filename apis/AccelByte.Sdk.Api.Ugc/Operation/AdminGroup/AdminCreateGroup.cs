@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminCreateGroupBuilder Builder { get => new AdminCreateGroupBuilder(); }
 
-        public class AdminCreateGroupBuilder
-            : OperationBuilder<AdminCreateGroupBuilder>
+        public interface IAdminCreateGroupBuilder
         {
 
 
 
 
 
-            internal AdminCreateGroupBuilder() { }
+        }
 
-            internal AdminCreateGroupBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateGroupBuilder
+            where TImpl : AdminCreateGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateGroupAbstractBuilder() { }
+
+            public AdminCreateGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateGroup.Response Execute(
+            protected AdminCreateGroup.Response InternalExecute(
                 ModelsCreateGroupRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateGroup.Response> ExecuteAsync(
+            protected async Task<AdminCreateGroup.Response> InternalExecuteAsync(
                 ModelsCreateGroupRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminCreateGroup(AdminCreateGroupBuilder builder,
+        public class AdminCreateGroupBuilder : AdminCreateGroupAbstractBuilder<AdminCreateGroupBuilder>
+        {
+            public AdminCreateGroupBuilder() : base() { }
+
+            public AdminCreateGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateGroup.Response Execute(
+                ModelsCreateGroupRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateGroup.Response> ExecuteAsync(
+                ModelsCreateGroupRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateGroup(IAdminCreateGroupBuilder builder,
             ModelsCreateGroupRequest body,
             string namespace_
         )
@@ -177,22 +216,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateGroupResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateGroupResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicValidateUserByUserIDAndPasswordV3Builder Builder { get => new PublicValidateUserByUserIDAndPasswordV3Builder(); }
 
-        public class PublicValidateUserByUserIDAndPasswordV3Builder
-            : OperationBuilder<PublicValidateUserByUserIDAndPasswordV3Builder>
+        public interface IPublicValidateUserByUserIDAndPasswordV3Builder
         {
 
 
 
 
 
-            internal PublicValidateUserByUserIDAndPasswordV3Builder() { }
+        }
 
-            internal PublicValidateUserByUserIDAndPasswordV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicValidateUserByUserIDAndPasswordV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicValidateUserByUserIDAndPasswordV3Builder
+            where TImpl : PublicValidateUserByUserIDAndPasswordV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicValidateUserByUserIDAndPasswordV3AbstractBuilder() { }
+
+            public PublicValidateUserByUserIDAndPasswordV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicValidateUserByUserIDAndPasswordV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicValidateUserByUserIDAndPasswordV3.Response Execute(
+            protected PublicValidateUserByUserIDAndPasswordV3.Response InternalExecute(
                 string password,
                 string namespace_,
                 string userId
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicValidateUserByUserIDAndPasswordV3.Response> ExecuteAsync(
+            protected async Task<PublicValidateUserByUserIDAndPasswordV3.Response> InternalExecuteAsync(
                 string password,
                 string namespace_,
                 string userId
@@ -115,7 +125,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicValidateUserByUserIDAndPasswordV3(PublicValidateUserByUserIDAndPasswordV3Builder builder,
+        public class PublicValidateUserByUserIDAndPasswordV3Builder : PublicValidateUserByUserIDAndPasswordV3AbstractBuilder<PublicValidateUserByUserIDAndPasswordV3Builder>
+        {
+            public PublicValidateUserByUserIDAndPasswordV3Builder() : base() { }
+
+            public PublicValidateUserByUserIDAndPasswordV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicValidateUserByUserIDAndPasswordV3.Response Execute(
+                string password,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    password,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicValidateUserByUserIDAndPasswordV3.Response> ExecuteAsync(
+                string password,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    password,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicValidateUserByUserIDAndPasswordV3(IPublicValidateUserByUserIDAndPasswordV3Builder builder,
             string password,
             string namespace_,
             string userId
@@ -197,27 +240,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

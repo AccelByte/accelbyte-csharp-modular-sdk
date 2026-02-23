@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetStatisticBuilder Builder { get => new GetStatisticBuilder(); }
 
-        public class GetStatisticBuilder
-            : OperationBuilder<GetStatisticBuilder>
+        public interface IGetStatisticBuilder
+        {
+
+            GetStatisticAction? Action { get; }
+
+            string? ItemSku { get; }
+
+            GetStatisticItemType? ItemType { get; }
+
+            GetStatisticType? Type { get; }
+
+            string? UpdatedAtEnd { get; }
+
+            string? UpdatedAtStart { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetStatisticAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetStatisticBuilder
+            where TImpl : GetStatisticAbstractBuilder<TImpl>
         {
 
             public GetStatisticAction? Action { get; set; }
@@ -54,48 +76,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetStatisticBuilder() { }
+            public GetStatisticAbstractBuilder() { }
 
-            internal GetStatisticBuilder(IAccelByteSdk sdk)
+            public GetStatisticAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetStatisticBuilder SetAction(GetStatisticAction _action)
+            public TImpl SetAction(GetStatisticAction _action)
             {
                 Action = _action;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatisticBuilder SetItemSku(string _itemSku)
+            public TImpl SetItemSku(string _itemSku)
             {
                 ItemSku = _itemSku;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatisticBuilder SetItemType(GetStatisticItemType _itemType)
+            public TImpl SetItemType(GetStatisticItemType _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatisticBuilder SetType(GetStatisticType _type)
+            public TImpl SetType(GetStatisticType _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatisticBuilder SetUpdatedAtEnd(string _updatedAtEnd)
+            public TImpl SetUpdatedAtEnd(string _updatedAtEnd)
             {
                 UpdatedAtEnd = _updatedAtEnd;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatisticBuilder SetUpdatedAtStart(string _updatedAtStart)
+            public TImpl SetUpdatedAtStart(string _updatedAtStart)
             {
                 UpdatedAtStart = _updatedAtStart;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -112,11 +134,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<GetStatisticBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetStatistic.Response Execute(
+            protected GetStatistic.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -135,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetStatistic.Response> ExecuteAsync(
+            protected async Task<GetStatistic.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -156,7 +178,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetStatistic(GetStatisticBuilder builder,
+        public class GetStatisticBuilder : GetStatisticAbstractBuilder<GetStatisticBuilder>
+        {
+            public GetStatisticBuilder() : base() { }
+
+            public GetStatisticBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetStatistic.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<GetStatistic.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public GetStatistic(IGetStatisticBuilder builder,
             string namespace_,
             string storeId
         )
@@ -241,7 +292,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CatalogChangeStatistics>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CatalogChangeStatistics>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AcquireUserTicketBuilder Builder { get => new AcquireUserTicketBuilder(); }
 
-        public class AcquireUserTicketBuilder
-            : OperationBuilder<AcquireUserTicketBuilder>
+        public interface IAcquireUserTicketBuilder
         {
 
 
 
 
 
-            internal AcquireUserTicketBuilder() { }
+        }
 
-            internal AcquireUserTicketBuilder(IAccelByteSdk sdk)
+        public abstract class AcquireUserTicketAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAcquireUserTicketBuilder
+            where TImpl : AcquireUserTicketAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AcquireUserTicketAbstractBuilder() { }
+
+            public AcquireUserTicketAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AcquireUserTicketBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AcquireUserTicket.Response Execute(
+            protected AcquireUserTicket.Response InternalExecute(
                 TicketAcquireRequest body,
                 string boothName,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AcquireUserTicket.Response> ExecuteAsync(
+            protected async Task<AcquireUserTicket.Response> InternalExecuteAsync(
                 TicketAcquireRequest body,
                 string boothName,
                 string namespace_,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AcquireUserTicket(AcquireUserTicketBuilder builder,
+        public class AcquireUserTicketBuilder : AcquireUserTicketAbstractBuilder<AcquireUserTicketBuilder>
+        {
+            public AcquireUserTicketBuilder() : base() { }
+
+            public AcquireUserTicketBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AcquireUserTicket.Response Execute(
+                TicketAcquireRequest body,
+                string boothName,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    boothName,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AcquireUserTicket.Response> ExecuteAsync(
+                TicketAcquireRequest body,
+                string boothName,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    boothName,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AcquireUserTicket(IAcquireUserTicketBuilder builder,
             TicketAcquireRequest body,
             string boothName,
             string namespace_,
@@ -200,22 +247,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TicketAcquireResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TicketAcquireResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

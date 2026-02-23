@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicUpdateUserNamespaceSlotMetadataBuilder Builder { get => new PublicUpdateUserNamespaceSlotMetadataBuilder(); }
 
-        public class PublicUpdateUserNamespaceSlotMetadataBuilder
-            : OperationBuilder<PublicUpdateUserNamespaceSlotMetadataBuilder>
+        public interface IPublicUpdateUserNamespaceSlotMetadataBuilder
+        {
+
+
+            Model.SlotMetadataUpdate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PublicUpdateUserNamespaceSlotMetadataAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdateUserNamespaceSlotMetadataBuilder
+            where TImpl : PublicUpdateUserNamespaceSlotMetadataAbstractBuilder<TImpl>
         {
 
 
@@ -48,19 +60,19 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal PublicUpdateUserNamespaceSlotMetadataBuilder() { }
+            public PublicUpdateUserNamespaceSlotMetadataAbstractBuilder() { }
 
-            internal PublicUpdateUserNamespaceSlotMetadataBuilder(IAccelByteSdk sdk)
+            public PublicUpdateUserNamespaceSlotMetadataAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PublicUpdateUserNamespaceSlotMetadataBuilder SetBody(Model.SlotMetadataUpdate _body)
+            public TImpl SetBody(Model.SlotMetadataUpdate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -78,12 +90,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdateUserNamespaceSlotMetadataBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicUpdateUserNamespaceSlotMetadata.Response Execute(
+            protected PublicUpdateUserNamespaceSlotMetadata.Response InternalExecute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -104,7 +116,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateUserNamespaceSlotMetadata.Response> ExecuteAsync(
+            protected async Task<PublicUpdateUserNamespaceSlotMetadata.Response> InternalExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -127,7 +139,41 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicUpdateUserNamespaceSlotMetadata(PublicUpdateUserNamespaceSlotMetadataBuilder builder,
+        public class PublicUpdateUserNamespaceSlotMetadataBuilder : PublicUpdateUserNamespaceSlotMetadataAbstractBuilder<PublicUpdateUserNamespaceSlotMetadataBuilder>
+        {
+            public PublicUpdateUserNamespaceSlotMetadataBuilder() : base() { }
+
+            public PublicUpdateUserNamespaceSlotMetadataBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdateUserNamespaceSlotMetadata.Response Execute(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateUserNamespaceSlotMetadata.Response> ExecuteAsync(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdateUserNamespaceSlotMetadata(IPublicUpdateUserNamespaceSlotMetadataBuilder builder,
             string namespace_,
             string slotId,
             string userId
@@ -203,12 +249,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SlotInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

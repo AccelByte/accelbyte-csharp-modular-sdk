@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetThirdPartySubscriptionDetailsBuilder Builder { get => new GetThirdPartySubscriptionDetailsBuilder(); }
 
-        public class GetThirdPartySubscriptionDetailsBuilder
-            : OperationBuilder<GetThirdPartySubscriptionDetailsBuilder>
+        public interface IGetThirdPartySubscriptionDetailsBuilder
         {
 
 
 
 
 
-            internal GetThirdPartySubscriptionDetailsBuilder() { }
+        }
 
-            internal GetThirdPartySubscriptionDetailsBuilder(IAccelByteSdk sdk)
+        public abstract class GetThirdPartySubscriptionDetailsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetThirdPartySubscriptionDetailsBuilder
+            where TImpl : GetThirdPartySubscriptionDetailsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetThirdPartySubscriptionDetailsAbstractBuilder() { }
+
+            public GetThirdPartySubscriptionDetailsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetThirdPartySubscriptionDetailsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetThirdPartySubscriptionDetails.Response Execute(
+            protected GetThirdPartySubscriptionDetails.Response InternalExecute(
                 string id,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetThirdPartySubscriptionDetails.Response> ExecuteAsync(
+            protected async Task<GetThirdPartySubscriptionDetails.Response> InternalExecuteAsync(
                 string id,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetThirdPartySubscriptionDetails(GetThirdPartySubscriptionDetailsBuilder builder,
+        public class GetThirdPartySubscriptionDetailsBuilder : GetThirdPartySubscriptionDetailsAbstractBuilder<GetThirdPartySubscriptionDetailsBuilder>
+        {
+            public GetThirdPartySubscriptionDetailsBuilder() : base() { }
+
+            public GetThirdPartySubscriptionDetailsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetThirdPartySubscriptionDetails.Response Execute(
+                string id,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    id,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetThirdPartySubscriptionDetails.Response> ExecuteAsync(
+                string id,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    id,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetThirdPartySubscriptionDetails(IGetThirdPartySubscriptionDetailsBuilder builder,
             string id,
             string namespace_,
             string userId
@@ -184,12 +227,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

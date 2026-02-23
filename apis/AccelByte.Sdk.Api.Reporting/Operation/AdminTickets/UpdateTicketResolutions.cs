@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static UpdateTicketResolutionsBuilder Builder { get => new UpdateTicketResolutionsBuilder(); }
 
-        public class UpdateTicketResolutionsBuilder
-            : OperationBuilder<UpdateTicketResolutionsBuilder>
+        public interface IUpdateTicketResolutionsBuilder
         {
 
 
 
 
 
-            internal UpdateTicketResolutionsBuilder() { }
+        }
 
-            internal UpdateTicketResolutionsBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateTicketResolutionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateTicketResolutionsBuilder
+            where TImpl : UpdateTicketResolutionsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateTicketResolutionsAbstractBuilder() { }
+
+            public UpdateTicketResolutionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ticketId                    
                 );
 
-                op.SetBaseFields<UpdateTicketResolutionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateTicketResolutions.Response Execute(
+            protected UpdateTicketResolutions.Response InternalExecute(
                 RestapiUpdateTicketResolutionsRequest body,
                 string namespace_,
                 string ticketId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateTicketResolutions.Response> ExecuteAsync(
+            protected async Task<UpdateTicketResolutions.Response> InternalExecuteAsync(
                 RestapiUpdateTicketResolutionsRequest body,
                 string namespace_,
                 string ticketId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private UpdateTicketResolutions(UpdateTicketResolutionsBuilder builder,
+        public class UpdateTicketResolutionsBuilder : UpdateTicketResolutionsAbstractBuilder<UpdateTicketResolutionsBuilder>
+        {
+            public UpdateTicketResolutionsBuilder() : base() { }
+
+            public UpdateTicketResolutionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateTicketResolutions.Response Execute(
+                RestapiUpdateTicketResolutionsRequest body,
+                string namespace_,
+                string ticketId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    ticketId
+                );
+            }
+            public async Task<UpdateTicketResolutions.Response> ExecuteAsync(
+                RestapiUpdateTicketResolutionsRequest body,
+                string namespace_,
+                string ticketId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    ticketId
+                );
+            }
+        }
+
+
+        public UpdateTicketResolutions(IUpdateTicketResolutionsBuilder builder,
             RestapiUpdateTicketResolutionsRequest body,
             string namespace_,
             string ticketId
@@ -183,12 +226,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

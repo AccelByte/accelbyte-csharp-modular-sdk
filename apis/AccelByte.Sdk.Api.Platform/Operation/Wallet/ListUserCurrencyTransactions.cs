@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListUserCurrencyTransactionsBuilder Builder { get => new ListUserCurrencyTransactionsBuilder(); }
 
-        public class ListUserCurrencyTransactionsBuilder
-            : OperationBuilder<ListUserCurrencyTransactionsBuilder>
+        public interface IListUserCurrencyTransactionsBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListUserCurrencyTransactionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListUserCurrencyTransactionsBuilder
+            where TImpl : ListUserCurrencyTransactionsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListUserCurrencyTransactionsBuilder() { }
+            public ListUserCurrencyTransactionsAbstractBuilder() { }
 
-            internal ListUserCurrencyTransactionsBuilder(IAccelByteSdk sdk)
+            public ListUserCurrencyTransactionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListUserCurrencyTransactionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListUserCurrencyTransactionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ListUserCurrencyTransactionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListUserCurrencyTransactions.Response Execute(
+            protected ListUserCurrencyTransactions.Response InternalExecute(
                 string currencyCode,
                 string namespace_,
                 string userId
@@ -106,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListUserCurrencyTransactions.Response> ExecuteAsync(
+            protected async Task<ListUserCurrencyTransactions.Response> InternalExecuteAsync(
                 string currencyCode,
                 string namespace_,
                 string userId
@@ -129,7 +143,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListUserCurrencyTransactions(ListUserCurrencyTransactionsBuilder builder,
+        public class ListUserCurrencyTransactionsBuilder : ListUserCurrencyTransactionsAbstractBuilder<ListUserCurrencyTransactionsBuilder>
+        {
+            public ListUserCurrencyTransactionsBuilder() : base() { }
+
+            public ListUserCurrencyTransactionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListUserCurrencyTransactions.Response Execute(
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ListUserCurrencyTransactions.Response> ExecuteAsync(
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ListUserCurrencyTransactions(IListUserCurrencyTransactionsBuilder builder,
             string currencyCode,
             string namespace_,
             string userId
@@ -208,12 +255,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.WalletTransactionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.WalletTransactionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateUserEmailAddressV4Builder Builder { get => new AdminUpdateUserEmailAddressV4Builder(); }
 
-        public class AdminUpdateUserEmailAddressV4Builder
-            : OperationBuilder<AdminUpdateUserEmailAddressV4Builder>
+        public interface IAdminUpdateUserEmailAddressV4Builder
         {
 
 
 
 
 
-            internal AdminUpdateUserEmailAddressV4Builder() { }
+        }
 
-            internal AdminUpdateUserEmailAddressV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateUserEmailAddressV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateUserEmailAddressV4Builder
+            where TImpl : AdminUpdateUserEmailAddressV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateUserEmailAddressV4AbstractBuilder() { }
+
+            public AdminUpdateUserEmailAddressV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminUpdateUserEmailAddressV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateUserEmailAddressV4.Response Execute(
+            protected AdminUpdateUserEmailAddressV4.Response InternalExecute(
                 ModelEmailUpdateRequestV4 body,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateUserEmailAddressV4.Response> ExecuteAsync(
+            protected async Task<AdminUpdateUserEmailAddressV4.Response> InternalExecuteAsync(
                 ModelEmailUpdateRequestV4 body,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateUserEmailAddressV4(AdminUpdateUserEmailAddressV4Builder builder,
+        public class AdminUpdateUserEmailAddressV4Builder : AdminUpdateUserEmailAddressV4AbstractBuilder<AdminUpdateUserEmailAddressV4Builder>
+        {
+            public AdminUpdateUserEmailAddressV4Builder() : base() { }
+
+            public AdminUpdateUserEmailAddressV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateUserEmailAddressV4.Response Execute(
+                ModelEmailUpdateRequestV4 body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminUpdateUserEmailAddressV4.Response> ExecuteAsync(
+                ModelEmailUpdateRequestV4 body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminUpdateUserEmailAddressV4(IAdminUpdateUserEmailAddressV4Builder builder,
             ModelEmailUpdateRequestV4 body,
             string namespace_,
             string userId
@@ -193,27 +236,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

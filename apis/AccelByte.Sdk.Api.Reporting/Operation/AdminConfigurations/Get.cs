@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static GetBuilder Builder { get => new GetBuilder(); }
 
-        public class GetBuilder
-            : OperationBuilder<GetBuilder>
+        public interface IGetBuilder
+        {
+
+            GetCategory? Category { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetBuilder
+            where TImpl : GetAbstractBuilder<TImpl>
         {
 
             public GetCategory? Category { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal GetBuilder() { }
+            public GetAbstractBuilder() { }
 
-            internal GetBuilder(IAccelByteSdk sdk)
+            public GetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetBuilder SetCategory(GetCategory _category)
+            public TImpl SetCategory(GetCategory _category)
             {
                 Category = _category;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -67,11 +79,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Get.Response Execute(
+            protected Get.Response InternalExecute(
                 string namespace_
             )
             {
@@ -88,7 +100,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Get.Response> ExecuteAsync(
+            protected async Task<Get.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -107,7 +119,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private Get(GetBuilder builder,
+        public class GetBuilder : GetAbstractBuilder<GetBuilder>
+        {
+            public GetBuilder() : base() { }
+
+            public GetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Get.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<Get.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public Get(IGetBuilder builder,
             string namespace_
         )
         {
@@ -175,12 +212,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiConfigResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiConfigResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

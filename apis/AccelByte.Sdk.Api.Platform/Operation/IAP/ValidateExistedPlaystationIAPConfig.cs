@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ValidateExistedPlaystationIAPConfigBuilder Builder { get => new ValidateExistedPlaystationIAPConfigBuilder(); }
 
-        public class ValidateExistedPlaystationIAPConfigBuilder
-            : OperationBuilder<ValidateExistedPlaystationIAPConfigBuilder>
+        public interface IValidateExistedPlaystationIAPConfigBuilder
         {
 
 
 
 
 
-            internal ValidateExistedPlaystationIAPConfigBuilder() { }
+        }
 
-            internal ValidateExistedPlaystationIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class ValidateExistedPlaystationIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IValidateExistedPlaystationIAPConfigBuilder
+            where TImpl : ValidateExistedPlaystationIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ValidateExistedPlaystationIAPConfigAbstractBuilder() { }
+
+            public ValidateExistedPlaystationIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ValidateExistedPlaystationIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ValidateExistedPlaystationIAPConfig.Response Execute(
+            protected ValidateExistedPlaystationIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ValidateExistedPlaystationIAPConfig.Response> ExecuteAsync(
+            protected async Task<ValidateExistedPlaystationIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ValidateExistedPlaystationIAPConfig(ValidateExistedPlaystationIAPConfigBuilder builder,
+        public class ValidateExistedPlaystationIAPConfigBuilder : ValidateExistedPlaystationIAPConfigAbstractBuilder<ValidateExistedPlaystationIAPConfigBuilder>
+        {
+            public ValidateExistedPlaystationIAPConfigBuilder() : base() { }
+
+            public ValidateExistedPlaystationIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ValidateExistedPlaystationIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ValidateExistedPlaystationIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ValidateExistedPlaystationIAPConfig(IValidateExistedPlaystationIAPConfigBuilder builder,
             string namespace_
         )
         {
@@ -162,7 +197,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

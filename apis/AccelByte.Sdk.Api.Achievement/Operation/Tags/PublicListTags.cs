@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static PublicListTagsBuilder Builder { get => new PublicListTagsBuilder(); }
 
-        public class PublicListTagsBuilder
-            : OperationBuilder<PublicListTagsBuilder>
+        public interface IPublicListTagsBuilder
+        {
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            PublicListTagsSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListTagsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListTagsBuilder
+            where TImpl : PublicListTagsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal PublicListTagsBuilder() { }
+            public PublicListTagsAbstractBuilder() { }
 
-            internal PublicListTagsBuilder(IAccelByteSdk sdk)
+            public PublicListTagsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListTagsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListTagsBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListTagsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListTagsBuilder SetSortBy(PublicListTagsSortBy _sortBy)
+            public TImpl SetSortBy(PublicListTagsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -93,11 +111,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListTagsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListTags.Response Execute(
+            protected PublicListTags.Response InternalExecute(
                 string namespace_
             )
             {
@@ -114,7 +132,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListTags.Response> ExecuteAsync(
+            protected async Task<PublicListTags.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -133,7 +151,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private PublicListTags(PublicListTagsBuilder builder,
+        public class PublicListTagsBuilder : PublicListTagsAbstractBuilder<PublicListTagsBuilder>
+        {
+            public PublicListTagsBuilder() : base() { }
+
+            public PublicListTagsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListTags.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListTags.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListTags(IPublicListTagsBuilder builder,
             string namespace_
         )
         {
@@ -216,27 +259,32 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedTagResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedTagResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -47,17 +47,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static CreateNewGroupPublicV2Builder Builder { get => new CreateNewGroupPublicV2Builder(); }
 
-        public class CreateNewGroupPublicV2Builder
-            : OperationBuilder<CreateNewGroupPublicV2Builder>
+        public interface ICreateNewGroupPublicV2Builder
         {
 
 
 
 
 
-            internal CreateNewGroupPublicV2Builder() { }
+        }
 
-            internal CreateNewGroupPublicV2Builder(IAccelByteSdk sdk)
+        public abstract class CreateNewGroupPublicV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateNewGroupPublicV2Builder
+            where TImpl : CreateNewGroupPublicV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateNewGroupPublicV2AbstractBuilder() { }
+
+            public CreateNewGroupPublicV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -77,11 +87,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateNewGroupPublicV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateNewGroupPublicV2.Response Execute(
+            protected CreateNewGroupPublicV2.Response InternalExecute(
                 ModelsPublicCreateNewGroupRequestV1 body,
                 string namespace_
             )
@@ -100,7 +110,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateNewGroupPublicV2.Response> ExecuteAsync(
+            protected async Task<CreateNewGroupPublicV2.Response> InternalExecuteAsync(
                 ModelsPublicCreateNewGroupRequestV1 body,
                 string namespace_
             )
@@ -120,7 +130,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.Payload);
             }
 
-            public CreateNewGroupPublicV2.Response<T1> Execute<T1>(
+            protected CreateNewGroupPublicV2.Response<T1> InternalExecute<T1>(
                 ModelsPublicCreateNewGroupRequestV1 body,
                 string namespace_
             )
@@ -139,7 +149,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateNewGroupPublicV2.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<CreateNewGroupPublicV2.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsPublicCreateNewGroupRequestV1 body,
                 string namespace_
             )
@@ -160,7 +170,57 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private CreateNewGroupPublicV2(CreateNewGroupPublicV2Builder builder,
+        public class CreateNewGroupPublicV2Builder : CreateNewGroupPublicV2AbstractBuilder<CreateNewGroupPublicV2Builder>
+        {
+            public CreateNewGroupPublicV2Builder() : base() { }
+
+            public CreateNewGroupPublicV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateNewGroupPublicV2.Response Execute(
+                ModelsPublicCreateNewGroupRequestV1 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateNewGroupPublicV2.Response> ExecuteAsync(
+                ModelsPublicCreateNewGroupRequestV1 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+
+            public CreateNewGroupPublicV2.Response<T1> Execute<T1>(
+                ModelsPublicCreateNewGroupRequestV1 body,
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateNewGroupPublicV2.Response<T1>> ExecuteAsync<T1>(
+                ModelsPublicCreateNewGroupRequestV1 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateNewGroupPublicV2(ICreateNewGroupPublicV2Builder builder,
             ModelsPublicCreateNewGroupRequestV1 body,
             string namespace_
         )
@@ -252,32 +312,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -298,32 +364,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGroupResponseV1<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

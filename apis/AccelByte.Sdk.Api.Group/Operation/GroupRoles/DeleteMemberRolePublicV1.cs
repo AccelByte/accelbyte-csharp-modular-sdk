@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static DeleteMemberRolePublicV1Builder Builder { get => new DeleteMemberRolePublicV1Builder(); }
 
-        public class DeleteMemberRolePublicV1Builder
-            : OperationBuilder<DeleteMemberRolePublicV1Builder>
+        public interface IDeleteMemberRolePublicV1Builder
         {
 
 
 
 
 
-            internal DeleteMemberRolePublicV1Builder() { }
+        }
 
-            internal DeleteMemberRolePublicV1Builder(IAccelByteSdk sdk)
+        public abstract class DeleteMemberRolePublicV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteMemberRolePublicV1Builder
+            where TImpl : DeleteMemberRolePublicV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteMemberRolePublicV1AbstractBuilder() { }
+
+            public DeleteMemberRolePublicV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteMemberRolePublicV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteMemberRolePublicV1.Response Execute(
+            protected DeleteMemberRolePublicV1.Response InternalExecute(
                 ModelsRemoveRoleFromMemberRequestV1 body,
                 string memberRoleId,
                 string namespace_
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteMemberRolePublicV1.Response> ExecuteAsync(
+            protected async Task<DeleteMemberRolePublicV1.Response> InternalExecuteAsync(
                 ModelsRemoveRoleFromMemberRequestV1 body,
                 string memberRoleId,
                 string namespace_
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private DeleteMemberRolePublicV1(DeleteMemberRolePublicV1Builder builder,
+        public class DeleteMemberRolePublicV1Builder : DeleteMemberRolePublicV1AbstractBuilder<DeleteMemberRolePublicV1Builder>
+        {
+            public DeleteMemberRolePublicV1Builder() : base() { }
+
+            public DeleteMemberRolePublicV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteMemberRolePublicV1.Response Execute(
+                ModelsRemoveRoleFromMemberRequestV1 body,
+                string memberRoleId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    memberRoleId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteMemberRolePublicV1.Response> ExecuteAsync(
+                ModelsRemoveRoleFromMemberRequestV1 body,
+                string memberRoleId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    memberRoleId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteMemberRolePublicV1(IDeleteMemberRolePublicV1Builder builder,
             ModelsRemoveRoleFromMemberRequestV1 body,
             string memberRoleId,
             string namespace_
@@ -198,32 +241,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

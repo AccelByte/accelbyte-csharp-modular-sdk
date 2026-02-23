@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicSearchItemsBuilder Builder { get => new PublicSearchItemsBuilder(); }
 
-        public class PublicSearchItemsBuilder
-            : OperationBuilder<PublicSearchItemsBuilder>
+        public interface IPublicSearchItemsBuilder
+        {
+
+            bool? AutoCalcEstimatedPrice { get; }
+
+            PublicSearchItemsItemType? ItemType { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicSearchItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicSearchItemsBuilder
+            where TImpl : PublicSearchItemsAbstractBuilder<TImpl>
         {
 
             public bool? AutoCalcEstimatedPrice { get; set; }
@@ -56,48 +78,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicSearchItemsBuilder() { }
+            public PublicSearchItemsAbstractBuilder() { }
 
-            internal PublicSearchItemsBuilder(IAccelByteSdk sdk)
+            public PublicSearchItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicSearchItemsBuilder SetAutoCalcEstimatedPrice(bool _autoCalcEstimatedPrice)
+            public TImpl SetAutoCalcEstimatedPrice(bool _autoCalcEstimatedPrice)
             {
                 AutoCalcEstimatedPrice = _autoCalcEstimatedPrice;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchItemsBuilder SetItemType(PublicSearchItemsItemType _itemType)
+            public TImpl SetItemType(PublicSearchItemsItemType _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchItemsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchItemsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchItemsBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicSearchItemsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -116,11 +138,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     language                    
                 );
 
-                op.SetBaseFields<PublicSearchItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicSearchItems.Response Execute(
+            protected PublicSearchItems.Response InternalExecute(
                 string namespace_,
                 string keyword,
                 string language
@@ -141,7 +163,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicSearchItems.Response> ExecuteAsync(
+            protected async Task<PublicSearchItems.Response> InternalExecuteAsync(
                 string namespace_,
                 string keyword,
                 string language
@@ -164,7 +186,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicSearchItems(PublicSearchItemsBuilder builder,
+        public class PublicSearchItemsBuilder : PublicSearchItemsAbstractBuilder<PublicSearchItemsBuilder>
+        {
+            public PublicSearchItemsBuilder() : base() { }
+
+            public PublicSearchItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicSearchItems.Response Execute(
+                string namespace_,
+                string keyword,
+                string language
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    keyword,
+                    language
+                );
+            }
+            public async Task<PublicSearchItems.Response> ExecuteAsync(
+                string namespace_,
+                string keyword,
+                string language
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    keyword,
+                    language
+                );
+            }
+        }
+
+
+        public PublicSearchItems(IPublicSearchItemsBuilder builder,
             string namespace_,
             string keyword,
             string language
@@ -255,12 +310,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

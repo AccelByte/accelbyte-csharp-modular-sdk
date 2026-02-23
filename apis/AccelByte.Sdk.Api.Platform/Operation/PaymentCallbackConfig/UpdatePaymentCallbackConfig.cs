@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePaymentCallbackConfigBuilder Builder { get => new UpdatePaymentCallbackConfigBuilder(); }
 
-        public class UpdatePaymentCallbackConfigBuilder
-            : OperationBuilder<UpdatePaymentCallbackConfigBuilder>
+        public interface IUpdatePaymentCallbackConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePaymentCallbackConfigBuilder() { }
+        }
 
-            internal UpdatePaymentCallbackConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePaymentCallbackConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePaymentCallbackConfigBuilder
+            where TImpl : UpdatePaymentCallbackConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePaymentCallbackConfigAbstractBuilder() { }
+
+            public UpdatePaymentCallbackConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,12 +78,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdatePaymentCallbackConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpdatePaymentCallbackConfig.Response Execute(
+            protected UpdatePaymentCallbackConfig.Response InternalExecute(
                 PaymentCallbackConfigUpdate body,
                 string namespace_
             )
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePaymentCallbackConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePaymentCallbackConfig.Response> InternalExecuteAsync(
                 PaymentCallbackConfigUpdate body,
                 string namespace_
             )
@@ -113,7 +123,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePaymentCallbackConfig(UpdatePaymentCallbackConfigBuilder builder,
+        public class UpdatePaymentCallbackConfigBuilder : UpdatePaymentCallbackConfigAbstractBuilder<UpdatePaymentCallbackConfigBuilder>
+        {
+            public UpdatePaymentCallbackConfigBuilder() : base() { }
+
+            public UpdatePaymentCallbackConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdatePaymentCallbackConfig.Response Execute(
+                PaymentCallbackConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdatePaymentCallbackConfig.Response> ExecuteAsync(
+                PaymentCallbackConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdatePaymentCallbackConfig(IUpdatePaymentCallbackConfigBuilder builder,
             PaymentCallbackConfigUpdate body,
             string namespace_
         )
@@ -180,7 +220,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentCallbackConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentCallbackConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

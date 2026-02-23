@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QuerySectionsBuilder Builder { get => new QuerySectionsBuilder(); }
 
-        public class QuerySectionsBuilder
-            : OperationBuilder<QuerySectionsBuilder>
+        public interface IQuerySectionsBuilder
+        {
+
+            string? End { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Start { get; }
+
+            string? StoreId { get; }
+
+            string? ViewId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QuerySectionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQuerySectionsBuilder
+            where TImpl : QuerySectionsAbstractBuilder<TImpl>
         {
 
             public string? End { get; set; }
@@ -54,48 +76,48 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QuerySectionsBuilder() { }
+            public QuerySectionsAbstractBuilder() { }
 
-            internal QuerySectionsBuilder(IAccelByteSdk sdk)
+            public QuerySectionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QuerySectionsBuilder SetEnd(string _end)
+            public TImpl SetEnd(string _end)
             {
                 End = _end;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySectionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySectionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySectionsBuilder SetStart(string _start)
+            public TImpl SetStart(string _start)
             {
                 Start = _start;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySectionsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QuerySectionsBuilder SetViewId(string _viewId)
+            public TImpl SetViewId(string _viewId)
             {
                 ViewId = _viewId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -110,11 +132,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QuerySectionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QuerySections.Response Execute(
+            protected QuerySections.Response InternalExecute(
                 string namespace_
             )
             {
@@ -131,7 +153,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QuerySections.Response> ExecuteAsync(
+            protected async Task<QuerySections.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -150,7 +172,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QuerySections(QuerySectionsBuilder builder,
+        public class QuerySectionsBuilder : QuerySectionsAbstractBuilder<QuerySectionsBuilder>
+        {
+            public QuerySectionsBuilder() : base() { }
+
+            public QuerySectionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QuerySections.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QuerySections.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QuerySections(IQuerySectionsBuilder builder,
             string namespace_
         )
         {
@@ -235,17 +282,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SectionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SectionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DoRevocationBuilder Builder { get => new DoRevocationBuilder(); }
 
-        public class DoRevocationBuilder
-            : OperationBuilder<DoRevocationBuilder>
+        public interface IDoRevocationBuilder
         {
 
 
 
 
 
-            internal DoRevocationBuilder() { }
+        }
 
-            internal DoRevocationBuilder(IAccelByteSdk sdk)
+        public abstract class DoRevocationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDoRevocationBuilder
+            where TImpl : DoRevocationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DoRevocationAbstractBuilder() { }
+
+            public DoRevocationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DoRevocationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DoRevocation.Response Execute(
+            protected DoRevocation.Response InternalExecute(
                 RevocationRequest body,
                 string namespace_,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DoRevocation.Response> ExecuteAsync(
+            protected async Task<DoRevocation.Response> InternalExecuteAsync(
                 RevocationRequest body,
                 string namespace_,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DoRevocation(DoRevocationBuilder builder,
+        public class DoRevocationBuilder : DoRevocationAbstractBuilder<DoRevocationBuilder>
+        {
+            public DoRevocationBuilder() : base() { }
+
+            public DoRevocationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DoRevocation.Response Execute(
+                RevocationRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DoRevocation.Response> ExecuteAsync(
+                RevocationRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DoRevocation(IDoRevocationBuilder builder,
             RevocationRequest body,
             string namespace_,
             string userId
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

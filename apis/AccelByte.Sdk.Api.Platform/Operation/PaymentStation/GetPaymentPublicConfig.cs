@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentPublicConfigBuilder Builder { get => new GetPaymentPublicConfigBuilder(); }
 
-        public class GetPaymentPublicConfigBuilder
-            : OperationBuilder<GetPaymentPublicConfigBuilder>
+        public interface IGetPaymentPublicConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetPaymentPublicConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentPublicConfigBuilder
+            where TImpl : GetPaymentPublicConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetPaymentPublicConfigBuilder() { }
+            public GetPaymentPublicConfigAbstractBuilder() { }
 
-            internal GetPaymentPublicConfigBuilder(IAccelByteSdk sdk)
+            public GetPaymentPublicConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetPaymentPublicConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     region                    
                 );
 
-                op.SetBaseFields<GetPaymentPublicConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPaymentPublicConfig.Response Execute(
+            protected GetPaymentPublicConfig.Response InternalExecute(
                 string namespace_,
                 string paymentProvider,
                 string region
@@ -98,7 +110,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentPublicConfig.Response> ExecuteAsync(
+            protected async Task<GetPaymentPublicConfig.Response> InternalExecuteAsync(
                 string namespace_,
                 string paymentProvider,
                 string region
@@ -121,7 +133,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentPublicConfig(GetPaymentPublicConfigBuilder builder,
+        public class GetPaymentPublicConfigBuilder : GetPaymentPublicConfigAbstractBuilder<GetPaymentPublicConfigBuilder>
+        {
+            public GetPaymentPublicConfigBuilder() : base() { }
+
+            public GetPaymentPublicConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPaymentPublicConfig.Response Execute(
+                string namespace_,
+                string paymentProvider,
+                string region
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    paymentProvider,
+                    region
+                );
+            }
+            public async Task<GetPaymentPublicConfig.Response> ExecuteAsync(
+                string namespace_,
+                string paymentProvider,
+                string region
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    paymentProvider,
+                    region
+                );
+            }
+        }
+
+
+        public GetPaymentPublicConfig(IGetPaymentPublicConfigBuilder builder,
             string namespace_,
             GetPaymentPublicConfigPaymentProvider paymentProvider,
             string region
@@ -193,7 +238,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

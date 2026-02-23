@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteViewBuilder Builder { get => new DeleteViewBuilder(); }
 
-        public class DeleteViewBuilder
-            : OperationBuilder<DeleteViewBuilder>
+        public interface IDeleteViewBuilder
         {
 
 
 
 
 
-            internal DeleteViewBuilder() { }
+        }
 
-            internal DeleteViewBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteViewAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteViewBuilder
+            where TImpl : DeleteViewAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteViewAbstractBuilder() { }
+
+            public DeleteViewAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<DeleteViewBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteView.Response Execute(
+            protected DeleteView.Response InternalExecute(
                 string namespace_,
                 string viewId,
                 string storeId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteView.Response> ExecuteAsync(
+            protected async Task<DeleteView.Response> InternalExecuteAsync(
                 string namespace_,
                 string viewId,
                 string storeId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteView(DeleteViewBuilder builder,
+        public class DeleteViewBuilder : DeleteViewAbstractBuilder<DeleteViewBuilder>
+        {
+            public DeleteViewBuilder() : base() { }
+
+            public DeleteViewBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteView.Response Execute(
+                string namespace_,
+                string viewId,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    viewId,
+                    storeId
+                );
+            }
+            public async Task<DeleteView.Response> ExecuteAsync(
+                string namespace_,
+                string viewId,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    viewId,
+                    storeId
+                );
+            }
+        }
+
+
+        public DeleteView(IDeleteViewBuilder builder,
             string namespace_,
             string viewId,
             string storeId
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

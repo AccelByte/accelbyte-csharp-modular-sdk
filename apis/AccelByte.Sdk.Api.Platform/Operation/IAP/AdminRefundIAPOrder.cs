@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AdminRefundIAPOrderBuilder Builder { get => new AdminRefundIAPOrderBuilder(); }
 
-        public class AdminRefundIAPOrderBuilder
-            : OperationBuilder<AdminRefundIAPOrderBuilder>
+        public interface IAdminRefundIAPOrderBuilder
         {
 
 
 
 
 
-            internal AdminRefundIAPOrderBuilder() { }
+        }
 
-            internal AdminRefundIAPOrderBuilder(IAccelByteSdk sdk)
+        public abstract class AdminRefundIAPOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminRefundIAPOrderBuilder
+            where TImpl : AdminRefundIAPOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminRefundIAPOrderAbstractBuilder() { }
+
+            public AdminRefundIAPOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminRefundIAPOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminRefundIAPOrder.Response Execute(
+            protected AdminRefundIAPOrder.Response InternalExecute(
                 string iapOrderNo,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminRefundIAPOrder.Response> ExecuteAsync(
+            protected async Task<AdminRefundIAPOrder.Response> InternalExecuteAsync(
                 string iapOrderNo,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AdminRefundIAPOrder(AdminRefundIAPOrderBuilder builder,
+        public class AdminRefundIAPOrderBuilder : AdminRefundIAPOrderAbstractBuilder<AdminRefundIAPOrderBuilder>
+        {
+            public AdminRefundIAPOrderBuilder() : base() { }
+
+            public AdminRefundIAPOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminRefundIAPOrder.Response Execute(
+                string iapOrderNo,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    iapOrderNo,
+                    namespace_
+                );
+            }
+            public async Task<AdminRefundIAPOrder.Response> ExecuteAsync(
+                string iapOrderNo,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    iapOrderNo,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminRefundIAPOrder(IAdminRefundIAPOrderBuilder builder,
             string iapOrderNo,
             string namespace_
         )
@@ -177,22 +216,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPOrderInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPOrderInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicQueryUserThirdPartySubscriptionBuilder Builder { get => new PublicQueryUserThirdPartySubscriptionBuilder(); }
 
-        public class PublicQueryUserThirdPartySubscriptionBuilder
-            : OperationBuilder<PublicQueryUserThirdPartySubscriptionBuilder>
+        public interface IPublicQueryUserThirdPartySubscriptionBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? GroupId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? ProductId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryUserThirdPartySubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryUserThirdPartySubscriptionBuilder
+            where TImpl : PublicQueryUserThirdPartySubscriptionAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -49,42 +69,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicQueryUserThirdPartySubscriptionBuilder() { }
+            public PublicQueryUserThirdPartySubscriptionAbstractBuilder() { }
 
-            internal PublicQueryUserThirdPartySubscriptionBuilder(IAccelByteSdk sdk)
+            public PublicQueryUserThirdPartySubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryUserThirdPartySubscriptionBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserThirdPartySubscriptionBuilder SetGroupId(string _groupId)
+            public TImpl SetGroupId(string _groupId)
             {
                 GroupId = _groupId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserThirdPartySubscriptionBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserThirdPartySubscriptionBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryUserThirdPartySubscriptionBuilder SetProductId(string _productId)
+            public TImpl SetProductId(string _productId)
             {
                 ProductId = _productId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -103,11 +123,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicQueryUserThirdPartySubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryUserThirdPartySubscription.Response Execute(
+            protected PublicQueryUserThirdPartySubscription.Response InternalExecute(
                 string namespace_,
                 string platform,
                 string userId
@@ -128,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryUserThirdPartySubscription.Response> ExecuteAsync(
+            protected async Task<PublicQueryUserThirdPartySubscription.Response> InternalExecuteAsync(
                 string namespace_,
                 string platform,
                 string userId
@@ -151,7 +171,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicQueryUserThirdPartySubscription(PublicQueryUserThirdPartySubscriptionBuilder builder,
+        public class PublicQueryUserThirdPartySubscriptionBuilder : PublicQueryUserThirdPartySubscriptionAbstractBuilder<PublicQueryUserThirdPartySubscriptionBuilder>
+        {
+            public PublicQueryUserThirdPartySubscriptionBuilder() : base() { }
+
+            public PublicQueryUserThirdPartySubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryUserThirdPartySubscription.Response Execute(
+                string namespace_,
+                string platform,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platform,
+                    userId
+                );
+            }
+            public async Task<PublicQueryUserThirdPartySubscription.Response> ExecuteAsync(
+                string namespace_,
+                string platform,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platform,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicQueryUserThirdPartySubscription(IPublicQueryUserThirdPartySubscriptionBuilder builder,
             string namespace_,
             PublicQueryUserThirdPartySubscriptionPlatform platform,
             string userId
@@ -237,7 +290,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartyUserSubscriptionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartyUserSubscriptionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

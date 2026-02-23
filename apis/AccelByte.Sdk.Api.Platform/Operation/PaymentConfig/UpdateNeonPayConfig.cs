@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateNeonPayConfigBuilder Builder { get => new UpdateNeonPayConfigBuilder(); }
 
-        public class UpdateNeonPayConfigBuilder
-            : OperationBuilder<UpdateNeonPayConfigBuilder>
+        public interface IUpdateNeonPayConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+            bool? Validate { get; }
+
+
+
+
+
+        }
+
+        public abstract class UpdateNeonPayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateNeonPayConfigBuilder
+            where TImpl : UpdateNeonPayConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateNeonPayConfigBuilder() { }
+            public UpdateNeonPayConfigAbstractBuilder() { }
 
-            internal UpdateNeonPayConfigBuilder(IAccelByteSdk sdk)
+            public UpdateNeonPayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UpdateNeonPayConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
-            public UpdateNeonPayConfigBuilder SetValidate(bool _validate)
+            public TImpl SetValidate(bool _validate)
             {
                 Validate = _validate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateNeonPayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateNeonPayConfig.Response Execute(
+            protected UpdateNeonPayConfig.Response InternalExecute(
                 NeonPayConfig body,
                 string id
             )
@@ -102,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateNeonPayConfig.Response> ExecuteAsync(
+            protected async Task<UpdateNeonPayConfig.Response> InternalExecuteAsync(
                 NeonPayConfig body,
                 string id
             )
@@ -123,7 +137,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateNeonPayConfig(UpdateNeonPayConfigBuilder builder,
+        public class UpdateNeonPayConfigBuilder : UpdateNeonPayConfigAbstractBuilder<UpdateNeonPayConfigBuilder>
+        {
+            public UpdateNeonPayConfigBuilder() : base() { }
+
+            public UpdateNeonPayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateNeonPayConfig.Response Execute(
+                NeonPayConfig body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateNeonPayConfig.Response> ExecuteAsync(
+                NeonPayConfig body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateNeonPayConfig(IUpdateNeonPayConfigBuilder builder,
             NeonPayConfig body,
             string id
         )
@@ -198,12 +241,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static InvalidateUserInfoCacheBuilder Builder { get => new InvalidateUserInfoCacheBuilder(); }
 
-        public class InvalidateUserInfoCacheBuilder
-            : OperationBuilder<InvalidateUserInfoCacheBuilder>
+        public interface IInvalidateUserInfoCacheBuilder
+        {
+
+            string? Namespace { get; }
+
+
+
+
+
+        }
+
+        public abstract class InvalidateUserInfoCacheAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IInvalidateUserInfoCacheBuilder
+            where TImpl : InvalidateUserInfoCacheAbstractBuilder<TImpl>
         {
 
             public string? Namespace { get; set; }
@@ -41,18 +53,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal InvalidateUserInfoCacheBuilder() { }
+            public InvalidateUserInfoCacheAbstractBuilder() { }
 
-            internal InvalidateUserInfoCacheBuilder(IAccelByteSdk sdk)
+            public InvalidateUserInfoCacheAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public InvalidateUserInfoCacheBuilder SetNamespace(string _namespace_)
+            public TImpl SetNamespace(string _namespace_)
             {
                 Namespace = _namespace_;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -65,12 +77,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 InvalidateUserInfoCache op = new InvalidateUserInfoCache(this
                 );
 
-                op.SetBaseFields<InvalidateUserInfoCacheBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public InvalidateUserInfoCache.Response Execute(
+            protected InvalidateUserInfoCache.Response InternalExecute(
             )
             {
                 InvalidateUserInfoCache op = Build(
@@ -85,7 +97,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<InvalidateUserInfoCache.Response> ExecuteAsync(
+            protected async Task<InvalidateUserInfoCache.Response> InternalExecuteAsync(
             )
             {
                 InvalidateUserInfoCache op = Build(
@@ -102,7 +114,29 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private InvalidateUserInfoCache(InvalidateUserInfoCacheBuilder builder
+        public class InvalidateUserInfoCacheBuilder : InvalidateUserInfoCacheAbstractBuilder<InvalidateUserInfoCacheBuilder>
+        {
+            public InvalidateUserInfoCacheBuilder() : base() { }
+
+            public InvalidateUserInfoCacheBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public InvalidateUserInfoCache.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<InvalidateUserInfoCache.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public InvalidateUserInfoCache(IInvalidateUserInfoCacheBuilder builder
         )
         {
             

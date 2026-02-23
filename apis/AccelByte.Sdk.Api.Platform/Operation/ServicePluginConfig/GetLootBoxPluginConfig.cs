@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetLootBoxPluginConfigBuilder Builder { get => new GetLootBoxPluginConfigBuilder(); }
 
-        public class GetLootBoxPluginConfigBuilder
-            : OperationBuilder<GetLootBoxPluginConfigBuilder>
+        public interface IGetLootBoxPluginConfigBuilder
         {
 
 
 
 
 
-            internal GetLootBoxPluginConfigBuilder() { }
+        }
 
-            internal GetLootBoxPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetLootBoxPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLootBoxPluginConfigBuilder
+            where TImpl : GetLootBoxPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetLootBoxPluginConfigAbstractBuilder() { }
+
+            public GetLootBoxPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetLootBoxPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLootBoxPluginConfig.Response Execute(
+            protected GetLootBoxPluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLootBoxPluginConfig.Response> ExecuteAsync(
+            protected async Task<GetLootBoxPluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetLootBoxPluginConfig(GetLootBoxPluginConfigBuilder builder,
+        public class GetLootBoxPluginConfigBuilder : GetLootBoxPluginConfigAbstractBuilder<GetLootBoxPluginConfigBuilder>
+        {
+            public GetLootBoxPluginConfigBuilder() : base() { }
+
+            public GetLootBoxPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLootBoxPluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetLootBoxPluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetLootBoxPluginConfig(IGetLootBoxPluginConfigBuilder builder,
             string namespace_
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.LootBoxPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.LootBoxPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

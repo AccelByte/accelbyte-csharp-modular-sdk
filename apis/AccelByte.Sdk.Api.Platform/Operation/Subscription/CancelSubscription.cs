@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CancelSubscriptionBuilder Builder { get => new CancelSubscriptionBuilder(); }
 
-        public class CancelSubscriptionBuilder
-            : OperationBuilder<CancelSubscriptionBuilder>
+        public interface ICancelSubscriptionBuilder
+        {
+
+            bool? Force { get; }
+
+
+
+
+
+        }
+
+        public abstract class CancelSubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICancelSubscriptionBuilder
+            where TImpl : CancelSubscriptionAbstractBuilder<TImpl>
         {
 
             public bool? Force { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal CancelSubscriptionBuilder() { }
+            public CancelSubscriptionAbstractBuilder() { }
 
-            internal CancelSubscriptionBuilder(IAccelByteSdk sdk)
+            public CancelSubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public CancelSubscriptionBuilder SetForce(bool _force)
+            public TImpl SetForce(bool _force)
             {
                 Force = _force;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -77,11 +89,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<CancelSubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CancelSubscription.Response Execute(
+            protected CancelSubscription.Response InternalExecute(
                 CancelRequest body,
                 string namespace_,
                 string subscriptionId,
@@ -104,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CancelSubscription.Response> ExecuteAsync(
+            protected async Task<CancelSubscription.Response> InternalExecuteAsync(
                 CancelRequest body,
                 string namespace_,
                 string subscriptionId,
@@ -129,7 +141,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CancelSubscription(CancelSubscriptionBuilder builder,
+        public class CancelSubscriptionBuilder : CancelSubscriptionAbstractBuilder<CancelSubscriptionBuilder>
+        {
+            public CancelSubscriptionBuilder() : base() { }
+
+            public CancelSubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CancelSubscription.Response Execute(
+                CancelRequest body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<CancelSubscription.Response> ExecuteAsync(
+                CancelRequest body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public CancelSubscription(ICancelSubscriptionBuilder builder,
             CancelRequest body,
             string namespace_,
             string subscriptionId,
@@ -211,17 +260,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

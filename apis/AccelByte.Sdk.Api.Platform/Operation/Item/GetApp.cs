@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetAppBuilder Builder { get => new GetAppBuilder(); }
 
-        public class GetAppBuilder
-            : OperationBuilder<GetAppBuilder>
+        public interface IGetAppBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetAppAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAppBuilder
+            where TImpl : GetAppAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetAppBuilder() { }
+            public GetAppAbstractBuilder() { }
 
-            internal GetAppBuilder(IAccelByteSdk sdk)
+            public GetAppAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetAppBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetAppBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetAppBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetApp.Response Execute(
+            protected GetApp.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetApp.Response> ExecuteAsync(
+            protected async Task<GetApp.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -124,7 +138,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetApp(GetAppBuilder builder,
+        public class GetAppBuilder : GetAppAbstractBuilder<GetAppBuilder>
+        {
+            public GetAppBuilder() : base() { }
+
+            public GetAppBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetApp.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<GetApp.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetApp(IGetAppBuilder builder,
             string itemId,
             string namespace_
         )
@@ -197,7 +240,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullAppInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullAppInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

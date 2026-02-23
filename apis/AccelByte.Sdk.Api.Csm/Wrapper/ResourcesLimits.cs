@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public ResourcesLimits(IAccelByteSdk sdk)
         {

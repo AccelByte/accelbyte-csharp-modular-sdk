@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryPaymentNotificationsBuilder Builder { get => new QueryPaymentNotificationsBuilder(); }
 
-        public class QueryPaymentNotificationsBuilder
-            : OperationBuilder<QueryPaymentNotificationsBuilder>
+        public interface IQueryPaymentNotificationsBuilder
+        {
+
+            string? EndDate { get; }
+
+            string? ExternalId { get; }
+
+            int? Limit { get; }
+
+            QueryPaymentNotificationsNotificationSource? NotificationSource { get; }
+
+            string? NotificationType { get; }
+
+            int? Offset { get; }
+
+            string? PaymentOrderNo { get; }
+
+            string? StartDate { get; }
+
+            QueryPaymentNotificationsStatus? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryPaymentNotificationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryPaymentNotificationsBuilder
+            where TImpl : QueryPaymentNotificationsAbstractBuilder<TImpl>
         {
 
             public string? EndDate { get; set; }
@@ -59,66 +87,66 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryPaymentNotificationsBuilder() { }
+            public QueryPaymentNotificationsAbstractBuilder() { }
 
-            internal QueryPaymentNotificationsBuilder(IAccelByteSdk sdk)
+            public QueryPaymentNotificationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryPaymentNotificationsBuilder SetEndDate(string _endDate)
+            public TImpl SetEndDate(string _endDate)
             {
                 EndDate = _endDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetExternalId(string _externalId)
+            public TImpl SetExternalId(string _externalId)
             {
                 ExternalId = _externalId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetNotificationSource(QueryPaymentNotificationsNotificationSource _notificationSource)
+            public TImpl SetNotificationSource(QueryPaymentNotificationsNotificationSource _notificationSource)
             {
                 NotificationSource = _notificationSource;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetNotificationType(string _notificationType)
+            public TImpl SetNotificationType(string _notificationType)
             {
                 NotificationType = _notificationType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetPaymentOrderNo(string _paymentOrderNo)
+            public TImpl SetPaymentOrderNo(string _paymentOrderNo)
             {
                 PaymentOrderNo = _paymentOrderNo;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetStartDate(string _startDate)
+            public TImpl SetStartDate(string _startDate)
             {
                 StartDate = _startDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryPaymentNotificationsBuilder SetStatus(QueryPaymentNotificationsStatus _status)
+            public TImpl SetStatus(QueryPaymentNotificationsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -133,11 +161,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryPaymentNotificationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryPaymentNotifications.Response Execute(
+            protected QueryPaymentNotifications.Response InternalExecute(
                 string namespace_
             )
             {
@@ -154,7 +182,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryPaymentNotifications.Response> ExecuteAsync(
+            protected async Task<QueryPaymentNotifications.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -173,7 +201,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryPaymentNotifications(QueryPaymentNotificationsBuilder builder,
+        public class QueryPaymentNotificationsBuilder : QueryPaymentNotificationsAbstractBuilder<QueryPaymentNotificationsBuilder>
+        {
+            public QueryPaymentNotificationsBuilder() : base() { }
+
+            public QueryPaymentNotificationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryPaymentNotifications.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryPaymentNotifications.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryPaymentNotifications(IQueryPaymentNotificationsBuilder builder,
             string namespace_
         )
         {
@@ -263,7 +316,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentNotificationPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentNotificationPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

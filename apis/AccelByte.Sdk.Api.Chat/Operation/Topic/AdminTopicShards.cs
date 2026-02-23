@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminTopicShardsBuilder Builder { get => new AdminTopicShardsBuilder(); }
 
-        public class AdminTopicShardsBuilder
-            : OperationBuilder<AdminTopicShardsBuilder>
+        public interface IAdminTopicShardsBuilder
         {
 
 
 
 
 
-            internal AdminTopicShardsBuilder() { }
+        }
 
-            internal AdminTopicShardsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminTopicShardsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminTopicShardsBuilder
+            where TImpl : AdminTopicShardsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminTopicShardsAbstractBuilder() { }
+
+            public AdminTopicShardsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<AdminTopicShardsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminTopicShards.Response Execute(
+            protected AdminTopicShards.Response InternalExecute(
                 string namespace_,
                 string topic
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminTopicShards.Response> ExecuteAsync(
+            protected async Task<AdminTopicShards.Response> InternalExecuteAsync(
                 string namespace_,
                 string topic
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminTopicShards(AdminTopicShardsBuilder builder,
+        public class AdminTopicShardsBuilder : AdminTopicShardsAbstractBuilder<AdminTopicShardsBuilder>
+        {
+            public AdminTopicShardsBuilder() : base() { }
+
+            public AdminTopicShardsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminTopicShards.Response Execute(
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<AdminTopicShards.Response> ExecuteAsync(
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public AdminTopicShards(IAdminTopicShardsBuilder builder,
             string namespace_,
             string topic
         )
@@ -179,27 +218,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

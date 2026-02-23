@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncOrdersBuilder Builder { get => new SyncOrdersBuilder(); }
 
-        public class SyncOrdersBuilder
-            : OperationBuilder<SyncOrdersBuilder>
+        public interface ISyncOrdersBuilder
+        {
+
+            string? NextEvaluatedKey { get; }
+
+
+
+
+
+        }
+
+        public abstract class SyncOrdersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncOrdersBuilder
+            where TImpl : SyncOrdersAbstractBuilder<TImpl>
         {
 
             public string? NextEvaluatedKey { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SyncOrdersBuilder() { }
+            public SyncOrdersAbstractBuilder() { }
 
-            internal SyncOrdersBuilder(IAccelByteSdk sdk)
+            public SyncOrdersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public SyncOrdersBuilder SetNextEvaluatedKey(string _nextEvaluatedKey)
+            public TImpl SetNextEvaluatedKey(string _nextEvaluatedKey)
             {
                 NextEvaluatedKey = _nextEvaluatedKey;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     start                    
                 );
 
-                op.SetBaseFields<SyncOrdersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncOrders.Response Execute(
+            protected SyncOrders.Response InternalExecute(
                 string end,
                 string start
             )
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncOrders.Response> ExecuteAsync(
+            protected async Task<SyncOrders.Response> InternalExecuteAsync(
                 string end,
                 string start
             )
@@ -115,7 +127,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncOrders(SyncOrdersBuilder builder,
+        public class SyncOrdersBuilder : SyncOrdersAbstractBuilder<SyncOrdersBuilder>
+        {
+            public SyncOrdersBuilder() : base() { }
+
+            public SyncOrdersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncOrders.Response Execute(
+                string end,
+                string start
+            )
+            {
+                return InternalExecute(
+                    end,
+                    start
+                );
+            }
+            public async Task<SyncOrders.Response> ExecuteAsync(
+                string end,
+                string start
+            )
+            {
+                return await InternalExecuteAsync(
+                    end,
+                    start
+                );
+            }
+        }
+
+
+        public SyncOrders(ISyncOrdersBuilder builder,
             string end,
             string start
         )
@@ -185,7 +226,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderSyncResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderSyncResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

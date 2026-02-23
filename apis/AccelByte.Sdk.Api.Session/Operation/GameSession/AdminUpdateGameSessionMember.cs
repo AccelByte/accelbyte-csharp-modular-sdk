@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminUpdateGameSessionMemberBuilder Builder { get => new AdminUpdateGameSessionMemberBuilder(); }
 
-        public class AdminUpdateGameSessionMemberBuilder
-            : OperationBuilder<AdminUpdateGameSessionMemberBuilder>
+        public interface IAdminUpdateGameSessionMemberBuilder
         {
 
 
 
 
 
-            internal AdminUpdateGameSessionMemberBuilder() { }
+        }
 
-            internal AdminUpdateGameSessionMemberBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateGameSessionMemberAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateGameSessionMemberBuilder
+            where TImpl : AdminUpdateGameSessionMemberAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateGameSessionMemberAbstractBuilder() { }
+
+            public AdminUpdateGameSessionMemberAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     statusType                    
                 );
 
-                op.SetBaseFields<AdminUpdateGameSessionMemberBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateGameSessionMember.Response Execute(
+            protected AdminUpdateGameSessionMember.Response InternalExecute(
                 string memberId,
                 string namespace_,
                 string sessionId,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateGameSessionMember.Response> ExecuteAsync(
+            protected async Task<AdminUpdateGameSessionMember.Response> InternalExecuteAsync(
                 string memberId,
                 string namespace_,
                 string sessionId,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminUpdateGameSessionMember(AdminUpdateGameSessionMemberBuilder builder,
+        public class AdminUpdateGameSessionMemberBuilder : AdminUpdateGameSessionMemberAbstractBuilder<AdminUpdateGameSessionMemberBuilder>
+        {
+            public AdminUpdateGameSessionMemberBuilder() : base() { }
+
+            public AdminUpdateGameSessionMemberBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateGameSessionMember.Response Execute(
+                string memberId,
+                string namespace_,
+                string sessionId,
+                string statusType
+            )
+            {
+                return InternalExecute(
+                    memberId,
+                    namespace_,
+                    sessionId,
+                    statusType
+                );
+            }
+            public async Task<AdminUpdateGameSessionMember.Response> ExecuteAsync(
+                string memberId,
+                string namespace_,
+                string sessionId,
+                string statusType
+            )
+            {
+                return await InternalExecuteAsync(
+                    memberId,
+                    namespace_,
+                    sessionId,
+                    statusType
+                );
+            }
+        }
+
+
+        public AdminUpdateGameSessionMember(IAdminUpdateGameSessionMemberBuilder builder,
             string memberId,
             string namespace_,
             string sessionId,
@@ -201,32 +248,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsUpdateGameSessionMemberStatusResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsUpdateGameSessionMemberStatusResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

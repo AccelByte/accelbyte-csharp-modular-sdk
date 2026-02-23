@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static UpdateCustomAttributesPartiallyBuilder Builder { get => new UpdateCustomAttributesPartiallyBuilder(); }
 
-        public class UpdateCustomAttributesPartiallyBuilder
-            : OperationBuilder<UpdateCustomAttributesPartiallyBuilder>
+        public interface IUpdateCustomAttributesPartiallyBuilder
+        {
+
+
+            Dictionary<string, object>? Body { get; }
+
+
+
+
+        }
+
+        public abstract class UpdateCustomAttributesPartiallyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateCustomAttributesPartiallyBuilder
+            where TImpl : UpdateCustomAttributesPartiallyAbstractBuilder<TImpl>
         {
 
 
@@ -45,19 +57,19 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal UpdateCustomAttributesPartiallyBuilder() { }
+            public UpdateCustomAttributesPartiallyAbstractBuilder() { }
 
-            internal UpdateCustomAttributesPartiallyBuilder(IAccelByteSdk sdk)
+            public UpdateCustomAttributesPartiallyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public UpdateCustomAttributesPartiallyBuilder SetBody(Dictionary<string, object> _body)
+            public TImpl SetBody(Dictionary<string, object> _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpdateCustomAttributesPartiallyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateCustomAttributesPartially.Response Execute(
+            protected UpdateCustomAttributesPartially.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -96,7 +108,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateCustomAttributesPartially.Response> ExecuteAsync(
+            protected async Task<UpdateCustomAttributesPartially.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -117,7 +129,36 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private UpdateCustomAttributesPartially(UpdateCustomAttributesPartiallyBuilder builder,
+        public class UpdateCustomAttributesPartiallyBuilder : UpdateCustomAttributesPartiallyAbstractBuilder<UpdateCustomAttributesPartiallyBuilder>
+        {
+            public UpdateCustomAttributesPartiallyBuilder() : base() { }
+
+            public UpdateCustomAttributesPartiallyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateCustomAttributesPartially.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpdateCustomAttributesPartially.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpdateCustomAttributesPartially(IUpdateCustomAttributesPartiallyBuilder builder,
             string namespace_,
             string userId
         )
@@ -195,27 +236,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicDeletePlayerAttributesBuilder Builder { get => new PublicDeletePlayerAttributesBuilder(); }
 
-        public class PublicDeletePlayerAttributesBuilder
-            : OperationBuilder<PublicDeletePlayerAttributesBuilder>
+        public interface IPublicDeletePlayerAttributesBuilder
         {
 
 
 
 
 
-            internal PublicDeletePlayerAttributesBuilder() { }
+        }
 
-            internal PublicDeletePlayerAttributesBuilder(IAccelByteSdk sdk)
+        public abstract class PublicDeletePlayerAttributesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicDeletePlayerAttributesBuilder
+            where TImpl : PublicDeletePlayerAttributesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicDeletePlayerAttributesAbstractBuilder() { }
+
+            public PublicDeletePlayerAttributesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicDeletePlayerAttributesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicDeletePlayerAttributes.Response Execute(
+            protected PublicDeletePlayerAttributes.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicDeletePlayerAttributes.Response> ExecuteAsync(
+            protected async Task<PublicDeletePlayerAttributes.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicDeletePlayerAttributes(PublicDeletePlayerAttributesBuilder builder,
+        public class PublicDeletePlayerAttributesBuilder : PublicDeletePlayerAttributesAbstractBuilder<PublicDeletePlayerAttributesBuilder>
+        {
+            public PublicDeletePlayerAttributesBuilder() : base() { }
+
+            public PublicDeletePlayerAttributesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicDeletePlayerAttributes.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicDeletePlayerAttributes.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicDeletePlayerAttributes(IPublicDeletePlayerAttributesBuilder builder,
             string namespace_
         )
         {
@@ -170,22 +205,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

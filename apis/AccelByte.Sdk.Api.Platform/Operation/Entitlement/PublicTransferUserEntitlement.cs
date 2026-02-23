@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicTransferUserEntitlementBuilder Builder { get => new PublicTransferUserEntitlementBuilder(); }
 
-        public class PublicTransferUserEntitlementBuilder
-            : OperationBuilder<PublicTransferUserEntitlementBuilder>
+        public interface IPublicTransferUserEntitlementBuilder
         {
 
 
 
 
 
-            internal PublicTransferUserEntitlementBuilder() { }
+        }
 
-            internal PublicTransferUserEntitlementBuilder(IAccelByteSdk sdk)
+        public abstract class PublicTransferUserEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicTransferUserEntitlementBuilder
+            where TImpl : PublicTransferUserEntitlementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicTransferUserEntitlementAbstractBuilder() { }
+
+            public PublicTransferUserEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicTransferUserEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicTransferUserEntitlement.Response Execute(
+            protected PublicTransferUserEntitlement.Response InternalExecute(
                 EntitlementTransferRequest body,
                 string entitlementId,
                 string namespace_,
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicTransferUserEntitlement.Response> ExecuteAsync(
+            protected async Task<PublicTransferUserEntitlement.Response> InternalExecuteAsync(
                 EntitlementTransferRequest body,
                 string entitlementId,
                 string namespace_,
@@ -117,7 +127,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicTransferUserEntitlement(PublicTransferUserEntitlementBuilder builder,
+        public class PublicTransferUserEntitlementBuilder : PublicTransferUserEntitlementAbstractBuilder<PublicTransferUserEntitlementBuilder>
+        {
+            public PublicTransferUserEntitlementBuilder() : base() { }
+
+            public PublicTransferUserEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicTransferUserEntitlement.Response Execute(
+                EntitlementTransferRequest body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicTransferUserEntitlement.Response> ExecuteAsync(
+                EntitlementTransferRequest body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicTransferUserEntitlement(IPublicTransferUserEntitlementBuilder builder,
             EntitlementTransferRequest body,
             string entitlementId,
             string namespace_,
@@ -196,17 +243,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementTransferResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementTransferResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

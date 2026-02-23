@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static PublicBulkUnlockAchievementBuilder Builder { get => new PublicBulkUnlockAchievementBuilder(); }
 
-        public class PublicBulkUnlockAchievementBuilder
-            : OperationBuilder<PublicBulkUnlockAchievementBuilder>
+        public interface IPublicBulkUnlockAchievementBuilder
         {
 
 
 
 
 
-            internal PublicBulkUnlockAchievementBuilder() { }
+        }
 
-            internal PublicBulkUnlockAchievementBuilder(IAccelByteSdk sdk)
+        public abstract class PublicBulkUnlockAchievementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicBulkUnlockAchievementBuilder
+            where TImpl : PublicBulkUnlockAchievementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicBulkUnlockAchievementAbstractBuilder() { }
+
+            public PublicBulkUnlockAchievementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicBulkUnlockAchievementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicBulkUnlockAchievement.Response Execute(
+            protected PublicBulkUnlockAchievement.Response InternalExecute(
                 ModelsBulkUnlockAchievementRequest body,
                 string namespace_,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicBulkUnlockAchievement.Response> ExecuteAsync(
+            protected async Task<PublicBulkUnlockAchievement.Response> InternalExecuteAsync(
                 ModelsBulkUnlockAchievementRequest body,
                 string namespace_,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private PublicBulkUnlockAchievement(PublicBulkUnlockAchievementBuilder builder,
+        public class PublicBulkUnlockAchievementBuilder : PublicBulkUnlockAchievementAbstractBuilder<PublicBulkUnlockAchievementBuilder>
+        {
+            public PublicBulkUnlockAchievementBuilder() : base() { }
+
+            public PublicBulkUnlockAchievementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicBulkUnlockAchievement.Response Execute(
+                ModelsBulkUnlockAchievementRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicBulkUnlockAchievement.Response> ExecuteAsync(
+                ModelsBulkUnlockAchievementRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicBulkUnlockAchievement(IPublicBulkUnlockAchievementBuilder builder,
             ModelsBulkUnlockAchievementRequest body,
             string namespace_,
             string userId
@@ -194,32 +237,38 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelsBulkUnlockAchievementResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelsBulkUnlockAchievementResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

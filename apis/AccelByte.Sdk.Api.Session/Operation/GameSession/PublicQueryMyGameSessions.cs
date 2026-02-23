@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -44,8 +44,24 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicQueryMyGameSessionsBuilder Builder { get => new PublicQueryMyGameSessionsBuilder(); }
 
-        public class PublicQueryMyGameSessionsBuilder
-            : OperationBuilder<PublicQueryMyGameSessionsBuilder>
+        public interface IPublicQueryMyGameSessionsBuilder
+        {
+
+            string? Order { get; }
+
+            string? OrderBy { get; }
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryMyGameSessionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryMyGameSessionsBuilder
+            where TImpl : PublicQueryMyGameSessionsAbstractBuilder<TImpl>
         {
 
             public string? Order { get; set; }
@@ -58,30 +74,30 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal PublicQueryMyGameSessionsBuilder() { }
+            public PublicQueryMyGameSessionsAbstractBuilder() { }
 
-            internal PublicQueryMyGameSessionsBuilder(IAccelByteSdk sdk)
+            public PublicQueryMyGameSessionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryMyGameSessionsBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryMyGameSessionsBuilder SetOrderBy(string _orderBy)
+            public TImpl SetOrderBy(string _orderBy)
             {
                 OrderBy = _orderBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryMyGameSessionsBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -96,11 +112,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicQueryMyGameSessionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryMyGameSessions.Response Execute(
+            protected PublicQueryMyGameSessions.Response InternalExecute(
                 string namespace_
             )
             {
@@ -117,7 +133,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryMyGameSessions.Response> ExecuteAsync(
+            protected async Task<PublicQueryMyGameSessions.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -136,7 +152,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicQueryMyGameSessions(PublicQueryMyGameSessionsBuilder builder,
+        public class PublicQueryMyGameSessionsBuilder : PublicQueryMyGameSessionsAbstractBuilder<PublicQueryMyGameSessionsBuilder>
+        {
+            public PublicQueryMyGameSessionsBuilder() : base() { }
+
+            public PublicQueryMyGameSessionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryMyGameSessions.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicQueryMyGameSessions.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicQueryMyGameSessions(IPublicQueryMyGameSessionsBuilder builder,
             string namespace_
         )
         {
@@ -214,22 +255,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

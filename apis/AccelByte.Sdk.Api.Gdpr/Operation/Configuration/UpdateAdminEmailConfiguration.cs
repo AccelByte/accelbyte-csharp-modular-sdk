@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static UpdateAdminEmailConfigurationBuilder Builder { get => new UpdateAdminEmailConfigurationBuilder(); }
 
-        public class UpdateAdminEmailConfigurationBuilder
-            : OperationBuilder<UpdateAdminEmailConfigurationBuilder>
+        public interface IUpdateAdminEmailConfigurationBuilder
         {
 
 
 
 
 
-            internal UpdateAdminEmailConfigurationBuilder() { }
+        }
 
-            internal UpdateAdminEmailConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateAdminEmailConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateAdminEmailConfigurationBuilder
+            where TImpl : UpdateAdminEmailConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateAdminEmailConfigurationAbstractBuilder() { }
+
+            public UpdateAdminEmailConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateAdminEmailConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateAdminEmailConfiguration.Response Execute(
+            protected UpdateAdminEmailConfiguration.Response InternalExecute(
                 List<string> body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateAdminEmailConfiguration.Response> ExecuteAsync(
+            protected async Task<UpdateAdminEmailConfiguration.Response> InternalExecuteAsync(
                 List<string> body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private UpdateAdminEmailConfiguration(UpdateAdminEmailConfigurationBuilder builder,
+        public class UpdateAdminEmailConfigurationBuilder : UpdateAdminEmailConfigurationAbstractBuilder<UpdateAdminEmailConfigurationBuilder>
+        {
+            public UpdateAdminEmailConfigurationBuilder() : base() { }
+
+            public UpdateAdminEmailConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateAdminEmailConfiguration.Response Execute(
+                List<string> body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateAdminEmailConfiguration.Response> ExecuteAsync(
+                List<string> body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateAdminEmailConfiguration(IUpdateAdminEmailConfigurationBuilder builder,
             List<string> body,
             string namespace_
         )
@@ -179,17 +218,20 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

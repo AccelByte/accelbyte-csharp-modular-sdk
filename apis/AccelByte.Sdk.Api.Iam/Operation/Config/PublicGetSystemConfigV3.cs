@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetSystemConfigV3Builder Builder { get => new PublicGetSystemConfigV3Builder(); }
 
-        public class PublicGetSystemConfigV3Builder
-            : OperationBuilder<PublicGetSystemConfigV3Builder>
+        public interface IPublicGetSystemConfigV3Builder
         {
 
 
 
 
 
-            internal PublicGetSystemConfigV3Builder() { }
+        }
 
-            internal PublicGetSystemConfigV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetSystemConfigV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetSystemConfigV3Builder
+            where TImpl : PublicGetSystemConfigV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetSystemConfigV3AbstractBuilder() { }
+
+            public PublicGetSystemConfigV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 PublicGetSystemConfigV3 op = new PublicGetSystemConfigV3(this
                 );
 
-                op.SetBaseFields<PublicGetSystemConfigV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetSystemConfigV3.Response Execute(
+            protected PublicGetSystemConfigV3.Response InternalExecute(
             )
             {
                 PublicGetSystemConfigV3 op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetSystemConfigV3.Response> ExecuteAsync(
+            protected async Task<PublicGetSystemConfigV3.Response> InternalExecuteAsync(
             )
             {
                 PublicGetSystemConfigV3 op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetSystemConfigV3(PublicGetSystemConfigV3Builder builder
+        public class PublicGetSystemConfigV3Builder : PublicGetSystemConfigV3AbstractBuilder<PublicGetSystemConfigV3Builder>
+        {
+            public PublicGetSystemConfigV3Builder() : base() { }
+
+            public PublicGetSystemConfigV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetSystemConfigV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicGetSystemConfigV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicGetSystemConfigV3(IPublicGetSystemConfigV3Builder builder
         )
         {
             
@@ -151,12 +182,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelInternalConfigResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelInternalConfigResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

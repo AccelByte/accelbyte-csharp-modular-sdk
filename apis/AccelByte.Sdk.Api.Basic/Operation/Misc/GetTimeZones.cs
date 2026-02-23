@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetTimeZonesBuilder Builder { get => new GetTimeZonesBuilder(); }
 
-        public class GetTimeZonesBuilder
-            : OperationBuilder<GetTimeZonesBuilder>
+        public interface IGetTimeZonesBuilder
         {
 
 
 
 
 
-            internal GetTimeZonesBuilder() { }
+        }
 
-            internal GetTimeZonesBuilder(IAccelByteSdk sdk)
+        public abstract class GetTimeZonesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTimeZonesBuilder
+            where TImpl : GetTimeZonesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetTimeZonesAbstractBuilder() { }
+
+            public GetTimeZonesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetTimeZonesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTimeZones.Response Execute(
+            protected GetTimeZones.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTimeZones.Response> ExecuteAsync(
+            protected async Task<GetTimeZones.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetTimeZones(GetTimeZonesBuilder builder,
+        public class GetTimeZonesBuilder : GetTimeZonesAbstractBuilder<GetTimeZonesBuilder>
+        {
+            public GetTimeZonesBuilder() : base() { }
+
+            public GetTimeZonesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTimeZones.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetTimeZones.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetTimeZones(IGetTimeZonesBuilder builder,
             string namespace_
         )
         {
@@ -169,17 +204,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateUserEntitlementBuilder Builder { get => new UpdateUserEntitlementBuilder(); }
 
-        public class UpdateUserEntitlementBuilder
-            : OperationBuilder<UpdateUserEntitlementBuilder>
+        public interface IUpdateUserEntitlementBuilder
         {
 
 
 
 
 
-            internal UpdateUserEntitlementBuilder() { }
+        }
 
-            internal UpdateUserEntitlementBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateUserEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateUserEntitlementBuilder
+            where TImpl : UpdateUserEntitlementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateUserEntitlementAbstractBuilder() { }
+
+            public UpdateUserEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpdateUserEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateUserEntitlement.Response Execute(
+            protected UpdateUserEntitlement.Response InternalExecute(
                 EntitlementUpdate body,
                 string entitlementId,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateUserEntitlement.Response> ExecuteAsync(
+            protected async Task<UpdateUserEntitlement.Response> InternalExecuteAsync(
                 EntitlementUpdate body,
                 string entitlementId,
                 string namespace_,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateUserEntitlement(UpdateUserEntitlementBuilder builder,
+        public class UpdateUserEntitlementBuilder : UpdateUserEntitlementAbstractBuilder<UpdateUserEntitlementBuilder>
+        {
+            public UpdateUserEntitlementBuilder() : base() { }
+
+            public UpdateUserEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateUserEntitlement.Response Execute(
+                EntitlementUpdate body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpdateUserEntitlement.Response> ExecuteAsync(
+                EntitlementUpdate body,
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpdateUserEntitlement(IUpdateUserEntitlementBuilder builder,
             EntitlementUpdate body,
             string entitlementId,
             string namespace_,
@@ -200,22 +247,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

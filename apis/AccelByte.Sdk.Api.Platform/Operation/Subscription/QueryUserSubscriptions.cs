@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUserSubscriptionsBuilder Builder { get => new QueryUserSubscriptionsBuilder(); }
 
-        public class QueryUserSubscriptionsBuilder
-            : OperationBuilder<QueryUserSubscriptionsBuilder>
+        public interface IQueryUserSubscriptionsBuilder
+        {
+
+            QueryUserSubscriptionsChargeStatus? ChargeStatus { get; }
+
+            string? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Sku { get; }
+
+            QueryUserSubscriptionsStatus? Status { get; }
+
+            QueryUserSubscriptionsSubscribedBy? SubscribedBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserSubscriptionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserSubscriptionsBuilder
+            where TImpl : QueryUserSubscriptionsAbstractBuilder<TImpl>
         {
 
             public QueryUserSubscriptionsChargeStatus? ChargeStatus { get; set; }
@@ -55,54 +79,54 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUserSubscriptionsBuilder() { }
+            public QueryUserSubscriptionsAbstractBuilder() { }
 
-            internal QueryUserSubscriptionsBuilder(IAccelByteSdk sdk)
+            public QueryUserSubscriptionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserSubscriptionsBuilder SetChargeStatus(QueryUserSubscriptionsChargeStatus _chargeStatus)
+            public TImpl SetChargeStatus(QueryUserSubscriptionsChargeStatus _chargeStatus)
             {
                 ChargeStatus = _chargeStatus;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserSubscriptionsBuilder SetItemId(string _itemId)
+            public TImpl SetItemId(string _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserSubscriptionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserSubscriptionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserSubscriptionsBuilder SetSku(string _sku)
+            public TImpl SetSku(string _sku)
             {
                 Sku = _sku;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserSubscriptionsBuilder SetStatus(QueryUserSubscriptionsStatus _status)
+            public TImpl SetStatus(QueryUserSubscriptionsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserSubscriptionsBuilder SetSubscribedBy(QueryUserSubscriptionsSubscribedBy _subscribedBy)
+            public TImpl SetSubscribedBy(QueryUserSubscriptionsSubscribedBy _subscribedBy)
             {
                 SubscribedBy = _subscribedBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -119,11 +143,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserSubscriptionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserSubscriptions.Response Execute(
+            protected QueryUserSubscriptions.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -142,7 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserSubscriptions.Response> ExecuteAsync(
+            protected async Task<QueryUserSubscriptions.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -163,7 +187,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUserSubscriptions(QueryUserSubscriptionsBuilder builder,
+        public class QueryUserSubscriptionsBuilder : QueryUserSubscriptionsAbstractBuilder<QueryUserSubscriptionsBuilder>
+        {
+            public QueryUserSubscriptionsBuilder() : base() { }
+
+            public QueryUserSubscriptionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserSubscriptions.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserSubscriptions.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserSubscriptions(IQueryUserSubscriptionsBuilder builder,
             string namespace_,
             string userId
         )
@@ -251,7 +304,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -83,8 +83,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static TokenGrantV3Builder Builder { get => new TokenGrantV3Builder(); }
 
-        public class TokenGrantV3Builder
-            : OperationBuilder<TokenGrantV3Builder>
+        public interface ITokenGrantV3Builder
+        {
+
+
+
+            string? AdditionalData { get; }
+
+            string? ClientId { get; }
+
+            string? ClientSecret { get; }
+
+            string? Code { get; }
+
+            string? CodeVerifier { get; }
+
+            string? ExtendNamespace { get; }
+
+            bool? ExtendExp { get; }
+
+            string? Password { get; }
+
+            string? RedirectUri { get; }
+
+            string? RefreshToken { get; }
+
+            string? Scope { get; }
+
+            string? Username { get; }
+
+
+
+        }
+
+        public abstract class TokenGrantV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITokenGrantV3Builder
+            where TImpl : TokenGrantV3AbstractBuilder<TImpl>
         {
 
 
@@ -115,9 +149,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal TokenGrantV3Builder() { }
+            public TokenGrantV3AbstractBuilder() { }
 
-            internal TokenGrantV3Builder(IAccelByteSdk sdk)
+            public TokenGrantV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -125,76 +159,76 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public TokenGrantV3Builder SetAdditionalData(string _additionalData)
+            public TImpl SetAdditionalData(string _additionalData)
             {
                 AdditionalData = _additionalData;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetClientId(string _clientId)
+            public TImpl SetClientId(string _clientId)
             {
                 ClientId = _clientId;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetClientSecret(string _clientSecret)
+            public TImpl SetClientSecret(string _clientSecret)
             {
                 ClientSecret = _clientSecret;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetCodeVerifier(string _codeVerifier)
+            public TImpl SetCodeVerifier(string _codeVerifier)
             {
                 CodeVerifier = _codeVerifier;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetExtendNamespace(string _extendNamespace)
+            public TImpl SetExtendNamespace(string _extendNamespace)
             {
                 ExtendNamespace = _extendNamespace;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetExtendExp(bool _extendExp)
+            public TImpl SetExtendExp(bool _extendExp)
             {
                 ExtendExp = _extendExp;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetPassword(string _password)
+            public TImpl SetPassword(string _password)
             {
                 Password = _password;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetRefreshToken(string _refreshToken)
+            public TImpl SetRefreshToken(string _refreshToken)
             {
                 RefreshToken = _refreshToken;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetScope(string _scope)
+            public TImpl SetScope(string _scope)
             {
                 Scope = _scope;
-                return this;
+                return (TImpl)this;
             }
 
-            public TokenGrantV3Builder SetUsername(string _username)
+            public TImpl SetUsername(string _username)
             {
                 Username = _username;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -207,11 +241,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     grantType                    
                 );
 
-                op.SetBaseFields<TokenGrantV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TokenGrantV3.Response Execute(
+            protected TokenGrantV3.Response InternalExecute(
                 string grantType
             )
             {
@@ -228,7 +262,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TokenGrantV3.Response> ExecuteAsync(
+            protected async Task<TokenGrantV3.Response> InternalExecuteAsync(
                 string grantType
             )
             {
@@ -247,7 +281,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private TokenGrantV3(TokenGrantV3Builder builder,
+        public class TokenGrantV3Builder : TokenGrantV3AbstractBuilder<TokenGrantV3Builder>
+        {
+            public TokenGrantV3Builder() : base() { }
+
+            public TokenGrantV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TokenGrantV3.Response Execute(
+                string grantType
+            )
+            {
+                return InternalExecute(
+                    grantType
+                );
+            }
+            public async Task<TokenGrantV3.Response> ExecuteAsync(
+                string grantType
+            )
+            {
+                return await InternalExecuteAsync(
+                    grantType
+                );
+            }
+        }
+
+
+        public TokenGrantV3(ITokenGrantV3Builder builder,
             TokenGrantV3GrantType grantType
         )
         {
@@ -354,27 +413,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenWithDeviceCookieResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenWithDeviceCookieResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetMyDLCContentBuilder Builder { get => new PublicGetMyDLCContentBuilder(); }
 
-        public class PublicGetMyDLCContentBuilder
-            : OperationBuilder<PublicGetMyDLCContentBuilder>
+        public interface IPublicGetMyDLCContentBuilder
+        {
+
+            bool? IncludeAllNamespaces { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetMyDLCContentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetMyDLCContentBuilder
+            where TImpl : PublicGetMyDLCContentAbstractBuilder<TImpl>
         {
 
             public bool? IncludeAllNamespaces { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetMyDLCContentBuilder() { }
+            public PublicGetMyDLCContentAbstractBuilder() { }
 
-            internal PublicGetMyDLCContentBuilder(IAccelByteSdk sdk)
+            public PublicGetMyDLCContentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetMyDLCContentBuilder SetIncludeAllNamespaces(bool _includeAllNamespaces)
+            public TImpl SetIncludeAllNamespaces(bool _includeAllNamespaces)
             {
                 IncludeAllNamespaces = _includeAllNamespaces;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     type                    
                 );
 
-                op.SetBaseFields<PublicGetMyDLCContentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetMyDLCContent.Response Execute(
+            protected PublicGetMyDLCContent.Response InternalExecute(
                 string type
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetMyDLCContent.Response> ExecuteAsync(
+            protected async Task<PublicGetMyDLCContent.Response> InternalExecuteAsync(
                 string type
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetMyDLCContent(PublicGetMyDLCContentBuilder builder,
+        public class PublicGetMyDLCContentBuilder : PublicGetMyDLCContentAbstractBuilder<PublicGetMyDLCContentBuilder>
+        {
+            public PublicGetMyDLCContentBuilder() : base() { }
+
+            public PublicGetMyDLCContentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetMyDLCContent.Response Execute(
+                string type
+            )
+            {
+                return InternalExecute(
+                    type
+                );
+            }
+            public async Task<PublicGetMyDLCContent.Response> ExecuteAsync(
+                string type
+            )
+            {
+                return await InternalExecuteAsync(
+                    type
+                );
+            }
+        }
+
+
+        public PublicGetMyDLCContent(IPublicGetMyDLCContentBuilder builder,
             PublicGetMyDLCContentType type
         )
         {
@@ -175,7 +212,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SimpleUserDLCRewardContentsResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SimpleUserDLCRewardContentsResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

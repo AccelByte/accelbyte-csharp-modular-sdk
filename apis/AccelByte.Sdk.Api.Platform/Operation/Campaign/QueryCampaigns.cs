@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryCampaignsBuilder Builder { get => new QueryCampaignsBuilder(); }
 
-        public class QueryCampaignsBuilder
-            : OperationBuilder<QueryCampaignsBuilder>
+        public interface IQueryCampaignsBuilder
+        {
+
+            int? Limit { get; }
+
+            string? Name { get; }
+
+            int? Offset { get; }
+
+            string? Tag { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryCampaignsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryCampaignsBuilder
+            where TImpl : QueryCampaignsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryCampaignsBuilder() { }
+            public QueryCampaignsAbstractBuilder() { }
 
-            internal QueryCampaignsBuilder(IAccelByteSdk sdk)
+            public QueryCampaignsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryCampaignsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCampaignsBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCampaignsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryCampaignsBuilder SetTag(string _tag)
+            public TImpl SetTag(string _tag)
             {
                 Tag = _tag;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -93,11 +111,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryCampaignsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryCampaigns.Response Execute(
+            protected QueryCampaigns.Response InternalExecute(
                 string namespace_
             )
             {
@@ -114,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryCampaigns.Response> ExecuteAsync(
+            protected async Task<QueryCampaigns.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -133,7 +151,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryCampaigns(QueryCampaignsBuilder builder,
+        public class QueryCampaignsBuilder : QueryCampaignsAbstractBuilder<QueryCampaignsBuilder>
+        {
+            public QueryCampaignsBuilder() : base() { }
+
+            public QueryCampaignsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryCampaigns.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryCampaigns.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryCampaigns(IQueryCampaignsBuilder builder,
             string namespace_
         )
         {
@@ -208,7 +251,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CampaignPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CampaignPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

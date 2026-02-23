@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteFulfillmentScriptBuilder Builder { get => new DeleteFulfillmentScriptBuilder(); }
 
-        public class DeleteFulfillmentScriptBuilder
-            : OperationBuilder<DeleteFulfillmentScriptBuilder>
+        public interface IDeleteFulfillmentScriptBuilder
         {
 
 
 
 
 
-            internal DeleteFulfillmentScriptBuilder() { }
+        }
 
-            internal DeleteFulfillmentScriptBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteFulfillmentScriptAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteFulfillmentScriptBuilder
+            where TImpl : DeleteFulfillmentScriptAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteFulfillmentScriptAbstractBuilder() { }
+
+            public DeleteFulfillmentScriptAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<DeleteFulfillmentScriptBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteFulfillmentScript.Response Execute(
+            protected DeleteFulfillmentScript.Response InternalExecute(
                 string id
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteFulfillmentScript.Response> ExecuteAsync(
+            protected async Task<DeleteFulfillmentScript.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteFulfillmentScript(DeleteFulfillmentScriptBuilder builder,
+        public class DeleteFulfillmentScriptBuilder : DeleteFulfillmentScriptAbstractBuilder<DeleteFulfillmentScriptBuilder>
+        {
+            public DeleteFulfillmentScriptBuilder() : base() { }
+
+            public DeleteFulfillmentScriptBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteFulfillmentScript.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<DeleteFulfillmentScript.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public DeleteFulfillmentScript(IDeleteFulfillmentScriptBuilder builder,
             string id
         )
         {

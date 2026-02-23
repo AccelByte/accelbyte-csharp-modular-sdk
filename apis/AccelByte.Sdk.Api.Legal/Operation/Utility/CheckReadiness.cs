@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static CheckReadinessBuilder Builder { get => new CheckReadinessBuilder(); }
 
-        public class CheckReadinessBuilder
-            : OperationBuilder<CheckReadinessBuilder>
+        public interface ICheckReadinessBuilder
         {
 
 
 
 
 
-            internal CheckReadinessBuilder() { }
+        }
 
-            internal CheckReadinessBuilder(IAccelByteSdk sdk)
+        public abstract class CheckReadinessAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICheckReadinessBuilder
+            where TImpl : CheckReadinessAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CheckReadinessAbstractBuilder() { }
+
+            public CheckReadinessAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 CheckReadiness op = new CheckReadiness(this
                 );
 
-                op.SetBaseFields<CheckReadinessBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CheckReadiness.Response Execute(
+            protected CheckReadiness.Response InternalExecute(
             )
             {
                 CheckReadiness op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CheckReadiness.Response> ExecuteAsync(
+            protected async Task<CheckReadiness.Response> InternalExecuteAsync(
             )
             {
                 CheckReadiness op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private CheckReadiness(CheckReadinessBuilder builder
+        public class CheckReadinessBuilder : CheckReadinessAbstractBuilder<CheckReadinessBuilder>
+        {
+            public CheckReadinessBuilder() : base() { }
+
+            public CheckReadinessBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CheckReadiness.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<CheckReadiness.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public CheckReadiness(ICheckReadinessBuilder builder
         )
         {
             
@@ -151,7 +182,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.LegalReadinessStatusResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.LegalReadinessStatusResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

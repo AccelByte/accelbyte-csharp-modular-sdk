@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteTwitchIAPConfigBuilder Builder { get => new DeleteTwitchIAPConfigBuilder(); }
 
-        public class DeleteTwitchIAPConfigBuilder
-            : OperationBuilder<DeleteTwitchIAPConfigBuilder>
+        public interface IDeleteTwitchIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeleteTwitchIAPConfigBuilder() { }
+        }
 
-            internal DeleteTwitchIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteTwitchIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteTwitchIAPConfigBuilder
+            where TImpl : DeleteTwitchIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteTwitchIAPConfigAbstractBuilder() { }
+
+            public DeleteTwitchIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteTwitchIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteTwitchIAPConfig.Response Execute(
+            protected DeleteTwitchIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteTwitchIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeleteTwitchIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteTwitchIAPConfig(DeleteTwitchIAPConfigBuilder builder,
+        public class DeleteTwitchIAPConfigBuilder : DeleteTwitchIAPConfigAbstractBuilder<DeleteTwitchIAPConfigBuilder>
+        {
+            public DeleteTwitchIAPConfigBuilder() : base() { }
+
+            public DeleteTwitchIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteTwitchIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeleteTwitchIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteTwitchIAPConfig(IDeleteTwitchIAPConfigBuilder builder,
             string namespace_
         )
         {

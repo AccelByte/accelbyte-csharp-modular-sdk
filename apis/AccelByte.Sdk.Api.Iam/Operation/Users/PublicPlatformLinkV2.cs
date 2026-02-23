@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -48,17 +48,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicPlatformLinkV2Builder Builder { get => new PublicPlatformLinkV2Builder(); }
 
-        public class PublicPlatformLinkV2Builder
-            : OperationBuilder<PublicPlatformLinkV2Builder>
+        public interface IPublicPlatformLinkV2Builder
         {
 
 
 
 
 
-            internal PublicPlatformLinkV2Builder() { }
+        }
 
-            internal PublicPlatformLinkV2Builder(IAccelByteSdk sdk)
+        public abstract class PublicPlatformLinkV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicPlatformLinkV2Builder
+            where TImpl : PublicPlatformLinkV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicPlatformLinkV2AbstractBuilder() { }
+
+            public PublicPlatformLinkV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -82,12 +92,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicPlatformLinkV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicPlatformLinkV2.Response Execute(
+            protected PublicPlatformLinkV2.Response InternalExecute(
                 string ticket,
                 string namespace_,
                 string platformId,
@@ -110,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicPlatformLinkV2.Response> ExecuteAsync(
+            protected async Task<PublicPlatformLinkV2.Response> InternalExecuteAsync(
                 string ticket,
                 string namespace_,
                 string platformId,
@@ -135,7 +145,45 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicPlatformLinkV2(PublicPlatformLinkV2Builder builder,
+        public class PublicPlatformLinkV2Builder : PublicPlatformLinkV2AbstractBuilder<PublicPlatformLinkV2Builder>
+        {
+            public PublicPlatformLinkV2Builder() : base() { }
+
+            public PublicPlatformLinkV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicPlatformLinkV2.Response Execute(
+                string ticket,
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    ticket,
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+            public async Task<PublicPlatformLinkV2.Response> ExecuteAsync(
+                string ticket,
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    ticket,
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicPlatformLinkV2(IPublicPlatformLinkV2Builder builder,
             string ticket,
             string namespace_,
             string platformId,
@@ -223,32 +271,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error409 = response.Payload;
                 response.Error = new ApiError("-1", response.Error409!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

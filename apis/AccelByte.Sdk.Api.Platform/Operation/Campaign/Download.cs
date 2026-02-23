@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DownloadBuilder Builder { get => new DownloadBuilder(); }
 
-        public class DownloadBuilder
-            : OperationBuilder<DownloadBuilder>
+        public interface IDownloadBuilder
+        {
+
+            string? BatchName { get; }
+
+            List<int>? BatchNo { get; }
+
+            bool? WithBatchName { get; }
+
+
+
+
+
+        }
+
+        public abstract class DownloadAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDownloadBuilder
+            where TImpl : DownloadAbstractBuilder<TImpl>
         {
 
             public string? BatchName { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal DownloadBuilder() { }
+            public DownloadAbstractBuilder() { }
 
-            internal DownloadBuilder(IAccelByteSdk sdk)
+            public DownloadAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DownloadBuilder SetBatchName(string _batchName)
+            public TImpl SetBatchName(string _batchName)
             {
                 BatchName = _batchName;
-                return this;
+                return (TImpl)this;
             }
 
-            public DownloadBuilder SetBatchNo(List<int> _batchNo)
+            public TImpl SetBatchNo(List<int> _batchNo)
             {
                 BatchNo = _batchNo;
-                return this;
+                return (TImpl)this;
             }
 
-            public DownloadBuilder SetWithBatchName(bool _withBatchName)
+            public TImpl SetWithBatchName(bool _withBatchName)
             {
                 WithBatchName = _withBatchName;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +104,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DownloadBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Download.Response Execute(
+            protected Download.Response InternalExecute(
                 string campaignId,
                 string namespace_
             )
@@ -111,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Download.Response> ExecuteAsync(
+            protected async Task<Download.Response> InternalExecuteAsync(
                 string campaignId,
                 string namespace_
             )
@@ -132,7 +148,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private Download(DownloadBuilder builder,
+        public class DownloadBuilder : DownloadAbstractBuilder<DownloadBuilder>
+        {
+            public DownloadBuilder() : base() { }
+
+            public DownloadBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Download.Response Execute(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    campaignId,
+                    namespace_
+                );
+            }
+            public async Task<Download.Response> ExecuteAsync(
+                string campaignId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    campaignId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public Download(IDownloadBuilder builder,
             string campaignId,
             string namespace_
         )

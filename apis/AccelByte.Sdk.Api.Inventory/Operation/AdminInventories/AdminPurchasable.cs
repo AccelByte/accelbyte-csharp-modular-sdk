@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminPurchasableBuilder Builder { get => new AdminPurchasableBuilder(); }
 
-        public class AdminPurchasableBuilder
-            : OperationBuilder<AdminPurchasableBuilder>
+        public interface IAdminPurchasableBuilder
         {
 
 
 
 
 
-            internal AdminPurchasableBuilder() { }
+        }
 
-            internal AdminPurchasableBuilder(IAccelByteSdk sdk)
+        public abstract class AdminPurchasableAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminPurchasableBuilder
+            where TImpl : AdminPurchasableAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminPurchasableAbstractBuilder() { }
+
+            public AdminPurchasableAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminPurchasableBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminPurchasable.Response Execute(
+            protected AdminPurchasable.Response InternalExecute(
                 ApimodelsPurchaseValidationReq body,
                 string namespace_,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminPurchasable.Response> ExecuteAsync(
+            protected async Task<AdminPurchasable.Response> InternalExecuteAsync(
                 ApimodelsPurchaseValidationReq body,
                 string namespace_,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminPurchasable(AdminPurchasableBuilder builder,
+        public class AdminPurchasableBuilder : AdminPurchasableAbstractBuilder<AdminPurchasableBuilder>
+        {
+            public AdminPurchasableBuilder() : base() { }
+
+            public AdminPurchasableBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminPurchasable.Response Execute(
+                ApimodelsPurchaseValidationReq body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminPurchasable.Response> ExecuteAsync(
+                ApimodelsPurchaseValidationReq body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminPurchasable(IAdminPurchasableBuilder builder,
             ApimodelsPurchaseValidationReq body,
             string namespace_,
             string userId
@@ -193,22 +236,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

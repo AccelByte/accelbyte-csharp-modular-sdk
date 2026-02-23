@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldSetDefaultPolicyBuilder Builder { get => new OldSetDefaultPolicyBuilder(); }
 
-        public class OldSetDefaultPolicyBuilder
-            : OperationBuilder<OldSetDefaultPolicyBuilder>
+        public interface IOldSetDefaultPolicyBuilder
         {
 
 
 
 
 
-            internal OldSetDefaultPolicyBuilder() { }
+        }
 
-            internal OldSetDefaultPolicyBuilder(IAccelByteSdk sdk)
+        public abstract class OldSetDefaultPolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldSetDefaultPolicyBuilder
+            where TImpl : OldSetDefaultPolicyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public OldSetDefaultPolicyAbstractBuilder() { }
+
+            public OldSetDefaultPolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyId                    
                 );
 
-                op.SetBaseFields<OldSetDefaultPolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldSetDefaultPolicy.Response Execute(
+            protected OldSetDefaultPolicy.Response InternalExecute(
                 string policyId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldSetDefaultPolicy.Response> ExecuteAsync(
+            protected async Task<OldSetDefaultPolicy.Response> InternalExecuteAsync(
                 string policyId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldSetDefaultPolicy(OldSetDefaultPolicyBuilder builder,
+        public class OldSetDefaultPolicyBuilder : OldSetDefaultPolicyAbstractBuilder<OldSetDefaultPolicyBuilder>
+        {
+            public OldSetDefaultPolicyBuilder() : base() { }
+
+            public OldSetDefaultPolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldSetDefaultPolicy.Response Execute(
+                string policyId
+            )
+            {
+                return InternalExecute(
+                    policyId
+                );
+            }
+            public async Task<OldSetDefaultPolicy.Response> ExecuteAsync(
+                string policyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    policyId
+                );
+            }
+        }
+
+
+        public OldSetDefaultPolicy(IOldSetDefaultPolicyBuilder builder,
             string policyId
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

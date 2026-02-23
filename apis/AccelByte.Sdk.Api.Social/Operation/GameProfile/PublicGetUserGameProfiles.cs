@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicGetUserGameProfilesBuilder Builder { get => new PublicGetUserGameProfilesBuilder(); }
 
-        public class PublicGetUserGameProfilesBuilder
-            : OperationBuilder<PublicGetUserGameProfilesBuilder>
+        public interface IPublicGetUserGameProfilesBuilder
         {
 
 
 
 
 
-            internal PublicGetUserGameProfilesBuilder() { }
+        }
 
-            internal PublicGetUserGameProfilesBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetUserGameProfilesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserGameProfilesBuilder
+            where TImpl : PublicGetUserGameProfilesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetUserGameProfilesAbstractBuilder() { }
+
+            public PublicGetUserGameProfilesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,12 +78,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userIds                    
                 );
 
-                op.SetBaseFields<PublicGetUserGameProfilesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicGetUserGameProfiles.Response Execute(
+            protected PublicGetUserGameProfiles.Response InternalExecute(
                 string namespace_,
                 List<string> userIds
             )
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserGameProfiles.Response> ExecuteAsync(
+            protected async Task<PublicGetUserGameProfiles.Response> InternalExecuteAsync(
                 string namespace_,
                 List<string> userIds
             )
@@ -113,7 +123,37 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicGetUserGameProfiles(PublicGetUserGameProfilesBuilder builder,
+        public class PublicGetUserGameProfilesBuilder : PublicGetUserGameProfilesAbstractBuilder<PublicGetUserGameProfilesBuilder>
+        {
+            public PublicGetUserGameProfilesBuilder() : base() { }
+
+            public PublicGetUserGameProfilesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetUserGameProfiles.Response Execute(
+                string namespace_,
+                List<string> userIds
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userIds
+                );
+            }
+            public async Task<PublicGetUserGameProfiles.Response> ExecuteAsync(
+                string namespace_,
+                List<string> userIds
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userIds
+                );
+            }
+        }
+
+
+        public PublicGetUserGameProfiles(IPublicGetUserGameProfilesBuilder builder,
             string namespace_,
             List<string> userIds
         )
@@ -190,27 +230,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserGameProfiles>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserGameProfiles>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

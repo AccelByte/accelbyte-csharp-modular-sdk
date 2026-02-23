@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static SetUserVisibilityV3Builder Builder { get => new SetUserVisibilityV3Builder(); }
 
-        public class SetUserVisibilityV3Builder
-            : OperationBuilder<SetUserVisibilityV3Builder>
+        public interface ISetUserVisibilityV3Builder
         {
 
 
 
 
 
-            internal SetUserVisibilityV3Builder() { }
+        }
 
-            internal SetUserVisibilityV3Builder(IAccelByteSdk sdk)
+        public abstract class SetUserVisibilityV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISetUserVisibilityV3Builder
+            where TImpl : SetUserVisibilityV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SetUserVisibilityV3AbstractBuilder() { }
+
+            public SetUserVisibilityV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SetUserVisibilityV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SetUserVisibilityV3.Response Execute(
+            protected SetUserVisibilityV3.Response InternalExecute(
                 ModelsSetUserVisibilityRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SetUserVisibilityV3.Response> ExecuteAsync(
+            protected async Task<SetUserVisibilityV3.Response> InternalExecuteAsync(
                 ModelsSetUserVisibilityRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private SetUserVisibilityV3(SetUserVisibilityV3Builder builder,
+        public class SetUserVisibilityV3Builder : SetUserVisibilityV3AbstractBuilder<SetUserVisibilityV3Builder>
+        {
+            public SetUserVisibilityV3Builder() : base() { }
+
+            public SetUserVisibilityV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SetUserVisibilityV3.Response Execute(
+                ModelsSetUserVisibilityRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SetUserVisibilityV3.Response> ExecuteAsync(
+                ModelsSetUserVisibilityRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SetUserVisibilityV3(ISetUserVisibilityV3Builder builder,
             ModelsSetUserVisibilityRequest body,
             string namespace_,
             string userId
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetUserVisibilityResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetUserVisibilityResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static AdminGetUserProfilePublicInfoByIdsBuilder Builder { get => new AdminGetUserProfilePublicInfoByIdsBuilder(); }
 
-        public class AdminGetUserProfilePublicInfoByIdsBuilder
-            : OperationBuilder<AdminGetUserProfilePublicInfoByIdsBuilder>
+        public interface IAdminGetUserProfilePublicInfoByIdsBuilder
+        {
+
+
+            Model.UserProfileBulkRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class AdminGetUserProfilePublicInfoByIdsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUserProfilePublicInfoByIdsBuilder
+            where TImpl : AdminGetUserProfilePublicInfoByIdsAbstractBuilder<TImpl>
         {
 
 
@@ -45,19 +57,19 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
 
 
-            internal AdminGetUserProfilePublicInfoByIdsBuilder() { }
+            public AdminGetUserProfilePublicInfoByIdsAbstractBuilder() { }
 
-            internal AdminGetUserProfilePublicInfoByIdsBuilder(IAccelByteSdk sdk)
+            public AdminGetUserProfilePublicInfoByIdsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public AdminGetUserProfilePublicInfoByIdsBuilder SetBody(Model.UserProfileBulkRequest _body)
+            public TImpl SetBody(Model.UserProfileBulkRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetUserProfilePublicInfoByIdsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUserProfilePublicInfoByIds.Response Execute(
+            protected AdminGetUserProfilePublicInfoByIds.Response InternalExecute(
                 string namespace_
             )
             {
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserProfilePublicInfoByIds.Response> ExecuteAsync(
+            protected async Task<AdminGetUserProfilePublicInfoByIds.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -110,7 +122,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.Payload);
             }
 
-            public AdminGetUserProfilePublicInfoByIds.Response<T1> Execute<T1>(
+            protected AdminGetUserProfilePublicInfoByIds.Response<T1> InternalExecute<T1>(
                 string namespace_
             )
             {
@@ -127,7 +139,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserProfilePublicInfoByIds.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminGetUserProfilePublicInfoByIds.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_
             )
             {
@@ -146,7 +158,49 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private AdminGetUserProfilePublicInfoByIds(AdminGetUserProfilePublicInfoByIdsBuilder builder,
+        public class AdminGetUserProfilePublicInfoByIdsBuilder : AdminGetUserProfilePublicInfoByIdsAbstractBuilder<AdminGetUserProfilePublicInfoByIdsBuilder>
+        {
+            public AdminGetUserProfilePublicInfoByIdsBuilder() : base() { }
+
+            public AdminGetUserProfilePublicInfoByIdsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUserProfilePublicInfoByIds.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetUserProfilePublicInfoByIds.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+
+            public AdminGetUserProfilePublicInfoByIds.Response<T1> Execute<T1>(
+                string namespace_
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetUserProfilePublicInfoByIds.Response<T1>> ExecuteAsync<T1>(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetUserProfilePublicInfoByIds(IAdminGetUserProfilePublicInfoByIdsBuilder builder,
             string namespace_
         )
         {
@@ -221,12 +275,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserProfilePublicInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserProfilePublicInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 
@@ -247,12 +303,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserProfilePublicInfo<T1>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserProfilePublicInfo<T1>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             

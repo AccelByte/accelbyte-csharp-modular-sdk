@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentTaxConfigBuilder Builder { get => new GetPaymentTaxConfigBuilder(); }
 
-        public class GetPaymentTaxConfigBuilder
-            : OperationBuilder<GetPaymentTaxConfigBuilder>
+        public interface IGetPaymentTaxConfigBuilder
         {
 
 
 
 
 
-            internal GetPaymentTaxConfigBuilder() { }
+        }
 
-            internal GetPaymentTaxConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetPaymentTaxConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentTaxConfigBuilder
+            where TImpl : GetPaymentTaxConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPaymentTaxConfigAbstractBuilder() { }
+
+            public GetPaymentTaxConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetPaymentTaxConfig op = new GetPaymentTaxConfig(this
                 );
 
-                op.SetBaseFields<GetPaymentTaxConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPaymentTaxConfig.Response Execute(
+            protected GetPaymentTaxConfig.Response InternalExecute(
             )
             {
                 GetPaymentTaxConfig op = Build(
@@ -78,7 +88,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentTaxConfig.Response> ExecuteAsync(
+            protected async Task<GetPaymentTaxConfig.Response> InternalExecuteAsync(
             )
             {
                 GetPaymentTaxConfig op = Build(
@@ -95,7 +105,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentTaxConfig(GetPaymentTaxConfigBuilder builder
+        public class GetPaymentTaxConfigBuilder : GetPaymentTaxConfigAbstractBuilder<GetPaymentTaxConfigBuilder>
+        {
+            public GetPaymentTaxConfigBuilder() : base() { }
+
+            public GetPaymentTaxConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPaymentTaxConfig.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetPaymentTaxConfig.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetPaymentTaxConfig(IGetPaymentTaxConfigBuilder builder
         )
         {
             
@@ -154,7 +185,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

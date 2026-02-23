@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetRoleAdminStatusV3Builder Builder { get => new AdminGetRoleAdminStatusV3Builder(); }
 
-        public class AdminGetRoleAdminStatusV3Builder
-            : OperationBuilder<AdminGetRoleAdminStatusV3Builder>
+        public interface IAdminGetRoleAdminStatusV3Builder
         {
 
 
 
 
 
-            internal AdminGetRoleAdminStatusV3Builder() { }
+        }
 
-            internal AdminGetRoleAdminStatusV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetRoleAdminStatusV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetRoleAdminStatusV3Builder
+            where TImpl : AdminGetRoleAdminStatusV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetRoleAdminStatusV3AbstractBuilder() { }
+
+            public AdminGetRoleAdminStatusV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<AdminGetRoleAdminStatusV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetRoleAdminStatusV3.Response Execute(
+            protected AdminGetRoleAdminStatusV3.Response InternalExecute(
                 string roleId
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetRoleAdminStatusV3.Response> ExecuteAsync(
+            protected async Task<AdminGetRoleAdminStatusV3.Response> InternalExecuteAsync(
                 string roleId
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetRoleAdminStatusV3(AdminGetRoleAdminStatusV3Builder builder,
+        public class AdminGetRoleAdminStatusV3Builder : AdminGetRoleAdminStatusV3AbstractBuilder<AdminGetRoleAdminStatusV3Builder>
+        {
+            public AdminGetRoleAdminStatusV3Builder() : base() { }
+
+            public AdminGetRoleAdminStatusV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetRoleAdminStatusV3.Response Execute(
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    roleId
+                );
+            }
+            public async Task<AdminGetRoleAdminStatusV3.Response> ExecuteAsync(
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    roleId
+                );
+            }
+        }
+
+
+        public AdminGetRoleAdminStatusV3(IAdminGetRoleAdminStatusV3Builder builder,
             string roleId
         )
         {
@@ -172,32 +207,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelRoleAdminStatusResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelRoleAdminStatusResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

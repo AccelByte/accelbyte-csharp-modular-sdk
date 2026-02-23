@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static SendMultipleUsersFreeformNotificationV1AdminBuilder Builder { get => new SendMultipleUsersFreeformNotificationV1AdminBuilder(); }
 
-        public class SendMultipleUsersFreeformNotificationV1AdminBuilder
-            : OperationBuilder<SendMultipleUsersFreeformNotificationV1AdminBuilder>
+        public interface ISendMultipleUsersFreeformNotificationV1AdminBuilder
         {
 
 
 
 
 
-            internal SendMultipleUsersFreeformNotificationV1AdminBuilder() { }
+        }
 
-            internal SendMultipleUsersFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk)
+        public abstract class SendMultipleUsersFreeformNotificationV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISendMultipleUsersFreeformNotificationV1AdminBuilder
+            where TImpl : SendMultipleUsersFreeformNotificationV1AdminAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SendMultipleUsersFreeformNotificationV1AdminAbstractBuilder() { }
+
+            public SendMultipleUsersFreeformNotificationV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SendMultipleUsersFreeformNotificationV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SendMultipleUsersFreeformNotificationV1Admin.Response Execute(
+            protected SendMultipleUsersFreeformNotificationV1Admin.Response InternalExecute(
                 ModelBulkUsersFreeFormNotificationRequestV1 body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SendMultipleUsersFreeformNotificationV1Admin.Response> ExecuteAsync(
+            protected async Task<SendMultipleUsersFreeformNotificationV1Admin.Response> InternalExecuteAsync(
                 ModelBulkUsersFreeFormNotificationRequestV1 body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private SendMultipleUsersFreeformNotificationV1Admin(SendMultipleUsersFreeformNotificationV1AdminBuilder builder,
+        public class SendMultipleUsersFreeformNotificationV1AdminBuilder : SendMultipleUsersFreeformNotificationV1AdminAbstractBuilder<SendMultipleUsersFreeformNotificationV1AdminBuilder>
+        {
+            public SendMultipleUsersFreeformNotificationV1AdminBuilder() : base() { }
+
+            public SendMultipleUsersFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SendMultipleUsersFreeformNotificationV1Admin.Response Execute(
+                ModelBulkUsersFreeFormNotificationRequestV1 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<SendMultipleUsersFreeformNotificationV1Admin.Response> ExecuteAsync(
+                ModelBulkUsersFreeFormNotificationRequestV1 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SendMultipleUsersFreeformNotificationV1Admin(ISendMultipleUsersFreeformNotificationV1AdminBuilder builder,
             ModelBulkUsersFreeFormNotificationRequestV1 body,
             string namespace_
         )
@@ -179,17 +218,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

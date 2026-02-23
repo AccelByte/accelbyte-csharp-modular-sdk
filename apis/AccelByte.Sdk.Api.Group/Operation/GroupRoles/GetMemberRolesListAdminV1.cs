@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,22 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static GetMemberRolesListAdminV1Builder Builder { get => new GetMemberRolesListAdminV1Builder(); }
 
-        public class GetMemberRolesListAdminV1Builder
-            : OperationBuilder<GetMemberRolesListAdminV1Builder>
+        public interface IGetMemberRolesListAdminV1Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetMemberRolesListAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetMemberRolesListAdminV1Builder
+            where TImpl : GetMemberRolesListAdminV1AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -44,24 +58,24 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
 
 
-            internal GetMemberRolesListAdminV1Builder() { }
+            public GetMemberRolesListAdminV1AbstractBuilder() { }
 
-            internal GetMemberRolesListAdminV1Builder(IAccelByteSdk sdk)
+            public GetMemberRolesListAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetMemberRolesListAdminV1Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetMemberRolesListAdminV1Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetMemberRolesListAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetMemberRolesListAdminV1.Response Execute(
+            protected GetMemberRolesListAdminV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -97,7 +111,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetMemberRolesListAdminV1.Response> ExecuteAsync(
+            protected async Task<GetMemberRolesListAdminV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -116,7 +130,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private GetMemberRolesListAdminV1(GetMemberRolesListAdminV1Builder builder,
+        public class GetMemberRolesListAdminV1Builder : GetMemberRolesListAdminV1AbstractBuilder<GetMemberRolesListAdminV1Builder>
+        {
+            public GetMemberRolesListAdminV1Builder() : base() { }
+
+            public GetMemberRolesListAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetMemberRolesListAdminV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetMemberRolesListAdminV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetMemberRolesListAdminV1(IGetMemberRolesListAdminV1Builder builder,
             string namespace_
         )
         {
@@ -193,27 +232,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetMemberRolesListResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetMemberRolesListResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

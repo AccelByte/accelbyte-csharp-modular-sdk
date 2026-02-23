@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetAppleConfigVersionBuilder Builder { get => new GetAppleConfigVersionBuilder(); }
 
-        public class GetAppleConfigVersionBuilder
-            : OperationBuilder<GetAppleConfigVersionBuilder>
+        public interface IGetAppleConfigVersionBuilder
         {
 
 
 
 
 
-            internal GetAppleConfigVersionBuilder() { }
+        }
 
-            internal GetAppleConfigVersionBuilder(IAccelByteSdk sdk)
+        public abstract class GetAppleConfigVersionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAppleConfigVersionBuilder
+            where TImpl : GetAppleConfigVersionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetAppleConfigVersionAbstractBuilder() { }
+
+            public GetAppleConfigVersionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetAppleConfigVersionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAppleConfigVersion.Response Execute(
+            protected GetAppleConfigVersion.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAppleConfigVersion.Response> ExecuteAsync(
+            protected async Task<GetAppleConfigVersion.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetAppleConfigVersion(GetAppleConfigVersionBuilder builder,
+        public class GetAppleConfigVersionBuilder : GetAppleConfigVersionAbstractBuilder<GetAppleConfigVersionBuilder>
+        {
+            public GetAppleConfigVersionBuilder() : base() { }
+
+            public GetAppleConfigVersionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAppleConfigVersion.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetAppleConfigVersion.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetAppleConfigVersion(IGetAppleConfigVersionBuilder builder,
             string namespace_
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AppleIAPConfigVersionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AppleIAPConfigVersionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

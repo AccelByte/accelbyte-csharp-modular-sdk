@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateUserBanV3Builder Builder { get => new AdminUpdateUserBanV3Builder(); }
 
-        public class AdminUpdateUserBanV3Builder
-            : OperationBuilder<AdminUpdateUserBanV3Builder>
+        public interface IAdminUpdateUserBanV3Builder
         {
 
 
 
 
 
-            internal AdminUpdateUserBanV3Builder() { }
+        }
 
-            internal AdminUpdateUserBanV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateUserBanV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateUserBanV3Builder
+            where TImpl : AdminUpdateUserBanV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateUserBanV3AbstractBuilder() { }
+
+            public AdminUpdateUserBanV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminUpdateUserBanV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateUserBanV3.Response Execute(
+            protected AdminUpdateUserBanV3.Response InternalExecute(
                 ModelBanUpdateRequest body,
                 string banId,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateUserBanV3.Response> ExecuteAsync(
+            protected async Task<AdminUpdateUserBanV3.Response> InternalExecuteAsync(
                 ModelBanUpdateRequest body,
                 string banId,
                 string namespace_,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateUserBanV3(AdminUpdateUserBanV3Builder builder,
+        public class AdminUpdateUserBanV3Builder : AdminUpdateUserBanV3AbstractBuilder<AdminUpdateUserBanV3Builder>
+        {
+            public AdminUpdateUserBanV3Builder() : base() { }
+
+            public AdminUpdateUserBanV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateUserBanV3.Response Execute(
+                ModelBanUpdateRequest body,
+                string banId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    banId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminUpdateUserBanV3.Response> ExecuteAsync(
+                ModelBanUpdateRequest body,
+                string banId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    banId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminUpdateUserBanV3(IAdminUpdateUserBanV3Builder builder,
             ModelBanUpdateRequest body,
             string banId,
             string namespace_,
@@ -204,32 +251,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserBanResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserBanResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

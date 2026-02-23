@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static GetPlayerBinaryRecordV1Builder Builder { get => new GetPlayerBinaryRecordV1Builder(); }
 
-        public class GetPlayerBinaryRecordV1Builder
-            : OperationBuilder<GetPlayerBinaryRecordV1Builder>
+        public interface IGetPlayerBinaryRecordV1Builder
         {
 
 
 
 
 
-            internal GetPlayerBinaryRecordV1Builder() { }
+        }
 
-            internal GetPlayerBinaryRecordV1Builder(IAccelByteSdk sdk)
+        public abstract class GetPlayerBinaryRecordV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPlayerBinaryRecordV1Builder
+            where TImpl : GetPlayerBinaryRecordV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPlayerBinaryRecordV1AbstractBuilder() { }
+
+            public GetPlayerBinaryRecordV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetPlayerBinaryRecordV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPlayerBinaryRecordV1.Response Execute(
+            protected GetPlayerBinaryRecordV1.Response InternalExecute(
                 string key,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPlayerBinaryRecordV1.Response> ExecuteAsync(
+            protected async Task<GetPlayerBinaryRecordV1.Response> InternalExecuteAsync(
                 string key,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private GetPlayerBinaryRecordV1(GetPlayerBinaryRecordV1Builder builder,
+        public class GetPlayerBinaryRecordV1Builder : GetPlayerBinaryRecordV1AbstractBuilder<GetPlayerBinaryRecordV1Builder>
+        {
+            public GetPlayerBinaryRecordV1Builder() : base() { }
+
+            public GetPlayerBinaryRecordV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPlayerBinaryRecordV1.Response Execute(
+                string key,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    key,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetPlayerBinaryRecordV1.Response> ExecuteAsync(
+                string key,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    key,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetPlayerBinaryRecordV1(IGetPlayerBinaryRecordV1Builder builder,
             string key,
             string namespace_,
             string userId
@@ -190,27 +233,32 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPlayerBinaryRecordResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPlayerBinaryRecordResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,30 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminGetUserRewardsBuilder Builder { get => new AdminGetUserRewardsBuilder(); }
 
-        public class AdminGetUserRewardsBuilder
-            : OperationBuilder<AdminGetUserRewardsBuilder>
+        public interface IAdminGetUserRewardsBuilder
+        {
+
+            string? ChallengeCode { get; }
+
+            string? GoalProgressionId { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            AdminGetUserRewardsSortBy? SortBy { get; }
+
+            AdminGetUserRewardsStatus? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetUserRewardsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUserRewardsBuilder
+            where TImpl : AdminGetUserRewardsAbstractBuilder<TImpl>
         {
 
             public string? ChallengeCode { get; set; }
@@ -50,48 +72,48 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
 
 
-            internal AdminGetUserRewardsBuilder() { }
+            public AdminGetUserRewardsAbstractBuilder() { }
 
-            internal AdminGetUserRewardsBuilder(IAccelByteSdk sdk)
+            public AdminGetUserRewardsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetUserRewardsBuilder SetChallengeCode(string _challengeCode)
+            public TImpl SetChallengeCode(string _challengeCode)
             {
                 ChallengeCode = _challengeCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserRewardsBuilder SetGoalProgressionId(string _goalProgressionId)
+            public TImpl SetGoalProgressionId(string _goalProgressionId)
             {
                 GoalProgressionId = _goalProgressionId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserRewardsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserRewardsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserRewardsBuilder SetSortBy(AdminGetUserRewardsSortBy _sortBy)
+            public TImpl SetSortBy(AdminGetUserRewardsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserRewardsBuilder SetStatus(AdminGetUserRewardsStatus _status)
+            public TImpl SetStatus(AdminGetUserRewardsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -108,11 +130,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetUserRewardsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUserRewards.Response Execute(
+            protected AdminGetUserRewards.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -131,7 +153,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserRewards.Response> ExecuteAsync(
+            protected async Task<AdminGetUserRewards.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -152,7 +174,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminGetUserRewards(AdminGetUserRewardsBuilder builder,
+        public class AdminGetUserRewardsBuilder : AdminGetUserRewardsAbstractBuilder<AdminGetUserRewardsBuilder>
+        {
+            public AdminGetUserRewardsBuilder() : base() { }
+
+            public AdminGetUserRewardsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUserRewards.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetUserRewards.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetUserRewards(IAdminGetUserRewardsBuilder builder,
             string namespace_,
             string userId
         )
@@ -243,22 +294,26 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListUserRewardsResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListUserRewardsResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

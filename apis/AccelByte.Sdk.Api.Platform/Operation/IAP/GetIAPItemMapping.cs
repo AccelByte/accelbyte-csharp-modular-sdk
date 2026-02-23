@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetIAPItemMappingBuilder Builder { get => new GetIAPItemMappingBuilder(); }
 
-        public class GetIAPItemMappingBuilder
-            : OperationBuilder<GetIAPItemMappingBuilder>
+        public interface IGetIAPItemMappingBuilder
+        {
+
+            GetIAPItemMappingPlatform? Platform { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetIAPItemMappingAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetIAPItemMappingBuilder
+            where TImpl : GetIAPItemMappingAbstractBuilder<TImpl>
         {
 
             public GetIAPItemMappingPlatform? Platform { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetIAPItemMappingBuilder() { }
+            public GetIAPItemMappingAbstractBuilder() { }
 
-            internal GetIAPItemMappingBuilder(IAccelByteSdk sdk)
+            public GetIAPItemMappingAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetIAPItemMappingBuilder SetPlatform(GetIAPItemMappingPlatform _platform)
+            public TImpl SetPlatform(GetIAPItemMappingPlatform _platform)
             {
                 Platform = _platform;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetIAPItemMappingBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetIAPItemMapping.Response Execute(
+            protected GetIAPItemMapping.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetIAPItemMapping.Response> ExecuteAsync(
+            protected async Task<GetIAPItemMapping.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetIAPItemMapping(GetIAPItemMappingBuilder builder,
+        public class GetIAPItemMappingBuilder : GetIAPItemMappingAbstractBuilder<GetIAPItemMappingBuilder>
+        {
+            public GetIAPItemMappingBuilder() : base() { }
+
+            public GetIAPItemMappingBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetIAPItemMapping.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetIAPItemMapping.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetIAPItemMapping(IGetIAPItemMappingBuilder builder,
             string namespace_
         )
         {
@@ -174,12 +211,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPItemMappingInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPItemMappingInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

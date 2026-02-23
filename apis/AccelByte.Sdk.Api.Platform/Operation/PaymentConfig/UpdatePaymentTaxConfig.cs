@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -47,17 +47,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePaymentTaxConfigBuilder Builder { get => new UpdatePaymentTaxConfigBuilder(); }
 
-        public class UpdatePaymentTaxConfigBuilder
-            : OperationBuilder<UpdatePaymentTaxConfigBuilder>
+        public interface IUpdatePaymentTaxConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePaymentTaxConfigBuilder() { }
+        }
 
-            internal UpdatePaymentTaxConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePaymentTaxConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePaymentTaxConfigBuilder
+            where TImpl : UpdatePaymentTaxConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePaymentTaxConfigAbstractBuilder() { }
+
+            public UpdatePaymentTaxConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -75,11 +85,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<UpdatePaymentTaxConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePaymentTaxConfig.Response Execute(
+            protected UpdatePaymentTaxConfig.Response InternalExecute(
                 PaymentTaxConfigEdit body
             )
             {
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePaymentTaxConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePaymentTaxConfig.Response> InternalExecuteAsync(
                 PaymentTaxConfigEdit body
             )
             {
@@ -115,7 +125,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePaymentTaxConfig(UpdatePaymentTaxConfigBuilder builder,
+        public class UpdatePaymentTaxConfigBuilder : UpdatePaymentTaxConfigAbstractBuilder<UpdatePaymentTaxConfigBuilder>
+        {
+            public UpdatePaymentTaxConfigBuilder() : base() { }
+
+            public UpdatePaymentTaxConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePaymentTaxConfig.Response Execute(
+                PaymentTaxConfigEdit body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<UpdatePaymentTaxConfig.Response> ExecuteAsync(
+                PaymentTaxConfigEdit body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public UpdatePaymentTaxConfig(IUpdatePaymentTaxConfigBuilder builder,
             PaymentTaxConfigEdit body
         )
         {
@@ -182,17 +217,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentTaxConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

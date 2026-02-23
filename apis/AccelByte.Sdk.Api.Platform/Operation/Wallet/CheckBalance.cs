@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CheckBalanceBuilder Builder { get => new CheckBalanceBuilder(); }
 
-        public class CheckBalanceBuilder
-            : OperationBuilder<CheckBalanceBuilder>
+        public interface ICheckBalanceBuilder
         {
 
 
 
 
 
-            internal CheckBalanceBuilder() { }
+        }
 
-            internal CheckBalanceBuilder(IAccelByteSdk sdk)
+        public abstract class CheckBalanceAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICheckBalanceBuilder
+            where TImpl : CheckBalanceAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CheckBalanceAbstractBuilder() { }
+
+            public CheckBalanceAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<CheckBalanceBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CheckBalance.Response Execute(
+            protected CheckBalance.Response InternalExecute(
                 DebitByWalletPlatformRequest request,
                 string currencyCode,
                 string namespace_,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CheckBalance.Response> ExecuteAsync(
+            protected async Task<CheckBalance.Response> InternalExecuteAsync(
                 DebitByWalletPlatformRequest request,
                 string currencyCode,
                 string namespace_,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CheckBalance(CheckBalanceBuilder builder,
+        public class CheckBalanceBuilder : CheckBalanceAbstractBuilder<CheckBalanceBuilder>
+        {
+            public CheckBalanceBuilder() : base() { }
+
+            public CheckBalanceBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CheckBalance.Response Execute(
+                DebitByWalletPlatformRequest request,
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    request,
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<CheckBalance.Response> ExecuteAsync(
+                DebitByWalletPlatformRequest request,
+                string currencyCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    request,
+                    currencyCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public CheckBalance(ICheckBalanceBuilder builder,
             DebitByWalletPlatformRequest request,
             string currencyCode,
             string namespace_,
@@ -197,7 +244,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

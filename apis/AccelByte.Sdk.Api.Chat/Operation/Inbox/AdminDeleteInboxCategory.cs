@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminDeleteInboxCategoryBuilder Builder { get => new AdminDeleteInboxCategoryBuilder(); }
 
-        public class AdminDeleteInboxCategoryBuilder
-            : OperationBuilder<AdminDeleteInboxCategoryBuilder>
+        public interface IAdminDeleteInboxCategoryBuilder
         {
 
 
 
 
 
-            internal AdminDeleteInboxCategoryBuilder() { }
+        }
 
-            internal AdminDeleteInboxCategoryBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteInboxCategoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteInboxCategoryBuilder
+            where TImpl : AdminDeleteInboxCategoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteInboxCategoryAbstractBuilder() { }
+
+            public AdminDeleteInboxCategoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteInboxCategoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteInboxCategory.Response Execute(
+            protected AdminDeleteInboxCategory.Response InternalExecute(
                 string category,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteInboxCategory.Response> ExecuteAsync(
+            protected async Task<AdminDeleteInboxCategory.Response> InternalExecuteAsync(
                 string category,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminDeleteInboxCategory(AdminDeleteInboxCategoryBuilder builder,
+        public class AdminDeleteInboxCategoryBuilder : AdminDeleteInboxCategoryAbstractBuilder<AdminDeleteInboxCategoryBuilder>
+        {
+            public AdminDeleteInboxCategoryBuilder() : base() { }
+
+            public AdminDeleteInboxCategoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteInboxCategory.Response Execute(
+                string category,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    category,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteInboxCategory.Response> ExecuteAsync(
+                string category,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    category,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteInboxCategory(IAdminDeleteInboxCategoryBuilder builder,
             string category,
             string namespace_
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

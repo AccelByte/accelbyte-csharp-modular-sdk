@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AdminResetSteamJobTimeBuilder Builder { get => new AdminResetSteamJobTimeBuilder(); }
 
-        public class AdminResetSteamJobTimeBuilder
-            : OperationBuilder<AdminResetSteamJobTimeBuilder>
+        public interface IAdminResetSteamJobTimeBuilder
         {
 
 
 
 
 
-            internal AdminResetSteamJobTimeBuilder() { }
+        }
 
-            internal AdminResetSteamJobTimeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminResetSteamJobTimeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminResetSteamJobTimeBuilder
+            where TImpl : AdminResetSteamJobTimeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminResetSteamJobTimeAbstractBuilder() { }
+
+            public AdminResetSteamJobTimeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminResetSteamJobTimeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminResetSteamJobTime.Response Execute(
+            protected AdminResetSteamJobTime.Response InternalExecute(
                 ResetJobRequest body,
                 string namespace_
             )
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminResetSteamJobTime.Response> ExecuteAsync(
+            protected async Task<AdminResetSteamJobTime.Response> InternalExecuteAsync(
                 ResetJobRequest body,
                 string namespace_
             )
@@ -102,7 +112,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AdminResetSteamJobTime(AdminResetSteamJobTimeBuilder builder,
+        public class AdminResetSteamJobTimeBuilder : AdminResetSteamJobTimeAbstractBuilder<AdminResetSteamJobTimeBuilder>
+        {
+            public AdminResetSteamJobTimeBuilder() : base() { }
+
+            public AdminResetSteamJobTimeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminResetSteamJobTime.Response Execute(
+                ResetJobRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminResetSteamJobTime.Response> ExecuteAsync(
+                ResetJobRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminResetSteamJobTime(IAdminResetSteamJobTimeBuilder builder,
             ResetJobRequest body,
             string namespace_
         )
@@ -169,7 +208,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SteamReportJobInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SteamReportJobInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

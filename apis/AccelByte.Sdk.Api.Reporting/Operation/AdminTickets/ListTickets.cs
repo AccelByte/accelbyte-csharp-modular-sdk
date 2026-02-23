@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static ListTicketsBuilder Builder { get => new ListTicketsBuilder(); }
 
-        public class ListTicketsBuilder
-            : OperationBuilder<ListTicketsBuilder>
+        public interface IListTicketsBuilder
+        {
+
+            string? Category { get; }
+
+            string? ExtensionCategory { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? Order { get; }
+
+            string? ReportedUserId { get; }
+
+            string? SortBy { get; }
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListTicketsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListTicketsBuilder
+            where TImpl : ListTicketsAbstractBuilder<TImpl>
         {
 
             public string? Category { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal ListTicketsBuilder() { }
+            public ListTicketsAbstractBuilder() { }
 
-            internal ListTicketsBuilder(IAccelByteSdk sdk)
+            public ListTicketsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListTicketsBuilder SetCategory(string _category)
+            public TImpl SetCategory(string _category)
             {
                 Category = _category;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetExtensionCategory(string _extensionCategory)
+            public TImpl SetExtensionCategory(string _extensionCategory)
             {
                 ExtensionCategory = _extensionCategory;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetReportedUserId(string _reportedUserId)
+            public TImpl SetReportedUserId(string _reportedUserId)
             {
                 ReportedUserId = _reportedUserId;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListTicketsBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -125,11 +151,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListTicketsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListTickets.Response Execute(
+            protected ListTickets.Response InternalExecute(
                 string namespace_
             )
             {
@@ -146,7 +172,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListTickets.Response> ExecuteAsync(
+            protected async Task<ListTickets.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -165,7 +191,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private ListTickets(ListTicketsBuilder builder,
+        public class ListTicketsBuilder : ListTicketsAbstractBuilder<ListTicketsBuilder>
+        {
+            public ListTicketsBuilder() : base() { }
+
+            public ListTicketsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListTickets.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListTickets.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListTickets(IListTicketsBuilder builder,
             string namespace_
         )
         {
@@ -254,12 +305,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiTicketListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

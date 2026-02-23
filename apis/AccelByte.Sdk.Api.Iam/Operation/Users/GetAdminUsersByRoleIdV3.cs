@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetAdminUsersByRoleIdV3Builder Builder { get => new GetAdminUsersByRoleIdV3Builder(); }
 
-        public class GetAdminUsersByRoleIdV3Builder
-            : OperationBuilder<GetAdminUsersByRoleIdV3Builder>
+        public interface IGetAdminUsersByRoleIdV3Builder
+        {
+
+            long? After { get; }
+
+            long? Before { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetAdminUsersByRoleIdV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAdminUsersByRoleIdV3Builder
+            where TImpl : GetAdminUsersByRoleIdV3AbstractBuilder<TImpl>
         {
 
             public long? After { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal GetAdminUsersByRoleIdV3Builder() { }
+            public GetAdminUsersByRoleIdV3AbstractBuilder() { }
 
-            internal GetAdminUsersByRoleIdV3Builder(IAccelByteSdk sdk)
+            public GetAdminUsersByRoleIdV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetAdminUsersByRoleIdV3Builder SetAfter(long _after)
+            public TImpl SetAfter(long _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetAdminUsersByRoleIdV3Builder SetBefore(long _before)
+            public TImpl SetBefore(long _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetAdminUsersByRoleIdV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +104,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<GetAdminUsersByRoleIdV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAdminUsersByRoleIdV3.Response Execute(
+            protected GetAdminUsersByRoleIdV3.Response InternalExecute(
                 string namespace_,
                 string roleId
             )
@@ -111,7 +127,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAdminUsersByRoleIdV3.Response> ExecuteAsync(
+            protected async Task<GetAdminUsersByRoleIdV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string roleId
             )
@@ -132,7 +148,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetAdminUsersByRoleIdV3(GetAdminUsersByRoleIdV3Builder builder,
+        public class GetAdminUsersByRoleIdV3Builder : GetAdminUsersByRoleIdV3AbstractBuilder<GetAdminUsersByRoleIdV3Builder>
+        {
+            public GetAdminUsersByRoleIdV3Builder() : base() { }
+
+            public GetAdminUsersByRoleIdV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAdminUsersByRoleIdV3.Response Execute(
+                string namespace_,
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    roleId
+                );
+            }
+            public async Task<GetAdminUsersByRoleIdV3.Response> ExecuteAsync(
+                string namespace_,
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    roleId
+                );
+            }
+        }
+
+
+        public GetAdminUsersByRoleIdV3(IGetAdminUsersByRoleIdV3Builder builder,
             string namespace_,
             string roleId
         )
@@ -218,32 +263,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGetUsersResponseWithPaginationV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGetUsersResponseWithPaginationV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

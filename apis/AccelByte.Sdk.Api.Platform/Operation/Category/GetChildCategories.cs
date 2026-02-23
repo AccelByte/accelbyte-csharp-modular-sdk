@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetChildCategoriesBuilder Builder { get => new GetChildCategoriesBuilder(); }
 
-        public class GetChildCategoriesBuilder
-            : OperationBuilder<GetChildCategoriesBuilder>
+        public interface IGetChildCategoriesBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetChildCategoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetChildCategoriesBuilder
+            where TImpl : GetChildCategoriesAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetChildCategoriesBuilder() { }
+            public GetChildCategoriesAbstractBuilder() { }
 
-            internal GetChildCategoriesBuilder(IAccelByteSdk sdk)
+            public GetChildCategoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetChildCategoriesBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetChildCategoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetChildCategories.Response Execute(
+            protected GetChildCategories.Response InternalExecute(
                 string categoryPath,
                 string namespace_
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetChildCategories.Response> ExecuteAsync(
+            protected async Task<GetChildCategories.Response> InternalExecuteAsync(
                 string categoryPath,
                 string namespace_
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetChildCategories(GetChildCategoriesBuilder builder,
+        public class GetChildCategoriesBuilder : GetChildCategoriesAbstractBuilder<GetChildCategoriesBuilder>
+        {
+            public GetChildCategoriesBuilder() : base() { }
+
+            public GetChildCategoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetChildCategories.Response Execute(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    categoryPath,
+                    namespace_
+                );
+            }
+            public async Task<GetChildCategories.Response> ExecuteAsync(
+                string categoryPath,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    categoryPath,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetChildCategories(IGetChildCategoriesBuilder builder,
             string categoryPath,
             string namespace_
         )
@@ -186,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.FullCategoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

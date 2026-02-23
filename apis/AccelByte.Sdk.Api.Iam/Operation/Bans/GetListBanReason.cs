@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetListBanReasonBuilder Builder { get => new GetListBanReasonBuilder(); }
 
-        public class GetListBanReasonBuilder
-            : OperationBuilder<GetListBanReasonBuilder>
+        public interface IGetListBanReasonBuilder
         {
 
 
 
 
 
-            internal GetListBanReasonBuilder() { }
+        }
 
-            internal GetListBanReasonBuilder(IAccelByteSdk sdk)
+        public abstract class GetListBanReasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetListBanReasonBuilder
+            where TImpl : GetListBanReasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetListBanReasonAbstractBuilder() { }
+
+            public GetListBanReasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,12 +69,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetListBanReason op = new GetListBanReason(this
                 );
 
-                op.SetBaseFields<GetListBanReasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetListBanReason.Response Execute(
+            protected GetListBanReason.Response InternalExecute(
             )
             {
                 GetListBanReason op = Build(
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetListBanReason.Response> ExecuteAsync(
+            protected async Task<GetListBanReason.Response> InternalExecuteAsync(
             )
             {
                 GetListBanReason op = Build(
@@ -96,7 +106,29 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetListBanReason(GetListBanReasonBuilder builder
+        public class GetListBanReasonBuilder : GetListBanReasonAbstractBuilder<GetListBanReasonBuilder>
+        {
+            public GetListBanReasonBuilder() : base() { }
+
+            public GetListBanReasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetListBanReason.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetListBanReason.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetListBanReason(IGetListBanReasonBuilder builder
         )
         {
             
@@ -159,17 +191,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonBanReasons>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonBanReasons>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

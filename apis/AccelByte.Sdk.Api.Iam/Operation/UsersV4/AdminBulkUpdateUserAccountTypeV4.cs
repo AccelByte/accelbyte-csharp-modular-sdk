@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminBulkUpdateUserAccountTypeV4Builder Builder { get => new AdminBulkUpdateUserAccountTypeV4Builder(); }
 
-        public class AdminBulkUpdateUserAccountTypeV4Builder
-            : OperationBuilder<AdminBulkUpdateUserAccountTypeV4Builder>
+        public interface IAdminBulkUpdateUserAccountTypeV4Builder
         {
 
 
 
 
 
-            internal AdminBulkUpdateUserAccountTypeV4Builder() { }
+        }
 
-            internal AdminBulkUpdateUserAccountTypeV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminBulkUpdateUserAccountTypeV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBulkUpdateUserAccountTypeV4Builder
+            where TImpl : AdminBulkUpdateUserAccountTypeV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBulkUpdateUserAccountTypeV4AbstractBuilder() { }
+
+            public AdminBulkUpdateUserAccountTypeV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminBulkUpdateUserAccountTypeV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBulkUpdateUserAccountTypeV4.Response Execute(
+            protected AdminBulkUpdateUserAccountTypeV4.Response InternalExecute(
                 ModelBulkAccountTypeUpdateRequestV4 body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBulkUpdateUserAccountTypeV4.Response> ExecuteAsync(
+            protected async Task<AdminBulkUpdateUserAccountTypeV4.Response> InternalExecuteAsync(
                 ModelBulkAccountTypeUpdateRequestV4 body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminBulkUpdateUserAccountTypeV4(AdminBulkUpdateUserAccountTypeV4Builder builder,
+        public class AdminBulkUpdateUserAccountTypeV4Builder : AdminBulkUpdateUserAccountTypeV4AbstractBuilder<AdminBulkUpdateUserAccountTypeV4Builder>
+        {
+            public AdminBulkUpdateUserAccountTypeV4Builder() : base() { }
+
+            public AdminBulkUpdateUserAccountTypeV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBulkUpdateUserAccountTypeV4.Response Execute(
+                ModelBulkAccountTypeUpdateRequestV4 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminBulkUpdateUserAccountTypeV4.Response> ExecuteAsync(
+                ModelBulkAccountTypeUpdateRequestV4 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminBulkUpdateUserAccountTypeV4(IAdminBulkUpdateUserAccountTypeV4Builder builder,
             ModelBulkAccountTypeUpdateRequestV4 body,
             string namespace_
         )
@@ -184,27 +223,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

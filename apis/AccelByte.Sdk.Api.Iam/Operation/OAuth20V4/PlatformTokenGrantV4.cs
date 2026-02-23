@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -102,8 +102,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PlatformTokenGrantV4Builder Builder { get => new PlatformTokenGrantV4Builder(); }
 
-        public class PlatformTokenGrantV4Builder
-            : OperationBuilder<PlatformTokenGrantV4Builder>
+        public interface IPlatformTokenGrantV4Builder
+        {
+
+            string? CodeChallenge { get; }
+
+            PlatformTokenGrantV4CodeChallengeMethod? CodeChallengeMethod { get; }
+
+
+
+            string? AdditionalData { get; }
+
+            string? ClientId { get; }
+
+            bool? CreateHeadless { get; }
+
+            string? DeviceId { get; }
+
+            string? MacAddress { get; }
+
+            string? PlatformToken { get; }
+
+            double? ServiceLabel { get; }
+
+            bool? SkipSetCookie { get; }
+
+
+
+        }
+
+        public abstract class PlatformTokenGrantV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPlatformTokenGrantV4Builder
+            where TImpl : PlatformTokenGrantV4AbstractBuilder<TImpl>
         {
 
             public string? CodeChallenge { get; set; }
@@ -130,74 +160,74 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PlatformTokenGrantV4Builder() { }
+            public PlatformTokenGrantV4AbstractBuilder() { }
 
-            internal PlatformTokenGrantV4Builder(IAccelByteSdk sdk)
+            public PlatformTokenGrantV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PlatformTokenGrantV4Builder SetCodeChallenge(string _codeChallenge)
+            public TImpl SetCodeChallenge(string _codeChallenge)
             {
                 CodeChallenge = _codeChallenge;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetCodeChallengeMethod(PlatformTokenGrantV4CodeChallengeMethod _codeChallengeMethod)
+            public TImpl SetCodeChallengeMethod(PlatformTokenGrantV4CodeChallengeMethod _codeChallengeMethod)
             {
                 CodeChallengeMethod = _codeChallengeMethod;
-                return this;
+                return (TImpl)this;
             }
 
 
 
-            public PlatformTokenGrantV4Builder SetAdditionalData(string _additionalData)
+            public TImpl SetAdditionalData(string _additionalData)
             {
                 AdditionalData = _additionalData;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetClientId(string _clientId)
+            public TImpl SetClientId(string _clientId)
             {
                 ClientId = _clientId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetCreateHeadless(bool _createHeadless)
+            public TImpl SetCreateHeadless(bool _createHeadless)
             {
                 CreateHeadless = _createHeadless;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetDeviceId(string _deviceId)
+            public TImpl SetDeviceId(string _deviceId)
             {
                 DeviceId = _deviceId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetMacAddress(string _macAddress)
+            public TImpl SetMacAddress(string _macAddress)
             {
                 MacAddress = _macAddress;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetPlatformToken(string _platformToken)
+            public TImpl SetPlatformToken(string _platformToken)
             {
                 PlatformToken = _platformToken;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetServiceLabel(double _serviceLabel)
+            public TImpl SetServiceLabel(double _serviceLabel)
             {
                 ServiceLabel = _serviceLabel;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformTokenGrantV4Builder SetSkipSetCookie(bool _skipSetCookie)
+            public TImpl SetSkipSetCookie(bool _skipSetCookie)
             {
                 SkipSetCookie = _skipSetCookie;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -210,11 +240,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<PlatformTokenGrantV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PlatformTokenGrantV4.Response Execute(
+            protected PlatformTokenGrantV4.Response InternalExecute(
                 string platformId
             )
             {
@@ -231,7 +261,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PlatformTokenGrantV4.Response> ExecuteAsync(
+            protected async Task<PlatformTokenGrantV4.Response> InternalExecuteAsync(
                 string platformId
             )
             {
@@ -250,7 +280,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PlatformTokenGrantV4(PlatformTokenGrantV4Builder builder,
+        public class PlatformTokenGrantV4Builder : PlatformTokenGrantV4AbstractBuilder<PlatformTokenGrantV4Builder>
+        {
+            public PlatformTokenGrantV4Builder() : base() { }
+
+            public PlatformTokenGrantV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PlatformTokenGrantV4.Response Execute(
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    platformId
+                );
+            }
+            public async Task<PlatformTokenGrantV4.Response> ExecuteAsync(
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId
+                );
+            }
+        }
+
+
+        public PlatformTokenGrantV4(IPlatformTokenGrantV4Builder builder,
             string platformId
         )
         {
@@ -351,27 +406,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)503)
             {
-                response.Error503 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error503 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error503!.TranslateToApiError();
             }
 

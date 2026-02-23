@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUserEntitlementsBuilder Builder { get => new QueryUserEntitlementsBuilder(); }
 
-        public class QueryUserEntitlementsBuilder
-            : OperationBuilder<QueryUserEntitlementsBuilder>
+        public interface IQueryUserEntitlementsBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            QueryUserEntitlementsAppType? AppType { get; }
+
+            string? CollectionId { get; }
+
+            QueryUserEntitlementsEntitlementClazz? EntitlementClazz { get; }
+
+            string? EntitlementName { get; }
+
+            List<string>? Features { get; }
+
+            bool? FuzzyMatchName { get; }
+
+            bool? IgnoreActiveDate { get; }
+
+            List<string>? ItemId { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryUserEntitlementsOrigin? Origin { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserEntitlementsBuilder
+            where TImpl : QueryUserEntitlementsAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -66,84 +100,84 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUserEntitlementsBuilder() { }
+            public QueryUserEntitlementsAbstractBuilder() { }
 
-            internal QueryUserEntitlementsBuilder(IAccelByteSdk sdk)
+            public QueryUserEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserEntitlementsBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetAppType(QueryUserEntitlementsAppType _appType)
+            public TImpl SetAppType(QueryUserEntitlementsAppType _appType)
             {
                 AppType = _appType;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetCollectionId(string _collectionId)
+            public TImpl SetCollectionId(string _collectionId)
             {
                 CollectionId = _collectionId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetEntitlementClazz(QueryUserEntitlementsEntitlementClazz _entitlementClazz)
+            public TImpl SetEntitlementClazz(QueryUserEntitlementsEntitlementClazz _entitlementClazz)
             {
                 EntitlementClazz = _entitlementClazz;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetEntitlementName(string _entitlementName)
+            public TImpl SetEntitlementName(string _entitlementName)
             {
                 EntitlementName = _entitlementName;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetFeatures(List<string> _features)
+            public TImpl SetFeatures(List<string> _features)
             {
                 Features = _features;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetFuzzyMatchName(bool _fuzzyMatchName)
+            public TImpl SetFuzzyMatchName(bool _fuzzyMatchName)
             {
                 FuzzyMatchName = _fuzzyMatchName;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetIgnoreActiveDate(bool _ignoreActiveDate)
+            public TImpl SetIgnoreActiveDate(bool _ignoreActiveDate)
             {
                 IgnoreActiveDate = _ignoreActiveDate;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetItemId(List<string> _itemId)
+            public TImpl SetItemId(List<string> _itemId)
             {
                 ItemId = _itemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsBuilder SetOrigin(QueryUserEntitlementsOrigin _origin)
+            public TImpl SetOrigin(QueryUserEntitlementsOrigin _origin)
             {
                 Origin = _origin;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -160,11 +194,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserEntitlements.Response Execute(
+            protected QueryUserEntitlements.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -183,7 +217,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserEntitlements.Response> ExecuteAsync(
+            protected async Task<QueryUserEntitlements.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -204,7 +238,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUserEntitlements(QueryUserEntitlementsBuilder builder,
+        public class QueryUserEntitlementsBuilder : QueryUserEntitlementsAbstractBuilder<QueryUserEntitlementsBuilder>
+        {
+            public QueryUserEntitlementsBuilder() : base() { }
+
+            public QueryUserEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserEntitlements.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserEntitlements.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserEntitlements(IQueryUserEntitlementsBuilder builder,
             string namespace_,
             string userId
         )
@@ -311,7 +374,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EntitlementPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicQueryItemsBuilder Builder { get => new PublicQueryItemsBuilder(); }
 
-        public class PublicQueryItemsBuilder
-            : OperationBuilder<PublicQueryItemsBuilder>
+        public interface IPublicQueryItemsBuilder
+        {
+
+            PublicQueryItemsAppType? AppType { get; }
+
+            bool? AutoCalcEstimatedPrice { get; }
+
+            string? BaseAppId { get; }
+
+            string? CategoryPath { get; }
+
+            string? Features { get; }
+
+            bool? IncludeSubCategoryItem { get; }
+
+            PublicQueryItemsItemType? ItemType { get; }
+
+            string? Language { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? Region { get; }
+
+            List<PublicQueryItemsSortBy>? SortBy { get; }
+
+            string? StoreId { get; }
+
+            string? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryItemsBuilder
+            where TImpl : PublicQueryItemsAbstractBuilder<TImpl>
         {
 
             public PublicQueryItemsAppType? AppType { get; set; }
@@ -72,96 +110,96 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicQueryItemsBuilder() { }
+            public PublicQueryItemsAbstractBuilder() { }
 
-            internal PublicQueryItemsBuilder(IAccelByteSdk sdk)
+            public PublicQueryItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryItemsBuilder SetAppType(PublicQueryItemsAppType _appType)
+            public TImpl SetAppType(PublicQueryItemsAppType _appType)
             {
                 AppType = _appType;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetAutoCalcEstimatedPrice(bool _autoCalcEstimatedPrice)
+            public TImpl SetAutoCalcEstimatedPrice(bool _autoCalcEstimatedPrice)
             {
                 AutoCalcEstimatedPrice = _autoCalcEstimatedPrice;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetBaseAppId(string _baseAppId)
+            public TImpl SetBaseAppId(string _baseAppId)
             {
                 BaseAppId = _baseAppId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetCategoryPath(string _categoryPath)
+            public TImpl SetCategoryPath(string _categoryPath)
             {
                 CategoryPath = _categoryPath;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetFeatures(string _features)
+            public TImpl SetFeatures(string _features)
             {
                 Features = _features;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetIncludeSubCategoryItem(bool _includeSubCategoryItem)
+            public TImpl SetIncludeSubCategoryItem(bool _includeSubCategoryItem)
             {
                 IncludeSubCategoryItem = _includeSubCategoryItem;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetItemType(PublicQueryItemsItemType _itemType)
+            public TImpl SetItemType(PublicQueryItemsItemType _itemType)
             {
                 ItemType = _itemType;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetSortBy(List<PublicQueryItemsSortBy> _sortBy)
+            public TImpl SetSortBy(List<PublicQueryItemsSortBy> _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryItemsBuilder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -176,11 +214,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicQueryItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryItems.Response Execute(
+            protected PublicQueryItems.Response InternalExecute(
                 string namespace_
             )
             {
@@ -197,7 +235,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryItems.Response> ExecuteAsync(
+            protected async Task<PublicQueryItems.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -216,7 +254,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicQueryItems(PublicQueryItemsBuilder builder,
+        public class PublicQueryItemsBuilder : PublicQueryItemsAbstractBuilder<PublicQueryItemsBuilder>
+        {
+            public PublicQueryItemsBuilder() : base() { }
+
+            public PublicQueryItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryItems.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicQueryItems.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicQueryItems(IPublicQueryItemsBuilder builder,
             string namespace_
         )
         {
@@ -327,17 +390,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

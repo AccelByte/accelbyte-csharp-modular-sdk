@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static DeleteAllUserRankingByCycleIdAdminV3Builder Builder { get => new DeleteAllUserRankingByCycleIdAdminV3Builder(); }
 
-        public class DeleteAllUserRankingByCycleIdAdminV3Builder
-            : OperationBuilder<DeleteAllUserRankingByCycleIdAdminV3Builder>
+        public interface IDeleteAllUserRankingByCycleIdAdminV3Builder
         {
 
 
 
 
 
-            internal DeleteAllUserRankingByCycleIdAdminV3Builder() { }
+        }
 
-            internal DeleteAllUserRankingByCycleIdAdminV3Builder(IAccelByteSdk sdk)
+        public abstract class DeleteAllUserRankingByCycleIdAdminV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteAllUserRankingByCycleIdAdminV3Builder
+            where TImpl : DeleteAllUserRankingByCycleIdAdminV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteAllUserRankingByCycleIdAdminV3AbstractBuilder() { }
+
+            public DeleteAllUserRankingByCycleIdAdminV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,11 +79,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteAllUserRankingByCycleIdAdminV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteAllUserRankingByCycleIdAdminV3.Response Execute(
+            protected DeleteAllUserRankingByCycleIdAdminV3.Response InternalExecute(
                 string cycleId,
                 string leaderboardCode,
                 string namespace_
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteAllUserRankingByCycleIdAdminV3.Response> ExecuteAsync(
+            protected async Task<DeleteAllUserRankingByCycleIdAdminV3.Response> InternalExecuteAsync(
                 string cycleId,
                 string leaderboardCode,
                 string namespace_
@@ -117,7 +127,40 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private DeleteAllUserRankingByCycleIdAdminV3(DeleteAllUserRankingByCycleIdAdminV3Builder builder,
+        public class DeleteAllUserRankingByCycleIdAdminV3Builder : DeleteAllUserRankingByCycleIdAdminV3AbstractBuilder<DeleteAllUserRankingByCycleIdAdminV3Builder>
+        {
+            public DeleteAllUserRankingByCycleIdAdminV3Builder() : base() { }
+
+            public DeleteAllUserRankingByCycleIdAdminV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteAllUserRankingByCycleIdAdminV3.Response Execute(
+                string cycleId,
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    cycleId,
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+            public async Task<DeleteAllUserRankingByCycleIdAdminV3.Response> ExecuteAsync(
+                string cycleId,
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    cycleId,
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteAllUserRankingByCycleIdAdminV3(IDeleteAllUserRankingByCycleIdAdminV3Builder builder,
             string cycleId,
             string leaderboardCode,
             string namespace_
@@ -197,22 +240,26 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

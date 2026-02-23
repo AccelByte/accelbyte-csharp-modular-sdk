@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserAppEntitlementOwnershipByAppIdBuilder Builder { get => new GetUserAppEntitlementOwnershipByAppIdBuilder(); }
 
-        public class GetUserAppEntitlementOwnershipByAppIdBuilder
-            : OperationBuilder<GetUserAppEntitlementOwnershipByAppIdBuilder>
+        public interface IGetUserAppEntitlementOwnershipByAppIdBuilder
         {
 
 
 
 
 
-            internal GetUserAppEntitlementOwnershipByAppIdBuilder() { }
+        }
 
-            internal GetUserAppEntitlementOwnershipByAppIdBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserAppEntitlementOwnershipByAppIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserAppEntitlementOwnershipByAppIdBuilder
+            where TImpl : GetUserAppEntitlementOwnershipByAppIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserAppEntitlementOwnershipByAppIdAbstractBuilder() { }
+
+            public GetUserAppEntitlementOwnershipByAppIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     appId                    
                 );
 
-                op.SetBaseFields<GetUserAppEntitlementOwnershipByAppIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserAppEntitlementOwnershipByAppId.Response Execute(
+            protected GetUserAppEntitlementOwnershipByAppId.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string appId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserAppEntitlementOwnershipByAppId.Response> ExecuteAsync(
+            protected async Task<GetUserAppEntitlementOwnershipByAppId.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string appId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserAppEntitlementOwnershipByAppId(GetUserAppEntitlementOwnershipByAppIdBuilder builder,
+        public class GetUserAppEntitlementOwnershipByAppIdBuilder : GetUserAppEntitlementOwnershipByAppIdAbstractBuilder<GetUserAppEntitlementOwnershipByAppIdBuilder>
+        {
+            public GetUserAppEntitlementOwnershipByAppIdBuilder() : base() { }
+
+            public GetUserAppEntitlementOwnershipByAppIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserAppEntitlementOwnershipByAppId.Response Execute(
+                string namespace_,
+                string userId,
+                string appId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    appId
+                );
+            }
+            public async Task<GetUserAppEntitlementOwnershipByAppId.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string appId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    appId
+                );
+            }
+        }
+
+
+        public GetUserAppEntitlementOwnershipByAppId(IGetUserAppEntitlementOwnershipByAppIdBuilder builder,
             string namespace_,
             string userId,
             string appId
@@ -181,7 +224,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.Ownership>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.Ownership>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static ArtifactBulkDeleteBuilder Builder { get => new ArtifactBulkDeleteBuilder(); }
 
-        public class ArtifactBulkDeleteBuilder
-            : OperationBuilder<ArtifactBulkDeleteBuilder>
+        public interface IArtifactBulkDeleteBuilder
+        {
+
+            string? ArtifactType { get; }
+
+            string? FleetId { get; }
+
+            DateTime? UploadedBefore { get; }
+
+
+
+
+
+        }
+
+        public abstract class ArtifactBulkDeleteAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IArtifactBulkDeleteBuilder
+            where TImpl : ArtifactBulkDeleteAbstractBuilder<TImpl>
         {
 
             public string? ArtifactType { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal ArtifactBulkDeleteBuilder() { }
+            public ArtifactBulkDeleteAbstractBuilder() { }
 
-            internal ArtifactBulkDeleteBuilder(IAccelByteSdk sdk)
+            public ArtifactBulkDeleteAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ArtifactBulkDeleteBuilder SetArtifactType(string _artifactType)
+            public TImpl SetArtifactType(string _artifactType)
             {
                 ArtifactType = _artifactType;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactBulkDeleteBuilder SetFleetId(string _fleetId)
+            public TImpl SetFleetId(string _fleetId)
             {
                 FleetId = _fleetId;
-                return this;
+                return (TImpl)this;
             }
 
-            public ArtifactBulkDeleteBuilder SetUploadedBefore(DateTime _uploadedBefore)
+            public TImpl SetUploadedBefore(DateTime _uploadedBefore)
             {
                 UploadedBefore = _uploadedBefore;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ArtifactBulkDeleteBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ArtifactBulkDelete.Response Execute(
+            protected ArtifactBulkDelete.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ArtifactBulkDelete.Response> ExecuteAsync(
+            protected async Task<ArtifactBulkDelete.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private ArtifactBulkDelete(ArtifactBulkDeleteBuilder builder,
+        public class ArtifactBulkDeleteBuilder : ArtifactBulkDeleteAbstractBuilder<ArtifactBulkDeleteBuilder>
+        {
+            public ArtifactBulkDeleteBuilder() : base() { }
+
+            public ArtifactBulkDeleteBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ArtifactBulkDelete.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ArtifactBulkDelete.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ArtifactBulkDelete(IArtifactBulkDeleteBuilder builder,
             string namespace_
         )
         {
@@ -205,22 +246,26 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static PublicMoveMyItemsBuilder Builder { get => new PublicMoveMyItemsBuilder(); }
 
-        public class PublicMoveMyItemsBuilder
-            : OperationBuilder<PublicMoveMyItemsBuilder>
+        public interface IPublicMoveMyItemsBuilder
         {
 
 
 
 
 
-            internal PublicMoveMyItemsBuilder() { }
+        }
 
-            internal PublicMoveMyItemsBuilder(IAccelByteSdk sdk)
+        public abstract class PublicMoveMyItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicMoveMyItemsBuilder
+            where TImpl : PublicMoveMyItemsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicMoveMyItemsAbstractBuilder() { }
+
+            public PublicMoveMyItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicMoveMyItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicMoveMyItems.Response Execute(
+            protected PublicMoveMyItems.Response InternalExecute(
                 ApimodelsMoveItemsReq body,
                 string inventoryId,
                 string namespace_
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicMoveMyItems.Response> ExecuteAsync(
+            protected async Task<PublicMoveMyItems.Response> InternalExecuteAsync(
                 ApimodelsMoveItemsReq body,
                 string inventoryId,
                 string namespace_
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private PublicMoveMyItems(PublicMoveMyItemsBuilder builder,
+        public class PublicMoveMyItemsBuilder : PublicMoveMyItemsAbstractBuilder<PublicMoveMyItemsBuilder>
+        {
+            public PublicMoveMyItemsBuilder() : base() { }
+
+            public PublicMoveMyItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicMoveMyItems.Response Execute(
+                ApimodelsMoveItemsReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<PublicMoveMyItems.Response> ExecuteAsync(
+                ApimodelsMoveItemsReq body,
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inventoryId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicMoveMyItems(IPublicMoveMyItemsBuilder builder,
             ApimodelsMoveItemsReq body,
             string inventoryId,
             string namespace_
@@ -187,17 +230,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsMoveItemsResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsMoveItemsResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

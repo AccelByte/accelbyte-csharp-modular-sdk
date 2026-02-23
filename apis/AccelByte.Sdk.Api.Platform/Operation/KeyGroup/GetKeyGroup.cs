@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetKeyGroupBuilder Builder { get => new GetKeyGroupBuilder(); }
 
-        public class GetKeyGroupBuilder
-            : OperationBuilder<GetKeyGroupBuilder>
+        public interface IGetKeyGroupBuilder
         {
 
 
 
 
 
-            internal GetKeyGroupBuilder() { }
+        }
 
-            internal GetKeyGroupBuilder(IAccelByteSdk sdk)
+        public abstract class GetKeyGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetKeyGroupBuilder
+            where TImpl : GetKeyGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetKeyGroupAbstractBuilder() { }
+
+            public GetKeyGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetKeyGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetKeyGroup.Response Execute(
+            protected GetKeyGroup.Response InternalExecute(
                 string keyGroupId,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetKeyGroup.Response> ExecuteAsync(
+            protected async Task<GetKeyGroup.Response> InternalExecuteAsync(
                 string keyGroupId,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetKeyGroup(GetKeyGroupBuilder builder,
+        public class GetKeyGroupBuilder : GetKeyGroupAbstractBuilder<GetKeyGroupBuilder>
+        {
+            public GetKeyGroupBuilder() : base() { }
+
+            public GetKeyGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetKeyGroup.Response Execute(
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    keyGroupId,
+                    namespace_
+                );
+            }
+            public async Task<GetKeyGroup.Response> ExecuteAsync(
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    keyGroupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetKeyGroup(IGetKeyGroupBuilder builder,
             string keyGroupId,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

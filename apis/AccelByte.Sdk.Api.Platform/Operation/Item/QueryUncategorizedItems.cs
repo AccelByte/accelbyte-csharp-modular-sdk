@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUncategorizedItemsBuilder Builder { get => new QueryUncategorizedItemsBuilder(); }
 
-        public class QueryUncategorizedItemsBuilder
-            : OperationBuilder<QueryUncategorizedItemsBuilder>
+        public interface IQueryUncategorizedItemsBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            List<QueryUncategorizedItemsSortBy>? SortBy { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUncategorizedItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUncategorizedItemsBuilder
+            where TImpl : QueryUncategorizedItemsAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUncategorizedItemsBuilder() { }
+            public QueryUncategorizedItemsAbstractBuilder() { }
 
-            internal QueryUncategorizedItemsBuilder(IAccelByteSdk sdk)
+            public QueryUncategorizedItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUncategorizedItemsBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUncategorizedItemsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUncategorizedItemsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUncategorizedItemsBuilder SetSortBy(List<QueryUncategorizedItemsSortBy> _sortBy)
+            public TImpl SetSortBy(List<QueryUncategorizedItemsSortBy> _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUncategorizedItemsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,11 +122,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryUncategorizedItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUncategorizedItems.Response Execute(
+            protected QueryUncategorizedItems.Response InternalExecute(
                 string namespace_
             )
             {
@@ -123,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUncategorizedItems.Response> ExecuteAsync(
+            protected async Task<QueryUncategorizedItems.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -142,7 +162,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUncategorizedItems(QueryUncategorizedItemsBuilder builder,
+        public class QueryUncategorizedItemsBuilder : QueryUncategorizedItemsAbstractBuilder<QueryUncategorizedItemsBuilder>
+        {
+            public QueryUncategorizedItemsBuilder() : base() { }
+
+            public QueryUncategorizedItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUncategorizedItems.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryUncategorizedItems.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryUncategorizedItems(IQueryUncategorizedItemsBuilder builder,
             string namespace_
         )
         {
@@ -226,17 +271,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

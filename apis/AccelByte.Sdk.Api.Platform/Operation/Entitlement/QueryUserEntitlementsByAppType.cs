@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryUserEntitlementsByAppTypeBuilder Builder { get => new QueryUserEntitlementsByAppTypeBuilder(); }
 
-        public class QueryUserEntitlementsByAppTypeBuilder
-            : OperationBuilder<QueryUserEntitlementsByAppTypeBuilder>
+        public interface IQueryUserEntitlementsByAppTypeBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserEntitlementsByAppTypeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserEntitlementsByAppTypeBuilder
+            where TImpl : QueryUserEntitlementsByAppTypeAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryUserEntitlementsByAppTypeBuilder() { }
+            public QueryUserEntitlementsByAppTypeAbstractBuilder() { }
 
-            internal QueryUserEntitlementsByAppTypeBuilder(IAccelByteSdk sdk)
+            public QueryUserEntitlementsByAppTypeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserEntitlementsByAppTypeBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsByAppTypeBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserEntitlementsByAppTypeBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -90,11 +106,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     appType                    
                 );
 
-                op.SetBaseFields<QueryUserEntitlementsByAppTypeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserEntitlementsByAppType.Response Execute(
+            protected QueryUserEntitlementsByAppType.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string appType
@@ -115,7 +131,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserEntitlementsByAppType.Response> ExecuteAsync(
+            protected async Task<QueryUserEntitlementsByAppType.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string appType
@@ -138,7 +154,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryUserEntitlementsByAppType(QueryUserEntitlementsByAppTypeBuilder builder,
+        public class QueryUserEntitlementsByAppTypeBuilder : QueryUserEntitlementsByAppTypeAbstractBuilder<QueryUserEntitlementsByAppTypeBuilder>
+        {
+            public QueryUserEntitlementsByAppTypeBuilder() : base() { }
+
+            public QueryUserEntitlementsByAppTypeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserEntitlementsByAppType.Response Execute(
+                string namespace_,
+                string userId,
+                string appType
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    appType
+                );
+            }
+            public async Task<QueryUserEntitlementsByAppType.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string appType
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    appType
+                );
+            }
+        }
+
+
+        public QueryUserEntitlementsByAppType(IQueryUserEntitlementsByAppTypeBuilder builder,
             string namespace_,
             string userId,
             QueryUserEntitlementsByAppTypeAppType appType
@@ -218,7 +267,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AppEntitlementPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AppEntitlementPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

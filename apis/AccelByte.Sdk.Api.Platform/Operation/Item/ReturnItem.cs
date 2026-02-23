@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ReturnItemBuilder Builder { get => new ReturnItemBuilder(); }
 
-        public class ReturnItemBuilder
-            : OperationBuilder<ReturnItemBuilder>
+        public interface IReturnItemBuilder
         {
 
 
 
 
 
-            internal ReturnItemBuilder() { }
+        }
 
-            internal ReturnItemBuilder(IAccelByteSdk sdk)
+        public abstract class ReturnItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IReturnItemBuilder
+            where TImpl : ReturnItemAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ReturnItemAbstractBuilder() { }
+
+            public ReturnItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ReturnItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ReturnItem.Response Execute(
+            protected ReturnItem.Response InternalExecute(
                 ItemReturnRequest body,
                 string itemId,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ReturnItem.Response> ExecuteAsync(
+            protected async Task<ReturnItem.Response> InternalExecuteAsync(
                 ItemReturnRequest body,
                 string itemId,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ReturnItem(ReturnItemBuilder builder,
+        public class ReturnItemBuilder : ReturnItemAbstractBuilder<ReturnItemBuilder>
+        {
+            public ReturnItemBuilder() : base() { }
+
+            public ReturnItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ReturnItem.Response Execute(
+                ItemReturnRequest body,
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<ReturnItem.Response> ExecuteAsync(
+                ItemReturnRequest body,
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ReturnItem(IReturnItemBuilder builder,
             ItemReturnRequest body,
             string itemId,
             string namespace_
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

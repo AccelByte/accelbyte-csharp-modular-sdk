@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -39,8 +39,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static UpdateNamespaceSlotConfigBuilder Builder { get => new UpdateNamespaceSlotConfigBuilder(); }
 
-        public class UpdateNamespaceSlotConfigBuilder
-            : OperationBuilder<UpdateNamespaceSlotConfigBuilder>
+        public interface IUpdateNamespaceSlotConfigBuilder
+        {
+
+
+            Model.SlotConfigUpdate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class UpdateNamespaceSlotConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateNamespaceSlotConfigBuilder
+            where TImpl : UpdateNamespaceSlotConfigAbstractBuilder<TImpl>
         {
 
 
@@ -49,19 +61,19 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal UpdateNamespaceSlotConfigBuilder() { }
+            public UpdateNamespaceSlotConfigAbstractBuilder() { }
 
-            internal UpdateNamespaceSlotConfigBuilder(IAccelByteSdk sdk)
+            public UpdateNamespaceSlotConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public UpdateNamespaceSlotConfigBuilder SetBody(Model.SlotConfigUpdate _body)
+            public TImpl SetBody(Model.SlotConfigUpdate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -75,12 +87,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateNamespaceSlotConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpdateNamespaceSlotConfig.Response Execute(
+            protected UpdateNamespaceSlotConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -97,7 +109,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateNamespaceSlotConfig.Response> ExecuteAsync(
+            protected async Task<UpdateNamespaceSlotConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -116,7 +128,33 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private UpdateNamespaceSlotConfig(UpdateNamespaceSlotConfigBuilder builder,
+        public class UpdateNamespaceSlotConfigBuilder : UpdateNamespaceSlotConfigAbstractBuilder<UpdateNamespaceSlotConfigBuilder>
+        {
+            public UpdateNamespaceSlotConfigBuilder() : base() { }
+
+            public UpdateNamespaceSlotConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateNamespaceSlotConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<UpdateNamespaceSlotConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateNamespaceSlotConfig(IUpdateNamespaceSlotConfigBuilder builder,
             string namespace_
         )
         {
@@ -182,7 +220,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.NamespaceSlotConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.NamespaceSlotConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

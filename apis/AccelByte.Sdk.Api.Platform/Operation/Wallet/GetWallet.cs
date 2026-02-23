@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetWalletBuilder Builder { get => new GetWalletBuilder(); }
 
-        public class GetWalletBuilder
-            : OperationBuilder<GetWalletBuilder>
+        public interface IGetWalletBuilder
         {
 
 
 
 
 
-            internal GetWalletBuilder() { }
+        }
 
-            internal GetWalletBuilder(IAccelByteSdk sdk)
+        public abstract class GetWalletAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetWalletBuilder
+            where TImpl : GetWalletAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetWalletAbstractBuilder() { }
+
+            public GetWalletAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,12 +74,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     walletId                    
                 );
 
-                op.SetBaseFields<GetWalletBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetWallet.Response Execute(
+            protected GetWallet.Response InternalExecute(
                 string namespace_,
                 string walletId
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetWallet.Response> ExecuteAsync(
+            protected async Task<GetWallet.Response> InternalExecuteAsync(
                 string namespace_,
                 string walletId
             )
@@ -109,7 +119,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetWallet(GetWalletBuilder builder,
+        public class GetWalletBuilder : GetWalletAbstractBuilder<GetWalletBuilder>
+        {
+            public GetWalletBuilder() : base() { }
+
+            public GetWalletBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetWallet.Response Execute(
+                string namespace_,
+                string walletId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    walletId
+                );
+            }
+            public async Task<GetWallet.Response> ExecuteAsync(
+                string namespace_,
+                string walletId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    walletId
+                );
+            }
+        }
+
+
+        public GetWallet(IGetWalletBuilder builder,
             string namespace_,
             string walletId
         )
@@ -178,12 +218,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.WalletInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.WalletInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

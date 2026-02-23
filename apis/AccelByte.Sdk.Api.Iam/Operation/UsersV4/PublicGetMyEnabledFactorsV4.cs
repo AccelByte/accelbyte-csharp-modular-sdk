@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetMyEnabledFactorsV4Builder Builder { get => new PublicGetMyEnabledFactorsV4Builder(); }
 
-        public class PublicGetMyEnabledFactorsV4Builder
-            : OperationBuilder<PublicGetMyEnabledFactorsV4Builder>
+        public interface IPublicGetMyEnabledFactorsV4Builder
         {
 
 
 
 
 
-            internal PublicGetMyEnabledFactorsV4Builder() { }
+        }
 
-            internal PublicGetMyEnabledFactorsV4Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetMyEnabledFactorsV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetMyEnabledFactorsV4Builder
+            where TImpl : PublicGetMyEnabledFactorsV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetMyEnabledFactorsV4AbstractBuilder() { }
+
+            public PublicGetMyEnabledFactorsV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetMyEnabledFactorsV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetMyEnabledFactorsV4.Response Execute(
+            protected PublicGetMyEnabledFactorsV4.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetMyEnabledFactorsV4.Response> ExecuteAsync(
+            protected async Task<PublicGetMyEnabledFactorsV4.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetMyEnabledFactorsV4(PublicGetMyEnabledFactorsV4Builder builder,
+        public class PublicGetMyEnabledFactorsV4Builder : PublicGetMyEnabledFactorsV4AbstractBuilder<PublicGetMyEnabledFactorsV4Builder>
+        {
+            public PublicGetMyEnabledFactorsV4Builder() : base() { }
+
+            public PublicGetMyEnabledFactorsV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetMyEnabledFactorsV4.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetMyEnabledFactorsV4.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetMyEnabledFactorsV4(IPublicGetMyEnabledFactorsV4Builder builder,
             string namespace_
         )
         {
@@ -171,32 +206,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelEnabledFactorsResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelEnabledFactorsResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

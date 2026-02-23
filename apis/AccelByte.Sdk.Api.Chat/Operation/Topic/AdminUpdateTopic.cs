@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminUpdateTopicBuilder Builder { get => new AdminUpdateTopicBuilder(); }
 
-        public class AdminUpdateTopicBuilder
-            : OperationBuilder<AdminUpdateTopicBuilder>
+        public interface IAdminUpdateTopicBuilder
         {
 
 
 
 
 
-            internal AdminUpdateTopicBuilder() { }
+        }
 
-            internal AdminUpdateTopicBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateTopicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateTopicBuilder
+            where TImpl : AdminUpdateTopicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateTopicAbstractBuilder() { }
+
+            public AdminUpdateTopicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<AdminUpdateTopicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateTopic.Response Execute(
+            protected AdminUpdateTopic.Response InternalExecute(
                 ApiUpdateTopicParams body,
                 string namespace_,
                 string topic
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateTopic.Response> ExecuteAsync(
+            protected async Task<AdminUpdateTopic.Response> InternalExecuteAsync(
                 ApiUpdateTopicParams body,
                 string namespace_,
                 string topic
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminUpdateTopic(AdminUpdateTopicBuilder builder,
+        public class AdminUpdateTopicBuilder : AdminUpdateTopicAbstractBuilder<AdminUpdateTopicBuilder>
+        {
+            public AdminUpdateTopicBuilder() : base() { }
+
+            public AdminUpdateTopicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateTopic.Response Execute(
+                ApiUpdateTopicParams body,
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<AdminUpdateTopic.Response> ExecuteAsync(
+                ApiUpdateTopicParams body,
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public AdminUpdateTopic(IAdminUpdateTopicBuilder builder,
             ApiUpdateTopicParams body,
             string namespace_,
             string topic
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiCreateTopicResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiCreateTopicResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

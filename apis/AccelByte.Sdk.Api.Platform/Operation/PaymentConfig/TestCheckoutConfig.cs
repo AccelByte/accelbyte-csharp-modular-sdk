@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestCheckoutConfigBuilder Builder { get => new TestCheckoutConfigBuilder(); }
 
-        public class TestCheckoutConfigBuilder
-            : OperationBuilder<TestCheckoutConfigBuilder>
+        public interface ITestCheckoutConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestCheckoutConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestCheckoutConfigBuilder
+            where TImpl : TestCheckoutConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -48,18 +60,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestCheckoutConfigBuilder() { }
+            public TestCheckoutConfigAbstractBuilder() { }
 
-            internal TestCheckoutConfigBuilder(IAccelByteSdk sdk)
+            public TestCheckoutConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestCheckoutConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestCheckoutConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestCheckoutConfig.Response Execute(
+            protected TestCheckoutConfig.Response InternalExecute(
                 CheckoutConfig body
             )
             {
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestCheckoutConfig.Response> ExecuteAsync(
+            protected async Task<TestCheckoutConfig.Response> InternalExecuteAsync(
                 CheckoutConfig body
             )
             {
@@ -114,7 +126,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestCheckoutConfig(TestCheckoutConfigBuilder builder,
+        public class TestCheckoutConfigBuilder : TestCheckoutConfigAbstractBuilder<TestCheckoutConfigBuilder>
+        {
+            public TestCheckoutConfigBuilder() : base() { }
+
+            public TestCheckoutConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestCheckoutConfig.Response Execute(
+                CheckoutConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestCheckoutConfig.Response> ExecuteAsync(
+                CheckoutConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestCheckoutConfig(ITestCheckoutConfigBuilder builder,
             CheckoutConfig body
         )
         {
@@ -180,7 +217,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

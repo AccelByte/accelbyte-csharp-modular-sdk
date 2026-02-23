@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -40,17 +40,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static S2SGetListFinishedAccountDeletionRequestBuilder Builder { get => new S2SGetListFinishedAccountDeletionRequestBuilder(); }
 
-        public class S2SGetListFinishedAccountDeletionRequestBuilder
-            : OperationBuilder<S2SGetListFinishedAccountDeletionRequestBuilder>
+        public interface IS2SGetListFinishedAccountDeletionRequestBuilder
         {
 
 
 
 
 
-            internal S2SGetListFinishedAccountDeletionRequestBuilder() { }
+        }
 
-            internal S2SGetListFinishedAccountDeletionRequestBuilder(IAccelByteSdk sdk)
+        public abstract class S2SGetListFinishedAccountDeletionRequestAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IS2SGetListFinishedAccountDeletionRequestBuilder
+            where TImpl : S2SGetListFinishedAccountDeletionRequestAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public S2SGetListFinishedAccountDeletionRequestAbstractBuilder() { }
+
+            public S2SGetListFinishedAccountDeletionRequestAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -72,11 +82,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     start                    
                 );
 
-                op.SetBaseFields<S2SGetListFinishedAccountDeletionRequestBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public S2SGetListFinishedAccountDeletionRequest.Response Execute(
+            protected S2SGetListFinishedAccountDeletionRequest.Response InternalExecute(
                 string namespace_,
                 string end,
                 string start
@@ -97,7 +107,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<S2SGetListFinishedAccountDeletionRequest.Response> ExecuteAsync(
+            protected async Task<S2SGetListFinishedAccountDeletionRequest.Response> InternalExecuteAsync(
                 string namespace_,
                 string end,
                 string start
@@ -120,7 +130,40 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private S2SGetListFinishedAccountDeletionRequest(S2SGetListFinishedAccountDeletionRequestBuilder builder,
+        public class S2SGetListFinishedAccountDeletionRequestBuilder : S2SGetListFinishedAccountDeletionRequestAbstractBuilder<S2SGetListFinishedAccountDeletionRequestBuilder>
+        {
+            public S2SGetListFinishedAccountDeletionRequestBuilder() : base() { }
+
+            public S2SGetListFinishedAccountDeletionRequestBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public S2SGetListFinishedAccountDeletionRequest.Response Execute(
+                string namespace_,
+                string end,
+                string start
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    end,
+                    start
+                );
+            }
+            public async Task<S2SGetListFinishedAccountDeletionRequest.Response> ExecuteAsync(
+                string namespace_,
+                string end,
+                string start
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    end,
+                    start
+                );
+            }
+        }
+
+
+        public S2SGetListFinishedAccountDeletionRequest(IS2SGetListFinishedAccountDeletionRequestBuilder builder,
             string namespace_,
             string end,
             string start
@@ -199,27 +242,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DtoListFinishedDataDeletion>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DtoListFinishedDataDeletion>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static BulkGetLocaleItemsBuilder Builder { get => new BulkGetLocaleItemsBuilder(); }
 
-        public class BulkGetLocaleItemsBuilder
-            : OperationBuilder<BulkGetLocaleItemsBuilder>
+        public interface IBulkGetLocaleItemsBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? Language { get; }
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class BulkGetLocaleItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkGetLocaleItemsBuilder
+            where TImpl : BulkGetLocaleItemsAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -50,36 +68,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal BulkGetLocaleItemsBuilder() { }
+            public BulkGetLocaleItemsAbstractBuilder() { }
 
-            internal BulkGetLocaleItemsBuilder(IAccelByteSdk sdk)
+            public BulkGetLocaleItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public BulkGetLocaleItemsBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public BulkGetLocaleItemsBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public BulkGetLocaleItemsBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public BulkGetLocaleItemsBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -96,11 +114,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     itemIds                    
                 );
 
-                op.SetBaseFields<BulkGetLocaleItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkGetLocaleItems.Response Execute(
+            protected BulkGetLocaleItems.Response InternalExecute(
                 string namespace_,
                 string itemIds
             )
@@ -119,7 +137,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkGetLocaleItems.Response> ExecuteAsync(
+            protected async Task<BulkGetLocaleItems.Response> InternalExecuteAsync(
                 string namespace_,
                 string itemIds
             )
@@ -139,7 +157,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public BulkGetLocaleItems.Response<T1, T2> Execute<T1, T2>(
+            protected BulkGetLocaleItems.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_,
                 string itemIds
             )
@@ -158,7 +176,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkGetLocaleItems.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<BulkGetLocaleItems.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_,
                 string itemIds
             )
@@ -179,7 +197,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private BulkGetLocaleItems(BulkGetLocaleItemsBuilder builder,
+        public class BulkGetLocaleItemsBuilder : BulkGetLocaleItemsAbstractBuilder<BulkGetLocaleItemsBuilder>
+        {
+            public BulkGetLocaleItemsBuilder() : base() { }
+
+            public BulkGetLocaleItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkGetLocaleItems.Response Execute(
+                string namespace_,
+                string itemIds
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    itemIds
+                );
+            }
+            public async Task<BulkGetLocaleItems.Response> ExecuteAsync(
+                string namespace_,
+                string itemIds
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    itemIds
+                );
+            }
+
+            public BulkGetLocaleItems.Response<T1, T2> Execute<T1, T2>(
+                string namespace_,
+                string itemIds
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_,
+                    itemIds
+                );
+            }
+            public async Task<BulkGetLocaleItems.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_,
+                string itemIds
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_,
+                    itemIds
+                );
+            }
+        }
+
+
+        public BulkGetLocaleItems(IBulkGetLocaleItemsBuilder builder,
             string namespace_,
             string itemIds
         )
@@ -267,12 +335,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ItemInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -293,12 +363,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ItemInfo<T1, T2>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemInfo<T1, T2>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetSectionPluginConfigBuilder Builder { get => new GetSectionPluginConfigBuilder(); }
 
-        public class GetSectionPluginConfigBuilder
-            : OperationBuilder<GetSectionPluginConfigBuilder>
+        public interface IGetSectionPluginConfigBuilder
         {
 
 
 
 
 
-            internal GetSectionPluginConfigBuilder() { }
+        }
 
-            internal GetSectionPluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetSectionPluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetSectionPluginConfigBuilder
+            where TImpl : GetSectionPluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetSectionPluginConfigAbstractBuilder() { }
+
+            public GetSectionPluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetSectionPluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetSectionPluginConfig.Response Execute(
+            protected GetSectionPluginConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetSectionPluginConfig.Response> ExecuteAsync(
+            protected async Task<GetSectionPluginConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetSectionPluginConfig(GetSectionPluginConfigBuilder builder,
+        public class GetSectionPluginConfigBuilder : GetSectionPluginConfigAbstractBuilder<GetSectionPluginConfigBuilder>
+        {
+            public GetSectionPluginConfigBuilder() : base() { }
+
+            public GetSectionPluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetSectionPluginConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetSectionPluginConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetSectionPluginConfig(IGetSectionPluginConfigBuilder builder,
             string namespace_
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SectionPluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SectionPluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

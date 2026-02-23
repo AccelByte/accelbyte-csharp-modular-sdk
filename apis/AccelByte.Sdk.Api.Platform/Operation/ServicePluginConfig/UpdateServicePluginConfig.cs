@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateServicePluginConfigBuilder Builder { get => new UpdateServicePluginConfigBuilder(); }
 
-        public class UpdateServicePluginConfigBuilder
-            : OperationBuilder<UpdateServicePluginConfigBuilder>
+        public interface IUpdateServicePluginConfigBuilder
         {
 
 
 
 
 
-            internal UpdateServicePluginConfigBuilder() { }
+        }
 
-            internal UpdateServicePluginConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateServicePluginConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateServicePluginConfigBuilder
+            where TImpl : UpdateServicePluginConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateServicePluginConfigAbstractBuilder() { }
+
+            public UpdateServicePluginConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,12 +72,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateServicePluginConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpdateServicePluginConfig.Response Execute(
+            protected UpdateServicePluginConfig.Response InternalExecute(
                 ServicePluginConfigUpdate body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateServicePluginConfig.Response> ExecuteAsync(
+            protected async Task<UpdateServicePluginConfig.Response> InternalExecuteAsync(
                 ServicePluginConfigUpdate body,
                 string namespace_
             )
@@ -107,7 +117,37 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateServicePluginConfig(UpdateServicePluginConfigBuilder builder,
+        public class UpdateServicePluginConfigBuilder : UpdateServicePluginConfigAbstractBuilder<UpdateServicePluginConfigBuilder>
+        {
+            public UpdateServicePluginConfigBuilder() : base() { }
+
+            public UpdateServicePluginConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateServicePluginConfig.Response Execute(
+                ServicePluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateServicePluginConfig.Response> ExecuteAsync(
+                ServicePluginConfigUpdate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateServicePluginConfig(IUpdateServicePluginConfigBuilder builder,
             ServicePluginConfigUpdate body,
             string namespace_
         )
@@ -176,12 +216,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ServicePluginConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ServicePluginConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

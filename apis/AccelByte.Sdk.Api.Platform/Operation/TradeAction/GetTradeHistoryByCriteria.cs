@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetTradeHistoryByCriteriaBuilder Builder { get => new GetTradeHistoryByCriteriaBuilder(); }
 
-        public class GetTradeHistoryByCriteriaBuilder
-            : OperationBuilder<GetTradeHistoryByCriteriaBuilder>
+        public interface IGetTradeHistoryByCriteriaBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            GetTradeHistoryByCriteriaStatus? Status { get; }
+
+            string? Type { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetTradeHistoryByCriteriaAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTradeHistoryByCriteriaBuilder
+            where TImpl : GetTradeHistoryByCriteriaAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetTradeHistoryByCriteriaBuilder() { }
+            public GetTradeHistoryByCriteriaAbstractBuilder() { }
 
-            internal GetTradeHistoryByCriteriaBuilder(IAccelByteSdk sdk)
+            public GetTradeHistoryByCriteriaAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetTradeHistoryByCriteriaBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTradeHistoryByCriteriaBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTradeHistoryByCriteriaBuilder SetStatus(GetTradeHistoryByCriteriaStatus _status)
+            public TImpl SetStatus(GetTradeHistoryByCriteriaStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTradeHistoryByCriteriaBuilder SetType(string _type)
+            public TImpl SetType(string _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetTradeHistoryByCriteriaBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,11 +122,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetTradeHistoryByCriteriaBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTradeHistoryByCriteria.Response Execute(
+            protected GetTradeHistoryByCriteria.Response InternalExecute(
                 string namespace_
             )
             {
@@ -123,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTradeHistoryByCriteria.Response> ExecuteAsync(
+            protected async Task<GetTradeHistoryByCriteria.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -142,7 +162,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetTradeHistoryByCriteria(GetTradeHistoryByCriteriaBuilder builder,
+        public class GetTradeHistoryByCriteriaBuilder : GetTradeHistoryByCriteriaAbstractBuilder<GetTradeHistoryByCriteriaBuilder>
+        {
+            public GetTradeHistoryByCriteriaBuilder() : base() { }
+
+            public GetTradeHistoryByCriteriaBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTradeHistoryByCriteria.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetTradeHistoryByCriteria.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetTradeHistoryByCriteria(IGetTradeHistoryByCriteriaBuilder builder,
             string namespace_
         )
         {
@@ -220,7 +265,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TradeActionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Sessionhistory.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public XRay(IAccelByteSdk sdk)
         {

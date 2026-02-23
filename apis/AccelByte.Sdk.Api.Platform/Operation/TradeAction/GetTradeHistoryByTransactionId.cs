@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetTradeHistoryByTransactionIdBuilder Builder { get => new GetTradeHistoryByTransactionIdBuilder(); }
 
-        public class GetTradeHistoryByTransactionIdBuilder
-            : OperationBuilder<GetTradeHistoryByTransactionIdBuilder>
+        public interface IGetTradeHistoryByTransactionIdBuilder
         {
 
 
 
 
 
-            internal GetTradeHistoryByTransactionIdBuilder() { }
+        }
 
-            internal GetTradeHistoryByTransactionIdBuilder(IAccelByteSdk sdk)
+        public abstract class GetTradeHistoryByTransactionIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetTradeHistoryByTransactionIdBuilder
+            where TImpl : GetTradeHistoryByTransactionIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetTradeHistoryByTransactionIdAbstractBuilder() { }
+
+            public GetTradeHistoryByTransactionIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     transactionId                    
                 );
 
-                op.SetBaseFields<GetTradeHistoryByTransactionIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetTradeHistoryByTransactionId.Response Execute(
+            protected GetTradeHistoryByTransactionId.Response InternalExecute(
                 string namespace_,
                 string transactionId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTradeHistoryByTransactionId.Response> ExecuteAsync(
+            protected async Task<GetTradeHistoryByTransactionId.Response> InternalExecuteAsync(
                 string namespace_,
                 string transactionId
             )
@@ -107,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetTradeHistoryByTransactionId.Response<T1> Execute<T1>(
+            protected GetTradeHistoryByTransactionId.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string transactionId
             )
@@ -126,7 +136,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetTradeHistoryByTransactionId.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<GetTradeHistoryByTransactionId.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string transactionId
             )
@@ -147,7 +157,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetTradeHistoryByTransactionId(GetTradeHistoryByTransactionIdBuilder builder,
+        public class GetTradeHistoryByTransactionIdBuilder : GetTradeHistoryByTransactionIdAbstractBuilder<GetTradeHistoryByTransactionIdBuilder>
+        {
+            public GetTradeHistoryByTransactionIdBuilder() : base() { }
+
+            public GetTradeHistoryByTransactionIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetTradeHistoryByTransactionId.Response Execute(
+                string namespace_,
+                string transactionId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    transactionId
+                );
+            }
+            public async Task<GetTradeHistoryByTransactionId.Response> ExecuteAsync(
+                string namespace_,
+                string transactionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    transactionId
+                );
+            }
+
+            public GetTradeHistoryByTransactionId.Response<T1> Execute<T1>(
+                string namespace_,
+                string transactionId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    transactionId
+                );
+            }
+            public async Task<GetTradeHistoryByTransactionId.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string transactionId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    transactionId
+                );
+            }
+        }
+
+
+        public GetTradeHistoryByTransactionId(IGetTradeHistoryByTransactionIdBuilder builder,
             string namespace_,
             string transactionId
         )
@@ -219,7 +279,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
@@ -240,7 +301,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TradeChainActionHistoryInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             

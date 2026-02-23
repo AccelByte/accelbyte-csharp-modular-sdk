@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static PublicCreateChannelBuilder Builder { get => new PublicCreateChannelBuilder(); }
 
-        public class PublicCreateChannelBuilder
-            : OperationBuilder<PublicCreateChannelBuilder>
+        public interface IPublicCreateChannelBuilder
         {
 
 
 
 
 
-            internal PublicCreateChannelBuilder() { }
+        }
 
-            internal PublicCreateChannelBuilder(IAccelByteSdk sdk)
+        public abstract class PublicCreateChannelAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicCreateChannelBuilder
+            where TImpl : PublicCreateChannelAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicCreateChannelAbstractBuilder() { }
+
+            public PublicCreateChannelAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicCreateChannelBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicCreateChannel.Response Execute(
+            protected PublicCreateChannel.Response InternalExecute(
                 ModelsPublicChannelRequest body,
                 string namespace_,
                 string userId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicCreateChannel.Response> ExecuteAsync(
+            protected async Task<PublicCreateChannel.Response> InternalExecuteAsync(
                 ModelsPublicChannelRequest body,
                 string namespace_,
                 string userId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private PublicCreateChannel(PublicCreateChannelBuilder builder,
+        public class PublicCreateChannelBuilder : PublicCreateChannelAbstractBuilder<PublicCreateChannelBuilder>
+        {
+            public PublicCreateChannelBuilder() : base() { }
+
+            public PublicCreateChannelBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicCreateChannel.Response Execute(
+                ModelsPublicChannelRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicCreateChannel.Response> ExecuteAsync(
+                ModelsPublicChannelRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicCreateChannel(IPublicCreateChannelBuilder builder,
             ModelsPublicChannelRequest body,
             string namespace_,
             string userId
@@ -187,22 +230,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsChannelResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

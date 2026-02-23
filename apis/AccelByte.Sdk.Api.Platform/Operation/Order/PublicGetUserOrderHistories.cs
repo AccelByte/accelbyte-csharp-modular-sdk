@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetUserOrderHistoriesBuilder Builder { get => new PublicGetUserOrderHistoriesBuilder(); }
 
-        public class PublicGetUserOrderHistoriesBuilder
-            : OperationBuilder<PublicGetUserOrderHistoriesBuilder>
+        public interface IPublicGetUserOrderHistoriesBuilder
         {
 
 
 
 
 
-            internal PublicGetUserOrderHistoriesBuilder() { }
+        }
 
-            internal PublicGetUserOrderHistoriesBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetUserOrderHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserOrderHistoriesBuilder
+            where TImpl : PublicGetUserOrderHistoriesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetUserOrderHistoriesAbstractBuilder() { }
+
+            public PublicGetUserOrderHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserOrderHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserOrderHistories.Response Execute(
+            protected PublicGetUserOrderHistories.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserOrderHistories.Response> ExecuteAsync(
+            protected async Task<PublicGetUserOrderHistories.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetUserOrderHistories(PublicGetUserOrderHistoriesBuilder builder,
+        public class PublicGetUserOrderHistoriesBuilder : PublicGetUserOrderHistoriesAbstractBuilder<PublicGetUserOrderHistoriesBuilder>
+        {
+            public PublicGetUserOrderHistoriesBuilder() : base() { }
+
+            public PublicGetUserOrderHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserOrderHistories.Response Execute(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserOrderHistories.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserOrderHistories(IPublicGetUserOrderHistoriesBuilder builder,
             string namespace_,
             string orderNo,
             string userId
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.OrderHistoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.OrderHistoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

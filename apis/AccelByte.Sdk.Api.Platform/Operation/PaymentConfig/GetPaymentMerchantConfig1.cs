@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPaymentMerchantConfig1Builder Builder { get => new GetPaymentMerchantConfig1Builder(); }
 
-        public class GetPaymentMerchantConfig1Builder
-            : OperationBuilder<GetPaymentMerchantConfig1Builder>
+        public interface IGetPaymentMerchantConfig1Builder
         {
 
 
 
 
 
-            internal GetPaymentMerchantConfig1Builder() { }
+        }
 
-            internal GetPaymentMerchantConfig1Builder(IAccelByteSdk sdk)
+        public abstract class GetPaymentMerchantConfig1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPaymentMerchantConfig1Builder
+            where TImpl : GetPaymentMerchantConfig1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPaymentMerchantConfig1AbstractBuilder() { }
+
+            public GetPaymentMerchantConfig1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<GetPaymentMerchantConfig1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPaymentMerchantConfig1.Response Execute(
+            protected GetPaymentMerchantConfig1.Response InternalExecute(
                 string id
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPaymentMerchantConfig1.Response> ExecuteAsync(
+            protected async Task<GetPaymentMerchantConfig1.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPaymentMerchantConfig1(GetPaymentMerchantConfig1Builder builder,
+        public class GetPaymentMerchantConfig1Builder : GetPaymentMerchantConfig1AbstractBuilder<GetPaymentMerchantConfig1Builder>
+        {
+            public GetPaymentMerchantConfig1Builder() : base() { }
+
+            public GetPaymentMerchantConfig1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPaymentMerchantConfig1.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<GetPaymentMerchantConfig1.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public GetPaymentMerchantConfig1(IGetPaymentMerchantConfig1Builder builder,
             string id
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

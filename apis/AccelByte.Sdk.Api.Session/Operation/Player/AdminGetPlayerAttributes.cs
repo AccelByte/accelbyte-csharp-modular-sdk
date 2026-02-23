@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -41,17 +41,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminGetPlayerAttributesBuilder Builder { get => new AdminGetPlayerAttributesBuilder(); }
 
-        public class AdminGetPlayerAttributesBuilder
-            : OperationBuilder<AdminGetPlayerAttributesBuilder>
+        public interface IAdminGetPlayerAttributesBuilder
         {
 
 
 
 
 
-            internal AdminGetPlayerAttributesBuilder() { }
+        }
 
-            internal AdminGetPlayerAttributesBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetPlayerAttributesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetPlayerAttributesBuilder
+            where TImpl : AdminGetPlayerAttributesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetPlayerAttributesAbstractBuilder() { }
+
+            public AdminGetPlayerAttributesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,11 +81,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetPlayerAttributesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetPlayerAttributes.Response Execute(
+            protected AdminGetPlayerAttributes.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetPlayerAttributes.Response> ExecuteAsync(
+            protected async Task<AdminGetPlayerAttributes.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -114,7 +124,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.Payload);
             }
 
-            public AdminGetPlayerAttributes.Response<T1> Execute<T1>(
+            protected AdminGetPlayerAttributes.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string userId
             )
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetPlayerAttributes.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminGetPlayerAttributes.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -154,7 +164,57 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminGetPlayerAttributes(AdminGetPlayerAttributesBuilder builder,
+        public class AdminGetPlayerAttributesBuilder : AdminGetPlayerAttributesAbstractBuilder<AdminGetPlayerAttributesBuilder>
+        {
+            public AdminGetPlayerAttributesBuilder() : base() { }
+
+            public AdminGetPlayerAttributesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetPlayerAttributes.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetPlayerAttributes.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public AdminGetPlayerAttributes.Response<T1> Execute<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetPlayerAttributes.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetPlayerAttributes(IAdminGetPlayerAttributesBuilder builder,
             string namespace_,
             string userId
         )
@@ -242,27 +302,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPlayerAttributesResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPlayerAttributesResponseBody>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -283,27 +348,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPlayerAttributesResponseBody<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPlayerAttributesResponseBody<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

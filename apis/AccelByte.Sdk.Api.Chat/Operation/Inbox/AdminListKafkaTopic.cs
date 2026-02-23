@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminListKafkaTopicBuilder Builder { get => new AdminListKafkaTopicBuilder(); }
 
-        public class AdminListKafkaTopicBuilder
-            : OperationBuilder<AdminListKafkaTopicBuilder>
+        public interface IAdminListKafkaTopicBuilder
         {
 
 
 
 
 
-            internal AdminListKafkaTopicBuilder() { }
+        }
 
-            internal AdminListKafkaTopicBuilder(IAccelByteSdk sdk)
+        public abstract class AdminListKafkaTopicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListKafkaTopicBuilder
+            where TImpl : AdminListKafkaTopicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminListKafkaTopicAbstractBuilder() { }
+
+            public AdminListKafkaTopicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminListKafkaTopicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListKafkaTopic.Response Execute(
+            protected AdminListKafkaTopic.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListKafkaTopic.Response> ExecuteAsync(
+            protected async Task<AdminListKafkaTopic.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminListKafkaTopic(AdminListKafkaTopicBuilder builder,
+        public class AdminListKafkaTopicBuilder : AdminListKafkaTopicAbstractBuilder<AdminListKafkaTopicBuilder>
+        {
+            public AdminListKafkaTopicBuilder() : base() { }
+
+            public AdminListKafkaTopicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListKafkaTopic.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminListKafkaTopic.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminListKafkaTopic(IAdminListKafkaTopicBuilder builder,
             string namespace_
         )
         {
@@ -167,22 +202,26 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetListTopicKafkaResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetListTopicKafkaResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

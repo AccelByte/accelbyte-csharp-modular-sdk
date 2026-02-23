@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,17 +50,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RetrieveUserThirdPartyPlatformTokenV3Builder Builder { get => new RetrieveUserThirdPartyPlatformTokenV3Builder(); }
 
-        public class RetrieveUserThirdPartyPlatformTokenV3Builder
-            : OperationBuilder<RetrieveUserThirdPartyPlatformTokenV3Builder>
+        public interface IRetrieveUserThirdPartyPlatformTokenV3Builder
         {
 
 
 
 
 
-            internal RetrieveUserThirdPartyPlatformTokenV3Builder() { }
+        }
 
-            internal RetrieveUserThirdPartyPlatformTokenV3Builder(IAccelByteSdk sdk)
+        public abstract class RetrieveUserThirdPartyPlatformTokenV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveUserThirdPartyPlatformTokenV3Builder
+            where TImpl : RetrieveUserThirdPartyPlatformTokenV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveUserThirdPartyPlatformTokenV3AbstractBuilder() { }
+
+            public RetrieveUserThirdPartyPlatformTokenV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -82,11 +92,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RetrieveUserThirdPartyPlatformTokenV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveUserThirdPartyPlatformTokenV3.Response Execute(
+            protected RetrieveUserThirdPartyPlatformTokenV3.Response InternalExecute(
                 string namespace_,
                 string platformId,
                 string userId
@@ -107,7 +117,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveUserThirdPartyPlatformTokenV3.Response> ExecuteAsync(
+            protected async Task<RetrieveUserThirdPartyPlatformTokenV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string platformId,
                 string userId
@@ -130,7 +140,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RetrieveUserThirdPartyPlatformTokenV3(RetrieveUserThirdPartyPlatformTokenV3Builder builder,
+        public class RetrieveUserThirdPartyPlatformTokenV3Builder : RetrieveUserThirdPartyPlatformTokenV3AbstractBuilder<RetrieveUserThirdPartyPlatformTokenV3Builder>
+        {
+            public RetrieveUserThirdPartyPlatformTokenV3Builder() : base() { }
+
+            public RetrieveUserThirdPartyPlatformTokenV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveUserThirdPartyPlatformTokenV3.Response Execute(
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+            public async Task<RetrieveUserThirdPartyPlatformTokenV3.Response> ExecuteAsync(
+                string namespace_,
+                string platformId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    platformId,
+                    userId
+                );
+            }
+        }
+
+
+        public RetrieveUserThirdPartyPlatformTokenV3(IRetrieveUserThirdPartyPlatformTokenV3Builder builder,
             string namespace_,
             string platformId,
             string userId
@@ -207,22 +250,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenThirdPartyResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenThirdPartyResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

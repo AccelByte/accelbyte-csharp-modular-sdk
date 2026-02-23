@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizeFulfillmentBuilder Builder { get => new AnonymizeFulfillmentBuilder(); }
 
-        public class AnonymizeFulfillmentBuilder
-            : OperationBuilder<AnonymizeFulfillmentBuilder>
+        public interface IAnonymizeFulfillmentBuilder
         {
 
 
 
 
 
-            internal AnonymizeFulfillmentBuilder() { }
+        }
 
-            internal AnonymizeFulfillmentBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeFulfillmentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeFulfillmentBuilder
+            where TImpl : AnonymizeFulfillmentAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeFulfillmentAbstractBuilder() { }
+
+            public AnonymizeFulfillmentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeFulfillmentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeFulfillment.Response Execute(
+            protected AnonymizeFulfillment.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeFulfillment.Response> ExecuteAsync(
+            protected async Task<AnonymizeFulfillment.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizeFulfillment(AnonymizeFulfillmentBuilder builder,
+        public class AnonymizeFulfillmentBuilder : AnonymizeFulfillmentAbstractBuilder<AnonymizeFulfillmentBuilder>
+        {
+            public AnonymizeFulfillmentBuilder() : base() { }
+
+            public AnonymizeFulfillmentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeFulfillment.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeFulfillment.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeFulfillment(IAnonymizeFulfillmentBuilder builder,
             string namespace_,
             string userId
         )

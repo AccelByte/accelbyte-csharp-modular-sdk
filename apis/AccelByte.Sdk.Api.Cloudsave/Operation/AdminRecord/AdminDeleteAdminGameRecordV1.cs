@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #region Builder Part
         public static AdminDeleteAdminGameRecordV1Builder Builder { get => new AdminDeleteAdminGameRecordV1Builder(); }
 
-        public class AdminDeleteAdminGameRecordV1Builder
-            : OperationBuilder<AdminDeleteAdminGameRecordV1Builder>
+        public interface IAdminDeleteAdminGameRecordV1Builder
         {
 
 
 
 
 
-            internal AdminDeleteAdminGameRecordV1Builder() { }
+        }
 
-            internal AdminDeleteAdminGameRecordV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteAdminGameRecordV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteAdminGameRecordV1Builder
+            where TImpl : AdminDeleteAdminGameRecordV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteAdminGameRecordV1AbstractBuilder() { }
+
+            public AdminDeleteAdminGameRecordV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteAdminGameRecordV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteAdminGameRecordV1.Response Execute(
+            protected AdminDeleteAdminGameRecordV1.Response InternalExecute(
                 string key,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteAdminGameRecordV1.Response> ExecuteAsync(
+            protected async Task<AdminDeleteAdminGameRecordV1.Response> InternalExecuteAsync(
                 string key,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
         }
 
-        private AdminDeleteAdminGameRecordV1(AdminDeleteAdminGameRecordV1Builder builder,
+        public class AdminDeleteAdminGameRecordV1Builder : AdminDeleteAdminGameRecordV1AbstractBuilder<AdminDeleteAdminGameRecordV1Builder>
+        {
+            public AdminDeleteAdminGameRecordV1Builder() : base() { }
+
+            public AdminDeleteAdminGameRecordV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteAdminGameRecordV1.Response Execute(
+                string key,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    key,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteAdminGameRecordV1.Response> ExecuteAsync(
+                string key,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    key,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteAdminGameRecordV1(IAdminDeleteAdminGameRecordV1Builder builder,
             string key,
             string namespace_
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

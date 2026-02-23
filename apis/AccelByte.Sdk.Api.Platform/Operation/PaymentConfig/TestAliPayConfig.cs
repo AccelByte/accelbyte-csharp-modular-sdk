@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestAliPayConfigBuilder Builder { get => new TestAliPayConfigBuilder(); }
 
-        public class TestAliPayConfigBuilder
-            : OperationBuilder<TestAliPayConfigBuilder>
+        public interface ITestAliPayConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestAliPayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestAliPayConfigBuilder
+            where TImpl : TestAliPayConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestAliPayConfigBuilder() { }
+            public TestAliPayConfigAbstractBuilder() { }
 
-            internal TestAliPayConfigBuilder(IAccelByteSdk sdk)
+            public TestAliPayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestAliPayConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestAliPayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestAliPayConfig.Response Execute(
+            protected TestAliPayConfig.Response InternalExecute(
                 AliPayConfig body
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestAliPayConfig.Response> ExecuteAsync(
+            protected async Task<TestAliPayConfig.Response> InternalExecuteAsync(
                 AliPayConfig body
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestAliPayConfig(TestAliPayConfigBuilder builder,
+        public class TestAliPayConfigBuilder : TestAliPayConfigAbstractBuilder<TestAliPayConfigBuilder>
+        {
+            public TestAliPayConfigBuilder() : base() { }
+
+            public TestAliPayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestAliPayConfig.Response Execute(
+                AliPayConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestAliPayConfig.Response> ExecuteAsync(
+                AliPayConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestAliPayConfig(ITestAliPayConfigBuilder builder,
             AliPayConfig body
         )
         {
@@ -175,7 +212,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

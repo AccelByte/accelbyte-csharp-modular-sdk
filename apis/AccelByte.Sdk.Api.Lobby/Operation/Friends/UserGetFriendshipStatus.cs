@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UserGetFriendshipStatusBuilder Builder { get => new UserGetFriendshipStatusBuilder(); }
 
-        public class UserGetFriendshipStatusBuilder
-            : OperationBuilder<UserGetFriendshipStatusBuilder>
+        public interface IUserGetFriendshipStatusBuilder
         {
 
 
 
 
 
-            internal UserGetFriendshipStatusBuilder() { }
+        }
 
-            internal UserGetFriendshipStatusBuilder(IAccelByteSdk sdk)
+        public abstract class UserGetFriendshipStatusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUserGetFriendshipStatusBuilder
+            where TImpl : UserGetFriendshipStatusAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UserGetFriendshipStatusAbstractBuilder() { }
+
+            public UserGetFriendshipStatusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UserGetFriendshipStatusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UserGetFriendshipStatus.Response Execute(
+            protected UserGetFriendshipStatus.Response InternalExecute(
                 string friendId,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UserGetFriendshipStatus.Response> ExecuteAsync(
+            protected async Task<UserGetFriendshipStatus.Response> InternalExecuteAsync(
                 string friendId,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UserGetFriendshipStatus(UserGetFriendshipStatusBuilder builder,
+        public class UserGetFriendshipStatusBuilder : UserGetFriendshipStatusAbstractBuilder<UserGetFriendshipStatusBuilder>
+        {
+            public UserGetFriendshipStatusBuilder() : base() { }
+
+            public UserGetFriendshipStatusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UserGetFriendshipStatus.Response Execute(
+                string friendId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    friendId,
+                    namespace_
+                );
+            }
+            public async Task<UserGetFriendshipStatus.Response> ExecuteAsync(
+                string friendId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    friendId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UserGetFriendshipStatus(IUserGetFriendshipStatusBuilder builder,
             string friendId,
             string namespace_
         )
@@ -183,27 +222,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserGetFriendshipStatusResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserGetFriendshipStatusResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static BulkGetUsersRankingPublicV3Builder Builder { get => new BulkGetUsersRankingPublicV3Builder(); }
 
-        public class BulkGetUsersRankingPublicV3Builder
-            : OperationBuilder<BulkGetUsersRankingPublicV3Builder>
+        public interface IBulkGetUsersRankingPublicV3Builder
+        {
+
+            long? PreviousVersion { get; }
+
+
+
+
+
+        }
+
+        public abstract class BulkGetUsersRankingPublicV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkGetUsersRankingPublicV3Builder
+            where TImpl : BulkGetUsersRankingPublicV3AbstractBuilder<TImpl>
         {
 
             public long? PreviousVersion { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
 
 
-            internal BulkGetUsersRankingPublicV3Builder() { }
+            public BulkGetUsersRankingPublicV3AbstractBuilder() { }
 
-            internal BulkGetUsersRankingPublicV3Builder(IAccelByteSdk sdk)
+            public BulkGetUsersRankingPublicV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public BulkGetUsersRankingPublicV3Builder SetPreviousVersion(long _previousVersion)
+            public TImpl SetPreviousVersion(long _previousVersion)
             {
                 PreviousVersion = _previousVersion;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<BulkGetUsersRankingPublicV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkGetUsersRankingPublicV3.Response Execute(
+            protected BulkGetUsersRankingPublicV3.Response InternalExecute(
                 ModelsBulkUserIDsRequest body,
                 string leaderboardCode,
                 string namespace_
@@ -97,7 +109,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkGetUsersRankingPublicV3.Response> ExecuteAsync(
+            protected async Task<BulkGetUsersRankingPublicV3.Response> InternalExecuteAsync(
                 ModelsBulkUserIDsRequest body,
                 string leaderboardCode,
                 string namespace_
@@ -120,7 +132,40 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private BulkGetUsersRankingPublicV3(BulkGetUsersRankingPublicV3Builder builder,
+        public class BulkGetUsersRankingPublicV3Builder : BulkGetUsersRankingPublicV3AbstractBuilder<BulkGetUsersRankingPublicV3Builder>
+        {
+            public BulkGetUsersRankingPublicV3Builder() : base() { }
+
+            public BulkGetUsersRankingPublicV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkGetUsersRankingPublicV3.Response Execute(
+                ModelsBulkUserIDsRequest body,
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+            public async Task<BulkGetUsersRankingPublicV3.Response> ExecuteAsync(
+                ModelsBulkUserIDsRequest body,
+                string leaderboardCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    leaderboardCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public BulkGetUsersRankingPublicV3(IBulkGetUsersRankingPublicV3Builder builder,
             ModelsBulkUserIDsRequest body,
             string leaderboardCode,
             string namespace_
@@ -204,32 +249,38 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsBulkUserRankingResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsBulkUserRankingResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

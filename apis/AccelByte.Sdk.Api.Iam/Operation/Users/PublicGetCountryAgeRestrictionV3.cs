@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetCountryAgeRestrictionV3Builder Builder { get => new PublicGetCountryAgeRestrictionV3Builder(); }
 
-        public class PublicGetCountryAgeRestrictionV3Builder
-            : OperationBuilder<PublicGetCountryAgeRestrictionV3Builder>
+        public interface IPublicGetCountryAgeRestrictionV3Builder
         {
 
 
 
 
 
-            internal PublicGetCountryAgeRestrictionV3Builder() { }
+        }
 
-            internal PublicGetCountryAgeRestrictionV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetCountryAgeRestrictionV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetCountryAgeRestrictionV3Builder
+            where TImpl : PublicGetCountryAgeRestrictionV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetCountryAgeRestrictionV3AbstractBuilder() { }
+
+            public PublicGetCountryAgeRestrictionV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetCountryAgeRestrictionV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetCountryAgeRestrictionV3.Response Execute(
+            protected PublicGetCountryAgeRestrictionV3.Response InternalExecute(
                 string countryCode,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetCountryAgeRestrictionV3.Response> ExecuteAsync(
+            protected async Task<PublicGetCountryAgeRestrictionV3.Response> InternalExecuteAsync(
                 string countryCode,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetCountryAgeRestrictionV3(PublicGetCountryAgeRestrictionV3Builder builder,
+        public class PublicGetCountryAgeRestrictionV3Builder : PublicGetCountryAgeRestrictionV3AbstractBuilder<PublicGetCountryAgeRestrictionV3Builder>
+        {
+            public PublicGetCountryAgeRestrictionV3Builder() : base() { }
+
+            public PublicGetCountryAgeRestrictionV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetCountryAgeRestrictionV3.Response Execute(
+                string countryCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    countryCode,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetCountryAgeRestrictionV3.Response> ExecuteAsync(
+                string countryCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    countryCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetCountryAgeRestrictionV3(IPublicGetCountryAgeRestrictionV3Builder builder,
             string countryCode,
             string namespace_
         )
@@ -175,17 +214,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelCountryV3Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelCountryV3Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

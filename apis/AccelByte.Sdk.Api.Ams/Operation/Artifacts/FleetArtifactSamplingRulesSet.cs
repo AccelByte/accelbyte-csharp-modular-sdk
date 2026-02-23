@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static FleetArtifactSamplingRulesSetBuilder Builder { get => new FleetArtifactSamplingRulesSetBuilder(); }
 
-        public class FleetArtifactSamplingRulesSetBuilder
-            : OperationBuilder<FleetArtifactSamplingRulesSetBuilder>
+        public interface IFleetArtifactSamplingRulesSetBuilder
         {
 
 
 
 
 
-            internal FleetArtifactSamplingRulesSetBuilder() { }
+        }
 
-            internal FleetArtifactSamplingRulesSetBuilder(IAccelByteSdk sdk)
+        public abstract class FleetArtifactSamplingRulesSetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IFleetArtifactSamplingRulesSetBuilder
+            where TImpl : FleetArtifactSamplingRulesSetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public FleetArtifactSamplingRulesSetAbstractBuilder() { }
+
+            public FleetArtifactSamplingRulesSetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<FleetArtifactSamplingRulesSetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public FleetArtifactSamplingRulesSet.Response Execute(
+            protected FleetArtifactSamplingRulesSet.Response InternalExecute(
                 ApiFleetArtifactsSampleRules body,
                 string fleetID,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<FleetArtifactSamplingRulesSet.Response> ExecuteAsync(
+            protected async Task<FleetArtifactSamplingRulesSet.Response> InternalExecuteAsync(
                 ApiFleetArtifactsSampleRules body,
                 string fleetID,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private FleetArtifactSamplingRulesSet(FleetArtifactSamplingRulesSetBuilder builder,
+        public class FleetArtifactSamplingRulesSetBuilder : FleetArtifactSamplingRulesSetAbstractBuilder<FleetArtifactSamplingRulesSetBuilder>
+        {
+            public FleetArtifactSamplingRulesSetBuilder() : base() { }
+
+            public FleetArtifactSamplingRulesSetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public FleetArtifactSamplingRulesSet.Response Execute(
+                ApiFleetArtifactsSampleRules body,
+                string fleetID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    fleetID,
+                    namespace_
+                );
+            }
+            public async Task<FleetArtifactSamplingRulesSet.Response> ExecuteAsync(
+                ApiFleetArtifactsSampleRules body,
+                string fleetID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    fleetID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public FleetArtifactSamplingRulesSet(IFleetArtifactSamplingRulesSetBuilder builder,
             ApiFleetArtifactsSampleRules body,
             string fleetID,
             string namespace_
@@ -191,32 +234,38 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiFleetArtifactsSampleRules>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiFleetArtifactsSampleRules>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserDLCBuilder Builder { get => new GetUserDLCBuilder(); }
 
-        public class GetUserDLCBuilder
-            : OperationBuilder<GetUserDLCBuilder>
+        public interface IGetUserDLCBuilder
+        {
+
+            bool? IncludeAllNamespaces { get; }
+
+            GetUserDLCStatus? Status { get; }
+
+            GetUserDLCType? Type { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserDLCAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserDLCBuilder
+            where TImpl : GetUserDLCAbstractBuilder<TImpl>
         {
 
             public bool? IncludeAllNamespaces { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetUserDLCBuilder() { }
+            public GetUserDLCAbstractBuilder() { }
 
-            internal GetUserDLCBuilder(IAccelByteSdk sdk)
+            public GetUserDLCAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserDLCBuilder SetIncludeAllNamespaces(bool _includeAllNamespaces)
+            public TImpl SetIncludeAllNamespaces(bool _includeAllNamespaces)
             {
                 IncludeAllNamespaces = _includeAllNamespaces;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserDLCBuilder SetStatus(GetUserDLCStatus _status)
+            public TImpl SetStatus(GetUserDLCStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetUserDLCBuilder SetType(GetUserDLCType _type)
+            public TImpl SetType(GetUserDLCType _type)
             {
                 Type = _type;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +104,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserDLCBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserDLC.Response Execute(
+            protected GetUserDLC.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -111,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserDLC.Response> ExecuteAsync(
+            protected async Task<GetUserDLC.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -131,7 +147,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetUserDLC.Response<T1> Execute<T1>(
+            protected GetUserDLC.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string userId
             )
@@ -150,7 +166,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserDLC.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<GetUserDLC.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string userId
             )
@@ -171,7 +187,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserDLC(GetUserDLCBuilder builder,
+        public class GetUserDLCBuilder : GetUserDLCAbstractBuilder<GetUserDLCBuilder>
+        {
+            public GetUserDLCBuilder() : base() { }
+
+            public GetUserDLCBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserDLC.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserDLC.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+
+            public GetUserDLC.Response<T1> Execute<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserDLC.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserDLC(IGetUserDLCBuilder builder,
             string namespace_,
             string userId
         )
@@ -252,7 +318,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
@@ -273,7 +340,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.UserDLCRecord<T1>>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetNamespaceInvitationHistoryV4Builder Builder { get => new AdminGetNamespaceInvitationHistoryV4Builder(); }
 
-        public class AdminGetNamespaceInvitationHistoryV4Builder
-            : OperationBuilder<AdminGetNamespaceInvitationHistoryV4Builder>
+        public interface IAdminGetNamespaceInvitationHistoryV4Builder
         {
 
 
 
 
 
-            internal AdminGetNamespaceInvitationHistoryV4Builder() { }
+        }
 
-            internal AdminGetNamespaceInvitationHistoryV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetNamespaceInvitationHistoryV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetNamespaceInvitationHistoryV4Builder
+            where TImpl : AdminGetNamespaceInvitationHistoryV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetNamespaceInvitationHistoryV4AbstractBuilder() { }
+
+            public AdminGetNamespaceInvitationHistoryV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetNamespaceInvitationHistoryV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetNamespaceInvitationHistoryV4.Response Execute(
+            protected AdminGetNamespaceInvitationHistoryV4.Response InternalExecute(
                 string namespace_
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetNamespaceInvitationHistoryV4.Response> ExecuteAsync(
+            protected async Task<AdminGetNamespaceInvitationHistoryV4.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetNamespaceInvitationHistoryV4(AdminGetNamespaceInvitationHistoryV4Builder builder,
+        public class AdminGetNamespaceInvitationHistoryV4Builder : AdminGetNamespaceInvitationHistoryV4AbstractBuilder<AdminGetNamespaceInvitationHistoryV4Builder>
+        {
+            public AdminGetNamespaceInvitationHistoryV4Builder() : base() { }
+
+            public AdminGetNamespaceInvitationHistoryV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetNamespaceInvitationHistoryV4.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetNamespaceInvitationHistoryV4.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetNamespaceInvitationHistoryV4(IAdminGetNamespaceInvitationHistoryV4Builder builder,
             string namespace_
         )
         {
@@ -172,32 +207,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelInvitationHistoryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelInvitationHistoryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)501)
             {
-                response.Error501 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error501 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error501!.TranslateToApiError();
             }
 

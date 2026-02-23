@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminClaimUserRewardsByGoalCodeBuilder Builder { get => new AdminClaimUserRewardsByGoalCodeBuilder(); }
 
-        public class AdminClaimUserRewardsByGoalCodeBuilder
-            : OperationBuilder<AdminClaimUserRewardsByGoalCodeBuilder>
+        public interface IAdminClaimUserRewardsByGoalCodeBuilder
         {
 
 
 
 
 
-            internal AdminClaimUserRewardsByGoalCodeBuilder() { }
+        }
 
-            internal AdminClaimUserRewardsByGoalCodeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminClaimUserRewardsByGoalCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminClaimUserRewardsByGoalCodeBuilder
+            where TImpl : AdminClaimUserRewardsByGoalCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminClaimUserRewardsByGoalCodeAbstractBuilder() { }
+
+            public AdminClaimUserRewardsByGoalCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminClaimUserRewardsByGoalCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminClaimUserRewardsByGoalCode.Response Execute(
+            protected AdminClaimUserRewardsByGoalCode.Response InternalExecute(
                 ModelClaimUserRewardsByGoalCodeRequest body,
                 string challengeCode,
                 string namespace_,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminClaimUserRewardsByGoalCode.Response> ExecuteAsync(
+            protected async Task<AdminClaimUserRewardsByGoalCode.Response> InternalExecuteAsync(
                 ModelClaimUserRewardsByGoalCodeRequest body,
                 string challengeCode,
                 string namespace_,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminClaimUserRewardsByGoalCode(AdminClaimUserRewardsByGoalCodeBuilder builder,
+        public class AdminClaimUserRewardsByGoalCodeBuilder : AdminClaimUserRewardsByGoalCodeAbstractBuilder<AdminClaimUserRewardsByGoalCodeBuilder>
+        {
+            public AdminClaimUserRewardsByGoalCodeBuilder() : base() { }
+
+            public AdminClaimUserRewardsByGoalCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminClaimUserRewardsByGoalCode.Response Execute(
+                ModelClaimUserRewardsByGoalCodeRequest body,
+                string challengeCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    challengeCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminClaimUserRewardsByGoalCode.Response> ExecuteAsync(
+                ModelClaimUserRewardsByGoalCodeRequest body,
+                string challengeCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    challengeCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminClaimUserRewardsByGoalCode(IAdminClaimUserRewardsByGoalCodeBuilder builder,
             ModelClaimUserRewardsByGoalCodeRequest body,
             string challengeCode,
             string namespace_,
@@ -203,37 +250,44 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelUserReward>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelUserReward>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

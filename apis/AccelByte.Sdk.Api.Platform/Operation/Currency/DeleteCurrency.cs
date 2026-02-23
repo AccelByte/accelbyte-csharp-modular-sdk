@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteCurrencyBuilder Builder { get => new DeleteCurrencyBuilder(); }
 
-        public class DeleteCurrencyBuilder
-            : OperationBuilder<DeleteCurrencyBuilder>
+        public interface IDeleteCurrencyBuilder
         {
 
 
 
 
 
-            internal DeleteCurrencyBuilder() { }
+        }
 
-            internal DeleteCurrencyBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteCurrencyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteCurrencyBuilder
+            where TImpl : DeleteCurrencyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteCurrencyAbstractBuilder() { }
+
+            public DeleteCurrencyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteCurrencyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteCurrency.Response Execute(
+            protected DeleteCurrency.Response InternalExecute(
                 string currencyCode,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteCurrency.Response> ExecuteAsync(
+            protected async Task<DeleteCurrency.Response> InternalExecuteAsync(
                 string currencyCode,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteCurrency(DeleteCurrencyBuilder builder,
+        public class DeleteCurrencyBuilder : DeleteCurrencyAbstractBuilder<DeleteCurrencyBuilder>
+        {
+            public DeleteCurrencyBuilder() : base() { }
+
+            public DeleteCurrencyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteCurrency.Response Execute(
+                string currencyCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    currencyCode,
+                    namespace_
+                );
+            }
+            public async Task<DeleteCurrency.Response> ExecuteAsync(
+                string currencyCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    currencyCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteCurrency(IDeleteCurrencyBuilder builder,
             string currencyCode,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CurrencyInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CurrencyInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

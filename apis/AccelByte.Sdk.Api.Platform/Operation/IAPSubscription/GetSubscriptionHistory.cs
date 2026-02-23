@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetSubscriptionHistoryBuilder Builder { get => new GetSubscriptionHistoryBuilder(); }
 
-        public class GetSubscriptionHistoryBuilder
-            : OperationBuilder<GetSubscriptionHistoryBuilder>
+        public interface IGetSubscriptionHistoryBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetSubscriptionHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetSubscriptionHistoryBuilder
+            where TImpl : GetSubscriptionHistoryAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetSubscriptionHistoryBuilder() { }
+            public GetSubscriptionHistoryAbstractBuilder() { }
 
-            internal GetSubscriptionHistoryBuilder(IAccelByteSdk sdk)
+            public GetSubscriptionHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetSubscriptionHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetSubscriptionHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -78,11 +92,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetSubscriptionHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetSubscriptionHistory.Response Execute(
+            protected GetSubscriptionHistory.Response InternalExecute(
                 string id,
                 string namespace_,
                 string userId
@@ -103,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetSubscriptionHistory.Response> ExecuteAsync(
+            protected async Task<GetSubscriptionHistory.Response> InternalExecuteAsync(
                 string id,
                 string namespace_,
                 string userId
@@ -126,7 +140,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetSubscriptionHistory(GetSubscriptionHistoryBuilder builder,
+        public class GetSubscriptionHistoryBuilder : GetSubscriptionHistoryAbstractBuilder<GetSubscriptionHistoryBuilder>
+        {
+            public GetSubscriptionHistoryBuilder() : base() { }
+
+            public GetSubscriptionHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetSubscriptionHistory.Response Execute(
+                string id,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    id,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetSubscriptionHistory.Response> ExecuteAsync(
+                string id,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    id,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetSubscriptionHistory(IGetSubscriptionHistoryBuilder builder,
             string id,
             string namespace_,
             string userId
@@ -203,7 +250,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ThirdPartySubscriptionTransactionHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static UploadURLGetBuilder Builder { get => new UploadURLGetBuilder(); }
 
-        public class UploadURLGetBuilder
-            : OperationBuilder<UploadURLGetBuilder>
+        public interface IUploadURLGetBuilder
         {
 
 
 
 
 
-            internal UploadURLGetBuilder() { }
+        }
 
-            internal UploadURLGetBuilder(IAccelByteSdk sdk)
+        public abstract class UploadURLGetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUploadURLGetBuilder
+            where TImpl : UploadURLGetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UploadURLGetAbstractBuilder() { }
+
+            public UploadURLGetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 UploadURLGet op = new UploadURLGet(this
                 );
 
-                op.SetBaseFields<UploadURLGetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UploadURLGet.Response Execute(
+            protected UploadURLGet.Response InternalExecute(
             )
             {
                 UploadURLGet op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UploadURLGet.Response> ExecuteAsync(
+            protected async Task<UploadURLGet.Response> InternalExecuteAsync(
             )
             {
                 UploadURLGet op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private UploadURLGet(UploadURLGetBuilder builder
+        public class UploadURLGetBuilder : UploadURLGetAbstractBuilder<UploadURLGetBuilder>
+        {
+            public UploadURLGetBuilder() : base() { }
+
+            public UploadURLGetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UploadURLGet.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<UploadURLGet.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public UploadURLGet(IUploadURLGetBuilder builder
         )
         {
             

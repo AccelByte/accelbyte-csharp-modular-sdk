@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,17 +50,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder Builder { get => new RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(); }
 
-        public class RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder
-            : OperationBuilder<RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>
+        public interface IRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder
         {
 
 
 
 
 
-            internal RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder() { }
+        }
 
-            internal RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(IAccelByteSdk sdk)
+        public abstract class RetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder
+            where TImpl : RetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder() { }
+
+            public RetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -82,11 +92,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     clientId                    
                 );
 
-                op.SetBaseFields<RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response Execute(
+            protected RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response InternalExecute(
                 string countryCode,
                 string namespace_,
                 string clientId
@@ -107,7 +117,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> ExecuteAsync(
+            protected async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> InternalExecuteAsync(
                 string countryCode,
                 string namespace_,
                 string clientId
@@ -130,7 +140,40 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveLatestPoliciesByNamespaceAndCountryPublic(RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder builder,
+        public class RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder : RetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder<RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>
+        {
+            public RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder() : base() { }
+
+            public RetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response Execute(
+                string countryCode,
+                string namespace_,
+                string clientId
+            )
+            {
+                return InternalExecute(
+                    countryCode,
+                    namespace_,
+                    clientId
+                );
+            }
+            public async Task<RetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> ExecuteAsync(
+                string countryCode,
+                string namespace_,
+                string clientId
+            )
+            {
+                return await InternalExecuteAsync(
+                    countryCode,
+                    namespace_,
+                    clientId
+                );
+            }
+        }
+
+
+        public RetrieveLatestPoliciesByNamespaceAndCountryPublic(IRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder builder,
             string countryCode,
             string namespace_,
             string clientId
@@ -199,7 +242,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveSimplePolicyPublicResponseV2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveSimplePolicyPublicResponseV2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

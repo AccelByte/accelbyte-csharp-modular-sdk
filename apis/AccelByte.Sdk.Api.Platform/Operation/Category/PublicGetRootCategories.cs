@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetRootCategoriesBuilder Builder { get => new PublicGetRootCategoriesBuilder(); }
 
-        public class PublicGetRootCategoriesBuilder
-            : OperationBuilder<PublicGetRootCategoriesBuilder>
+        public interface IPublicGetRootCategoriesBuilder
+        {
+
+            string? Language { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetRootCategoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetRootCategoriesBuilder
+            where TImpl : PublicGetRootCategoriesAbstractBuilder<TImpl>
         {
 
             public string? Language { get; set; }
@@ -48,24 +62,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetRootCategoriesBuilder() { }
+            public PublicGetRootCategoriesAbstractBuilder() { }
 
-            internal PublicGetRootCategoriesBuilder(IAccelByteSdk sdk)
+            public PublicGetRootCategoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetRootCategoriesBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetRootCategoriesBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -80,11 +94,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetRootCategoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetRootCategories.Response Execute(
+            protected PublicGetRootCategories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -101,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetRootCategories.Response> ExecuteAsync(
+            protected async Task<PublicGetRootCategories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -120,7 +134,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetRootCategories(PublicGetRootCategoriesBuilder builder,
+        public class PublicGetRootCategoriesBuilder : PublicGetRootCategoriesAbstractBuilder<PublicGetRootCategoriesBuilder>
+        {
+            public PublicGetRootCategoriesBuilder() : base() { }
+
+            public PublicGetRootCategoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetRootCategories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetRootCategories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetRootCategories(IPublicGetRootCategoriesBuilder builder,
             string namespace_
         )
         {
@@ -187,7 +226,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.CategoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.CategoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

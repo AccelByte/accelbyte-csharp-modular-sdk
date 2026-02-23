@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -48,17 +48,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminUpdateContentS3ByShareCodeBuilder Builder { get => new AdminUpdateContentS3ByShareCodeBuilder(); }
 
-        public class AdminUpdateContentS3ByShareCodeBuilder
-            : OperationBuilder<AdminUpdateContentS3ByShareCodeBuilder>
+        public interface IAdminUpdateContentS3ByShareCodeBuilder
         {
 
 
 
 
 
-            internal AdminUpdateContentS3ByShareCodeBuilder() { }
+        }
 
-            internal AdminUpdateContentS3ByShareCodeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateContentS3ByShareCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateContentS3ByShareCodeBuilder
+            where TImpl : AdminUpdateContentS3ByShareCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateContentS3ByShareCodeAbstractBuilder() { }
+
+            public AdminUpdateContentS3ByShareCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -84,11 +94,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminUpdateContentS3ByShareCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateContentS3ByShareCode.Response Execute(
+            protected AdminUpdateContentS3ByShareCode.Response InternalExecute(
                 ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string namespace_,
@@ -113,7 +123,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateContentS3ByShareCode.Response> ExecuteAsync(
+            protected async Task<AdminUpdateContentS3ByShareCode.Response> InternalExecuteAsync(
                 ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string namespace_,
@@ -139,7 +149,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.Payload);
             }
 
-            public AdminUpdateContentS3ByShareCode.Response<T1> Execute<T1>(
+            protected AdminUpdateContentS3ByShareCode.Response<T1> InternalExecute<T1>(
                 ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string namespace_,
@@ -164,7 +174,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateContentS3ByShareCode.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<AdminUpdateContentS3ByShareCode.Response<T1>> InternalExecuteAsync<T1>(
                 ModelsAdminUpdateContentRequest body,
                 string channelId,
                 string namespace_,
@@ -191,7 +201,81 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminUpdateContentS3ByShareCode(AdminUpdateContentS3ByShareCodeBuilder builder,
+        public class AdminUpdateContentS3ByShareCodeBuilder : AdminUpdateContentS3ByShareCodeAbstractBuilder<AdminUpdateContentS3ByShareCodeBuilder>
+        {
+            public AdminUpdateContentS3ByShareCodeBuilder() : base() { }
+
+            public AdminUpdateContentS3ByShareCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateContentS3ByShareCode.Response Execute(
+                ModelsAdminUpdateContentRequest body,
+                string channelId,
+                string namespace_,
+                string shareCode,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
+                );
+            }
+            public async Task<AdminUpdateContentS3ByShareCode.Response> ExecuteAsync(
+                ModelsAdminUpdateContentRequest body,
+                string channelId,
+                string namespace_,
+                string shareCode,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
+                );
+            }
+
+            public AdminUpdateContentS3ByShareCode.Response<T1> Execute<T1>(
+                ModelsAdminUpdateContentRequest body,
+                string channelId,
+                string namespace_,
+                string shareCode,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
+                );
+            }
+            public async Task<AdminUpdateContentS3ByShareCode.Response<T1>> ExecuteAsync<T1>(
+                ModelsAdminUpdateContentRequest body,
+                string channelId,
+                string namespace_,
+                string shareCode,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminUpdateContentS3ByShareCode(IAdminUpdateContentS3ByShareCodeBuilder builder,
             ModelsAdminUpdateContentRequest body,
             string channelId,
             string namespace_,
@@ -299,37 +383,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -350,37 +441,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsCreateContentResponse<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

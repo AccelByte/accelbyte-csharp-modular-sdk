@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -39,17 +39,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicPartialUpdateUserV3Builder Builder { get => new PublicPartialUpdateUserV3Builder(); }
 
-        public class PublicPartialUpdateUserV3Builder
-            : OperationBuilder<PublicPartialUpdateUserV3Builder>
+        public interface IPublicPartialUpdateUserV3Builder
         {
 
 
 
 
 
-            internal PublicPartialUpdateUserV3Builder() { }
+        }
 
-            internal PublicPartialUpdateUserV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicPartialUpdateUserV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicPartialUpdateUserV3Builder
+            where TImpl : PublicPartialUpdateUserV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicPartialUpdateUserV3AbstractBuilder() { }
+
+            public PublicPartialUpdateUserV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,11 +79,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicPartialUpdateUserV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicPartialUpdateUserV3.Response Execute(
+            protected PublicPartialUpdateUserV3.Response InternalExecute(
                 ModelPublicUserUpdateRequestV3 body,
                 string namespace_
             )
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicPartialUpdateUserV3.Response> ExecuteAsync(
+            protected async Task<PublicPartialUpdateUserV3.Response> InternalExecuteAsync(
                 ModelPublicUserUpdateRequestV3 body,
                 string namespace_
             )
@@ -113,7 +123,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicPartialUpdateUserV3(PublicPartialUpdateUserV3Builder builder,
+        public class PublicPartialUpdateUserV3Builder : PublicPartialUpdateUserV3AbstractBuilder<PublicPartialUpdateUserV3Builder>
+        {
+            public PublicPartialUpdateUserV3Builder() : base() { }
+
+            public PublicPartialUpdateUserV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicPartialUpdateUserV3.Response Execute(
+                ModelPublicUserUpdateRequestV3 body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicPartialUpdateUserV3.Response> ExecuteAsync(
+                ModelPublicUserUpdateRequestV3 body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicPartialUpdateUserV3(IPublicPartialUpdateUserV3Builder builder,
             ModelPublicUserUpdateRequestV3 body,
             string namespace_
         )
@@ -190,32 +229,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

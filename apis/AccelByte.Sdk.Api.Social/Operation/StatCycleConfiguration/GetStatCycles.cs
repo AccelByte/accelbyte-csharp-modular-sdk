@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,30 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static GetStatCyclesBuilder Builder { get => new GetStatCyclesBuilder(); }
 
-        public class GetStatCyclesBuilder
-            : OperationBuilder<GetStatCyclesBuilder>
+        public interface IGetStatCyclesBuilder
+        {
+
+            GetStatCyclesCycleType? CycleType { get; }
+
+            int? Limit { get; }
+
+            string? Name { get; }
+
+            int? Offset { get; }
+
+            string? SortBy { get; }
+
+            GetStatCyclesStatus? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetStatCyclesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetStatCyclesBuilder
+            where TImpl : GetStatCyclesAbstractBuilder<TImpl>
         {
 
             public GetStatCyclesCycleType? CycleType { get; set; }
@@ -52,48 +74,48 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal GetStatCyclesBuilder() { }
+            public GetStatCyclesAbstractBuilder() { }
 
-            internal GetStatCyclesBuilder(IAccelByteSdk sdk)
+            public GetStatCyclesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetStatCyclesBuilder SetCycleType(GetStatCyclesCycleType _cycleType)
+            public TImpl SetCycleType(GetStatCyclesCycleType _cycleType)
             {
                 CycleType = _cycleType;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatCyclesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatCyclesBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatCyclesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatCyclesBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetStatCyclesBuilder SetStatus(GetStatCyclesStatus _status)
+            public TImpl SetStatus(GetStatCyclesStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -108,11 +130,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetStatCyclesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetStatCycles.Response Execute(
+            protected GetStatCycles.Response InternalExecute(
                 string namespace_
             )
             {
@@ -129,7 +151,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetStatCycles.Response> ExecuteAsync(
+            protected async Task<GetStatCycles.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -148,7 +170,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private GetStatCycles(GetStatCyclesBuilder builder,
+        public class GetStatCyclesBuilder : GetStatCyclesAbstractBuilder<GetStatCyclesBuilder>
+        {
+            public GetStatCyclesBuilder() : base() { }
+
+            public GetStatCyclesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetStatCycles.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetStatCycles.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetStatCycles(IGetStatCyclesBuilder builder,
             string namespace_
         )
         {
@@ -235,22 +282,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StatCyclePagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StatCyclePagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

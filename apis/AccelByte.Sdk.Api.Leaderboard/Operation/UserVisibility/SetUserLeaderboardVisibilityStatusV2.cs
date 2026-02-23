@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static SetUserLeaderboardVisibilityStatusV2Builder Builder { get => new SetUserLeaderboardVisibilityStatusV2Builder(); }
 
-        public class SetUserLeaderboardVisibilityStatusV2Builder
-            : OperationBuilder<SetUserLeaderboardVisibilityStatusV2Builder>
+        public interface ISetUserLeaderboardVisibilityStatusV2Builder
         {
 
 
 
 
 
-            internal SetUserLeaderboardVisibilityStatusV2Builder() { }
+        }
 
-            internal SetUserLeaderboardVisibilityStatusV2Builder(IAccelByteSdk sdk)
+        public abstract class SetUserLeaderboardVisibilityStatusV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISetUserLeaderboardVisibilityStatusV2Builder
+            where TImpl : SetUserLeaderboardVisibilityStatusV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SetUserLeaderboardVisibilityStatusV2AbstractBuilder() { }
+
+            public SetUserLeaderboardVisibilityStatusV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SetUserLeaderboardVisibilityStatusV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SetUserLeaderboardVisibilityStatusV2.Response Execute(
+            protected SetUserLeaderboardVisibilityStatusV2.Response InternalExecute(
                 ModelsSetUserVisibilityRequest body,
                 string leaderboardCode,
                 string namespace_,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SetUserLeaderboardVisibilityStatusV2.Response> ExecuteAsync(
+            protected async Task<SetUserLeaderboardVisibilityStatusV2.Response> InternalExecuteAsync(
                 ModelsSetUserVisibilityRequest body,
                 string leaderboardCode,
                 string namespace_,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private SetUserLeaderboardVisibilityStatusV2(SetUserLeaderboardVisibilityStatusV2Builder builder,
+        public class SetUserLeaderboardVisibilityStatusV2Builder : SetUserLeaderboardVisibilityStatusV2AbstractBuilder<SetUserLeaderboardVisibilityStatusV2Builder>
+        {
+            public SetUserLeaderboardVisibilityStatusV2Builder() : base() { }
+
+            public SetUserLeaderboardVisibilityStatusV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SetUserLeaderboardVisibilityStatusV2.Response Execute(
+                ModelsSetUserVisibilityRequest body,
+                string leaderboardCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    leaderboardCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SetUserLeaderboardVisibilityStatusV2.Response> ExecuteAsync(
+                ModelsSetUserVisibilityRequest body,
+                string leaderboardCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    leaderboardCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SetUserLeaderboardVisibilityStatusV2(ISetUserLeaderboardVisibilityStatusV2Builder builder,
             ModelsSetUserVisibilityRequest body,
             string leaderboardCode,
             string namespace_,
@@ -199,27 +246,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetUserVisibilityResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetUserVisibilityResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

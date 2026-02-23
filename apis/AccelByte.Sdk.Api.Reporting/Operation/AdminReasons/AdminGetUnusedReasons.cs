@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static AdminGetUnusedReasonsBuilder Builder { get => new AdminGetUnusedReasonsBuilder(); }
 
-        public class AdminGetUnusedReasonsBuilder
-            : OperationBuilder<AdminGetUnusedReasonsBuilder>
+        public interface IAdminGetUnusedReasonsBuilder
+        {
+
+            string? ExtensionCategory { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetUnusedReasonsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUnusedReasonsBuilder
+            where TImpl : AdminGetUnusedReasonsAbstractBuilder<TImpl>
         {
 
             public string? ExtensionCategory { get; set; }
@@ -40,18 +52,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal AdminGetUnusedReasonsBuilder() { }
+            public AdminGetUnusedReasonsAbstractBuilder() { }
 
-            internal AdminGetUnusedReasonsBuilder(IAccelByteSdk sdk)
+            public AdminGetUnusedReasonsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetUnusedReasonsBuilder SetExtensionCategory(string _extensionCategory)
+            public TImpl SetExtensionCategory(string _extensionCategory)
             {
                 ExtensionCategory = _extensionCategory;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     category                    
                 );
 
-                op.SetBaseFields<AdminGetUnusedReasonsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUnusedReasons.Response Execute(
+            protected AdminGetUnusedReasons.Response InternalExecute(
                 string namespace_,
                 string category
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUnusedReasons.Response> ExecuteAsync(
+            protected async Task<AdminGetUnusedReasons.Response> InternalExecuteAsync(
                 string namespace_,
                 string category
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private AdminGetUnusedReasons(AdminGetUnusedReasonsBuilder builder,
+        public class AdminGetUnusedReasonsBuilder : AdminGetUnusedReasonsAbstractBuilder<AdminGetUnusedReasonsBuilder>
+        {
+            public AdminGetUnusedReasonsBuilder() : base() { }
+
+            public AdminGetUnusedReasonsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUnusedReasons.Response Execute(
+                string namespace_,
+                string category
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    category
+                );
+            }
+            public async Task<AdminGetUnusedReasons.Response> ExecuteAsync(
+                string namespace_,
+                string category
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    category
+                );
+            }
+        }
+
+
+        public AdminGetUnusedReasons(IAdminGetUnusedReasonsBuilder builder,
             string namespace_,
             string category
         )
@@ -186,17 +227,20 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiUnusedReasonListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiUnusedReasonListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

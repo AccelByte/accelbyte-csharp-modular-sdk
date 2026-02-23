@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static UpdateScreenshotsBuilder Builder { get => new UpdateScreenshotsBuilder(); }
 
-        public class UpdateScreenshotsBuilder
-            : OperationBuilder<UpdateScreenshotsBuilder>
+        public interface IUpdateScreenshotsBuilder
         {
 
 
 
 
 
-            internal UpdateScreenshotsBuilder() { }
+        }
 
-            internal UpdateScreenshotsBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateScreenshotsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateScreenshotsBuilder
+            where TImpl : UpdateScreenshotsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateScreenshotsAbstractBuilder() { }
+
+            public UpdateScreenshotsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpdateScreenshotsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateScreenshots.Response Execute(
+            protected UpdateScreenshots.Response InternalExecute(
                 ModelsUpdateScreenshotRequest body,
                 string contentId,
                 string namespace_,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateScreenshots.Response> ExecuteAsync(
+            protected async Task<UpdateScreenshots.Response> InternalExecuteAsync(
                 ModelsUpdateScreenshotRequest body,
                 string contentId,
                 string namespace_,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private UpdateScreenshots(UpdateScreenshotsBuilder builder,
+        public class UpdateScreenshotsBuilder : UpdateScreenshotsAbstractBuilder<UpdateScreenshotsBuilder>
+        {
+            public UpdateScreenshotsBuilder() : base() { }
+
+            public UpdateScreenshotsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateScreenshots.Response Execute(
+                ModelsUpdateScreenshotRequest body,
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    contentId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpdateScreenshots.Response> ExecuteAsync(
+                ModelsUpdateScreenshotRequest body,
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    contentId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpdateScreenshots(IUpdateScreenshotsBuilder builder,
             ModelsUpdateScreenshotRequest body,
             string contentId,
             string namespace_,
@@ -201,32 +248,38 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUpdateScreenshotResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUpdateScreenshotResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

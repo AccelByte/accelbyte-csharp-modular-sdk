@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetLocaleItemBySkuBuilder Builder { get => new GetLocaleItemBySkuBuilder(); }
 
-        public class GetLocaleItemBySkuBuilder
-            : OperationBuilder<GetLocaleItemBySkuBuilder>
+        public interface IGetLocaleItemBySkuBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            string? Language { get; }
+
+            bool? PopulateBundle { get; }
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetLocaleItemBySkuAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetLocaleItemBySkuBuilder
+            where TImpl : GetLocaleItemBySkuAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetLocaleItemBySkuBuilder() { }
+            public GetLocaleItemBySkuAbstractBuilder() { }
 
-            internal GetLocaleItemBySkuBuilder(IAccelByteSdk sdk)
+            public GetLocaleItemBySkuAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetLocaleItemBySkuBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBySkuBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBySkuBuilder SetPopulateBundle(bool _populateBundle)
+            public TImpl SetPopulateBundle(bool _populateBundle)
             {
                 PopulateBundle = _populateBundle;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBySkuBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetLocaleItemBySkuBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -104,11 +124,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     sku                    
                 );
 
-                op.SetBaseFields<GetLocaleItemBySkuBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetLocaleItemBySku.Response Execute(
+            protected GetLocaleItemBySku.Response InternalExecute(
                 string namespace_,
                 string sku
             )
@@ -127,7 +147,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLocaleItemBySku.Response> ExecuteAsync(
+            protected async Task<GetLocaleItemBySku.Response> InternalExecuteAsync(
                 string namespace_,
                 string sku
             )
@@ -147,7 +167,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetLocaleItemBySku.Response<T1, T2> Execute<T1, T2>(
+            protected GetLocaleItemBySku.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_,
                 string sku
             )
@@ -166,7 +186,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetLocaleItemBySku.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<GetLocaleItemBySku.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_,
                 string sku
             )
@@ -187,7 +207,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetLocaleItemBySku(GetLocaleItemBySkuBuilder builder,
+        public class GetLocaleItemBySkuBuilder : GetLocaleItemBySkuAbstractBuilder<GetLocaleItemBySkuBuilder>
+        {
+            public GetLocaleItemBySkuBuilder() : base() { }
+
+            public GetLocaleItemBySkuBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetLocaleItemBySku.Response Execute(
+                string namespace_,
+                string sku
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    sku
+                );
+            }
+            public async Task<GetLocaleItemBySku.Response> ExecuteAsync(
+                string namespace_,
+                string sku
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    sku
+                );
+            }
+
+            public GetLocaleItemBySku.Response<T1, T2> Execute<T1, T2>(
+                string namespace_,
+                string sku
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_,
+                    sku
+                );
+            }
+            public async Task<GetLocaleItemBySku.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_,
+                string sku
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_,
+                    sku
+                );
+            }
+        }
+
+
+        public GetLocaleItemBySku(IGetLocaleItemBySkuBuilder builder,
             string namespace_,
             string sku
         )
@@ -278,12 +348,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -304,12 +376,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PopulatedItemInfo<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

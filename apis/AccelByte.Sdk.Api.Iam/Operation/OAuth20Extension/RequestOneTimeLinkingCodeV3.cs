@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -55,8 +55,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RequestOneTimeLinkingCodeV3Builder Builder { get => new RequestOneTimeLinkingCodeV3Builder(); }
 
-        public class RequestOneTimeLinkingCodeV3Builder
-            : OperationBuilder<RequestOneTimeLinkingCodeV3Builder>
+        public interface IRequestOneTimeLinkingCodeV3Builder
+        {
+
+
+
+            string? RedirectUri { get; }
+
+            string? State { get; }
+
+
+
+        }
+
+        public abstract class RequestOneTimeLinkingCodeV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRequestOneTimeLinkingCodeV3Builder
+            where TImpl : RequestOneTimeLinkingCodeV3AbstractBuilder<TImpl>
         {
 
 
@@ -67,9 +81,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal RequestOneTimeLinkingCodeV3Builder() { }
+            public RequestOneTimeLinkingCodeV3AbstractBuilder() { }
 
-            internal RequestOneTimeLinkingCodeV3Builder(IAccelByteSdk sdk)
+            public RequestOneTimeLinkingCodeV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -77,16 +91,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public RequestOneTimeLinkingCodeV3Builder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
-            public RequestOneTimeLinkingCodeV3Builder SetState(string _state)
+            public TImpl SetState(string _state)
             {
                 State = _state;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -99,11 +113,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<RequestOneTimeLinkingCodeV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RequestOneTimeLinkingCodeV3.Response Execute(
+            protected RequestOneTimeLinkingCodeV3.Response InternalExecute(
                 string platformId
             )
             {
@@ -120,7 +134,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RequestOneTimeLinkingCodeV3.Response> ExecuteAsync(
+            protected async Task<RequestOneTimeLinkingCodeV3.Response> InternalExecuteAsync(
                 string platformId
             )
             {
@@ -139,7 +153,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RequestOneTimeLinkingCodeV3(RequestOneTimeLinkingCodeV3Builder builder,
+        public class RequestOneTimeLinkingCodeV3Builder : RequestOneTimeLinkingCodeV3AbstractBuilder<RequestOneTimeLinkingCodeV3Builder>
+        {
+            public RequestOneTimeLinkingCodeV3Builder() : base() { }
+
+            public RequestOneTimeLinkingCodeV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RequestOneTimeLinkingCodeV3.Response Execute(
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    platformId
+                );
+            }
+            public async Task<RequestOneTimeLinkingCodeV3.Response> ExecuteAsync(
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId
+                );
+            }
+        }
+
+
+        public RequestOneTimeLinkingCodeV3(IRequestOneTimeLinkingCodeV3Builder builder,
             string platformId
         )
         {
@@ -208,7 +247,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

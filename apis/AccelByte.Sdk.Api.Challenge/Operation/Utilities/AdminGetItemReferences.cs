@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminGetItemReferencesBuilder Builder { get => new AdminGetItemReferencesBuilder(); }
 
-        public class AdminGetItemReferencesBuilder
-            : OperationBuilder<AdminGetItemReferencesBuilder>
+        public interface IAdminGetItemReferencesBuilder
         {
 
 
 
 
 
-            internal AdminGetItemReferencesBuilder() { }
+        }
 
-            internal AdminGetItemReferencesBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetItemReferencesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetItemReferencesBuilder
+            where TImpl : AdminGetItemReferencesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetItemReferencesAbstractBuilder() { }
+
+            public AdminGetItemReferencesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     itemId                    
                 );
 
-                op.SetBaseFields<AdminGetItemReferencesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetItemReferences.Response Execute(
+            protected AdminGetItemReferences.Response InternalExecute(
                 string namespace_,
                 string itemId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetItemReferences.Response> ExecuteAsync(
+            protected async Task<AdminGetItemReferences.Response> InternalExecuteAsync(
                 string namespace_,
                 string itemId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminGetItemReferences(AdminGetItemReferencesBuilder builder,
+        public class AdminGetItemReferencesBuilder : AdminGetItemReferencesAbstractBuilder<AdminGetItemReferencesBuilder>
+        {
+            public AdminGetItemReferencesBuilder() : base() { }
+
+            public AdminGetItemReferencesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetItemReferences.Response Execute(
+                string namespace_,
+                string itemId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    itemId
+                );
+            }
+            public async Task<AdminGetItemReferences.Response> ExecuteAsync(
+                string namespace_,
+                string itemId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    itemId
+                );
+            }
+        }
+
+
+        public AdminGetItemReferences(IAdminGetItemReferencesBuilder builder,
             string namespace_,
             string itemId
         )
@@ -179,27 +218,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelItemReferenceResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelItemReferenceResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

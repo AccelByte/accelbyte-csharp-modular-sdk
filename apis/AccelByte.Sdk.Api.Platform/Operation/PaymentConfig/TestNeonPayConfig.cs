@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestNeonPayConfigBuilder Builder { get => new TestNeonPayConfigBuilder(); }
 
-        public class TestNeonPayConfigBuilder
-            : OperationBuilder<TestNeonPayConfigBuilder>
+        public interface ITestNeonPayConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestNeonPayConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestNeonPayConfigBuilder
+            where TImpl : TestNeonPayConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -48,18 +60,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestNeonPayConfigBuilder() { }
+            public TestNeonPayConfigAbstractBuilder() { }
 
-            internal TestNeonPayConfigBuilder(IAccelByteSdk sdk)
+            public TestNeonPayConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestNeonPayConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestNeonPayConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestNeonPayConfig.Response Execute(
+            protected TestNeonPayConfig.Response InternalExecute(
                 NeonPayConfig body
             )
             {
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestNeonPayConfig.Response> ExecuteAsync(
+            protected async Task<TestNeonPayConfig.Response> InternalExecuteAsync(
                 NeonPayConfig body
             )
             {
@@ -114,7 +126,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestNeonPayConfig(TestNeonPayConfigBuilder builder,
+        public class TestNeonPayConfigBuilder : TestNeonPayConfigAbstractBuilder<TestNeonPayConfigBuilder>
+        {
+            public TestNeonPayConfigBuilder() : base() { }
+
+            public TestNeonPayConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestNeonPayConfig.Response Execute(
+                NeonPayConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestNeonPayConfig.Response> ExecuteAsync(
+                NeonPayConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestNeonPayConfig(ITestNeonPayConfigBuilder builder,
             NeonPayConfig body
         )
         {
@@ -180,7 +217,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

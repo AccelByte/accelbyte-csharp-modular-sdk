@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,28 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicUpdateUserNamespaceSlotBuilder Builder { get => new PublicUpdateUserNamespaceSlotBuilder(); }
 
-        public class PublicUpdateUserNamespaceSlotBuilder
-            : OperationBuilder<PublicUpdateUserNamespaceSlotBuilder>
+        public interface IPublicUpdateUserNamespaceSlotBuilder
+        {
+
+            string? Label { get; }
+
+            List<string>? Tags { get; }
+
+
+
+            string? Checksum { get; }
+
+            string? CustomAttribute { get; }
+
+            Stream? File { get; }
+
+
+
+        }
+
+        public abstract class PublicUpdateUserNamespaceSlotAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicUpdateUserNamespaceSlotBuilder
+            where TImpl : PublicUpdateUserNamespaceSlotAbstractBuilder<TImpl>
         {
 
             public string? Label { get; set; }
@@ -56,44 +76,44 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal PublicUpdateUserNamespaceSlotBuilder() { }
+            public PublicUpdateUserNamespaceSlotAbstractBuilder() { }
 
-            internal PublicUpdateUserNamespaceSlotBuilder(IAccelByteSdk sdk)
+            public PublicUpdateUserNamespaceSlotAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicUpdateUserNamespaceSlotBuilder SetLabel(string _label)
+            public TImpl SetLabel(string _label)
             {
                 Label = _label;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUpdateUserNamespaceSlotBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
 
-            public PublicUpdateUserNamespaceSlotBuilder SetChecksum(string _checksum)
+            public TImpl SetChecksum(string _checksum)
             {
                 Checksum = _checksum;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUpdateUserNamespaceSlotBuilder SetCustomAttribute(string _customAttribute)
+            public TImpl SetCustomAttribute(string _customAttribute)
             {
                 CustomAttribute = _customAttribute;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicUpdateUserNamespaceSlotBuilder SetFile(Stream _file)
+            public TImpl SetFile(Stream _file)
             {
                 File = _file;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -110,12 +130,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicUpdateUserNamespaceSlotBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicUpdateUserNamespaceSlot.Response Execute(
+            protected PublicUpdateUserNamespaceSlot.Response InternalExecute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -136,7 +156,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicUpdateUserNamespaceSlot.Response> ExecuteAsync(
+            protected async Task<PublicUpdateUserNamespaceSlot.Response> InternalExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -159,7 +179,41 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicUpdateUserNamespaceSlot(PublicUpdateUserNamespaceSlotBuilder builder,
+        public class PublicUpdateUserNamespaceSlotBuilder : PublicUpdateUserNamespaceSlotAbstractBuilder<PublicUpdateUserNamespaceSlotBuilder>
+        {
+            public PublicUpdateUserNamespaceSlotBuilder() : base() { }
+
+            public PublicUpdateUserNamespaceSlotBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicUpdateUserNamespaceSlot.Response Execute(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+            public async Task<PublicUpdateUserNamespaceSlot.Response> ExecuteAsync(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicUpdateUserNamespaceSlot(IPublicUpdateUserNamespaceSlotBuilder builder,
             string namespace_,
             string slotId,
             string userId
@@ -251,17 +305,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SlotInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SlotInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

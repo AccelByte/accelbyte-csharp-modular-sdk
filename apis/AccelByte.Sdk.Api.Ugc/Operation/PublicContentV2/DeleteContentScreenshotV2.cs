@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static DeleteContentScreenshotV2Builder Builder { get => new DeleteContentScreenshotV2Builder(); }
 
-        public class DeleteContentScreenshotV2Builder
-            : OperationBuilder<DeleteContentScreenshotV2Builder>
+        public interface IDeleteContentScreenshotV2Builder
         {
 
 
 
 
 
-            internal DeleteContentScreenshotV2Builder() { }
+        }
 
-            internal DeleteContentScreenshotV2Builder(IAccelByteSdk sdk)
+        public abstract class DeleteContentScreenshotV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteContentScreenshotV2Builder
+            where TImpl : DeleteContentScreenshotV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteContentScreenshotV2AbstractBuilder() { }
+
+            public DeleteContentScreenshotV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteContentScreenshotV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteContentScreenshotV2.Response Execute(
+            protected DeleteContentScreenshotV2.Response InternalExecute(
                 string contentId,
                 string namespace_,
                 string screenshotId,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteContentScreenshotV2.Response> ExecuteAsync(
+            protected async Task<DeleteContentScreenshotV2.Response> InternalExecuteAsync(
                 string contentId,
                 string namespace_,
                 string screenshotId,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private DeleteContentScreenshotV2(DeleteContentScreenshotV2Builder builder,
+        public class DeleteContentScreenshotV2Builder : DeleteContentScreenshotV2AbstractBuilder<DeleteContentScreenshotV2Builder>
+        {
+            public DeleteContentScreenshotV2Builder() : base() { }
+
+            public DeleteContentScreenshotV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteContentScreenshotV2.Response Execute(
+                string contentId,
+                string namespace_,
+                string screenshotId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    contentId,
+                    namespace_,
+                    screenshotId,
+                    userId
+                );
+            }
+            public async Task<DeleteContentScreenshotV2.Response> ExecuteAsync(
+                string contentId,
+                string namespace_,
+                string screenshotId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    contentId,
+                    namespace_,
+                    screenshotId,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteContentScreenshotV2(IDeleteContentScreenshotV2Builder builder,
             string contentId,
             string namespace_,
             string screenshotId,
@@ -202,27 +249,32 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

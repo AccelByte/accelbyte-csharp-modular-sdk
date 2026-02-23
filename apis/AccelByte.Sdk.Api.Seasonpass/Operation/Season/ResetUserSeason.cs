@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static ResetUserSeasonBuilder Builder { get => new ResetUserSeasonBuilder(); }
 
-        public class ResetUserSeasonBuilder
-            : OperationBuilder<ResetUserSeasonBuilder>
+        public interface IResetUserSeasonBuilder
         {
 
 
 
 
 
-            internal ResetUserSeasonBuilder() { }
+        }
 
-            internal ResetUserSeasonBuilder(IAccelByteSdk sdk)
+        public abstract class ResetUserSeasonAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IResetUserSeasonBuilder
+            where TImpl : ResetUserSeasonAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ResetUserSeasonAbstractBuilder() { }
+
+            public ResetUserSeasonAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ResetUserSeasonBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ResetUserSeason.Response Execute(
+            protected ResetUserSeason.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ResetUserSeason.Response> ExecuteAsync(
+            protected async Task<ResetUserSeason.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private ResetUserSeason(ResetUserSeasonBuilder builder,
+        public class ResetUserSeasonBuilder : ResetUserSeasonAbstractBuilder<ResetUserSeasonBuilder>
+        {
+            public ResetUserSeasonBuilder() : base() { }
+
+            public ResetUserSeasonBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ResetUserSeason.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<ResetUserSeason.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public ResetUserSeason(IResetUserSeasonBuilder builder,
             string namespace_,
             string userId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

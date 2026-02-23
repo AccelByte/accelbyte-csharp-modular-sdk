@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PartialUpdateThirdPartyLoginPlatformDomainV3Builder Builder { get => new PartialUpdateThirdPartyLoginPlatformDomainV3Builder(); }
 
-        public class PartialUpdateThirdPartyLoginPlatformDomainV3Builder
-            : OperationBuilder<PartialUpdateThirdPartyLoginPlatformDomainV3Builder>
+        public interface IPartialUpdateThirdPartyLoginPlatformDomainV3Builder
         {
 
 
 
 
 
-            internal PartialUpdateThirdPartyLoginPlatformDomainV3Builder() { }
+        }
 
-            internal PartialUpdateThirdPartyLoginPlatformDomainV3Builder(IAccelByteSdk sdk)
+        public abstract class PartialUpdateThirdPartyLoginPlatformDomainV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPartialUpdateThirdPartyLoginPlatformDomainV3Builder
+            where TImpl : PartialUpdateThirdPartyLoginPlatformDomainV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PartialUpdateThirdPartyLoginPlatformDomainV3AbstractBuilder() { }
+
+            public PartialUpdateThirdPartyLoginPlatformDomainV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     platformId                    
                 );
 
-                op.SetBaseFields<PartialUpdateThirdPartyLoginPlatformDomainV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PartialUpdateThirdPartyLoginPlatformDomainV3.Response Execute(
+            protected PartialUpdateThirdPartyLoginPlatformDomainV3.Response InternalExecute(
                 ModelPlatformDomainPatchRequest body,
                 string namespace_,
                 string platformId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PartialUpdateThirdPartyLoginPlatformDomainV3.Response> ExecuteAsync(
+            protected async Task<PartialUpdateThirdPartyLoginPlatformDomainV3.Response> InternalExecuteAsync(
                 ModelPlatformDomainPatchRequest body,
                 string namespace_,
                 string platformId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PartialUpdateThirdPartyLoginPlatformDomainV3(PartialUpdateThirdPartyLoginPlatformDomainV3Builder builder,
+        public class PartialUpdateThirdPartyLoginPlatformDomainV3Builder : PartialUpdateThirdPartyLoginPlatformDomainV3AbstractBuilder<PartialUpdateThirdPartyLoginPlatformDomainV3Builder>
+        {
+            public PartialUpdateThirdPartyLoginPlatformDomainV3Builder() : base() { }
+
+            public PartialUpdateThirdPartyLoginPlatformDomainV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PartialUpdateThirdPartyLoginPlatformDomainV3.Response Execute(
+                ModelPlatformDomainPatchRequest body,
+                string namespace_,
+                string platformId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    platformId
+                );
+            }
+            public async Task<PartialUpdateThirdPartyLoginPlatformDomainV3.Response> ExecuteAsync(
+                ModelPlatformDomainPatchRequest body,
+                string namespace_,
+                string platformId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    platformId
+                );
+            }
+        }
+
+
+        public PartialUpdateThirdPartyLoginPlatformDomainV3(IPartialUpdateThirdPartyLoginPlatformDomainV3Builder builder,
             ModelPlatformDomainPatchRequest body,
             string namespace_,
             string platformId
@@ -192,32 +235,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelPlatformDomainResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelPlatformDomainResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

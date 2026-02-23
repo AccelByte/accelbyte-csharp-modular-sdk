@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static GetSlotDataBuilder Builder { get => new GetSlotDataBuilder(); }
 
-        public class GetSlotDataBuilder
-            : OperationBuilder<GetSlotDataBuilder>
+        public interface IGetSlotDataBuilder
         {
 
 
 
 
 
-            internal GetSlotDataBuilder() { }
+        }
 
-            internal GetSlotDataBuilder(IAccelByteSdk sdk)
+        public abstract class GetSlotDataAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetSlotDataBuilder
+            where TImpl : GetSlotDataAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetSlotDataAbstractBuilder() { }
+
+            public GetSlotDataAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,12 +80,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetSlotDataBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetSlotData.Response Execute(
+            protected GetSlotData.Response InternalExecute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetSlotData.Response> ExecuteAsync(
+            protected async Task<GetSlotData.Response> InternalExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -119,7 +129,41 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private GetSlotData(GetSlotDataBuilder builder,
+        public class GetSlotDataBuilder : GetSlotDataAbstractBuilder<GetSlotDataBuilder>
+        {
+            public GetSlotDataBuilder() : base() { }
+
+            public GetSlotDataBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetSlotData.Response Execute(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+            public async Task<GetSlotData.Response> ExecuteAsync(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+        }
+
+
+        public GetSlotData(IGetSlotDataBuilder builder,
             string namespace_,
             string slotId,
             string userId
@@ -210,7 +254,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminGetAllPlayerSessionAttributeBuilder Builder { get => new AdminGetAllPlayerSessionAttributeBuilder(); }
 
-        public class AdminGetAllPlayerSessionAttributeBuilder
-            : OperationBuilder<AdminGetAllPlayerSessionAttributeBuilder>
+        public interface IAdminGetAllPlayerSessionAttributeBuilder
         {
 
 
 
 
 
-            internal AdminGetAllPlayerSessionAttributeBuilder() { }
+        }
 
-            internal AdminGetAllPlayerSessionAttributeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetAllPlayerSessionAttributeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetAllPlayerSessionAttributeBuilder
+            where TImpl : AdminGetAllPlayerSessionAttributeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetAllPlayerSessionAttributeAbstractBuilder() { }
+
+            public AdminGetAllPlayerSessionAttributeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetAllPlayerSessionAttributeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminGetAllPlayerSessionAttribute.Response Execute(
+            protected AdminGetAllPlayerSessionAttribute.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetAllPlayerSessionAttribute.Response> ExecuteAsync(
+            protected async Task<AdminGetAllPlayerSessionAttribute.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -106,7 +116,37 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminGetAllPlayerSessionAttribute(AdminGetAllPlayerSessionAttributeBuilder builder,
+        public class AdminGetAllPlayerSessionAttributeBuilder : AdminGetAllPlayerSessionAttributeAbstractBuilder<AdminGetAllPlayerSessionAttributeBuilder>
+        {
+            public AdminGetAllPlayerSessionAttributeBuilder() : base() { }
+
+            public AdminGetAllPlayerSessionAttributeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminGetAllPlayerSessionAttribute.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetAllPlayerSessionAttribute.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetAllPlayerSessionAttribute(IAdminGetAllPlayerSessionAttributeBuilder builder,
             string namespace_,
             string userId
         )
@@ -179,22 +219,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetAllPlayerSessionAttributeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetAllPlayerSessionAttributeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

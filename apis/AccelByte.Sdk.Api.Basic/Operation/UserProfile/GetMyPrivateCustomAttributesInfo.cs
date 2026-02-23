@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GetMyPrivateCustomAttributesInfoBuilder Builder { get => new GetMyPrivateCustomAttributesInfoBuilder(); }
 
-        public class GetMyPrivateCustomAttributesInfoBuilder
-            : OperationBuilder<GetMyPrivateCustomAttributesInfoBuilder>
+        public interface IGetMyPrivateCustomAttributesInfoBuilder
         {
 
 
 
 
 
-            internal GetMyPrivateCustomAttributesInfoBuilder() { }
+        }
 
-            internal GetMyPrivateCustomAttributesInfoBuilder(IAccelByteSdk sdk)
+        public abstract class GetMyPrivateCustomAttributesInfoAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetMyPrivateCustomAttributesInfoBuilder
+            where TImpl : GetMyPrivateCustomAttributesInfoAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetMyPrivateCustomAttributesInfoAbstractBuilder() { }
+
+            public GetMyPrivateCustomAttributesInfoAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetMyPrivateCustomAttributesInfoBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetMyPrivateCustomAttributesInfo.Response Execute(
+            protected GetMyPrivateCustomAttributesInfo.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetMyPrivateCustomAttributesInfo.Response> ExecuteAsync(
+            protected async Task<GetMyPrivateCustomAttributesInfo.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GetMyPrivateCustomAttributesInfo(GetMyPrivateCustomAttributesInfoBuilder builder,
+        public class GetMyPrivateCustomAttributesInfoBuilder : GetMyPrivateCustomAttributesInfoAbstractBuilder<GetMyPrivateCustomAttributesInfoBuilder>
+        {
+            public GetMyPrivateCustomAttributesInfoBuilder() : base() { }
+
+            public GetMyPrivateCustomAttributesInfoBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetMyPrivateCustomAttributesInfo.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetMyPrivateCustomAttributesInfo.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetMyPrivateCustomAttributesInfo(IGetMyPrivateCustomAttributesInfoBuilder builder,
             string namespace_
         )
         {
@@ -171,22 +206,26 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

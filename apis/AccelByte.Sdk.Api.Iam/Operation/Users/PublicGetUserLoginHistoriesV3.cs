@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetUserLoginHistoriesV3Builder Builder { get => new PublicGetUserLoginHistoriesV3Builder(); }
 
-        public class PublicGetUserLoginHistoriesV3Builder
-            : OperationBuilder<PublicGetUserLoginHistoriesV3Builder>
+        public interface IPublicGetUserLoginHistoriesV3Builder
+        {
+
+            double? After { get; }
+
+            double? Before { get; }
+
+            long? Limit { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetUserLoginHistoriesV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserLoginHistoriesV3Builder
+            where TImpl : PublicGetUserLoginHistoriesV3AbstractBuilder<TImpl>
         {
 
             public double? After { get; set; }
@@ -52,30 +68,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicGetUserLoginHistoriesV3Builder() { }
+            public PublicGetUserLoginHistoriesV3AbstractBuilder() { }
 
-            internal PublicGetUserLoginHistoriesV3Builder(IAccelByteSdk sdk)
+            public PublicGetUserLoginHistoriesV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetUserLoginHistoriesV3Builder SetAfter(double _after)
+            public TImpl SetAfter(double _after)
             {
                 After = _after;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetUserLoginHistoriesV3Builder SetBefore(double _before)
+            public TImpl SetBefore(double _before)
             {
                 Before = _before;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetUserLoginHistoriesV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +108,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserLoginHistoriesV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserLoginHistoriesV3.Response Execute(
+            protected PublicGetUserLoginHistoriesV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -115,7 +131,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserLoginHistoriesV3.Response> ExecuteAsync(
+            protected async Task<PublicGetUserLoginHistoriesV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -136,7 +152,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetUserLoginHistoriesV3(PublicGetUserLoginHistoriesV3Builder builder,
+        public class PublicGetUserLoginHistoriesV3Builder : PublicGetUserLoginHistoriesV3AbstractBuilder<PublicGetUserLoginHistoriesV3Builder>
+        {
+            public PublicGetUserLoginHistoriesV3Builder() : base() { }
+
+            public PublicGetUserLoginHistoriesV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserLoginHistoriesV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserLoginHistoriesV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserLoginHistoriesV3(IPublicGetUserLoginHistoriesV3Builder builder,
             string namespace_,
             string userId
         )
@@ -218,22 +263,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelLoginHistoriesResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelLoginHistoriesResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

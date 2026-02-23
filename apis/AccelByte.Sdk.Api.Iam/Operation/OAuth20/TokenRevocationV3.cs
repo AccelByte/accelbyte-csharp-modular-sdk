@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static TokenRevocationV3Builder Builder { get => new TokenRevocationV3Builder(); }
 
-        public class TokenRevocationV3Builder
-            : OperationBuilder<TokenRevocationV3Builder>
+        public interface ITokenRevocationV3Builder
         {
 
 
 
 
 
-            internal TokenRevocationV3Builder() { }
+        }
 
-            internal TokenRevocationV3Builder(IAccelByteSdk sdk)
+        public abstract class TokenRevocationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITokenRevocationV3Builder
+            where TImpl : TokenRevocationV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public TokenRevocationV3AbstractBuilder() { }
+
+            public TokenRevocationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     token                    
                 );
 
-                op.SetBaseFields<TokenRevocationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TokenRevocationV3.Response Execute(
+            protected TokenRevocationV3.Response InternalExecute(
                 string token
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TokenRevocationV3.Response> ExecuteAsync(
+            protected async Task<TokenRevocationV3.Response> InternalExecuteAsync(
                 string token
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private TokenRevocationV3(TokenRevocationV3Builder builder,
+        public class TokenRevocationV3Builder : TokenRevocationV3AbstractBuilder<TokenRevocationV3Builder>
+        {
+            public TokenRevocationV3Builder() : base() { }
+
+            public TokenRevocationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TokenRevocationV3.Response Execute(
+                string token
+            )
+            {
+                return InternalExecute(
+                    token
+                );
+            }
+            public async Task<TokenRevocationV3.Response> ExecuteAsync(
+                string token
+            )
+            {
+                return await InternalExecuteAsync(
+                    token
+                );
+            }
+        }
+
+
+        public TokenRevocationV3(ITokenRevocationV3Builder builder,
             string token
         )
         {
@@ -168,12 +203,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

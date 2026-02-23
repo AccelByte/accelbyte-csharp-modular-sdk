@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static SubmitReportBuilder Builder { get => new SubmitReportBuilder(); }
 
-        public class SubmitReportBuilder
-            : OperationBuilder<SubmitReportBuilder>
+        public interface ISubmitReportBuilder
         {
 
 
 
 
 
-            internal SubmitReportBuilder() { }
+        }
 
-            internal SubmitReportBuilder(IAccelByteSdk sdk)
+        public abstract class SubmitReportAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISubmitReportBuilder
+            where TImpl : SubmitReportAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SubmitReportAbstractBuilder() { }
+
+            public SubmitReportAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -68,11 +78,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SubmitReportBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SubmitReport.Response Execute(
+            protected SubmitReport.Response InternalExecute(
                 RestapiSubmitReportRequest body,
                 string namespace_
             )
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SubmitReport.Response> ExecuteAsync(
+            protected async Task<SubmitReport.Response> InternalExecuteAsync(
                 RestapiSubmitReportRequest body,
                 string namespace_
             )
@@ -112,7 +122,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private SubmitReport(SubmitReportBuilder builder,
+        public class SubmitReportBuilder : SubmitReportAbstractBuilder<SubmitReportBuilder>
+        {
+            public SubmitReportBuilder() : base() { }
+
+            public SubmitReportBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SubmitReport.Response Execute(
+                RestapiSubmitReportRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<SubmitReport.Response> ExecuteAsync(
+                RestapiSubmitReportRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public SubmitReport(ISubmitReportBuilder builder,
             RestapiSubmitReportRequest body,
             string namespace_
         )
@@ -187,27 +226,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiSubmitReportResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiSubmitReportResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

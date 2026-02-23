@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryFulfillmentHistoriesBuilder Builder { get => new QueryFulfillmentHistoriesBuilder(); }
 
-        public class QueryFulfillmentHistoriesBuilder
-            : OperationBuilder<QueryFulfillmentHistoriesBuilder>
+        public interface IQueryFulfillmentHistoriesBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryFulfillmentHistoriesStatus? Status { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryFulfillmentHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryFulfillmentHistoriesBuilder
+            where TImpl : QueryFulfillmentHistoriesAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -49,36 +67,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryFulfillmentHistoriesBuilder() { }
+            public QueryFulfillmentHistoriesAbstractBuilder() { }
 
-            internal QueryFulfillmentHistoriesBuilder(IAccelByteSdk sdk)
+            public QueryFulfillmentHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryFulfillmentHistoriesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentHistoriesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentHistoriesBuilder SetStatus(QueryFulfillmentHistoriesStatus _status)
+            public TImpl SetStatus(QueryFulfillmentHistoriesStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryFulfillmentHistoriesBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -93,11 +111,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryFulfillmentHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryFulfillmentHistories.Response Execute(
+            protected QueryFulfillmentHistories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -114,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryFulfillmentHistories.Response> ExecuteAsync(
+            protected async Task<QueryFulfillmentHistories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -133,7 +151,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryFulfillmentHistories(QueryFulfillmentHistoriesBuilder builder,
+        public class QueryFulfillmentHistoriesBuilder : QueryFulfillmentHistoriesAbstractBuilder<QueryFulfillmentHistoriesBuilder>
+        {
+            public QueryFulfillmentHistoriesBuilder() : base() { }
+
+            public QueryFulfillmentHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryFulfillmentHistories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryFulfillmentHistories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryFulfillmentHistories(IQueryFulfillmentHistoriesBuilder builder,
             string namespace_
         )
         {
@@ -208,7 +251,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminListEnvironmentVariablesBuilder Builder { get => new AdminListEnvironmentVariablesBuilder(); }
 
-        public class AdminListEnvironmentVariablesBuilder
-            : OperationBuilder<AdminListEnvironmentVariablesBuilder>
+        public interface IAdminListEnvironmentVariablesBuilder
         {
 
 
 
 
 
-            internal AdminListEnvironmentVariablesBuilder() { }
+        }
 
-            internal AdminListEnvironmentVariablesBuilder(IAccelByteSdk sdk)
+        public abstract class AdminListEnvironmentVariablesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListEnvironmentVariablesBuilder
+            where TImpl : AdminListEnvironmentVariablesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminListEnvironmentVariablesAbstractBuilder() { }
+
+            public AdminListEnvironmentVariablesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminListEnvironmentVariables op = new AdminListEnvironmentVariables(this
                 );
 
-                op.SetBaseFields<AdminListEnvironmentVariablesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListEnvironmentVariables.Response Execute(
+            protected AdminListEnvironmentVariables.Response InternalExecute(
             )
             {
                 AdminListEnvironmentVariables op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListEnvironmentVariables.Response> ExecuteAsync(
+            protected async Task<AdminListEnvironmentVariables.Response> InternalExecuteAsync(
             )
             {
                 AdminListEnvironmentVariables op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminListEnvironmentVariables(AdminListEnvironmentVariablesBuilder builder
+        public class AdminListEnvironmentVariablesBuilder : AdminListEnvironmentVariablesAbstractBuilder<AdminListEnvironmentVariablesBuilder>
+        {
+            public AdminListEnvironmentVariablesBuilder() : base() { }
+
+            public AdminListEnvironmentVariablesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListEnvironmentVariables.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminListEnvironmentVariables.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminListEnvironmentVariables(IAdminListEnvironmentVariablesBuilder builder
         )
         {
             
@@ -155,17 +186,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsEnvironmentVariableListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsEnvironmentVariableListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

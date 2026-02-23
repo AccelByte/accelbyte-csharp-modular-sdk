@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GenerateTokenByNewHeadlessAccountV3Builder Builder { get => new GenerateTokenByNewHeadlessAccountV3Builder(); }
 
-        public class GenerateTokenByNewHeadlessAccountV3Builder
-            : OperationBuilder<GenerateTokenByNewHeadlessAccountV3Builder>
+        public interface IGenerateTokenByNewHeadlessAccountV3Builder
+        {
+
+
+
+            string? AdditionalData { get; }
+
+            bool? ExtendExp { get; }
+
+
+
+        }
+
+        public abstract class GenerateTokenByNewHeadlessAccountV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGenerateTokenByNewHeadlessAccountV3Builder
+            where TImpl : GenerateTokenByNewHeadlessAccountV3AbstractBuilder<TImpl>
         {
 
 
@@ -44,9 +58,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal GenerateTokenByNewHeadlessAccountV3Builder() { }
+            public GenerateTokenByNewHeadlessAccountV3AbstractBuilder() { }
 
-            internal GenerateTokenByNewHeadlessAccountV3Builder(IAccelByteSdk sdk)
+            public GenerateTokenByNewHeadlessAccountV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,16 +68,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public GenerateTokenByNewHeadlessAccountV3Builder SetAdditionalData(string _additionalData)
+            public TImpl SetAdditionalData(string _additionalData)
             {
                 AdditionalData = _additionalData;
-                return this;
+                return (TImpl)this;
             }
 
-            public GenerateTokenByNewHeadlessAccountV3Builder SetExtendExp(bool _extendExp)
+            public TImpl SetExtendExp(bool _extendExp)
             {
                 ExtendExp = _extendExp;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     linkingToken                    
                 );
 
-                op.SetBaseFields<GenerateTokenByNewHeadlessAccountV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GenerateTokenByNewHeadlessAccountV3.Response Execute(
+            protected GenerateTokenByNewHeadlessAccountV3.Response InternalExecute(
                 string linkingToken
             )
             {
@@ -97,7 +111,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GenerateTokenByNewHeadlessAccountV3.Response> ExecuteAsync(
+            protected async Task<GenerateTokenByNewHeadlessAccountV3.Response> InternalExecuteAsync(
                 string linkingToken
             )
             {
@@ -116,7 +130,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GenerateTokenByNewHeadlessAccountV3(GenerateTokenByNewHeadlessAccountV3Builder builder,
+        public class GenerateTokenByNewHeadlessAccountV3Builder : GenerateTokenByNewHeadlessAccountV3AbstractBuilder<GenerateTokenByNewHeadlessAccountV3Builder>
+        {
+            public GenerateTokenByNewHeadlessAccountV3Builder() : base() { }
+
+            public GenerateTokenByNewHeadlessAccountV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GenerateTokenByNewHeadlessAccountV3.Response Execute(
+                string linkingToken
+            )
+            {
+                return InternalExecute(
+                    linkingToken
+                );
+            }
+            public async Task<GenerateTokenByNewHeadlessAccountV3.Response> ExecuteAsync(
+                string linkingToken
+            )
+            {
+                return await InternalExecuteAsync(
+                    linkingToken
+                );
+            }
+        }
+
+
+        public GenerateTokenByNewHeadlessAccountV3(IGenerateTokenByNewHeadlessAccountV3Builder builder,
             string linkingToken
         )
         {
@@ -191,22 +230,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelTokenResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

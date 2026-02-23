@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static Change2faMethodBuilder Builder { get => new Change2faMethodBuilder(); }
 
-        public class Change2faMethodBuilder
-            : OperationBuilder<Change2faMethodBuilder>
+        public interface IChange2faMethodBuilder
         {
 
 
 
 
 
-            internal Change2faMethodBuilder() { }
+        }
 
-            internal Change2faMethodBuilder(IAccelByteSdk sdk)
+        public abstract class Change2faMethodAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IChange2faMethodBuilder
+            where TImpl : Change2faMethodAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public Change2faMethodAbstractBuilder() { }
+
+            public Change2faMethodAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     mfaToken                    
                 );
 
-                op.SetBaseFields<Change2faMethodBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Change2faMethod.Response Execute(
+            protected Change2faMethod.Response InternalExecute(
                 string factor,
                 string mfaToken
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Change2faMethod.Response> ExecuteAsync(
+            protected async Task<Change2faMethod.Response> InternalExecuteAsync(
                 string factor,
                 string mfaToken
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private Change2faMethod(Change2faMethodBuilder builder,
+        public class Change2faMethodBuilder : Change2faMethodAbstractBuilder<Change2faMethodBuilder>
+        {
+            public Change2faMethodBuilder() : base() { }
+
+            public Change2faMethodBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Change2faMethod.Response Execute(
+                string factor,
+                string mfaToken
+            )
+            {
+                return InternalExecute(
+                    factor,
+                    mfaToken
+                );
+            }
+            public async Task<Change2faMethod.Response> ExecuteAsync(
+                string factor,
+                string mfaToken
+            )
+            {
+                return await InternalExecuteAsync(
+                    factor,
+                    mfaToken
+                );
+            }
+        }
+
+
+        public Change2faMethod(IChange2faMethodBuilder builder,
             string factor,
             string mfaToken
         )
@@ -183,17 +222,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

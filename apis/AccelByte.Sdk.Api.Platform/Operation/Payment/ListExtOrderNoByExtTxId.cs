@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListExtOrderNoByExtTxIdBuilder Builder { get => new ListExtOrderNoByExtTxIdBuilder(); }
 
-        public class ListExtOrderNoByExtTxIdBuilder
-            : OperationBuilder<ListExtOrderNoByExtTxIdBuilder>
+        public interface IListExtOrderNoByExtTxIdBuilder
         {
 
 
 
 
 
-            internal ListExtOrderNoByExtTxIdBuilder() { }
+        }
 
-            internal ListExtOrderNoByExtTxIdBuilder(IAccelByteSdk sdk)
+        public abstract class ListExtOrderNoByExtTxIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListExtOrderNoByExtTxIdBuilder
+            where TImpl : ListExtOrderNoByExtTxIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ListExtOrderNoByExtTxIdAbstractBuilder() { }
+
+            public ListExtOrderNoByExtTxIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     extTxId                    
                 );
 
-                op.SetBaseFields<ListExtOrderNoByExtTxIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListExtOrderNoByExtTxId.Response Execute(
+            protected ListExtOrderNoByExtTxId.Response InternalExecute(
                 string namespace_,
                 string extTxId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListExtOrderNoByExtTxId.Response> ExecuteAsync(
+            protected async Task<ListExtOrderNoByExtTxId.Response> InternalExecuteAsync(
                 string namespace_,
                 string extTxId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListExtOrderNoByExtTxId(ListExtOrderNoByExtTxIdBuilder builder,
+        public class ListExtOrderNoByExtTxIdBuilder : ListExtOrderNoByExtTxIdAbstractBuilder<ListExtOrderNoByExtTxIdBuilder>
+        {
+            public ListExtOrderNoByExtTxIdBuilder() : base() { }
+
+            public ListExtOrderNoByExtTxIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListExtOrderNoByExtTxId.Response Execute(
+                string namespace_,
+                string extTxId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    extTxId
+                );
+            }
+            public async Task<ListExtOrderNoByExtTxId.Response> ExecuteAsync(
+                string namespace_,
+                string extTxId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    extTxId
+                );
+            }
+        }
+
+
+        public ListExtOrderNoByExtTxId(IListExtOrderNoByExtTxIdBuilder builder,
             string namespace_,
             string extTxId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

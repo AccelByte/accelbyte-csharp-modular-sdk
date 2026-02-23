@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncOculusDLCBuilder Builder { get => new SyncOculusDLCBuilder(); }
 
-        public class SyncOculusDLCBuilder
-            : OperationBuilder<SyncOculusDLCBuilder>
+        public interface ISyncOculusDLCBuilder
         {
 
 
 
 
 
-            internal SyncOculusDLCBuilder() { }
+        }
 
-            internal SyncOculusDLCBuilder(IAccelByteSdk sdk)
+        public abstract class SyncOculusDLCAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncOculusDLCBuilder
+            where TImpl : SyncOculusDLCAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncOculusDLCAbstractBuilder() { }
+
+            public SyncOculusDLCAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncOculusDLCBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncOculusDLC.Response Execute(
+            protected SyncOculusDLC.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncOculusDLC.Response> ExecuteAsync(
+            protected async Task<SyncOculusDLC.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncOculusDLC(SyncOculusDLCBuilder builder,
+        public class SyncOculusDLCBuilder : SyncOculusDLCAbstractBuilder<SyncOculusDLCBuilder>
+        {
+            public SyncOculusDLCBuilder() : base() { }
+
+            public SyncOculusDLCBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncOculusDLC.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncOculusDLC.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncOculusDLC(ISyncOculusDLCBuilder builder,
             string namespace_,
             string userId
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

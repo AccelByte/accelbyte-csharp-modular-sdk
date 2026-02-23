@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetListJusticePlatformAccountsBuilder Builder { get => new GetListJusticePlatformAccountsBuilder(); }
 
-        public class GetListJusticePlatformAccountsBuilder
-            : OperationBuilder<GetListJusticePlatformAccountsBuilder>
+        public interface IGetListJusticePlatformAccountsBuilder
         {
 
 
 
 
 
-            internal GetListJusticePlatformAccountsBuilder() { }
+        }
 
-            internal GetListJusticePlatformAccountsBuilder(IAccelByteSdk sdk)
+        public abstract class GetListJusticePlatformAccountsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetListJusticePlatformAccountsBuilder
+            where TImpl : GetListJusticePlatformAccountsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetListJusticePlatformAccountsAbstractBuilder() { }
+
+            public GetListJusticePlatformAccountsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,12 +75,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetListJusticePlatformAccountsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetListJusticePlatformAccounts.Response Execute(
+            protected GetListJusticePlatformAccounts.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetListJusticePlatformAccounts.Response> ExecuteAsync(
+            protected async Task<GetListJusticePlatformAccounts.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -110,7 +120,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetListJusticePlatformAccounts(GetListJusticePlatformAccountsBuilder builder,
+        public class GetListJusticePlatformAccountsBuilder : GetListJusticePlatformAccountsAbstractBuilder<GetListJusticePlatformAccountsBuilder>
+        {
+            public GetListJusticePlatformAccountsBuilder() : base() { }
+
+            public GetListJusticePlatformAccountsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetListJusticePlatformAccounts.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetListJusticePlatformAccounts.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetListJusticePlatformAccounts(IGetListJusticePlatformAccountsBuilder builder,
             string namespace_,
             string userId
         )
@@ -181,17 +221,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelGetUserMapping>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelGetUserMapping>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

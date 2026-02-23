@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicQueryMyPartiesBuilder Builder { get => new PublicQueryMyPartiesBuilder(); }
 
-        public class PublicQueryMyPartiesBuilder
-            : OperationBuilder<PublicQueryMyPartiesBuilder>
+        public interface IPublicQueryMyPartiesBuilder
+        {
+
+            string? Order { get; }
+
+            string? OrderBy { get; }
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicQueryMyPartiesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicQueryMyPartiesBuilder
+            where TImpl : PublicQueryMyPartiesAbstractBuilder<TImpl>
         {
 
             public string? Order { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal PublicQueryMyPartiesBuilder() { }
+            public PublicQueryMyPartiesAbstractBuilder() { }
 
-            internal PublicQueryMyPartiesBuilder(IAccelByteSdk sdk)
+            public PublicQueryMyPartiesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicQueryMyPartiesBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryMyPartiesBuilder SetOrderBy(string _orderBy)
+            public TImpl SetOrderBy(string _orderBy)
             {
                 OrderBy = _orderBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicQueryMyPartiesBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicQueryMyPartiesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicQueryMyParties.Response Execute(
+            protected PublicQueryMyParties.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicQueryMyParties.Response> ExecuteAsync(
+            protected async Task<PublicQueryMyParties.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicQueryMyParties(PublicQueryMyPartiesBuilder builder,
+        public class PublicQueryMyPartiesBuilder : PublicQueryMyPartiesAbstractBuilder<PublicQueryMyPartiesBuilder>
+        {
+            public PublicQueryMyPartiesBuilder() : base() { }
+
+            public PublicQueryMyPartiesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicQueryMyParties.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicQueryMyParties.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicQueryMyParties(IPublicQueryMyPartiesBuilder builder,
             string namespace_
         )
         {
@@ -200,22 +241,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartyQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartyQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

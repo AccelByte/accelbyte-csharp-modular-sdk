@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveAllLegalPoliciesByNamespaceBuilder Builder { get => new RetrieveAllLegalPoliciesByNamespaceBuilder(); }
 
-        public class RetrieveAllLegalPoliciesByNamespaceBuilder
-            : OperationBuilder<RetrieveAllLegalPoliciesByNamespaceBuilder>
+        public interface IRetrieveAllLegalPoliciesByNamespaceBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            bool? VisibleOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class RetrieveAllLegalPoliciesByNamespaceAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveAllLegalPoliciesByNamespaceBuilder
+            where TImpl : RetrieveAllLegalPoliciesByNamespaceAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal RetrieveAllLegalPoliciesByNamespaceBuilder() { }
+            public RetrieveAllLegalPoliciesByNamespaceAbstractBuilder() { }
 
-            internal RetrieveAllLegalPoliciesByNamespaceBuilder(IAccelByteSdk sdk)
+            public RetrieveAllLegalPoliciesByNamespaceAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RetrieveAllLegalPoliciesByNamespaceBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveAllLegalPoliciesByNamespaceBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public RetrieveAllLegalPoliciesByNamespaceBuilder SetVisibleOnly(bool _visibleOnly)
+            public TImpl SetVisibleOnly(bool _visibleOnly)
             {
                 VisibleOnly = _visibleOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -82,11 +98,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RetrieveAllLegalPoliciesByNamespaceBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveAllLegalPoliciesByNamespace.Response Execute(
+            protected RetrieveAllLegalPoliciesByNamespace.Response InternalExecute(
                 string namespace_
             )
             {
@@ -103,7 +119,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveAllLegalPoliciesByNamespace.Response> ExecuteAsync(
+            protected async Task<RetrieveAllLegalPoliciesByNamespace.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -122,7 +138,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveAllLegalPoliciesByNamespace(RetrieveAllLegalPoliciesByNamespaceBuilder builder,
+        public class RetrieveAllLegalPoliciesByNamespaceBuilder : RetrieveAllLegalPoliciesByNamespaceAbstractBuilder<RetrieveAllLegalPoliciesByNamespaceBuilder>
+        {
+            public RetrieveAllLegalPoliciesByNamespaceBuilder() : base() { }
+
+            public RetrieveAllLegalPoliciesByNamespaceBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveAllLegalPoliciesByNamespace.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RetrieveAllLegalPoliciesByNamespace.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RetrieveAllLegalPoliciesByNamespace(IRetrieveAllLegalPoliciesByNamespaceBuilder builder,
             string namespace_
         )
         {
@@ -194,7 +235,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveBasePolicyResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

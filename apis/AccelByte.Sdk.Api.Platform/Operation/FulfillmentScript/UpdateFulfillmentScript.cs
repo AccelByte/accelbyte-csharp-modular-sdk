@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateFulfillmentScriptBuilder Builder { get => new UpdateFulfillmentScriptBuilder(); }
 
-        public class UpdateFulfillmentScriptBuilder
-            : OperationBuilder<UpdateFulfillmentScriptBuilder>
+        public interface IUpdateFulfillmentScriptBuilder
+        {
+
+
+            Model.FulfillmentScriptUpdate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class UpdateFulfillmentScriptAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateFulfillmentScriptBuilder
+            where TImpl : UpdateFulfillmentScriptAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateFulfillmentScriptBuilder() { }
+            public UpdateFulfillmentScriptAbstractBuilder() { }
 
-            internal UpdateFulfillmentScriptBuilder(IAccelByteSdk sdk)
+            public UpdateFulfillmentScriptAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public UpdateFulfillmentScriptBuilder SetBody(Model.FulfillmentScriptUpdate _body)
+            public TImpl SetBody(Model.FulfillmentScriptUpdate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateFulfillmentScriptBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateFulfillmentScript.Response Execute(
+            protected UpdateFulfillmentScript.Response InternalExecute(
                 string id
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateFulfillmentScript.Response> ExecuteAsync(
+            protected async Task<UpdateFulfillmentScript.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -106,7 +118,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateFulfillmentScript(UpdateFulfillmentScriptBuilder builder,
+        public class UpdateFulfillmentScriptBuilder : UpdateFulfillmentScriptAbstractBuilder<UpdateFulfillmentScriptBuilder>
+        {
+            public UpdateFulfillmentScriptBuilder() : base() { }
+
+            public UpdateFulfillmentScriptBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateFulfillmentScript.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<UpdateFulfillmentScript.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public UpdateFulfillmentScript(IUpdateFulfillmentScriptBuilder builder,
             string id
         )
         {
@@ -174,12 +211,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FulfillmentScriptInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

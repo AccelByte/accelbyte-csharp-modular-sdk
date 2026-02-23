@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetDLCItemConfigHistoryBuilder Builder { get => new GetDLCItemConfigHistoryBuilder(); }
 
-        public class GetDLCItemConfigHistoryBuilder
-            : OperationBuilder<GetDLCItemConfigHistoryBuilder>
+        public interface IGetDLCItemConfigHistoryBuilder
         {
 
 
 
 
 
-            internal GetDLCItemConfigHistoryBuilder() { }
+        }
 
-            internal GetDLCItemConfigHistoryBuilder(IAccelByteSdk sdk)
+        public abstract class GetDLCItemConfigHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetDLCItemConfigHistoryBuilder
+            where TImpl : GetDLCItemConfigHistoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetDLCItemConfigHistoryAbstractBuilder() { }
+
+            public GetDLCItemConfigHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     dlcId                    
                 );
 
-                op.SetBaseFields<GetDLCItemConfigHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetDLCItemConfigHistory.Response Execute(
+            protected GetDLCItemConfigHistory.Response InternalExecute(
                 string namespace_,
                 string dlcId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetDLCItemConfigHistory.Response> ExecuteAsync(
+            protected async Task<GetDLCItemConfigHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string dlcId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetDLCItemConfigHistory(GetDLCItemConfigHistoryBuilder builder,
+        public class GetDLCItemConfigHistoryBuilder : GetDLCItemConfigHistoryAbstractBuilder<GetDLCItemConfigHistoryBuilder>
+        {
+            public GetDLCItemConfigHistoryBuilder() : base() { }
+
+            public GetDLCItemConfigHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetDLCItemConfigHistory.Response Execute(
+                string namespace_,
+                string dlcId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    dlcId
+                );
+            }
+            public async Task<GetDLCItemConfigHistory.Response> ExecuteAsync(
+                string namespace_,
+                string dlcId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    dlcId
+                );
+            }
+        }
+
+
+        public GetDLCItemConfigHistory(IGetDLCItemConfigHistoryBuilder builder,
             string namespace_,
             string dlcId
         )
@@ -173,12 +212,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DLCItemConfigHistoryResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DLCItemConfigHistoryResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

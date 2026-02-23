@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AdminGetIAPOrderLineItemsBuilder Builder { get => new AdminGetIAPOrderLineItemsBuilder(); }
 
-        public class AdminGetIAPOrderLineItemsBuilder
-            : OperationBuilder<AdminGetIAPOrderLineItemsBuilder>
+        public interface IAdminGetIAPOrderLineItemsBuilder
         {
 
 
 
 
 
-            internal AdminGetIAPOrderLineItemsBuilder() { }
+        }
 
-            internal AdminGetIAPOrderLineItemsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetIAPOrderLineItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetIAPOrderLineItemsBuilder
+            where TImpl : AdminGetIAPOrderLineItemsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetIAPOrderLineItemsAbstractBuilder() { }
+
+            public AdminGetIAPOrderLineItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGetIAPOrderLineItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetIAPOrderLineItems.Response Execute(
+            protected AdminGetIAPOrderLineItems.Response InternalExecute(
                 string iapOrderNo,
                 string namespace_,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetIAPOrderLineItems.Response> ExecuteAsync(
+            protected async Task<AdminGetIAPOrderLineItems.Response> InternalExecuteAsync(
                 string iapOrderNo,
                 string namespace_,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AdminGetIAPOrderLineItems(AdminGetIAPOrderLineItemsBuilder builder,
+        public class AdminGetIAPOrderLineItemsBuilder : AdminGetIAPOrderLineItemsAbstractBuilder<AdminGetIAPOrderLineItemsBuilder>
+        {
+            public AdminGetIAPOrderLineItemsBuilder() : base() { }
+
+            public AdminGetIAPOrderLineItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetIAPOrderLineItems.Response Execute(
+                string iapOrderNo,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    iapOrderNo,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminGetIAPOrderLineItems.Response> ExecuteAsync(
+                string iapOrderNo,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    iapOrderNo,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGetIAPOrderLineItems(IAdminGetIAPOrderLineItemsBuilder builder,
             string iapOrderNo,
             string namespace_,
             string userId
@@ -184,7 +227,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.IAPOrderLineItemInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.IAPOrderLineItemInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -45,17 +45,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GrantEntitlementsBuilder Builder { get => new GrantEntitlementsBuilder(); }
 
-        public class GrantEntitlementsBuilder
-            : OperationBuilder<GrantEntitlementsBuilder>
+        public interface IGrantEntitlementsBuilder
         {
 
 
 
 
 
-            internal GrantEntitlementsBuilder() { }
+        }
 
-            internal GrantEntitlementsBuilder(IAccelByteSdk sdk)
+        public abstract class GrantEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGrantEntitlementsBuilder
+            where TImpl : GrantEntitlementsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GrantEntitlementsAbstractBuilder() { }
+
+            public GrantEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -75,11 +85,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GrantEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GrantEntitlements.Response Execute(
+            protected GrantEntitlements.Response InternalExecute(
                 BulkEntitlementGrantRequest body,
                 string namespace_
             )
@@ -98,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GrantEntitlements.Response> ExecuteAsync(
+            protected async Task<GrantEntitlements.Response> InternalExecuteAsync(
                 BulkEntitlementGrantRequest body,
                 string namespace_
             )
@@ -119,7 +129,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GrantEntitlements(GrantEntitlementsBuilder builder,
+        public class GrantEntitlementsBuilder : GrantEntitlementsAbstractBuilder<GrantEntitlementsBuilder>
+        {
+            public GrantEntitlementsBuilder() : base() { }
+
+            public GrantEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GrantEntitlements.Response Execute(
+                BulkEntitlementGrantRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<GrantEntitlements.Response> ExecuteAsync(
+                BulkEntitlementGrantRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GrantEntitlements(IGrantEntitlementsBuilder builder,
             BulkEntitlementGrantRequest body,
             string namespace_
         )
@@ -188,12 +227,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkEntitlementGrantResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkEntitlementGrantResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

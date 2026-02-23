@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,28 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static PublicListItemsBuilder Builder { get => new PublicListItemsBuilder(); }
 
-        public class PublicListItemsBuilder
-            : OperationBuilder<PublicListItemsBuilder>
+        public interface IPublicListItemsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            PublicListItemsSortBy? SortBy { get; }
+
+            string? SourceItemId { get; }
+
+            string? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListItemsBuilder
+            where TImpl : PublicListItemsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -50,42 +70,42 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal PublicListItemsBuilder() { }
+            public PublicListItemsAbstractBuilder() { }
 
-            internal PublicListItemsBuilder(IAccelByteSdk sdk)
+            public PublicListItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListItemsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListItemsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListItemsBuilder SetSortBy(PublicListItemsSortBy _sortBy)
+            public TImpl SetSortBy(PublicListItemsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListItemsBuilder SetSourceItemId(string _sourceItemId)
+            public TImpl SetSourceItemId(string _sourceItemId)
             {
                 SourceItemId = _sourceItemId;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListItemsBuilder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,11 +122,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListItems.Response Execute(
+            protected PublicListItems.Response InternalExecute(
                 string inventoryId,
                 string namespace_
             )
@@ -125,7 +145,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListItems.Response> ExecuteAsync(
+            protected async Task<PublicListItems.Response> InternalExecuteAsync(
                 string inventoryId,
                 string namespace_
             )
@@ -146,7 +166,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private PublicListItems(PublicListItemsBuilder builder,
+        public class PublicListItemsBuilder : PublicListItemsAbstractBuilder<PublicListItemsBuilder>
+        {
+            public PublicListItemsBuilder() : base() { }
+
+            public PublicListItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListItems.Response Execute(
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    inventoryId,
+                    namespace_
+                );
+            }
+            public async Task<PublicListItems.Response> ExecuteAsync(
+                string inventoryId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    inventoryId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListItems(IPublicListItemsBuilder builder,
             string inventoryId,
             string namespace_
         )
@@ -232,17 +281,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

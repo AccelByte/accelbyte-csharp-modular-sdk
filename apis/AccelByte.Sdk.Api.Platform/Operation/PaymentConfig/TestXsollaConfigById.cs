@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestXsollaConfigByIdBuilder Builder { get => new TestXsollaConfigByIdBuilder(); }
 
-        public class TestXsollaConfigByIdBuilder
-            : OperationBuilder<TestXsollaConfigByIdBuilder>
+        public interface ITestXsollaConfigByIdBuilder
         {
 
 
 
 
 
-            internal TestXsollaConfigByIdBuilder() { }
+        }
 
-            internal TestXsollaConfigByIdBuilder(IAccelByteSdk sdk)
+        public abstract class TestXsollaConfigByIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestXsollaConfigByIdBuilder
+            where TImpl : TestXsollaConfigByIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public TestXsollaConfigByIdAbstractBuilder() { }
+
+            public TestXsollaConfigByIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<TestXsollaConfigByIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestXsollaConfigById.Response Execute(
+            protected TestXsollaConfigById.Response InternalExecute(
                 string id
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestXsollaConfigById.Response> ExecuteAsync(
+            protected async Task<TestXsollaConfigById.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestXsollaConfigById(TestXsollaConfigByIdBuilder builder,
+        public class TestXsollaConfigByIdBuilder : TestXsollaConfigByIdAbstractBuilder<TestXsollaConfigByIdBuilder>
+        {
+            public TestXsollaConfigByIdBuilder() : base() { }
+
+            public TestXsollaConfigByIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestXsollaConfigById.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<TestXsollaConfigById.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public TestXsollaConfigById(ITestXsollaConfigByIdBuilder builder,
             string id
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

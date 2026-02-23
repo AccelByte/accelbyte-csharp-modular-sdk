@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,30 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetClientsByNamespaceV3Builder Builder { get => new AdminGetClientsByNamespaceV3Builder(); }
 
-        public class AdminGetClientsByNamespaceV3Builder
-            : OperationBuilder<AdminGetClientsByNamespaceV3Builder>
+        public interface IAdminGetClientsByNamespaceV3Builder
+        {
+
+            string? ClientId { get; }
+
+            string? ClientName { get; }
+
+            string? ClientType { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            bool? SkipLoginQueue { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetClientsByNamespaceV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetClientsByNamespaceV3Builder
+            where TImpl : AdminGetClientsByNamespaceV3AbstractBuilder<TImpl>
         {
 
             public string? ClientId { get; set; }
@@ -50,48 +72,48 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AdminGetClientsByNamespaceV3Builder() { }
+            public AdminGetClientsByNamespaceV3AbstractBuilder() { }
 
-            internal AdminGetClientsByNamespaceV3Builder(IAccelByteSdk sdk)
+            public AdminGetClientsByNamespaceV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetClientsByNamespaceV3Builder SetClientId(string _clientId)
+            public TImpl SetClientId(string _clientId)
             {
                 ClientId = _clientId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetClientsByNamespaceV3Builder SetClientName(string _clientName)
+            public TImpl SetClientName(string _clientName)
             {
                 ClientName = _clientName;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetClientsByNamespaceV3Builder SetClientType(string _clientType)
+            public TImpl SetClientType(string _clientType)
             {
                 ClientType = _clientType;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetClientsByNamespaceV3Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetClientsByNamespaceV3Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetClientsByNamespaceV3Builder SetSkipLoginQueue(bool _skipLoginQueue)
+            public TImpl SetSkipLoginQueue(bool _skipLoginQueue)
             {
                 SkipLoginQueue = _skipLoginQueue;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -106,11 +128,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetClientsByNamespaceV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetClientsByNamespaceV3.Response Execute(
+            protected AdminGetClientsByNamespaceV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -127,7 +149,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetClientsByNamespaceV3.Response> ExecuteAsync(
+            protected async Task<AdminGetClientsByNamespaceV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -146,7 +168,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetClientsByNamespaceV3(AdminGetClientsByNamespaceV3Builder builder,
+        public class AdminGetClientsByNamespaceV3Builder : AdminGetClientsByNamespaceV3AbstractBuilder<AdminGetClientsByNamespaceV3Builder>
+        {
+            public AdminGetClientsByNamespaceV3Builder() : base() { }
+
+            public AdminGetClientsByNamespaceV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetClientsByNamespaceV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetClientsByNamespaceV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetClientsByNamespaceV3(IAdminGetClientsByNamespaceV3Builder builder,
             string namespace_
         )
         {
@@ -233,22 +280,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientsV3Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClientmodelClientsV3Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -42,8 +42,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder Builder { get => new OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(); }
 
-        public class OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder
-            : OperationBuilder<OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>
+        public interface IOldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder
+        {
+
+            bool? AlwaysIncludeDefault { get; }
+
+            bool? DefaultOnEmpty { get; }
+
+            OldRetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? PolicyType { get; }
+
+            string? Tags { get; }
+
+            bool? VisibleOnly { get; }
+
+
+
+
+
+        }
+
+        public abstract class OldRetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder
+            where TImpl : OldRetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder<TImpl>
         {
 
             public bool? AlwaysIncludeDefault { get; set; }
@@ -60,42 +80,42 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder() { }
+            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder() { }
 
-            internal OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(IAccelByteSdk sdk)
+            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder SetAlwaysIncludeDefault(bool _alwaysIncludeDefault)
+            public TImpl SetAlwaysIncludeDefault(bool _alwaysIncludeDefault)
             {
                 AlwaysIncludeDefault = _alwaysIncludeDefault;
-                return this;
+                return (TImpl)this;
             }
 
-            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder SetDefaultOnEmpty(bool _defaultOnEmpty)
+            public TImpl SetDefaultOnEmpty(bool _defaultOnEmpty)
             {
                 DefaultOnEmpty = _defaultOnEmpty;
-                return this;
+                return (TImpl)this;
             }
 
-            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder SetPolicyType(OldRetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType _policyType)
+            public TImpl SetPolicyType(OldRetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType _policyType)
             {
                 PolicyType = _policyType;
-                return this;
+                return (TImpl)this;
             }
 
-            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder SetTags(string _tags)
+            public TImpl SetTags(string _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder SetVisibleOnly(bool _visibleOnly)
+            public TImpl SetVisibleOnly(bool _visibleOnly)
             {
                 VisibleOnly = _visibleOnly;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -112,11 +132,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response Execute(
+            protected OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response InternalExecute(
                 string countryCode,
                 string namespace_
             )
@@ -135,7 +155,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> ExecuteAsync(
+            protected async Task<OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> InternalExecuteAsync(
                 string countryCode,
                 string namespace_
             )
@@ -156,7 +176,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveLatestPoliciesByNamespaceAndCountryPublic(OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder builder,
+        public class OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder : OldRetrieveLatestPoliciesByNamespaceAndCountryPublicAbstractBuilder<OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder>
+        {
+            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder() : base() { }
+
+            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response Execute(
+                string countryCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    countryCode,
+                    namespace_
+                );
+            }
+            public async Task<OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response> ExecuteAsync(
+                string countryCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    countryCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public OldRetrieveLatestPoliciesByNamespaceAndCountryPublic(IOldRetrieveLatestPoliciesByNamespaceAndCountryPublicBuilder builder,
             string countryCode,
             string namespace_
         )
@@ -236,7 +285,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrievePolicyPublicResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

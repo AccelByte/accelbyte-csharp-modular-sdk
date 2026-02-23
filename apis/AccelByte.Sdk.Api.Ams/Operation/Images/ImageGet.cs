@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static ImageGetBuilder Builder { get => new ImageGetBuilder(); }
 
-        public class ImageGetBuilder
-            : OperationBuilder<ImageGetBuilder>
+        public interface IImageGetBuilder
         {
 
 
 
 
 
-            internal ImageGetBuilder() { }
+        }
 
-            internal ImageGetBuilder(IAccelByteSdk sdk)
+        public abstract class ImageGetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImageGetBuilder
+            where TImpl : ImageGetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ImageGetAbstractBuilder() { }
+
+            public ImageGetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ImageGetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImageGet.Response Execute(
+            protected ImageGet.Response InternalExecute(
                 string imageID,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImageGet.Response> ExecuteAsync(
+            protected async Task<ImageGet.Response> InternalExecuteAsync(
                 string imageID,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private ImageGet(ImageGetBuilder builder,
+        public class ImageGetBuilder : ImageGetAbstractBuilder<ImageGetBuilder>
+        {
+            public ImageGetBuilder() : base() { }
+
+            public ImageGetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImageGet.Response Execute(
+                string imageID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    imageID,
+                    namespace_
+                );
+            }
+            public async Task<ImageGet.Response> ExecuteAsync(
+                string imageID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    imageID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ImageGet(IImageGetBuilder builder,
             string imageID,
             string namespace_
         )
@@ -179,27 +218,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiImageDetails>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiImageDetails>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

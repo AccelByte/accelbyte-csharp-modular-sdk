@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static ResetPasswordBuilder Builder { get => new ResetPasswordBuilder(); }
 
-        public class ResetPasswordBuilder
-            : OperationBuilder<ResetPasswordBuilder>
+        public interface IResetPasswordBuilder
         {
 
 
 
 
 
-            internal ResetPasswordBuilder() { }
+        }
 
-            internal ResetPasswordBuilder(IAccelByteSdk sdk)
+        public abstract class ResetPasswordAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IResetPasswordBuilder
+            where TImpl : ResetPasswordAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ResetPasswordAbstractBuilder() { }
+
+            public ResetPasswordAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ResetPasswordBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public ResetPassword.Response Execute(
+            protected ResetPassword.Response InternalExecute(
                 ModelResetPasswordRequest body,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ResetPassword.Response> ExecuteAsync(
+            protected async Task<ResetPassword.Response> InternalExecuteAsync(
                 ModelResetPasswordRequest body,
                 string namespace_
             )
@@ -108,7 +118,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private ResetPassword(ResetPasswordBuilder builder,
+        public class ResetPasswordBuilder : ResetPasswordAbstractBuilder<ResetPasswordBuilder>
+        {
+            public ResetPasswordBuilder() : base() { }
+
+            public ResetPasswordBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public ResetPassword.Response Execute(
+                ModelResetPasswordRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<ResetPassword.Response> ExecuteAsync(
+                ModelResetPasswordRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ResetPassword(IResetPasswordBuilder builder,
             ModelResetPasswordRequest body,
             string namespace_
         )
@@ -186,22 +226,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error403 = response.Payload;
                 response.Error = new ApiError("-1", response.Error403!);
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

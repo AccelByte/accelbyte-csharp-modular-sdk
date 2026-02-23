@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static LeaveGroupPublicV2Builder Builder { get => new LeaveGroupPublicV2Builder(); }
 
-        public class LeaveGroupPublicV2Builder
-            : OperationBuilder<LeaveGroupPublicV2Builder>
+        public interface ILeaveGroupPublicV2Builder
         {
 
 
 
 
 
-            internal LeaveGroupPublicV2Builder() { }
+        }
 
-            internal LeaveGroupPublicV2Builder(IAccelByteSdk sdk)
+        public abstract class LeaveGroupPublicV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ILeaveGroupPublicV2Builder
+            where TImpl : LeaveGroupPublicV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public LeaveGroupPublicV2AbstractBuilder() { }
+
+            public LeaveGroupPublicV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<LeaveGroupPublicV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public LeaveGroupPublicV2.Response Execute(
+            protected LeaveGroupPublicV2.Response InternalExecute(
                 string groupId,
                 string namespace_
             )
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<LeaveGroupPublicV2.Response> ExecuteAsync(
+            protected async Task<LeaveGroupPublicV2.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_
             )
@@ -110,7 +120,36 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private LeaveGroupPublicV2(LeaveGroupPublicV2Builder builder,
+        public class LeaveGroupPublicV2Builder : LeaveGroupPublicV2AbstractBuilder<LeaveGroupPublicV2Builder>
+        {
+            public LeaveGroupPublicV2Builder() : base() { }
+
+            public LeaveGroupPublicV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public LeaveGroupPublicV2.Response Execute(
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<LeaveGroupPublicV2.Response> ExecuteAsync(
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public LeaveGroupPublicV2(ILeaveGroupPublicV2Builder builder,
             string groupId,
             string namespace_
         )
@@ -187,32 +226,38 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsLeaveGroupResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsLeaveGroupResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

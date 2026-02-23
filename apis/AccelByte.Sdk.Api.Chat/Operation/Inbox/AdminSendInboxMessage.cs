@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminSendInboxMessageBuilder Builder { get => new AdminSendInboxMessageBuilder(); }
 
-        public class AdminSendInboxMessageBuilder
-            : OperationBuilder<AdminSendInboxMessageBuilder>
+        public interface IAdminSendInboxMessageBuilder
         {
 
 
 
 
 
-            internal AdminSendInboxMessageBuilder() { }
+        }
 
-            internal AdminSendInboxMessageBuilder(IAccelByteSdk sdk)
+        public abstract class AdminSendInboxMessageAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSendInboxMessageBuilder
+            where TImpl : AdminSendInboxMessageAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminSendInboxMessageAbstractBuilder() { }
+
+            public AdminSendInboxMessageAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminSendInboxMessageBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSendInboxMessage.Response Execute(
+            protected AdminSendInboxMessage.Response InternalExecute(
                 ModelsSendInboxMessageRequest body,
                 string messageId,
                 string namespace_
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSendInboxMessage.Response> ExecuteAsync(
+            protected async Task<AdminSendInboxMessage.Response> InternalExecuteAsync(
                 ModelsSendInboxMessageRequest body,
                 string messageId,
                 string namespace_
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminSendInboxMessage(AdminSendInboxMessageBuilder builder,
+        public class AdminSendInboxMessageBuilder : AdminSendInboxMessageAbstractBuilder<AdminSendInboxMessageBuilder>
+        {
+            public AdminSendInboxMessageBuilder() : base() { }
+
+            public AdminSendInboxMessageBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSendInboxMessage.Response Execute(
+                ModelsSendInboxMessageRequest body,
+                string messageId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    messageId,
+                    namespace_
+                );
+            }
+            public async Task<AdminSendInboxMessage.Response> ExecuteAsync(
+                ModelsSendInboxMessageRequest body,
+                string messageId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    messageId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminSendInboxMessage(IAdminSendInboxMessageBuilder builder,
             ModelsSendInboxMessageRequest body,
             string messageId,
             string namespace_
@@ -189,27 +232,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsSendInboxMessageResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsSendInboxMessageResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static GeneratedUploadUrlBuilder Builder { get => new GeneratedUploadUrlBuilder(); }
 
-        public class GeneratedUploadUrlBuilder
-            : OperationBuilder<GeneratedUploadUrlBuilder>
+        public interface IGeneratedUploadUrlBuilder
         {
 
 
 
 
 
-            internal GeneratedUploadUrlBuilder() { }
+        }
 
-            internal GeneratedUploadUrlBuilder(IAccelByteSdk sdk)
+        public abstract class GeneratedUploadUrlAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGeneratedUploadUrlBuilder
+            where TImpl : GeneratedUploadUrlAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GeneratedUploadUrlAbstractBuilder() { }
+
+            public GeneratedUploadUrlAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     fileType                    
                 );
 
-                op.SetBaseFields<GeneratedUploadUrlBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GeneratedUploadUrl.Response Execute(
+            protected GeneratedUploadUrl.Response InternalExecute(
                 string folder,
                 string namespace_,
                 string fileType
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GeneratedUploadUrl.Response> ExecuteAsync(
+            protected async Task<GeneratedUploadUrl.Response> InternalExecuteAsync(
                 string folder,
                 string namespace_,
                 string fileType
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private GeneratedUploadUrl(GeneratedUploadUrlBuilder builder,
+        public class GeneratedUploadUrlBuilder : GeneratedUploadUrlAbstractBuilder<GeneratedUploadUrlBuilder>
+        {
+            public GeneratedUploadUrlBuilder() : base() { }
+
+            public GeneratedUploadUrlBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GeneratedUploadUrl.Response Execute(
+                string folder,
+                string namespace_,
+                string fileType
+            )
+            {
+                return InternalExecute(
+                    folder,
+                    namespace_,
+                    fileType
+                );
+            }
+            public async Task<GeneratedUploadUrl.Response> ExecuteAsync(
+                string folder,
+                string namespace_,
+                string fileType
+            )
+            {
+                return await InternalExecuteAsync(
+                    folder,
+                    namespace_,
+                    fileType
+                );
+            }
+        }
+
+
+        public GeneratedUploadUrl(IGeneratedUploadUrlBuilder builder,
             string folder,
             string namespace_,
             string fileType
@@ -193,27 +236,32 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FileUploadUrlInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

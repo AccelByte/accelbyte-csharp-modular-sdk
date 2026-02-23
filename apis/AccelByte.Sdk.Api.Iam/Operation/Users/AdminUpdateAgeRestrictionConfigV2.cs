@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateAgeRestrictionConfigV2Builder Builder { get => new AdminUpdateAgeRestrictionConfigV2Builder(); }
 
-        public class AdminUpdateAgeRestrictionConfigV2Builder
-            : OperationBuilder<AdminUpdateAgeRestrictionConfigV2Builder>
+        public interface IAdminUpdateAgeRestrictionConfigV2Builder
         {
 
 
 
 
 
-            internal AdminUpdateAgeRestrictionConfigV2Builder() { }
+        }
 
-            internal AdminUpdateAgeRestrictionConfigV2Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateAgeRestrictionConfigV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateAgeRestrictionConfigV2Builder
+            where TImpl : AdminUpdateAgeRestrictionConfigV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateAgeRestrictionConfigV2AbstractBuilder() { }
+
+            public AdminUpdateAgeRestrictionConfigV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateAgeRestrictionConfigV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminUpdateAgeRestrictionConfigV2.Response Execute(
+            protected AdminUpdateAgeRestrictionConfigV2.Response InternalExecute(
                 ModelAgeRestrictionRequest body,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateAgeRestrictionConfigV2.Response> ExecuteAsync(
+            protected async Task<AdminUpdateAgeRestrictionConfigV2.Response> InternalExecuteAsync(
                 ModelAgeRestrictionRequest body,
                 string namespace_
             )
@@ -108,7 +118,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateAgeRestrictionConfigV2(AdminUpdateAgeRestrictionConfigV2Builder builder,
+        public class AdminUpdateAgeRestrictionConfigV2Builder : AdminUpdateAgeRestrictionConfigV2AbstractBuilder<AdminUpdateAgeRestrictionConfigV2Builder>
+        {
+            public AdminUpdateAgeRestrictionConfigV2Builder() : base() { }
+
+            public AdminUpdateAgeRestrictionConfigV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminUpdateAgeRestrictionConfigV2.Response Execute(
+                ModelAgeRestrictionRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateAgeRestrictionConfigV2.Response> ExecuteAsync(
+                ModelAgeRestrictionRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateAgeRestrictionConfigV2(IAdminUpdateAgeRestrictionConfigV2Builder builder,
             ModelAgeRestrictionRequest body,
             string namespace_
         )
@@ -183,27 +223,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelAgeRestrictionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelAgeRestrictionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

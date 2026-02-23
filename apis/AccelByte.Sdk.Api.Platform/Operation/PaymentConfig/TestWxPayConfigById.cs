@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestWxPayConfigByIdBuilder Builder { get => new TestWxPayConfigByIdBuilder(); }
 
-        public class TestWxPayConfigByIdBuilder
-            : OperationBuilder<TestWxPayConfigByIdBuilder>
+        public interface ITestWxPayConfigByIdBuilder
         {
 
 
 
 
 
-            internal TestWxPayConfigByIdBuilder() { }
+        }
 
-            internal TestWxPayConfigByIdBuilder(IAccelByteSdk sdk)
+        public abstract class TestWxPayConfigByIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestWxPayConfigByIdBuilder
+            where TImpl : TestWxPayConfigByIdAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public TestWxPayConfigByIdAbstractBuilder() { }
+
+            public TestWxPayConfigByIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<TestWxPayConfigByIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestWxPayConfigById.Response Execute(
+            protected TestWxPayConfigById.Response InternalExecute(
                 string id
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestWxPayConfigById.Response> ExecuteAsync(
+            protected async Task<TestWxPayConfigById.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestWxPayConfigById(TestWxPayConfigByIdBuilder builder,
+        public class TestWxPayConfigByIdBuilder : TestWxPayConfigByIdAbstractBuilder<TestWxPayConfigByIdBuilder>
+        {
+            public TestWxPayConfigByIdBuilder() : base() { }
+
+            public TestWxPayConfigByIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestWxPayConfigById.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<TestWxPayConfigById.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public TestWxPayConfigById(ITestWxPayConfigByIdBuilder builder,
             string id
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static GrantUserExpBuilder Builder { get => new GrantUserExpBuilder(); }
 
-        public class GrantUserExpBuilder
-            : OperationBuilder<GrantUserExpBuilder>
+        public interface IGrantUserExpBuilder
+        {
+
+
+            Model.UserExpGrant? Body { get; }
+
+
+
+
+        }
+
+        public abstract class GrantUserExpAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGrantUserExpBuilder
+            where TImpl : GrantUserExpAbstractBuilder<TImpl>
         {
 
 
@@ -44,19 +56,19 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal GrantUserExpBuilder() { }
+            public GrantUserExpAbstractBuilder() { }
 
-            internal GrantUserExpBuilder(IAccelByteSdk sdk)
+            public GrantUserExpAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public GrantUserExpBuilder SetBody(Model.UserExpGrant _body)
+            public TImpl SetBody(Model.UserExpGrant _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GrantUserExpBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GrantUserExp.Response Execute(
+            protected GrantUserExp.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GrantUserExp.Response> ExecuteAsync(
+            protected async Task<GrantUserExp.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private GrantUserExp(GrantUserExpBuilder builder,
+        public class GrantUserExpBuilder : GrantUserExpAbstractBuilder<GrantUserExpBuilder>
+        {
+            public GrantUserExpBuilder() : base() { }
+
+            public GrantUserExpBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GrantUserExp.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GrantUserExp.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GrantUserExp(IGrantUserExpBuilder builder,
             string namespace_,
             string userId
         )
@@ -188,12 +229,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserSeasonSummary>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserSeasonSummary>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

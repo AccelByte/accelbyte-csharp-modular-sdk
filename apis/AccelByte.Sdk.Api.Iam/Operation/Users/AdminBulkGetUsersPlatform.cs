@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminBulkGetUsersPlatformBuilder Builder { get => new AdminBulkGetUsersPlatformBuilder(); }
 
-        public class AdminBulkGetUsersPlatformBuilder
-            : OperationBuilder<AdminBulkGetUsersPlatformBuilder>
+        public interface IAdminBulkGetUsersPlatformBuilder
         {
 
 
 
 
 
-            internal AdminBulkGetUsersPlatformBuilder() { }
+        }
 
-            internal AdminBulkGetUsersPlatformBuilder(IAccelByteSdk sdk)
+        public abstract class AdminBulkGetUsersPlatformAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminBulkGetUsersPlatformBuilder
+            where TImpl : AdminBulkGetUsersPlatformAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminBulkGetUsersPlatformAbstractBuilder() { }
+
+            public AdminBulkGetUsersPlatformAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminBulkGetUsersPlatformBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminBulkGetUsersPlatform.Response Execute(
+            protected AdminBulkGetUsersPlatform.Response InternalExecute(
                 ModelUserIDsRequest body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminBulkGetUsersPlatform.Response> ExecuteAsync(
+            protected async Task<AdminBulkGetUsersPlatform.Response> InternalExecuteAsync(
                 ModelUserIDsRequest body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminBulkGetUsersPlatform(AdminBulkGetUsersPlatformBuilder builder,
+        public class AdminBulkGetUsersPlatformBuilder : AdminBulkGetUsersPlatformAbstractBuilder<AdminBulkGetUsersPlatformBuilder>
+        {
+            public AdminBulkGetUsersPlatformBuilder() : base() { }
+
+            public AdminBulkGetUsersPlatformBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminBulkGetUsersPlatform.Response Execute(
+                ModelUserIDsRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminBulkGetUsersPlatform.Response> ExecuteAsync(
+                ModelUserIDsRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminBulkGetUsersPlatform(IAdminBulkGetUsersPlatformBuilder builder,
             ModelUserIDsRequest body,
             string namespace_
         )
@@ -177,17 +216,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListBulkUserPlatformsResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListBulkUserPlatformsResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

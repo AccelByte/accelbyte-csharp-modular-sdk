@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -39,17 +39,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetNotificationSubscriberListV2Builder Builder { get => new GetNotificationSubscriberListV2Builder(); }
 
-        public class GetNotificationSubscriberListV2Builder
-            : OperationBuilder<GetNotificationSubscriberListV2Builder>
+        public interface IGetNotificationSubscriberListV2Builder
         {
 
 
 
 
 
-            internal GetNotificationSubscriberListV2Builder() { }
+        }
 
-            internal GetNotificationSubscriberListV2Builder(IAccelByteSdk sdk)
+        public abstract class GetNotificationSubscriberListV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetNotificationSubscriberListV2Builder
+            where TImpl : GetNotificationSubscriberListV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetNotificationSubscriberListV2AbstractBuilder() { }
+
+            public GetNotificationSubscriberListV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,11 +81,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     notificationType                    
                 );
 
-                op.SetBaseFields<GetNotificationSubscriberListV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetNotificationSubscriberListV2.Response Execute(
+            protected GetNotificationSubscriberListV2.Response InternalExecute(
                 string app,
                 string namespace_,
                 string notificationType
@@ -96,7 +106,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetNotificationSubscriberListV2.Response> ExecuteAsync(
+            protected async Task<GetNotificationSubscriberListV2.Response> InternalExecuteAsync(
                 string app,
                 string namespace_,
                 string notificationType
@@ -119,7 +129,40 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetNotificationSubscriberListV2(GetNotificationSubscriberListV2Builder builder,
+        public class GetNotificationSubscriberListV2Builder : GetNotificationSubscriberListV2AbstractBuilder<GetNotificationSubscriberListV2Builder>
+        {
+            public GetNotificationSubscriberListV2Builder() : base() { }
+
+            public GetNotificationSubscriberListV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetNotificationSubscriberListV2.Response Execute(
+                string app,
+                string namespace_,
+                string notificationType
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_,
+                    notificationType
+                );
+            }
+            public async Task<GetNotificationSubscriberListV2.Response> ExecuteAsync(
+                string app,
+                string namespace_,
+                string notificationType
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_,
+                    notificationType
+                );
+            }
+        }
+
+
+        public GetNotificationSubscriberListV2(IGetNotificationSubscriberListV2Builder builder,
             string app,
             string namespace_,
             string notificationType
@@ -198,27 +241,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetNotificationSubscriberListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetNotificationSubscriberListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

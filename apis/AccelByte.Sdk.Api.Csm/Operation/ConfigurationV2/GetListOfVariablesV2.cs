@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,22 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetListOfVariablesV2Builder Builder { get => new GetListOfVariablesV2Builder(); }
 
-        public class GetListOfVariablesV2Builder
-            : OperationBuilder<GetListOfVariablesV2Builder>
+        public interface IGetListOfVariablesV2Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetListOfVariablesV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetListOfVariablesV2Builder
+            where TImpl : GetListOfVariablesV2AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -47,24 +61,24 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal GetListOfVariablesV2Builder() { }
+            public GetListOfVariablesV2AbstractBuilder() { }
 
-            internal GetListOfVariablesV2Builder(IAccelByteSdk sdk)
+            public GetListOfVariablesV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetListOfVariablesV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetListOfVariablesV2Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetListOfVariablesV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetListOfVariablesV2.Response Execute(
+            protected GetListOfVariablesV2.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -104,7 +118,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetListOfVariablesV2.Response> ExecuteAsync(
+            protected async Task<GetListOfVariablesV2.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -125,7 +139,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetListOfVariablesV2(GetListOfVariablesV2Builder builder,
+        public class GetListOfVariablesV2Builder : GetListOfVariablesV2AbstractBuilder<GetListOfVariablesV2Builder>
+        {
+            public GetListOfVariablesV2Builder() : base() { }
+
+            public GetListOfVariablesV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetListOfVariablesV2.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<GetListOfVariablesV2.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetListOfVariablesV2(IGetListOfVariablesV2Builder builder,
             string app,
             string namespace_
         )
@@ -208,32 +251,38 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetListOfConfigurationsV2Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetListOfConfigurationsV2Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

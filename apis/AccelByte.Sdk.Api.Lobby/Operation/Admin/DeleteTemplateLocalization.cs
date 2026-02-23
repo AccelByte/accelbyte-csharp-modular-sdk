@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static DeleteTemplateLocalizationBuilder Builder { get => new DeleteTemplateLocalizationBuilder(); }
 
-        public class DeleteTemplateLocalizationBuilder
-            : OperationBuilder<DeleteTemplateLocalizationBuilder>
+        public interface IDeleteTemplateLocalizationBuilder
         {
 
 
 
 
 
-            internal DeleteTemplateLocalizationBuilder() { }
+        }
 
-            internal DeleteTemplateLocalizationBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteTemplateLocalizationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteTemplateLocalizationBuilder
+            where TImpl : DeleteTemplateLocalizationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteTemplateLocalizationAbstractBuilder() { }
+
+            public DeleteTemplateLocalizationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<DeleteTemplateLocalizationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteTemplateLocalization.Response Execute(
+            protected DeleteTemplateLocalization.Response InternalExecute(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteTemplateLocalization.Response> ExecuteAsync(
+            protected async Task<DeleteTemplateLocalization.Response> InternalExecuteAsync(
                 string namespace_,
                 string templateLanguage,
                 string templateSlug
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private DeleteTemplateLocalization(DeleteTemplateLocalizationBuilder builder,
+        public class DeleteTemplateLocalizationBuilder : DeleteTemplateLocalizationAbstractBuilder<DeleteTemplateLocalizationBuilder>
+        {
+            public DeleteTemplateLocalizationBuilder() : base() { }
+
+            public DeleteTemplateLocalizationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteTemplateLocalization.Response Execute(
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+            public async Task<DeleteTemplateLocalization.Response> ExecuteAsync(
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public DeleteTemplateLocalization(IDeleteTemplateLocalizationBuilder builder,
             string namespace_,
             string templateLanguage,
             string templateSlug
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

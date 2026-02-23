@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,24 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminListItemTypesBuilder Builder { get => new AdminListItemTypesBuilder(); }
 
-        public class AdminListItemTypesBuilder
-            : OperationBuilder<AdminListItemTypesBuilder>
+        public interface IAdminListItemTypesBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            AdminListItemTypesSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListItemTypesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListItemTypesBuilder
+            where TImpl : AdminListItemTypesAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -48,30 +64,30 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal AdminListItemTypesBuilder() { }
+            public AdminListItemTypesAbstractBuilder() { }
 
-            internal AdminListItemTypesBuilder(IAccelByteSdk sdk)
+            public AdminListItemTypesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListItemTypesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListItemTypesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListItemTypesBuilder SetSortBy(AdminListItemTypesSortBy _sortBy)
+            public TImpl SetSortBy(AdminListItemTypesSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -86,11 +102,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminListItemTypesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListItemTypes.Response Execute(
+            protected AdminListItemTypes.Response InternalExecute(
                 string namespace_
             )
             {
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListItemTypes.Response> ExecuteAsync(
+            protected async Task<AdminListItemTypes.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -126,7 +142,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminListItemTypes(AdminListItemTypesBuilder builder,
+        public class AdminListItemTypesBuilder : AdminListItemTypesAbstractBuilder<AdminListItemTypesBuilder>
+        {
+            public AdminListItemTypesBuilder() : base() { }
+
+            public AdminListItemTypesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListItemTypes.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminListItemTypes.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminListItemTypes(IAdminListItemTypesBuilder builder,
             string namespace_
         )
         {
@@ -202,17 +243,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemTypesResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListItemTypesResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

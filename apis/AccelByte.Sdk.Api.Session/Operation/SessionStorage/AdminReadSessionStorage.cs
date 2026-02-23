@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminReadSessionStorageBuilder Builder { get => new AdminReadSessionStorageBuilder(); }
 
-        public class AdminReadSessionStorageBuilder
-            : OperationBuilder<AdminReadSessionStorageBuilder>
+        public interface IAdminReadSessionStorageBuilder
         {
 
 
 
 
 
-            internal AdminReadSessionStorageBuilder() { }
+        }
 
-            internal AdminReadSessionStorageBuilder(IAccelByteSdk sdk)
+        public abstract class AdminReadSessionStorageAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminReadSessionStorageBuilder
+            where TImpl : AdminReadSessionStorageAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminReadSessionStorageAbstractBuilder() { }
+
+            public AdminReadSessionStorageAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId                    
                 );
 
-                op.SetBaseFields<AdminReadSessionStorageBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminReadSessionStorage.Response Execute(
+            protected AdminReadSessionStorage.Response InternalExecute(
                 string namespace_,
                 string sessionId
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminReadSessionStorage.Response> ExecuteAsync(
+            protected async Task<AdminReadSessionStorage.Response> InternalExecuteAsync(
                 string namespace_,
                 string sessionId
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminReadSessionStorage(AdminReadSessionStorageBuilder builder,
+        public class AdminReadSessionStorageBuilder : AdminReadSessionStorageAbstractBuilder<AdminReadSessionStorageBuilder>
+        {
+            public AdminReadSessionStorageBuilder() : base() { }
+
+            public AdminReadSessionStorageBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminReadSessionStorage.Response Execute(
+                string namespace_,
+                string sessionId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    sessionId
+                );
+            }
+            public async Task<AdminReadSessionStorage.Response> ExecuteAsync(
+                string namespace_,
+                string sessionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    sessionId
+                );
+            }
+        }
+
+
+        public AdminReadSessionStorage(IAdminReadSessionStorageBuilder builder,
             string namespace_,
             string sessionId
         )
@@ -181,27 +220,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

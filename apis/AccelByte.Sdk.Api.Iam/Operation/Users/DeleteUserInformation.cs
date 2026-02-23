@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static DeleteUserInformationBuilder Builder { get => new DeleteUserInformationBuilder(); }
 
-        public class DeleteUserInformationBuilder
-            : OperationBuilder<DeleteUserInformationBuilder>
+        public interface IDeleteUserInformationBuilder
         {
 
 
 
 
 
-            internal DeleteUserInformationBuilder() { }
+        }
 
-            internal DeleteUserInformationBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteUserInformationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteUserInformationBuilder
+            where TImpl : DeleteUserInformationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteUserInformationAbstractBuilder() { }
+
+            public DeleteUserInformationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteUserInformationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteUserInformation.Response Execute(
+            protected DeleteUserInformation.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteUserInformation.Response> ExecuteAsync(
+            protected async Task<DeleteUserInformation.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -108,7 +118,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private DeleteUserInformation(DeleteUserInformationBuilder builder,
+        public class DeleteUserInformationBuilder : DeleteUserInformationAbstractBuilder<DeleteUserInformationBuilder>
+        {
+            public DeleteUserInformationBuilder() : base() { }
+
+            public DeleteUserInformationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteUserInformation.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DeleteUserInformation.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteUserInformation(IDeleteUserInformationBuilder builder,
             string namespace_,
             string userId
         )
@@ -182,17 +222,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

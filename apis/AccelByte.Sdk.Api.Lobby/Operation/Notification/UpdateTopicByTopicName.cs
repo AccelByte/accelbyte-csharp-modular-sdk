@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UpdateTopicByTopicNameBuilder Builder { get => new UpdateTopicByTopicNameBuilder(); }
 
-        public class UpdateTopicByTopicNameBuilder
-            : OperationBuilder<UpdateTopicByTopicNameBuilder>
+        public interface IUpdateTopicByTopicNameBuilder
         {
 
 
 
 
 
-            internal UpdateTopicByTopicNameBuilder() { }
+        }
 
-            internal UpdateTopicByTopicNameBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateTopicByTopicNameAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateTopicByTopicNameBuilder
+            where TImpl : UpdateTopicByTopicNameAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateTopicByTopicNameAbstractBuilder() { }
+
+            public UpdateTopicByTopicNameAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<UpdateTopicByTopicNameBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateTopicByTopicName.Response Execute(
+            protected UpdateTopicByTopicName.Response InternalExecute(
                 ModelUpdateTopicRequest body,
                 string namespace_,
                 string topic
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateTopicByTopicName.Response> ExecuteAsync(
+            protected async Task<UpdateTopicByTopicName.Response> InternalExecuteAsync(
                 ModelUpdateTopicRequest body,
                 string namespace_,
                 string topic
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UpdateTopicByTopicName(UpdateTopicByTopicNameBuilder builder,
+        public class UpdateTopicByTopicNameBuilder : UpdateTopicByTopicNameAbstractBuilder<UpdateTopicByTopicNameBuilder>
+        {
+            public UpdateTopicByTopicNameBuilder() : base() { }
+
+            public UpdateTopicByTopicNameBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateTopicByTopicName.Response Execute(
+                ModelUpdateTopicRequest body,
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<UpdateTopicByTopicName.Response> ExecuteAsync(
+                ModelUpdateTopicRequest body,
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public UpdateTopicByTopicName(IUpdateTopicByTopicNameBuilder builder,
             ModelUpdateTopicRequest body,
             string namespace_,
             string topic
@@ -193,22 +236,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

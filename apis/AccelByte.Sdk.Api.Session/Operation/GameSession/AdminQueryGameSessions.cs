@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,52 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminQueryGameSessionsBuilder Builder { get => new AdminQueryGameSessionsBuilder(); }
 
-        public class AdminQueryGameSessionsBuilder
-            : OperationBuilder<AdminQueryGameSessionsBuilder>
+        public interface IAdminQueryGameSessionsBuilder
+        {
+
+            string? ConfigurationName { get; }
+
+            string? DsPodName { get; }
+
+            string? FromTime { get; }
+
+            string? GameMode { get; }
+
+            string? IsPersistent { get; }
+
+            string? IsSoftDeleted { get; }
+
+            AdminQueryGameSessionsJoinability? Joinability { get; }
+
+            long? Limit { get; }
+
+            string? MatchPool { get; }
+
+            string? MemberID { get; }
+
+            long? Offset { get; }
+
+            string? Order { get; }
+
+            string? OrderBy { get; }
+
+            string? SessionID { get; }
+
+            AdminQueryGameSessionsStatus? Status { get; }
+
+            AdminQueryGameSessionsStatusV2? StatusV2 { get; }
+
+            string? ToTime { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminQueryGameSessionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminQueryGameSessionsBuilder
+            where TImpl : AdminQueryGameSessionsAbstractBuilder<TImpl>
         {
 
             public string? ConfigurationName { get; set; }
@@ -72,114 +116,114 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal AdminQueryGameSessionsBuilder() { }
+            public AdminQueryGameSessionsAbstractBuilder() { }
 
-            internal AdminQueryGameSessionsBuilder(IAccelByteSdk sdk)
+            public AdminQueryGameSessionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminQueryGameSessionsBuilder SetConfigurationName(string _configurationName)
+            public TImpl SetConfigurationName(string _configurationName)
             {
                 ConfigurationName = _configurationName;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetDsPodName(string _dsPodName)
+            public TImpl SetDsPodName(string _dsPodName)
             {
                 DsPodName = _dsPodName;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetFromTime(string _fromTime)
+            public TImpl SetFromTime(string _fromTime)
             {
                 FromTime = _fromTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetGameMode(string _gameMode)
+            public TImpl SetGameMode(string _gameMode)
             {
                 GameMode = _gameMode;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetIsPersistent(string _isPersistent)
+            public TImpl SetIsPersistent(string _isPersistent)
             {
                 IsPersistent = _isPersistent;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetIsSoftDeleted(string _isSoftDeleted)
+            public TImpl SetIsSoftDeleted(string _isSoftDeleted)
             {
                 IsSoftDeleted = _isSoftDeleted;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetJoinability(AdminQueryGameSessionsJoinability _joinability)
+            public TImpl SetJoinability(AdminQueryGameSessionsJoinability _joinability)
             {
                 Joinability = _joinability;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetMatchPool(string _matchPool)
+            public TImpl SetMatchPool(string _matchPool)
             {
                 MatchPool = _matchPool;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetMemberID(string _memberID)
+            public TImpl SetMemberID(string _memberID)
             {
                 MemberID = _memberID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetOrderBy(string _orderBy)
+            public TImpl SetOrderBy(string _orderBy)
             {
                 OrderBy = _orderBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetSessionID(string _sessionID)
+            public TImpl SetSessionID(string _sessionID)
             {
                 SessionID = _sessionID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetStatus(AdminQueryGameSessionsStatus _status)
+            public TImpl SetStatus(AdminQueryGameSessionsStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetStatusV2(AdminQueryGameSessionsStatusV2 _statusV2)
+            public TImpl SetStatusV2(AdminQueryGameSessionsStatusV2 _statusV2)
             {
                 StatusV2 = _statusV2;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryGameSessionsBuilder SetToTime(string _toTime)
+            public TImpl SetToTime(string _toTime)
             {
                 ToTime = _toTime;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -194,11 +238,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryGameSessionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminQueryGameSessions.Response Execute(
+            protected AdminQueryGameSessions.Response InternalExecute(
                 string namespace_
             )
             {
@@ -215,7 +259,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryGameSessions.Response> ExecuteAsync(
+            protected async Task<AdminQueryGameSessions.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -234,7 +278,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminQueryGameSessions(AdminQueryGameSessionsBuilder builder,
+        public class AdminQueryGameSessionsBuilder : AdminQueryGameSessionsAbstractBuilder<AdminQueryGameSessionsBuilder>
+        {
+            public AdminQueryGameSessionsBuilder() : base() { }
+
+            public AdminQueryGameSessionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminQueryGameSessions.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminQueryGameSessions.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminQueryGameSessions(IAdminQueryGameSessionsBuilder builder,
             string namespace_
         )
         {
@@ -356,27 +425,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGameSessionQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

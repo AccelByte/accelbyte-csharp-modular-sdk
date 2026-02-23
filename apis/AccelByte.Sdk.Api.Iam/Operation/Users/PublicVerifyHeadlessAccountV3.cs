@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicVerifyHeadlessAccountV3Builder Builder { get => new PublicVerifyHeadlessAccountV3Builder(); }
 
-        public class PublicVerifyHeadlessAccountV3Builder
-            : OperationBuilder<PublicVerifyHeadlessAccountV3Builder>
+        public interface IPublicVerifyHeadlessAccountV3Builder
+        {
+
+            bool? NeedVerificationCode { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicVerifyHeadlessAccountV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicVerifyHeadlessAccountV3Builder
+            where TImpl : PublicVerifyHeadlessAccountV3AbstractBuilder<TImpl>
         {
 
             public bool? NeedVerificationCode { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PublicVerifyHeadlessAccountV3Builder() { }
+            public PublicVerifyHeadlessAccountV3AbstractBuilder() { }
 
-            internal PublicVerifyHeadlessAccountV3Builder(IAccelByteSdk sdk)
+            public PublicVerifyHeadlessAccountV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicVerifyHeadlessAccountV3Builder SetNeedVerificationCode(bool _needVerificationCode)
+            public TImpl SetNeedVerificationCode(bool _needVerificationCode)
             {
                 NeedVerificationCode = _needVerificationCode;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicVerifyHeadlessAccountV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicVerifyHeadlessAccountV3.Response Execute(
+            protected PublicVerifyHeadlessAccountV3.Response InternalExecute(
                 ModelUpgradeHeadlessAccountV3Request body,
                 string namespace_
             )
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicVerifyHeadlessAccountV3.Response> ExecuteAsync(
+            protected async Task<PublicVerifyHeadlessAccountV3.Response> InternalExecuteAsync(
                 ModelUpgradeHeadlessAccountV3Request body,
                 string namespace_
             )
@@ -115,7 +127,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicVerifyHeadlessAccountV3(PublicVerifyHeadlessAccountV3Builder builder,
+        public class PublicVerifyHeadlessAccountV3Builder : PublicVerifyHeadlessAccountV3AbstractBuilder<PublicVerifyHeadlessAccountV3Builder>
+        {
+            public PublicVerifyHeadlessAccountV3Builder() : base() { }
+
+            public PublicVerifyHeadlessAccountV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicVerifyHeadlessAccountV3.Response Execute(
+                ModelUpgradeHeadlessAccountV3Request body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicVerifyHeadlessAccountV3.Response> ExecuteAsync(
+                ModelUpgradeHeadlessAccountV3Request body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicVerifyHeadlessAccountV3(IPublicVerifyHeadlessAccountV3Builder builder,
             ModelUpgradeHeadlessAccountV3Request body,
             string namespace_
         )
@@ -195,32 +236,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

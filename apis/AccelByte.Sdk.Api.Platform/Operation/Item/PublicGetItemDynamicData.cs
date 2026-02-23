@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetItemDynamicDataBuilder Builder { get => new PublicGetItemDynamicDataBuilder(); }
 
-        public class PublicGetItemDynamicDataBuilder
-            : OperationBuilder<PublicGetItemDynamicDataBuilder>
+        public interface IPublicGetItemDynamicDataBuilder
         {
 
 
 
 
 
-            internal PublicGetItemDynamicDataBuilder() { }
+        }
 
-            internal PublicGetItemDynamicDataBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetItemDynamicDataAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetItemDynamicDataBuilder
+            where TImpl : PublicGetItemDynamicDataAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetItemDynamicDataAbstractBuilder() { }
+
+            public PublicGetItemDynamicDataAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetItemDynamicDataBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetItemDynamicData.Response Execute(
+            protected PublicGetItemDynamicData.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetItemDynamicData.Response> ExecuteAsync(
+            protected async Task<PublicGetItemDynamicData.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetItemDynamicData(PublicGetItemDynamicDataBuilder builder,
+        public class PublicGetItemDynamicDataBuilder : PublicGetItemDynamicDataAbstractBuilder<PublicGetItemDynamicDataBuilder>
+        {
+            public PublicGetItemDynamicDataBuilder() : base() { }
+
+            public PublicGetItemDynamicDataBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetItemDynamicData.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetItemDynamicData.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetItemDynamicData(IPublicGetItemDynamicDataBuilder builder,
             string itemId,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemDynamicDataInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemDynamicDataInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

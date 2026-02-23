@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicDeleteUserNamespaceSlotBuilder Builder { get => new PublicDeleteUserNamespaceSlotBuilder(); }
 
-        public class PublicDeleteUserNamespaceSlotBuilder
-            : OperationBuilder<PublicDeleteUserNamespaceSlotBuilder>
+        public interface IPublicDeleteUserNamespaceSlotBuilder
         {
 
 
 
 
 
-            internal PublicDeleteUserNamespaceSlotBuilder() { }
+        }
 
-            internal PublicDeleteUserNamespaceSlotBuilder(IAccelByteSdk sdk)
+        public abstract class PublicDeleteUserNamespaceSlotAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicDeleteUserNamespaceSlotBuilder
+            where TImpl : PublicDeleteUserNamespaceSlotAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicDeleteUserNamespaceSlotAbstractBuilder() { }
+
+            public PublicDeleteUserNamespaceSlotAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,12 +79,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicDeleteUserNamespaceSlotBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicDeleteUserNamespaceSlot.Response Execute(
+            protected PublicDeleteUserNamespaceSlot.Response InternalExecute(
                 string namespace_,
                 string slotId,
                 string userId
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicDeleteUserNamespaceSlot.Response> ExecuteAsync(
+            protected async Task<PublicDeleteUserNamespaceSlot.Response> InternalExecuteAsync(
                 string namespace_,
                 string slotId,
                 string userId
@@ -118,7 +128,41 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicDeleteUserNamespaceSlot(PublicDeleteUserNamespaceSlotBuilder builder,
+        public class PublicDeleteUserNamespaceSlotBuilder : PublicDeleteUserNamespaceSlotAbstractBuilder<PublicDeleteUserNamespaceSlotBuilder>
+        {
+            public PublicDeleteUserNamespaceSlotBuilder() : base() { }
+
+            public PublicDeleteUserNamespaceSlotBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicDeleteUserNamespaceSlot.Response Execute(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+            public async Task<PublicDeleteUserNamespaceSlot.Response> ExecuteAsync(
+                string namespace_,
+                string slotId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    slotId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicDeleteUserNamespaceSlot(IPublicDeleteUserNamespaceSlotBuilder builder,
             string namespace_,
             string slotId,
             string userId
@@ -192,7 +236,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

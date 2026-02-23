@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminGetProfanityListFiltersV1Builder Builder { get => new AdminGetProfanityListFiltersV1Builder(); }
 
-        public class AdminGetProfanityListFiltersV1Builder
-            : OperationBuilder<AdminGetProfanityListFiltersV1Builder>
+        public interface IAdminGetProfanityListFiltersV1Builder
         {
 
 
 
 
 
-            internal AdminGetProfanityListFiltersV1Builder() { }
+        }
 
-            internal AdminGetProfanityListFiltersV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetProfanityListFiltersV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetProfanityListFiltersV1Builder
+            where TImpl : AdminGetProfanityListFiltersV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetProfanityListFiltersV1AbstractBuilder() { }
+
+            public AdminGetProfanityListFiltersV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetProfanityListFiltersV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminGetProfanityListFiltersV1.Response Execute(
+            protected AdminGetProfanityListFiltersV1.Response InternalExecute(
                 string list,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetProfanityListFiltersV1.Response> ExecuteAsync(
+            protected async Task<AdminGetProfanityListFiltersV1.Response> InternalExecuteAsync(
                 string list,
                 string namespace_
             )
@@ -106,7 +116,37 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminGetProfanityListFiltersV1(AdminGetProfanityListFiltersV1Builder builder,
+        public class AdminGetProfanityListFiltersV1Builder : AdminGetProfanityListFiltersV1AbstractBuilder<AdminGetProfanityListFiltersV1Builder>
+        {
+            public AdminGetProfanityListFiltersV1Builder() : base() { }
+
+            public AdminGetProfanityListFiltersV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminGetProfanityListFiltersV1.Response Execute(
+                string list,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    list,
+                    namespace_
+                );
+            }
+            public async Task<AdminGetProfanityListFiltersV1.Response> ExecuteAsync(
+                string list,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    list,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetProfanityListFiltersV1(IAdminGetProfanityListFiltersV1Builder builder,
             string list,
             string namespace_
         )
@@ -183,32 +223,38 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsAdminGetProfanityListFiltersV1Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsAdminGetProfanityListFiltersV1Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

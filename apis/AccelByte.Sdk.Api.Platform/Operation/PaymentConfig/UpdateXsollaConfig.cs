@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateXsollaConfigBuilder Builder { get => new UpdateXsollaConfigBuilder(); }
 
-        public class UpdateXsollaConfigBuilder
-            : OperationBuilder<UpdateXsollaConfigBuilder>
+        public interface IUpdateXsollaConfigBuilder
+        {
+
+            bool? Validate { get; }
+
+
+
+
+
+        }
+
+        public abstract class UpdateXsollaConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateXsollaConfigBuilder
+            where TImpl : UpdateXsollaConfigAbstractBuilder<TImpl>
         {
 
             public bool? Validate { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal UpdateXsollaConfigBuilder() { }
+            public UpdateXsollaConfigAbstractBuilder() { }
 
-            internal UpdateXsollaConfigBuilder(IAccelByteSdk sdk)
+            public UpdateXsollaConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public UpdateXsollaConfigBuilder SetValidate(bool _validate)
+            public TImpl SetValidate(bool _validate)
             {
                 Validate = _validate;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<UpdateXsollaConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateXsollaConfig.Response Execute(
+            protected UpdateXsollaConfig.Response InternalExecute(
                 XsollaConfig body,
                 string id
             )
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateXsollaConfig.Response> ExecuteAsync(
+            protected async Task<UpdateXsollaConfig.Response> InternalExecuteAsync(
                 XsollaConfig body,
                 string id
             )
@@ -115,7 +127,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateXsollaConfig(UpdateXsollaConfigBuilder builder,
+        public class UpdateXsollaConfigBuilder : UpdateXsollaConfigAbstractBuilder<UpdateXsollaConfigBuilder>
+        {
+            public UpdateXsollaConfigBuilder() : base() { }
+
+            public UpdateXsollaConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateXsollaConfig.Response Execute(
+                XsollaConfig body,
+                string id
+            )
+            {
+                return InternalExecute(
+                    body,
+                    id
+                );
+            }
+            public async Task<UpdateXsollaConfig.Response> ExecuteAsync(
+                XsollaConfig body,
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    id
+                );
+            }
+        }
+
+
+        public UpdateXsollaConfig(IUpdateXsollaConfigBuilder builder,
             XsollaConfig body,
             string id
         )
@@ -187,12 +228,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentMerchantConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

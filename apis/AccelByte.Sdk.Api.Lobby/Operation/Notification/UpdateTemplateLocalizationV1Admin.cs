@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static UpdateTemplateLocalizationV1AdminBuilder Builder { get => new UpdateTemplateLocalizationV1AdminBuilder(); }
 
-        public class UpdateTemplateLocalizationV1AdminBuilder
-            : OperationBuilder<UpdateTemplateLocalizationV1AdminBuilder>
+        public interface IUpdateTemplateLocalizationV1AdminBuilder
         {
 
 
 
 
 
-            internal UpdateTemplateLocalizationV1AdminBuilder() { }
+        }
 
-            internal UpdateTemplateLocalizationV1AdminBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateTemplateLocalizationV1AdminAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateTemplateLocalizationV1AdminBuilder
+            where TImpl : UpdateTemplateLocalizationV1AdminAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateTemplateLocalizationV1AdminAbstractBuilder() { }
+
+            public UpdateTemplateLocalizationV1AdminAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     templateSlug                    
                 );
 
-                op.SetBaseFields<UpdateTemplateLocalizationV1AdminBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateTemplateLocalizationV1Admin.Response Execute(
+            protected UpdateTemplateLocalizationV1Admin.Response InternalExecute(
                 ModelUpdateTemplateRequest body,
                 string namespace_,
                 string templateLanguage,
@@ -93,7 +103,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateTemplateLocalizationV1Admin.Response> ExecuteAsync(
+            protected async Task<UpdateTemplateLocalizationV1Admin.Response> InternalExecuteAsync(
                 ModelUpdateTemplateRequest body,
                 string namespace_,
                 string templateLanguage,
@@ -118,7 +128,44 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private UpdateTemplateLocalizationV1Admin(UpdateTemplateLocalizationV1AdminBuilder builder,
+        public class UpdateTemplateLocalizationV1AdminBuilder : UpdateTemplateLocalizationV1AdminAbstractBuilder<UpdateTemplateLocalizationV1AdminBuilder>
+        {
+            public UpdateTemplateLocalizationV1AdminBuilder() : base() { }
+
+            public UpdateTemplateLocalizationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateTemplateLocalizationV1Admin.Response Execute(
+                ModelUpdateTemplateRequest body,
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+            public async Task<UpdateTemplateLocalizationV1Admin.Response> ExecuteAsync(
+                ModelUpdateTemplateRequest body,
+                string namespace_,
+                string templateLanguage,
+                string templateSlug
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
+                );
+            }
+        }
+
+
+        public UpdateTemplateLocalizationV1Admin(IUpdateTemplateLocalizationV1AdminBuilder builder,
             ModelUpdateTemplateRequest body,
             string namespace_,
             string templateLanguage,
@@ -204,27 +251,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseV1>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

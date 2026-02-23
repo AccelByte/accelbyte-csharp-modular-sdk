@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -47,8 +47,20 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static QoSRegionsGetBuilder Builder { get => new QoSRegionsGetBuilder(); }
 
-        public class QoSRegionsGetBuilder
-            : OperationBuilder<QoSRegionsGetBuilder>
+        public interface IQoSRegionsGetBuilder
+        {
+
+            string? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class QoSRegionsGetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQoSRegionsGetBuilder
+            where TImpl : QoSRegionsGetAbstractBuilder<TImpl>
         {
 
             public string? Status { get; set; }
@@ -57,18 +69,18 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal QoSRegionsGetBuilder() { }
+            public QoSRegionsGetAbstractBuilder() { }
 
-            internal QoSRegionsGetBuilder(IAccelByteSdk sdk)
+            public QoSRegionsGetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QoSRegionsGetBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -83,11 +95,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QoSRegionsGetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QoSRegionsGet.Response Execute(
+            protected QoSRegionsGet.Response InternalExecute(
                 string namespace_
             )
             {
@@ -104,7 +116,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QoSRegionsGet.Response> ExecuteAsync(
+            protected async Task<QoSRegionsGet.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -123,7 +135,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private QoSRegionsGet(QoSRegionsGetBuilder builder,
+        public class QoSRegionsGetBuilder : QoSRegionsGetAbstractBuilder<QoSRegionsGetBuilder>
+        {
+            public QoSRegionsGetBuilder() : base() { }
+
+            public QoSRegionsGetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QoSRegionsGet.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QoSRegionsGet.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QoSRegionsGet(IQoSRegionsGetBuilder builder,
             string namespace_
         )
         {
@@ -197,27 +234,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiQoSEndpointResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiQoSEndpointResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

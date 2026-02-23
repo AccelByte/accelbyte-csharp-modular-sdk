@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,28 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminListInventoriesBuilder Builder { get => new AdminListInventoriesBuilder(); }
 
-        public class AdminListInventoriesBuilder
-            : OperationBuilder<AdminListInventoriesBuilder>
+        public interface IAdminListInventoriesBuilder
+        {
+
+            string? InventoryConfigurationCode { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            AdminListInventoriesSortBy? SortBy { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListInventoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListInventoriesBuilder
+            where TImpl : AdminListInventoriesAbstractBuilder<TImpl>
         {
 
             public string? InventoryConfigurationCode { get; set; }
@@ -52,42 +72,42 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal AdminListInventoriesBuilder() { }
+            public AdminListInventoriesAbstractBuilder() { }
 
-            internal AdminListInventoriesBuilder(IAccelByteSdk sdk)
+            public AdminListInventoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListInventoriesBuilder SetInventoryConfigurationCode(string _inventoryConfigurationCode)
+            public TImpl SetInventoryConfigurationCode(string _inventoryConfigurationCode)
             {
                 InventoryConfigurationCode = _inventoryConfigurationCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListInventoriesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListInventoriesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListInventoriesBuilder SetSortBy(AdminListInventoriesSortBy _sortBy)
+            public TImpl SetSortBy(AdminListInventoriesSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListInventoriesBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -102,11 +122,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminListInventoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListInventories.Response Execute(
+            protected AdminListInventories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -123,7 +143,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListInventories.Response> ExecuteAsync(
+            protected async Task<AdminListInventories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -142,7 +162,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminListInventories(AdminListInventoriesBuilder builder,
+        public class AdminListInventoriesBuilder : AdminListInventoriesAbstractBuilder<AdminListInventoriesBuilder>
+        {
+            public AdminListInventoriesBuilder() : base() { }
+
+            public AdminListInventoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListInventories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminListInventories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminListInventories(IAdminListInventoriesBuilder builder,
             string namespace_
         )
         {
@@ -224,17 +269,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListInventoryResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListInventoryResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

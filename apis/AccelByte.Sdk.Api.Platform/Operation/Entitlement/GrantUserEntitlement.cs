@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -47,17 +47,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GrantUserEntitlementBuilder Builder { get => new GrantUserEntitlementBuilder(); }
 
-        public class GrantUserEntitlementBuilder
-            : OperationBuilder<GrantUserEntitlementBuilder>
+        public interface IGrantUserEntitlementBuilder
         {
 
 
 
 
 
-            internal GrantUserEntitlementBuilder() { }
+        }
 
-            internal GrantUserEntitlementBuilder(IAccelByteSdk sdk)
+        public abstract class GrantUserEntitlementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGrantUserEntitlementBuilder
+            where TImpl : GrantUserEntitlementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GrantUserEntitlementAbstractBuilder() { }
+
+            public GrantUserEntitlementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -79,11 +89,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GrantUserEntitlementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GrantUserEntitlement.Response Execute(
+            protected GrantUserEntitlement.Response InternalExecute(
                 List<EntitlementGrant> body,
                 string namespace_,
                 string userId
@@ -104,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GrantUserEntitlement.Response> ExecuteAsync(
+            protected async Task<GrantUserEntitlement.Response> InternalExecuteAsync(
                 List<EntitlementGrant> body,
                 string namespace_,
                 string userId
@@ -127,7 +137,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GrantUserEntitlement(GrantUserEntitlementBuilder builder,
+        public class GrantUserEntitlementBuilder : GrantUserEntitlementAbstractBuilder<GrantUserEntitlementBuilder>
+        {
+            public GrantUserEntitlementBuilder() : base() { }
+
+            public GrantUserEntitlementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GrantUserEntitlement.Response Execute(
+                List<EntitlementGrant> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GrantUserEntitlement.Response> ExecuteAsync(
+                List<EntitlementGrant> body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GrantUserEntitlement(IGrantUserEntitlementBuilder builder,
             List<EntitlementGrant> body,
             string namespace_,
             string userId
@@ -202,17 +245,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.StackableEntitlementInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.StackableEntitlementInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

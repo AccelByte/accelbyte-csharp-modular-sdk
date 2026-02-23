@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetAvailablePredicateTypesBuilder Builder { get => new GetAvailablePredicateTypesBuilder(); }
 
-        public class GetAvailablePredicateTypesBuilder
-            : OperationBuilder<GetAvailablePredicateTypesBuilder>
+        public interface IGetAvailablePredicateTypesBuilder
         {
 
 
 
 
 
-            internal GetAvailablePredicateTypesBuilder() { }
+        }
 
-            internal GetAvailablePredicateTypesBuilder(IAccelByteSdk sdk)
+        public abstract class GetAvailablePredicateTypesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAvailablePredicateTypesBuilder
+            where TImpl : GetAvailablePredicateTypesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetAvailablePredicateTypesAbstractBuilder() { }
+
+            public GetAvailablePredicateTypesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetAvailablePredicateTypesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAvailablePredicateTypes.Response Execute(
+            protected GetAvailablePredicateTypes.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAvailablePredicateTypes.Response> ExecuteAsync(
+            protected async Task<GetAvailablePredicateTypes.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetAvailablePredicateTypes(GetAvailablePredicateTypesBuilder builder,
+        public class GetAvailablePredicateTypesBuilder : GetAvailablePredicateTypesAbstractBuilder<GetAvailablePredicateTypesBuilder>
+        {
+            public GetAvailablePredicateTypesBuilder() : base() { }
+
+            public GetAvailablePredicateTypesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAvailablePredicateTypes.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetAvailablePredicateTypes.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetAvailablePredicateTypes(IGetAvailablePredicateTypesBuilder builder,
             string namespace_
         )
         {
@@ -166,12 +201,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.AvailablePredicate>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.AvailablePredicate>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

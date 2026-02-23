@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static DevelopmentServerConfigurationDeleteBuilder Builder { get => new DevelopmentServerConfigurationDeleteBuilder(); }
 
-        public class DevelopmentServerConfigurationDeleteBuilder
-            : OperationBuilder<DevelopmentServerConfigurationDeleteBuilder>
+        public interface IDevelopmentServerConfigurationDeleteBuilder
         {
 
 
 
 
 
-            internal DevelopmentServerConfigurationDeleteBuilder() { }
+        }
 
-            internal DevelopmentServerConfigurationDeleteBuilder(IAccelByteSdk sdk)
+        public abstract class DevelopmentServerConfigurationDeleteAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDevelopmentServerConfigurationDeleteBuilder
+            where TImpl : DevelopmentServerConfigurationDeleteAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DevelopmentServerConfigurationDeleteAbstractBuilder() { }
+
+            public DevelopmentServerConfigurationDeleteAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DevelopmentServerConfigurationDeleteBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DevelopmentServerConfigurationDelete.Response Execute(
+            protected DevelopmentServerConfigurationDelete.Response InternalExecute(
                 string developmentServerConfigID,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DevelopmentServerConfigurationDelete.Response> ExecuteAsync(
+            protected async Task<DevelopmentServerConfigurationDelete.Response> InternalExecuteAsync(
                 string developmentServerConfigID,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private DevelopmentServerConfigurationDelete(DevelopmentServerConfigurationDeleteBuilder builder,
+        public class DevelopmentServerConfigurationDeleteBuilder : DevelopmentServerConfigurationDeleteAbstractBuilder<DevelopmentServerConfigurationDeleteBuilder>
+        {
+            public DevelopmentServerConfigurationDeleteBuilder() : base() { }
+
+            public DevelopmentServerConfigurationDeleteBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DevelopmentServerConfigurationDelete.Response Execute(
+                string developmentServerConfigID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    developmentServerConfigID,
+                    namespace_
+                );
+            }
+            public async Task<DevelopmentServerConfigurationDelete.Response> ExecuteAsync(
+                string developmentServerConfigID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    developmentServerConfigID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DevelopmentServerConfigurationDelete(IDevelopmentServerConfigurationDeleteBuilder builder,
             string developmentServerConfigID,
             string namespace_
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static DeleteSubscriptionAppNotificationV3Builder Builder { get => new DeleteSubscriptionAppNotificationV3Builder(); }
 
-        public class DeleteSubscriptionAppNotificationV3Builder
-            : OperationBuilder<DeleteSubscriptionAppNotificationV3Builder>
+        public interface IDeleteSubscriptionAppNotificationV3Builder
+        {
+
+            string? EmailAddress { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class DeleteSubscriptionAppNotificationV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteSubscriptionAppNotificationV3Builder
+            where TImpl : DeleteSubscriptionAppNotificationV3AbstractBuilder<TImpl>
         {
 
             public string? EmailAddress { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal DeleteSubscriptionAppNotificationV3Builder() { }
+            public DeleteSubscriptionAppNotificationV3AbstractBuilder() { }
 
-            internal DeleteSubscriptionAppNotificationV3Builder(IAccelByteSdk sdk)
+            public DeleteSubscriptionAppNotificationV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DeleteSubscriptionAppNotificationV3Builder SetEmailAddress(string _emailAddress)
+            public TImpl SetEmailAddress(string _emailAddress)
             {
                 EmailAddress = _emailAddress;
-                return this;
+                return (TImpl)this;
             }
 
-            public DeleteSubscriptionAppNotificationV3Builder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +93,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteSubscriptionAppNotificationV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteSubscriptionAppNotificationV3.Response Execute(
+            protected DeleteSubscriptionAppNotificationV3.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -102,7 +116,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteSubscriptionAppNotificationV3.Response> ExecuteAsync(
+            protected async Task<DeleteSubscriptionAppNotificationV3.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -123,7 +137,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private DeleteSubscriptionAppNotificationV3(DeleteSubscriptionAppNotificationV3Builder builder,
+        public class DeleteSubscriptionAppNotificationV3Builder : DeleteSubscriptionAppNotificationV3AbstractBuilder<DeleteSubscriptionAppNotificationV3Builder>
+        {
+            public DeleteSubscriptionAppNotificationV3Builder() : base() { }
+
+            public DeleteSubscriptionAppNotificationV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteSubscriptionAppNotificationV3.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<DeleteSubscriptionAppNotificationV3.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteSubscriptionAppNotificationV3(IDeleteSubscriptionAppNotificationV3Builder builder,
             string app,
             string namespace_
         )
@@ -205,22 +248,26 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizeSubscriptionBuilder Builder { get => new AnonymizeSubscriptionBuilder(); }
 
-        public class AnonymizeSubscriptionBuilder
-            : OperationBuilder<AnonymizeSubscriptionBuilder>
+        public interface IAnonymizeSubscriptionBuilder
         {
 
 
 
 
 
-            internal AnonymizeSubscriptionBuilder() { }
+        }
 
-            internal AnonymizeSubscriptionBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeSubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeSubscriptionBuilder
+            where TImpl : AnonymizeSubscriptionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeSubscriptionAbstractBuilder() { }
+
+            public AnonymizeSubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeSubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeSubscription.Response Execute(
+            protected AnonymizeSubscription.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeSubscription.Response> ExecuteAsync(
+            protected async Task<AnonymizeSubscription.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizeSubscription(AnonymizeSubscriptionBuilder builder,
+        public class AnonymizeSubscriptionBuilder : AnonymizeSubscriptionAbstractBuilder<AnonymizeSubscriptionBuilder>
+        {
+            public AnonymizeSubscriptionBuilder() : base() { }
+
+            public AnonymizeSubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeSubscription.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeSubscription.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeSubscription(IAnonymizeSubscriptionBuilder builder,
             string namespace_,
             string userId
         )

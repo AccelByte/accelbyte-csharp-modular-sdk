@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static DeletePassBuilder Builder { get => new DeletePassBuilder(); }
 
-        public class DeletePassBuilder
-            : OperationBuilder<DeletePassBuilder>
+        public interface IDeletePassBuilder
         {
 
 
 
 
 
-            internal DeletePassBuilder() { }
+        }
 
-            internal DeletePassBuilder(IAccelByteSdk sdk)
+        public abstract class DeletePassAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeletePassBuilder
+            where TImpl : DeletePassAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeletePassAbstractBuilder() { }
+
+            public DeletePassAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<DeletePassBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeletePass.Response Execute(
+            protected DeletePass.Response InternalExecute(
                 string code,
                 string namespace_,
                 string seasonId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeletePass.Response> ExecuteAsync(
+            protected async Task<DeletePass.Response> InternalExecuteAsync(
                 string code,
                 string namespace_,
                 string seasonId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private DeletePass(DeletePassBuilder builder,
+        public class DeletePassBuilder : DeletePassAbstractBuilder<DeletePassBuilder>
+        {
+            public DeletePassBuilder() : base() { }
+
+            public DeletePassBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeletePass.Response Execute(
+                string code,
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    code,
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<DeletePass.Response> ExecuteAsync(
+                string code,
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public DeletePass(IDeletePassBuilder builder,
             string code,
             string namespace_,
             string seasonId
@@ -188,17 +231,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

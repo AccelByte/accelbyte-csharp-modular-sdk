@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminSetDSReadyBuilder Builder { get => new AdminSetDSReadyBuilder(); }
 
-        public class AdminSetDSReadyBuilder
-            : OperationBuilder<AdminSetDSReadyBuilder>
+        public interface IAdminSetDSReadyBuilder
         {
 
 
 
 
 
-            internal AdminSetDSReadyBuilder() { }
+        }
 
-            internal AdminSetDSReadyBuilder(IAccelByteSdk sdk)
+        public abstract class AdminSetDSReadyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminSetDSReadyBuilder
+            where TImpl : AdminSetDSReadyAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminSetDSReadyAbstractBuilder() { }
+
+            public AdminSetDSReadyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId                    
                 );
 
-                op.SetBaseFields<AdminSetDSReadyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminSetDSReady.Response Execute(
+            protected AdminSetDSReady.Response InternalExecute(
                 ApimodelsSetDSReadyRequest body,
                 string namespace_,
                 string sessionId
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminSetDSReady.Response> ExecuteAsync(
+            protected async Task<AdminSetDSReady.Response> InternalExecuteAsync(
                 ApimodelsSetDSReadyRequest body,
                 string namespace_,
                 string sessionId
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminSetDSReady(AdminSetDSReadyBuilder builder,
+        public class AdminSetDSReadyBuilder : AdminSetDSReadyAbstractBuilder<AdminSetDSReadyBuilder>
+        {
+            public AdminSetDSReadyBuilder() : base() { }
+
+            public AdminSetDSReadyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminSetDSReady.Response Execute(
+                ApimodelsSetDSReadyRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+            }
+            public async Task<AdminSetDSReady.Response> ExecuteAsync(
+                ApimodelsSetDSReadyRequest body,
+                string namespace_,
+                string sessionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    sessionId
+                );
+            }
+        }
+
+
+        public AdminSetDSReady(IAdminSetDSReadyBuilder builder,
             ApimodelsSetDSReadyRequest body,
             string namespace_,
             string sessionId
@@ -190,22 +233,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

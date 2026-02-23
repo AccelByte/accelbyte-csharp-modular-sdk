@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static DeleteAppV2Builder Builder { get => new DeleteAppV2Builder(); }
 
-        public class DeleteAppV2Builder
-            : OperationBuilder<DeleteAppV2Builder>
+        public interface IDeleteAppV2Builder
+        {
+
+            string? Forced { get; }
+
+
+
+
+
+        }
+
+        public abstract class DeleteAppV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteAppV2Builder
+            where TImpl : DeleteAppV2AbstractBuilder<TImpl>
         {
 
             public string? Forced { get; set; }
@@ -45,18 +57,18 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal DeleteAppV2Builder() { }
+            public DeleteAppV2AbstractBuilder() { }
 
-            internal DeleteAppV2Builder(IAccelByteSdk sdk)
+            public DeleteAppV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DeleteAppV2Builder SetForced(string _forced)
+            public TImpl SetForced(string _forced)
             {
                 Forced = _forced;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -73,11 +85,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteAppV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteAppV2.Response Execute(
+            protected DeleteAppV2.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -96,7 +108,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteAppV2.Response> ExecuteAsync(
+            protected async Task<DeleteAppV2.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -117,7 +129,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private DeleteAppV2(DeleteAppV2Builder builder,
+        public class DeleteAppV2Builder : DeleteAppV2AbstractBuilder<DeleteAppV2Builder>
+        {
+            public DeleteAppV2Builder() : base() { }
+
+            public DeleteAppV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteAppV2.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<DeleteAppV2.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteAppV2(IDeleteAppV2Builder builder,
             string app,
             string namespace_
         )
@@ -198,27 +239,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeletePlaystationIAPConfigBuilder Builder { get => new DeletePlaystationIAPConfigBuilder(); }
 
-        public class DeletePlaystationIAPConfigBuilder
-            : OperationBuilder<DeletePlaystationIAPConfigBuilder>
+        public interface IDeletePlaystationIAPConfigBuilder
         {
 
 
 
 
 
-            internal DeletePlaystationIAPConfigBuilder() { }
+        }
 
-            internal DeletePlaystationIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeletePlaystationIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeletePlaystationIAPConfigBuilder
+            where TImpl : DeletePlaystationIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeletePlaystationIAPConfigAbstractBuilder() { }
+
+            public DeletePlaystationIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeletePlaystationIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeletePlaystationIAPConfig.Response Execute(
+            protected DeletePlaystationIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeletePlaystationIAPConfig.Response> ExecuteAsync(
+            protected async Task<DeletePlaystationIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeletePlaystationIAPConfig(DeletePlaystationIAPConfigBuilder builder,
+        public class DeletePlaystationIAPConfigBuilder : DeletePlaystationIAPConfigAbstractBuilder<DeletePlaystationIAPConfigBuilder>
+        {
+            public DeletePlaystationIAPConfigBuilder() : base() { }
+
+            public DeletePlaystationIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeletePlaystationIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DeletePlaystationIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeletePlaystationIAPConfig(IDeletePlaystationIAPConfigBuilder builder,
             string namespace_
         )
         {

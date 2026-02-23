@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static UpdateRuleSetBuilder Builder { get => new UpdateRuleSetBuilder(); }
 
-        public class UpdateRuleSetBuilder
-            : OperationBuilder<UpdateRuleSetBuilder>
+        public interface IUpdateRuleSetBuilder
         {
 
 
 
 
 
-            internal UpdateRuleSetBuilder() { }
+        }
 
-            internal UpdateRuleSetBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateRuleSetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateRuleSetBuilder
+            where TImpl : UpdateRuleSetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateRuleSetAbstractBuilder() { }
+
+            public UpdateRuleSetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     ruleset                    
                 );
 
-                op.SetBaseFields<UpdateRuleSetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateRuleSet.Response Execute(
+            protected UpdateRuleSet.Response InternalExecute(
                 ApiRuleSetPayload body,
                 string namespace_,
                 string ruleset
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateRuleSet.Response> ExecuteAsync(
+            protected async Task<UpdateRuleSet.Response> InternalExecuteAsync(
                 ApiRuleSetPayload body,
                 string namespace_,
                 string ruleset
@@ -113,7 +123,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.Payload);
             }
 
-            public UpdateRuleSet.Response<T1> Execute<T1>(
+            protected UpdateRuleSet.Response<T1> InternalExecute<T1>(
                 ApiRuleSetPayload body,
                 string namespace_,
                 string ruleset
@@ -134,7 +144,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateRuleSet.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<UpdateRuleSet.Response<T1>> InternalExecuteAsync<T1>(
                 ApiRuleSetPayload body,
                 string namespace_,
                 string ruleset
@@ -157,7 +167,65 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private UpdateRuleSet(UpdateRuleSetBuilder builder,
+        public class UpdateRuleSetBuilder : UpdateRuleSetAbstractBuilder<UpdateRuleSetBuilder>
+        {
+            public UpdateRuleSetBuilder() : base() { }
+
+            public UpdateRuleSetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateRuleSet.Response Execute(
+                ApiRuleSetPayload body,
+                string namespace_,
+                string ruleset
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    ruleset
+                );
+            }
+            public async Task<UpdateRuleSet.Response> ExecuteAsync(
+                ApiRuleSetPayload body,
+                string namespace_,
+                string ruleset
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    ruleset
+                );
+            }
+
+            public UpdateRuleSet.Response<T1> Execute<T1>(
+                ApiRuleSetPayload body,
+                string namespace_,
+                string ruleset
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    namespace_,
+                    ruleset
+                );
+            }
+            public async Task<UpdateRuleSet.Response<T1>> ExecuteAsync<T1>(
+                ApiRuleSetPayload body,
+                string namespace_,
+                string ruleset
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    namespace_,
+                    ruleset
+                );
+            }
+        }
+
+
+        public UpdateRuleSet(IUpdateRuleSetBuilder builder,
             ApiRuleSetPayload body,
             string namespace_,
             string ruleset
@@ -253,32 +321,38 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiRuleSetPayload>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiRuleSetPayload>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -299,32 +373,38 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiRuleSetPayload<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiRuleSetPayload<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

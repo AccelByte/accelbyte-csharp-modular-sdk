@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteStoreBuilder Builder { get => new DeleteStoreBuilder(); }
 
-        public class DeleteStoreBuilder
-            : OperationBuilder<DeleteStoreBuilder>
+        public interface IDeleteStoreBuilder
         {
 
 
 
 
 
-            internal DeleteStoreBuilder() { }
+        }
 
-            internal DeleteStoreBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteStoreAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteStoreBuilder
+            where TImpl : DeleteStoreAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteStoreAbstractBuilder() { }
+
+            public DeleteStoreAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<DeleteStoreBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteStore.Response Execute(
+            protected DeleteStore.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteStore.Response> ExecuteAsync(
+            protected async Task<DeleteStore.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteStore(DeleteStoreBuilder builder,
+        public class DeleteStoreBuilder : DeleteStoreAbstractBuilder<DeleteStoreBuilder>
+        {
+            public DeleteStoreBuilder() : base() { }
+
+            public DeleteStoreBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteStore.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<DeleteStore.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public DeleteStore(IDeleteStoreBuilder builder,
             string namespace_,
             string storeId
         )
@@ -178,17 +217,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

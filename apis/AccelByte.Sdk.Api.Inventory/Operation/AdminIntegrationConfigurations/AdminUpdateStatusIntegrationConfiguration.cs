@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminUpdateStatusIntegrationConfigurationBuilder Builder { get => new AdminUpdateStatusIntegrationConfigurationBuilder(); }
 
-        public class AdminUpdateStatusIntegrationConfigurationBuilder
-            : OperationBuilder<AdminUpdateStatusIntegrationConfigurationBuilder>
+        public interface IAdminUpdateStatusIntegrationConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminUpdateStatusIntegrationConfigurationBuilder() { }
+        }
 
-            internal AdminUpdateStatusIntegrationConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateStatusIntegrationConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateStatusIntegrationConfigurationBuilder
+            where TImpl : AdminUpdateStatusIntegrationConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateStatusIntegrationConfigurationAbstractBuilder() { }
+
+            public AdminUpdateStatusIntegrationConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminUpdateStatusIntegrationConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateStatusIntegrationConfiguration.Response Execute(
+            protected AdminUpdateStatusIntegrationConfiguration.Response InternalExecute(
                 ApimodelsUpdateStatusIntegrationConfigurationReq body,
                 string integrationConfigurationId,
                 string namespace_
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateStatusIntegrationConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminUpdateStatusIntegrationConfiguration.Response> InternalExecuteAsync(
                 ApimodelsUpdateStatusIntegrationConfigurationReq body,
                 string integrationConfigurationId,
                 string namespace_
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminUpdateStatusIntegrationConfiguration(AdminUpdateStatusIntegrationConfigurationBuilder builder,
+        public class AdminUpdateStatusIntegrationConfigurationBuilder : AdminUpdateStatusIntegrationConfigurationAbstractBuilder<AdminUpdateStatusIntegrationConfigurationBuilder>
+        {
+            public AdminUpdateStatusIntegrationConfigurationBuilder() : base() { }
+
+            public AdminUpdateStatusIntegrationConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateStatusIntegrationConfiguration.Response Execute(
+                ApimodelsUpdateStatusIntegrationConfigurationReq body,
+                string integrationConfigurationId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    integrationConfigurationId,
+                    namespace_
+                );
+            }
+            public async Task<AdminUpdateStatusIntegrationConfiguration.Response> ExecuteAsync(
+                ApimodelsUpdateStatusIntegrationConfigurationReq body,
+                string integrationConfigurationId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    integrationConfigurationId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminUpdateStatusIntegrationConfiguration(IAdminUpdateStatusIntegrationConfigurationBuilder builder,
             ApimodelsUpdateStatusIntegrationConfigurationReq body,
             string integrationConfigurationId,
             string namespace_
@@ -193,27 +236,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsIntegrationConfigurationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsIntegrationConfigurationResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

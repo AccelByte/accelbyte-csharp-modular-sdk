@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetViewBuilder Builder { get => new GetViewBuilder(); }
 
-        public class GetViewBuilder
-            : OperationBuilder<GetViewBuilder>
+        public interface IGetViewBuilder
+        {
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetViewAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetViewBuilder
+            where TImpl : GetViewAbstractBuilder<TImpl>
         {
 
             public string? StoreId { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetViewBuilder() { }
+            public GetViewAbstractBuilder() { }
 
-            internal GetViewBuilder(IAccelByteSdk sdk)
+            public GetViewAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetViewBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     viewId                    
                 );
 
-                op.SetBaseFields<GetViewBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetView.Response Execute(
+            protected GetView.Response InternalExecute(
                 string namespace_,
                 string viewId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetView.Response> ExecuteAsync(
+            protected async Task<GetView.Response> InternalExecuteAsync(
                 string namespace_,
                 string viewId
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetView(GetViewBuilder builder,
+        public class GetViewBuilder : GetViewAbstractBuilder<GetViewBuilder>
+        {
+            public GetViewBuilder() : base() { }
+
+            public GetViewBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetView.Response Execute(
+                string namespace_,
+                string viewId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    viewId
+                );
+            }
+            public async Task<GetView.Response> ExecuteAsync(
+                string namespace_,
+                string viewId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    viewId
+                );
+            }
+        }
+
+
+        public GetView(IGetViewBuilder builder,
             string namespace_,
             string viewId
         )
@@ -188,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullViewInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullViewInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

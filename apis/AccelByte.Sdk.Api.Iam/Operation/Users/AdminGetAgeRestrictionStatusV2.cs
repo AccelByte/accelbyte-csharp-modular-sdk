@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetAgeRestrictionStatusV2Builder Builder { get => new AdminGetAgeRestrictionStatusV2Builder(); }
 
-        public class AdminGetAgeRestrictionStatusV2Builder
-            : OperationBuilder<AdminGetAgeRestrictionStatusV2Builder>
+        public interface IAdminGetAgeRestrictionStatusV2Builder
         {
 
 
 
 
 
-            internal AdminGetAgeRestrictionStatusV2Builder() { }
+        }
 
-            internal AdminGetAgeRestrictionStatusV2Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetAgeRestrictionStatusV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetAgeRestrictionStatusV2Builder
+            where TImpl : AdminGetAgeRestrictionStatusV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetAgeRestrictionStatusV2AbstractBuilder() { }
+
+            public AdminGetAgeRestrictionStatusV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetAgeRestrictionStatusV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminGetAgeRestrictionStatusV2.Response Execute(
+            protected AdminGetAgeRestrictionStatusV2.Response InternalExecute(
                 string namespace_
             )
             {
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetAgeRestrictionStatusV2.Response> ExecuteAsync(
+            protected async Task<AdminGetAgeRestrictionStatusV2.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -104,7 +114,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetAgeRestrictionStatusV2(AdminGetAgeRestrictionStatusV2Builder builder,
+        public class AdminGetAgeRestrictionStatusV2Builder : AdminGetAgeRestrictionStatusV2AbstractBuilder<AdminGetAgeRestrictionStatusV2Builder>
+        {
+            public AdminGetAgeRestrictionStatusV2Builder() : base() { }
+
+            public AdminGetAgeRestrictionStatusV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminGetAgeRestrictionStatusV2.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetAgeRestrictionStatusV2.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetAgeRestrictionStatusV2(IAdminGetAgeRestrictionStatusV2Builder builder,
             string namespace_
         )
         {
@@ -173,22 +209,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelAgeRestrictionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelAgeRestrictionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

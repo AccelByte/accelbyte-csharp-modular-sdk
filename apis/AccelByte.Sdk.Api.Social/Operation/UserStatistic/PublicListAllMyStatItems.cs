@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,24 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static PublicListAllMyStatItemsBuilder Builder { get => new PublicListAllMyStatItemsBuilder(); }
 
-        public class PublicListAllMyStatItemsBuilder
-            : OperationBuilder<PublicListAllMyStatItemsBuilder>
+        public interface IPublicListAllMyStatItemsBuilder
+        {
+
+            string? AdditionalKey { get; }
+
+            List<string>? StatCodes { get; }
+
+            List<string>? Tags { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListAllMyStatItemsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListAllMyStatItemsBuilder
+            where TImpl : PublicListAllMyStatItemsAbstractBuilder<TImpl>
         {
 
             public string? AdditionalKey { get; set; }
@@ -49,30 +65,30 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal PublicListAllMyStatItemsBuilder() { }
+            public PublicListAllMyStatItemsAbstractBuilder() { }
 
-            internal PublicListAllMyStatItemsBuilder(IAccelByteSdk sdk)
+            public PublicListAllMyStatItemsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListAllMyStatItemsBuilder SetAdditionalKey(string _additionalKey)
+            public TImpl SetAdditionalKey(string _additionalKey)
             {
                 AdditionalKey = _additionalKey;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListAllMyStatItemsBuilder SetStatCodes(List<string> _statCodes)
+            public TImpl SetStatCodes(List<string> _statCodes)
             {
                 StatCodes = _statCodes;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListAllMyStatItemsBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -87,11 +103,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListAllMyStatItemsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListAllMyStatItems.Response Execute(
+            protected PublicListAllMyStatItems.Response InternalExecute(
                 string namespace_
             )
             {
@@ -108,7 +124,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListAllMyStatItems.Response> ExecuteAsync(
+            protected async Task<PublicListAllMyStatItems.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -127,7 +143,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private PublicListAllMyStatItems(PublicListAllMyStatItemsBuilder builder,
+        public class PublicListAllMyStatItemsBuilder : PublicListAllMyStatItemsAbstractBuilder<PublicListAllMyStatItemsBuilder>
+        {
+            public PublicListAllMyStatItemsBuilder() : base() { }
+
+            public PublicListAllMyStatItemsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListAllMyStatItems.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListAllMyStatItems.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListAllMyStatItems(IPublicListAllMyStatItemsBuilder builder,
             string namespace_
         )
         {
@@ -211,27 +252,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ADTOObjectForUserStatItemValue>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ADTOObjectForUserStatItemValue>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

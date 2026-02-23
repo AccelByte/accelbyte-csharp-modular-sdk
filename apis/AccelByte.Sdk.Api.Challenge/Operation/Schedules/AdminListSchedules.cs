@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,26 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminListSchedulesBuilder Builder { get => new AdminListSchedulesBuilder(); }
 
-        public class AdminListSchedulesBuilder
-            : OperationBuilder<AdminListSchedulesBuilder>
+        public interface IAdminListSchedulesBuilder
+        {
+
+            DateTime? DateTime { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminListSchedulesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListSchedulesBuilder
+            where TImpl : AdminListSchedulesAbstractBuilder<TImpl>
         {
 
             public DateTime? DateTime { get; set; }
@@ -50,36 +68,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
 
 
-            internal AdminListSchedulesBuilder() { }
+            public AdminListSchedulesAbstractBuilder() { }
 
-            internal AdminListSchedulesBuilder(IAccelByteSdk sdk)
+            public AdminListSchedulesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminListSchedulesBuilder SetDateTime(DateTime _dateTime)
+            public TImpl SetDateTime(DateTime _dateTime)
             {
                 DateTime = _dateTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListSchedulesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListSchedulesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminListSchedulesBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -96,11 +114,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminListSchedulesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListSchedules.Response Execute(
+            protected AdminListSchedules.Response InternalExecute(
                 string challengeCode,
                 string namespace_
             )
@@ -119,7 +137,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListSchedules.Response> ExecuteAsync(
+            protected async Task<AdminListSchedules.Response> InternalExecuteAsync(
                 string challengeCode,
                 string namespace_
             )
@@ -140,7 +158,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminListSchedules(AdminListSchedulesBuilder builder,
+        public class AdminListSchedulesBuilder : AdminListSchedulesAbstractBuilder<AdminListSchedulesBuilder>
+        {
+            public AdminListSchedulesBuilder() : base() { }
+
+            public AdminListSchedulesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListSchedules.Response Execute(
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    challengeCode,
+                    namespace_
+                );
+            }
+            public async Task<AdminListSchedules.Response> ExecuteAsync(
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    challengeCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminListSchedules(IAdminListSchedulesBuilder builder,
             string challengeCode,
             string namespace_
         )
@@ -231,32 +278,38 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelListSchedulesResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelListSchedulesResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<IamErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

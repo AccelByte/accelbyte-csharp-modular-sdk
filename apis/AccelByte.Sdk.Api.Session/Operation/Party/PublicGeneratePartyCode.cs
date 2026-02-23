@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static PublicGeneratePartyCodeBuilder Builder { get => new PublicGeneratePartyCodeBuilder(); }
 
-        public class PublicGeneratePartyCodeBuilder
-            : OperationBuilder<PublicGeneratePartyCodeBuilder>
+        public interface IPublicGeneratePartyCodeBuilder
         {
 
 
 
 
 
-            internal PublicGeneratePartyCodeBuilder() { }
+        }
 
-            internal PublicGeneratePartyCodeBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGeneratePartyCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGeneratePartyCodeBuilder
+            where TImpl : PublicGeneratePartyCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGeneratePartyCodeAbstractBuilder() { }
+
+            public PublicGeneratePartyCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     partyId                    
                 );
 
-                op.SetBaseFields<PublicGeneratePartyCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGeneratePartyCode.Response Execute(
+            protected PublicGeneratePartyCode.Response InternalExecute(
                 string namespace_,
                 string partyId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGeneratePartyCode.Response> ExecuteAsync(
+            protected async Task<PublicGeneratePartyCode.Response> InternalExecuteAsync(
                 string namespace_,
                 string partyId
             )
@@ -103,7 +113,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.Payload);
             }
 
-            public PublicGeneratePartyCode.Response<T1, T2> Execute<T1, T2>(
+            protected PublicGeneratePartyCode.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_,
                 string partyId
             )
@@ -122,7 +132,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGeneratePartyCode.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<PublicGeneratePartyCode.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_,
                 string partyId
             )
@@ -143,7 +153,57 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private PublicGeneratePartyCode(PublicGeneratePartyCodeBuilder builder,
+        public class PublicGeneratePartyCodeBuilder : PublicGeneratePartyCodeAbstractBuilder<PublicGeneratePartyCodeBuilder>
+        {
+            public PublicGeneratePartyCodeBuilder() : base() { }
+
+            public PublicGeneratePartyCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGeneratePartyCode.Response Execute(
+                string namespace_,
+                string partyId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    partyId
+                );
+            }
+            public async Task<PublicGeneratePartyCode.Response> ExecuteAsync(
+                string namespace_,
+                string partyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    partyId
+                );
+            }
+
+            public PublicGeneratePartyCode.Response<T1, T2> Execute<T1, T2>(
+                string namespace_,
+                string partyId
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_,
+                    partyId
+                );
+            }
+            public async Task<PublicGeneratePartyCode.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_,
+                string partyId
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_,
+                    partyId
+                );
+            }
+        }
+
+
+        public PublicGeneratePartyCode(IPublicGeneratePartyCodeBuilder builder,
             string namespace_,
             string partyId
         )
@@ -235,32 +295,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -281,32 +347,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartySessionResponse<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

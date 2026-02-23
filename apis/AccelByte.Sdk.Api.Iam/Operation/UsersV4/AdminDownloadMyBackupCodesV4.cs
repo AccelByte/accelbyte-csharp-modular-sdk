@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDownloadMyBackupCodesV4Builder Builder { get => new AdminDownloadMyBackupCodesV4Builder(); }
 
-        public class AdminDownloadMyBackupCodesV4Builder
-            : OperationBuilder<AdminDownloadMyBackupCodesV4Builder>
+        public interface IAdminDownloadMyBackupCodesV4Builder
         {
 
 
 
 
 
-            internal AdminDownloadMyBackupCodesV4Builder() { }
+        }
 
-            internal AdminDownloadMyBackupCodesV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminDownloadMyBackupCodesV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDownloadMyBackupCodesV4Builder
+            where TImpl : AdminDownloadMyBackupCodesV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDownloadMyBackupCodesV4AbstractBuilder() { }
+
+            public AdminDownloadMyBackupCodesV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,12 +67,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminDownloadMyBackupCodesV4 op = new AdminDownloadMyBackupCodesV4(this
                 );
 
-                op.SetBaseFields<AdminDownloadMyBackupCodesV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminDownloadMyBackupCodesV4.Response Execute(
+            protected AdminDownloadMyBackupCodesV4.Response InternalExecute(
             )
             {
                 AdminDownloadMyBackupCodesV4 op = Build(
@@ -77,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDownloadMyBackupCodesV4.Response> ExecuteAsync(
+            protected async Task<AdminDownloadMyBackupCodesV4.Response> InternalExecuteAsync(
             )
             {
                 AdminDownloadMyBackupCodesV4 op = Build(
@@ -94,7 +104,29 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDownloadMyBackupCodesV4(AdminDownloadMyBackupCodesV4Builder builder
+        public class AdminDownloadMyBackupCodesV4Builder : AdminDownloadMyBackupCodesV4AbstractBuilder<AdminDownloadMyBackupCodesV4Builder>
+        {
+            public AdminDownloadMyBackupCodesV4Builder() : base() { }
+
+            public AdminDownloadMyBackupCodesV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminDownloadMyBackupCodesV4.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminDownloadMyBackupCodesV4.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminDownloadMyBackupCodesV4(IAdminDownloadMyBackupCodesV4Builder builder
         )
         {
             
@@ -168,27 +200,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static DeleteMatchTicketBuilder Builder { get => new DeleteMatchTicketBuilder(); }
 
-        public class DeleteMatchTicketBuilder
-            : OperationBuilder<DeleteMatchTicketBuilder>
+        public interface IDeleteMatchTicketBuilder
         {
 
 
 
 
 
-            internal DeleteMatchTicketBuilder() { }
+        }
 
-            internal DeleteMatchTicketBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteMatchTicketAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteMatchTicketBuilder
+            where TImpl : DeleteMatchTicketAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteMatchTicketAbstractBuilder() { }
+
+            public DeleteMatchTicketAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     ticketid                    
                 );
 
-                op.SetBaseFields<DeleteMatchTicketBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteMatchTicket.Response Execute(
+            protected DeleteMatchTicket.Response InternalExecute(
                 string namespace_,
                 string ticketid
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteMatchTicket.Response> ExecuteAsync(
+            protected async Task<DeleteMatchTicket.Response> InternalExecuteAsync(
                 string namespace_,
                 string ticketid
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private DeleteMatchTicket(DeleteMatchTicketBuilder builder,
+        public class DeleteMatchTicketBuilder : DeleteMatchTicketAbstractBuilder<DeleteMatchTicketBuilder>
+        {
+            public DeleteMatchTicketBuilder() : base() { }
+
+            public DeleteMatchTicketBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteMatchTicket.Response Execute(
+                string namespace_,
+                string ticketid
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    ticketid
+                );
+            }
+            public async Task<DeleteMatchTicket.Response> ExecuteAsync(
+                string namespace_,
+                string ticketid
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    ticketid
+                );
+            }
+        }
+
+
+        public DeleteMatchTicket(IDeleteMatchTicketBuilder builder,
             string namespace_,
             string ticketid
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)406)
             {
-                response.Error406 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error406 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error406!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

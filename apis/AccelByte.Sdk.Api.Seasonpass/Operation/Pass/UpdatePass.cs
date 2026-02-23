@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static UpdatePassBuilder Builder { get => new UpdatePassBuilder(); }
 
-        public class UpdatePassBuilder
-            : OperationBuilder<UpdatePassBuilder>
+        public interface IUpdatePassBuilder
+        {
+
+
+            Model.PassUpdate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class UpdatePassAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePassBuilder
+            where TImpl : UpdatePassAbstractBuilder<TImpl>
         {
 
 
@@ -44,19 +56,19 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal UpdatePassBuilder() { }
+            public UpdatePassAbstractBuilder() { }
 
-            internal UpdatePassBuilder(IAccelByteSdk sdk)
+            public UpdatePassAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public UpdatePassBuilder SetBody(Model.PassUpdate _body)
+            public TImpl SetBody(Model.PassUpdate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -74,11 +86,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     seasonId                    
                 );
 
-                op.SetBaseFields<UpdatePassBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePass.Response Execute(
+            protected UpdatePass.Response InternalExecute(
                 string code,
                 string namespace_,
                 string seasonId
@@ -99,7 +111,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePass.Response> ExecuteAsync(
+            protected async Task<UpdatePass.Response> InternalExecuteAsync(
                 string code,
                 string namespace_,
                 string seasonId
@@ -122,7 +134,40 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private UpdatePass(UpdatePassBuilder builder,
+        public class UpdatePassBuilder : UpdatePassAbstractBuilder<UpdatePassBuilder>
+        {
+            public UpdatePassBuilder() : base() { }
+
+            public UpdatePassBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePass.Response Execute(
+                string code,
+                string namespace_,
+                string seasonId
+            )
+            {
+                return InternalExecute(
+                    code,
+                    namespace_,
+                    seasonId
+                );
+            }
+            public async Task<UpdatePass.Response> ExecuteAsync(
+                string code,
+                string namespace_,
+                string seasonId
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    namespace_,
+                    seasonId
+                );
+            }
+        }
+
+
+        public UpdatePass(IUpdatePassBuilder builder,
             string code,
             string namespace_,
             string seasonId
@@ -204,27 +249,32 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PassInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PassInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

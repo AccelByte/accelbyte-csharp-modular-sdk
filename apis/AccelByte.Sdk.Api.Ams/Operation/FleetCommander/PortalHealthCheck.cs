@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,17 +28,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static PortalHealthCheckBuilder Builder { get => new PortalHealthCheckBuilder(); }
 
-        public class PortalHealthCheckBuilder
-            : OperationBuilder<PortalHealthCheckBuilder>
+        public interface IPortalHealthCheckBuilder
         {
 
 
 
 
 
-            internal PortalHealthCheckBuilder() { }
+        }
 
-            internal PortalHealthCheckBuilder(IAccelByteSdk sdk)
+        public abstract class PortalHealthCheckAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPortalHealthCheckBuilder
+            where TImpl : PortalHealthCheckAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PortalHealthCheckAbstractBuilder() { }
+
+            public PortalHealthCheckAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -54,11 +64,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                 PortalHealthCheck op = new PortalHealthCheck(this
                 );
 
-                op.SetBaseFields<PortalHealthCheckBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PortalHealthCheck.Response Execute(
+            protected PortalHealthCheck.Response InternalExecute(
             )
             {
                 PortalHealthCheck op = Build(
@@ -73,7 +83,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PortalHealthCheck.Response> ExecuteAsync(
+            protected async Task<PortalHealthCheck.Response> InternalExecuteAsync(
             )
             {
                 PortalHealthCheck op = Build(
@@ -90,7 +100,28 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private PortalHealthCheck(PortalHealthCheckBuilder builder
+        public class PortalHealthCheckBuilder : PortalHealthCheckAbstractBuilder<PortalHealthCheckBuilder>
+        {
+            public PortalHealthCheckBuilder() : base() { }
+
+            public PortalHealthCheckBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PortalHealthCheck.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PortalHealthCheck.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PortalHealthCheck(IPortalHealthCheckBuilder builder
         )
         {
             

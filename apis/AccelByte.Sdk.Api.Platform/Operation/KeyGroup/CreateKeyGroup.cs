@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CreateKeyGroupBuilder Builder { get => new CreateKeyGroupBuilder(); }
 
-        public class CreateKeyGroupBuilder
-            : OperationBuilder<CreateKeyGroupBuilder>
+        public interface ICreateKeyGroupBuilder
         {
 
 
 
 
 
-            internal CreateKeyGroupBuilder() { }
+        }
 
-            internal CreateKeyGroupBuilder(IAccelByteSdk sdk)
+        public abstract class CreateKeyGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateKeyGroupBuilder
+            where TImpl : CreateKeyGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateKeyGroupAbstractBuilder() { }
+
+            public CreateKeyGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateKeyGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateKeyGroup.Response Execute(
+            protected CreateKeyGroup.Response InternalExecute(
                 KeyGroupCreate body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateKeyGroup.Response> ExecuteAsync(
+            protected async Task<CreateKeyGroup.Response> InternalExecuteAsync(
                 KeyGroupCreate body,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CreateKeyGroup(CreateKeyGroupBuilder builder,
+        public class CreateKeyGroupBuilder : CreateKeyGroupAbstractBuilder<CreateKeyGroupBuilder>
+        {
+            public CreateKeyGroupBuilder() : base() { }
+
+            public CreateKeyGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateKeyGroup.Response Execute(
+                KeyGroupCreate body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateKeyGroup.Response> ExecuteAsync(
+                KeyGroupCreate body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateKeyGroup(ICreateKeyGroupBuilder builder,
             KeyGroupCreate body,
             string namespace_
         )
@@ -178,17 +217,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.KeyGroupInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

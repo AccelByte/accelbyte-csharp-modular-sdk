@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminDeleteGlobalConfigBuilder Builder { get => new AdminDeleteGlobalConfigBuilder(); }
 
-        public class AdminDeleteGlobalConfigBuilder
-            : OperationBuilder<AdminDeleteGlobalConfigBuilder>
+        public interface IAdminDeleteGlobalConfigBuilder
         {
 
 
 
 
 
-            internal AdminDeleteGlobalConfigBuilder() { }
+        }
 
-            internal AdminDeleteGlobalConfigBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteGlobalConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteGlobalConfigBuilder
+            where TImpl : AdminDeleteGlobalConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteGlobalConfigAbstractBuilder() { }
+
+            public AdminDeleteGlobalConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,12 +67,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                 AdminDeleteGlobalConfig op = new AdminDeleteGlobalConfig(this
                 );
 
-                op.SetBaseFields<AdminDeleteGlobalConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminDeleteGlobalConfig.Response Execute(
+            protected AdminDeleteGlobalConfig.Response InternalExecute(
             )
             {
                 AdminDeleteGlobalConfig op = Build(
@@ -77,7 +87,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteGlobalConfig.Response> ExecuteAsync(
+            protected async Task<AdminDeleteGlobalConfig.Response> InternalExecuteAsync(
             )
             {
                 AdminDeleteGlobalConfig op = Build(
@@ -94,7 +104,29 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminDeleteGlobalConfig(AdminDeleteGlobalConfigBuilder builder
+        public class AdminDeleteGlobalConfigBuilder : AdminDeleteGlobalConfigAbstractBuilder<AdminDeleteGlobalConfigBuilder>
+        {
+            public AdminDeleteGlobalConfigBuilder() : base() { }
+
+            public AdminDeleteGlobalConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminDeleteGlobalConfig.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminDeleteGlobalConfig.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminDeleteGlobalConfig(IAdminDeleteGlobalConfigBuilder builder
         )
         {
             
@@ -157,17 +189,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<string>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<string>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

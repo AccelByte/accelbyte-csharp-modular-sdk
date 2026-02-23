@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,26 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminGetUserPlatformAccountClosureHistoriesBuilder Builder { get => new AdminGetUserPlatformAccountClosureHistoriesBuilder(); }
 
-        public class AdminGetUserPlatformAccountClosureHistoriesBuilder
-            : OperationBuilder<AdminGetUserPlatformAccountClosureHistoriesBuilder>
+        public interface IAdminGetUserPlatformAccountClosureHistoriesBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? Platform { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetUserPlatformAccountClosureHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetUserPlatformAccountClosureHistoriesBuilder
+            where TImpl : AdminGetUserPlatformAccountClosureHistoriesAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -53,36 +71,36 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
 
 
-            internal AdminGetUserPlatformAccountClosureHistoriesBuilder() { }
+            public AdminGetUserPlatformAccountClosureHistoriesAbstractBuilder() { }
 
-            internal AdminGetUserPlatformAccountClosureHistoriesBuilder(IAccelByteSdk sdk)
+            public AdminGetUserPlatformAccountClosureHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetUserPlatformAccountClosureHistoriesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountClosureHistoriesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountClosureHistoriesBuilder SetPlatform(string _platform)
+            public TImpl SetPlatform(string _platform)
             {
                 Platform = _platform;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetUserPlatformAccountClosureHistoriesBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -97,11 +115,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetUserPlatformAccountClosureHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetUserPlatformAccountClosureHistories.Response Execute(
+            protected AdminGetUserPlatformAccountClosureHistories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -118,7 +136,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetUserPlatformAccountClosureHistories.Response> ExecuteAsync(
+            protected async Task<AdminGetUserPlatformAccountClosureHistories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -137,7 +155,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminGetUserPlatformAccountClosureHistories(AdminGetUserPlatformAccountClosureHistoriesBuilder builder,
+        public class AdminGetUserPlatformAccountClosureHistoriesBuilder : AdminGetUserPlatformAccountClosureHistoriesAbstractBuilder<AdminGetUserPlatformAccountClosureHistoriesBuilder>
+        {
+            public AdminGetUserPlatformAccountClosureHistoriesBuilder() : base() { }
+
+            public AdminGetUserPlatformAccountClosureHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetUserPlatformAccountClosureHistories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetUserPlatformAccountClosureHistories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetUserPlatformAccountClosureHistories(IAdminGetUserPlatformAccountClosureHistoriesBuilder builder,
             string namespace_
         )
         {
@@ -220,27 +263,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DtoUserPlatformAccountClosureHistoriesResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DtoUserPlatformAccountClosureHistoriesResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

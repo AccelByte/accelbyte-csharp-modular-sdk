@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -46,17 +46,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdatePaymentDomainWhitelistConfigBuilder Builder { get => new UpdatePaymentDomainWhitelistConfigBuilder(); }
 
-        public class UpdatePaymentDomainWhitelistConfigBuilder
-            : OperationBuilder<UpdatePaymentDomainWhitelistConfigBuilder>
+        public interface IUpdatePaymentDomainWhitelistConfigBuilder
         {
 
 
 
 
 
-            internal UpdatePaymentDomainWhitelistConfigBuilder() { }
+        }
 
-            internal UpdatePaymentDomainWhitelistConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdatePaymentDomainWhitelistConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePaymentDomainWhitelistConfigBuilder
+            where TImpl : UpdatePaymentDomainWhitelistConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdatePaymentDomainWhitelistConfigAbstractBuilder() { }
+
+            public UpdatePaymentDomainWhitelistConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -76,11 +86,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdatePaymentDomainWhitelistConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePaymentDomainWhitelistConfig.Response Execute(
+            protected UpdatePaymentDomainWhitelistConfig.Response InternalExecute(
                 PaymentDomainWhitelistConfigEdit body,
                 string namespace_
             )
@@ -99,7 +109,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePaymentDomainWhitelistConfig.Response> ExecuteAsync(
+            protected async Task<UpdatePaymentDomainWhitelistConfig.Response> InternalExecuteAsync(
                 PaymentDomainWhitelistConfigEdit body,
                 string namespace_
             )
@@ -120,7 +130,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdatePaymentDomainWhitelistConfig(UpdatePaymentDomainWhitelistConfigBuilder builder,
+        public class UpdatePaymentDomainWhitelistConfigBuilder : UpdatePaymentDomainWhitelistConfigAbstractBuilder<UpdatePaymentDomainWhitelistConfigBuilder>
+        {
+            public UpdatePaymentDomainWhitelistConfigBuilder() : base() { }
+
+            public UpdatePaymentDomainWhitelistConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePaymentDomainWhitelistConfig.Response Execute(
+                PaymentDomainWhitelistConfigEdit body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdatePaymentDomainWhitelistConfig.Response> ExecuteAsync(
+                PaymentDomainWhitelistConfigEdit body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdatePaymentDomainWhitelistConfig(IUpdatePaymentDomainWhitelistConfigBuilder builder,
             PaymentDomainWhitelistConfigEdit body,
             string namespace_
         )
@@ -189,12 +228,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentDomainWhitelistConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentDomainWhitelistConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

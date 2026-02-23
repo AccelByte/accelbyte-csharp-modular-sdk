@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static DeleteContentBuilder Builder { get => new DeleteContentBuilder(); }
 
-        public class DeleteContentBuilder
-            : OperationBuilder<DeleteContentBuilder>
+        public interface IDeleteContentBuilder
         {
 
 
 
 
 
-            internal DeleteContentBuilder() { }
+        }
 
-            internal DeleteContentBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteContentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteContentBuilder
+            where TImpl : DeleteContentAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteContentAbstractBuilder() { }
+
+            public DeleteContentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<DeleteContentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteContent.Response Execute(
+            protected DeleteContent.Response InternalExecute(
                 string channelId,
                 string contentId,
                 string namespace_,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteContent.Response> ExecuteAsync(
+            protected async Task<DeleteContent.Response> InternalExecuteAsync(
                 string channelId,
                 string contentId,
                 string namespace_,
@@ -116,7 +126,44 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private DeleteContent(DeleteContentBuilder builder,
+        public class DeleteContentBuilder : DeleteContentAbstractBuilder<DeleteContentBuilder>
+        {
+            public DeleteContentBuilder() : base() { }
+
+            public DeleteContentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteContent.Response Execute(
+                string channelId,
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    channelId,
+                    contentId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<DeleteContent.Response> ExecuteAsync(
+                string channelId,
+                string contentId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    channelId,
+                    contentId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public DeleteContent(IDeleteContentBuilder builder,
             string channelId,
             string contentId,
             string namespace_,
@@ -198,17 +245,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

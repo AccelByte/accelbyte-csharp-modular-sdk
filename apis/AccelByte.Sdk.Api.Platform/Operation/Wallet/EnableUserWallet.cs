@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static EnableUserWalletBuilder Builder { get => new EnableUserWalletBuilder(); }
 
-        public class EnableUserWalletBuilder
-            : OperationBuilder<EnableUserWalletBuilder>
+        public interface IEnableUserWalletBuilder
         {
 
 
 
 
 
-            internal EnableUserWalletBuilder() { }
+        }
 
-            internal EnableUserWalletBuilder(IAccelByteSdk sdk)
+        public abstract class EnableUserWalletAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IEnableUserWalletBuilder
+            where TImpl : EnableUserWalletAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public EnableUserWalletAbstractBuilder() { }
+
+            public EnableUserWalletAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     walletId                    
                 );
 
-                op.SetBaseFields<EnableUserWalletBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public EnableUserWallet.Response Execute(
+            protected EnableUserWallet.Response InternalExecute(
                 string namespace_,
                 string userId,
                 string walletId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<EnableUserWallet.Response> ExecuteAsync(
+            protected async Task<EnableUserWallet.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId,
                 string walletId
@@ -112,7 +122,41 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private EnableUserWallet(EnableUserWalletBuilder builder,
+        public class EnableUserWalletBuilder : EnableUserWalletAbstractBuilder<EnableUserWalletBuilder>
+        {
+            public EnableUserWalletBuilder() : base() { }
+
+            public EnableUserWalletBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public EnableUserWallet.Response Execute(
+                string namespace_,
+                string userId,
+                string walletId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId,
+                    walletId
+                );
+            }
+            public async Task<EnableUserWallet.Response> ExecuteAsync(
+                string namespace_,
+                string userId,
+                string walletId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId,
+                    walletId
+                );
+            }
+        }
+
+
+        public EnableUserWallet(IEnableUserWalletBuilder builder,
             string namespace_,
             string userId,
             string walletId
@@ -188,12 +232,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

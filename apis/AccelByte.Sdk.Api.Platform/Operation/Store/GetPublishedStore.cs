@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetPublishedStoreBuilder Builder { get => new GetPublishedStoreBuilder(); }
 
-        public class GetPublishedStoreBuilder
-            : OperationBuilder<GetPublishedStoreBuilder>
+        public interface IGetPublishedStoreBuilder
         {
 
 
 
 
 
-            internal GetPublishedStoreBuilder() { }
+        }
 
-            internal GetPublishedStoreBuilder(IAccelByteSdk sdk)
+        public abstract class GetPublishedStoreAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPublishedStoreBuilder
+            where TImpl : GetPublishedStoreAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPublishedStoreAbstractBuilder() { }
+
+            public GetPublishedStoreAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetPublishedStoreBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPublishedStore.Response Execute(
+            protected GetPublishedStore.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPublishedStore.Response> ExecuteAsync(
+            protected async Task<GetPublishedStore.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetPublishedStore(GetPublishedStoreBuilder builder,
+        public class GetPublishedStoreBuilder : GetPublishedStoreAbstractBuilder<GetPublishedStoreBuilder>
+        {
+            public GetPublishedStoreBuilder() : base() { }
+
+            public GetPublishedStoreBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPublishedStore.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetPublishedStore.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetPublishedStore(IGetPublishedStoreBuilder builder,
             string namespace_
         )
         {
@@ -167,12 +202,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StoreInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ProcessUserSubscriptionNotificationBuilder Builder { get => new ProcessUserSubscriptionNotificationBuilder(); }
 
-        public class ProcessUserSubscriptionNotificationBuilder
-            : OperationBuilder<ProcessUserSubscriptionNotificationBuilder>
+        public interface IProcessUserSubscriptionNotificationBuilder
         {
 
 
 
 
 
-            internal ProcessUserSubscriptionNotificationBuilder() { }
+        }
 
-            internal ProcessUserSubscriptionNotificationBuilder(IAccelByteSdk sdk)
+        public abstract class ProcessUserSubscriptionNotificationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IProcessUserSubscriptionNotificationBuilder
+            where TImpl : ProcessUserSubscriptionNotificationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ProcessUserSubscriptionNotificationAbstractBuilder() { }
+
+            public ProcessUserSubscriptionNotificationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<ProcessUserSubscriptionNotificationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ProcessUserSubscriptionNotification.Response Execute(
+            protected ProcessUserSubscriptionNotification.Response InternalExecute(
                 TradeNotification body,
                 string namespace_,
                 string subscriptionId,
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ProcessUserSubscriptionNotification.Response> ExecuteAsync(
+            protected async Task<ProcessUserSubscriptionNotification.Response> InternalExecuteAsync(
                 TradeNotification body,
                 string namespace_,
                 string subscriptionId,
@@ -119,7 +129,44 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ProcessUserSubscriptionNotification(ProcessUserSubscriptionNotificationBuilder builder,
+        public class ProcessUserSubscriptionNotificationBuilder : ProcessUserSubscriptionNotificationAbstractBuilder<ProcessUserSubscriptionNotificationBuilder>
+        {
+            public ProcessUserSubscriptionNotificationBuilder() : base() { }
+
+            public ProcessUserSubscriptionNotificationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ProcessUserSubscriptionNotification.Response Execute(
+                TradeNotification body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<ProcessUserSubscriptionNotification.Response> ExecuteAsync(
+                TradeNotification body,
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public ProcessUserSubscriptionNotification(IProcessUserSubscriptionNotificationBuilder builder,
             TradeNotification body,
             string namespace_,
             string subscriptionId,
@@ -197,7 +244,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
 

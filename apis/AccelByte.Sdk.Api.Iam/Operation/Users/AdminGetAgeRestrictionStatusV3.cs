@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetAgeRestrictionStatusV3Builder Builder { get => new AdminGetAgeRestrictionStatusV3Builder(); }
 
-        public class AdminGetAgeRestrictionStatusV3Builder
-            : OperationBuilder<AdminGetAgeRestrictionStatusV3Builder>
+        public interface IAdminGetAgeRestrictionStatusV3Builder
         {
 
 
 
 
 
-            internal AdminGetAgeRestrictionStatusV3Builder() { }
+        }
 
-            internal AdminGetAgeRestrictionStatusV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetAgeRestrictionStatusV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetAgeRestrictionStatusV3Builder
+            where TImpl : AdminGetAgeRestrictionStatusV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetAgeRestrictionStatusV3AbstractBuilder() { }
+
+            public AdminGetAgeRestrictionStatusV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetAgeRestrictionStatusV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetAgeRestrictionStatusV3.Response Execute(
+            protected AdminGetAgeRestrictionStatusV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetAgeRestrictionStatusV3.Response> ExecuteAsync(
+            protected async Task<AdminGetAgeRestrictionStatusV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetAgeRestrictionStatusV3(AdminGetAgeRestrictionStatusV3Builder builder,
+        public class AdminGetAgeRestrictionStatusV3Builder : AdminGetAgeRestrictionStatusV3AbstractBuilder<AdminGetAgeRestrictionStatusV3Builder>
+        {
+            public AdminGetAgeRestrictionStatusV3Builder() : base() { }
+
+            public AdminGetAgeRestrictionStatusV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetAgeRestrictionStatusV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetAgeRestrictionStatusV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetAgeRestrictionStatusV3(IAdminGetAgeRestrictionStatusV3Builder builder,
             string namespace_
         )
         {
@@ -171,32 +206,38 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelAgeRestrictionResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelAgeRestrictionResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

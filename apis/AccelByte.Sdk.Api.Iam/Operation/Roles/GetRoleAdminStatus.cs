@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetRoleAdminStatusBuilder Builder { get => new GetRoleAdminStatusBuilder(); }
 
-        public class GetRoleAdminStatusBuilder
-            : OperationBuilder<GetRoleAdminStatusBuilder>
+        public interface IGetRoleAdminStatusBuilder
         {
 
 
 
 
 
-            internal GetRoleAdminStatusBuilder() { }
+        }
 
-            internal GetRoleAdminStatusBuilder(IAccelByteSdk sdk)
+        public abstract class GetRoleAdminStatusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRoleAdminStatusBuilder
+            where TImpl : GetRoleAdminStatusAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetRoleAdminStatusAbstractBuilder() { }
+
+            public GetRoleAdminStatusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,12 +73,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     roleId                    
                 );
 
-                op.SetBaseFields<GetRoleAdminStatusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetRoleAdminStatus.Response Execute(
+            protected GetRoleAdminStatus.Response InternalExecute(
                 string roleId
             )
             {
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRoleAdminStatus.Response> ExecuteAsync(
+            protected async Task<GetRoleAdminStatus.Response> InternalExecuteAsync(
                 string roleId
             )
             {
@@ -104,7 +114,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetRoleAdminStatus(GetRoleAdminStatusBuilder builder,
+        public class GetRoleAdminStatusBuilder : GetRoleAdminStatusAbstractBuilder<GetRoleAdminStatusBuilder>
+        {
+            public GetRoleAdminStatusBuilder() : base() { }
+
+            public GetRoleAdminStatusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetRoleAdminStatus.Response Execute(
+                string roleId
+            )
+            {
+                return InternalExecute(
+                    roleId
+                );
+            }
+            public async Task<GetRoleAdminStatus.Response> ExecuteAsync(
+                string roleId
+            )
+            {
+                return await InternalExecuteAsync(
+                    roleId
+                );
+            }
+        }
+
+
+        public GetRoleAdminStatus(IGetRoleAdminStatusBuilder builder,
             string roleId
         )
         {
@@ -175,27 +211,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelRoleAdminStatusResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelRoleAdminStatusResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

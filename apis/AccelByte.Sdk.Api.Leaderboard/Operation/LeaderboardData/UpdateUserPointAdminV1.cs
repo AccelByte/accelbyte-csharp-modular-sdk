@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -44,17 +44,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static UpdateUserPointAdminV1Builder Builder { get => new UpdateUserPointAdminV1Builder(); }
 
-        public class UpdateUserPointAdminV1Builder
-            : OperationBuilder<UpdateUserPointAdminV1Builder>
+        public interface IUpdateUserPointAdminV1Builder
         {
 
 
 
 
 
-            internal UpdateUserPointAdminV1Builder() { }
+        }
 
-            internal UpdateUserPointAdminV1Builder(IAccelByteSdk sdk)
+        public abstract class UpdateUserPointAdminV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateUserPointAdminV1Builder
+            where TImpl : UpdateUserPointAdminV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateUserPointAdminV1AbstractBuilder() { }
+
+            public UpdateUserPointAdminV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -78,11 +88,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpdateUserPointAdminV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateUserPointAdminV1.Response Execute(
+            protected UpdateUserPointAdminV1.Response InternalExecute(
                 ModelsUpdateUserPointAdminV1Request body,
                 string leaderboardCode,
                 string namespace_,
@@ -105,7 +115,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateUserPointAdminV1.Response> ExecuteAsync(
+            protected async Task<UpdateUserPointAdminV1.Response> InternalExecuteAsync(
                 ModelsUpdateUserPointAdminV1Request body,
                 string leaderboardCode,
                 string namespace_,
@@ -130,7 +140,44 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private UpdateUserPointAdminV1(UpdateUserPointAdminV1Builder builder,
+        public class UpdateUserPointAdminV1Builder : UpdateUserPointAdminV1AbstractBuilder<UpdateUserPointAdminV1Builder>
+        {
+            public UpdateUserPointAdminV1Builder() : base() { }
+
+            public UpdateUserPointAdminV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateUserPointAdminV1.Response Execute(
+                ModelsUpdateUserPointAdminV1Request body,
+                string leaderboardCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    leaderboardCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpdateUserPointAdminV1.Response> ExecuteAsync(
+                ModelsUpdateUserPointAdminV1Request body,
+                string leaderboardCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    leaderboardCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpdateUserPointAdminV1(IUpdateUserPointAdminV1Builder builder,
             ModelsUpdateUserPointAdminV1Request body,
             string leaderboardCode,
             string namespace_,
@@ -215,32 +262,38 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUpdateUserPointAdminV1Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUpdateUserPointAdminV1Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

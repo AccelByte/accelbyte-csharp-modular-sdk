@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static DeleteGameSessionBuilder Builder { get => new DeleteGameSessionBuilder(); }
 
-        public class DeleteGameSessionBuilder
-            : OperationBuilder<DeleteGameSessionBuilder>
+        public interface IDeleteGameSessionBuilder
         {
 
 
 
 
 
-            internal DeleteGameSessionBuilder() { }
+        }
 
-            internal DeleteGameSessionBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteGameSessionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteGameSessionBuilder
+            where TImpl : DeleteGameSessionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteGameSessionAbstractBuilder() { }
+
+            public DeleteGameSessionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     sessionId                    
                 );
 
-                op.SetBaseFields<DeleteGameSessionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteGameSession.Response Execute(
+            protected DeleteGameSession.Response InternalExecute(
                 string namespace_,
                 string sessionId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteGameSession.Response> ExecuteAsync(
+            protected async Task<DeleteGameSession.Response> InternalExecuteAsync(
                 string namespace_,
                 string sessionId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private DeleteGameSession(DeleteGameSessionBuilder builder,
+        public class DeleteGameSessionBuilder : DeleteGameSessionAbstractBuilder<DeleteGameSessionBuilder>
+        {
+            public DeleteGameSessionBuilder() : base() { }
+
+            public DeleteGameSessionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteGameSession.Response Execute(
+                string namespace_,
+                string sessionId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    sessionId
+                );
+            }
+            public async Task<DeleteGameSession.Response> ExecuteAsync(
+                string namespace_,
+                string sessionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    sessionId
+                );
+            }
+        }
+
+
+        public DeleteGameSession(IDeleteGameSessionBuilder builder,
             string namespace_,
             string sessionId
         )
@@ -178,17 +217,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

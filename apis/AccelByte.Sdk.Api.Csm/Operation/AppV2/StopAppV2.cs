@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static StopAppV2Builder Builder { get => new StopAppV2Builder(); }
 
-        public class StopAppV2Builder
-            : OperationBuilder<StopAppV2Builder>
+        public interface IStopAppV2Builder
         {
 
 
 
 
 
-            internal StopAppV2Builder() { }
+        }
 
-            internal StopAppV2Builder(IAccelByteSdk sdk)
+        public abstract class StopAppV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IStopAppV2Builder
+            where TImpl : StopAppV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public StopAppV2AbstractBuilder() { }
+
+            public StopAppV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<StopAppV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public StopAppV2.Response Execute(
+            protected StopAppV2.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<StopAppV2.Response> ExecuteAsync(
+            protected async Task<StopAppV2.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private StopAppV2(StopAppV2Builder builder,
+        public class StopAppV2Builder : StopAppV2AbstractBuilder<StopAppV2Builder>
+        {
+            public StopAppV2Builder() : base() { }
+
+            public StopAppV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public StopAppV2.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<StopAppV2.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public StopAppV2(IStopAppV2Builder builder,
             string app,
             string namespace_
         )
@@ -184,27 +223,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

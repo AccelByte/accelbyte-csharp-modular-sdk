@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static BulkCreditBuilder Builder { get => new BulkCreditBuilder(); }
 
-        public class BulkCreditBuilder
-            : OperationBuilder<BulkCreditBuilder>
+        public interface IBulkCreditBuilder
         {
 
 
 
 
 
-            internal BulkCreditBuilder() { }
+        }
 
-            internal BulkCreditBuilder(IAccelByteSdk sdk)
+        public abstract class BulkCreditAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkCreditBuilder
+            where TImpl : BulkCreditAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public BulkCreditAbstractBuilder() { }
+
+            public BulkCreditAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<BulkCreditBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public BulkCredit.Response Execute(
+            protected BulkCredit.Response InternalExecute(
                 List<BulkCreditRequest> body,
                 string namespace_
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<BulkCredit.Response> ExecuteAsync(
+            protected async Task<BulkCredit.Response> InternalExecuteAsync(
                 List<BulkCreditRequest> body,
                 string namespace_
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private BulkCredit(BulkCreditBuilder builder,
+        public class BulkCreditBuilder : BulkCreditAbstractBuilder<BulkCreditBuilder>
+        {
+            public BulkCreditBuilder() : base() { }
+
+            public BulkCreditBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public BulkCredit.Response Execute(
+                List<BulkCreditRequest> body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<BulkCredit.Response> ExecuteAsync(
+                List<BulkCreditRequest> body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public BulkCredit(IBulkCreditBuilder builder,
             List<BulkCreditRequest> body,
             string namespace_
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkCreditResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkCreditResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

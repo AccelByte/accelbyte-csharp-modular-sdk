@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetCountryListV3Builder Builder { get => new PublicGetCountryListV3Builder(); }
 
-        public class PublicGetCountryListV3Builder
-            : OperationBuilder<PublicGetCountryListV3Builder>
+        public interface IPublicGetCountryListV3Builder
         {
 
 
 
 
 
-            internal PublicGetCountryListV3Builder() { }
+        }
 
-            internal PublicGetCountryListV3Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetCountryListV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetCountryListV3Builder
+            where TImpl : PublicGetCountryListV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetCountryListV3AbstractBuilder() { }
+
+            public PublicGetCountryListV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetCountryListV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetCountryListV3.Response Execute(
+            protected PublicGetCountryListV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetCountryListV3.Response> ExecuteAsync(
+            protected async Task<PublicGetCountryListV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetCountryListV3(PublicGetCountryListV3Builder builder,
+        public class PublicGetCountryListV3Builder : PublicGetCountryListV3AbstractBuilder<PublicGetCountryListV3Builder>
+        {
+            public PublicGetCountryListV3Builder() : base() { }
+
+            public PublicGetCountryListV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetCountryListV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetCountryListV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetCountryListV3(IPublicGetCountryListV3Builder builder,
             string namespace_
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ModelCountryResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ModelCountryResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

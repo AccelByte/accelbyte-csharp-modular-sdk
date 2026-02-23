@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizePaymentBuilder Builder { get => new AnonymizePaymentBuilder(); }
 
-        public class AnonymizePaymentBuilder
-            : OperationBuilder<AnonymizePaymentBuilder>
+        public interface IAnonymizePaymentBuilder
         {
 
 
 
 
 
-            internal AnonymizePaymentBuilder() { }
+        }
 
-            internal AnonymizePaymentBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizePaymentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizePaymentBuilder
+            where TImpl : AnonymizePaymentAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizePaymentAbstractBuilder() { }
+
+            public AnonymizePaymentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizePaymentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizePayment.Response Execute(
+            protected AnonymizePayment.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizePayment.Response> ExecuteAsync(
+            protected async Task<AnonymizePayment.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizePayment(AnonymizePaymentBuilder builder,
+        public class AnonymizePaymentBuilder : AnonymizePaymentAbstractBuilder<AnonymizePaymentBuilder>
+        {
+            public AnonymizePaymentBuilder() : base() { }
+
+            public AnonymizePaymentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizePayment.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizePayment.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizePayment(IAnonymizePaymentBuilder builder,
             string namespace_,
             string userId
         )

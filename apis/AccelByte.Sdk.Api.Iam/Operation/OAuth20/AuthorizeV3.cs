@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -57,8 +57,42 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AuthorizeV3Builder Builder { get => new AuthorizeV3Builder(); }
 
-        public class AuthorizeV3Builder
-            : OperationBuilder<AuthorizeV3Builder>
+        public interface IAuthorizeV3Builder
+        {
+
+            string? BlockedPlatformId { get; }
+
+            string? CodeChallenge { get; }
+
+            AuthorizeV3CodeChallengeMethod? CodeChallengeMethod { get; }
+
+            bool? CreateHeadless { get; }
+
+            bool? LoginWebBased { get; }
+
+            string? Nonce { get; }
+
+            string? OneTimeLinkCode { get; }
+
+            string? RedirectUri { get; }
+
+            string? Scope { get; }
+
+            string? State { get; }
+
+            string? TargetAuthPage { get; }
+
+            bool? UseRedirectUriAsLoginUrlWhenLocked { get; }
+
+
+
+
+
+        }
+
+        public abstract class AuthorizeV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAuthorizeV3Builder
+            where TImpl : AuthorizeV3AbstractBuilder<TImpl>
         {
 
             public string? BlockedPlatformId { get; set; }
@@ -89,84 +123,84 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal AuthorizeV3Builder() { }
+            public AuthorizeV3AbstractBuilder() { }
 
-            internal AuthorizeV3Builder(IAccelByteSdk sdk)
+            public AuthorizeV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AuthorizeV3Builder SetBlockedPlatformId(string _blockedPlatformId)
+            public TImpl SetBlockedPlatformId(string _blockedPlatformId)
             {
                 BlockedPlatformId = _blockedPlatformId;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetCodeChallenge(string _codeChallenge)
+            public TImpl SetCodeChallenge(string _codeChallenge)
             {
                 CodeChallenge = _codeChallenge;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetCodeChallengeMethod(AuthorizeV3CodeChallengeMethod _codeChallengeMethod)
+            public TImpl SetCodeChallengeMethod(AuthorizeV3CodeChallengeMethod _codeChallengeMethod)
             {
                 CodeChallengeMethod = _codeChallengeMethod;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetCreateHeadless(bool _createHeadless)
+            public TImpl SetCreateHeadless(bool _createHeadless)
             {
                 CreateHeadless = _createHeadless;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetLoginWebBased(bool _loginWebBased)
+            public TImpl SetLoginWebBased(bool _loginWebBased)
             {
                 LoginWebBased = _loginWebBased;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetNonce(string _nonce)
+            public TImpl SetNonce(string _nonce)
             {
                 Nonce = _nonce;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetOneTimeLinkCode(string _oneTimeLinkCode)
+            public TImpl SetOneTimeLinkCode(string _oneTimeLinkCode)
             {
                 OneTimeLinkCode = _oneTimeLinkCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetRedirectUri(string _redirectUri)
+            public TImpl SetRedirectUri(string _redirectUri)
             {
                 RedirectUri = _redirectUri;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetScope(string _scope)
+            public TImpl SetScope(string _scope)
             {
                 Scope = _scope;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetState(string _state)
+            public TImpl SetState(string _state)
             {
                 State = _state;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetTargetAuthPage(string _targetAuthPage)
+            public TImpl SetTargetAuthPage(string _targetAuthPage)
             {
                 TargetAuthPage = _targetAuthPage;
-                return this;
+                return (TImpl)this;
             }
 
-            public AuthorizeV3Builder SetUseRedirectUriAsLoginUrlWhenLocked(bool _useRedirectUriAsLoginUrlWhenLocked)
+            public TImpl SetUseRedirectUriAsLoginUrlWhenLocked(bool _useRedirectUriAsLoginUrlWhenLocked)
             {
                 UseRedirectUriAsLoginUrlWhenLocked = _useRedirectUriAsLoginUrlWhenLocked;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -183,11 +217,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     responseType                    
                 );
 
-                op.SetBaseFields<AuthorizeV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AuthorizeV3.Response Execute(
+            protected AuthorizeV3.Response InternalExecute(
                 string clientId,
                 string responseType
             )
@@ -206,7 +240,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AuthorizeV3.Response> ExecuteAsync(
+            protected async Task<AuthorizeV3.Response> InternalExecuteAsync(
                 string clientId,
                 string responseType
             )
@@ -227,7 +261,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AuthorizeV3(AuthorizeV3Builder builder,
+        public class AuthorizeV3Builder : AuthorizeV3AbstractBuilder<AuthorizeV3Builder>
+        {
+            public AuthorizeV3Builder() : base() { }
+
+            public AuthorizeV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AuthorizeV3.Response Execute(
+                string clientId,
+                string responseType
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    responseType
+                );
+            }
+            public async Task<AuthorizeV3.Response> ExecuteAsync(
+                string clientId,
+                string responseType
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    responseType
+                );
+            }
+        }
+
+
+        public AuthorizeV3(IAuthorizeV3Builder builder,
             string clientId,
             AuthorizeV3ResponseType responseType
         )

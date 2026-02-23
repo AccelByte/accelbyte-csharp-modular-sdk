@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetAggregatePaymentProvidersBuilder Builder { get => new GetAggregatePaymentProvidersBuilder(); }
 
-        public class GetAggregatePaymentProvidersBuilder
-            : OperationBuilder<GetAggregatePaymentProvidersBuilder>
+        public interface IGetAggregatePaymentProvidersBuilder
         {
 
 
 
 
 
-            internal GetAggregatePaymentProvidersBuilder() { }
+        }
 
-            internal GetAggregatePaymentProvidersBuilder(IAccelByteSdk sdk)
+        public abstract class GetAggregatePaymentProvidersAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAggregatePaymentProvidersBuilder
+            where TImpl : GetAggregatePaymentProvidersAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetAggregatePaymentProvidersAbstractBuilder() { }
+
+            public GetAggregatePaymentProvidersAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 GetAggregatePaymentProviders op = new GetAggregatePaymentProviders(this
                 );
 
-                op.SetBaseFields<GetAggregatePaymentProvidersBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAggregatePaymentProviders.Response Execute(
+            protected GetAggregatePaymentProviders.Response InternalExecute(
             )
             {
                 GetAggregatePaymentProviders op = Build(
@@ -78,7 +88,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAggregatePaymentProviders.Response> ExecuteAsync(
+            protected async Task<GetAggregatePaymentProviders.Response> InternalExecuteAsync(
             )
             {
                 GetAggregatePaymentProviders op = Build(
@@ -95,7 +105,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetAggregatePaymentProviders(GetAggregatePaymentProvidersBuilder builder
+        public class GetAggregatePaymentProvidersBuilder : GetAggregatePaymentProvidersAbstractBuilder<GetAggregatePaymentProvidersBuilder>
+        {
+            public GetAggregatePaymentProvidersBuilder() : base() { }
+
+            public GetAggregatePaymentProvidersBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAggregatePaymentProviders.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetAggregatePaymentProviders.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetAggregatePaymentProviders(IGetAggregatePaymentProvidersBuilder builder
         )
         {
             
@@ -154,7 +185,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<string>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<string>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

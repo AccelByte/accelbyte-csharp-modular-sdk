@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static DeleteMatchPoolBuilder Builder { get => new DeleteMatchPoolBuilder(); }
 
-        public class DeleteMatchPoolBuilder
-            : OperationBuilder<DeleteMatchPoolBuilder>
+        public interface IDeleteMatchPoolBuilder
         {
 
 
 
 
 
-            internal DeleteMatchPoolBuilder() { }
+        }
 
-            internal DeleteMatchPoolBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteMatchPoolAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteMatchPoolBuilder
+            where TImpl : DeleteMatchPoolAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteMatchPoolAbstractBuilder() { }
+
+            public DeleteMatchPoolAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     pool                    
                 );
 
-                op.SetBaseFields<DeleteMatchPoolBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteMatchPool.Response Execute(
+            protected DeleteMatchPool.Response InternalExecute(
                 string namespace_,
                 string pool
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteMatchPool.Response> ExecuteAsync(
+            protected async Task<DeleteMatchPool.Response> InternalExecuteAsync(
                 string namespace_,
                 string pool
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private DeleteMatchPool(DeleteMatchPoolBuilder builder,
+        public class DeleteMatchPoolBuilder : DeleteMatchPoolAbstractBuilder<DeleteMatchPoolBuilder>
+        {
+            public DeleteMatchPoolBuilder() : base() { }
+
+            public DeleteMatchPoolBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteMatchPool.Response Execute(
+                string namespace_,
+                string pool
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    pool
+                );
+            }
+            public async Task<DeleteMatchPool.Response> ExecuteAsync(
+                string namespace_,
+                string pool
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    pool
+                );
+            }
+        }
+
+
+        public DeleteMatchPool(IDeleteMatchPoolBuilder builder,
             string namespace_,
             string pool
         )
@@ -180,22 +219,26 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

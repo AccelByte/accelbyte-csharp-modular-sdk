@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AnonymizeRevocationBuilder Builder { get => new AnonymizeRevocationBuilder(); }
 
-        public class AnonymizeRevocationBuilder
-            : OperationBuilder<AnonymizeRevocationBuilder>
+        public interface IAnonymizeRevocationBuilder
         {
 
 
 
 
 
-            internal AnonymizeRevocationBuilder() { }
+        }
 
-            internal AnonymizeRevocationBuilder(IAccelByteSdk sdk)
+        public abstract class AnonymizeRevocationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAnonymizeRevocationBuilder
+            where TImpl : AnonymizeRevocationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AnonymizeRevocationAbstractBuilder() { }
+
+            public AnonymizeRevocationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AnonymizeRevocationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AnonymizeRevocation.Response Execute(
+            protected AnonymizeRevocation.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AnonymizeRevocation.Response> ExecuteAsync(
+            protected async Task<AnonymizeRevocation.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AnonymizeRevocation(AnonymizeRevocationBuilder builder,
+        public class AnonymizeRevocationBuilder : AnonymizeRevocationAbstractBuilder<AnonymizeRevocationBuilder>
+        {
+            public AnonymizeRevocationBuilder() : base() { }
+
+            public AnonymizeRevocationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AnonymizeRevocation.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AnonymizeRevocation.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AnonymizeRevocation(IAnonymizeRevocationBuilder builder,
             string namespace_,
             string userId
         )

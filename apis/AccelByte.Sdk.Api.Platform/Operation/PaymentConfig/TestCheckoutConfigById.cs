@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestCheckoutConfigByIdBuilder Builder { get => new TestCheckoutConfigByIdBuilder(); }
 
-        public class TestCheckoutConfigByIdBuilder
-            : OperationBuilder<TestCheckoutConfigByIdBuilder>
+        public interface ITestCheckoutConfigByIdBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestCheckoutConfigByIdAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestCheckoutConfigByIdBuilder
+            where TImpl : TestCheckoutConfigByIdAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestCheckoutConfigByIdBuilder() { }
+            public TestCheckoutConfigByIdAbstractBuilder() { }
 
-            internal TestCheckoutConfigByIdBuilder(IAccelByteSdk sdk)
+            public TestCheckoutConfigByIdAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestCheckoutConfigByIdBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<TestCheckoutConfigByIdBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestCheckoutConfigById.Response Execute(
+            protected TestCheckoutConfigById.Response InternalExecute(
                 string id
             )
             {
@@ -89,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestCheckoutConfigById.Response> ExecuteAsync(
+            protected async Task<TestCheckoutConfigById.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -108,7 +120,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestCheckoutConfigById(TestCheckoutConfigByIdBuilder builder,
+        public class TestCheckoutConfigByIdBuilder : TestCheckoutConfigByIdAbstractBuilder<TestCheckoutConfigByIdBuilder>
+        {
+            public TestCheckoutConfigByIdBuilder() : base() { }
+
+            public TestCheckoutConfigByIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestCheckoutConfigById.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<TestCheckoutConfigById.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public TestCheckoutConfigById(ITestCheckoutConfigByIdBuilder builder,
             string id
         )
         {
@@ -176,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

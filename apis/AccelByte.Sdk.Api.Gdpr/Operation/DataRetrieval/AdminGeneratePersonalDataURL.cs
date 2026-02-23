@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,20 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminGeneratePersonalDataURLBuilder Builder { get => new AdminGeneratePersonalDataURLBuilder(); }
 
-        public class AdminGeneratePersonalDataURLBuilder
-            : OperationBuilder<AdminGeneratePersonalDataURLBuilder>
+        public interface IAdminGeneratePersonalDataURLBuilder
+        {
+
+
+
+            string? Password { get; }
+
+
+
+        }
+
+        public abstract class AdminGeneratePersonalDataURLAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGeneratePersonalDataURLBuilder
+            where TImpl : AdminGeneratePersonalDataURLAbstractBuilder<TImpl>
         {
 
 
@@ -47,9 +59,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
 
 
-            internal AdminGeneratePersonalDataURLBuilder() { }
+            public AdminGeneratePersonalDataURLAbstractBuilder() { }
 
-            internal AdminGeneratePersonalDataURLBuilder(IAccelByteSdk sdk)
+            public AdminGeneratePersonalDataURLAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,10 +69,10 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
 
 
-            public AdminGeneratePersonalDataURLBuilder SetPassword(string _password)
+            public TImpl SetPassword(string _password)
             {
                 Password = _password;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -77,11 +89,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminGeneratePersonalDataURLBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGeneratePersonalDataURL.Response Execute(
+            protected AdminGeneratePersonalDataURL.Response InternalExecute(
                 string namespace_,
                 string requestDate,
                 string userId
@@ -102,7 +114,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGeneratePersonalDataURL.Response> ExecuteAsync(
+            protected async Task<AdminGeneratePersonalDataURL.Response> InternalExecuteAsync(
                 string namespace_,
                 string requestDate,
                 string userId
@@ -125,7 +137,40 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminGeneratePersonalDataURL(AdminGeneratePersonalDataURLBuilder builder,
+        public class AdminGeneratePersonalDataURLBuilder : AdminGeneratePersonalDataURLAbstractBuilder<AdminGeneratePersonalDataURLBuilder>
+        {
+            public AdminGeneratePersonalDataURLBuilder() : base() { }
+
+            public AdminGeneratePersonalDataURLBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGeneratePersonalDataURL.Response Execute(
+                string namespace_,
+                string requestDate,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    requestDate,
+                    userId
+                );
+            }
+            public async Task<AdminGeneratePersonalDataURL.Response> ExecuteAsync(
+                string namespace_,
+                string requestDate,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    requestDate,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminGeneratePersonalDataURL(IAdminGeneratePersonalDataURLBuilder builder,
             string namespace_,
             string requestDate,
             string userId
@@ -207,27 +252,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsUserDataURL>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsUserDataURL>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

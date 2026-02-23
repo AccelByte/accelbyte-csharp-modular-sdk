@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DownloadInvoiceDetailsBuilder Builder { get => new DownloadInvoiceDetailsBuilder(); }
 
-        public class DownloadInvoiceDetailsBuilder
-            : OperationBuilder<DownloadInvoiceDetailsBuilder>
+        public interface IDownloadInvoiceDetailsBuilder
         {
 
 
 
 
 
-            internal DownloadInvoiceDetailsBuilder() { }
+        }
 
-            internal DownloadInvoiceDetailsBuilder(IAccelByteSdk sdk)
+        public abstract class DownloadInvoiceDetailsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDownloadInvoiceDetailsBuilder
+            where TImpl : DownloadInvoiceDetailsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DownloadInvoiceDetailsAbstractBuilder() { }
+
+            public DownloadInvoiceDetailsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -71,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     startTime                    
                 );
 
-                op.SetBaseFields<DownloadInvoiceDetailsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DownloadInvoiceDetails.Response Execute(
+            protected DownloadInvoiceDetails.Response InternalExecute(
                 string namespace_,
                 string endTime,
                 string feature,
@@ -102,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DownloadInvoiceDetails.Response> ExecuteAsync(
+            protected async Task<DownloadInvoiceDetails.Response> InternalExecuteAsync(
                 string namespace_,
                 string endTime,
                 string feature,
@@ -131,7 +141,52 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DownloadInvoiceDetails(DownloadInvoiceDetailsBuilder builder,
+        public class DownloadInvoiceDetailsBuilder : DownloadInvoiceDetailsAbstractBuilder<DownloadInvoiceDetailsBuilder>
+        {
+            public DownloadInvoiceDetailsBuilder() : base() { }
+
+            public DownloadInvoiceDetailsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DownloadInvoiceDetails.Response Execute(
+                string namespace_,
+                string endTime,
+                string feature,
+                string itemId,
+                string itemType,
+                string startTime
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    endTime,
+                    feature,
+                    itemId,
+                    itemType,
+                    startTime
+                );
+            }
+            public async Task<DownloadInvoiceDetails.Response> ExecuteAsync(
+                string namespace_,
+                string endTime,
+                string feature,
+                string itemId,
+                string itemType,
+                string startTime
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    endTime,
+                    feature,
+                    itemId,
+                    itemType,
+                    startTime
+                );
+            }
+        }
+
+
+        public DownloadInvoiceDetails(IDownloadInvoiceDetailsBuilder builder,
             string namespace_,
             string endTime,
             string feature,

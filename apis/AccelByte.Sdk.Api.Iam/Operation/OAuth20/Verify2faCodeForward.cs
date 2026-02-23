@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static Verify2faCodeForwardBuilder Builder { get => new Verify2faCodeForwardBuilder(); }
 
-        public class Verify2faCodeForwardBuilder
-            : OperationBuilder<Verify2faCodeForwardBuilder>
+        public interface IVerify2faCodeForwardBuilder
+        {
+
+
+
+            string? DefaultFactor { get; }
+
+            string? Factors { get; }
+
+            bool? RememberDevice { get; }
+
+
+
+        }
+
+        public abstract class Verify2faCodeForwardAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IVerify2faCodeForwardBuilder
+            where TImpl : Verify2faCodeForwardAbstractBuilder<TImpl>
         {
 
 
@@ -50,9 +66,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal Verify2faCodeForwardBuilder() { }
+            public Verify2faCodeForwardAbstractBuilder() { }
 
-            internal Verify2faCodeForwardBuilder(IAccelByteSdk sdk)
+            public Verify2faCodeForwardAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,22 +76,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            public Verify2faCodeForwardBuilder SetDefaultFactor(string _defaultFactor)
+            public TImpl SetDefaultFactor(string _defaultFactor)
             {
                 DefaultFactor = _defaultFactor;
-                return this;
+                return (TImpl)this;
             }
 
-            public Verify2faCodeForwardBuilder SetFactors(string _factors)
+            public TImpl SetFactors(string _factors)
             {
                 Factors = _factors;
-                return this;
+                return (TImpl)this;
             }
 
-            public Verify2faCodeForwardBuilder SetRememberDevice(bool _rememberDevice)
+            public TImpl SetRememberDevice(bool _rememberDevice)
             {
                 RememberDevice = _rememberDevice;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -94,11 +110,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     mfaToken                    
                 );
 
-                op.SetBaseFields<Verify2faCodeForwardBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Verify2faCodeForward.Response Execute(
+            protected Verify2faCodeForward.Response InternalExecute(
                 string clientId,
                 string code,
                 string factor,
@@ -121,7 +137,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Verify2faCodeForward.Response> ExecuteAsync(
+            protected async Task<Verify2faCodeForward.Response> InternalExecuteAsync(
                 string clientId,
                 string code,
                 string factor,
@@ -146,7 +162,44 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private Verify2faCodeForward(Verify2faCodeForwardBuilder builder,
+        public class Verify2faCodeForwardBuilder : Verify2faCodeForwardAbstractBuilder<Verify2faCodeForwardBuilder>
+        {
+            public Verify2faCodeForwardBuilder() : base() { }
+
+            public Verify2faCodeForwardBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Verify2faCodeForward.Response Execute(
+                string clientId,
+                string code,
+                string factor,
+                string mfaToken
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    code,
+                    factor,
+                    mfaToken
+                );
+            }
+            public async Task<Verify2faCodeForward.Response> ExecuteAsync(
+                string clientId,
+                string code,
+                string factor,
+                string mfaToken
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    code,
+                    factor,
+                    mfaToken
+                );
+            }
+        }
+
+
+        public Verify2faCodeForward(IVerify2faCodeForwardBuilder builder,
             string clientId,
             string code,
             string factor,

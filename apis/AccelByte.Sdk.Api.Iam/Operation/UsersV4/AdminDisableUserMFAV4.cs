@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDisableUserMFAV4Builder Builder { get => new AdminDisableUserMFAV4Builder(); }
 
-        public class AdminDisableUserMFAV4Builder
-            : OperationBuilder<AdminDisableUserMFAV4Builder>
+        public interface IAdminDisableUserMFAV4Builder
         {
 
 
 
 
 
-            internal AdminDisableUserMFAV4Builder() { }
+        }
 
-            internal AdminDisableUserMFAV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminDisableUserMFAV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDisableUserMFAV4Builder
+            where TImpl : AdminDisableUserMFAV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDisableUserMFAV4AbstractBuilder() { }
+
+            public AdminDisableUserMFAV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminDisableUserMFAV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDisableUserMFAV4.Response Execute(
+            protected AdminDisableUserMFAV4.Response InternalExecute(
                 ModelDisableMFARequest body,
                 string namespace_,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDisableUserMFAV4.Response> ExecuteAsync(
+            protected async Task<AdminDisableUserMFAV4.Response> InternalExecuteAsync(
                 ModelDisableMFARequest body,
                 string namespace_,
                 string userId
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDisableUserMFAV4(AdminDisableUserMFAV4Builder builder,
+        public class AdminDisableUserMFAV4Builder : AdminDisableUserMFAV4AbstractBuilder<AdminDisableUserMFAV4Builder>
+        {
+            public AdminDisableUserMFAV4Builder() : base() { }
+
+            public AdminDisableUserMFAV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDisableUserMFAV4.Response Execute(
+                ModelDisableMFARequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminDisableUserMFAV4.Response> ExecuteAsync(
+                ModelDisableMFARequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminDisableUserMFAV4(IAdminDisableUserMFAV4Builder builder,
             ModelDisableMFARequest body,
             string namespace_,
             string userId
@@ -194,27 +237,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

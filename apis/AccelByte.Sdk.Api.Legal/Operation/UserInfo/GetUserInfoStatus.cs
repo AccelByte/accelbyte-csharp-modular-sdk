@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static GetUserInfoStatusBuilder Builder { get => new GetUserInfoStatusBuilder(); }
 
-        public class GetUserInfoStatusBuilder
-            : OperationBuilder<GetUserInfoStatusBuilder>
+        public interface IGetUserInfoStatusBuilder
+        {
+
+            string? Namespaces { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserInfoStatusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserInfoStatusBuilder
+            where TImpl : GetUserInfoStatusAbstractBuilder<TImpl>
         {
 
             public string? Namespaces { get; set; }
@@ -42,18 +54,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal GetUserInfoStatusBuilder() { }
+            public GetUserInfoStatusAbstractBuilder() { }
 
-            internal GetUserInfoStatusBuilder(IAccelByteSdk sdk)
+            public GetUserInfoStatusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserInfoStatusBuilder SetNamespaces(string _namespaces)
+            public TImpl SetNamespaces(string _namespaces)
             {
                 Namespaces = _namespaces;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 GetUserInfoStatus op = new GetUserInfoStatus(this
                 );
 
-                op.SetBaseFields<GetUserInfoStatusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserInfoStatus.Response Execute(
+            protected GetUserInfoStatus.Response InternalExecute(
             )
             {
                 GetUserInfoStatus op = Build(
@@ -85,7 +97,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserInfoStatus.Response> ExecuteAsync(
+            protected async Task<GetUserInfoStatus.Response> InternalExecuteAsync(
             )
             {
                 GetUserInfoStatus op = Build(
@@ -102,7 +114,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private GetUserInfoStatus(GetUserInfoStatusBuilder builder
+        public class GetUserInfoStatusBuilder : GetUserInfoStatusAbstractBuilder<GetUserInfoStatusBuilder>
+        {
+            public GetUserInfoStatusBuilder() : base() { }
+
+            public GetUserInfoStatusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserInfoStatus.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetUserInfoStatus.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetUserInfoStatus(IGetUserInfoStatusBuilder builder
         )
         {
             
@@ -164,7 +197,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveUserInfoCacheStatusResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveUserInfoCacheStatusResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

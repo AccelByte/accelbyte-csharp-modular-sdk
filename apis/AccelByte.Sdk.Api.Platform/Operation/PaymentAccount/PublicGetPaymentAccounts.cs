@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetPaymentAccountsBuilder Builder { get => new PublicGetPaymentAccountsBuilder(); }
 
-        public class PublicGetPaymentAccountsBuilder
-            : OperationBuilder<PublicGetPaymentAccountsBuilder>
+        public interface IPublicGetPaymentAccountsBuilder
         {
 
 
 
 
 
-            internal PublicGetPaymentAccountsBuilder() { }
+        }
 
-            internal PublicGetPaymentAccountsBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetPaymentAccountsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetPaymentAccountsBuilder
+            where TImpl : PublicGetPaymentAccountsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetPaymentAccountsAbstractBuilder() { }
+
+            public PublicGetPaymentAccountsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetPaymentAccountsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetPaymentAccounts.Response Execute(
+            protected PublicGetPaymentAccounts.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetPaymentAccounts.Response> ExecuteAsync(
+            protected async Task<PublicGetPaymentAccounts.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetPaymentAccounts(PublicGetPaymentAccountsBuilder builder,
+        public class PublicGetPaymentAccountsBuilder : PublicGetPaymentAccountsAbstractBuilder<PublicGetPaymentAccountsBuilder>
+        {
+            public PublicGetPaymentAccountsBuilder() : base() { }
+
+            public PublicGetPaymentAccountsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetPaymentAccounts.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<PublicGetPaymentAccounts.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetPaymentAccounts(IPublicGetPaymentAccountsBuilder builder,
             string namespace_,
             string userId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.PaymentAccount>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.PaymentAccount>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

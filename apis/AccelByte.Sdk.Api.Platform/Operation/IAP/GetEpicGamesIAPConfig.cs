@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetEpicGamesIAPConfigBuilder Builder { get => new GetEpicGamesIAPConfigBuilder(); }
 
-        public class GetEpicGamesIAPConfigBuilder
-            : OperationBuilder<GetEpicGamesIAPConfigBuilder>
+        public interface IGetEpicGamesIAPConfigBuilder
         {
 
 
 
 
 
-            internal GetEpicGamesIAPConfigBuilder() { }
+        }
 
-            internal GetEpicGamesIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetEpicGamesIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetEpicGamesIAPConfigBuilder
+            where TImpl : GetEpicGamesIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetEpicGamesIAPConfigAbstractBuilder() { }
+
+            public GetEpicGamesIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetEpicGamesIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetEpicGamesIAPConfig.Response Execute(
+            protected GetEpicGamesIAPConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetEpicGamesIAPConfig.Response> ExecuteAsync(
+            protected async Task<GetEpicGamesIAPConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetEpicGamesIAPConfig(GetEpicGamesIAPConfigBuilder builder,
+        public class GetEpicGamesIAPConfigBuilder : GetEpicGamesIAPConfigAbstractBuilder<GetEpicGamesIAPConfigBuilder>
+        {
+            public GetEpicGamesIAPConfigBuilder() : base() { }
+
+            public GetEpicGamesIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetEpicGamesIAPConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetEpicGamesIAPConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetEpicGamesIAPConfig(IGetEpicGamesIAPConfigBuilder builder,
             string namespace_
         )
         {
@@ -164,7 +199,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.EpicGamesIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

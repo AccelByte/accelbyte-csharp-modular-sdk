@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DebugMatchedPaymentProviderConfigBuilder Builder { get => new DebugMatchedPaymentProviderConfigBuilder(); }
 
-        public class DebugMatchedPaymentProviderConfigBuilder
-            : OperationBuilder<DebugMatchedPaymentProviderConfigBuilder>
+        public interface IDebugMatchedPaymentProviderConfigBuilder
+        {
+
+            string? Namespace { get; }
+
+            string? Region { get; }
+
+
+
+
+
+        }
+
+        public abstract class DebugMatchedPaymentProviderConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDebugMatchedPaymentProviderConfigBuilder
+            where TImpl : DebugMatchedPaymentProviderConfigAbstractBuilder<TImpl>
         {
 
             public string? Namespace { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal DebugMatchedPaymentProviderConfigBuilder() { }
+            public DebugMatchedPaymentProviderConfigAbstractBuilder() { }
 
-            internal DebugMatchedPaymentProviderConfigBuilder(IAccelByteSdk sdk)
+            public DebugMatchedPaymentProviderConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DebugMatchedPaymentProviderConfigBuilder SetNamespace(string _namespace_)
+            public TImpl SetNamespace(string _namespace_)
             {
                 Namespace = _namespace_;
-                return this;
+                return (TImpl)this;
             }
 
-            public DebugMatchedPaymentProviderConfigBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -75,11 +89,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 DebugMatchedPaymentProviderConfig op = new DebugMatchedPaymentProviderConfig(this
                 );
 
-                op.SetBaseFields<DebugMatchedPaymentProviderConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DebugMatchedPaymentProviderConfig.Response Execute(
+            protected DebugMatchedPaymentProviderConfig.Response InternalExecute(
             )
             {
                 DebugMatchedPaymentProviderConfig op = Build(
@@ -94,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DebugMatchedPaymentProviderConfig.Response> ExecuteAsync(
+            protected async Task<DebugMatchedPaymentProviderConfig.Response> InternalExecuteAsync(
             )
             {
                 DebugMatchedPaymentProviderConfig op = Build(
@@ -111,7 +125,28 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DebugMatchedPaymentProviderConfig(DebugMatchedPaymentProviderConfigBuilder builder
+        public class DebugMatchedPaymentProviderConfigBuilder : DebugMatchedPaymentProviderConfigAbstractBuilder<DebugMatchedPaymentProviderConfigBuilder>
+        {
+            public DebugMatchedPaymentProviderConfigBuilder() : base() { }
+
+            public DebugMatchedPaymentProviderConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DebugMatchedPaymentProviderConfig.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<DebugMatchedPaymentProviderConfig.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public DebugMatchedPaymentProviderConfig(IDebugMatchedPaymentProviderConfigBuilder builder
         )
         {
             
@@ -178,12 +213,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static AdminGetSteamJobInfoBuilder Builder { get => new AdminGetSteamJobInfoBuilder(); }
 
-        public class AdminGetSteamJobInfoBuilder
-            : OperationBuilder<AdminGetSteamJobInfoBuilder>
+        public interface IAdminGetSteamJobInfoBuilder
         {
 
 
 
 
 
-            internal AdminGetSteamJobInfoBuilder() { }
+        }
 
-            internal AdminGetSteamJobInfoBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetSteamJobInfoAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetSteamJobInfoBuilder
+            where TImpl : AdminGetSteamJobInfoAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetSteamJobInfoAbstractBuilder() { }
+
+            public AdminGetSteamJobInfoAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetSteamJobInfoBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetSteamJobInfo.Response Execute(
+            protected AdminGetSteamJobInfo.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetSteamJobInfo.Response> ExecuteAsync(
+            protected async Task<AdminGetSteamJobInfo.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private AdminGetSteamJobInfo(AdminGetSteamJobInfoBuilder builder,
+        public class AdminGetSteamJobInfoBuilder : AdminGetSteamJobInfoAbstractBuilder<AdminGetSteamJobInfoBuilder>
+        {
+            public AdminGetSteamJobInfoBuilder() : base() { }
+
+            public AdminGetSteamJobInfoBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetSteamJobInfo.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetSteamJobInfo.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetSteamJobInfo(IAdminGetSteamJobInfoBuilder builder,
             string namespace_
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.SteamReportJobInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.SteamReportJobInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

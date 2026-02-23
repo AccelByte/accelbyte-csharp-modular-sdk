@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static ArtifactGetURLBuilder Builder { get => new ArtifactGetURLBuilder(); }
 
-        public class ArtifactGetURLBuilder
-            : OperationBuilder<ArtifactGetURLBuilder>
+        public interface IArtifactGetURLBuilder
         {
 
 
 
 
 
-            internal ArtifactGetURLBuilder() { }
+        }
 
-            internal ArtifactGetURLBuilder(IAccelByteSdk sdk)
+        public abstract class ArtifactGetURLAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IArtifactGetURLBuilder
+            where TImpl : ArtifactGetURLAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ArtifactGetURLAbstractBuilder() { }
+
+            public ArtifactGetURLAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ArtifactGetURLBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ArtifactGetURL.Response Execute(
+            protected ArtifactGetURL.Response InternalExecute(
                 string artifactID,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ArtifactGetURL.Response> ExecuteAsync(
+            protected async Task<ArtifactGetURL.Response> InternalExecuteAsync(
                 string artifactID,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private ArtifactGetURL(ArtifactGetURLBuilder builder,
+        public class ArtifactGetURLBuilder : ArtifactGetURLAbstractBuilder<ArtifactGetURLBuilder>
+        {
+            public ArtifactGetURLBuilder() : base() { }
+
+            public ArtifactGetURLBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ArtifactGetURL.Response Execute(
+                string artifactID,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    artifactID,
+                    namespace_
+                );
+            }
+            public async Task<ArtifactGetURL.Response> ExecuteAsync(
+                string artifactID,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    artifactID,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ArtifactGetURL(IArtifactGetURLBuilder builder,
             string artifactID,
             string namespace_
         )
@@ -181,32 +220,38 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiArtifactURLResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiArtifactURLResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

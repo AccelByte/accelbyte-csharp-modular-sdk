@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static FleetListBuilder Builder { get => new FleetListBuilder(); }
 
-        public class FleetListBuilder
-            : OperationBuilder<FleetListBuilder>
+        public interface IFleetListBuilder
+        {
+
+            bool? Active { get; }
+
+            long? Count { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            string? Region { get; }
+
+            FleetListSortBy? SortBy { get; }
+
+            FleetListSortDirection? SortDirection { get; }
+
+
+
+
+
+        }
+
+        public abstract class FleetListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IFleetListBuilder
+            where TImpl : FleetListAbstractBuilder<TImpl>
         {
 
             public bool? Active { get; set; }
@@ -52,54 +76,54 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal FleetListBuilder() { }
+            public FleetListAbstractBuilder() { }
 
-            internal FleetListBuilder(IAccelByteSdk sdk)
+            public FleetListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public FleetListBuilder SetActive(bool _active)
+            public TImpl SetActive(bool _active)
             {
                 Active = _active;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetListBuilder SetCount(long _count)
+            public TImpl SetCount(long _count)
             {
                 Count = _count;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetListBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetListBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetListBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetListBuilder SetSortBy(FleetListSortBy _sortBy)
+            public TImpl SetSortBy(FleetListSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public FleetListBuilder SetSortDirection(FleetListSortDirection _sortDirection)
+            public TImpl SetSortDirection(FleetListSortDirection _sortDirection)
             {
                 SortDirection = _sortDirection;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -114,11 +138,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<FleetListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public FleetList.Response Execute(
+            protected FleetList.Response InternalExecute(
                 string namespace_
             )
             {
@@ -135,7 +159,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<FleetList.Response> ExecuteAsync(
+            protected async Task<FleetList.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -154,7 +178,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private FleetList(FleetListBuilder builder,
+        public class FleetListBuilder : FleetListAbstractBuilder<FleetListBuilder>
+        {
+            public FleetListBuilder() : base() { }
+
+            public FleetListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public FleetList.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<FleetList.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public FleetList(IFleetListBuilder builder,
             string namespace_
         )
         {
@@ -240,12 +289,14 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiFleetListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiFleetListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

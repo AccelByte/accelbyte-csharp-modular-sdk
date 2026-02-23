@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -54,17 +54,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static CreatePaymentProviderConfigBuilder Builder { get => new CreatePaymentProviderConfigBuilder(); }
 
-        public class CreatePaymentProviderConfigBuilder
-            : OperationBuilder<CreatePaymentProviderConfigBuilder>
+        public interface ICreatePaymentProviderConfigBuilder
         {
 
 
 
 
 
-            internal CreatePaymentProviderConfigBuilder() { }
+        }
 
-            internal CreatePaymentProviderConfigBuilder(IAccelByteSdk sdk)
+        public abstract class CreatePaymentProviderConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreatePaymentProviderConfigBuilder
+            where TImpl : CreatePaymentProviderConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreatePaymentProviderConfigAbstractBuilder() { }
+
+            public CreatePaymentProviderConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -82,11 +92,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<CreatePaymentProviderConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreatePaymentProviderConfig.Response Execute(
+            protected CreatePaymentProviderConfig.Response InternalExecute(
                 PaymentProviderConfigEdit body
             )
             {
@@ -103,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreatePaymentProviderConfig.Response> ExecuteAsync(
+            protected async Task<CreatePaymentProviderConfig.Response> InternalExecuteAsync(
                 PaymentProviderConfigEdit body
             )
             {
@@ -122,7 +132,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private CreatePaymentProviderConfig(CreatePaymentProviderConfigBuilder builder,
+        public class CreatePaymentProviderConfigBuilder : CreatePaymentProviderConfigAbstractBuilder<CreatePaymentProviderConfigBuilder>
+        {
+            public CreatePaymentProviderConfigBuilder() : base() { }
+
+            public CreatePaymentProviderConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreatePaymentProviderConfig.Response Execute(
+                PaymentProviderConfigEdit body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<CreatePaymentProviderConfig.Response> ExecuteAsync(
+                PaymentProviderConfigEdit body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public CreatePaymentProviderConfig(ICreatePaymentProviderConfigBuilder builder,
             PaymentProviderConfigEdit body
         )
         {
@@ -191,22 +226,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.PaymentProviderConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

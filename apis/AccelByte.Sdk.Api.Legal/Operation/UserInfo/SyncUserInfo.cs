@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static SyncUserInfoBuilder Builder { get => new SyncUserInfoBuilder(); }
 
-        public class SyncUserInfoBuilder
-            : OperationBuilder<SyncUserInfoBuilder>
+        public interface ISyncUserInfoBuilder
         {
 
 
 
 
 
-            internal SyncUserInfoBuilder() { }
+        }
 
-            internal SyncUserInfoBuilder(IAccelByteSdk sdk)
+        public abstract class SyncUserInfoAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncUserInfoBuilder
+            where TImpl : SyncUserInfoAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncUserInfoAbstractBuilder() { }
+
+            public SyncUserInfoAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,12 +69,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<SyncUserInfoBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public SyncUserInfo.Response Execute(
+            protected SyncUserInfo.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncUserInfo.Response> ExecuteAsync(
+            protected async Task<SyncUserInfo.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,33 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private SyncUserInfo(SyncUserInfoBuilder builder,
+        public class SyncUserInfoBuilder : SyncUserInfoAbstractBuilder<SyncUserInfoBuilder>
+        {
+            public SyncUserInfoBuilder() : base() { }
+
+            public SyncUserInfoBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public SyncUserInfo.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<SyncUserInfo.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public SyncUserInfo(ISyncUserInfoBuilder builder,
             string namespace_
         )
         {

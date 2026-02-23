@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeletePaymentProviderConfigBuilder Builder { get => new DeletePaymentProviderConfigBuilder(); }
 
-        public class DeletePaymentProviderConfigBuilder
-            : OperationBuilder<DeletePaymentProviderConfigBuilder>
+        public interface IDeletePaymentProviderConfigBuilder
         {
 
 
 
 
 
-            internal DeletePaymentProviderConfigBuilder() { }
+        }
 
-            internal DeletePaymentProviderConfigBuilder(IAccelByteSdk sdk)
+        public abstract class DeletePaymentProviderConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeletePaymentProviderConfigBuilder
+            where TImpl : DeletePaymentProviderConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeletePaymentProviderConfigAbstractBuilder() { }
+
+            public DeletePaymentProviderConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     id                    
                 );
 
-                op.SetBaseFields<DeletePaymentProviderConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeletePaymentProviderConfig.Response Execute(
+            protected DeletePaymentProviderConfig.Response InternalExecute(
                 string id
             )
             {
@@ -82,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeletePaymentProviderConfig.Response> ExecuteAsync(
+            protected async Task<DeletePaymentProviderConfig.Response> InternalExecuteAsync(
                 string id
             )
             {
@@ -101,7 +111,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeletePaymentProviderConfig(DeletePaymentProviderConfigBuilder builder,
+        public class DeletePaymentProviderConfigBuilder : DeletePaymentProviderConfigAbstractBuilder<DeletePaymentProviderConfigBuilder>
+        {
+            public DeletePaymentProviderConfigBuilder() : base() { }
+
+            public DeletePaymentProviderConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeletePaymentProviderConfig.Response Execute(
+                string id
+            )
+            {
+                return InternalExecute(
+                    id
+                );
+            }
+            public async Task<DeletePaymentProviderConfig.Response> ExecuteAsync(
+                string id
+            )
+            {
+                return await InternalExecuteAsync(
+                    id
+                );
+            }
+        }
+
+
+        public DeletePaymentProviderConfig(IDeletePaymentProviderConfigBuilder builder,
             string id
         )
         {
@@ -167,7 +202,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

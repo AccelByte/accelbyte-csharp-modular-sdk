@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetAppImageListV2Builder Builder { get => new GetAppImageListV2Builder(); }
 
-        public class GetAppImageListV2Builder
-            : OperationBuilder<GetAppImageListV2Builder>
+        public interface IGetAppImageListV2Builder
+        {
+
+            string? Cached { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetAppImageListV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetAppImageListV2Builder
+            where TImpl : GetAppImageListV2AbstractBuilder<TImpl>
         {
 
             public string? Cached { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal GetAppImageListV2Builder() { }
+            public GetAppImageListV2AbstractBuilder() { }
 
-            internal GetAppImageListV2Builder(IAccelByteSdk sdk)
+            public GetAppImageListV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetAppImageListV2Builder SetCached(string _cached)
+            public TImpl SetCached(string _cached)
             {
                 Cached = _cached;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetAppImageListV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetAppImageListV2.Response Execute(
+            protected GetAppImageListV2.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetAppImageListV2.Response> ExecuteAsync(
+            protected async Task<GetAppImageListV2.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetAppImageListV2(GetAppImageListV2Builder builder,
+        public class GetAppImageListV2Builder : GetAppImageListV2AbstractBuilder<GetAppImageListV2Builder>
+        {
+            public GetAppImageListV2Builder() : base() { }
+
+            public GetAppImageListV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetAppImageListV2.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<GetAppImageListV2.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetAppImageListV2(IGetAppImageListV2Builder builder,
             string app,
             string namespace_
         )
@@ -194,27 +235,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetAppImageListV2Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelGetAppImageListV2Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

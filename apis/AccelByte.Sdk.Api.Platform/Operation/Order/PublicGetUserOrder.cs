@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetUserOrderBuilder Builder { get => new PublicGetUserOrderBuilder(); }
 
-        public class PublicGetUserOrderBuilder
-            : OperationBuilder<PublicGetUserOrderBuilder>
+        public interface IPublicGetUserOrderBuilder
         {
 
 
 
 
 
-            internal PublicGetUserOrderBuilder() { }
+        }
 
-            internal PublicGetUserOrderBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetUserOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserOrderBuilder
+            where TImpl : PublicGetUserOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetUserOrderAbstractBuilder() { }
+
+            public PublicGetUserOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserOrder.Response Execute(
+            protected PublicGetUserOrder.Response InternalExecute(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserOrder.Response> ExecuteAsync(
+            protected async Task<PublicGetUserOrder.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -112,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public PublicGetUserOrder.Response<T1> Execute<T1>(
+            protected PublicGetUserOrder.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserOrder.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<PublicGetUserOrder.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string orderNo,
                 string userId
@@ -156,7 +166,65 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetUserOrder(PublicGetUserOrderBuilder builder,
+        public class PublicGetUserOrderBuilder : PublicGetUserOrderAbstractBuilder<PublicGetUserOrderBuilder>
+        {
+            public PublicGetUserOrderBuilder() : base() { }
+
+            public PublicGetUserOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserOrder.Response Execute(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserOrder.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+
+            public PublicGetUserOrder.Response<T1> Execute<T1>(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserOrder.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string orderNo,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    orderNo,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserOrder(IPublicGetUserOrderBuilder builder,
             string namespace_,
             string orderNo,
             string userId
@@ -236,12 +304,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -262,12 +332,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static CreateRuleSetBuilder Builder { get => new CreateRuleSetBuilder(); }
 
-        public class CreateRuleSetBuilder
-            : OperationBuilder<CreateRuleSetBuilder>
+        public interface ICreateRuleSetBuilder
         {
 
 
 
 
 
-            internal CreateRuleSetBuilder() { }
+        }
 
-            internal CreateRuleSetBuilder(IAccelByteSdk sdk)
+        public abstract class CreateRuleSetAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateRuleSetBuilder
+            where TImpl : CreateRuleSetAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateRuleSetAbstractBuilder() { }
+
+            public CreateRuleSetAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateRuleSetBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateRuleSet.Response Execute(
+            protected CreateRuleSet.Response InternalExecute(
                 ApiRuleSetPayload body,
                 string namespace_
             )
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateRuleSet.Response> ExecuteAsync(
+            protected async Task<CreateRuleSet.Response> InternalExecuteAsync(
                 ApiRuleSetPayload body,
                 string namespace_
             )
@@ -111,7 +121,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private CreateRuleSet(CreateRuleSetBuilder builder,
+        public class CreateRuleSetBuilder : CreateRuleSetAbstractBuilder<CreateRuleSetBuilder>
+        {
+            public CreateRuleSetBuilder() : base() { }
+
+            public CreateRuleSetBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateRuleSet.Response Execute(
+                ApiRuleSetPayload body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateRuleSet.Response> ExecuteAsync(
+                ApiRuleSetPayload body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateRuleSet(ICreateRuleSetBuilder builder,
             ApiRuleSetPayload body,
             string namespace_
         )
@@ -189,27 +228,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

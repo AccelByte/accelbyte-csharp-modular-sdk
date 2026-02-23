@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PlatformAuthenticateSAMLV3HandlerBuilder Builder { get => new PlatformAuthenticateSAMLV3HandlerBuilder(); }
 
-        public class PlatformAuthenticateSAMLV3HandlerBuilder
-            : OperationBuilder<PlatformAuthenticateSAMLV3HandlerBuilder>
+        public interface IPlatformAuthenticateSAMLV3HandlerBuilder
+        {
+
+            string? Code { get; }
+
+            string? Error { get; }
+
+
+
+
+
+        }
+
+        public abstract class PlatformAuthenticateSAMLV3HandlerAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPlatformAuthenticateSAMLV3HandlerBuilder
+            where TImpl : PlatformAuthenticateSAMLV3HandlerAbstractBuilder<TImpl>
         {
 
             public string? Code { get; set; }
@@ -47,24 +61,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal PlatformAuthenticateSAMLV3HandlerBuilder() { }
+            public PlatformAuthenticateSAMLV3HandlerAbstractBuilder() { }
 
-            internal PlatformAuthenticateSAMLV3HandlerBuilder(IAccelByteSdk sdk)
+            public PlatformAuthenticateSAMLV3HandlerAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PlatformAuthenticateSAMLV3HandlerBuilder SetCode(string _code)
+            public TImpl SetCode(string _code)
             {
                 Code = _code;
-                return this;
+                return (TImpl)this;
             }
 
-            public PlatformAuthenticateSAMLV3HandlerBuilder SetError(string _error)
+            public TImpl SetError(string _error)
             {
                 Error = _error;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -81,11 +95,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     state                    
                 );
 
-                op.SetBaseFields<PlatformAuthenticateSAMLV3HandlerBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PlatformAuthenticateSAMLV3Handler.Response Execute(
+            protected PlatformAuthenticateSAMLV3Handler.Response InternalExecute(
                 string platformId,
                 string state
             )
@@ -104,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PlatformAuthenticateSAMLV3Handler.Response> ExecuteAsync(
+            protected async Task<PlatformAuthenticateSAMLV3Handler.Response> InternalExecuteAsync(
                 string platformId,
                 string state
             )
@@ -125,7 +139,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PlatformAuthenticateSAMLV3Handler(PlatformAuthenticateSAMLV3HandlerBuilder builder,
+        public class PlatformAuthenticateSAMLV3HandlerBuilder : PlatformAuthenticateSAMLV3HandlerAbstractBuilder<PlatformAuthenticateSAMLV3HandlerBuilder>
+        {
+            public PlatformAuthenticateSAMLV3HandlerBuilder() : base() { }
+
+            public PlatformAuthenticateSAMLV3HandlerBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PlatformAuthenticateSAMLV3Handler.Response Execute(
+                string platformId,
+                string state
+            )
+            {
+                return InternalExecute(
+                    platformId,
+                    state
+                );
+            }
+            public async Task<PlatformAuthenticateSAMLV3Handler.Response> ExecuteAsync(
+                string platformId,
+                string state
+            )
+            {
+                return await InternalExecuteAsync(
+                    platformId,
+                    state
+                );
+            }
+        }
+
+
+        public PlatformAuthenticateSAMLV3Handler(IPlatformAuthenticateSAMLV3HandlerBuilder builder,
             string platformId,
             string state
         )

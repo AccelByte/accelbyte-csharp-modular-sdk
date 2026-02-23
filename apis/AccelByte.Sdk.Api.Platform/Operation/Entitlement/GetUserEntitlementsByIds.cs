@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserEntitlementsByIdsBuilder Builder { get => new GetUserEntitlementsByIdsBuilder(); }
 
-        public class GetUserEntitlementsByIdsBuilder
-            : OperationBuilder<GetUserEntitlementsByIdsBuilder>
+        public interface IGetUserEntitlementsByIdsBuilder
+        {
+
+            List<string>? Ids { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetUserEntitlementsByIdsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserEntitlementsByIdsBuilder
+            where TImpl : GetUserEntitlementsByIdsAbstractBuilder<TImpl>
         {
 
             public List<string>? Ids { get; set; }
@@ -44,18 +56,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetUserEntitlementsByIdsBuilder() { }
+            public GetUserEntitlementsByIdsAbstractBuilder() { }
 
-            internal GetUserEntitlementsByIdsBuilder(IAccelByteSdk sdk)
+            public GetUserEntitlementsByIdsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetUserEntitlementsByIdsBuilder SetIds(List<string> _ids)
+            public TImpl SetIds(List<string> _ids)
             {
                 Ids = _ids;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -72,11 +84,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserEntitlementsByIdsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserEntitlementsByIds.Response Execute(
+            protected GetUserEntitlementsByIds.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -95,7 +107,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserEntitlementsByIds.Response> ExecuteAsync(
+            protected async Task<GetUserEntitlementsByIds.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -116,7 +128,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserEntitlementsByIds(GetUserEntitlementsByIdsBuilder builder,
+        public class GetUserEntitlementsByIdsBuilder : GetUserEntitlementsByIdsAbstractBuilder<GetUserEntitlementsByIdsBuilder>
+        {
+            public GetUserEntitlementsByIdsBuilder() : base() { }
+
+            public GetUserEntitlementsByIdsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserEntitlementsByIds.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserEntitlementsByIds.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserEntitlementsByIds(IGetUserEntitlementsByIdsBuilder builder,
             string namespace_,
             string userId
         )
@@ -188,7 +229,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

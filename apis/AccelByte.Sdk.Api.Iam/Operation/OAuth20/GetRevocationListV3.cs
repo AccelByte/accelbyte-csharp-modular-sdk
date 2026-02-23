@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetRevocationListV3Builder Builder { get => new GetRevocationListV3Builder(); }
 
-        public class GetRevocationListV3Builder
-            : OperationBuilder<GetRevocationListV3Builder>
+        public interface IGetRevocationListV3Builder
         {
 
 
 
 
 
-            internal GetRevocationListV3Builder() { }
+        }
 
-            internal GetRevocationListV3Builder(IAccelByteSdk sdk)
+        public abstract class GetRevocationListV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetRevocationListV3Builder
+            where TImpl : GetRevocationListV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetRevocationListV3AbstractBuilder() { }
+
+            public GetRevocationListV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetRevocationListV3 op = new GetRevocationListV3(this
                 );
 
-                op.SetBaseFields<GetRevocationListV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetRevocationListV3.Response Execute(
+            protected GetRevocationListV3.Response InternalExecute(
             )
             {
                 GetRevocationListV3 op = Build(
@@ -78,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetRevocationListV3.Response> ExecuteAsync(
+            protected async Task<GetRevocationListV3.Response> InternalExecuteAsync(
             )
             {
                 GetRevocationListV3 op = Build(
@@ -95,7 +105,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetRevocationListV3(GetRevocationListV3Builder builder
+        public class GetRevocationListV3Builder : GetRevocationListV3AbstractBuilder<GetRevocationListV3Builder>
+        {
+            public GetRevocationListV3Builder() : base() { }
+
+            public GetRevocationListV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetRevocationListV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetRevocationListV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetRevocationListV3(IGetRevocationListV3Builder builder
         )
         {
             
@@ -156,12 +187,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthapiRevocationList>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthapiRevocationList>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
 

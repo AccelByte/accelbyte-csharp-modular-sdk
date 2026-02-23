@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #region Builder Part
         public static AdminGetContentByChannelIDV2Builder Builder { get => new AdminGetContentByChannelIDV2Builder(); }
 
-        public class AdminGetContentByChannelIDV2Builder
-            : OperationBuilder<AdminGetContentByChannelIDV2Builder>
+        public interface IAdminGetContentByChannelIDV2Builder
+        {
+
+            long? Limit { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            string? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminGetContentByChannelIDV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetContentByChannelIDV2Builder
+            where TImpl : AdminGetContentByChannelIDV2AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -46,36 +64,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
 
 
-            internal AdminGetContentByChannelIDV2Builder() { }
+            public AdminGetContentByChannelIDV2AbstractBuilder() { }
 
-            internal AdminGetContentByChannelIDV2Builder(IAccelByteSdk sdk)
+            public AdminGetContentByChannelIDV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminGetContentByChannelIDV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetContentByChannelIDV2Builder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetContentByChannelIDV2Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminGetContentByChannelIDV2Builder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetContentByChannelIDV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetContentByChannelIDV2.Response Execute(
+            protected AdminGetContentByChannelIDV2.Response InternalExecute(
                 string channelId,
                 string namespace_
             )
@@ -115,7 +133,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetContentByChannelIDV2.Response> ExecuteAsync(
+            protected async Task<AdminGetContentByChannelIDV2.Response> InternalExecuteAsync(
                 string channelId,
                 string namespace_
             )
@@ -136,7 +154,36 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
         }
 
-        private AdminGetContentByChannelIDV2(AdminGetContentByChannelIDV2Builder builder,
+        public class AdminGetContentByChannelIDV2Builder : AdminGetContentByChannelIDV2AbstractBuilder<AdminGetContentByChannelIDV2Builder>
+        {
+            public AdminGetContentByChannelIDV2Builder() : base() { }
+
+            public AdminGetContentByChannelIDV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetContentByChannelIDV2.Response Execute(
+                string channelId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    channelId,
+                    namespace_
+                );
+            }
+            public async Task<AdminGetContentByChannelIDV2.Response> ExecuteAsync(
+                string channelId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    channelId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetContentByChannelIDV2(IAdminGetContentByChannelIDV2Builder builder,
             string channelId,
             string namespace_
         )
@@ -221,22 +268,26 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponseV2>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContentDownloadResponseV2>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

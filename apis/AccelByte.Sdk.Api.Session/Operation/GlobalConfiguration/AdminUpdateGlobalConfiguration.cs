@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminUpdateGlobalConfigurationBuilder Builder { get => new AdminUpdateGlobalConfigurationBuilder(); }
 
-        public class AdminUpdateGlobalConfigurationBuilder
-            : OperationBuilder<AdminUpdateGlobalConfigurationBuilder>
+        public interface IAdminUpdateGlobalConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminUpdateGlobalConfigurationBuilder() { }
+        }
 
-            internal AdminUpdateGlobalConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateGlobalConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateGlobalConfigurationBuilder
+            where TImpl : AdminUpdateGlobalConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateGlobalConfigurationAbstractBuilder() { }
+
+            public AdminUpdateGlobalConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminUpdateGlobalConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateGlobalConfiguration.Response Execute(
+            protected AdminUpdateGlobalConfiguration.Response InternalExecute(
                 ApimodelsPutGlobalConfigurationRequest body
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateGlobalConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminUpdateGlobalConfiguration.Response> InternalExecuteAsync(
                 ApimodelsPutGlobalConfigurationRequest body
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminUpdateGlobalConfiguration(AdminUpdateGlobalConfigurationBuilder builder,
+        public class AdminUpdateGlobalConfigurationBuilder : AdminUpdateGlobalConfigurationAbstractBuilder<AdminUpdateGlobalConfigurationBuilder>
+        {
+            public AdminUpdateGlobalConfigurationBuilder() : base() { }
+
+            public AdminUpdateGlobalConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateGlobalConfiguration.Response Execute(
+                ApimodelsPutGlobalConfigurationRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminUpdateGlobalConfiguration.Response> ExecuteAsync(
+                ApimodelsPutGlobalConfigurationRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminUpdateGlobalConfiguration(IAdminUpdateGlobalConfigurationBuilder builder,
             ApimodelsPutGlobalConfigurationRequest body
         )
         {
@@ -165,17 +200,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGlobalConfigurationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsGlobalConfigurationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

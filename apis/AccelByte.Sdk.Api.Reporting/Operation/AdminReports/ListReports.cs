@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,28 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static ListReportsBuilder Builder { get => new ListReportsBuilder(); }
 
-        public class ListReportsBuilder
-            : OperationBuilder<ListReportsBuilder>
+        public interface IListReportsBuilder
+        {
+
+            string? Category { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            string? ReportedUserId { get; }
+
+            string? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListReportsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListReportsBuilder
+            where TImpl : ListReportsAbstractBuilder<TImpl>
         {
 
             public string? Category { get; set; }
@@ -51,42 +71,42 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
 
 
-            internal ListReportsBuilder() { }
+            public ListReportsAbstractBuilder() { }
 
-            internal ListReportsBuilder(IAccelByteSdk sdk)
+            public ListReportsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListReportsBuilder SetCategory(string _category)
+            public TImpl SetCategory(string _category)
             {
                 Category = _category;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListReportsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListReportsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListReportsBuilder SetReportedUserId(string _reportedUserId)
+            public TImpl SetReportedUserId(string _reportedUserId)
             {
                 ReportedUserId = _reportedUserId;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListReportsBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -101,11 +121,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListReportsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListReports.Response Execute(
+            protected ListReports.Response InternalExecute(
                 string namespace_
             )
             {
@@ -122,7 +142,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListReports.Response> ExecuteAsync(
+            protected async Task<ListReports.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -141,7 +161,32 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private ListReports(ListReportsBuilder builder,
+        public class ListReportsBuilder : ListReportsAbstractBuilder<ListReportsBuilder>
+        {
+            public ListReportsBuilder() : base() { }
+
+            public ListReportsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListReports.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListReports.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListReports(IListReportsBuilder builder,
             string namespace_
         )
         {
@@ -221,12 +266,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RestapiReportListResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RestapiReportListResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

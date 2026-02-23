@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static RetrieveEligibilitiesPublicBuilder Builder { get => new RetrieveEligibilitiesPublicBuilder(); }
 
-        public class RetrieveEligibilitiesPublicBuilder
-            : OperationBuilder<RetrieveEligibilitiesPublicBuilder>
+        public interface IRetrieveEligibilitiesPublicBuilder
         {
 
 
 
 
 
-            internal RetrieveEligibilitiesPublicBuilder() { }
+        }
 
-            internal RetrieveEligibilitiesPublicBuilder(IAccelByteSdk sdk)
+        public abstract class RetrieveEligibilitiesPublicAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRetrieveEligibilitiesPublicBuilder
+            where TImpl : RetrieveEligibilitiesPublicAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RetrieveEligibilitiesPublicAbstractBuilder() { }
+
+            public RetrieveEligibilitiesPublicAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,11 +69,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RetrieveEligibilitiesPublicBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RetrieveEligibilitiesPublic.Response Execute(
+            protected RetrieveEligibilitiesPublic.Response InternalExecute(
                 string namespace_
             )
             {
@@ -80,7 +90,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RetrieveEligibilitiesPublic.Response> ExecuteAsync(
+            protected async Task<RetrieveEligibilitiesPublic.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -99,7 +109,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private RetrieveEligibilitiesPublic(RetrieveEligibilitiesPublicBuilder builder,
+        public class RetrieveEligibilitiesPublicBuilder : RetrieveEligibilitiesPublicAbstractBuilder<RetrieveEligibilitiesPublicBuilder>
+        {
+            public RetrieveEligibilitiesPublicBuilder() : base() { }
+
+            public RetrieveEligibilitiesPublicBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RetrieveEligibilitiesPublic.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RetrieveEligibilitiesPublic.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RetrieveEligibilitiesPublic(IRetrieveEligibilitiesPublicBuilder builder,
             string namespace_
         )
         {
@@ -166,17 +201,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveUserEligibilitiesResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveUserEligibilitiesResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static AdminQueryBackfillBuilder Builder { get => new AdminQueryBackfillBuilder(); }
 
-        public class AdminQueryBackfillBuilder
-            : OperationBuilder<AdminQueryBackfillBuilder>
+        public interface IAdminQueryBackfillBuilder
+        {
+
+            DateTime? FromTime { get; }
+
+            bool? IsActive { get; }
+
+            long? Limit { get; }
+
+            string? MatchPool { get; }
+
+            long? Offset { get; }
+
+            string? PlayerID { get; }
+
+            string? Region { get; }
+
+            string? SessionID { get; }
+
+            DateTime? ToTime { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminQueryBackfillAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminQueryBackfillBuilder
+            where TImpl : AdminQueryBackfillAbstractBuilder<TImpl>
         {
 
             public DateTime? FromTime { get; set; }
@@ -56,66 +84,66 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
 
 
-            internal AdminQueryBackfillBuilder() { }
+            public AdminQueryBackfillAbstractBuilder() { }
 
-            internal AdminQueryBackfillBuilder(IAccelByteSdk sdk)
+            public AdminQueryBackfillAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminQueryBackfillBuilder SetFromTime(DateTime _fromTime)
+            public TImpl SetFromTime(DateTime _fromTime)
             {
                 FromTime = _fromTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetIsActive(bool _isActive)
+            public TImpl SetIsActive(bool _isActive)
             {
                 IsActive = _isActive;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetMatchPool(string _matchPool)
+            public TImpl SetMatchPool(string _matchPool)
             {
                 MatchPool = _matchPool;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetPlayerID(string _playerID)
+            public TImpl SetPlayerID(string _playerID)
             {
                 PlayerID = _playerID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetSessionID(string _sessionID)
+            public TImpl SetSessionID(string _sessionID)
             {
                 SessionID = _sessionID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryBackfillBuilder SetToTime(DateTime _toTime)
+            public TImpl SetToTime(DateTime _toTime)
             {
                 ToTime = _toTime;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -130,11 +158,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryBackfillBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminQueryBackfill.Response Execute(
+            protected AdminQueryBackfill.Response InternalExecute(
                 string namespace_
             )
             {
@@ -151,7 +179,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryBackfill.Response> ExecuteAsync(
+            protected async Task<AdminQueryBackfill.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -170,7 +198,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private AdminQueryBackfill(AdminQueryBackfillBuilder builder,
+        public class AdminQueryBackfillBuilder : AdminQueryBackfillAbstractBuilder<AdminQueryBackfillBuilder>
+        {
+            public AdminQueryBackfillBuilder() : base() { }
+
+            public AdminQueryBackfillBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminQueryBackfill.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminQueryBackfill.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminQueryBackfill(IAdminQueryBackfillBuilder builder,
             string namespace_
         )
         {
@@ -274,32 +327,38 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiListBackfillQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiListBackfillQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

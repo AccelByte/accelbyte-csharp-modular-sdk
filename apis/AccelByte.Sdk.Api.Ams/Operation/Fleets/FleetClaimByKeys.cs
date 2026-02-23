@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static FleetClaimByKeysBuilder Builder { get => new FleetClaimByKeysBuilder(); }
 
-        public class FleetClaimByKeysBuilder
-            : OperationBuilder<FleetClaimByKeysBuilder>
+        public interface IFleetClaimByKeysBuilder
         {
 
 
 
 
 
-            internal FleetClaimByKeysBuilder() { }
+        }
 
-            internal FleetClaimByKeysBuilder(IAccelByteSdk sdk)
+        public abstract class FleetClaimByKeysAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IFleetClaimByKeysBuilder
+            where TImpl : FleetClaimByKeysAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public FleetClaimByKeysAbstractBuilder() { }
+
+            public FleetClaimByKeysAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<FleetClaimByKeysBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public FleetClaimByKeys.Response Execute(
+            protected FleetClaimByKeys.Response InternalExecute(
                 ApiFleetClaimByKeysReq body,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<FleetClaimByKeys.Response> ExecuteAsync(
+            protected async Task<FleetClaimByKeys.Response> InternalExecuteAsync(
                 ApiFleetClaimByKeysReq body,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private FleetClaimByKeys(FleetClaimByKeysBuilder builder,
+        public class FleetClaimByKeysBuilder : FleetClaimByKeysAbstractBuilder<FleetClaimByKeysBuilder>
+        {
+            public FleetClaimByKeysBuilder() : base() { }
+
+            public FleetClaimByKeysBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public FleetClaimByKeys.Response Execute(
+                ApiFleetClaimByKeysReq body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<FleetClaimByKeys.Response> ExecuteAsync(
+                ApiFleetClaimByKeysReq body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public FleetClaimByKeys(IFleetClaimByKeysBuilder builder,
             ApiFleetClaimByKeysReq body,
             string namespace_
         )
@@ -185,32 +224,38 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiFleetClaimResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiFleetClaimResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

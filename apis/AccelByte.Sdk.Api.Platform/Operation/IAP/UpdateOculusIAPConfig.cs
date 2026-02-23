@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateOculusIAPConfigBuilder Builder { get => new UpdateOculusIAPConfigBuilder(); }
 
-        public class UpdateOculusIAPConfigBuilder
-            : OperationBuilder<UpdateOculusIAPConfigBuilder>
+        public interface IUpdateOculusIAPConfigBuilder
         {
 
 
 
 
 
-            internal UpdateOculusIAPConfigBuilder() { }
+        }
 
-            internal UpdateOculusIAPConfigBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateOculusIAPConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateOculusIAPConfigBuilder
+            where TImpl : UpdateOculusIAPConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateOculusIAPConfigAbstractBuilder() { }
+
+            public UpdateOculusIAPConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateOculusIAPConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateOculusIAPConfig.Response Execute(
+            protected UpdateOculusIAPConfig.Response InternalExecute(
                 OculusIAPConfigRequest body,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateOculusIAPConfig.Response> ExecuteAsync(
+            protected async Task<UpdateOculusIAPConfig.Response> InternalExecuteAsync(
                 OculusIAPConfigRequest body,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateOculusIAPConfig(UpdateOculusIAPConfigBuilder builder,
+        public class UpdateOculusIAPConfigBuilder : UpdateOculusIAPConfigAbstractBuilder<UpdateOculusIAPConfigBuilder>
+        {
+            public UpdateOculusIAPConfigBuilder() : base() { }
+
+            public UpdateOculusIAPConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateOculusIAPConfig.Response Execute(
+                OculusIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<UpdateOculusIAPConfig.Response> ExecuteAsync(
+                OculusIAPConfigRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateOculusIAPConfig(IUpdateOculusIAPConfigBuilder builder,
             OculusIAPConfigRequest body,
             string namespace_
         )
@@ -172,7 +211,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OculusIAPConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OculusIAPConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

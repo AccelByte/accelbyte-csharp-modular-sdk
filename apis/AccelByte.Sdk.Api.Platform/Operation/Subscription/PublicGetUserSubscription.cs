@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetUserSubscriptionBuilder Builder { get => new PublicGetUserSubscriptionBuilder(); }
 
-        public class PublicGetUserSubscriptionBuilder
-            : OperationBuilder<PublicGetUserSubscriptionBuilder>
+        public interface IPublicGetUserSubscriptionBuilder
         {
 
 
 
 
 
-            internal PublicGetUserSubscriptionBuilder() { }
+        }
 
-            internal PublicGetUserSubscriptionBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetUserSubscriptionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetUserSubscriptionBuilder
+            where TImpl : PublicGetUserSubscriptionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetUserSubscriptionAbstractBuilder() { }
+
+            public PublicGetUserSubscriptionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<PublicGetUserSubscriptionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetUserSubscription.Response Execute(
+            protected PublicGetUserSubscription.Response InternalExecute(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetUserSubscription.Response> ExecuteAsync(
+            protected async Task<PublicGetUserSubscription.Response> InternalExecuteAsync(
                 string namespace_,
                 string subscriptionId,
                 string userId
@@ -113,7 +123,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetUserSubscription(PublicGetUserSubscriptionBuilder builder,
+        public class PublicGetUserSubscriptionBuilder : PublicGetUserSubscriptionAbstractBuilder<PublicGetUserSubscriptionBuilder>
+        {
+            public PublicGetUserSubscriptionBuilder() : base() { }
+
+            public PublicGetUserSubscriptionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetUserSubscription.Response Execute(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+            public async Task<PublicGetUserSubscription.Response> ExecuteAsync(
+                string namespace_,
+                string subscriptionId,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    subscriptionId,
+                    userId
+                );
+            }
+        }
+
+
+        public PublicGetUserSubscription(IPublicGetUserSubscriptionBuilder builder,
             string namespace_,
             string subscriptionId,
             string userId
@@ -186,12 +229,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SubscriptionInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

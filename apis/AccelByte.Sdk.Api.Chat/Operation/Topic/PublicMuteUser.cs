@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static PublicMuteUserBuilder Builder { get => new PublicMuteUserBuilder(); }
 
-        public class PublicMuteUserBuilder
-            : OperationBuilder<PublicMuteUserBuilder>
+        public interface IPublicMuteUserBuilder
         {
 
 
 
 
 
-            internal PublicMuteUserBuilder() { }
+        }
 
-            internal PublicMuteUserBuilder(IAccelByteSdk sdk)
+        public abstract class PublicMuteUserAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicMuteUserBuilder
+            where TImpl : PublicMuteUserAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicMuteUserAbstractBuilder() { }
+
+            public PublicMuteUserAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     topic                    
                 );
 
-                op.SetBaseFields<PublicMuteUserBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicMuteUser.Response Execute(
+            protected PublicMuteUser.Response InternalExecute(
                 ApiMuteUserRequest body,
                 string namespace_,
                 string topic
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicMuteUser.Response> ExecuteAsync(
+            protected async Task<PublicMuteUser.Response> InternalExecuteAsync(
                 ApiMuteUserRequest body,
                 string namespace_,
                 string topic
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private PublicMuteUser(PublicMuteUserBuilder builder,
+        public class PublicMuteUserBuilder : PublicMuteUserAbstractBuilder<PublicMuteUserBuilder>
+        {
+            public PublicMuteUserBuilder() : base() { }
+
+            public PublicMuteUserBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicMuteUser.Response Execute(
+                ApiMuteUserRequest body,
+                string namespace_,
+                string topic
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+            public async Task<PublicMuteUser.Response> ExecuteAsync(
+                ApiMuteUserRequest body,
+                string namespace_,
+                string topic
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    topic
+                );
+            }
+        }
+
+
+        public PublicMuteUser(IPublicMuteUserBuilder builder,
             ApiMuteUserRequest body,
             string namespace_,
             string topic
@@ -192,27 +235,32 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

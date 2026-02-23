@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #region Builder Part
         public static UpdateMyZipCodeBuilder Builder { get => new UpdateMyZipCodeBuilder(); }
 
-        public class UpdateMyZipCodeBuilder
-            : OperationBuilder<UpdateMyZipCodeBuilder>
+        public interface IUpdateMyZipCodeBuilder
         {
 
 
 
 
 
-            internal UpdateMyZipCodeBuilder() { }
+        }
 
-            internal UpdateMyZipCodeBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateMyZipCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateMyZipCodeBuilder
+            where TImpl : UpdateMyZipCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateMyZipCodeAbstractBuilder() { }
+
+            public UpdateMyZipCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<UpdateMyZipCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateMyZipCode.Response Execute(
+            protected UpdateMyZipCode.Response InternalExecute(
                 UserZipCodeUpdate userZipCodeUpdate,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateMyZipCode.Response> ExecuteAsync(
+            protected async Task<UpdateMyZipCode.Response> InternalExecuteAsync(
                 UserZipCodeUpdate userZipCodeUpdate,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
         }
 
-        private UpdateMyZipCode(UpdateMyZipCodeBuilder builder,
+        public class UpdateMyZipCodeBuilder : UpdateMyZipCodeAbstractBuilder<UpdateMyZipCodeBuilder>
+        {
+            public UpdateMyZipCodeBuilder() : base() { }
+
+            public UpdateMyZipCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateMyZipCode.Response Execute(
+                UserZipCodeUpdate userZipCodeUpdate,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    userZipCodeUpdate,
+                    namespace_
+                );
+            }
+            public async Task<UpdateMyZipCode.Response> ExecuteAsync(
+                UserZipCodeUpdate userZipCodeUpdate,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    userZipCodeUpdate,
+                    namespace_
+                );
+            }
+        }
+
+
+        public UpdateMyZipCode(IUpdateMyZipCodeBuilder builder,
             UserZipCodeUpdate userZipCodeUpdate,
             string namespace_
         )
@@ -181,22 +220,26 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserZipCode>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserZipCode>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

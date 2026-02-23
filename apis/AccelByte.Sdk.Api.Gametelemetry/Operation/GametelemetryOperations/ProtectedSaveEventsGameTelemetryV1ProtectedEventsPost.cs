@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -81,17 +81,27 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #region Builder Part
         public static ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder Builder { get => new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder(); }
 
-        public class ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder
-            : OperationBuilder<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder>
+        public interface IProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder
         {
 
 
 
 
 
-            internal ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder() { }
+        }
 
-            internal ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder(IAccelByteSdk sdk)
+        public abstract class ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder
+            where TImpl : ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostAbstractBuilder() { }
+
+            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -110,11 +120,11 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 );
 
-                op.SetBaseFields<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response Execute(
+            protected ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response InternalExecute(
                 List<TelemetryBody> body
 
             )
@@ -133,7 +143,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response> ExecuteAsync(
+            protected async Task<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response> InternalExecuteAsync(
                 List<TelemetryBody> body
 
             )
@@ -154,7 +164,36 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
         }
 
-        private ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder builder,
+        public class ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder : ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostAbstractBuilder<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder>
+        {
+            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder() : base() { }
+
+            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response Execute(
+                List<TelemetryBody> body
+
+            )
+            {
+                return InternalExecute(
+                    body
+                    
+                );
+            }
+            public async Task<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response> ExecuteAsync(
+                List<TelemetryBody> body
+
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                    
+                );
+            }
+        }
+
+
+        public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(IProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder builder,
             List<TelemetryBody> body
             
         )
@@ -228,17 +267,20 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<BaseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<BaseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)507)
             {
-                response.Error507 = JsonSerializer.Deserialize<BaseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error507 = JsonSerializer.Deserialize<BaseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error507!.TranslateToApiError();
             }
 

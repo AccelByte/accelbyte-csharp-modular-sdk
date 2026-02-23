@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,8 +37,22 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static GetListOfDeploymentV1Builder Builder { get => new GetListOfDeploymentV1Builder(); }
 
-        public class GetListOfDeploymentV1Builder
-            : OperationBuilder<GetListOfDeploymentV1Builder>
+        public interface IGetListOfDeploymentV1Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetListOfDeploymentV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetListOfDeploymentV1Builder
+            where TImpl : GetListOfDeploymentV1AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -49,24 +63,24 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal GetListOfDeploymentV1Builder() { }
+            public GetListOfDeploymentV1AbstractBuilder() { }
 
-            internal GetListOfDeploymentV1Builder(IAccelByteSdk sdk)
+            public GetListOfDeploymentV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetListOfDeploymentV1Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetListOfDeploymentV1Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -83,12 +97,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetListOfDeploymentV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetListOfDeploymentV1.Response Execute(
+            protected GetListOfDeploymentV1.Response InternalExecute(
                 GeneratedGetDeploymentListV1Request body,
                 string namespace_
             )
@@ -107,7 +121,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetListOfDeploymentV1.Response> ExecuteAsync(
+            protected async Task<GetListOfDeploymentV1.Response> InternalExecuteAsync(
                 GeneratedGetDeploymentListV1Request body,
                 string namespace_
             )
@@ -128,7 +142,37 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private GetListOfDeploymentV1(GetListOfDeploymentV1Builder builder,
+        public class GetListOfDeploymentV1Builder : GetListOfDeploymentV1AbstractBuilder<GetListOfDeploymentV1Builder>
+        {
+            public GetListOfDeploymentV1Builder() : base() { }
+
+            public GetListOfDeploymentV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetListOfDeploymentV1.Response Execute(
+                GeneratedGetDeploymentListV1Request body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<GetListOfDeploymentV1.Response> ExecuteAsync(
+                GeneratedGetDeploymentListV1Request body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetListOfDeploymentV1(IGetListOfDeploymentV1Builder builder,
             GeneratedGetDeploymentListV1Request body,
             string namespace_
         )
@@ -209,27 +253,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.GeneratedGetDeploymentListV1Response>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.GeneratedGetDeploymentListV1Response>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

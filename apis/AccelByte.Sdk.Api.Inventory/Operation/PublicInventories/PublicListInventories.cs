@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static PublicListInventoriesBuilder Builder { get => new PublicListInventoriesBuilder(); }
 
-        public class PublicListInventoriesBuilder
-            : OperationBuilder<PublicListInventoriesBuilder>
+        public interface IPublicListInventoriesBuilder
+        {
+
+            string? InventoryConfigurationCode { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            PublicListInventoriesSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicListInventoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListInventoriesBuilder
+            where TImpl : PublicListInventoriesAbstractBuilder<TImpl>
         {
 
             public string? InventoryConfigurationCode { get; set; }
@@ -48,36 +66,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal PublicListInventoriesBuilder() { }
+            public PublicListInventoriesAbstractBuilder() { }
 
-            internal PublicListInventoriesBuilder(IAccelByteSdk sdk)
+            public PublicListInventoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicListInventoriesBuilder SetInventoryConfigurationCode(string _inventoryConfigurationCode)
+            public TImpl SetInventoryConfigurationCode(string _inventoryConfigurationCode)
             {
                 InventoryConfigurationCode = _inventoryConfigurationCode;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListInventoriesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListInventoriesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicListInventoriesBuilder SetSortBy(PublicListInventoriesSortBy _sortBy)
+            public TImpl SetSortBy(PublicListInventoriesSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -92,11 +110,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListInventoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListInventories.Response Execute(
+            protected PublicListInventories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -113,7 +131,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListInventories.Response> ExecuteAsync(
+            protected async Task<PublicListInventories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -132,7 +150,32 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private PublicListInventories(PublicListInventoriesBuilder builder,
+        public class PublicListInventoriesBuilder : PublicListInventoriesAbstractBuilder<PublicListInventoriesBuilder>
+        {
+            public PublicListInventoriesBuilder() : base() { }
+
+            public PublicListInventoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListInventories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListInventories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListInventories(IPublicListInventoriesBuilder builder,
             string namespace_
         )
         {
@@ -211,17 +254,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListInventoryResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsListInventoryResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

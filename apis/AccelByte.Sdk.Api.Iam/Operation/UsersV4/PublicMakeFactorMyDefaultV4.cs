@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicMakeFactorMyDefaultV4Builder Builder { get => new PublicMakeFactorMyDefaultV4Builder(); }
 
-        public class PublicMakeFactorMyDefaultV4Builder
-            : OperationBuilder<PublicMakeFactorMyDefaultV4Builder>
+        public interface IPublicMakeFactorMyDefaultV4Builder
         {
 
 
 
 
 
-            internal PublicMakeFactorMyDefaultV4Builder() { }
+        }
 
-            internal PublicMakeFactorMyDefaultV4Builder(IAccelByteSdk sdk)
+        public abstract class PublicMakeFactorMyDefaultV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicMakeFactorMyDefaultV4Builder
+            where TImpl : PublicMakeFactorMyDefaultV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicMakeFactorMyDefaultV4AbstractBuilder() { }
+
+            public PublicMakeFactorMyDefaultV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicMakeFactorMyDefaultV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicMakeFactorMyDefaultV4.Response Execute(
+            protected PublicMakeFactorMyDefaultV4.Response InternalExecute(
                 string factor,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicMakeFactorMyDefaultV4.Response> ExecuteAsync(
+            protected async Task<PublicMakeFactorMyDefaultV4.Response> InternalExecuteAsync(
                 string factor,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicMakeFactorMyDefaultV4(PublicMakeFactorMyDefaultV4Builder builder,
+        public class PublicMakeFactorMyDefaultV4Builder : PublicMakeFactorMyDefaultV4AbstractBuilder<PublicMakeFactorMyDefaultV4Builder>
+        {
+            public PublicMakeFactorMyDefaultV4Builder() : base() { }
+
+            public PublicMakeFactorMyDefaultV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicMakeFactorMyDefaultV4.Response Execute(
+                string factor,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    factor,
+                    namespace_
+                );
+            }
+            public async Task<PublicMakeFactorMyDefaultV4.Response> ExecuteAsync(
+                string factor,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    factor,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicMakeFactorMyDefaultV4(IPublicMakeFactorMyDefaultV4Builder builder,
             string factor,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

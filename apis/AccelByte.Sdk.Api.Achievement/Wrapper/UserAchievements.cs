@@ -20,7 +20,7 @@ namespace AccelByte.Sdk.Api.Achievement.Wrapper
     {
         private readonly IAccelByteSdk _sdk;
 
-        private string _CustomBasePath = String.Empty;
+        private string _CustomBasePath = "";
 
         public UserAchievements(IAccelByteSdk sdk)
         {

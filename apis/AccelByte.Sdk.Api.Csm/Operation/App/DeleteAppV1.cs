@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static DeleteAppV1Builder Builder { get => new DeleteAppV1Builder(); }
 
-        public class DeleteAppV1Builder
-            : OperationBuilder<DeleteAppV1Builder>
+        public interface IDeleteAppV1Builder
+        {
+
+            string? Forced { get; }
+
+
+
+
+
+        }
+
+        public abstract class DeleteAppV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteAppV1Builder
+            where TImpl : DeleteAppV1AbstractBuilder<TImpl>
         {
 
             public string? Forced { get; set; }
@@ -48,18 +60,18 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
 
 
-            internal DeleteAppV1Builder() { }
+            public DeleteAppV1AbstractBuilder() { }
 
-            internal DeleteAppV1Builder(IAccelByteSdk sdk)
+            public DeleteAppV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public DeleteAppV1Builder SetForced(string _forced)
+            public TImpl SetForced(string _forced)
             {
                 Forced = _forced;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,12 +88,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteAppV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public DeleteAppV1.Response Execute(
+            protected DeleteAppV1.Response InternalExecute(
                 string app,
                 string namespace_
             )
@@ -100,7 +112,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteAppV1.Response> ExecuteAsync(
+            protected async Task<DeleteAppV1.Response> InternalExecuteAsync(
                 string app,
                 string namespace_
             )
@@ -121,7 +133,37 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private DeleteAppV1(DeleteAppV1Builder builder,
+        public class DeleteAppV1Builder : DeleteAppV1AbstractBuilder<DeleteAppV1Builder>
+        {
+            public DeleteAppV1Builder() : base() { }
+
+            public DeleteAppV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public DeleteAppV1.Response Execute(
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<DeleteAppV1.Response> ExecuteAsync(
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteAppV1(IDeleteAppV1Builder builder,
             string app,
             string namespace_
         )
@@ -202,27 +244,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

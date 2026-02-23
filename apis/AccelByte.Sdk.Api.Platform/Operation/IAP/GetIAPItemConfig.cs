@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetIAPItemConfigBuilder Builder { get => new GetIAPItemConfigBuilder(); }
 
-        public class GetIAPItemConfigBuilder
-            : OperationBuilder<GetIAPItemConfigBuilder>
+        public interface IGetIAPItemConfigBuilder
         {
 
 
 
 
 
-            internal GetIAPItemConfigBuilder() { }
+        }
 
-            internal GetIAPItemConfigBuilder(IAccelByteSdk sdk)
+        public abstract class GetIAPItemConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetIAPItemConfigBuilder
+            where TImpl : GetIAPItemConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetIAPItemConfigAbstractBuilder() { }
+
+            public GetIAPItemConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetIAPItemConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetIAPItemConfig.Response Execute(
+            protected GetIAPItemConfig.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetIAPItemConfig.Response> ExecuteAsync(
+            protected async Task<GetIAPItemConfig.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetIAPItemConfig(GetIAPItemConfigBuilder builder,
+        public class GetIAPItemConfigBuilder : GetIAPItemConfigAbstractBuilder<GetIAPItemConfigBuilder>
+        {
+            public GetIAPItemConfigBuilder() : base() { }
+
+            public GetIAPItemConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetIAPItemConfig.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetIAPItemConfig.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetIAPItemConfig(IGetIAPItemConfigBuilder builder,
             string namespace_
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.IAPItemConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.IAPItemConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

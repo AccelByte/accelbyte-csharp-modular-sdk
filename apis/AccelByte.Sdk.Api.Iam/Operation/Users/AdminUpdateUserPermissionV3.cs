@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -52,17 +52,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminUpdateUserPermissionV3Builder Builder { get => new AdminUpdateUserPermissionV3Builder(); }
 
-        public class AdminUpdateUserPermissionV3Builder
-            : OperationBuilder<AdminUpdateUserPermissionV3Builder>
+        public interface IAdminUpdateUserPermissionV3Builder
         {
 
 
 
 
 
-            internal AdminUpdateUserPermissionV3Builder() { }
+        }
 
-            internal AdminUpdateUserPermissionV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateUserPermissionV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateUserPermissionV3Builder
+            where TImpl : AdminUpdateUserPermissionV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateUserPermissionV3AbstractBuilder() { }
+
+            public AdminUpdateUserPermissionV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -84,11 +94,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminUpdateUserPermissionV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminUpdateUserPermissionV3.Response Execute(
+            protected AdminUpdateUserPermissionV3.Response InternalExecute(
                 AccountcommonPermissions body,
                 string namespace_,
                 string userId
@@ -109,7 +119,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateUserPermissionV3.Response> ExecuteAsync(
+            protected async Task<AdminUpdateUserPermissionV3.Response> InternalExecuteAsync(
                 AccountcommonPermissions body,
                 string namespace_,
                 string userId
@@ -132,7 +142,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminUpdateUserPermissionV3(AdminUpdateUserPermissionV3Builder builder,
+        public class AdminUpdateUserPermissionV3Builder : AdminUpdateUserPermissionV3AbstractBuilder<AdminUpdateUserPermissionV3Builder>
+        {
+            public AdminUpdateUserPermissionV3Builder() : base() { }
+
+            public AdminUpdateUserPermissionV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminUpdateUserPermissionV3.Response Execute(
+                AccountcommonPermissions body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminUpdateUserPermissionV3.Response> ExecuteAsync(
+                AccountcommonPermissions body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminUpdateUserPermissionV3(IAdminUpdateUserPermissionV3Builder builder,
             AccountcommonPermissions body,
             string namespace_,
             string userId
@@ -212,22 +255,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
 

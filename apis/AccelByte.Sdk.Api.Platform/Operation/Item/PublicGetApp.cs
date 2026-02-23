@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,8 +36,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetAppBuilder Builder { get => new PublicGetAppBuilder(); }
 
-        public class PublicGetAppBuilder
-            : OperationBuilder<PublicGetAppBuilder>
+        public interface IPublicGetAppBuilder
+        {
+
+            string? Language { get; }
+
+            string? Region { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class PublicGetAppAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetAppBuilder
+            where TImpl : PublicGetAppAbstractBuilder<TImpl>
         {
 
             public string? Language { get; set; }
@@ -50,30 +66,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal PublicGetAppBuilder() { }
+            public PublicGetAppAbstractBuilder() { }
 
-            internal PublicGetAppBuilder(IAccelByteSdk sdk)
+            public PublicGetAppAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public PublicGetAppBuilder SetLanguage(string _language)
+            public TImpl SetLanguage(string _language)
             {
                 Language = _language;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetAppBuilder SetRegion(string _region)
+            public TImpl SetRegion(string _region)
             {
                 Region = _region;
-                return this;
+                return (TImpl)this;
             }
 
-            public PublicGetAppBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -90,11 +106,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetAppBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetApp.Response Execute(
+            protected PublicGetApp.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -113,7 +129,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetApp.Response> ExecuteAsync(
+            protected async Task<PublicGetApp.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -134,7 +150,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetApp(PublicGetAppBuilder builder,
+        public class PublicGetAppBuilder : PublicGetAppAbstractBuilder<PublicGetAppBuilder>
+        {
+            public PublicGetAppBuilder() : base() { }
+
+            public PublicGetAppBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetApp.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<PublicGetApp.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetApp(IPublicGetAppBuilder builder,
             string itemId,
             string namespace_
         )
@@ -210,12 +255,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AppInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AppInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

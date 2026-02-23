@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #region Builder Part
         public static AdminDeleteTiedChallengeBuilder Builder { get => new AdminDeleteTiedChallengeBuilder(); }
 
-        public class AdminDeleteTiedChallengeBuilder
-            : OperationBuilder<AdminDeleteTiedChallengeBuilder>
+        public interface IAdminDeleteTiedChallengeBuilder
         {
 
 
 
 
 
-            internal AdminDeleteTiedChallengeBuilder() { }
+        }
 
-            internal AdminDeleteTiedChallengeBuilder(IAccelByteSdk sdk)
+        public abstract class AdminDeleteTiedChallengeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDeleteTiedChallengeBuilder
+            where TImpl : AdminDeleteTiedChallengeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDeleteTiedChallengeAbstractBuilder() { }
+
+            public AdminDeleteTiedChallengeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,11 +71,11 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminDeleteTiedChallengeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDeleteTiedChallenge.Response Execute(
+            protected AdminDeleteTiedChallenge.Response InternalExecute(
                 string challengeCode,
                 string namespace_
             )
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDeleteTiedChallenge.Response> ExecuteAsync(
+            protected async Task<AdminDeleteTiedChallenge.Response> InternalExecuteAsync(
                 string challengeCode,
                 string namespace_
             )
@@ -105,7 +115,36 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
         }
 
-        private AdminDeleteTiedChallenge(AdminDeleteTiedChallengeBuilder builder,
+        public class AdminDeleteTiedChallengeBuilder : AdminDeleteTiedChallengeAbstractBuilder<AdminDeleteTiedChallengeBuilder>
+        {
+            public AdminDeleteTiedChallengeBuilder() : base() { }
+
+            public AdminDeleteTiedChallengeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDeleteTiedChallenge.Response Execute(
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    challengeCode,
+                    namespace_
+                );
+            }
+            public async Task<AdminDeleteTiedChallenge.Response> ExecuteAsync(
+                string challengeCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    challengeCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminDeleteTiedChallenge(IAdminDeleteTiedChallengeBuilder builder,
             string challengeCode,
             string namespace_
         )
@@ -183,27 +222,32 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

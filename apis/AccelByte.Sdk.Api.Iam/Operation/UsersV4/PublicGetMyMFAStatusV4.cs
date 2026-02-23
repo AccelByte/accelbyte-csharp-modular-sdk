@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicGetMyMFAStatusV4Builder Builder { get => new PublicGetMyMFAStatusV4Builder(); }
 
-        public class PublicGetMyMFAStatusV4Builder
-            : OperationBuilder<PublicGetMyMFAStatusV4Builder>
+        public interface IPublicGetMyMFAStatusV4Builder
         {
 
 
 
 
 
-            internal PublicGetMyMFAStatusV4Builder() { }
+        }
 
-            internal PublicGetMyMFAStatusV4Builder(IAccelByteSdk sdk)
+        public abstract class PublicGetMyMFAStatusV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetMyMFAStatusV4Builder
+            where TImpl : PublicGetMyMFAStatusV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetMyMFAStatusV4AbstractBuilder() { }
+
+            public PublicGetMyMFAStatusV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -61,12 +71,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicGetMyMFAStatusV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicGetMyMFAStatusV4.Response Execute(
+            protected PublicGetMyMFAStatusV4.Response InternalExecute(
                 string namespace_
             )
             {
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetMyMFAStatusV4.Response> ExecuteAsync(
+            protected async Task<PublicGetMyMFAStatusV4.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -102,7 +112,33 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicGetMyMFAStatusV4(PublicGetMyMFAStatusV4Builder builder,
+        public class PublicGetMyMFAStatusV4Builder : PublicGetMyMFAStatusV4AbstractBuilder<PublicGetMyMFAStatusV4Builder>
+        {
+            public PublicGetMyMFAStatusV4Builder() : base() { }
+
+            public PublicGetMyMFAStatusV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicGetMyMFAStatusV4.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicGetMyMFAStatusV4.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicGetMyMFAStatusV4(IPublicGetMyMFAStatusV4Builder builder,
             string namespace_
         )
         {
@@ -173,27 +209,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserMFAStatusResponseV4>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserMFAStatusResponseV4>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

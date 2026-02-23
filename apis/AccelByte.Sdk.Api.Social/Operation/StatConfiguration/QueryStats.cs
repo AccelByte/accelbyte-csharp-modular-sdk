@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static QueryStatsBuilder Builder { get => new QueryStatsBuilder(); }
 
-        public class QueryStatsBuilder
-            : OperationBuilder<QueryStatsBuilder>
+        public interface IQueryStatsBuilder
+        {
+
+            bool? IsGlobal { get; }
+
+            bool? IsPublic { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryStatsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryStatsBuilder
+            where TImpl : QueryStatsAbstractBuilder<TImpl>
         {
 
             public bool? IsGlobal { get; set; }
@@ -48,36 +66,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal QueryStatsBuilder() { }
+            public QueryStatsAbstractBuilder() { }
 
-            internal QueryStatsBuilder(IAccelByteSdk sdk)
+            public QueryStatsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryStatsBuilder SetIsGlobal(bool _isGlobal)
+            public TImpl SetIsGlobal(bool _isGlobal)
             {
                 IsGlobal = _isGlobal;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryStatsBuilder SetIsPublic(bool _isPublic)
+            public TImpl SetIsPublic(bool _isPublic)
             {
                 IsPublic = _isPublic;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryStatsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryStatsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -94,11 +112,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     keyword                    
                 );
 
-                op.SetBaseFields<QueryStatsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryStats.Response Execute(
+            protected QueryStats.Response InternalExecute(
                 string namespace_,
                 string keyword
             )
@@ -117,7 +135,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryStats.Response> ExecuteAsync(
+            protected async Task<QueryStats.Response> InternalExecuteAsync(
                 string namespace_,
                 string keyword
             )
@@ -138,7 +156,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private QueryStats(QueryStatsBuilder builder,
+        public class QueryStatsBuilder : QueryStatsAbstractBuilder<QueryStatsBuilder>
+        {
+            public QueryStatsBuilder() : base() { }
+
+            public QueryStatsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryStats.Response Execute(
+                string namespace_,
+                string keyword
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    keyword
+                );
+            }
+            public async Task<QueryStats.Response> ExecuteAsync(
+                string namespace_,
+                string keyword
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    keyword
+                );
+            }
+        }
+
+
+        public QueryStats(IQueryStatsBuilder builder,
             string namespace_,
             string keyword
         )
@@ -223,22 +270,26 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.StatPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.StatPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

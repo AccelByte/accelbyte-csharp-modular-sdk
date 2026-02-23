@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static PublicChangePreferenceConsentBuilder Builder { get => new PublicChangePreferenceConsentBuilder(); }
 
-        public class PublicChangePreferenceConsentBuilder
-            : OperationBuilder<PublicChangePreferenceConsentBuilder>
+        public interface IPublicChangePreferenceConsentBuilder
+        {
+
+
+            List<Model.AcceptAgreementRequest>? Body { get; }
+
+
+
+
+        }
+
+        public abstract class PublicChangePreferenceConsentAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicChangePreferenceConsentBuilder
+            where TImpl : PublicChangePreferenceConsentAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal PublicChangePreferenceConsentBuilder() { }
+            public PublicChangePreferenceConsentAbstractBuilder() { }
 
-            internal PublicChangePreferenceConsentBuilder(IAccelByteSdk sdk)
+            public PublicChangePreferenceConsentAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public PublicChangePreferenceConsentBuilder SetBody(List<Model.AcceptAgreementRequest> _body)
+            public TImpl SetBody(List<Model.AcceptAgreementRequest> _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -64,11 +76,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 PublicChangePreferenceConsent op = new PublicChangePreferenceConsent(this
                 );
 
-                op.SetBaseFields<PublicChangePreferenceConsentBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicChangePreferenceConsent.Response Execute(
+            protected PublicChangePreferenceConsent.Response InternalExecute(
             )
             {
                 PublicChangePreferenceConsent op = Build(
@@ -83,7 +95,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicChangePreferenceConsent.Response> ExecuteAsync(
+            protected async Task<PublicChangePreferenceConsent.Response> InternalExecuteAsync(
             )
             {
                 PublicChangePreferenceConsent op = Build(
@@ -100,7 +112,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private PublicChangePreferenceConsent(PublicChangePreferenceConsentBuilder builder
+        public class PublicChangePreferenceConsentBuilder : PublicChangePreferenceConsentAbstractBuilder<PublicChangePreferenceConsentBuilder>
+        {
+            public PublicChangePreferenceConsentBuilder() : base() { }
+
+            public PublicChangePreferenceConsentBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicChangePreferenceConsent.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<PublicChangePreferenceConsent.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public PublicChangePreferenceConsent(IPublicChangePreferenceConsentBuilder builder
         )
         {
             
@@ -165,7 +198,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

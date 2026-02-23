@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #region Builder Part
         public static DeleteBulkLeaderboardConfigurationAdminV3Builder Builder { get => new DeleteBulkLeaderboardConfigurationAdminV3Builder(); }
 
-        public class DeleteBulkLeaderboardConfigurationAdminV3Builder
-            : OperationBuilder<DeleteBulkLeaderboardConfigurationAdminV3Builder>
+        public interface IDeleteBulkLeaderboardConfigurationAdminV3Builder
         {
 
 
 
 
 
-            internal DeleteBulkLeaderboardConfigurationAdminV3Builder() { }
+        }
 
-            internal DeleteBulkLeaderboardConfigurationAdminV3Builder(IAccelByteSdk sdk)
+        public abstract class DeleteBulkLeaderboardConfigurationAdminV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteBulkLeaderboardConfigurationAdminV3Builder
+            where TImpl : DeleteBulkLeaderboardConfigurationAdminV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteBulkLeaderboardConfigurationAdminV3AbstractBuilder() { }
+
+            public DeleteBulkLeaderboardConfigurationAdminV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteBulkLeaderboardConfigurationAdminV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteBulkLeaderboardConfigurationAdminV3.Response Execute(
+            protected DeleteBulkLeaderboardConfigurationAdminV3.Response InternalExecute(
                 ModelsDeleteBulkLeaderboardsReq body,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteBulkLeaderboardConfigurationAdminV3.Response> ExecuteAsync(
+            protected async Task<DeleteBulkLeaderboardConfigurationAdminV3.Response> InternalExecuteAsync(
                 ModelsDeleteBulkLeaderboardsReq body,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
         }
 
-        private DeleteBulkLeaderboardConfigurationAdminV3(DeleteBulkLeaderboardConfigurationAdminV3Builder builder,
+        public class DeleteBulkLeaderboardConfigurationAdminV3Builder : DeleteBulkLeaderboardConfigurationAdminV3AbstractBuilder<DeleteBulkLeaderboardConfigurationAdminV3Builder>
+        {
+            public DeleteBulkLeaderboardConfigurationAdminV3Builder() : base() { }
+
+            public DeleteBulkLeaderboardConfigurationAdminV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteBulkLeaderboardConfigurationAdminV3.Response Execute(
+                ModelsDeleteBulkLeaderboardsReq body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<DeleteBulkLeaderboardConfigurationAdminV3.Response> ExecuteAsync(
+                ModelsDeleteBulkLeaderboardsReq body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteBulkLeaderboardConfigurationAdminV3(IDeleteBulkLeaderboardConfigurationAdminV3Builder builder,
             ModelsDeleteBulkLeaderboardsReq body,
             string namespace_
         )
@@ -181,27 +220,32 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsDeleteBulkLeaderboardsResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsDeleteBulkLeaderboardsResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

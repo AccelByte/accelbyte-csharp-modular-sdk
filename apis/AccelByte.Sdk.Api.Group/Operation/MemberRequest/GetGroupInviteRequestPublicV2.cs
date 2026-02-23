@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,22 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static GetGroupInviteRequestPublicV2Builder Builder { get => new GetGroupInviteRequestPublicV2Builder(); }
 
-        public class GetGroupInviteRequestPublicV2Builder
-            : OperationBuilder<GetGroupInviteRequestPublicV2Builder>
+        public interface IGetGroupInviteRequestPublicV2Builder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetGroupInviteRequestPublicV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetGroupInviteRequestPublicV2Builder
+            where TImpl : GetGroupInviteRequestPublicV2AbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -50,24 +64,24 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
 
 
-            internal GetGroupInviteRequestPublicV2Builder() { }
+            public GetGroupInviteRequestPublicV2AbstractBuilder() { }
 
-            internal GetGroupInviteRequestPublicV2Builder(IAccelByteSdk sdk)
+            public GetGroupInviteRequestPublicV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetGroupInviteRequestPublicV2Builder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetGroupInviteRequestPublicV2Builder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +98,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetGroupInviteRequestPublicV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetGroupInviteRequestPublicV2.Response Execute(
+            protected GetGroupInviteRequestPublicV2.Response InternalExecute(
                 string groupId,
                 string namespace_
             )
@@ -107,7 +121,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetGroupInviteRequestPublicV2.Response> ExecuteAsync(
+            protected async Task<GetGroupInviteRequestPublicV2.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_
             )
@@ -128,7 +142,36 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private GetGroupInviteRequestPublicV2(GetGroupInviteRequestPublicV2Builder builder,
+        public class GetGroupInviteRequestPublicV2Builder : GetGroupInviteRequestPublicV2AbstractBuilder<GetGroupInviteRequestPublicV2Builder>
+        {
+            public GetGroupInviteRequestPublicV2Builder() : base() { }
+
+            public GetGroupInviteRequestPublicV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetGroupInviteRequestPublicV2.Response Execute(
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<GetGroupInviteRequestPublicV2.Response> ExecuteAsync(
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetGroupInviteRequestPublicV2(IGetGroupInviteRequestPublicV2Builder builder,
             string groupId,
             string namespace_
         )
@@ -209,27 +252,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsGetMemberRequestsListResponseV1>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsGetMemberRequestsListResponseV1>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

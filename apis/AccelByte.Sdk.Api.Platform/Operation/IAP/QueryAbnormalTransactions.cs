@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -28,8 +28,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryAbnormalTransactionsBuilder Builder { get => new QueryAbnormalTransactionsBuilder(); }
 
-        public class QueryAbnormalTransactionsBuilder
-            : OperationBuilder<QueryAbnormalTransactionsBuilder>
+        public interface IQueryAbnormalTransactionsBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? OrderId { get; }
+
+            string? SteamId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryAbnormalTransactionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryAbnormalTransactionsBuilder
+            where TImpl : QueryAbnormalTransactionsAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -44,36 +62,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryAbnormalTransactionsBuilder() { }
+            public QueryAbnormalTransactionsAbstractBuilder() { }
 
-            internal QueryAbnormalTransactionsBuilder(IAccelByteSdk sdk)
+            public QueryAbnormalTransactionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryAbnormalTransactionsBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryAbnormalTransactionsBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryAbnormalTransactionsBuilder SetOrderId(string _orderId)
+            public TImpl SetOrderId(string _orderId)
             {
                 OrderId = _orderId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryAbnormalTransactionsBuilder SetSteamId(string _steamId)
+            public TImpl SetSteamId(string _steamId)
             {
                 SteamId = _steamId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -88,11 +106,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryAbnormalTransactionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryAbnormalTransactions.Response Execute(
+            protected QueryAbnormalTransactions.Response InternalExecute(
                 string namespace_
             )
             {
@@ -109,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryAbnormalTransactions.Response> ExecuteAsync(
+            protected async Task<QueryAbnormalTransactions.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -128,7 +146,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryAbnormalTransactions(QueryAbnormalTransactionsBuilder builder,
+        public class QueryAbnormalTransactionsBuilder : QueryAbnormalTransactionsAbstractBuilder<QueryAbnormalTransactionsBuilder>
+        {
+            public QueryAbnormalTransactionsBuilder() : base() { }
+
+            public QueryAbnormalTransactionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryAbnormalTransactions.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryAbnormalTransactions.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryAbnormalTransactions(IQueryAbnormalTransactionsBuilder builder,
             string namespace_
         )
         {
@@ -203,7 +246,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.SteamAbnormalTransactionPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.SteamAbnormalTransactionPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

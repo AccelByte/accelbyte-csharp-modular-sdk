@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DownloadCSVTemplatesBuilder Builder { get => new DownloadCSVTemplatesBuilder(); }
 
-        public class DownloadCSVTemplatesBuilder
-            : OperationBuilder<DownloadCSVTemplatesBuilder>
+        public interface IDownloadCSVTemplatesBuilder
         {
 
 
 
 
 
-            internal DownloadCSVTemplatesBuilder() { }
+        }
 
-            internal DownloadCSVTemplatesBuilder(IAccelByteSdk sdk)
+        public abstract class DownloadCSVTemplatesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDownloadCSVTemplatesBuilder
+            where TImpl : DownloadCSVTemplatesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DownloadCSVTemplatesAbstractBuilder() { }
+
+            public DownloadCSVTemplatesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DownloadCSVTemplatesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DownloadCSVTemplates.Response Execute(
+            protected DownloadCSVTemplates.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DownloadCSVTemplates.Response> ExecuteAsync(
+            protected async Task<DownloadCSVTemplates.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DownloadCSVTemplates(DownloadCSVTemplatesBuilder builder,
+        public class DownloadCSVTemplatesBuilder : DownloadCSVTemplatesAbstractBuilder<DownloadCSVTemplatesBuilder>
+        {
+            public DownloadCSVTemplatesBuilder() : base() { }
+
+            public DownloadCSVTemplatesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DownloadCSVTemplates.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<DownloadCSVTemplates.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public DownloadCSVTemplates(IDownloadCSVTemplatesBuilder builder,
             string namespace_
         )
         {

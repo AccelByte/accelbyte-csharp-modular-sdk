@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetOrderBuilder Builder { get => new GetOrderBuilder(); }
 
-        public class GetOrderBuilder
-            : OperationBuilder<GetOrderBuilder>
+        public interface IGetOrderBuilder
         {
 
 
 
 
 
-            internal GetOrderBuilder() { }
+        }
 
-            internal GetOrderBuilder(IAccelByteSdk sdk)
+        public abstract class GetOrderAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetOrderBuilder
+            where TImpl : GetOrderAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetOrderAbstractBuilder() { }
+
+            public GetOrderAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     orderNo                    
                 );
 
-                op.SetBaseFields<GetOrderBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetOrder.Response Execute(
+            protected GetOrder.Response InternalExecute(
                 string namespace_,
                 string orderNo
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetOrder.Response> ExecuteAsync(
+            protected async Task<GetOrder.Response> InternalExecuteAsync(
                 string namespace_,
                 string orderNo
             )
@@ -106,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public GetOrder.Response<T1> Execute<T1>(
+            protected GetOrder.Response<T1> InternalExecute<T1>(
                 string namespace_,
                 string orderNo
             )
@@ -125,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetOrder.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<GetOrder.Response<T1>> InternalExecuteAsync<T1>(
                 string namespace_,
                 string orderNo
             )
@@ -146,7 +156,57 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetOrder(GetOrderBuilder builder,
+        public class GetOrderBuilder : GetOrderAbstractBuilder<GetOrderBuilder>
+        {
+            public GetOrderBuilder() : base() { }
+
+            public GetOrderBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetOrder.Response Execute(
+                string namespace_,
+                string orderNo
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    orderNo
+                );
+            }
+            public async Task<GetOrder.Response> ExecuteAsync(
+                string namespace_,
+                string orderNo
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    orderNo
+                );
+            }
+
+            public GetOrder.Response<T1> Execute<T1>(
+                string namespace_,
+                string orderNo
+            )
+            {
+                return InternalExecute<T1>(
+                    namespace_,
+                    orderNo
+                );
+            }
+            public async Task<GetOrder.Response<T1>> ExecuteAsync<T1>(
+                string namespace_,
+                string orderNo
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    namespace_,
+                    orderNo
+                );
+            }
+        }
+
+
+        public GetOrder(IGetOrderBuilder builder,
             string namespace_,
             string orderNo
         )
@@ -222,12 +282,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 
@@ -248,12 +310,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OrderInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetBulkItemIdBySkusBuilder Builder { get => new GetBulkItemIdBySkusBuilder(); }
 
-        public class GetBulkItemIdBySkusBuilder
-            : OperationBuilder<GetBulkItemIdBySkusBuilder>
+        public interface IGetBulkItemIdBySkusBuilder
+        {
+
+            List<string>? Sku { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetBulkItemIdBySkusAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetBulkItemIdBySkusBuilder
+            where TImpl : GetBulkItemIdBySkusAbstractBuilder<TImpl>
         {
 
             public List<string>? Sku { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetBulkItemIdBySkusBuilder() { }
+            public GetBulkItemIdBySkusAbstractBuilder() { }
 
-            internal GetBulkItemIdBySkusBuilder(IAccelByteSdk sdk)
+            public GetBulkItemIdBySkusAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetBulkItemIdBySkusBuilder SetSku(List<string> _sku)
+            public TImpl SetSku(List<string> _sku)
             {
                 Sku = _sku;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetBulkItemIdBySkusBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -78,11 +92,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetBulkItemIdBySkusBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetBulkItemIdBySkus.Response Execute(
+            protected GetBulkItemIdBySkus.Response InternalExecute(
                 string namespace_
             )
             {
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetBulkItemIdBySkus.Response> ExecuteAsync(
+            protected async Task<GetBulkItemIdBySkus.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -118,7 +132,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetBulkItemIdBySkus(GetBulkItemIdBySkusBuilder builder,
+        public class GetBulkItemIdBySkusBuilder : GetBulkItemIdBySkusAbstractBuilder<GetBulkItemIdBySkusBuilder>
+        {
+            public GetBulkItemIdBySkusBuilder() : base() { }
+
+            public GetBulkItemIdBySkusBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetBulkItemIdBySkus.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<GetBulkItemIdBySkus.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetBulkItemIdBySkus(IGetBulkItemIdBySkusBuilder builder,
             string namespace_
         )
         {
@@ -189,7 +228,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ItemId>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ItemId>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

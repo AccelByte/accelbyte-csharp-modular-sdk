@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetCodeBuilder Builder { get => new GetCodeBuilder(); }
 
-        public class GetCodeBuilder
-            : OperationBuilder<GetCodeBuilder>
+        public interface IGetCodeBuilder
+        {
+
+            bool? Redeemable { get; }
+
+            bool? WithBatchName { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCodeBuilder
+            where TImpl : GetCodeAbstractBuilder<TImpl>
         {
 
             public bool? Redeemable { get; set; }
@@ -45,24 +59,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal GetCodeBuilder() { }
+            public GetCodeAbstractBuilder() { }
 
-            internal GetCodeBuilder(IAccelByteSdk sdk)
+            public GetCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetCodeBuilder SetRedeemable(bool _redeemable)
+            public TImpl SetRedeemable(bool _redeemable)
             {
                 Redeemable = _redeemable;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetCodeBuilder SetWithBatchName(bool _withBatchName)
+            public TImpl SetWithBatchName(bool _withBatchName)
             {
                 WithBatchName = _withBatchName;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -79,11 +93,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<GetCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCode.Response Execute(
+            protected GetCode.Response InternalExecute(
                 string code,
                 string namespace_
             )
@@ -102,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCode.Response> ExecuteAsync(
+            protected async Task<GetCode.Response> InternalExecuteAsync(
                 string code,
                 string namespace_
             )
@@ -123,7 +137,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetCode(GetCodeBuilder builder,
+        public class GetCodeBuilder : GetCodeAbstractBuilder<GetCodeBuilder>
+        {
+            public GetCodeBuilder() : base() { }
+
+            public GetCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCode.Response Execute(
+                string code,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    code,
+                    namespace_
+                );
+            }
+            public async Task<GetCode.Response> ExecuteAsync(
+                string code,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    namespace_
+                );
+            }
+        }
+
+
+        public GetCode(IGetCodeBuilder builder,
             string code,
             string namespace_
         )
@@ -200,17 +243,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminUpdateGlobalConfigBuilder Builder { get => new AdminUpdateGlobalConfigBuilder(); }
 
-        public class AdminUpdateGlobalConfigBuilder
-            : OperationBuilder<AdminUpdateGlobalConfigBuilder>
+        public interface IAdminUpdateGlobalConfigBuilder
         {
 
 
 
 
 
-            internal AdminUpdateGlobalConfigBuilder() { }
+        }
 
-            internal AdminUpdateGlobalConfigBuilder(IAccelByteSdk sdk)
+        public abstract class AdminUpdateGlobalConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminUpdateGlobalConfigBuilder
+            where TImpl : AdminUpdateGlobalConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminUpdateGlobalConfigAbstractBuilder() { }
+
+            public AdminUpdateGlobalConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -59,12 +69,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminUpdateGlobalConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminUpdateGlobalConfig.Response Execute(
+            protected AdminUpdateGlobalConfig.Response InternalExecute(
                 ModelPutGlobalConfigurationRequest body
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminUpdateGlobalConfig.Response> ExecuteAsync(
+            protected async Task<AdminUpdateGlobalConfig.Response> InternalExecuteAsync(
                 ModelPutGlobalConfigurationRequest body
             )
             {
@@ -100,7 +110,33 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminUpdateGlobalConfig(AdminUpdateGlobalConfigBuilder builder,
+        public class AdminUpdateGlobalConfigBuilder : AdminUpdateGlobalConfigAbstractBuilder<AdminUpdateGlobalConfigBuilder>
+        {
+            public AdminUpdateGlobalConfigBuilder() : base() { }
+
+            public AdminUpdateGlobalConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminUpdateGlobalConfig.Response Execute(
+                ModelPutGlobalConfigurationRequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminUpdateGlobalConfig.Response> ExecuteAsync(
+                ModelPutGlobalConfigurationRequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminUpdateGlobalConfig(IAdminUpdateGlobalConfigBuilder builder,
             ModelPutGlobalConfigurationRequest body
         )
         {
@@ -167,17 +203,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelGlobalConfiguration>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

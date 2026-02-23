@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,8 +38,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static UpdateUserSlotConfigBuilder Builder { get => new UpdateUserSlotConfigBuilder(); }
 
-        public class UpdateUserSlotConfigBuilder
-            : OperationBuilder<UpdateUserSlotConfigBuilder>
+        public interface IUpdateUserSlotConfigBuilder
+        {
+
+
+            Model.SlotConfigUpdate? Body { get; }
+
+
+
+
+        }
+
+        public abstract class UpdateUserSlotConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateUserSlotConfigBuilder
+            where TImpl : UpdateUserSlotConfigAbstractBuilder<TImpl>
         {
 
 
@@ -48,19 +60,19 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            internal UpdateUserSlotConfigBuilder() { }
+            public UpdateUserSlotConfigAbstractBuilder() { }
 
-            internal UpdateUserSlotConfigBuilder(IAccelByteSdk sdk)
+            public UpdateUserSlotConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public UpdateUserSlotConfigBuilder SetBody(Model.SlotConfigUpdate _body)
+            public TImpl SetBody(Model.SlotConfigUpdate _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,12 +88,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpdateUserSlotConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpdateUserSlotConfig.Response Execute(
+            protected UpdateUserSlotConfig.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -100,7 +112,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateUserSlotConfig.Response> ExecuteAsync(
+            protected async Task<UpdateUserSlotConfig.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -121,7 +133,37 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private UpdateUserSlotConfig(UpdateUserSlotConfigBuilder builder,
+        public class UpdateUserSlotConfigBuilder : UpdateUserSlotConfigAbstractBuilder<UpdateUserSlotConfigBuilder>
+        {
+            public UpdateUserSlotConfigBuilder() : base() { }
+
+            public UpdateUserSlotConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpdateUserSlotConfig.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpdateUserSlotConfig.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpdateUserSlotConfig(IUpdateUserSlotConfigBuilder builder,
             string namespace_,
             string userId
         )
@@ -191,7 +233,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.UserSlotConfigInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.UserSlotConfigInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

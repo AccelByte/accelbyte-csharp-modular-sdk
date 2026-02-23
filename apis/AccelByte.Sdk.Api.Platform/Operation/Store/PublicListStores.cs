@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicListStoresBuilder Builder { get => new PublicListStoresBuilder(); }
 
-        public class PublicListStoresBuilder
-            : OperationBuilder<PublicListStoresBuilder>
+        public interface IPublicListStoresBuilder
         {
 
 
 
 
 
-            internal PublicListStoresBuilder() { }
+        }
 
-            internal PublicListStoresBuilder(IAccelByteSdk sdk)
+        public abstract class PublicListStoresAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicListStoresBuilder
+            where TImpl : PublicListStoresAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicListStoresAbstractBuilder() { }
+
+            public PublicListStoresAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicListStoresBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicListStores.Response Execute(
+            protected PublicListStores.Response InternalExecute(
                 string namespace_
             )
             {
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicListStores.Response> ExecuteAsync(
+            protected async Task<PublicListStores.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -104,7 +114,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicListStores(PublicListStoresBuilder builder,
+        public class PublicListStoresBuilder : PublicListStoresAbstractBuilder<PublicListStoresBuilder>
+        {
+            public PublicListStoresBuilder() : base() { }
+
+            public PublicListStoresBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicListStores.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<PublicListStores.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicListStores(IPublicListStoresBuilder builder,
             string namespace_
         )
         {
@@ -165,7 +200,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.StoreInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.StoreInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

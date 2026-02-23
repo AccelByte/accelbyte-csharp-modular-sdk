@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static RevokeEntitlementsBuilder Builder { get => new RevokeEntitlementsBuilder(); }
 
-        public class RevokeEntitlementsBuilder
-            : OperationBuilder<RevokeEntitlementsBuilder>
+        public interface IRevokeEntitlementsBuilder
+        {
+
+
+            List<string>? Body { get; }
+
+
+
+
+        }
+
+        public abstract class RevokeEntitlementsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeEntitlementsBuilder
+            where TImpl : RevokeEntitlementsAbstractBuilder<TImpl>
         {
 
 
@@ -43,19 +55,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal RevokeEntitlementsBuilder() { }
+            public RevokeEntitlementsAbstractBuilder() { }
 
-            internal RevokeEntitlementsBuilder(IAccelByteSdk sdk)
+            public RevokeEntitlementsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public RevokeEntitlementsBuilder SetBody(List<string> _body)
+            public TImpl SetBody(List<string> _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RevokeEntitlementsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RevokeEntitlements.Response Execute(
+            protected RevokeEntitlements.Response InternalExecute(
                 string namespace_
             )
             {
@@ -90,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeEntitlements.Response> ExecuteAsync(
+            protected async Task<RevokeEntitlements.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -109,7 +121,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private RevokeEntitlements(RevokeEntitlementsBuilder builder,
+        public class RevokeEntitlementsBuilder : RevokeEntitlementsAbstractBuilder<RevokeEntitlementsBuilder>
+        {
+            public RevokeEntitlementsBuilder() : base() { }
+
+            public RevokeEntitlementsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RevokeEntitlements.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RevokeEntitlements.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RevokeEntitlements(IRevokeEntitlementsBuilder builder,
             string namespace_
         )
         {
@@ -177,12 +214,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BulkEntitlementRevokeResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BulkEntitlementRevokeResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 

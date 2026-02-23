@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,24 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static GetIncomingFriendRequestsBuilder Builder { get => new GetIncomingFriendRequestsBuilder(); }
 
-        public class GetIncomingFriendRequestsBuilder
-            : OperationBuilder<GetIncomingFriendRequestsBuilder>
+        public interface IGetIncomingFriendRequestsBuilder
+        {
+
+            string? FriendId { get; }
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+
+
+
+
+        }
+
+        public abstract class GetIncomingFriendRequestsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetIncomingFriendRequestsBuilder
+            where TImpl : GetIncomingFriendRequestsAbstractBuilder<TImpl>
         {
 
             public string? FriendId { get; set; }
@@ -44,30 +60,30 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
 
 
-            internal GetIncomingFriendRequestsBuilder() { }
+            public GetIncomingFriendRequestsAbstractBuilder() { }
 
-            internal GetIncomingFriendRequestsBuilder(IAccelByteSdk sdk)
+            public GetIncomingFriendRequestsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public GetIncomingFriendRequestsBuilder SetFriendId(string _friendId)
+            public TImpl SetFriendId(string _friendId)
             {
                 FriendId = _friendId;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetIncomingFriendRequestsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public GetIncomingFriendRequestsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -84,11 +100,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetIncomingFriendRequestsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetIncomingFriendRequests.Response Execute(
+            protected GetIncomingFriendRequests.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -107,7 +123,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetIncomingFriendRequests.Response> ExecuteAsync(
+            protected async Task<GetIncomingFriendRequests.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -128,7 +144,36 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private GetIncomingFriendRequests(GetIncomingFriendRequestsBuilder builder,
+        public class GetIncomingFriendRequestsBuilder : GetIncomingFriendRequestsAbstractBuilder<GetIncomingFriendRequestsBuilder>
+        {
+            public GetIncomingFriendRequestsBuilder() : base() { }
+
+            public GetIncomingFriendRequestsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetIncomingFriendRequests.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetIncomingFriendRequests.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetIncomingFriendRequests(IGetIncomingFriendRequestsBuilder builder,
             string namespace_,
             string userId
         )
@@ -212,27 +257,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelLoadIncomingFriendsWithTimeResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelLoadIncomingFriendsWithTimeResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static UpgradeHeadlessAccountBuilder Builder { get => new UpgradeHeadlessAccountBuilder(); }
 
-        public class UpgradeHeadlessAccountBuilder
-            : OperationBuilder<UpgradeHeadlessAccountBuilder>
+        public interface IUpgradeHeadlessAccountBuilder
         {
 
 
 
 
 
-            internal UpgradeHeadlessAccountBuilder() { }
+        }
 
-            internal UpgradeHeadlessAccountBuilder(IAccelByteSdk sdk)
+        public abstract class UpgradeHeadlessAccountAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpgradeHeadlessAccountBuilder
+            where TImpl : UpgradeHeadlessAccountAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpgradeHeadlessAccountAbstractBuilder() { }
+
+            public UpgradeHeadlessAccountAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,12 +76,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<UpgradeHeadlessAccountBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public UpgradeHeadlessAccount.Response Execute(
+            protected UpgradeHeadlessAccount.Response InternalExecute(
                 ModelUpgradeHeadlessAccountRequest body,
                 string namespace_,
                 string userId
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpgradeHeadlessAccount.Response> ExecuteAsync(
+            protected async Task<UpgradeHeadlessAccount.Response> InternalExecuteAsync(
                 ModelUpgradeHeadlessAccountRequest body,
                 string namespace_,
                 string userId
@@ -115,7 +125,41 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private UpgradeHeadlessAccount(UpgradeHeadlessAccountBuilder builder,
+        public class UpgradeHeadlessAccountBuilder : UpgradeHeadlessAccountAbstractBuilder<UpgradeHeadlessAccountBuilder>
+        {
+            public UpgradeHeadlessAccountBuilder() : base() { }
+
+            public UpgradeHeadlessAccountBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public UpgradeHeadlessAccount.Response Execute(
+                ModelUpgradeHeadlessAccountRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<UpgradeHeadlessAccount.Response> ExecuteAsync(
+                ModelUpgradeHeadlessAccountRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public UpgradeHeadlessAccount(IUpgradeHeadlessAccountBuilder builder,
             ModelUpgradeHeadlessAccountRequest body,
             string namespace_,
             string userId
@@ -192,22 +236,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error409 = response.Payload;
                 response.Error = new ApiError("-1", response.Error409!);
             }
 

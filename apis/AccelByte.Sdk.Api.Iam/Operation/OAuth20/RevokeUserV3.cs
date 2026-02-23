@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static RevokeUserV3Builder Builder { get => new RevokeUserV3Builder(); }
 
-        public class RevokeUserV3Builder
-            : OperationBuilder<RevokeUserV3Builder>
+        public interface IRevokeUserV3Builder
+        {
+
+            bool? IncludeGameNamespace { get; }
+
+
+
+
+
+        }
+
+        public abstract class RevokeUserV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRevokeUserV3Builder
+            where TImpl : RevokeUserV3AbstractBuilder<TImpl>
         {
 
             public bool? IncludeGameNamespace { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
 
 
-            internal RevokeUserV3Builder() { }
+            public RevokeUserV3AbstractBuilder() { }
 
-            internal RevokeUserV3Builder(IAccelByteSdk sdk)
+            public RevokeUserV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public RevokeUserV3Builder SetIncludeGameNamespace(bool _includeGameNamespace)
+            public TImpl SetIncludeGameNamespace(bool _includeGameNamespace)
             {
                 IncludeGameNamespace = _includeGameNamespace;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -71,11 +83,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<RevokeUserV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RevokeUserV3.Response Execute(
+            protected RevokeUserV3.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -94,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RevokeUserV3.Response> ExecuteAsync(
+            protected async Task<RevokeUserV3.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -115,7 +127,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private RevokeUserV3(RevokeUserV3Builder builder,
+        public class RevokeUserV3Builder : RevokeUserV3AbstractBuilder<RevokeUserV3Builder>
+        {
+            public RevokeUserV3Builder() : base() { }
+
+            public RevokeUserV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RevokeUserV3.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<RevokeUserV3.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public RevokeUserV3(IRevokeUserV3Builder builder,
             string namespace_,
             string userId
         )
@@ -192,17 +233,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<OauthmodelErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

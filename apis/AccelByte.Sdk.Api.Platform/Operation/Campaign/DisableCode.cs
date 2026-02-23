@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DisableCodeBuilder Builder { get => new DisableCodeBuilder(); }
 
-        public class DisableCodeBuilder
-            : OperationBuilder<DisableCodeBuilder>
+        public interface IDisableCodeBuilder
         {
 
 
 
 
 
-            internal DisableCodeBuilder() { }
+        }
 
-            internal DisableCodeBuilder(IAccelByteSdk sdk)
+        public abstract class DisableCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDisableCodeBuilder
+            where TImpl : DisableCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DisableCodeAbstractBuilder() { }
+
+            public DisableCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -65,11 +75,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DisableCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DisableCode.Response Execute(
+            protected DisableCode.Response InternalExecute(
                 string code,
                 string namespace_
             )
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DisableCode.Response> ExecuteAsync(
+            protected async Task<DisableCode.Response> InternalExecuteAsync(
                 string code,
                 string namespace_
             )
@@ -109,7 +119,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DisableCode(DisableCodeBuilder builder,
+        public class DisableCodeBuilder : DisableCodeAbstractBuilder<DisableCodeBuilder>
+        {
+            public DisableCodeBuilder() : base() { }
+
+            public DisableCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DisableCode.Response Execute(
+                string code,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    code,
+                    namespace_
+                );
+            }
+            public async Task<DisableCode.Response> ExecuteAsync(
+                string code,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    code,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DisableCode(IDisableCodeBuilder builder,
             string code,
             string namespace_
         )
@@ -178,12 +217,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.CodeInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

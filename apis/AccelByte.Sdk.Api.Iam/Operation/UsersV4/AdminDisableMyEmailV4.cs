@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminDisableMyEmailV4Builder Builder { get => new AdminDisableMyEmailV4Builder(); }
 
-        public class AdminDisableMyEmailV4Builder
-            : OperationBuilder<AdminDisableMyEmailV4Builder>
+        public interface IAdminDisableMyEmailV4Builder
         {
 
 
 
 
 
-            internal AdminDisableMyEmailV4Builder() { }
+        }
 
-            internal AdminDisableMyEmailV4Builder(IAccelByteSdk sdk)
+        public abstract class AdminDisableMyEmailV4AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminDisableMyEmailV4Builder
+            where TImpl : AdminDisableMyEmailV4AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminDisableMyEmailV4AbstractBuilder() { }
+
+            public AdminDisableMyEmailV4AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     body                    
                 );
 
-                op.SetBaseFields<AdminDisableMyEmailV4Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminDisableMyEmailV4.Response Execute(
+            protected AdminDisableMyEmailV4.Response InternalExecute(
                 ModelDisableMFARequest body
             )
             {
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminDisableMyEmailV4.Response> ExecuteAsync(
+            protected async Task<AdminDisableMyEmailV4.Response> InternalExecuteAsync(
                 ModelDisableMFARequest body
             )
             {
@@ -103,7 +113,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminDisableMyEmailV4(AdminDisableMyEmailV4Builder builder,
+        public class AdminDisableMyEmailV4Builder : AdminDisableMyEmailV4AbstractBuilder<AdminDisableMyEmailV4Builder>
+        {
+            public AdminDisableMyEmailV4Builder() : base() { }
+
+            public AdminDisableMyEmailV4Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminDisableMyEmailV4.Response Execute(
+                ModelDisableMFARequest body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<AdminDisableMyEmailV4.Response> ExecuteAsync(
+                ModelDisableMFARequest body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public AdminDisableMyEmailV4(IAdminDisableMyEmailV4Builder builder,
             ModelDisableMFARequest body
         )
         {
@@ -177,27 +212,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static DeleteOculusSubscriptionGroupBuilder Builder { get => new DeleteOculusSubscriptionGroupBuilder(); }
 
-        public class DeleteOculusSubscriptionGroupBuilder
-            : OperationBuilder<DeleteOculusSubscriptionGroupBuilder>
+        public interface IDeleteOculusSubscriptionGroupBuilder
         {
 
 
 
 
 
-            internal DeleteOculusSubscriptionGroupBuilder() { }
+        }
 
-            internal DeleteOculusSubscriptionGroupBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteOculusSubscriptionGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteOculusSubscriptionGroupBuilder
+            where TImpl : DeleteOculusSubscriptionGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteOculusSubscriptionGroupAbstractBuilder() { }
+
+            public DeleteOculusSubscriptionGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     sku                    
                 );
 
-                op.SetBaseFields<DeleteOculusSubscriptionGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteOculusSubscriptionGroup.Response Execute(
+            protected DeleteOculusSubscriptionGroup.Response InternalExecute(
                 string namespace_,
                 string sku
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteOculusSubscriptionGroup.Response> ExecuteAsync(
+            protected async Task<DeleteOculusSubscriptionGroup.Response> InternalExecuteAsync(
                 string namespace_,
                 string sku
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private DeleteOculusSubscriptionGroup(DeleteOculusSubscriptionGroupBuilder builder,
+        public class DeleteOculusSubscriptionGroupBuilder : DeleteOculusSubscriptionGroupAbstractBuilder<DeleteOculusSubscriptionGroupBuilder>
+        {
+            public DeleteOculusSubscriptionGroupBuilder() : base() { }
+
+            public DeleteOculusSubscriptionGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteOculusSubscriptionGroup.Response Execute(
+                string namespace_,
+                string sku
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    sku
+                );
+            }
+            public async Task<DeleteOculusSubscriptionGroup.Response> ExecuteAsync(
+                string namespace_,
+                string sku
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    sku
+                );
+            }
+        }
+
+
+        public DeleteOculusSubscriptionGroup(IDeleteOculusSubscriptionGroupBuilder builder,
             string namespace_,
             string sku
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
 

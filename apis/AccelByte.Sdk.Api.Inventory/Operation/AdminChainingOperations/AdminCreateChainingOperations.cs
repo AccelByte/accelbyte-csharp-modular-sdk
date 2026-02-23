@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -45,17 +45,27 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminCreateChainingOperationsBuilder Builder { get => new AdminCreateChainingOperationsBuilder(); }
 
-        public class AdminCreateChainingOperationsBuilder
-            : OperationBuilder<AdminCreateChainingOperationsBuilder>
+        public interface IAdminCreateChainingOperationsBuilder
         {
 
 
 
 
 
-            internal AdminCreateChainingOperationsBuilder() { }
+        }
 
-            internal AdminCreateChainingOperationsBuilder(IAccelByteSdk sdk)
+        public abstract class AdminCreateChainingOperationsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminCreateChainingOperationsBuilder
+            where TImpl : AdminCreateChainingOperationsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminCreateChainingOperationsAbstractBuilder() { }
+
+            public AdminCreateChainingOperationsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -75,11 +85,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminCreateChainingOperationsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminCreateChainingOperations.Response Execute(
+            protected AdminCreateChainingOperations.Response InternalExecute(
                 ApimodelsChainingOperationReq body,
                 string namespace_
             )
@@ -98,7 +108,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminCreateChainingOperations.Response> ExecuteAsync(
+            protected async Task<AdminCreateChainingOperations.Response> InternalExecuteAsync(
                 ApimodelsChainingOperationReq body,
                 string namespace_
             )
@@ -119,7 +129,36 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminCreateChainingOperations(AdminCreateChainingOperationsBuilder builder,
+        public class AdminCreateChainingOperationsBuilder : AdminCreateChainingOperationsAbstractBuilder<AdminCreateChainingOperationsBuilder>
+        {
+            public AdminCreateChainingOperationsBuilder() : base() { }
+
+            public AdminCreateChainingOperationsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminCreateChainingOperations.Response Execute(
+                ApimodelsChainingOperationReq body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<AdminCreateChainingOperations.Response> ExecuteAsync(
+                ApimodelsChainingOperationReq body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminCreateChainingOperations(IAdminCreateChainingOperationsBuilder builder,
             ApimodelsChainingOperationReq body,
             string namespace_
         )
@@ -196,32 +235,38 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsChainingOperationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsChainingOperationResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsChainingOperationResp>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListKeysBuilder Builder { get => new ListKeysBuilder(); }
 
-        public class ListKeysBuilder
-            : OperationBuilder<ListKeysBuilder>
+        public interface IListKeysBuilder
+        {
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            ListKeysStatus? Status { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListKeysAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListKeysBuilder
+            where TImpl : ListKeysAbstractBuilder<TImpl>
         {
 
             public int? Limit { get; set; }
@@ -47,30 +63,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListKeysBuilder() { }
+            public ListKeysAbstractBuilder() { }
 
-            internal ListKeysBuilder(IAccelByteSdk sdk)
+            public ListKeysAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListKeysBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListKeysBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListKeysBuilder SetStatus(ListKeysStatus _status)
+            public TImpl SetStatus(ListKeysStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -87,11 +103,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListKeysBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListKeys.Response Execute(
+            protected ListKeys.Response InternalExecute(
                 string keyGroupId,
                 string namespace_
             )
@@ -110,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListKeys.Response> ExecuteAsync(
+            protected async Task<ListKeys.Response> InternalExecuteAsync(
                 string keyGroupId,
                 string namespace_
             )
@@ -131,7 +147,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListKeys(ListKeysBuilder builder,
+        public class ListKeysBuilder : ListKeysAbstractBuilder<ListKeysBuilder>
+        {
+            public ListKeysBuilder() : base() { }
+
+            public ListKeysBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListKeys.Response Execute(
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    keyGroupId,
+                    namespace_
+                );
+            }
+            public async Task<ListKeys.Response> ExecuteAsync(
+                string keyGroupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    keyGroupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListKeys(IListKeysBuilder builder,
             string keyGroupId,
             string namespace_
         )
@@ -207,7 +252,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.KeyPagingSliceResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.KeyPagingSliceResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

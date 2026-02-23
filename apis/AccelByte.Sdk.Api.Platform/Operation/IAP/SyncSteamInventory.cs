@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncSteamInventoryBuilder Builder { get => new SyncSteamInventoryBuilder(); }
 
-        public class SyncSteamInventoryBuilder
-            : OperationBuilder<SyncSteamInventoryBuilder>
+        public interface ISyncSteamInventoryBuilder
         {
 
 
 
 
 
-            internal SyncSteamInventoryBuilder() { }
+        }
 
-            internal SyncSteamInventoryBuilder(IAccelByteSdk sdk)
+        public abstract class SyncSteamInventoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncSteamInventoryBuilder
+            where TImpl : SyncSteamInventoryAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SyncSteamInventoryAbstractBuilder() { }
+
+            public SyncSteamInventoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncSteamInventoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncSteamInventory.Response Execute(
+            protected SyncSteamInventory.Response InternalExecute(
                 SteamSyncRequest body,
                 string namespace_,
                 string userId
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncSteamInventory.Response> ExecuteAsync(
+            protected async Task<SyncSteamInventory.Response> InternalExecuteAsync(
                 SteamSyncRequest body,
                 string namespace_,
                 string userId
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncSteamInventory(SyncSteamInventoryBuilder builder,
+        public class SyncSteamInventoryBuilder : SyncSteamInventoryAbstractBuilder<SyncSteamInventoryBuilder>
+        {
+            public SyncSteamInventoryBuilder() : base() { }
+
+            public SyncSteamInventoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncSteamInventory.Response Execute(
+                SteamSyncRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncSteamInventory.Response> ExecuteAsync(
+                SteamSyncRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncSteamInventory(ISyncSteamInventoryBuilder builder,
             SteamSyncRequest body,
             string namespace_,
             string userId
@@ -187,12 +230,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

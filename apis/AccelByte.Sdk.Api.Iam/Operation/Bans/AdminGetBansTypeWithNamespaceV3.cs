@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetBansTypeWithNamespaceV3Builder Builder { get => new AdminGetBansTypeWithNamespaceV3Builder(); }
 
-        public class AdminGetBansTypeWithNamespaceV3Builder
-            : OperationBuilder<AdminGetBansTypeWithNamespaceV3Builder>
+        public interface IAdminGetBansTypeWithNamespaceV3Builder
         {
 
 
 
 
 
-            internal AdminGetBansTypeWithNamespaceV3Builder() { }
+        }
 
-            internal AdminGetBansTypeWithNamespaceV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetBansTypeWithNamespaceV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetBansTypeWithNamespaceV3Builder
+            where TImpl : AdminGetBansTypeWithNamespaceV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetBansTypeWithNamespaceV3AbstractBuilder() { }
+
+            public AdminGetBansTypeWithNamespaceV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminGetBansTypeWithNamespaceV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetBansTypeWithNamespaceV3.Response Execute(
+            protected AdminGetBansTypeWithNamespaceV3.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetBansTypeWithNamespaceV3.Response> ExecuteAsync(
+            protected async Task<AdminGetBansTypeWithNamespaceV3.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetBansTypeWithNamespaceV3(AdminGetBansTypeWithNamespaceV3Builder builder,
+        public class AdminGetBansTypeWithNamespaceV3Builder : AdminGetBansTypeWithNamespaceV3AbstractBuilder<AdminGetBansTypeWithNamespaceV3Builder>
+        {
+            public AdminGetBansTypeWithNamespaceV3Builder() : base() { }
+
+            public AdminGetBansTypeWithNamespaceV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetBansTypeWithNamespaceV3.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminGetBansTypeWithNamespaceV3.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminGetBansTypeWithNamespaceV3(IAdminGetBansTypeWithNamespaceV3Builder builder,
             string namespace_
         )
         {
@@ -169,22 +204,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.AccountcommonBansV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.AccountcommonBansV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

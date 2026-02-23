@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #region Builder Part
         public static DeleteTiedStatBuilder Builder { get => new DeleteTiedStatBuilder(); }
 
-        public class DeleteTiedStatBuilder
-            : OperationBuilder<DeleteTiedStatBuilder>
+        public interface IDeleteTiedStatBuilder
         {
 
 
 
 
 
-            internal DeleteTiedStatBuilder() { }
+        }
 
-            internal DeleteTiedStatBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteTiedStatAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteTiedStatBuilder
+            where TImpl : DeleteTiedStatAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteTiedStatAbstractBuilder() { }
+
+            public DeleteTiedStatAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     statCode                    
                 );
 
-                op.SetBaseFields<DeleteTiedStatBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteTiedStat.Response Execute(
+            protected DeleteTiedStat.Response InternalExecute(
                 string namespace_,
                 string statCode
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteTiedStat.Response> ExecuteAsync(
+            protected async Task<DeleteTiedStat.Response> InternalExecuteAsync(
                 string namespace_,
                 string statCode
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        private DeleteTiedStat(DeleteTiedStatBuilder builder,
+        public class DeleteTiedStatBuilder : DeleteTiedStatAbstractBuilder<DeleteTiedStatBuilder>
+        {
+            public DeleteTiedStatBuilder() : base() { }
+
+            public DeleteTiedStatBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteTiedStat.Response Execute(
+                string namespace_,
+                string statCode
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    statCode
+                );
+            }
+            public async Task<DeleteTiedStat.Response> ExecuteAsync(
+                string namespace_,
+                string statCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    statCode
+                );
+            }
+        }
+
+
+        public DeleteTiedStat(IDeleteTiedStatBuilder builder,
             string namespace_,
             string statCode
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

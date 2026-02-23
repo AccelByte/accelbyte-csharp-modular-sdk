@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static DeleteTicketBuilder Builder { get => new DeleteTicketBuilder(); }
 
-        public class DeleteTicketBuilder
-            : OperationBuilder<DeleteTicketBuilder>
+        public interface IDeleteTicketBuilder
         {
 
 
 
 
 
-            internal DeleteTicketBuilder() { }
+        }
 
-            internal DeleteTicketBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteTicketAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteTicketBuilder
+            where TImpl : DeleteTicketAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteTicketAbstractBuilder() { }
+
+            public DeleteTicketAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     ticketId                    
                 );
 
-                op.SetBaseFields<DeleteTicketBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteTicket.Response Execute(
+            protected DeleteTicket.Response InternalExecute(
                 string namespace_,
                 string ticketId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteTicket.Response> ExecuteAsync(
+            protected async Task<DeleteTicket.Response> InternalExecuteAsync(
                 string namespace_,
                 string ticketId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private DeleteTicket(DeleteTicketBuilder builder,
+        public class DeleteTicketBuilder : DeleteTicketAbstractBuilder<DeleteTicketBuilder>
+        {
+            public DeleteTicketBuilder() : base() { }
+
+            public DeleteTicketBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteTicket.Response Execute(
+                string namespace_,
+                string ticketId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    ticketId
+                );
+            }
+            public async Task<DeleteTicket.Response> ExecuteAsync(
+                string namespace_,
+                string ticketId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    ticketId
+                );
+            }
+        }
+
+
+        public DeleteTicket(IDeleteTicketBuilder builder,
             string namespace_,
             string ticketId
         )
@@ -176,12 +215,14 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

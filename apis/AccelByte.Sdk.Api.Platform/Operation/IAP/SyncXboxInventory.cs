@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,8 +31,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static SyncXboxInventoryBuilder Builder { get => new SyncXboxInventoryBuilder(); }
 
-        public class SyncXboxInventoryBuilder
-            : OperationBuilder<SyncXboxInventoryBuilder>
+        public interface ISyncXboxInventoryBuilder
+        {
+
+
+            Model.XblReconcileRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class SyncXboxInventoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISyncXboxInventoryBuilder
+            where TImpl : SyncXboxInventoryAbstractBuilder<TImpl>
         {
 
 
@@ -41,19 +53,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal SyncXboxInventoryBuilder() { }
+            public SyncXboxInventoryAbstractBuilder() { }
 
-            internal SyncXboxInventoryBuilder(IAccelByteSdk sdk)
+            public SyncXboxInventoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public SyncXboxInventoryBuilder SetBody(Model.XblReconcileRequest _body)
+            public TImpl SetBody(Model.XblReconcileRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -69,11 +81,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<SyncXboxInventoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SyncXboxInventory.Response Execute(
+            protected SyncXboxInventory.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -92,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SyncXboxInventory.Response> ExecuteAsync(
+            protected async Task<SyncXboxInventory.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -113,7 +125,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private SyncXboxInventory(SyncXboxInventoryBuilder builder,
+        public class SyncXboxInventoryBuilder : SyncXboxInventoryAbstractBuilder<SyncXboxInventoryBuilder>
+        {
+            public SyncXboxInventoryBuilder() : base() { }
+
+            public SyncXboxInventoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SyncXboxInventory.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<SyncXboxInventory.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public SyncXboxInventory(ISyncXboxInventoryBuilder builder,
             string namespace_,
             string userId
         )
@@ -187,17 +228,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.XblReconcileResult>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.XblReconcileResult>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

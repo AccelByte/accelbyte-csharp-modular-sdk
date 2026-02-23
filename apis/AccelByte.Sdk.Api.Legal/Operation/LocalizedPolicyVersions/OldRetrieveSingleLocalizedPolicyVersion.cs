@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveSingleLocalizedPolicyVersionBuilder Builder { get => new OldRetrieveSingleLocalizedPolicyVersionBuilder(); }
 
-        public class OldRetrieveSingleLocalizedPolicyVersionBuilder
-            : OperationBuilder<OldRetrieveSingleLocalizedPolicyVersionBuilder>
+        public interface IOldRetrieveSingleLocalizedPolicyVersionBuilder
         {
 
 
 
 
 
-            internal OldRetrieveSingleLocalizedPolicyVersionBuilder() { }
+        }
 
-            internal OldRetrieveSingleLocalizedPolicyVersionBuilder(IAccelByteSdk sdk)
+        public abstract class OldRetrieveSingleLocalizedPolicyVersionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveSingleLocalizedPolicyVersionBuilder
+            where TImpl : OldRetrieveSingleLocalizedPolicyVersionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public OldRetrieveSingleLocalizedPolicyVersionAbstractBuilder() { }
+
+            public OldRetrieveSingleLocalizedPolicyVersionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     localizedPolicyVersionId                    
                 );
 
-                op.SetBaseFields<OldRetrieveSingleLocalizedPolicyVersionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveSingleLocalizedPolicyVersion.Response Execute(
+            protected OldRetrieveSingleLocalizedPolicyVersion.Response InternalExecute(
                 string localizedPolicyVersionId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveSingleLocalizedPolicyVersion.Response> ExecuteAsync(
+            protected async Task<OldRetrieveSingleLocalizedPolicyVersion.Response> InternalExecuteAsync(
                 string localizedPolicyVersionId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveSingleLocalizedPolicyVersion(OldRetrieveSingleLocalizedPolicyVersionBuilder builder,
+        public class OldRetrieveSingleLocalizedPolicyVersionBuilder : OldRetrieveSingleLocalizedPolicyVersionAbstractBuilder<OldRetrieveSingleLocalizedPolicyVersionBuilder>
+        {
+            public OldRetrieveSingleLocalizedPolicyVersionBuilder() : base() { }
+
+            public OldRetrieveSingleLocalizedPolicyVersionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveSingleLocalizedPolicyVersion.Response Execute(
+                string localizedPolicyVersionId
+            )
+            {
+                return InternalExecute(
+                    localizedPolicyVersionId
+                );
+            }
+            public async Task<OldRetrieveSingleLocalizedPolicyVersion.Response> ExecuteAsync(
+                string localizedPolicyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    localizedPolicyVersionId
+                );
+            }
+        }
+
+
+        public OldRetrieveSingleLocalizedPolicyVersion(IOldRetrieveSingleLocalizedPolicyVersionBuilder builder,
             string localizedPolicyVersionId
         )
         {
@@ -163,12 +198,14 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RetrieveLocalizedPolicyVersionResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RetrieveLocalizedPolicyVersionResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,8 +32,38 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #region Builder Part
         public static ImageListBuilder Builder { get => new ImageListBuilder(); }
 
-        public class ImageListBuilder
-            : OperationBuilder<ImageListBuilder>
+        public interface IImageListBuilder
+        {
+
+            long? Count { get; }
+
+            string? InUse { get; }
+
+            bool? IsProtected { get; }
+
+            string? Name { get; }
+
+            long? Offset { get; }
+
+            string? SortBy { get; }
+
+            string? SortDirection { get; }
+
+            string? Status { get; }
+
+            string? Tag { get; }
+
+            string? TargetArchitecture { get; }
+
+
+
+
+
+        }
+
+        public abstract class ImageListAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IImageListBuilder
+            where TImpl : ImageListAbstractBuilder<TImpl>
         {
 
             public long? Count { get; set; }
@@ -60,72 +90,72 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
 
 
-            internal ImageListBuilder() { }
+            public ImageListAbstractBuilder() { }
 
-            internal ImageListBuilder(IAccelByteSdk sdk)
+            public ImageListAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ImageListBuilder SetCount(long _count)
+            public TImpl SetCount(long _count)
             {
                 Count = _count;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetInUse(string _inUse)
+            public TImpl SetInUse(string _inUse)
             {
                 InUse = _inUse;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetIsProtected(bool _isProtected)
+            public TImpl SetIsProtected(bool _isProtected)
             {
                 IsProtected = _isProtected;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetName(string _name)
+            public TImpl SetName(string _name)
             {
                 Name = _name;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetSortBy(string _sortBy)
+            public TImpl SetSortBy(string _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetSortDirection(string _sortDirection)
+            public TImpl SetSortDirection(string _sortDirection)
             {
                 SortDirection = _sortDirection;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetStatus(string _status)
+            public TImpl SetStatus(string _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetTag(string _tag)
+            public TImpl SetTag(string _tag)
             {
                 Tag = _tag;
-                return this;
+                return (TImpl)this;
             }
 
-            public ImageListBuilder SetTargetArchitecture(string _targetArchitecture)
+            public TImpl SetTargetArchitecture(string _targetArchitecture)
             {
                 TargetArchitecture = _targetArchitecture;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -140,11 +170,11 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ImageListBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ImageList.Response Execute(
+            protected ImageList.Response InternalExecute(
                 string namespace_
             )
             {
@@ -161,7 +191,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ImageList.Response> ExecuteAsync(
+            protected async Task<ImageList.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -180,7 +210,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
         }
 
-        private ImageList(ImageListBuilder builder,
+        public class ImageListBuilder : ImageListAbstractBuilder<ImageListBuilder>
+        {
+            public ImageListBuilder() : base() { }
+
+            public ImageListBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ImageList.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ImageList.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ImageList(IImageListBuilder builder,
             string namespace_
         )
         {
@@ -281,27 +336,32 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiImageList>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiImageList>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static StopNoSQLClusterV2Builder Builder { get => new StopNoSQLClusterV2Builder(); }
 
-        public class StopNoSQLClusterV2Builder
-            : OperationBuilder<StopNoSQLClusterV2Builder>
+        public interface IStopNoSQLClusterV2Builder
         {
 
 
 
 
 
-            internal StopNoSQLClusterV2Builder() { }
+        }
 
-            internal StopNoSQLClusterV2Builder(IAccelByteSdk sdk)
+        public abstract class StopNoSQLClusterV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IStopNoSQLClusterV2Builder
+            where TImpl : StopNoSQLClusterV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public StopNoSQLClusterV2AbstractBuilder() { }
+
+            public StopNoSQLClusterV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<StopNoSQLClusterV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public StopNoSQLClusterV2.Response Execute(
+            protected StopNoSQLClusterV2.Response InternalExecute(
                 string namespace_
             )
             {
@@ -84,7 +94,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<StopNoSQLClusterV2.Response> ExecuteAsync(
+            protected async Task<StopNoSQLClusterV2.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -103,7 +113,32 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private StopNoSQLClusterV2(StopNoSQLClusterV2Builder builder,
+        public class StopNoSQLClusterV2Builder : StopNoSQLClusterV2AbstractBuilder<StopNoSQLClusterV2Builder>
+        {
+            public StopNoSQLClusterV2Builder() : base() { }
+
+            public StopNoSQLClusterV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public StopNoSQLClusterV2.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<StopNoSQLClusterV2.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public StopNoSQLClusterV2(IStopNoSQLClusterV2Builder builder,
             string namespace_
         )
         {
@@ -179,32 +214,38 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)503)
             {
-                response.Error503 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error503 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error503!.TranslateToApiError();
             }
 

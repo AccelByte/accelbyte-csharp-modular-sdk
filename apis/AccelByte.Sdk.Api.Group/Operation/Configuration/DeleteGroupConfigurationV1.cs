@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #region Builder Part
         public static DeleteGroupConfigurationV1Builder Builder { get => new DeleteGroupConfigurationV1Builder(); }
 
-        public class DeleteGroupConfigurationV1Builder
-            : OperationBuilder<DeleteGroupConfigurationV1Builder>
+        public interface IDeleteGroupConfigurationV1Builder
         {
 
 
 
 
 
-            internal DeleteGroupConfigurationV1Builder() { }
+        }
 
-            internal DeleteGroupConfigurationV1Builder(IAccelByteSdk sdk)
+        public abstract class DeleteGroupConfigurationV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteGroupConfigurationV1Builder
+            where TImpl : DeleteGroupConfigurationV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteGroupConfigurationV1AbstractBuilder() { }
+
+            public DeleteGroupConfigurationV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteGroupConfigurationV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteGroupConfigurationV1.Response Execute(
+            protected DeleteGroupConfigurationV1.Response InternalExecute(
                 string configurationCode,
                 string namespace_
             )
@@ -85,7 +95,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteGroupConfigurationV1.Response> ExecuteAsync(
+            protected async Task<DeleteGroupConfigurationV1.Response> InternalExecuteAsync(
                 string configurationCode,
                 string namespace_
             )
@@ -106,7 +116,36 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
         }
 
-        private DeleteGroupConfigurationV1(DeleteGroupConfigurationV1Builder builder,
+        public class DeleteGroupConfigurationV1Builder : DeleteGroupConfigurationV1AbstractBuilder<DeleteGroupConfigurationV1Builder>
+        {
+            public DeleteGroupConfigurationV1Builder() : base() { }
+
+            public DeleteGroupConfigurationV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteGroupConfigurationV1.Response Execute(
+                string configurationCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    configurationCode,
+                    namespace_
+                );
+            }
+            public async Task<DeleteGroupConfigurationV1.Response> ExecuteAsync(
+                string configurationCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    configurationCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteGroupConfigurationV1(IDeleteGroupConfigurationV1Builder builder,
             string configurationCode,
             string namespace_
         )
@@ -184,27 +223,32 @@ namespace AccelByte.Sdk.Api.Group.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

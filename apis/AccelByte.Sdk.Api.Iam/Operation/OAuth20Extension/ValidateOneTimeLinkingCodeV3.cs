@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static ValidateOneTimeLinkingCodeV3Builder Builder { get => new ValidateOneTimeLinkingCodeV3Builder(); }
 
-        public class ValidateOneTimeLinkingCodeV3Builder
-            : OperationBuilder<ValidateOneTimeLinkingCodeV3Builder>
+        public interface IValidateOneTimeLinkingCodeV3Builder
         {
 
 
 
 
 
-            internal ValidateOneTimeLinkingCodeV3Builder() { }
+        }
 
-            internal ValidateOneTimeLinkingCodeV3Builder(IAccelByteSdk sdk)
+        public abstract class ValidateOneTimeLinkingCodeV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IValidateOneTimeLinkingCodeV3Builder
+            where TImpl : ValidateOneTimeLinkingCodeV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ValidateOneTimeLinkingCodeV3AbstractBuilder() { }
+
+            public ValidateOneTimeLinkingCodeV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     oneTimeLinkCode                    
                 );
 
-                op.SetBaseFields<ValidateOneTimeLinkingCodeV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ValidateOneTimeLinkingCodeV3.Response Execute(
+            protected ValidateOneTimeLinkingCodeV3.Response InternalExecute(
                 string oneTimeLinkCode
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ValidateOneTimeLinkingCodeV3.Response> ExecuteAsync(
+            protected async Task<ValidateOneTimeLinkingCodeV3.Response> InternalExecuteAsync(
                 string oneTimeLinkCode
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private ValidateOneTimeLinkingCodeV3(ValidateOneTimeLinkingCodeV3Builder builder,
+        public class ValidateOneTimeLinkingCodeV3Builder : ValidateOneTimeLinkingCodeV3AbstractBuilder<ValidateOneTimeLinkingCodeV3Builder>
+        {
+            public ValidateOneTimeLinkingCodeV3Builder() : base() { }
+
+            public ValidateOneTimeLinkingCodeV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ValidateOneTimeLinkingCodeV3.Response Execute(
+                string oneTimeLinkCode
+            )
+            {
+                return InternalExecute(
+                    oneTimeLinkCode
+                );
+            }
+            public async Task<ValidateOneTimeLinkingCodeV3.Response> ExecuteAsync(
+                string oneTimeLinkCode
+            )
+            {
+                return await InternalExecuteAsync(
+                    oneTimeLinkCode
+                );
+            }
+        }
+
+
+        public ValidateOneTimeLinkingCodeV3(IValidateOneTimeLinkingCodeV3Builder builder,
             string oneTimeLinkCode
         )
         {
@@ -159,7 +194,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeValidationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthmodelOneTimeLinkingCodeValidationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #region Builder Part
         public static CreateNoSQLDatabaseV2Builder Builder { get => new CreateNoSQLDatabaseV2Builder(); }
 
-        public class CreateNoSQLDatabaseV2Builder
-            : OperationBuilder<CreateNoSQLDatabaseV2Builder>
+        public interface ICreateNoSQLDatabaseV2Builder
         {
 
 
 
 
 
-            internal CreateNoSQLDatabaseV2Builder() { }
+        }
 
-            internal CreateNoSQLDatabaseV2Builder(IAccelByteSdk sdk)
+        public abstract class CreateNoSQLDatabaseV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateNoSQLDatabaseV2Builder
+            where TImpl : CreateNoSQLDatabaseV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateNoSQLDatabaseV2AbstractBuilder() { }
+
+            public CreateNoSQLDatabaseV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateNoSQLDatabaseV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateNoSQLDatabaseV2.Response Execute(
+            protected CreateNoSQLDatabaseV2.Response InternalExecute(
                 ApimodelCreateNoSQLAppDatabaseRequest body,
                 string app,
                 string namespace_
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateNoSQLDatabaseV2.Response> ExecuteAsync(
+            protected async Task<CreateNoSQLDatabaseV2.Response> InternalExecuteAsync(
                 ApimodelCreateNoSQLAppDatabaseRequest body,
                 string app,
                 string namespace_
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        private CreateNoSQLDatabaseV2(CreateNoSQLDatabaseV2Builder builder,
+        public class CreateNoSQLDatabaseV2Builder : CreateNoSQLDatabaseV2AbstractBuilder<CreateNoSQLDatabaseV2Builder>
+        {
+            public CreateNoSQLDatabaseV2Builder() : base() { }
+
+            public CreateNoSQLDatabaseV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateNoSQLDatabaseV2.Response Execute(
+                ApimodelCreateNoSQLAppDatabaseRequest body,
+                string app,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    app,
+                    namespace_
+                );
+            }
+            public async Task<CreateNoSQLDatabaseV2.Response> ExecuteAsync(
+                ApimodelCreateNoSQLAppDatabaseRequest body,
+                string app,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    app,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateNoSQLDatabaseV2(ICreateNoSQLDatabaseV2Builder builder,
             ApimodelCreateNoSQLAppDatabaseRequest body,
             string app,
             string namespace_
@@ -197,42 +240,50 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelNoSQLDatabaseResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelNoSQLDatabaseResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)503)
             {
-                response.Error503 = JsonSerializer.Deserialize<ResponseErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error503 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error503!.TranslateToApiError();
             }
 

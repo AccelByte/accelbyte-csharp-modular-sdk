@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminResetServicesConfigurationBuilder Builder { get => new AdminResetServicesConfigurationBuilder(); }
 
-        public class AdminResetServicesConfigurationBuilder
-            : OperationBuilder<AdminResetServicesConfigurationBuilder>
+        public interface IAdminResetServicesConfigurationBuilder
         {
 
 
 
 
 
-            internal AdminResetServicesConfigurationBuilder() { }
+        }
 
-            internal AdminResetServicesConfigurationBuilder(IAccelByteSdk sdk)
+        public abstract class AdminResetServicesConfigurationAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminResetServicesConfigurationBuilder
+            where TImpl : AdminResetServicesConfigurationAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminResetServicesConfigurationAbstractBuilder() { }
+
+            public AdminResetServicesConfigurationAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminResetServicesConfigurationBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminResetServicesConfiguration.Response Execute(
+            protected AdminResetServicesConfiguration.Response InternalExecute(
                 string namespace_
             )
             {
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminResetServicesConfiguration.Response> ExecuteAsync(
+            protected async Task<AdminResetServicesConfiguration.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -100,7 +110,32 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminResetServicesConfiguration(AdminResetServicesConfigurationBuilder builder,
+        public class AdminResetServicesConfigurationBuilder : AdminResetServicesConfigurationAbstractBuilder<AdminResetServicesConfigurationBuilder>
+        {
+            public AdminResetServicesConfigurationBuilder() : base() { }
+
+            public AdminResetServicesConfigurationBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminResetServicesConfiguration.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminResetServicesConfiguration.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminResetServicesConfiguration(IAdminResetServicesConfigurationBuilder builder,
             string namespace_
         )
         {
@@ -168,12 +203,14 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

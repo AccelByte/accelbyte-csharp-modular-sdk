@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static GetPlayerMetricBuilder Builder { get => new GetPlayerMetricBuilder(); }
 
-        public class GetPlayerMetricBuilder
-            : OperationBuilder<GetPlayerMetricBuilder>
+        public interface IGetPlayerMetricBuilder
         {
 
 
 
 
 
-            internal GetPlayerMetricBuilder() { }
+        }
 
-            internal GetPlayerMetricBuilder(IAccelByteSdk sdk)
+        public abstract class GetPlayerMetricAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetPlayerMetricBuilder
+            where TImpl : GetPlayerMetricAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetPlayerMetricAbstractBuilder() { }
+
+            public GetPlayerMetricAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     pool                    
                 );
 
-                op.SetBaseFields<GetPlayerMetricBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetPlayerMetric.Response Execute(
+            protected GetPlayerMetric.Response InternalExecute(
                 string namespace_,
                 string pool
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetPlayerMetric.Response> ExecuteAsync(
+            protected async Task<GetPlayerMetric.Response> InternalExecuteAsync(
                 string namespace_,
                 string pool
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private GetPlayerMetric(GetPlayerMetricBuilder builder,
+        public class GetPlayerMetricBuilder : GetPlayerMetricAbstractBuilder<GetPlayerMetricBuilder>
+        {
+            public GetPlayerMetricBuilder() : base() { }
+
+            public GetPlayerMetricBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetPlayerMetric.Response Execute(
+                string namespace_,
+                string pool
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    pool
+                );
+            }
+            public async Task<GetPlayerMetric.Response> ExecuteAsync(
+                string namespace_,
+                string pool
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    pool
+                );
+            }
+        }
+
+
+        public GetPlayerMetric(IGetPlayerMetricBuilder builder,
             string namespace_,
             string pool
         )
@@ -179,27 +218,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApiPlayerMetricRecord>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApiPlayerMetricRecord>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

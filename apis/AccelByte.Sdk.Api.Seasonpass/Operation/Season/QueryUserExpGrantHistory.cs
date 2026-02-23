@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,8 +35,32 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #region Builder Part
         public static QueryUserExpGrantHistoryBuilder Builder { get => new QueryUserExpGrantHistoryBuilder(); }
 
-        public class QueryUserExpGrantHistoryBuilder
-            : OperationBuilder<QueryUserExpGrantHistoryBuilder>
+        public interface IQueryUserExpGrantHistoryBuilder
+        {
+
+            string? From { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            string? SeasonId { get; }
+
+            QueryUserExpGrantHistorySource? Source { get; }
+
+            List<string>? Tags { get; }
+
+            string? To { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryUserExpGrantHistoryAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryUserExpGrantHistoryBuilder
+            where TImpl : QueryUserExpGrantHistoryAbstractBuilder<TImpl>
         {
 
             public string? From { get; set; }
@@ -57,54 +81,54 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
 
 
-            internal QueryUserExpGrantHistoryBuilder() { }
+            public QueryUserExpGrantHistoryAbstractBuilder() { }
 
-            internal QueryUserExpGrantHistoryBuilder(IAccelByteSdk sdk)
+            public QueryUserExpGrantHistoryAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryUserExpGrantHistoryBuilder SetFrom(string _from)
+            public TImpl SetFrom(string _from)
             {
                 From = _from;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserExpGrantHistoryBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserExpGrantHistoryBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserExpGrantHistoryBuilder SetSeasonId(string _seasonId)
+            public TImpl SetSeasonId(string _seasonId)
             {
                 SeasonId = _seasonId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserExpGrantHistoryBuilder SetSource(QueryUserExpGrantHistorySource _source)
+            public TImpl SetSource(QueryUserExpGrantHistorySource _source)
             {
                 Source = _source;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserExpGrantHistoryBuilder SetTags(List<string> _tags)
+            public TImpl SetTags(List<string> _tags)
             {
                 Tags = _tags;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryUserExpGrantHistoryBuilder SetTo(string _to)
+            public TImpl SetTo(string _to)
             {
                 To = _to;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -121,11 +145,11 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<QueryUserExpGrantHistoryBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryUserExpGrantHistory.Response Execute(
+            protected QueryUserExpGrantHistory.Response InternalExecute(
                 string namespace_,
                 string userId
             )
@@ -144,7 +168,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryUserExpGrantHistory.Response> ExecuteAsync(
+            protected async Task<QueryUserExpGrantHistory.Response> InternalExecuteAsync(
                 string namespace_,
                 string userId
             )
@@ -165,7 +189,36 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
         }
 
-        private QueryUserExpGrantHistory(QueryUserExpGrantHistoryBuilder builder,
+        public class QueryUserExpGrantHistoryBuilder : QueryUserExpGrantHistoryAbstractBuilder<QueryUserExpGrantHistoryBuilder>
+        {
+            public QueryUserExpGrantHistoryBuilder() : base() { }
+
+            public QueryUserExpGrantHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryUserExpGrantHistory.Response Execute(
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<QueryUserExpGrantHistory.Response> ExecuteAsync(
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public QueryUserExpGrantHistory(IQueryUserExpGrantHistoryBuilder builder,
             string namespace_,
             string userId
         )
@@ -257,12 +310,14 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ExpGrantHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ExpGrantHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

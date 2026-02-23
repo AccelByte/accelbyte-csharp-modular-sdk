@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -37,17 +37,27 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #region Builder Part
         public static AdminMockPlatformAccountClosureDataBuilder Builder { get => new AdminMockPlatformAccountClosureDataBuilder(); }
 
-        public class AdminMockPlatformAccountClosureDataBuilder
-            : OperationBuilder<AdminMockPlatformAccountClosureDataBuilder>
+        public interface IAdminMockPlatformAccountClosureDataBuilder
         {
 
 
 
 
 
-            internal AdminMockPlatformAccountClosureDataBuilder() { }
+        }
 
-            internal AdminMockPlatformAccountClosureDataBuilder(IAccelByteSdk sdk)
+        public abstract class AdminMockPlatformAccountClosureDataAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminMockPlatformAccountClosureDataBuilder
+            where TImpl : AdminMockPlatformAccountClosureDataAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminMockPlatformAccountClosureDataAbstractBuilder() { }
+
+            public AdminMockPlatformAccountClosureDataAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -69,11 +79,11 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     platform                    
                 );
 
-                op.SetBaseFields<AdminMockPlatformAccountClosureDataBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminMockPlatformAccountClosureData.Response Execute(
+            protected AdminMockPlatformAccountClosureData.Response InternalExecute(
                 DtoPlatformAccountClosureMockRequest body,
                 string namespace_,
                 string platform
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminMockPlatformAccountClosureData.Response> ExecuteAsync(
+            protected async Task<AdminMockPlatformAccountClosureData.Response> InternalExecuteAsync(
                 DtoPlatformAccountClosureMockRequest body,
                 string namespace_,
                 string platform
@@ -117,7 +127,40 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
         }
 
-        private AdminMockPlatformAccountClosureData(AdminMockPlatformAccountClosureDataBuilder builder,
+        public class AdminMockPlatformAccountClosureDataBuilder : AdminMockPlatformAccountClosureDataAbstractBuilder<AdminMockPlatformAccountClosureDataBuilder>
+        {
+            public AdminMockPlatformAccountClosureDataBuilder() : base() { }
+
+            public AdminMockPlatformAccountClosureDataBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminMockPlatformAccountClosureData.Response Execute(
+                DtoPlatformAccountClosureMockRequest body,
+                string namespace_,
+                string platform
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    platform
+                );
+            }
+            public async Task<AdminMockPlatformAccountClosureData.Response> ExecuteAsync(
+                DtoPlatformAccountClosureMockRequest body,
+                string namespace_,
+                string platform
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    platform
+                );
+            }
+        }
+
+
+        public AdminMockPlatformAccountClosureData(IAdminMockPlatformAccountClosureDataBuilder builder,
             DtoPlatformAccountClosureMockRequest body,
             string namespace_,
             string platform
@@ -197,22 +240,26 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

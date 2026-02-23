@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryItemReferencesBuilder Builder { get => new QueryItemReferencesBuilder(); }
 
-        public class QueryItemReferencesBuilder
-            : OperationBuilder<QueryItemReferencesBuilder>
+        public interface IQueryItemReferencesBuilder
+        {
+
+            List<QueryItemReferencesFeaturesToCheck>? FeaturesToCheck { get; }
+
+            string? StoreId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryItemReferencesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryItemReferencesBuilder
+            where TImpl : QueryItemReferencesAbstractBuilder<TImpl>
         {
 
             public List<QueryItemReferencesFeaturesToCheck>? FeaturesToCheck { get; set; }
@@ -42,24 +56,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryItemReferencesBuilder() { }
+            public QueryItemReferencesAbstractBuilder() { }
 
-            internal QueryItemReferencesBuilder(IAccelByteSdk sdk)
+            public QueryItemReferencesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryItemReferencesBuilder SetFeaturesToCheck(List<QueryItemReferencesFeaturesToCheck> _featuresToCheck)
+            public TImpl SetFeaturesToCheck(List<QueryItemReferencesFeaturesToCheck> _featuresToCheck)
             {
                 FeaturesToCheck = _featuresToCheck;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryItemReferencesBuilder SetStoreId(string _storeId)
+            public TImpl SetStoreId(string _storeId)
             {
                 StoreId = _storeId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -76,11 +90,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryItemReferencesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryItemReferences.Response Execute(
+            protected QueryItemReferences.Response InternalExecute(
                 string itemId,
                 string namespace_
             )
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryItemReferences.Response> ExecuteAsync(
+            protected async Task<QueryItemReferences.Response> InternalExecuteAsync(
                 string itemId,
                 string namespace_
             )
@@ -120,7 +134,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryItemReferences(QueryItemReferencesBuilder builder,
+        public class QueryItemReferencesBuilder : QueryItemReferencesAbstractBuilder<QueryItemReferencesBuilder>
+        {
+            public QueryItemReferencesBuilder() : base() { }
+
+            public QueryItemReferencesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryItemReferences.Response Execute(
+                string itemId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    itemId,
+                    namespace_
+                );
+            }
+            public async Task<QueryItemReferences.Response> ExecuteAsync(
+                string itemId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    itemId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryItemReferences(IQueryItemReferencesBuilder builder,
             string itemId,
             string namespace_
         )
@@ -197,12 +240,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ItemDependency>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ItemDependency>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

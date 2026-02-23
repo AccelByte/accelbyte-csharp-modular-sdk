@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static PostMatchErrorMetricBuilder Builder { get => new PostMatchErrorMetricBuilder(); }
 
-        public class PostMatchErrorMetricBuilder
-            : OperationBuilder<PostMatchErrorMetricBuilder>
+        public interface IPostMatchErrorMetricBuilder
         {
 
 
 
 
 
-            internal PostMatchErrorMetricBuilder() { }
+        }
 
-            internal PostMatchErrorMetricBuilder(IAccelByteSdk sdk)
+        public abstract class PostMatchErrorMetricAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPostMatchErrorMetricBuilder
+            where TImpl : PostMatchErrorMetricAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PostMatchErrorMetricAbstractBuilder() { }
+
+            public PostMatchErrorMetricAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     pool                    
                 );
 
-                op.SetBaseFields<PostMatchErrorMetricBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PostMatchErrorMetric.Response Execute(
+            protected PostMatchErrorMetric.Response InternalExecute(
                 ApiExternalFailureMetricRecord body,
                 string namespace_,
                 string pool
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PostMatchErrorMetric.Response> ExecuteAsync(
+            protected async Task<PostMatchErrorMetric.Response> InternalExecuteAsync(
                 ApiExternalFailureMetricRecord body,
                 string namespace_,
                 string pool
@@ -110,7 +120,40 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private PostMatchErrorMetric(PostMatchErrorMetricBuilder builder,
+        public class PostMatchErrorMetricBuilder : PostMatchErrorMetricAbstractBuilder<PostMatchErrorMetricBuilder>
+        {
+            public PostMatchErrorMetricBuilder() : base() { }
+
+            public PostMatchErrorMetricBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PostMatchErrorMetric.Response Execute(
+                ApiExternalFailureMetricRecord body,
+                string namespace_,
+                string pool
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    pool
+                );
+            }
+            public async Task<PostMatchErrorMetric.Response> ExecuteAsync(
+                ApiExternalFailureMetricRecord body,
+                string namespace_,
+                string pool
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    pool
+                );
+            }
+        }
+
+
+        public PostMatchErrorMetric(IPostMatchErrorMetricBuilder builder,
             ApiExternalFailureMetricRecord body,
             string namespace_,
             string pool
@@ -192,27 +235,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

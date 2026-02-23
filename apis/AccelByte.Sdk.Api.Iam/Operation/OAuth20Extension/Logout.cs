@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static LogoutBuilder Builder { get => new LogoutBuilder(); }
 
-        public class LogoutBuilder
-            : OperationBuilder<LogoutBuilder>
+        public interface ILogoutBuilder
         {
 
 
 
 
 
-            internal LogoutBuilder() { }
+        }
 
-            internal LogoutBuilder(IAccelByteSdk sdk)
+        public abstract class LogoutAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ILogoutBuilder
+            where TImpl : LogoutAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public LogoutAbstractBuilder() { }
+
+            public LogoutAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 Logout op = new Logout(this
                 );
 
-                op.SetBaseFields<LogoutBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public Logout.Response Execute(
+            protected Logout.Response InternalExecute(
             )
             {
                 Logout op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<Logout.Response> ExecuteAsync(
+            protected async Task<Logout.Response> InternalExecuteAsync(
             )
             {
                 Logout op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private Logout(LogoutBuilder builder
+        public class LogoutBuilder : LogoutAbstractBuilder<LogoutBuilder>
+        {
+            public LogoutBuilder() : base() { }
+
+            public LogoutBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public Logout.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<Logout.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public Logout(ILogoutBuilder builder
         )
         {
             

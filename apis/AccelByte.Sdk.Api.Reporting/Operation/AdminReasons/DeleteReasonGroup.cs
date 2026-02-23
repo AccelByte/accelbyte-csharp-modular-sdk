@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #region Builder Part
         public static DeleteReasonGroupBuilder Builder { get => new DeleteReasonGroupBuilder(); }
 
-        public class DeleteReasonGroupBuilder
-            : OperationBuilder<DeleteReasonGroupBuilder>
+        public interface IDeleteReasonGroupBuilder
         {
 
 
 
 
 
-            internal DeleteReasonGroupBuilder() { }
+        }
 
-            internal DeleteReasonGroupBuilder(IAccelByteSdk sdk)
+        public abstract class DeleteReasonGroupAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IDeleteReasonGroupBuilder
+            where TImpl : DeleteReasonGroupAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public DeleteReasonGroupAbstractBuilder() { }
+
+            public DeleteReasonGroupAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<DeleteReasonGroupBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public DeleteReasonGroup.Response Execute(
+            protected DeleteReasonGroup.Response InternalExecute(
                 string groupId,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<DeleteReasonGroup.Response> ExecuteAsync(
+            protected async Task<DeleteReasonGroup.Response> InternalExecuteAsync(
                 string groupId,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
         }
 
-        private DeleteReasonGroup(DeleteReasonGroupBuilder builder,
+        public class DeleteReasonGroupBuilder : DeleteReasonGroupAbstractBuilder<DeleteReasonGroupBuilder>
+        {
+            public DeleteReasonGroupBuilder() : base() { }
+
+            public DeleteReasonGroupBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public DeleteReasonGroup.Response Execute(
+                string groupId,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    groupId,
+                    namespace_
+                );
+            }
+            public async Task<DeleteReasonGroup.Response> ExecuteAsync(
+                string groupId,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    groupId,
+                    namespace_
+                );
+            }
+        }
+
+
+        public DeleteReasonGroup(IDeleteReasonGroupBuilder builder,
             string groupId,
             string namespace_
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestapiErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

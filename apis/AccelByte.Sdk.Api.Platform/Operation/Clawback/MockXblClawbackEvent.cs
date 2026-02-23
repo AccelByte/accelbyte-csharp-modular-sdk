@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static MockXblClawbackEventBuilder Builder { get => new MockXblClawbackEventBuilder(); }
 
-        public class MockXblClawbackEventBuilder
-            : OperationBuilder<MockXblClawbackEventBuilder>
+        public interface IMockXblClawbackEventBuilder
+        {
+
+
+            Model.XblClawbackEvent? Body { get; }
+
+
+
+
+        }
+
+        public abstract class MockXblClawbackEventAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IMockXblClawbackEventBuilder
+            where TImpl : MockXblClawbackEventAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal MockXblClawbackEventBuilder() { }
+            public MockXblClawbackEventAbstractBuilder() { }
 
-            internal MockXblClawbackEventBuilder(IAccelByteSdk sdk)
+            public MockXblClawbackEventAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public MockXblClawbackEventBuilder SetBody(Model.XblClawbackEvent _body)
+            public TImpl SetBody(Model.XblClawbackEvent _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -66,11 +78,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<MockXblClawbackEventBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public MockXblClawbackEvent.Response Execute(
+            protected MockXblClawbackEvent.Response InternalExecute(
                 string namespace_
             )
             {
@@ -87,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<MockXblClawbackEvent.Response> ExecuteAsync(
+            protected async Task<MockXblClawbackEvent.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -105,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public MockXblClawbackEvent.Response<T1, T2> Execute<T1, T2>(
+            protected MockXblClawbackEvent.Response<T1, T2> InternalExecute<T1, T2>(
                 string namespace_
             )
             {
@@ -122,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<MockXblClawbackEvent.Response<T1, T2>> ExecuteAsync<T1, T2>(
+            protected async Task<MockXblClawbackEvent.Response<T1, T2>> InternalExecuteAsync<T1, T2>(
                 string namespace_
             )
             {
@@ -141,7 +153,49 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private MockXblClawbackEvent(MockXblClawbackEventBuilder builder,
+        public class MockXblClawbackEventBuilder : MockXblClawbackEventAbstractBuilder<MockXblClawbackEventBuilder>
+        {
+            public MockXblClawbackEventBuilder() : base() { }
+
+            public MockXblClawbackEventBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public MockXblClawbackEvent.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<MockXblClawbackEvent.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+
+            public MockXblClawbackEvent.Response<T1, T2> Execute<T1, T2>(
+                string namespace_
+            )
+            {
+                return InternalExecute<T1, T2>(
+                    namespace_
+                );
+            }
+            public async Task<MockXblClawbackEvent.Response<T1, T2>> ExecuteAsync<T1, T2>(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync<T1, T2>(
+                    namespace_
+                );
+            }
+        }
+
+
+        public MockXblClawbackEvent(IMockXblClawbackEventBuilder builder,
             string namespace_
         )
         {
@@ -212,7 +266,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
@@ -233,7 +288,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClawbackInfo<T1, T2>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             

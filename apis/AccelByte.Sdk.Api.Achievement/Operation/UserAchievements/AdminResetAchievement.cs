@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -38,17 +38,27 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static AdminResetAchievementBuilder Builder { get => new AdminResetAchievementBuilder(); }
 
-        public class AdminResetAchievementBuilder
-            : OperationBuilder<AdminResetAchievementBuilder>
+        public interface IAdminResetAchievementBuilder
         {
 
 
 
 
 
-            internal AdminResetAchievementBuilder() { }
+        }
 
-            internal AdminResetAchievementBuilder(IAccelByteSdk sdk)
+        public abstract class AdminResetAchievementAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminResetAchievementBuilder
+            where TImpl : AdminResetAchievementAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminResetAchievementAbstractBuilder() { }
+
+            public AdminResetAchievementAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,11 +80,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminResetAchievementBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminResetAchievement.Response Execute(
+            protected AdminResetAchievement.Response InternalExecute(
                 string achievementCode,
                 string namespace_,
                 string userId
@@ -95,7 +105,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminResetAchievement.Response> ExecuteAsync(
+            protected async Task<AdminResetAchievement.Response> InternalExecuteAsync(
                 string achievementCode,
                 string namespace_,
                 string userId
@@ -118,7 +128,40 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private AdminResetAchievement(AdminResetAchievementBuilder builder,
+        public class AdminResetAchievementBuilder : AdminResetAchievementAbstractBuilder<AdminResetAchievementBuilder>
+        {
+            public AdminResetAchievementBuilder() : base() { }
+
+            public AdminResetAchievementBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminResetAchievement.Response Execute(
+                string achievementCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    achievementCode,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminResetAchievement.Response> ExecuteAsync(
+                string achievementCode,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    achievementCode,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminResetAchievement(IAdminResetAchievementBuilder builder,
             string achievementCode,
             string namespace_,
             string userId
@@ -198,22 +241,26 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

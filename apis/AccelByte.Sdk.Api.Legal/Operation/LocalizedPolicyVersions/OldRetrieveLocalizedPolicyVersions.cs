@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static OldRetrieveLocalizedPolicyVersionsBuilder Builder { get => new OldRetrieveLocalizedPolicyVersionsBuilder(); }
 
-        public class OldRetrieveLocalizedPolicyVersionsBuilder
-            : OperationBuilder<OldRetrieveLocalizedPolicyVersionsBuilder>
+        public interface IOldRetrieveLocalizedPolicyVersionsBuilder
         {
 
 
 
 
 
-            internal OldRetrieveLocalizedPolicyVersionsBuilder() { }
+        }
 
-            internal OldRetrieveLocalizedPolicyVersionsBuilder(IAccelByteSdk sdk)
+        public abstract class OldRetrieveLocalizedPolicyVersionsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IOldRetrieveLocalizedPolicyVersionsBuilder
+            where TImpl : OldRetrieveLocalizedPolicyVersionsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public OldRetrieveLocalizedPolicyVersionsAbstractBuilder() { }
+
+            public OldRetrieveLocalizedPolicyVersionsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyVersionId                    
                 );
 
-                op.SetBaseFields<OldRetrieveLocalizedPolicyVersionsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public OldRetrieveLocalizedPolicyVersions.Response Execute(
+            protected OldRetrieveLocalizedPolicyVersions.Response InternalExecute(
                 string policyVersionId
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<OldRetrieveLocalizedPolicyVersions.Response> ExecuteAsync(
+            protected async Task<OldRetrieveLocalizedPolicyVersions.Response> InternalExecuteAsync(
                 string policyVersionId
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private OldRetrieveLocalizedPolicyVersions(OldRetrieveLocalizedPolicyVersionsBuilder builder,
+        public class OldRetrieveLocalizedPolicyVersionsBuilder : OldRetrieveLocalizedPolicyVersionsAbstractBuilder<OldRetrieveLocalizedPolicyVersionsBuilder>
+        {
+            public OldRetrieveLocalizedPolicyVersionsBuilder() : base() { }
+
+            public OldRetrieveLocalizedPolicyVersionsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public OldRetrieveLocalizedPolicyVersions.Response Execute(
+                string policyVersionId
+            )
+            {
+                return InternalExecute(
+                    policyVersionId
+                );
+            }
+            public async Task<OldRetrieveLocalizedPolicyVersions.Response> ExecuteAsync(
+                string policyVersionId
+            )
+            {
+                return await InternalExecuteAsync(
+                    policyVersionId
+                );
+            }
+        }
+
+
+        public OldRetrieveLocalizedPolicyVersions(IOldRetrieveLocalizedPolicyVersionsBuilder builder,
             string policyVersionId
         )
         {
@@ -161,7 +196,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveLocalizedPolicyVersionResponse>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.RetrieveLocalizedPolicyVersionResponse>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

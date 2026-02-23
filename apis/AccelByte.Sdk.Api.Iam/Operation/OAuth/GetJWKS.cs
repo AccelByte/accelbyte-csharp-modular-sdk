@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -44,17 +44,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static GetJWKSBuilder Builder { get => new GetJWKSBuilder(); }
 
-        public class GetJWKSBuilder
-            : OperationBuilder<GetJWKSBuilder>
+        public interface IGetJWKSBuilder
         {
 
 
 
 
 
-            internal GetJWKSBuilder() { }
+        }
 
-            internal GetJWKSBuilder(IAccelByteSdk sdk)
+        public abstract class GetJWKSAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetJWKSBuilder
+            where TImpl : GetJWKSAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetJWKSAbstractBuilder() { }
+
+            public GetJWKSAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -70,12 +80,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 GetJWKS op = new GetJWKS(this
                 );
 
-                op.SetBaseFields<GetJWKSBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public GetJWKS.Response Execute(
+            protected GetJWKS.Response InternalExecute(
             )
             {
                 GetJWKS op = Build(
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetJWKS.Response> ExecuteAsync(
+            protected async Task<GetJWKS.Response> InternalExecuteAsync(
             )
             {
                 GetJWKS op = Build(
@@ -107,7 +117,29 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private GetJWKS(GetJWKSBuilder builder
+        public class GetJWKSBuilder : GetJWKSAbstractBuilder<GetJWKSBuilder>
+        {
+            public GetJWKSBuilder() : base() { }
+
+            public GetJWKSBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public GetJWKS.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<GetJWKS.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public GetJWKS(IGetJWKSBuilder builder
         )
         {
             
@@ -166,7 +198,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.OauthcommonJWKSet>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

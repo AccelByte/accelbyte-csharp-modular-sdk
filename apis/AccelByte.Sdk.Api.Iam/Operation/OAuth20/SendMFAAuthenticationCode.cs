@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static SendMFAAuthenticationCodeBuilder Builder { get => new SendMFAAuthenticationCodeBuilder(); }
 
-        public class SendMFAAuthenticationCodeBuilder
-            : OperationBuilder<SendMFAAuthenticationCodeBuilder>
+        public interface ISendMFAAuthenticationCodeBuilder
         {
 
 
 
 
 
-            internal SendMFAAuthenticationCodeBuilder() { }
+        }
 
-            internal SendMFAAuthenticationCodeBuilder(IAccelByteSdk sdk)
+        public abstract class SendMFAAuthenticationCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ISendMFAAuthenticationCodeBuilder
+            where TImpl : SendMFAAuthenticationCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public SendMFAAuthenticationCodeAbstractBuilder() { }
+
+            public SendMFAAuthenticationCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     mfaToken                    
                 );
 
-                op.SetBaseFields<SendMFAAuthenticationCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public SendMFAAuthenticationCode.Response Execute(
+            protected SendMFAAuthenticationCode.Response InternalExecute(
                 string clientId,
                 string factor,
                 string mfaToken
@@ -88,7 +98,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<SendMFAAuthenticationCode.Response> ExecuteAsync(
+            protected async Task<SendMFAAuthenticationCode.Response> InternalExecuteAsync(
                 string clientId,
                 string factor,
                 string mfaToken
@@ -111,7 +121,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private SendMFAAuthenticationCode(SendMFAAuthenticationCodeBuilder builder,
+        public class SendMFAAuthenticationCodeBuilder : SendMFAAuthenticationCodeAbstractBuilder<SendMFAAuthenticationCodeBuilder>
+        {
+            public SendMFAAuthenticationCodeBuilder() : base() { }
+
+            public SendMFAAuthenticationCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public SendMFAAuthenticationCode.Response Execute(
+                string clientId,
+                string factor,
+                string mfaToken
+            )
+            {
+                return InternalExecute(
+                    clientId,
+                    factor,
+                    mfaToken
+                );
+            }
+            public async Task<SendMFAAuthenticationCode.Response> ExecuteAsync(
+                string clientId,
+                string factor,
+                string mfaToken
+            )
+            {
+                return await InternalExecuteAsync(
+                    clientId,
+                    factor,
+                    mfaToken
+                );
+            }
+        }
+
+
+        public SendMFAAuthenticationCode(ISendMFAAuthenticationCodeBuilder builder,
             string clientId,
             string factor,
             string mfaToken
@@ -193,27 +236,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error429 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error429!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

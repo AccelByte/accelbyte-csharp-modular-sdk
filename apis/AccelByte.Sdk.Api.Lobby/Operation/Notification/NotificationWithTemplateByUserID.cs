@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -35,17 +35,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static NotificationWithTemplateByUserIDBuilder Builder { get => new NotificationWithTemplateByUserIDBuilder(); }
 
-        public class NotificationWithTemplateByUserIDBuilder
-            : OperationBuilder<NotificationWithTemplateByUserIDBuilder>
+        public interface INotificationWithTemplateByUserIDBuilder
         {
 
 
 
 
 
-            internal NotificationWithTemplateByUserIDBuilder() { }
+        }
 
-            internal NotificationWithTemplateByUserIDBuilder(IAccelByteSdk sdk)
+        public abstract class NotificationWithTemplateByUserIDAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, INotificationWithTemplateByUserIDBuilder
+            where TImpl : NotificationWithTemplateByUserIDAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public NotificationWithTemplateByUserIDAbstractBuilder() { }
+
+            public NotificationWithTemplateByUserIDAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -67,11 +77,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<NotificationWithTemplateByUserIDBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public NotificationWithTemplateByUserID.Response Execute(
+            protected NotificationWithTemplateByUserID.Response InternalExecute(
                 ModelNotificationWithTemplateRequest body,
                 string namespace_,
                 string userId
@@ -92,7 +102,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<NotificationWithTemplateByUserID.Response> ExecuteAsync(
+            protected async Task<NotificationWithTemplateByUserID.Response> InternalExecuteAsync(
                 ModelNotificationWithTemplateRequest body,
                 string namespace_,
                 string userId
@@ -115,7 +125,40 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private NotificationWithTemplateByUserID(NotificationWithTemplateByUserIDBuilder builder,
+        public class NotificationWithTemplateByUserIDBuilder : NotificationWithTemplateByUserIDAbstractBuilder<NotificationWithTemplateByUserIDBuilder>
+        {
+            public NotificationWithTemplateByUserIDBuilder() : base() { }
+
+            public NotificationWithTemplateByUserIDBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public NotificationWithTemplateByUserID.Response Execute(
+                ModelNotificationWithTemplateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<NotificationWithTemplateByUserID.Response> ExecuteAsync(
+                ModelNotificationWithTemplateRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public NotificationWithTemplateByUserID(INotificationWithTemplateByUserIDBuilder builder,
             ModelNotificationWithTemplateRequest body,
             string namespace_,
             string userId
@@ -195,22 +238,26 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestapiErrorResponseBody>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

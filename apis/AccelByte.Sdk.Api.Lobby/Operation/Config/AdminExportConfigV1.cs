@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -143,17 +143,27 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #region Builder Part
         public static AdminExportConfigV1Builder Builder { get => new AdminExportConfigV1Builder(); }
 
-        public class AdminExportConfigV1Builder
-            : OperationBuilder<AdminExportConfigV1Builder>
+        public interface IAdminExportConfigV1Builder
         {
 
 
 
 
 
-            internal AdminExportConfigV1Builder() { }
+        }
 
-            internal AdminExportConfigV1Builder(IAccelByteSdk sdk)
+        public abstract class AdminExportConfigV1AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminExportConfigV1Builder
+            where TImpl : AdminExportConfigV1AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminExportConfigV1AbstractBuilder() { }
+
+            public AdminExportConfigV1AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -171,11 +181,11 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminExportConfigV1Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminExportConfigV1.Response Execute(
+            protected AdminExportConfigV1.Response InternalExecute(
                 string namespace_
             )
             {
@@ -192,7 +202,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminExportConfigV1.Response> ExecuteAsync(
+            protected async Task<AdminExportConfigV1.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -211,7 +221,32 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
         }
 
-        private AdminExportConfigV1(AdminExportConfigV1Builder builder,
+        public class AdminExportConfigV1Builder : AdminExportConfigV1AbstractBuilder<AdminExportConfigV1Builder>
+        {
+            public AdminExportConfigV1Builder() : base() { }
+
+            public AdminExportConfigV1Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminExportConfigV1.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminExportConfigV1.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminExportConfigV1(IAdminExportConfigV1Builder builder,
             string namespace_
         )
         {
@@ -285,17 +320,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

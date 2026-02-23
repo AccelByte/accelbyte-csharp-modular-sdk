@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicForgotPasswordV2Builder Builder { get => new PublicForgotPasswordV2Builder(); }
 
-        public class PublicForgotPasswordV2Builder
-            : OperationBuilder<PublicForgotPasswordV2Builder>
+        public interface IPublicForgotPasswordV2Builder
         {
 
 
 
 
 
-            internal PublicForgotPasswordV2Builder() { }
+        }
 
-            internal PublicForgotPasswordV2Builder(IAccelByteSdk sdk)
+        public abstract class PublicForgotPasswordV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicForgotPasswordV2Builder
+            where TImpl : PublicForgotPasswordV2AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicForgotPasswordV2AbstractBuilder() { }
+
+            public PublicForgotPasswordV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,12 +76,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicForgotPasswordV2Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public PublicForgotPasswordV2.Response Execute(
+            protected PublicForgotPasswordV2.Response InternalExecute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
             )
@@ -90,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicForgotPasswordV2.Response> ExecuteAsync(
+            protected async Task<PublicForgotPasswordV2.Response> InternalExecuteAsync(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
             )
@@ -111,7 +121,37 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicForgotPasswordV2(PublicForgotPasswordV2Builder builder,
+        public class PublicForgotPasswordV2Builder : PublicForgotPasswordV2AbstractBuilder<PublicForgotPasswordV2Builder>
+        {
+            public PublicForgotPasswordV2Builder() : base() { }
+
+            public PublicForgotPasswordV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public PublicForgotPasswordV2.Response Execute(
+                ModelSendVerificationCodeRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicForgotPasswordV2.Response> ExecuteAsync(
+                ModelSendVerificationCodeRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicForgotPasswordV2(IPublicForgotPasswordV2Builder builder,
             ModelSendVerificationCodeRequest body,
             string namespace_
         )
@@ -187,22 +227,26 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error400 = response.Payload;
                 response.Error = new ApiError("-1", response.Error400!);
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error404 = response.Payload;
                 response.Error = new ApiError("-1", response.Error404!);
             }
             else if (code == (HttpStatusCode)429)
             {
-                response.Error429 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error429 = response.Payload;
                 response.Error = new ApiError("-1", response.Error429!);
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = payload.ReadToString();
+                response.Payload = payload.ReadToString();
+                response.Error500 = response.Payload;
                 response.Error = new ApiError("-1", response.Error500!);
             }
 

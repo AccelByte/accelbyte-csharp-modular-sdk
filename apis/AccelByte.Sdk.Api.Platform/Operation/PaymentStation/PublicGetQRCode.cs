@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,17 +33,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static PublicGetQRCodeBuilder Builder { get => new PublicGetQRCodeBuilder(); }
 
-        public class PublicGetQRCodeBuilder
-            : OperationBuilder<PublicGetQRCodeBuilder>
+        public interface IPublicGetQRCodeBuilder
         {
 
 
 
 
 
-            internal PublicGetQRCodeBuilder() { }
+        }
 
-            internal PublicGetQRCodeBuilder(IAccelByteSdk sdk)
+        public abstract class PublicGetQRCodeAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicGetQRCodeBuilder
+            where TImpl : PublicGetQRCodeAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicGetQRCodeAbstractBuilder() { }
+
+            public PublicGetQRCodeAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,11 +73,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     code                    
                 );
 
-                op.SetBaseFields<PublicGetQRCodeBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicGetQRCode.Response Execute(
+            protected PublicGetQRCode.Response InternalExecute(
                 string namespace_,
                 string code
             )
@@ -86,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicGetQRCode.Response> ExecuteAsync(
+            protected async Task<PublicGetQRCode.Response> InternalExecuteAsync(
                 string namespace_,
                 string code
             )
@@ -107,7 +117,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private PublicGetQRCode(PublicGetQRCodeBuilder builder,
+        public class PublicGetQRCodeBuilder : PublicGetQRCodeAbstractBuilder<PublicGetQRCodeBuilder>
+        {
+            public PublicGetQRCodeBuilder() : base() { }
+
+            public PublicGetQRCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicGetQRCode.Response Execute(
+                string namespace_,
+                string code
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    code
+                );
+            }
+            public async Task<PublicGetQRCode.Response> ExecuteAsync(
+                string namespace_,
+                string code
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    code
+                );
+            }
+        }
+
+
+        public PublicGetQRCode(IPublicGetQRCodeBuilder builder,
             string namespace_,
             string code
         )
@@ -172,7 +211,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.BinarySchema>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.BinarySchema>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,24 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #region Builder Part
         public static ListGlobalAchievementContributorsBuilder Builder { get => new ListGlobalAchievementContributorsBuilder(); }
 
-        public class ListGlobalAchievementContributorsBuilder
-            : OperationBuilder<ListGlobalAchievementContributorsBuilder>
+        public interface IListGlobalAchievementContributorsBuilder
+        {
+
+            long? Limit { get; }
+
+            long? Offset { get; }
+
+            ListGlobalAchievementContributorsSortBy? SortBy { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListGlobalAchievementContributorsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListGlobalAchievementContributorsBuilder
+            where TImpl : ListGlobalAchievementContributorsAbstractBuilder<TImpl>
         {
 
             public long? Limit { get; set; }
@@ -47,30 +63,30 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
 
 
-            internal ListGlobalAchievementContributorsBuilder() { }
+            public ListGlobalAchievementContributorsAbstractBuilder() { }
 
-            internal ListGlobalAchievementContributorsBuilder(IAccelByteSdk sdk)
+            public ListGlobalAchievementContributorsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListGlobalAchievementContributorsBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListGlobalAchievementContributorsBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListGlobalAchievementContributorsBuilder SetSortBy(ListGlobalAchievementContributorsSortBy _sortBy)
+            public TImpl SetSortBy(ListGlobalAchievementContributorsSortBy _sortBy)
             {
                 SortBy = _sortBy;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -87,11 +103,11 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListGlobalAchievementContributorsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListGlobalAchievementContributors.Response Execute(
+            protected ListGlobalAchievementContributors.Response InternalExecute(
                 string achievementCode,
                 string namespace_
             )
@@ -110,7 +126,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListGlobalAchievementContributors.Response> ExecuteAsync(
+            protected async Task<ListGlobalAchievementContributors.Response> InternalExecuteAsync(
                 string achievementCode,
                 string namespace_
             )
@@ -131,7 +147,36 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
         }
 
-        private ListGlobalAchievementContributors(ListGlobalAchievementContributorsBuilder builder,
+        public class ListGlobalAchievementContributorsBuilder : ListGlobalAchievementContributorsAbstractBuilder<ListGlobalAchievementContributorsBuilder>
+        {
+            public ListGlobalAchievementContributorsBuilder() : base() { }
+
+            public ListGlobalAchievementContributorsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListGlobalAchievementContributors.Response Execute(
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    achievementCode,
+                    namespace_
+                );
+            }
+            public async Task<ListGlobalAchievementContributors.Response> ExecuteAsync(
+                string achievementCode,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    achievementCode,
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListGlobalAchievementContributors(IListGlobalAchievementContributorsBuilder builder,
             string achievementCode,
             string namespace_
         )
@@ -213,22 +258,26 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContributorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsPaginatedContributorResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

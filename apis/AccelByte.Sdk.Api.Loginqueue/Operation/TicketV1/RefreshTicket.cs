@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
         #region Builder Part
         public static RefreshTicketBuilder Builder { get => new RefreshTicketBuilder(); }
 
-        public class RefreshTicketBuilder
-            : OperationBuilder<RefreshTicketBuilder>
+        public interface IRefreshTicketBuilder
         {
 
 
 
 
 
-            internal RefreshTicketBuilder() { }
+        }
 
-            internal RefreshTicketBuilder(IAccelByteSdk sdk)
+        public abstract class RefreshTicketAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IRefreshTicketBuilder
+            where TImpl : RefreshTicketAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public RefreshTicketAbstractBuilder() { }
+
+            public RefreshTicketAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -58,11 +68,11 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<RefreshTicketBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public RefreshTicket.Response Execute(
+            protected RefreshTicket.Response InternalExecute(
                 string namespace_
             )
             {
@@ -79,7 +89,7 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<RefreshTicket.Response> ExecuteAsync(
+            protected async Task<RefreshTicket.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -98,7 +108,32 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             }
         }
 
-        private RefreshTicket(RefreshTicketBuilder builder,
+        public class RefreshTicketBuilder : RefreshTicketAbstractBuilder<RefreshTicketBuilder>
+        {
+            public RefreshTicketBuilder() : base() { }
+
+            public RefreshTicketBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public RefreshTicket.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<RefreshTicket.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public RefreshTicket(IRefreshTicketBuilder builder,
             string namespace_
         )
         {
@@ -165,17 +200,20 @@ namespace AccelByte.Sdk.Api.Loginqueue.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsRefreshTicketResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsRefreshTicketResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

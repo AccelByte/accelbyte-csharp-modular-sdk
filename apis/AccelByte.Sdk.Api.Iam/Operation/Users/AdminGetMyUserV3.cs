@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminGetMyUserV3Builder Builder { get => new AdminGetMyUserV3Builder(); }
 
-        public class AdminGetMyUserV3Builder
-            : OperationBuilder<AdminGetMyUserV3Builder>
+        public interface IAdminGetMyUserV3Builder
         {
 
 
 
 
 
-            internal AdminGetMyUserV3Builder() { }
+        }
 
-            internal AdminGetMyUserV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminGetMyUserV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetMyUserV3Builder
+            where TImpl : AdminGetMyUserV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetMyUserV3AbstractBuilder() { }
+
+            public AdminGetMyUserV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,11 +67,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminGetMyUserV3 op = new AdminGetMyUserV3(this
                 );
 
-                op.SetBaseFields<AdminGetMyUserV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetMyUserV3.Response Execute(
+            protected AdminGetMyUserV3.Response InternalExecute(
             )
             {
                 AdminGetMyUserV3 op = Build(
@@ -76,7 +86,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetMyUserV3.Response> ExecuteAsync(
+            protected async Task<AdminGetMyUserV3.Response> InternalExecuteAsync(
             )
             {
                 AdminGetMyUserV3 op = Build(
@@ -93,7 +103,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminGetMyUserV3(AdminGetMyUserV3Builder builder
+        public class AdminGetMyUserV3Builder : AdminGetMyUserV3AbstractBuilder<AdminGetMyUserV3Builder>
+        {
+            public AdminGetMyUserV3Builder() : base() { }
+
+            public AdminGetMyUserV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetMyUserV3.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGetMyUserV3.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGetMyUserV3(IAdminGetMyUserV3Builder builder
         )
         {
             
@@ -156,17 +187,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponseV3>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserResponseV3>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

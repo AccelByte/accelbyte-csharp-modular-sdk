@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -50,8 +50,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestAdyenConfigBuilder Builder { get => new TestAdyenConfigBuilder(); }
 
-        public class TestAdyenConfigBuilder
-            : OperationBuilder<TestAdyenConfigBuilder>
+        public interface ITestAdyenConfigBuilder
+        {
+
+            bool? Sandbox { get; }
+
+
+
+
+
+        }
+
+        public abstract class TestAdyenConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestAdyenConfigBuilder
+            where TImpl : TestAdyenConfigAbstractBuilder<TImpl>
         {
 
             public bool? Sandbox { get; set; }
@@ -60,18 +72,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal TestAdyenConfigBuilder() { }
+            public TestAdyenConfigAbstractBuilder() { }
 
-            internal TestAdyenConfigBuilder(IAccelByteSdk sdk)
+            public TestAdyenConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public TestAdyenConfigBuilder SetSandbox(bool _sandbox)
+            public TImpl SetSandbox(bool _sandbox)
             {
                 Sandbox = _sandbox;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -86,11 +98,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestAdyenConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestAdyenConfig.Response Execute(
+            protected TestAdyenConfig.Response InternalExecute(
                 AdyenConfig body
             )
             {
@@ -107,7 +119,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestAdyenConfig.Response> ExecuteAsync(
+            protected async Task<TestAdyenConfig.Response> InternalExecuteAsync(
                 AdyenConfig body
             )
             {
@@ -126,7 +138,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestAdyenConfig(TestAdyenConfigBuilder builder,
+        public class TestAdyenConfigBuilder : TestAdyenConfigAbstractBuilder<TestAdyenConfigBuilder>
+        {
+            public TestAdyenConfigBuilder() : base() { }
+
+            public TestAdyenConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestAdyenConfig.Response Execute(
+                AdyenConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestAdyenConfig.Response> ExecuteAsync(
+                AdyenConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestAdyenConfig(ITestAdyenConfigBuilder builder,
             AdyenConfig body
         )
         {
@@ -192,7 +229,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

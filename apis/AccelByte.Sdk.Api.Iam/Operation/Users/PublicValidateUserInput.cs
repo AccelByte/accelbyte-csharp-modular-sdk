@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static PublicValidateUserInputBuilder Builder { get => new PublicValidateUserInputBuilder(); }
 
-        public class PublicValidateUserInputBuilder
-            : OperationBuilder<PublicValidateUserInputBuilder>
+        public interface IPublicValidateUserInputBuilder
         {
 
 
 
 
 
-            internal PublicValidateUserInputBuilder() { }
+        }
 
-            internal PublicValidateUserInputBuilder(IAccelByteSdk sdk)
+        public abstract class PublicValidateUserInputAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IPublicValidateUserInputBuilder
+            where TImpl : PublicValidateUserInputAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public PublicValidateUserInputAbstractBuilder() { }
+
+            public PublicValidateUserInputAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<PublicValidateUserInputBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public PublicValidateUserInput.Response Execute(
+            protected PublicValidateUserInput.Response InternalExecute(
                 ModelUserInputValidationRequest body,
                 string namespace_
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<PublicValidateUserInput.Response> ExecuteAsync(
+            protected async Task<PublicValidateUserInput.Response> InternalExecuteAsync(
                 ModelUserInputValidationRequest body,
                 string namespace_
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private PublicValidateUserInput(PublicValidateUserInputBuilder builder,
+        public class PublicValidateUserInputBuilder : PublicValidateUserInputAbstractBuilder<PublicValidateUserInputBuilder>
+        {
+            public PublicValidateUserInputBuilder() : base() { }
+
+            public PublicValidateUserInputBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public PublicValidateUserInput.Response Execute(
+                ModelUserInputValidationRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<PublicValidateUserInput.Response> ExecuteAsync(
+                ModelUserInputValidationRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public PublicValidateUserInput(IPublicValidateUserInputBuilder builder,
             ModelUserInputValidationRequest body,
             string namespace_
         )
@@ -177,12 +216,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelUserInputValidationResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelUserInputValidationResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

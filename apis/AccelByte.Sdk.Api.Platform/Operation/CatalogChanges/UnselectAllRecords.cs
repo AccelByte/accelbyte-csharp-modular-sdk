@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UnselectAllRecordsBuilder Builder { get => new UnselectAllRecordsBuilder(); }
 
-        public class UnselectAllRecordsBuilder
-            : OperationBuilder<UnselectAllRecordsBuilder>
+        public interface IUnselectAllRecordsBuilder
         {
 
 
 
 
 
-            internal UnselectAllRecordsBuilder() { }
+        }
 
-            internal UnselectAllRecordsBuilder(IAccelByteSdk sdk)
+        public abstract class UnselectAllRecordsAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUnselectAllRecordsBuilder
+            where TImpl : UnselectAllRecordsAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UnselectAllRecordsAbstractBuilder() { }
+
+            public UnselectAllRecordsAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<UnselectAllRecordsBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UnselectAllRecords.Response Execute(
+            protected UnselectAllRecords.Response InternalExecute(
                 string namespace_,
                 string storeId
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UnselectAllRecords.Response> ExecuteAsync(
+            protected async Task<UnselectAllRecords.Response> InternalExecuteAsync(
                 string namespace_,
                 string storeId
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UnselectAllRecords(UnselectAllRecordsBuilder builder,
+        public class UnselectAllRecordsBuilder : UnselectAllRecordsAbstractBuilder<UnselectAllRecordsBuilder>
+        {
+            public UnselectAllRecordsBuilder() : base() { }
+
+            public UnselectAllRecordsBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UnselectAllRecords.Response Execute(
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<UnselectAllRecords.Response> ExecuteAsync(
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public UnselectAllRecords(IUnselectAllRecordsBuilder builder,
             string namespace_,
             string storeId
         )
@@ -174,7 +213,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

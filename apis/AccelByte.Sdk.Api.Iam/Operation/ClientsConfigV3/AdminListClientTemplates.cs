@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminListClientTemplatesBuilder Builder { get => new AdminListClientTemplatesBuilder(); }
 
-        public class AdminListClientTemplatesBuilder
-            : OperationBuilder<AdminListClientTemplatesBuilder>
+        public interface IAdminListClientTemplatesBuilder
         {
 
 
 
 
 
-            internal AdminListClientTemplatesBuilder() { }
+        }
 
-            internal AdminListClientTemplatesBuilder(IAccelByteSdk sdk)
+        public abstract class AdminListClientTemplatesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminListClientTemplatesBuilder
+            where TImpl : AdminListClientTemplatesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminListClientTemplatesAbstractBuilder() { }
+
+            public AdminListClientTemplatesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -56,11 +66,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 AdminListClientTemplates op = new AdminListClientTemplates(this
                 );
 
-                op.SetBaseFields<AdminListClientTemplatesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminListClientTemplates.Response Execute(
+            protected AdminListClientTemplates.Response InternalExecute(
             )
             {
                 AdminListClientTemplates op = Build(
@@ -75,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminListClientTemplates.Response> ExecuteAsync(
+            protected async Task<AdminListClientTemplates.Response> InternalExecuteAsync(
             )
             {
                 AdminListClientTemplates op = Build(
@@ -92,7 +102,28 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminListClientTemplates(AdminListClientTemplatesBuilder builder
+        public class AdminListClientTemplatesBuilder : AdminListClientTemplatesAbstractBuilder<AdminListClientTemplatesBuilder>
+        {
+            public AdminListClientTemplatesBuilder() : base() { }
+
+            public AdminListClientTemplatesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminListClientTemplates.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminListClientTemplates.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminListClientTemplates(IAdminListClientTemplatesBuilder builder
         )
         {
             
@@ -155,17 +186,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ClientmodelListTemplatesResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ClientmodelListTemplatesResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
 

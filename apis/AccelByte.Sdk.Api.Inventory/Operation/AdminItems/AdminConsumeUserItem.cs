@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #region Builder Part
         public static AdminConsumeUserItemBuilder Builder { get => new AdminConsumeUserItemBuilder(); }
 
-        public class AdminConsumeUserItemBuilder
-            : OperationBuilder<AdminConsumeUserItemBuilder>
+        public interface IAdminConsumeUserItemBuilder
+        {
+
+            string? DateRangeValidation { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminConsumeUserItemAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminConsumeUserItemBuilder
+            where TImpl : AdminConsumeUserItemAbstractBuilder<TImpl>
         {
 
             public string? DateRangeValidation { get; set; }
@@ -43,18 +55,18 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
 
 
-            internal AdminConsumeUserItemBuilder() { }
+            public AdminConsumeUserItemAbstractBuilder() { }
 
-            internal AdminConsumeUserItemBuilder(IAccelByteSdk sdk)
+            public AdminConsumeUserItemAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminConsumeUserItemBuilder SetDateRangeValidation(string _dateRangeValidation)
+            public TImpl SetDateRangeValidation(string _dateRangeValidation)
             {
                 DateRangeValidation = _dateRangeValidation;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -75,11 +87,11 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminConsumeUserItemBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminConsumeUserItem.Response Execute(
+            protected AdminConsumeUserItem.Response InternalExecute(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_,
@@ -102,7 +114,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminConsumeUserItem.Response> ExecuteAsync(
+            protected async Task<AdminConsumeUserItem.Response> InternalExecuteAsync(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_,
@@ -126,7 +138,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.Payload);
             }
 
-            public AdminConsumeUserItem.Response<T1, T2, T3> Execute<T1, T2, T3>(
+            protected AdminConsumeUserItem.Response<T1, T2, T3> InternalExecute<T1, T2, T3>(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_,
@@ -149,7 +161,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminConsumeUserItem.Response<T1, T2, T3>> ExecuteAsync<T1, T2, T3>(
+            protected async Task<AdminConsumeUserItem.Response<T1, T2, T3>> InternalExecuteAsync<T1, T2, T3>(
                 ApimodelsConsumeItemReq body,
                 string inventoryId,
                 string namespace_,
@@ -174,7 +186,73 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
         }
 
-        private AdminConsumeUserItem(AdminConsumeUserItemBuilder builder,
+        public class AdminConsumeUserItemBuilder : AdminConsumeUserItemAbstractBuilder<AdminConsumeUserItemBuilder>
+        {
+            public AdminConsumeUserItemBuilder() : base() { }
+
+            public AdminConsumeUserItemBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminConsumeUserItem.Response Execute(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminConsumeUserItem.Response> ExecuteAsync(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
+                );
+            }
+
+            public AdminConsumeUserItem.Response<T1, T2, T3> Execute<T1, T2, T3>(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute<T1, T2, T3>(
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminConsumeUserItem.Response<T1, T2, T3>> ExecuteAsync<T1, T2, T3>(
+                ApimodelsConsumeItemReq body,
+                string inventoryId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync<T1, T2, T3>(
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminConsumeUserItem(IAdminConsumeUserItemBuilder builder,
             ApimodelsConsumeItemReq body,
             string inventoryId,
             string namespace_,
@@ -269,22 +347,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 
@@ -305,22 +387,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsItemResp<T1, T2, T3>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
             

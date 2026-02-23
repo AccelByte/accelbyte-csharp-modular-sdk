@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -31,17 +31,27 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminGetDSMCConfigurationDefaultBuilder Builder { get => new AdminGetDSMCConfigurationDefaultBuilder(); }
 
-        public class AdminGetDSMCConfigurationDefaultBuilder
-            : OperationBuilder<AdminGetDSMCConfigurationDefaultBuilder>
+        public interface IAdminGetDSMCConfigurationDefaultBuilder
         {
 
 
 
 
 
-            internal AdminGetDSMCConfigurationDefaultBuilder() { }
+        }
 
-            internal AdminGetDSMCConfigurationDefaultBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetDSMCConfigurationDefaultAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetDSMCConfigurationDefaultBuilder
+            where TImpl : AdminGetDSMCConfigurationDefaultAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetDSMCConfigurationDefaultAbstractBuilder() { }
+
+            public AdminGetDSMCConfigurationDefaultAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -57,12 +67,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 AdminGetDSMCConfigurationDefault op = new AdminGetDSMCConfigurationDefault(this
                 );
 
-                op.SetBaseFields<AdminGetDSMCConfigurationDefaultBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
             [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
-            public AdminGetDSMCConfigurationDefault.Response Execute(
+            protected AdminGetDSMCConfigurationDefault.Response InternalExecute(
             )
             {
                 AdminGetDSMCConfigurationDefault op = Build(
@@ -77,7 +87,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetDSMCConfigurationDefault.Response> ExecuteAsync(
+            protected async Task<AdminGetDSMCConfigurationDefault.Response> InternalExecuteAsync(
             )
             {
                 AdminGetDSMCConfigurationDefault op = Build(
@@ -94,7 +104,29 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminGetDSMCConfigurationDefault(AdminGetDSMCConfigurationDefaultBuilder builder
+        public class AdminGetDSMCConfigurationDefaultBuilder : AdminGetDSMCConfigurationDefaultAbstractBuilder<AdminGetDSMCConfigurationDefaultBuilder>
+        {
+            public AdminGetDSMCConfigurationDefaultBuilder() : base() { }
+
+            public AdminGetDSMCConfigurationDefaultBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            public AdminGetDSMCConfigurationDefault.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGetDSMCConfigurationDefault.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGetDSMCConfigurationDefault(IAdminGetDSMCConfigurationDefaultBuilder builder
         )
         {
             
@@ -163,32 +195,38 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ModelsDefaultDSMCConfig>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ModelsDefaultDSMCConfig>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

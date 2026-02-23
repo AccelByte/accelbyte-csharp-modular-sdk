@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #region Builder Part
         public static CreateMatchFunctionBuilder Builder { get => new CreateMatchFunctionBuilder(); }
 
-        public class CreateMatchFunctionBuilder
-            : OperationBuilder<CreateMatchFunctionBuilder>
+        public interface ICreateMatchFunctionBuilder
         {
 
 
 
 
 
-            internal CreateMatchFunctionBuilder() { }
+        }
 
-            internal CreateMatchFunctionBuilder(IAccelByteSdk sdk)
+        public abstract class CreateMatchFunctionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ICreateMatchFunctionBuilder
+            where TImpl : CreateMatchFunctionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public CreateMatchFunctionAbstractBuilder() { }
+
+            public CreateMatchFunctionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<CreateMatchFunctionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public CreateMatchFunction.Response Execute(
+            protected CreateMatchFunction.Response InternalExecute(
                 ApiMatchFunctionRequest body,
                 string namespace_
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<CreateMatchFunction.Response> ExecuteAsync(
+            protected async Task<CreateMatchFunction.Response> InternalExecuteAsync(
                 ApiMatchFunctionRequest body,
                 string namespace_
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
         }
 
-        private CreateMatchFunction(CreateMatchFunctionBuilder builder,
+        public class CreateMatchFunctionBuilder : CreateMatchFunctionAbstractBuilder<CreateMatchFunctionBuilder>
+        {
+            public CreateMatchFunctionBuilder() : base() { }
+
+            public CreateMatchFunctionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public CreateMatchFunction.Response Execute(
+                ApiMatchFunctionRequest body,
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_
+                );
+            }
+            public async Task<CreateMatchFunction.Response> ExecuteAsync(
+                ApiMatchFunctionRequest body,
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_
+                );
+            }
+        }
+
+
+        public CreateMatchFunction(ICreateMatchFunctionBuilder builder,
             ApiMatchFunctionRequest body,
             string namespace_
         )
@@ -182,27 +221,32 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListOculusSubscriptionGroupTierBuilder Builder { get => new ListOculusSubscriptionGroupTierBuilder(); }
 
-        public class ListOculusSubscriptionGroupTierBuilder
-            : OperationBuilder<ListOculusSubscriptionGroupTierBuilder>
+        public interface IListOculusSubscriptionGroupTierBuilder
         {
 
 
 
 
 
-            internal ListOculusSubscriptionGroupTierBuilder() { }
+        }
 
-            internal ListOculusSubscriptionGroupTierBuilder(IAccelByteSdk sdk)
+        public abstract class ListOculusSubscriptionGroupTierAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListOculusSubscriptionGroupTierBuilder
+            where TImpl : ListOculusSubscriptionGroupTierAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public ListOculusSubscriptionGroupTierAbstractBuilder() { }
+
+            public ListOculusSubscriptionGroupTierAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     sku                    
                 );
 
-                op.SetBaseFields<ListOculusSubscriptionGroupTierBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListOculusSubscriptionGroupTier.Response Execute(
+            protected ListOculusSubscriptionGroupTier.Response InternalExecute(
                 string namespace_,
                 string sku
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListOculusSubscriptionGroupTier.Response> ExecuteAsync(
+            protected async Task<ListOculusSubscriptionGroupTier.Response> InternalExecuteAsync(
                 string namespace_,
                 string sku
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListOculusSubscriptionGroupTier(ListOculusSubscriptionGroupTierBuilder builder,
+        public class ListOculusSubscriptionGroupTierBuilder : ListOculusSubscriptionGroupTierAbstractBuilder<ListOculusSubscriptionGroupTierBuilder>
+        {
+            public ListOculusSubscriptionGroupTierBuilder() : base() { }
+
+            public ListOculusSubscriptionGroupTierBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListOculusSubscriptionGroupTier.Response Execute(
+                string namespace_,
+                string sku
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    sku
+                );
+            }
+            public async Task<ListOculusSubscriptionGroupTier.Response> ExecuteAsync(
+                string namespace_,
+                string sku
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    sku
+                );
+            }
+        }
+
+
+        public ListOculusSubscriptionGroupTier(IListOculusSubscriptionGroupTierBuilder builder,
             string namespace_,
             string sku
         )
@@ -171,7 +210,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.ThirdPartySubscriptionTierInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.ThirdPartySubscriptionTierInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

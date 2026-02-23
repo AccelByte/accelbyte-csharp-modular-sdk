@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -36,17 +36,27 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #region Builder Part
         public static AdminGetLogConfigBuilder Builder { get => new AdminGetLogConfigBuilder(); }
 
-        public class AdminGetLogConfigBuilder
-            : OperationBuilder<AdminGetLogConfigBuilder>
+        public interface IAdminGetLogConfigBuilder
         {
 
 
 
 
 
-            internal AdminGetLogConfigBuilder() { }
+        }
 
-            internal AdminGetLogConfigBuilder(IAccelByteSdk sdk)
+        public abstract class AdminGetLogConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminGetLogConfigBuilder
+            where TImpl : AdminGetLogConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminGetLogConfigAbstractBuilder() { }
+
+            public AdminGetLogConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -62,11 +72,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                 AdminGetLogConfig op = new AdminGetLogConfig(this
                 );
 
-                op.SetBaseFields<AdminGetLogConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminGetLogConfig.Response Execute(
+            protected AdminGetLogConfig.Response InternalExecute(
             )
             {
                 AdminGetLogConfig op = Build(
@@ -81,7 +91,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminGetLogConfig.Response> ExecuteAsync(
+            protected async Task<AdminGetLogConfig.Response> InternalExecuteAsync(
             )
             {
                 AdminGetLogConfig op = Build(
@@ -98,7 +108,28 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
         }
 
-        private AdminGetLogConfig(AdminGetLogConfigBuilder builder
+        public class AdminGetLogConfigBuilder : AdminGetLogConfigAbstractBuilder<AdminGetLogConfigBuilder>
+        {
+            public AdminGetLogConfigBuilder() : base() { }
+
+            public AdminGetLogConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminGetLogConfig.Response Execute(
+            )
+            {
+                return InternalExecute(
+                );
+            }
+            public async Task<AdminGetLogConfig.Response> ExecuteAsync(
+            )
+            {
+                return await InternalExecuteAsync(
+                );
+            }
+        }
+
+
+        public AdminGetLogConfig(IAdminGetLogConfigBuilder builder
         )
         {
             
@@ -157,7 +188,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.LogconfigConfiguration>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.LogconfigConfiguration>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

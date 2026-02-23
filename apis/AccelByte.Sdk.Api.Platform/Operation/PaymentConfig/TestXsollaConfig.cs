@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -45,17 +45,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static TestXsollaConfigBuilder Builder { get => new TestXsollaConfigBuilder(); }
 
-        public class TestXsollaConfigBuilder
-            : OperationBuilder<TestXsollaConfigBuilder>
+        public interface ITestXsollaConfigBuilder
         {
 
 
 
 
 
-            internal TestXsollaConfigBuilder() { }
+        }
 
-            internal TestXsollaConfigBuilder(IAccelByteSdk sdk)
+        public abstract class TestXsollaConfigAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, ITestXsollaConfigBuilder
+            where TImpl : TestXsollaConfigAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public TestXsollaConfigAbstractBuilder() { }
+
+            public TestXsollaConfigAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -73,11 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     body                    
                 );
 
-                op.SetBaseFields<TestXsollaConfigBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public TestXsollaConfig.Response Execute(
+            protected TestXsollaConfig.Response InternalExecute(
                 XsollaConfig body
             )
             {
@@ -94,7 +104,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<TestXsollaConfig.Response> ExecuteAsync(
+            protected async Task<TestXsollaConfig.Response> InternalExecuteAsync(
                 XsollaConfig body
             )
             {
@@ -113,7 +123,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private TestXsollaConfig(TestXsollaConfigBuilder builder,
+        public class TestXsollaConfigBuilder : TestXsollaConfigAbstractBuilder<TestXsollaConfigBuilder>
+        {
+            public TestXsollaConfigBuilder() : base() { }
+
+            public TestXsollaConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public TestXsollaConfig.Response Execute(
+                XsollaConfig body
+            )
+            {
+                return InternalExecute(
+                    body
+                );
+            }
+            public async Task<TestXsollaConfig.Response> ExecuteAsync(
+                XsollaConfig body
+            )
+            {
+                return await InternalExecuteAsync(
+                    body
+                );
+            }
+        }
+
+
+        public TestXsollaConfig(ITestXsollaConfigBuilder builder,
             XsollaConfig body
         )
         {
@@ -176,7 +211,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.TestResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.TestResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

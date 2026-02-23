@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static UpdateItemPurchaseConditionBuilder Builder { get => new UpdateItemPurchaseConditionBuilder(); }
 
-        public class UpdateItemPurchaseConditionBuilder
-            : OperationBuilder<UpdateItemPurchaseConditionBuilder>
+        public interface IUpdateItemPurchaseConditionBuilder
         {
 
 
 
 
 
-            internal UpdateItemPurchaseConditionBuilder() { }
+        }
 
-            internal UpdateItemPurchaseConditionBuilder(IAccelByteSdk sdk)
+        public abstract class UpdateItemPurchaseConditionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateItemPurchaseConditionBuilder
+            where TImpl : UpdateItemPurchaseConditionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public UpdateItemPurchaseConditionAbstractBuilder() { }
+
+            public UpdateItemPurchaseConditionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     storeId                    
                 );
 
-                op.SetBaseFields<UpdateItemPurchaseConditionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdateItemPurchaseCondition.Response Execute(
+            protected UpdateItemPurchaseCondition.Response InternalExecute(
                 PurchaseConditionUpdate body,
                 string itemId,
                 string namespace_,
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateItemPurchaseCondition.Response> ExecuteAsync(
+            protected async Task<UpdateItemPurchaseCondition.Response> InternalExecuteAsync(
                 PurchaseConditionUpdate body,
                 string itemId,
                 string namespace_,
@@ -115,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.Payload);
             }
 
-            public UpdateItemPurchaseCondition.Response<T1> Execute<T1>(
+            protected UpdateItemPurchaseCondition.Response<T1> InternalExecute<T1>(
                 PurchaseConditionUpdate body,
                 string itemId,
                 string namespace_,
@@ -138,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdateItemPurchaseCondition.Response<T1>> ExecuteAsync<T1>(
+            protected async Task<UpdateItemPurchaseCondition.Response<T1>> InternalExecuteAsync<T1>(
                 PurchaseConditionUpdate body,
                 string itemId,
                 string namespace_,
@@ -163,7 +173,73 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private UpdateItemPurchaseCondition(UpdateItemPurchaseConditionBuilder builder,
+        public class UpdateItemPurchaseConditionBuilder : UpdateItemPurchaseConditionAbstractBuilder<UpdateItemPurchaseConditionBuilder>
+        {
+            public UpdateItemPurchaseConditionBuilder() : base() { }
+
+            public UpdateItemPurchaseConditionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdateItemPurchaseCondition.Response Execute(
+                PurchaseConditionUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<UpdateItemPurchaseCondition.Response> ExecuteAsync(
+                PurchaseConditionUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+
+            public UpdateItemPurchaseCondition.Response<T1> Execute<T1>(
+                PurchaseConditionUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return InternalExecute<T1>(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+            public async Task<UpdateItemPurchaseCondition.Response<T1>> ExecuteAsync<T1>(
+                PurchaseConditionUpdate body,
+                string itemId,
+                string namespace_,
+                string storeId
+            )
+            {
+                return await InternalExecuteAsync<T1>(
+                    body,
+                    itemId,
+                    namespace_,
+                    storeId
+                );
+            }
+        }
+
+
+        public UpdateItemPurchaseCondition(IUpdateItemPurchaseConditionBuilder builder,
             PurchaseConditionUpdate body,
             string itemId,
             string namespace_,
@@ -259,27 +335,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
 
@@ -300,27 +381,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }            
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.FullItemInfo<T1>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)409)
             {
-                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)422)
             {
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
             

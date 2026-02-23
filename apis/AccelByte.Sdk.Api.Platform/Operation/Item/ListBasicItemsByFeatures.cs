@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,8 +34,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static ListBasicItemsByFeaturesBuilder Builder { get => new ListBasicItemsByFeaturesBuilder(); }
 
-        public class ListBasicItemsByFeaturesBuilder
-            : OperationBuilder<ListBasicItemsByFeaturesBuilder>
+        public interface IListBasicItemsByFeaturesBuilder
+        {
+
+            bool? ActiveOnly { get; }
+
+            List<string>? Features { get; }
+
+
+
+
+
+        }
+
+        public abstract class ListBasicItemsByFeaturesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IListBasicItemsByFeaturesBuilder
+            where TImpl : ListBasicItemsByFeaturesAbstractBuilder<TImpl>
         {
 
             public bool? ActiveOnly { get; set; }
@@ -46,24 +60,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal ListBasicItemsByFeaturesBuilder() { }
+            public ListBasicItemsByFeaturesAbstractBuilder() { }
 
-            internal ListBasicItemsByFeaturesBuilder(IAccelByteSdk sdk)
+            public ListBasicItemsByFeaturesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public ListBasicItemsByFeaturesBuilder SetActiveOnly(bool _activeOnly)
+            public TImpl SetActiveOnly(bool _activeOnly)
             {
                 ActiveOnly = _activeOnly;
-                return this;
+                return (TImpl)this;
             }
 
-            public ListBasicItemsByFeaturesBuilder SetFeatures(List<string> _features)
+            public TImpl SetFeatures(List<string> _features)
             {
                 Features = _features;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -78,11 +92,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<ListBasicItemsByFeaturesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public ListBasicItemsByFeatures.Response Execute(
+            protected ListBasicItemsByFeatures.Response InternalExecute(
                 string namespace_
             )
             {
@@ -99,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<ListBasicItemsByFeatures.Response> ExecuteAsync(
+            protected async Task<ListBasicItemsByFeatures.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -118,7 +132,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private ListBasicItemsByFeatures(ListBasicItemsByFeaturesBuilder builder,
+        public class ListBasicItemsByFeaturesBuilder : ListBasicItemsByFeaturesAbstractBuilder<ListBasicItemsByFeaturesBuilder>
+        {
+            public ListBasicItemsByFeaturesBuilder() : base() { }
+
+            public ListBasicItemsByFeaturesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public ListBasicItemsByFeatures.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<ListBasicItemsByFeatures.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public ListBasicItemsByFeatures(IListBasicItemsByFeaturesBuilder builder,
             string namespace_
         )
         {
@@ -189,7 +228,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.BasicItem>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.BasicItem>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

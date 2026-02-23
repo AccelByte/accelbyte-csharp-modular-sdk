@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,17 +30,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GeDLCDurableRewardShortMapBuilder Builder { get => new GeDLCDurableRewardShortMapBuilder(); }
 
-        public class GeDLCDurableRewardShortMapBuilder
-            : OperationBuilder<GeDLCDurableRewardShortMapBuilder>
+        public interface IGeDLCDurableRewardShortMapBuilder
         {
 
 
 
 
 
-            internal GeDLCDurableRewardShortMapBuilder() { }
+        }
 
-            internal GeDLCDurableRewardShortMapBuilder(IAccelByteSdk sdk)
+        public abstract class GeDLCDurableRewardShortMapAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGeDLCDurableRewardShortMapBuilder
+            where TImpl : GeDLCDurableRewardShortMapAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GeDLCDurableRewardShortMapAbstractBuilder() { }
+
+            public GeDLCDurableRewardShortMapAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -60,11 +70,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     dlcType                    
                 );
 
-                op.SetBaseFields<GeDLCDurableRewardShortMapBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GeDLCDurableRewardShortMap.Response Execute(
+            protected GeDLCDurableRewardShortMap.Response InternalExecute(
                 string namespace_,
                 string dlcType
             )
@@ -83,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GeDLCDurableRewardShortMap.Response> ExecuteAsync(
+            protected async Task<GeDLCDurableRewardShortMap.Response> InternalExecuteAsync(
                 string namespace_,
                 string dlcType
             )
@@ -104,7 +114,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GeDLCDurableRewardShortMap(GeDLCDurableRewardShortMapBuilder builder,
+        public class GeDLCDurableRewardShortMapBuilder : GeDLCDurableRewardShortMapAbstractBuilder<GeDLCDurableRewardShortMapBuilder>
+        {
+            public GeDLCDurableRewardShortMapBuilder() : base() { }
+
+            public GeDLCDurableRewardShortMapBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GeDLCDurableRewardShortMap.Response Execute(
+                string namespace_,
+                string dlcType
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    dlcType
+                );
+            }
+            public async Task<GeDLCDurableRewardShortMap.Response> ExecuteAsync(
+                string namespace_,
+                string dlcType
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    dlcType
+                );
+            }
+        }
+
+
+        public GeDLCDurableRewardShortMap(IGeDLCDurableRewardShortMapBuilder builder,
             string namespace_,
             GeDLCDurableRewardShortMapDlcType dlcType
         )
@@ -173,12 +212,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.DLCConfigRewardShortInfo>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.DLCConfigRewardShortInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
 

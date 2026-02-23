@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetCatalogDefinitionBuilder Builder { get => new GetCatalogDefinitionBuilder(); }
 
-        public class GetCatalogDefinitionBuilder
-            : OperationBuilder<GetCatalogDefinitionBuilder>
+        public interface IGetCatalogDefinitionBuilder
         {
 
 
 
 
 
-            internal GetCatalogDefinitionBuilder() { }
+        }
 
-            internal GetCatalogDefinitionBuilder(IAccelByteSdk sdk)
+        public abstract class GetCatalogDefinitionAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetCatalogDefinitionBuilder
+            where TImpl : GetCatalogDefinitionAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetCatalogDefinitionAbstractBuilder() { }
+
+            public GetCatalogDefinitionAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     catalogType                    
                 );
 
-                op.SetBaseFields<GetCatalogDefinitionBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetCatalogDefinition.Response Execute(
+            protected GetCatalogDefinition.Response InternalExecute(
                 string namespace_,
                 string catalogType
             )
@@ -87,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetCatalogDefinition.Response> ExecuteAsync(
+            protected async Task<GetCatalogDefinition.Response> InternalExecuteAsync(
                 string namespace_,
                 string catalogType
             )
@@ -108,7 +118,36 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetCatalogDefinition(GetCatalogDefinitionBuilder builder,
+        public class GetCatalogDefinitionBuilder : GetCatalogDefinitionAbstractBuilder<GetCatalogDefinitionBuilder>
+        {
+            public GetCatalogDefinitionBuilder() : base() { }
+
+            public GetCatalogDefinitionBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetCatalogDefinition.Response Execute(
+                string namespace_,
+                string catalogType
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    catalogType
+                );
+            }
+            public async Task<GetCatalogDefinition.Response> ExecuteAsync(
+                string namespace_,
+                string catalogType
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    catalogType
+                );
+            }
+        }
+
+
+        public GetCatalogDefinition(IGetCatalogDefinitionBuilder builder,
             string namespace_,
             GetCatalogDefinitionCatalogType catalogType
         )
@@ -175,7 +214,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.CatalogDefinitionInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.CatalogDefinitionInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -32,17 +32,27 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #region Builder Part
         public static AdminVerifyAccountV3Builder Builder { get => new AdminVerifyAccountV3Builder(); }
 
-        public class AdminVerifyAccountV3Builder
-            : OperationBuilder<AdminVerifyAccountV3Builder>
+        public interface IAdminVerifyAccountV3Builder
         {
 
 
 
 
 
-            internal AdminVerifyAccountV3Builder() { }
+        }
 
-            internal AdminVerifyAccountV3Builder(IAccelByteSdk sdk)
+        public abstract class AdminVerifyAccountV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminVerifyAccountV3Builder
+            where TImpl : AdminVerifyAccountV3AbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public AdminVerifyAccountV3AbstractBuilder() { }
+
+            public AdminVerifyAccountV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,11 +74,11 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<AdminVerifyAccountV3Builder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminVerifyAccountV3.Response Execute(
+            protected AdminVerifyAccountV3.Response InternalExecute(
                 ModelUserVerificationRequest body,
                 string namespace_,
                 string userId
@@ -89,7 +99,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminVerifyAccountV3.Response> ExecuteAsync(
+            protected async Task<AdminVerifyAccountV3.Response> InternalExecuteAsync(
                 ModelUserVerificationRequest body,
                 string namespace_,
                 string userId
@@ -112,7 +122,40 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
         }
 
-        private AdminVerifyAccountV3(AdminVerifyAccountV3Builder builder,
+        public class AdminVerifyAccountV3Builder : AdminVerifyAccountV3AbstractBuilder<AdminVerifyAccountV3Builder>
+        {
+            public AdminVerifyAccountV3Builder() : base() { }
+
+            public AdminVerifyAccountV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminVerifyAccountV3.Response Execute(
+                ModelUserVerificationRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<AdminVerifyAccountV3.Response> ExecuteAsync(
+                ModelUserVerificationRequest body,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public AdminVerifyAccountV3(IAdminVerifyAccountV3Builder builder,
             ModelUserVerificationRequest body,
             string namespace_,
             string userId
@@ -194,27 +237,32 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
-                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error403 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
-                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error404 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #region Builder Part
         public static UpdatePolicyBuilder Builder { get => new UpdatePolicyBuilder(); }
 
-        public class UpdatePolicyBuilder
-            : OperationBuilder<UpdatePolicyBuilder>
+        public interface IUpdatePolicyBuilder
+        {
+
+
+            Model.UpdatePolicyRequest? Body { get; }
+
+
+
+
+        }
+
+        public abstract class UpdatePolicyAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdatePolicyBuilder
+            where TImpl : UpdatePolicyAbstractBuilder<TImpl>
         {
 
 
@@ -40,19 +52,19 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
 
 
-            internal UpdatePolicyBuilder() { }
+            public UpdatePolicyAbstractBuilder() { }
 
-            internal UpdatePolicyBuilder(IAccelByteSdk sdk)
+            public UpdatePolicyAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
-            public UpdatePolicyBuilder SetBody(Model.UpdatePolicyRequest _body)
+            public TImpl SetBody(Model.UpdatePolicyRequest _body)
             {
                 Body = _body;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -68,11 +80,11 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     policyId                    
                 );
 
-                op.SetBaseFields<UpdatePolicyBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public UpdatePolicy.Response Execute(
+            protected UpdatePolicy.Response InternalExecute(
                 string namespace_,
                 string policyId
             )
@@ -91,7 +103,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<UpdatePolicy.Response> ExecuteAsync(
+            protected async Task<UpdatePolicy.Response> InternalExecuteAsync(
                 string namespace_,
                 string policyId
             )
@@ -112,7 +124,36 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
         }
 
-        private UpdatePolicy(UpdatePolicyBuilder builder,
+        public class UpdatePolicyBuilder : UpdatePolicyAbstractBuilder<UpdatePolicyBuilder>
+        {
+            public UpdatePolicyBuilder() : base() { }
+
+            public UpdatePolicyBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public UpdatePolicy.Response Execute(
+                string namespace_,
+                string policyId
+            )
+            {
+                return InternalExecute(
+                    namespace_,
+                    policyId
+                );
+            }
+            public async Task<UpdatePolicy.Response> ExecuteAsync(
+                string namespace_,
+                string policyId
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_,
+                    policyId
+                );
+            }
+        }
+
+
+        public UpdatePolicy(IUpdatePolicyBuilder builder,
             string namespace_,
             string policyId
         )
@@ -185,7 +226,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
 

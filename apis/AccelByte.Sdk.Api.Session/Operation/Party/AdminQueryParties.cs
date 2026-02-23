@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -30,8 +30,48 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #region Builder Part
         public static AdminQueryPartiesBuilder Builder { get => new AdminQueryPartiesBuilder(); }
 
-        public class AdminQueryPartiesBuilder
-            : OperationBuilder<AdminQueryPartiesBuilder>
+        public interface IAdminQueryPartiesBuilder
+        {
+
+            string? ConfigurationName { get; }
+
+            string? FromTime { get; }
+
+            string? IsSoftDeleted { get; }
+
+            AdminQueryPartiesJoinability? Joinability { get; }
+
+            string? Key { get; }
+
+            string? LeaderID { get; }
+
+            long? Limit { get; }
+
+            string? MemberID { get; }
+
+            AdminQueryPartiesMemberStatus? MemberStatus { get; }
+
+            long? Offset { get; }
+
+            string? Order { get; }
+
+            string? OrderBy { get; }
+
+            string? PartyID { get; }
+
+            string? ToTime { get; }
+
+            string? Value { get; }
+
+
+
+
+
+        }
+
+        public abstract class AdminQueryPartiesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IAdminQueryPartiesBuilder
+            where TImpl : AdminQueryPartiesAbstractBuilder<TImpl>
         {
 
             public string? ConfigurationName { get; set; }
@@ -68,102 +108,102 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
 
 
-            internal AdminQueryPartiesBuilder() { }
+            public AdminQueryPartiesAbstractBuilder() { }
 
-            internal AdminQueryPartiesBuilder(IAccelByteSdk sdk)
+            public AdminQueryPartiesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public AdminQueryPartiesBuilder SetConfigurationName(string _configurationName)
+            public TImpl SetConfigurationName(string _configurationName)
             {
                 ConfigurationName = _configurationName;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetFromTime(string _fromTime)
+            public TImpl SetFromTime(string _fromTime)
             {
                 FromTime = _fromTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetIsSoftDeleted(string _isSoftDeleted)
+            public TImpl SetIsSoftDeleted(string _isSoftDeleted)
             {
                 IsSoftDeleted = _isSoftDeleted;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetJoinability(AdminQueryPartiesJoinability _joinability)
+            public TImpl SetJoinability(AdminQueryPartiesJoinability _joinability)
             {
                 Joinability = _joinability;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetKey(string _key)
+            public TImpl SetKey(string _key)
             {
                 Key = _key;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetLeaderID(string _leaderID)
+            public TImpl SetLeaderID(string _leaderID)
             {
                 LeaderID = _leaderID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetLimit(long _limit)
+            public TImpl SetLimit(long _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetMemberID(string _memberID)
+            public TImpl SetMemberID(string _memberID)
             {
                 MemberID = _memberID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetMemberStatus(AdminQueryPartiesMemberStatus _memberStatus)
+            public TImpl SetMemberStatus(AdminQueryPartiesMemberStatus _memberStatus)
             {
                 MemberStatus = _memberStatus;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetOffset(long _offset)
+            public TImpl SetOffset(long _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetOrder(string _order)
+            public TImpl SetOrder(string _order)
             {
                 Order = _order;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetOrderBy(string _orderBy)
+            public TImpl SetOrderBy(string _orderBy)
             {
                 OrderBy = _orderBy;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetPartyID(string _partyID)
+            public TImpl SetPartyID(string _partyID)
             {
                 PartyID = _partyID;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetToTime(string _toTime)
+            public TImpl SetToTime(string _toTime)
             {
                 ToTime = _toTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public AdminQueryPartiesBuilder SetValue(string _value)
+            public TImpl SetValue(string _value)
             {
                 Value = _value;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -178,11 +218,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<AdminQueryPartiesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public AdminQueryParties.Response Execute(
+            protected AdminQueryParties.Response InternalExecute(
                 string namespace_
             )
             {
@@ -199,7 +239,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<AdminQueryParties.Response> ExecuteAsync(
+            protected async Task<AdminQueryParties.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -218,7 +258,32 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
         }
 
-        private AdminQueryParties(AdminQueryPartiesBuilder builder,
+        public class AdminQueryPartiesBuilder : AdminQueryPartiesAbstractBuilder<AdminQueryPartiesBuilder>
+        {
+            public AdminQueryPartiesBuilder() : base() { }
+
+            public AdminQueryPartiesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AdminQueryParties.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<AdminQueryParties.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public AdminQueryParties(IAdminQueryPartiesBuilder builder,
             string namespace_
         )
         {
@@ -332,22 +397,26 @@ namespace AccelByte.Sdk.Api.Session.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartyQueryResponse>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.ApimodelsPartyQueryResponse>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
             else if (code == (HttpStatusCode)400)
             {
-                response.Error400 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
-                response.Error401 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error401 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {
-                response.Error500 = JsonSerializer.Deserialize<ResponseError>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
 

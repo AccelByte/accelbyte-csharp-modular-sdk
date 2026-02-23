@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -34,17 +34,27 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static GetUserEntitlementHistoriesBuilder Builder { get => new GetUserEntitlementHistoriesBuilder(); }
 
-        public class GetUserEntitlementHistoriesBuilder
-            : OperationBuilder<GetUserEntitlementHistoriesBuilder>
+        public interface IGetUserEntitlementHistoriesBuilder
         {
 
 
 
 
 
-            internal GetUserEntitlementHistoriesBuilder() { }
+        }
 
-            internal GetUserEntitlementHistoriesBuilder(IAccelByteSdk sdk)
+        public abstract class GetUserEntitlementHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IGetUserEntitlementHistoriesBuilder
+            where TImpl : GetUserEntitlementHistoriesAbstractBuilder<TImpl>
+        {
+
+
+
+
+
+            public GetUserEntitlementHistoriesAbstractBuilder() { }
+
+            public GetUserEntitlementHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -66,11 +76,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     userId                    
                 );
 
-                op.SetBaseFields<GetUserEntitlementHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public GetUserEntitlementHistories.Response Execute(
+            protected GetUserEntitlementHistories.Response InternalExecute(
                 string entitlementId,
                 string namespace_,
                 string userId
@@ -91,7 +101,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<GetUserEntitlementHistories.Response> ExecuteAsync(
+            protected async Task<GetUserEntitlementHistories.Response> InternalExecuteAsync(
                 string entitlementId,
                 string namespace_,
                 string userId
@@ -114,7 +124,40 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private GetUserEntitlementHistories(GetUserEntitlementHistoriesBuilder builder,
+        public class GetUserEntitlementHistoriesBuilder : GetUserEntitlementHistoriesAbstractBuilder<GetUserEntitlementHistoriesBuilder>
+        {
+            public GetUserEntitlementHistoriesBuilder() : base() { }
+
+            public GetUserEntitlementHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public GetUserEntitlementHistories.Response Execute(
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return InternalExecute(
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+            public async Task<GetUserEntitlementHistories.Response> ExecuteAsync(
+                string entitlementId,
+                string namespace_,
+                string userId
+            )
+            {
+                return await InternalExecuteAsync(
+                    entitlementId,
+                    namespace_,
+                    userId
+                );
+            }
+        }
+
+
+        public GetUserEntitlementHistories(IGetUserEntitlementHistoriesBuilder builder,
             string entitlementId,
             string namespace_,
             string userId
@@ -185,7 +228,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementHistoryInfo>>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<List<Model.EntitlementHistoryInfo>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 

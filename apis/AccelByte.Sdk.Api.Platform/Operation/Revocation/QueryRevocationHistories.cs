@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -33,8 +33,34 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #region Builder Part
         public static QueryRevocationHistoriesBuilder Builder { get => new QueryRevocationHistoriesBuilder(); }
 
-        public class QueryRevocationHistoriesBuilder
-            : OperationBuilder<QueryRevocationHistoriesBuilder>
+        public interface IQueryRevocationHistoriesBuilder
+        {
+
+            string? EndTime { get; }
+
+            int? Limit { get; }
+
+            int? Offset { get; }
+
+            QueryRevocationHistoriesSource? Source { get; }
+
+            string? StartTime { get; }
+
+            QueryRevocationHistoriesStatus? Status { get; }
+
+            string? TransactionId { get; }
+
+            string? UserId { get; }
+
+
+
+
+
+        }
+
+        public abstract class QueryRevocationHistoriesAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IQueryRevocationHistoriesBuilder
+            where TImpl : QueryRevocationHistoriesAbstractBuilder<TImpl>
         {
 
             public string? EndTime { get; set; }
@@ -57,60 +83,60 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            internal QueryRevocationHistoriesBuilder() { }
+            public QueryRevocationHistoriesAbstractBuilder() { }
 
-            internal QueryRevocationHistoriesBuilder(IAccelByteSdk sdk)
+            public QueryRevocationHistoriesAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
-            public QueryRevocationHistoriesBuilder SetEndTime(string _endTime)
+            public TImpl SetEndTime(string _endTime)
             {
                 EndTime = _endTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetLimit(int _limit)
+            public TImpl SetLimit(int _limit)
             {
                 Limit = _limit;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetOffset(int _offset)
+            public TImpl SetOffset(int _offset)
             {
                 Offset = _offset;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetSource(QueryRevocationHistoriesSource _source)
+            public TImpl SetSource(QueryRevocationHistoriesSource _source)
             {
                 Source = _source;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetStartTime(string _startTime)
+            public TImpl SetStartTime(string _startTime)
             {
                 StartTime = _startTime;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetStatus(QueryRevocationHistoriesStatus _status)
+            public TImpl SetStatus(QueryRevocationHistoriesStatus _status)
             {
                 Status = _status;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetTransactionId(string _transactionId)
+            public TImpl SetTransactionId(string _transactionId)
             {
                 TransactionId = _transactionId;
-                return this;
+                return (TImpl)this;
             }
 
-            public QueryRevocationHistoriesBuilder SetUserId(string _userId)
+            public TImpl SetUserId(string _userId)
             {
                 UserId = _userId;
-                return this;
+                return (TImpl)this;
             }
 
 
@@ -125,11 +151,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_                    
                 );
 
-                op.SetBaseFields<QueryRevocationHistoriesBuilder>(this);
+                op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            public QueryRevocationHistories.Response Execute(
+            protected QueryRevocationHistories.Response InternalExecute(
                 string namespace_
             )
             {
@@ -146,7 +172,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            public async Task<QueryRevocationHistories.Response> ExecuteAsync(
+            protected async Task<QueryRevocationHistories.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
@@ -165,7 +191,32 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        private QueryRevocationHistories(QueryRevocationHistoriesBuilder builder,
+        public class QueryRevocationHistoriesBuilder : QueryRevocationHistoriesAbstractBuilder<QueryRevocationHistoriesBuilder>
+        {
+            public QueryRevocationHistoriesBuilder() : base() { }
+
+            public QueryRevocationHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
+
+            public QueryRevocationHistories.Response Execute(
+                string namespace_
+            )
+            {
+                return InternalExecute(
+                    namespace_
+                );
+            }
+            public async Task<QueryRevocationHistories.Response> ExecuteAsync(
+                string namespace_
+            )
+            {
+                return await InternalExecuteAsync(
+                    namespace_
+                );
+            }
+        }
+
+
+        public QueryRevocationHistories(IQueryRevocationHistoriesBuilder builder,
             string namespace_
         )
         {
@@ -252,7 +303,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
-                response.Data = JsonSerializer.Deserialize<Model.RevocationHistoryPagingSlicedResult>(payload, ResponseJsonOptions);
+                response.Payload = payload.ReadToString();
+                response.Data = JsonSerializer.Deserialize<Model.RevocationHistoryPagingSlicedResult>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
             }
 
