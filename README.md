@@ -1,14 +1,15 @@
 # AccelByte Modular .NET (C#) SDK
 
-> :warning: **This [accelbyte-csharp-modular-sdk](https://github.com/AccelByte/accelbyte-csharp-modular-sdk) 
-> is not to be confused with [accelbyte-csharp-sdk](https://github.com/AccelByte/accelbyte-csharp-sdk):** 
-> * The former (modular SDK) is **experimental** and is planned to be the sucessor for the latter (monolithic SDK).
-> * The modular SDK allows developers to include only the required modules in projects.
-> * If you are starting a new project, you may try to use modular SDK.
-> * If you use monolithic SDK in an existing project, a migration path is available via compatibility layer in modular SDK.
-> * Both monolithic and modular SDK will be maintained for some time to give time for migration until monolithic SDK is deprecated in the future.
-
 A software development kit (SDK) for interacting with AccelByte Gaming Services (AGS) written in C#.
+
+This is the **modular** AccelByte .NET SDK ([accelbyte-csharp-modular-sdk](https://github.com/AccelByte/accelbyte-csharp-modular-sdk)), the successor to the legacy [accelbyte-csharp-sdk](https://github.com/AccelByte/accelbyte-csharp-sdk) (monolithic SDK).
+
+Key advantages over the monolithic SDK:
+
+- **Selective dependencies** — include only the API packages your project needs, reducing bloat and build times.
+- **Compatibility layer** — migrate from the monolithic SDK incrementally via `AccelByte.Sdk.Api.Compat` without rewriting everything at once.
+
+> **Migrating from the monolithic SDK?** See [MIGRATION.md](MIGRATION.md) for a step-by-step guide.
 
 This SDK was generated from AGS OpenAPI spec files included in the [spec](spec) directory.
 
