@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Authentication
 
         public string UserId { get; }
 
-        internal AuthTokenResponse(OauthmodelTokenResponseV3 token)
+        public AuthTokenResponse(OauthmodelTokenResponseV3 token)
         {
             AccessToken = token.AccessToken ?? "";
             ExpiresIn = token.ExpiresIn;
@@ -44,7 +44,7 @@ namespace AccelByte.Sdk.Authentication
             UserId = token.UserId ?? "";
         }
 
-        internal AuthTokenResponse(OauthmodelTokenResponse token)
+        public AuthTokenResponse(OauthmodelTokenResponse token)
         {
             AccessToken = token.AccessToken!;
             ExpiresIn = token.ExpiresIn;
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Authentication
             UserId = token.UserId ?? "";
         }
 
-        internal AuthTokenResponse(OauthmodelTokenWithDeviceCookieResponseV3 token)
+        public AuthTokenResponse(OauthmodelTokenWithDeviceCookieResponseV3 token)
         {
             AccessToken = token.AccessToken!;
             ExpiresIn = token.ExpiresIn;

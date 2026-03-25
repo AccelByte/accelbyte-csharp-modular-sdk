@@ -1,4 +1,4 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
@@ -11,10 +11,11 @@ using System.IO;
 using System.Reflection;
 
 using AccelByte.Sdk.Core.Net.Logging;
+using AccelByte.Sdk.Core.Security;
 
 namespace AccelByte.Sdk.Core.Repository
 {
-    public class JsonConfigRepository : IConfigRepository
+    public class JsonConfigRepository : IConfigRepository, ITokenValidationConfig
     {
         [JsonPropertyName("base_url")]
         public string BaseUrl { get; set; } = String.Empty;
@@ -39,6 +40,12 @@ namespace AccelByte.Sdk.Core.Repository
 
         [JsonPropertyName("enable_user_agent")]
         public bool EnableUserAgentInfo { get; set; } = true;
+
+        [JsonPropertyName("allow_global_role_fetch")]
+        public bool AllowGlobalRoleFetchForWildcardNamespace { get; set; } = true;
+
+        [JsonPropertyName("suppress_get_role_error")]
+        public bool SuppressGetRoleError { get; set; } = true;
 
         [JsonPropertyName("custom_base_paths")]
         public Dictionary<string, string>? CustomBasePaths { get; set; } = null;

@@ -24,6 +24,10 @@ namespace AccelByte.Sdk.Tests.Mod.Repository
 
         public static readonly IntegrationTestConfigRepository PublicClient = new IntegrationTestConfigRepository("PUBLIC_AB_CLIENT_ID", "", "AB_NAMESPACE");
 
+        public static readonly IntegrationTestConfigRepository AdminPortalLogin = new IntegrationTestConfigRepository("ADMINPORTAL_BASE_URL", "ADMINPORTAL_CLIENT_ID", "", "");
+
+        public static readonly IntegrationTestConfigRepository DifferentStudio = new IntegrationTestConfigRepository("DIFFENV_AB_BASE_URL", "DIFFENV_AB_CLIENT_ID", "DIFFENV_AB_CLIENT_SECRET", "DIFFENV_AB_NAMESPACE");
+
         #region AGS Shared Cloud OAuth Clients
         public static readonly IntegrationTestConfigRepository Achievement = new IntegrationTestConfigRepository("Achievement", true);
 
@@ -66,6 +70,8 @@ namespace AccelByte.Sdk.Tests.Mod.Repository
         public static readonly IntegrationTestConfigRepository CustomPermission = new IntegrationTestConfigRepository("CustomPermission", true);
         #endregion
 
+        private string _EnvName_BaseUrl = "AB_BASE_URL";
+
         private string _EnvName_ClientId;
 
         private string _EnvName_ClientSecret;
@@ -78,11 +84,19 @@ namespace AccelByte.Sdk.Tests.Mod.Repository
         {
             get
             {
-                string? temp = Environment.GetEnvironmentVariable("AB_BASE_URL");
+                string? temp = Environment.GetEnvironmentVariable(_EnvName_BaseUrl);
                 if (temp != null)
                     return UnQuote(temp);
+                else if (_UseFallback)
+                {
+                    temp = Environment.GetEnvironmentVariable("AB_BASE_URL");
+                    if (temp != null)
+                        return UnQuote(temp);
+                    else
+                        throw new Exception($"Fallback environment variable not found (variable: AB_BASE_URL)");
+                }
                 else
-                    throw new Exception($"Environment variable not found (variable: AB_BASE_URL)");
+                    throw new Exception($"Environment variable not found (variable: {_EnvName_BaseUrl})");
             }
         }
 
@@ -220,11 +234,19 @@ namespace AccelByte.Sdk.Tests.Mod.Repository
                 return value;
         }
 
+        private IntegrationTestConfigRepository(string envBaseUrl, string envClientId, string envClientSecret, string envNamespace)
+        {
+            _EnvName_BaseUrl = envBaseUrl;
+            _EnvName_ClientId = envClientId;
+            _EnvName_ClientSecret = envClientSecret;
+            _EnvName_Namespace = envNamespace;
+        }
+
         private IntegrationTestConfigRepository(string envClientId, string envClientSecret, string envNamespace)
         {
-            _EnvName_ClientId = UnQuote(envClientId);
-            _EnvName_ClientSecret = UnQuote(envClientSecret);
-            _EnvName_Namespace = UnQuote(envNamespace);
+            _EnvName_ClientId = envClientId;
+            _EnvName_ClientSecret = envClientSecret;
+            _EnvName_Namespace = envNamespace;
         }
 
         private IntegrationTestConfigRepository(string serviceName, bool useFallback)

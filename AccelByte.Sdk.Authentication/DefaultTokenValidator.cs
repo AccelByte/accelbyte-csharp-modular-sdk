@@ -16,96 +16,117 @@ using AccelByte.Sdk.Core.Security;
 
 namespace AccelByte.Sdk.Authentication
 {
-    public class DefaultTokenValidator : TokenValidator, ITokenValidator, IAsyncTokenValidator
+    public class DefaultTokenValidator : IamBaseTokenValidator, ITokenValidator, IAsyncTokenValidator
     {
-        private Func<IAccelByteSdk, string, string, List<LocalPermissionItem>> _FetchFunction = ((sdk, roleId, roleNs) =>
+        protected virtual bool InternalValidatePermission(IAccelByteSdk sdk, OauthmodelTokenResponseV3 response, string permission, int action, Dictionary<string, string> pParams)
         {
-            var response = sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
-                .Execute(roleNs, roleId)
-                .EnsureSuccess();
-
-            List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
-            foreach (var item in response.Permissions!)
+            bool foundMatchingPermission = false;
+            if ((response.Permissions != null) && (response.Permissions.Count > 0))
             {
-                permissions.Add(new LocalPermissionItem()
+                foreach (var p in response.Permissions)
                 {
-                    Resource = item.Resource!,
-                    Action = item.Action!.Value
-                });
+                    if ((p.Resource != null) && (p.Action != null))
+                    {
+                        if (IsResourceAllowed(p.Resource, permission))
+                        {
+                            if (PermissionAction.Has(p.Action.Value, action))
+                            {
+                                foundMatchingPermission = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
 
-            return permissions;
-        });
-
-        private Func<IAccelByteSdk, string, string, Task<List<LocalPermissionItem>>> _FetchFunctionAsync = (async (sdk, roleId, roleNs) =>
-        {
-            var response = await sdk.GetIamApi().OverrideRoleConfigV3.AdminGetRoleNamespacePermissionV3Op
-                .ExecuteAsync(roleNs, roleId);
-            var responseData = response.EnsureSuccess();
-
-            List<LocalPermissionItem> permissions = new List<LocalPermissionItem>();
-            foreach (var item in responseData.Permissions!)
+            if (!foundMatchingPermission)
             {
-                permissions.Add(new LocalPermissionItem()
+                if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))
                 {
-                    Resource = item.Resource!,
-                    Action = item.Action!.Value
-                });
+                    foreach (var r in response.NamespaceRoles)
+                    {
+                        if (r.RoleId == null)
+                            continue;
+                        string roleNamespace = r.Namespace!;
+
+                        pParams["namespace"] = roleNamespace;
+                        var permissions = GetRolePermission(sdk, r.RoleId, roleNamespace, _PermissionFetchFunction);
+                        foreach (var p in permissions)
+                        {
+                            string aResource = ReplacePlaceholder(p.Resource, pParams);
+                            if (IsResourceAllowed(aResource, permission))
+                            {
+                                if (PermissionAction.Has(p.Action, action))
+                                {
+                                    foundMatchingPermission = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (foundMatchingPermission)
+                            break;
+                    }
+                }
             }
 
-            return permissions;
-        });
+            return foundMatchingPermission;
+        }
 
-        private Func<IAccelByteSdk, string, LocalNamespaceContext> _NamespaceFetchFunction = ((sdk, aNamespace) =>
+        protected virtual async Task<bool> InternalValidatePermissionAsync(IAccelByteSdk sdk, OauthmodelTokenResponseV3 response, string permission, int action, Dictionary<string, string> pParams)
         {
-            var response = sdk.GetBasicApi().Namespace.GetNamespaceContextOp.Execute(aNamespace).EnsureSuccess();
+            bool foundMatchingPermission = false;
+            if ((response.Permissions != null) && (response.Permissions.Count > 0))
+            {
+                foreach (var p in response.Permissions)
+                {
+                    if ((p.Resource != null) && (p.Action != null))
+                    {
+                        if (IsResourceAllowed(p.Resource, permission))
+                        {
+                            if (PermissionAction.Has(p.Action.Value, action))
+                            {
+                                foundMatchingPermission = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
 
-            var context = new LocalNamespaceContext();
-            if (response.Namespace != null)
-                context.Namespace = response.Namespace;
+            if (!foundMatchingPermission)
+            {
+                if ((response.NamespaceRoles != null) && (response.NamespaceRoles.Count > 0))
+                {
+                    foreach (var r in response.NamespaceRoles)
+                    {
+                        if (r.RoleId == null)
+                            continue;
+                        string roleNamespace = r.Namespace!;
 
-            string sourceType = response.Type!.Value;
-            if (sourceType == NamespaceContextType.Publisher.Value)
-                context.Type = NamespaceType.Publisher;
-            else if (sourceType == NamespaceContextType.Studio.Value)
-                context.Type = NamespaceType.Studio;
-            else if (sourceType == NamespaceContextType.Game.Value)
-                context.Type = NamespaceType.Game;
+                        pParams["namespace"] = roleNamespace;
+                        var permissions = await GetRolePermissionAsync(sdk, r.RoleId, roleNamespace, _PermissionFetchFunctionAsync);
+                        foreach (var p in permissions)
+                        {
+                            string aResource = ReplacePlaceholder(p.Resource, pParams);
+                            if (IsResourceAllowed(aResource, permission))
+                            {
+                                if (PermissionAction.Has(p.Action, action))
+                                {
+                                    foundMatchingPermission = true;
+                                    break;
+                                }
+                            }
+                        }
 
-            if (response.PublisherNamespace != null)
-                context.PublisherNamespace = response.PublisherNamespace;
+                        if (foundMatchingPermission)
+                            break;
+                    }
+                }
+            }
 
-            if (response.StudioNamespace != null)
-                context.StudioNamespace = response.StudioNamespace;
-
-            return context;
-        });
-
-        private Func<IAccelByteSdk, string, Task<LocalNamespaceContext>> _NamespaceFetchFunctionAsync = (async (sdk, aNamespace) =>
-        {
-            var response = await sdk.GetBasicApi().Namespace.GetNamespaceContextOp.ExecuteAsync(aNamespace);
-            var responseData = response.EnsureSuccess();
-
-            var context = new LocalNamespaceContext();
-            if (responseData.Namespace != null)
-                context.Namespace = responseData.Namespace;
-
-            string sourceType = responseData.Type!.Value;
-            if (sourceType == NamespaceContextType.Publisher.Value)
-                context.Type = NamespaceType.Publisher;
-            else if (sourceType == NamespaceContextType.Studio.Value)
-                context.Type = NamespaceType.Studio;
-            else if (sourceType == NamespaceContextType.Game.Value)
-                context.Type = NamespaceType.Game;
-
-            if (responseData.PublisherNamespace != null)
-                context.PublisherNamespace = responseData.PublisherNamespace;
-
-            if (responseData.StudioNamespace != null)
-                context.StudioNamespace = responseData.StudioNamespace;
-
-            return context;
-        });
+            return foundMatchingPermission;
+        }
 
         public bool Validate(IAccelByteSdk sdk, string accessToken)
         {
@@ -150,60 +171,16 @@ namespace AccelByte.Sdk.Authentication
 
                 if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
+                string claimedNamespace = response.Data.Namespace!;
 
-                Dictionary<string, string> pParams = new Dictionary<string, string>();
-                GetNamespaceContext(sdk, sdk.Namespace, _NamespaceFetchFunction);
-                pParams.Add("namespace", sdk.Namespace);
+                var result = GetNamespaceContext(sdk, claimedNamespace, _NamespaceFetchFunction);
+                if (result.IsError)
+                    return false; //Access denied to namespace context error
 
-                bool foundMatchingPermission = false;
-                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
-                {
-                    foreach (var p in response.Data.Permissions)
-                    {
-                        if ((p.Resource != null) && (p.Action != null))
-                        {
-                            if (IsResourceAllowed(p.Resource, permission))
-                            {
-                                if (PermissionAction.Has(p.Action.Value, action))
-                                {
-                                    foundMatchingPermission = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
+                //Default filled with sdk's namespace
+                Dictionary<string, string> pParams = new() { { "namespace", sdk.Namespace } };
 
-                if (!foundMatchingPermission)
-                {
-                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
-                    {
-                        foreach (var r in response.Data.NamespaceRoles)
-                        {
-                            if (r.RoleId == null)
-                                continue;
-
-                            var permissions = GetRolePermission(sdk, r.RoleId, r.Namespace!, _FetchFunction);
-                            foreach (var p in permissions)
-                            {
-                                string aPermission = ReplacePlaceholder(p.Resource, pParams);
-                                if (IsResourceAllowed(aPermission, permission))
-                                {
-                                    if (PermissionAction.Has(p.Action, action))
-                                    {
-                                        foundMatchingPermission = true;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (foundMatchingPermission)
-                                break;
-                        }
-                    }
-                }
-
-                return foundMatchingPermission;
+                return InternalValidatePermission(sdk, response.Data, permission, action, pParams);
             }
             catch
             {
@@ -220,60 +197,16 @@ namespace AccelByte.Sdk.Authentication
 
                 if (response.Data == null)
                     throw new Exception("Server did not response to token validation request");
+                string claimedNamespace = response.Data.Namespace!;
 
-                Dictionary<string, string> pParams = new Dictionary<string, string>();
-                await GetNamespaceContextAsync(sdk, sdk.Namespace, _NamespaceFetchFunctionAsync);
-                pParams.Add("namespace", sdk.Namespace);
+                var result = await GetNamespaceContextAsync(sdk, claimedNamespace, _NamespaceFetchFunctionAsync);
+                if (result.IsError)
+                    return false; //Access denied to namespace context error
 
-                bool foundMatchingPermission = false;
-                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
-                {
-                    foreach (var p in response.Data.Permissions)
-                    {
-                        if ((p.Resource != null) && (p.Action != null))
-                        {
-                            if (IsResourceAllowed(p.Resource, permission))
-                            {
-                                if (PermissionAction.Has(p.Action.Value, action))
-                                {
-                                    foundMatchingPermission = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
+                //Default filled with sdk's namespace
+                Dictionary<string, string> pParams = new() { { "namespace", sdk.Namespace } };
 
-                if (!foundMatchingPermission)
-                {
-                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
-                    {
-                        foreach (var r in response.Data.NamespaceRoles)
-                        {
-                            if (r.RoleId == null)
-                                continue;
-
-                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, r.Namespace!, _FetchFunctionAsync);
-                            foreach (var p in permissions)
-                            {
-                                string aPermission = ReplacePlaceholder(p.Resource, pParams);
-                                if (IsResourceAllowed(aPermission, permission))
-                                {
-                                    if (PermissionAction.Has(p.Action, action))
-                                    {
-                                        foundMatchingPermission = true;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (foundMatchingPermission)
-                                break;
-                        }
-                    }
-                }
-
-                return foundMatchingPermission;
+                return await InternalValidatePermissionAsync(sdk, response.Data, permission, action, pParams);
             }
             catch
             {
@@ -300,62 +233,7 @@ namespace AccelByte.Sdk.Authentication
                 if (userId != null)
                     pParams.Add("userId", userId);
 
-                bool foundMatchingPermission = false;
-                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
-                {
-                    foreach (var p in response.Data.Permissions)
-                    {
-                        if ((p.Resource != null) && (p.Action != null))
-                        {
-                            string aPermission = p.Resource;
-                            if (pParams.Count > 0)
-                                aPermission = ReplacePlaceholder(p.Resource, pParams);
-
-                            if (IsResourceAllowed(aPermission, permission))
-                            {
-                                if (PermissionAction.Has(p.Action.Value, action))
-                                {
-                                    foundMatchingPermission = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (!foundMatchingPermission)
-                {
-                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
-                    {
-                        foreach (var r in response.Data.NamespaceRoles)
-                        {
-                            if (r.RoleId == null)
-                                continue;
-
-                            var permissions = GetRolePermission(sdk, r.RoleId, r.Namespace!, _FetchFunction);
-                            foreach (var p in permissions)
-                            {
-                                string aPermission = p.Resource;
-                                if (pParams.Count > 0)
-                                    aPermission = ReplacePlaceholder(p.Resource, pParams);
-
-                                if (IsResourceAllowed(aPermission, permission))
-                                {
-                                    if (PermissionAction.Has(p.Action, action))
-                                    {
-                                        foundMatchingPermission = true;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (foundMatchingPermission)
-                                break;
-                        }
-                    }
-                }
-
-                return foundMatchingPermission;
+                return InternalValidatePermission(sdk, response.Data, permission, action, pParams);
             }
             catch
             {
@@ -382,62 +260,7 @@ namespace AccelByte.Sdk.Authentication
                 if (userId != null)
                     pParams.Add("userId", userId);
 
-                bool foundMatchingPermission = false;
-                if ((response.Data.Permissions != null) && (response.Data.Permissions.Count > 0))
-                {
-                    foreach (var p in response.Data.Permissions)
-                    {
-                        if ((p.Resource != null) && (p.Action != null))
-                        {
-                            string aPermission = p.Resource;
-                            if (pParams.Count > 0)
-                                aPermission = ReplacePlaceholder(p.Resource, pParams);
-
-                            if (IsResourceAllowed(aPermission, permission))
-                            {
-                                if (PermissionAction.Has(p.Action.Value, action))
-                                {
-                                    foundMatchingPermission = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (!foundMatchingPermission)
-                {
-                    if ((response.Data.NamespaceRoles != null) && (response.Data.NamespaceRoles.Count > 0))
-                    {
-                        foreach (var r in response.Data.NamespaceRoles)
-                        {
-                            if (r.RoleId == null)
-                                continue;
-
-                            var permissions = await GetRolePermissionAsync(sdk, r.RoleId, r.Namespace!, _FetchFunctionAsync);
-                            foreach (var p in permissions)
-                            {
-                                string aPermission = p.Resource;
-                                if (pParams.Count > 0)
-                                    aPermission = ReplacePlaceholder(p.Resource, pParams);
-
-                                if (IsResourceAllowed(aPermission, permission))
-                                {
-                                    if (PermissionAction.Has(p.Action, action))
-                                    {
-                                        foundMatchingPermission = true;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (foundMatchingPermission)
-                                break;
-                        }
-                    }
-                }
-
-                return foundMatchingPermission;
+                return await InternalValidatePermissionAsync(sdk, response.Data, permission, action, pParams);
             }
             catch
             {

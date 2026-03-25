@@ -31,7 +31,6 @@ namespace AccelByte.Sdk.Tests.Mod.Scenario
                 .UseDefaultHttpClient()
                 .SetCredentialRepository(_CredentialRepo)
                 .SetTokenRepository(_TokenRepo)
-                .EnableLog()
                 .Build();
 
             if (doLogin)

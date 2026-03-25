@@ -1,14 +1,15 @@
-// Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved.
+// Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved.
 // This is licensed software from AccelByte Inc, for limitations
 // and restrictions contact your company contract manager.
 
 using System;
 
 using AccelByte.Sdk.Core.Net.Logging;
+using AccelByte.Sdk.Core.Security;
 
 namespace AccelByte.Sdk.Core.Repository
 {
-    public class DefaultConfigRepository : IConfigRepository
+    public class DefaultConfigRepository : IConfigRepository, ITokenValidationConfig
     {
         private const string BASE_URL = "AB_BASE_URL";
 
@@ -25,6 +26,10 @@ namespace AccelByte.Sdk.Core.Repository
         private const string CLIENT_ENABLE_TRACEID = "AB_ENABLE_TRACEID";
 
         private const string CLIENT_ENABLE_USERAGENT = "AB_ENABLE_USERAGENT";
+
+        private const string CLIENT_ALLOW_GLOBAL_ROLE_FETCH = "AB_ALLOW_GLOBAL_ROLE_FETCH";
+
+        private const string CLIENT_SUPPRESS_GET_ROLE_ERROR = "AB_SUPPRESS_GET_ROLE_ERROR";
 
         public string BaseUrl
         {
@@ -101,6 +106,30 @@ namespace AccelByte.Sdk.Core.Repository
                     return true;
                 else
                     return (aEnable.Trim() == "1");
+            }
+        }
+
+        public bool AllowGlobalRoleFetchForWildcardNamespace
+        {
+            get
+            {
+                string? aEnable = Environment.GetEnvironmentVariable(CLIENT_ALLOW_GLOBAL_ROLE_FETCH);
+                if (aEnable == null)
+                    return true;
+                else
+                    return aEnable.Trim() == "1" || aEnable.Trim().ToLower() == "true";
+            }
+        }
+
+        public bool SuppressGetRoleError
+        {
+            get
+            {
+                string? aEnable = Environment.GetEnvironmentVariable(CLIENT_SUPPRESS_GET_ROLE_ERROR);
+                if (aEnable == null)
+                    return true;
+                else
+                    return aEnable.Trim() == "1" || aEnable.Trim().ToLower() == "true";
             }
         }
 
