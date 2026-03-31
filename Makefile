@@ -105,6 +105,16 @@ push_tags:
 		echo "AGS tag does not exists!"; exit 1; \
 	fi
 
+# Pin SDK version due to memory issue in dotnet sdk 8.0.3xx and later.
+format:
+	docker run --rm -u $$(id -u):$$(id -g) \
+		-v $$(pwd):/data/ \
+		-w /data/ \
+		-e HOME="/data" \
+		-e DOTNET_CLI_HOME="/data" \
+		mcr.microsoft.com/dotnet/sdk:8.0.204 \
+		dotnet format
+
 pack:
 	docker run --rm -u $$(id -u):$$(id -g) \
 		-v $$(pwd):/data/ \
