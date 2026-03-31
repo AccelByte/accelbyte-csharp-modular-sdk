@@ -21,19 +21,19 @@ using AccelByte.Sdk.Api.Platform.Model;
 namespace AccelByte.Sdk.Api.Platform.Operation
 {
     /// <summary>
-    /// fulfillItemsV3
+    /// bulkFulfillItemsV3
     ///
-    ///  [Not supported yet in AGS Shared Cloud] Fulfill items by transactionId.
+    /// [Not supported yet in AGS Shared Cloud] Fulfill multiple transactions.
     /// Other detail info:
-    ///               * Request body : storeId, region, language, and entitlementCollectionId can be ignored.
-    ///               *  Returns : fulfillment v2 result, storeId field can be ignored.
+    ///               * Request body : list of fulfillment v3 requests. storeId, region, language, and entitlementCollectionId can be ignored.
+    ///               *  Returns : list of fulfillment v2 result
     /// </summary>
-    public class FulfillItemsV3 : AccelByte.Sdk.Core.Operation
+    public class BulkFulfillItemsV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static FulfillItemsV3Builder Builder { get => new FulfillItemsV3Builder(); }
+        public static BulkFulfillItemsV3Builder Builder { get => new BulkFulfillItemsV3Builder(); }
 
-        public interface IFulfillItemsV3Builder
+        public interface IBulkFulfillItemsV3Builder
         {
 
 
@@ -42,18 +42,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         }
 
-        public abstract class FulfillItemsV3AbstractBuilder<TImpl>
-            : OperationBuilder<TImpl>, IFulfillItemsV3Builder
-            where TImpl : FulfillItemsV3AbstractBuilder<TImpl>
+        public abstract class BulkFulfillItemsV3AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IBulkFulfillItemsV3Builder
+            where TImpl : BulkFulfillItemsV3AbstractBuilder<TImpl>
         {
 
 
 
 
 
-            public FulfillItemsV3AbstractBuilder() { }
+            public BulkFulfillItemsV3AbstractBuilder() { }
 
-            public FulfillItemsV3AbstractBuilder(IAccelByteSdk sdk)
+            public BulkFulfillItemsV3AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -63,17 +63,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public FulfillItemsV3 Build(
-                FulfillmentV2Request body,
+            public BulkFulfillItemsV3 Build(
+                List<FulfillmentV3Request> body,
                 string namespace_,
-                string transactionId,
                 string userId
             )
             {
-                FulfillItemsV3 op = new FulfillItemsV3(this,
+                BulkFulfillItemsV3 op = new BulkFulfillItemsV3(this,
                     body,
                     namespace_,
-                    transactionId,
                     userId
                 );
 
@@ -81,17 +79,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            protected FulfillItemsV3.Response InternalExecute(
-                FulfillmentV2Request body,
+            protected BulkFulfillItemsV3.Response InternalExecute(
+                List<FulfillmentV3Request> body,
                 string namespace_,
-                string transactionId,
                 string userId
             )
             {
-                FulfillItemsV3 op = Build(
+                BulkFulfillItemsV3 op = Build(
                     body,
                     namespace_,
-                    transactionId,
                     userId
                 );
 
@@ -104,17 +100,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            protected async Task<FulfillItemsV3.Response> InternalExecuteAsync(
-                FulfillmentV2Request body,
+            protected async Task<BulkFulfillItemsV3.Response> InternalExecuteAsync(
+                List<FulfillmentV3Request> body,
                 string namespace_,
-                string transactionId,
                 string userId
             )
             {
-                FulfillItemsV3 op = Build(
+                BulkFulfillItemsV3 op = Build(
                     body,
                     namespace_,
-                    transactionId,
                     userId
                 );
 
@@ -129,52 +123,46 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        public class FulfillItemsV3Builder : FulfillItemsV3AbstractBuilder<FulfillItemsV3Builder>
+        public class BulkFulfillItemsV3Builder : BulkFulfillItemsV3AbstractBuilder<BulkFulfillItemsV3Builder>
         {
-            public FulfillItemsV3Builder() : base() { }
+            public BulkFulfillItemsV3Builder() : base() { }
 
-            public FulfillItemsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
+            public BulkFulfillItemsV3Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            public FulfillItemsV3.Response Execute(
-                FulfillmentV2Request body,
+            public BulkFulfillItemsV3.Response Execute(
+                List<FulfillmentV3Request> body,
                 string namespace_,
-                string transactionId,
                 string userId
             )
             {
                 return InternalExecute(
                     body,
                     namespace_,
-                    transactionId,
                     userId
                 );
             }
-            public async Task<FulfillItemsV3.Response> ExecuteAsync(
-                FulfillmentV2Request body,
+            public async Task<BulkFulfillItemsV3.Response> ExecuteAsync(
+                List<FulfillmentV3Request> body,
                 string namespace_,
-                string transactionId,
                 string userId
             )
             {
                 return await InternalExecuteAsync(
                     body,
                     namespace_,
-                    transactionId,
                     userId
                 );
             }
         }
 
 
-        public FulfillItemsV3(IFulfillItemsV3Builder builder,
-            FulfillmentV2Request body,
+        public BulkFulfillItemsV3(IBulkFulfillItemsV3Builder builder,
+            List<FulfillmentV3Request> body,
             string namespace_,
-            string transactionId,
             string userId
         )
         {
             PathParams["namespace"] = namespace_;
-            PathParams["transactionId"] = transactionId;
             PathParams["userId"] = userId;
 
 
@@ -189,28 +177,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.FulfillmentV2Result>
+        public class Response : ApiResponse<List<Model.FulfillmentV2Result>>
         {
 
-            public ErrorEntity? Error400 { get; set; } = null;
 
-            public ErrorEntity? Error404 { get; set; } = null;
-
-
-            protected override string GetFullOperationId() => "Platform::Fulfillment::FulfillItemsV3";
+            protected override string GetFullOperationId() => "Platform::Fulfillment::BulkFulfillItemsV3";
         }
 
         #endregion
 
-        public FulfillItemsV3(
+        public BulkFulfillItemsV3(
             string namespace_,
-            string transactionId,
             string userId,
-            Model.FulfillmentV2Request body
+            List<Model.FulfillmentV3Request> body
         )
         {
             PathParams["namespace"] = namespace_;
-            PathParams["transactionId"] = transactionId;
             PathParams["userId"] = userId;
 
 
@@ -223,7 +205,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/platform/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}";
+        public override string Path => "/platform/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/bulk";
 
         public override HttpMethod Method => HttpMethod.Put;
 
@@ -231,9 +213,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public FulfillItemsV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public BulkFulfillItemsV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new FulfillItemsV3.Response()
+            var response = new BulkFulfillItemsV3.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
@@ -246,20 +228,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
-                response.Data = JsonSerializer.Deserialize<Model.FulfillmentV2Result>(response.Payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<List<Model.FulfillmentV2Result>>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
-            }
-            else if (code == (HttpStatusCode)400)
-            {
-                response.Payload = payload.ReadToString();
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
-                response.Error = response.Error400!.TranslateToApiError();
-            }
-            else if (code == (HttpStatusCode)404)
-            {
-                response.Payload = payload.ReadToString();
-                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
-                response.Error = response.Error404!.TranslateToApiError();
             }
 
             return response;

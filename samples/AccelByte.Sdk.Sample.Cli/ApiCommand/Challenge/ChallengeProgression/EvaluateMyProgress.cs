@@ -33,6 +33,9 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
         [SdkCommandArgument("challengeCode")]
         public List<string>? ChallengeCode { get; set; }
 
+        [SdkCommandArgument("includeOneTimeEvent")]
+        public string? IncludeOneTimeEvent { get; set; }
+
         public EvaluateMyProgressCommand(IAccelByteSdk sdk)
         {
             _SDK = sdk;
@@ -46,6 +49,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 
             if (ChallengeCode != null)
                 opBuilder.SetChallengeCode((List<string>)ChallengeCode);
+            if (IncludeOneTimeEvent != null)
+                opBuilder.SetIncludeOneTimeEvent((string)IncludeOneTimeEvent);
 
 
 

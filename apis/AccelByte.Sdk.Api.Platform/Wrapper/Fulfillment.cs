@@ -158,6 +158,17 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
+        public BulkFulfillItemsV3.BulkFulfillItemsV3Builder BulkFulfillItemsV3Op
+        {
+            get
+            {
+                var opBuilder = new Operation.BulkFulfillItemsV3.BulkFulfillItemsV3Builder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public FulfillItemsV3.FulfillItemsV3Builder FulfillItemsV3Op
         {
             get
@@ -378,6 +389,22 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.Payload);
         }
 #pragma warning restore ab_deprecated_operation
+        public BulkFulfillItemsV3.Response BulkFulfillItemsV3(BulkFulfillItemsV3 input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<BulkFulfillItemsV3.Response> BulkFulfillItemsV3Async(BulkFulfillItemsV3 input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
         public FulfillItemsV3.Response FulfillItemsV3(FulfillItemsV3 input)
         {
             var response = _sdk.RunRequest(input);

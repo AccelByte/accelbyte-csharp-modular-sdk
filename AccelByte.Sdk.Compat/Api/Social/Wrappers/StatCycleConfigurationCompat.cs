@@ -273,6 +273,36 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
+        public class ResetStatCycleBuilderCompat : ResetStatCycle.ResetStatCycleAbstractBuilder<ResetStatCycleBuilderCompat>
+        {
+            internal ResetStatCycleBuilderCompat() : base() { }
+
+            internal ResetStatCycleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
+
+            public void Execute(
+                string cycleId,
+                string namespace_
+            )
+            {
+                var response = InternalExecute(
+                    cycleId,
+                    namespace_
+                );
+                response.ThrowHttpExceptionIfError();
+            }
+            public async Task ExecuteAsync(
+                string cycleId,
+                string namespace_
+            )
+            {
+                var response = await InternalExecuteAsync(
+                    cycleId,
+                    namespace_
+                );
+                response.ThrowHttpExceptionIfError();
+            }
+        }
+
         public class BulkAddStatsBuilderCompat : BulkAddStats.BulkAddStatsAbstractBuilder<BulkAddStatsBuilderCompat>
         {
             internal BulkAddStatsBuilderCompat() : base() { }
@@ -525,6 +555,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             get
             {
                 var opBuilder = new DeleteStatCycleBuilderCompat(_sdk);
+                return opBuilder;
+            }
+        }
+        public ResetStatCycleBuilderCompat ResetStatCycleOp
+        {
+            get
+            {
+                var opBuilder = new ResetStatCycleBuilderCompat(_sdk);
                 return opBuilder;
             }
         }

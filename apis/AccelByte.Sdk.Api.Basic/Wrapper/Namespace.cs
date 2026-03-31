@@ -144,6 +144,17 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     return opBuilder;
             }
         }
+        public UpdateTestingFlag.UpdateTestingFlagBuilder UpdateTestingFlagOp
+        {
+            get
+            {
+                var opBuilder = new Operation.UpdateTestingFlag.UpdateTestingFlagBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public PublicGetNamespaces.PublicGetNamespacesBuilder PublicGetNamespacesOp
         {
             get
@@ -332,6 +343,22 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                     response.Payload);
         }
         public async Task<ChangeNamespaceStatus.Response> ChangeNamespaceStatusAsync(ChangeNamespaceStatus input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public UpdateTestingFlag.Response UpdateTestingFlag(UpdateTestingFlag input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<UpdateTestingFlag.Response> UpdateTestingFlagAsync(UpdateTestingFlag input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(

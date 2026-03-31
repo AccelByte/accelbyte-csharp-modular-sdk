@@ -461,12 +461,42 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
+        public class UploadRevocationPluginConfigCertV2BuilderCompat : UploadRevocationPluginConfigCertV2.UploadRevocationPluginConfigCertV2AbstractBuilder<UploadRevocationPluginConfigCertV2BuilderCompat>
+        {
+            internal UploadRevocationPluginConfigCertV2BuilderCompat() : base() { }
+
+            internal UploadRevocationPluginConfigCertV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AccelByte.Sdk.Api.Platform.Model.RevocationPluginConfigInfo? Execute(
+                string namespace_
+            )
+            {
+                var response = InternalExecute(
+                    namespace_
+                );
+                response.ThrowHttpExceptionIfError();
+                return response.Data;
+            }
+            public async Task<AccelByte.Sdk.Api.Platform.Model.RevocationPluginConfigInfo?> ExecuteAsync(
+                string namespace_
+            )
+            {
+                var response = await InternalExecuteAsync(
+                    namespace_
+                );
+                response.ThrowHttpExceptionIfError();
+                return response.Data;
+            }
+        }
+
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UploadRevocationPluginConfigCertBuilderCompat : UploadRevocationPluginConfigCert.UploadRevocationPluginConfigCertAbstractBuilder<UploadRevocationPluginConfigCertBuilderCompat>
         {
             internal UploadRevocationPluginConfigCertBuilderCompat() : base() { }
 
             internal UploadRevocationPluginConfigCertBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.RevocationPluginConfigInfo? Execute(
                 string namespace_
             )
@@ -614,6 +644,15 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
+        public UploadRevocationPluginConfigCertV2BuilderCompat UploadRevocationPluginConfigCertV2Op
+        {
+            get
+            {
+                var opBuilder = new UploadRevocationPluginConfigCertV2BuilderCompat(_sdk);
+                return opBuilder;
+            }
+        }
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UploadRevocationPluginConfigCertBuilderCompat UploadRevocationPluginConfigCertOp
         {
             get

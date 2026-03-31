@@ -46,6 +46,10 @@ namespace AccelByte.Sdk.Api.Csm.Model
         [JsonPropertyName("studioName")]
         public string? StudioName { get; set; }
 
+        [JsonPropertyName("tlsEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? TlsEnabled { get; set; }
+
     }
 
 

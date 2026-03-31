@@ -8,19 +8,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace AccelByte.Sdk.Api.Basic.Model
+namespace AccelByte.Sdk.Api.Platform.Model
 {
-    public class NamespaceCreate : AccelByte.Sdk.Core.Model
+    public class FulfillmentV3Request : AccelByte.Sdk.Core.Model
     {
-        [JsonPropertyName("displayName")]
-        public string? DisplayName { get; set; }
-
-        [JsonPropertyName("isTesting")]
+        [JsonPropertyName("items")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public bool? IsTesting { get; set; }
+        public List<FulfillmentV2RequestItem>? Items { get; set; }
 
-        [JsonPropertyName("namespace")]
-        public string? Namespace { get; set; }
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? TransactionId { get; set; }
 
     }
 

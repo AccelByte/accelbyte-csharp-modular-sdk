@@ -415,6 +415,42 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
+        public class BulkFulfillItemsV3BuilderCompat : BulkFulfillItemsV3.BulkFulfillItemsV3AbstractBuilder<BulkFulfillItemsV3BuilderCompat>
+        {
+            internal BulkFulfillItemsV3BuilderCompat() : base() { }
+
+            internal BulkFulfillItemsV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
+
+            public List<AccelByte.Sdk.Api.Platform.Model.FulfillmentV2Result>? Execute(
+                List<FulfillmentV3Request> body,
+                string namespace_,
+                string userId
+            )
+            {
+                var response = InternalExecute(
+                    body,
+                    namespace_,
+                    userId
+                );
+                response.ThrowHttpExceptionIfError();
+                return response.Data;
+            }
+            public async Task<List<AccelByte.Sdk.Api.Platform.Model.FulfillmentV2Result>?> ExecuteAsync(
+                List<FulfillmentV3Request> body,
+                string namespace_,
+                string userId
+            )
+            {
+                var response = await InternalExecuteAsync(
+                    body,
+                    namespace_,
+                    userId
+                );
+                response.ThrowHttpExceptionIfError();
+                return response.Data;
+            }
+        }
+
         public class FulfillItemsV3BuilderCompat : FulfillItemsV3.FulfillItemsV3AbstractBuilder<FulfillItemsV3BuilderCompat>
         {
             internal FulfillItemsV3BuilderCompat() : base() { }
@@ -617,6 +653,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             get
             {
                 var opBuilder = new RevokeItemsBuilderCompat(_sdk);
+                return opBuilder;
+            }
+        }
+        public BulkFulfillItemsV3BuilderCompat BulkFulfillItemsV3Op
+        {
+            get
+            {
+                var opBuilder = new BulkFulfillItemsV3BuilderCompat(_sdk);
                 return opBuilder;
             }
         }

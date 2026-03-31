@@ -16,83 +16,69 @@ using System.Threading.Tasks;
 using AccelByte.Sdk.Core;
 using AccelByte.Sdk.Core.Net.Http;
 
-using AccelByte.Sdk.Api.Csm.Model;
+using AccelByte.Sdk.Api.Basic.Model;
 
-namespace AccelByte.Sdk.Api.Csm.Operation
+namespace AccelByte.Sdk.Api.Basic.Operation
 {
     /// <summary>
-    /// GetAppV2
+    /// updateTestingFlag
     ///
-    /// Required permission : `ADMIN:NAMESPACE:{namespace}:EXTEND:APP [READ]`
+    /// Update namespace testing flag.
+    /// In multi-tenant mode, this is only applicable for studio namespaces, not game namespaces.
+    /// Other detail info:
     /// 
-    /// Get extend app by name
-    /// 
-    /// Available scenario:
-    /// - scenario 3: `event-handler`
-    /// - scenario 1: `function-override`
-    /// - scenario 2: `service-extension`
-    /// 
-    /// 
-    /// Available app status:
-    /// - `app-creating`
-    /// - `app-creation-failed`
-    /// - `app-creation-timeout`
-    /// - `app-undeployed`
-    /// - `deployment-in-progress`
-    /// - `deployment-failed`
-    /// - `deployment-timeout`
-    /// - `deployment-running`
-    /// - `deployment-down`
-    /// - `app-stopping`
-    /// - `app-stop-failed`
-    /// - `app-stop-timeout`
-    /// - `app-stopped`
-    /// - `app-removing`
-    /// - `app-removed`
-    /// - `app-remove-timeout`
+    ///   * Returns : updated namespace
     /// </summary>
-    public class GetAppV2 : AccelByte.Sdk.Core.Operation
+    public class UpdateTestingFlag : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static GetAppV2Builder Builder { get => new GetAppV2Builder(); }
+        public static UpdateTestingFlagBuilder Builder { get => new UpdateTestingFlagBuilder(); }
 
-        public interface IGetAppV2Builder
+        public interface IUpdateTestingFlagBuilder
         {
 
+
+            Model.NamespaceTestingFlagUpdate? Body { get; }
 
 
 
 
         }
 
-        public abstract class GetAppV2AbstractBuilder<TImpl>
-            : OperationBuilder<TImpl>, IGetAppV2Builder
-            where TImpl : GetAppV2AbstractBuilder<TImpl>
+        public abstract class UpdateTestingFlagAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUpdateTestingFlagBuilder
+            where TImpl : UpdateTestingFlagAbstractBuilder<TImpl>
         {
 
 
+            public Model.NamespaceTestingFlagUpdate? Body { get; set; }
 
 
 
-            public GetAppV2AbstractBuilder() { }
 
-            public GetAppV2AbstractBuilder(IAccelByteSdk sdk)
+            public UpdateTestingFlagAbstractBuilder() { }
+
+            public UpdateTestingFlagAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
 
 
 
+            public TImpl SetBody(Model.NamespaceTestingFlagUpdate _body)
+            {
+                Body = _body;
+                return (TImpl)this;
+            }
 
 
 
-            public GetAppV2 Build(
-                string app,
+
+            public UpdateTestingFlag Build(
                 string namespace_
             )
             {
-                GetAppV2 op = new GetAppV2(this,
-                    app,
+                UpdateTestingFlag op = new UpdateTestingFlag(this,
                     namespace_
                 );
 
@@ -100,13 +86,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                 return op;
             }
 
-            protected GetAppV2.Response InternalExecute(
-                string app,
+            protected UpdateTestingFlag.Response InternalExecute(
                 string namespace_
             )
             {
-                GetAppV2 op = Build(
-                    app,
+                UpdateTestingFlag op = Build(
                     namespace_
                 );
 
@@ -119,13 +103,11 @@ namespace AccelByte.Sdk.Api.Csm.Operation
                     response.ContentType,
                     response.Payload);
             }
-            protected async Task<GetAppV2.Response> InternalExecuteAsync(
-                string app,
+            protected async Task<UpdateTestingFlag.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
-                GetAppV2 op = Build(
-                    app,
+                UpdateTestingFlag op = Build(
                     namespace_
                 );
 
@@ -140,47 +122,42 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             }
         }
 
-        public class GetAppV2Builder : GetAppV2AbstractBuilder<GetAppV2Builder>
+        public class UpdateTestingFlagBuilder : UpdateTestingFlagAbstractBuilder<UpdateTestingFlagBuilder>
         {
-            public GetAppV2Builder() : base() { }
+            public UpdateTestingFlagBuilder() : base() { }
 
-            public GetAppV2Builder(IAccelByteSdk sdk) : base(sdk) { }
+            public UpdateTestingFlagBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            public GetAppV2.Response Execute(
-                string app,
+            public UpdateTestingFlag.Response Execute(
                 string namespace_
             )
             {
                 return InternalExecute(
-                    app,
                     namespace_
                 );
             }
-            public async Task<GetAppV2.Response> ExecuteAsync(
-                string app,
+            public async Task<UpdateTestingFlag.Response> ExecuteAsync(
                 string namespace_
             )
             {
                 return await InternalExecuteAsync(
-                    app,
                     namespace_
                 );
             }
         }
 
 
-        public GetAppV2(IGetAppV2Builder builder,
-            string app,
+        public UpdateTestingFlag(IUpdateTestingFlagBuilder builder,
             string namespace_
         )
         {
-            PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
 
 
 
 
 
+            BodyParams = builder.Body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -188,51 +165,53 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.ApimodelAppItem>
+        public class Response : ApiResponse<Model.NamespaceInfo>
         {
 
-            public ResponseErrorResponse? Error401 { get; set; } = null;
+            public ValidationErrorEntity? Error400 { get; set; } = null;
 
-            public ResponseErrorResponse? Error403 { get; set; } = null;
+            public ErrorEntity? Error401 { get; set; } = null;
 
-            public ResponseErrorResponse? Error404 { get; set; } = null;
+            public ErrorEntity? Error403 { get; set; } = null;
 
-            public ResponseErrorResponse? Error500 { get; set; } = null;
+            public ErrorEntity? Error404 { get; set; } = null;
+
+            public ErrorEntity? Error409 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Csm::AppV2::GetAppV2";
+            protected override string GetFullOperationId() => "Basic::Namespace::UpdateTestingFlag";
         }
 
         #endregion
 
-        public GetAppV2(
-            string app,
-            string namespace_
+        public UpdateTestingFlag(
+            string namespace_,
+            Model.NamespaceTestingFlagUpdate body
         )
         {
-            PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
 
 
 
 
 
+            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/csm/v2/admin/namespaces/{namespace}/apps/{app}";
+        public override string Path => "/basic/v1/admin/namespaces/{namespace}/testingFlag";
 
-        public override HttpMethod Method => HttpMethod.Get;
+        public override HttpMethod Method => HttpMethod.Patch;
 
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
 
-        public GetAppV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public UpdateTestingFlag.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new GetAppV2.Response()
+            var response = new UpdateTestingFlag.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
@@ -245,32 +224,38 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
-                response.Data = JsonSerializer.Deserialize<Model.ApimodelAppItem>(response.Payload, ResponseJsonOptions);
+                response.Data = JsonSerializer.Deserialize<Model.NamespaceInfo>(response.Payload, ResponseJsonOptions);
                 response.IsSuccess = true;
+            }
+            else if (code == (HttpStatusCode)400)
+            {
+                response.Payload = payload.ReadToString();
+                response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
+                response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
                 response.Payload = payload.ReadToString();
-                response.Error401 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
+                response.Error401 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error401!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)403)
             {
                 response.Payload = payload.ReadToString();
-                response.Error403 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
+                response.Error403 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error403!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)404)
             {
                 response.Payload = payload.ReadToString();
-                response.Error404 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
+                response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-            else if (code == (HttpStatusCode)500)
+            else if (code == (HttpStatusCode)409)
             {
                 response.Payload = payload.ReadToString();
-                response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
-                response.Error = response.Error500!.TranslateToApiError();
+                response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
+                response.Error = response.Error409!.TranslateToApiError();
             }
 
             return response;

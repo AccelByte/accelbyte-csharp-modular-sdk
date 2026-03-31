@@ -18,47 +18,47 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform", "uploadrevocationpluginconfigcert")]
-    public class UploadRevocationPluginConfigCertCommand : ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "bulkfulfillitemsv3")]
+    public class BulkFulfillItemsV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
         public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName { get { return "UploadRevocationPluginConfigCert"; } }
+        public string OperationName { get { return "BulkFulfillItemsV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
 
-        [SdkCommandFile("file")]
-        public Stream? File { get; set; }
+        [SdkCommandArgument("userId")]
+        public string UserId { get; set; } = String.Empty;
 
-        public UploadRevocationPluginConfigCertCommand(IAccelByteSdk sdk)
+        [SdkCommandData("body")]
+        public List<FulfillmentV3Request> Body { get; set; } = new List<FulfillmentV3Request>();
+
+        public BulkFulfillItemsV3Command(IAccelByteSdk sdk)
         {
             _SDK = sdk;
         }
 
         public CommandResult Run()
         {
-            AccelByte.Sdk.Api.Platform.Wrapper.ServicePluginConfig wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.ServicePluginConfig(_SDK);
+            AccelByte.Sdk.Api.Platform.Wrapper.Fulfillment wrapper = new AccelByte.Sdk.Api.Platform.Wrapper.Fulfillment(_SDK);
 
-#pragma warning disable ab_deprecated_operation
-            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.UploadRevocationPluginConfigCert.Builder;
-
+            var opBuilder = AccelByte.Sdk.Api.Platform.Operation.BulkFulfillItemsV3.Builder;
 
 
-            if (File != null)
-                opBuilder.SetFile((Stream)File);
 
 
-            UploadRevocationPluginConfigCert operation = opBuilder.Build(
-                Namespace
+
+            BulkFulfillItemsV3 operation = opBuilder.Build(
+                Body,
+                Namespace,
+                UserId
             );
 
-#pragma warning restore ab_deprecated_operation
 
-#pragma warning disable ab_deprecated_operation_wrapper
-            var response = wrapper.UploadRevocationPluginConfigCert(operation);
+            var response = wrapper.BulkFulfillItemsV3(operation);
             if (response.IsSuccess)
             {
                 if (response.Data != null)
@@ -70,7 +70,6 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else
                 return CommandResult.Fail("-", "Valid error message unavailable");
-#pragma warning restore ab_deprecated_operation_wrapper
         }
     }
 }

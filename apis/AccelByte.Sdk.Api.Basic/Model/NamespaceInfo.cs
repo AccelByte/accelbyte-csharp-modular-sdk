@@ -25,6 +25,10 @@ namespace AccelByte.Sdk.Api.Basic.Model
         [JsonPropertyName("displayName")]
         public string? DisplayName { get; set; }
 
+        [JsonPropertyName("isTesting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public bool? IsTesting { get; set; }
+
         [JsonPropertyName("namespace")]
         public string? Namespace { get; set; }
 

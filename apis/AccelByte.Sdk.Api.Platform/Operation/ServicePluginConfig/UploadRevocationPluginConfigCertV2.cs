@@ -21,18 +21,17 @@ using AccelByte.Sdk.Api.Platform.Model;
 namespace AccelByte.Sdk.Api.Platform.Operation
 {
     /// <summary>
-    /// uploadRevocationPluginConfigCert
+    /// uploadRevocationPluginConfigCertV2
     ///
-    /// Upload revocation plugin custom config tls cert. This api has been deprecated, please use /admin/namespaces/{namespace}/revocation/plugins/revocation/customConfig/cert to update revocation certOther detail info:
+    /// Upload revocation plugin custom config tls cert.Other detail info:
     ///   * Returns : updated service plugin config
     /// </summary>
-    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
-    public class UploadRevocationPluginConfigCert : AccelByte.Sdk.Core.Operation
+    public class UploadRevocationPluginConfigCertV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static UploadRevocationPluginConfigCertBuilder Builder { get => new UploadRevocationPluginConfigCertBuilder(); }
+        public static UploadRevocationPluginConfigCertV2Builder Builder { get => new UploadRevocationPluginConfigCertV2Builder(); }
 
-        public interface IUploadRevocationPluginConfigCertBuilder
+        public interface IUploadRevocationPluginConfigCertV2Builder
         {
 
 
@@ -43,9 +42,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         }
 
-        public abstract class UploadRevocationPluginConfigCertAbstractBuilder<TImpl>
-            : OperationBuilder<TImpl>, IUploadRevocationPluginConfigCertBuilder
-            where TImpl : UploadRevocationPluginConfigCertAbstractBuilder<TImpl>
+        public abstract class UploadRevocationPluginConfigCertV2AbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IUploadRevocationPluginConfigCertV2Builder
+            where TImpl : UploadRevocationPluginConfigCertV2AbstractBuilder<TImpl>
         {
 
 
@@ -54,9 +53,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UploadRevocationPluginConfigCertAbstractBuilder() { }
+            public UploadRevocationPluginConfigCertV2AbstractBuilder() { }
 
-            public UploadRevocationPluginConfigCertAbstractBuilder(IAccelByteSdk sdk)
+            public UploadRevocationPluginConfigCertV2AbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -72,11 +71,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
 
 
-            public UploadRevocationPluginConfigCert Build(
+            public UploadRevocationPluginConfigCertV2 Build(
                 string namespace_
             )
             {
-                UploadRevocationPluginConfigCert op = new UploadRevocationPluginConfigCert(this,
+                UploadRevocationPluginConfigCertV2 op = new UploadRevocationPluginConfigCertV2(this,
                     namespace_
                 );
 
@@ -84,12 +83,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            protected UploadRevocationPluginConfigCert.Response InternalExecute(
+            protected UploadRevocationPluginConfigCertV2.Response InternalExecute(
                 string namespace_
             )
             {
-                UploadRevocationPluginConfigCert op = Build(
+                UploadRevocationPluginConfigCertV2 op = Build(
                     namespace_
                 );
 
@@ -102,11 +100,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     response.ContentType,
                     response.Payload);
             }
-            protected async Task<UploadRevocationPluginConfigCert.Response> InternalExecuteAsync(
+            protected async Task<UploadRevocationPluginConfigCertV2.Response> InternalExecuteAsync(
                 string namespace_
             )
             {
-                UploadRevocationPluginConfigCert op = Build(
+                UploadRevocationPluginConfigCertV2 op = Build(
                     namespace_
                 );
 
@@ -121,14 +119,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             }
         }
 
-        public class UploadRevocationPluginConfigCertBuilder : UploadRevocationPluginConfigCertAbstractBuilder<UploadRevocationPluginConfigCertBuilder>
+        public class UploadRevocationPluginConfigCertV2Builder : UploadRevocationPluginConfigCertV2AbstractBuilder<UploadRevocationPluginConfigCertV2Builder>
         {
-            public UploadRevocationPluginConfigCertBuilder() : base() { }
+            public UploadRevocationPluginConfigCertV2Builder() : base() { }
 
-            public UploadRevocationPluginConfigCertBuilder(IAccelByteSdk sdk) : base(sdk) { }
+            public UploadRevocationPluginConfigCertV2Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
-            public UploadRevocationPluginConfigCert.Response Execute(
+            public UploadRevocationPluginConfigCertV2.Response Execute(
                 string namespace_
             )
             {
@@ -136,7 +133,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                     namespace_
                 );
             }
-            public async Task<UploadRevocationPluginConfigCert.Response> ExecuteAsync(
+            public async Task<UploadRevocationPluginConfigCertV2.Response> ExecuteAsync(
                 string namespace_
             )
             {
@@ -147,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         }
 
 
-        public UploadRevocationPluginConfigCert(IUploadRevocationPluginConfigCertBuilder builder,
+        public UploadRevocationPluginConfigCertV2(IUploadRevocationPluginConfigCertV2Builder builder,
             string namespace_
         )
         {
@@ -171,12 +168,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             public ValidationErrorEntity? Error422 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Platform::ServicePluginConfig::UploadRevocationPluginConfigCert";
+            protected override string GetFullOperationId() => "Platform::ServicePluginConfig::UploadRevocationPluginConfigCertV2";
         }
 
         #endregion
 
-        public UploadRevocationPluginConfigCert(
+        public UploadRevocationPluginConfigCertV2(
             string namespace_,
             Stream? file
         )
@@ -193,7 +190,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/platform/admin/namespaces/{namespace}/revocation/plugins/revocation/revocation/customConfig/cert";
+        public override string Path => "/platform/admin/namespaces/{namespace}/revocation/plugins/revocation/customConfig/cert";
 
         public override HttpMethod Method => HttpMethod.Put;
 
@@ -201,9 +198,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override List<string> Produces => new() { "application/json" };
 
-        public UploadRevocationPluginConfigCert.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public UploadRevocationPluginConfigCertV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new UploadRevocationPluginConfigCert.Response()
+            var response = new UploadRevocationPluginConfigCertV2.Response()
             {
                 StatusCode = code,
                 ContentType = contentType

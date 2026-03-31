@@ -21,20 +21,18 @@ using AccelByte.Sdk.Api.Social.Model;
 namespace AccelByte.Sdk.Api.Social.Operation
 {
     /// <summary>
-    /// updateStatCycle
+    /// resetStatCycle
     ///
-    /// Update stat cycle.
+    /// Reset stat cycle.
     /// Other detail info:
-    ///         * STOPPED cycles cannot be updated
-    ///         * If changing the start time of an ACTIVE cycle to a future time, the status will be set to INIT and the related user data will be removed
-    ///         * If changing the cycle type of an ACTIVE cycle, the related user data will be removed
+    ///         * This endpoint will reset the cycle immediately
     /// </summary>
-    public class UpdateStatCycle : AccelByte.Sdk.Core.Operation
+    public class ResetStatCycle : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
-        public static UpdateStatCycleBuilder Builder { get => new UpdateStatCycleBuilder(); }
+        public static ResetStatCycleBuilder Builder { get => new ResetStatCycleBuilder(); }
 
-        public interface IUpdateStatCycleBuilder
+        public interface IResetStatCycleBuilder
         {
 
 
@@ -43,18 +41,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         }
 
-        public abstract class UpdateStatCycleAbstractBuilder<TImpl>
-            : OperationBuilder<TImpl>, IUpdateStatCycleBuilder
-            where TImpl : UpdateStatCycleAbstractBuilder<TImpl>
+        public abstract class ResetStatCycleAbstractBuilder<TImpl>
+            : OperationBuilder<TImpl>, IResetStatCycleBuilder
+            where TImpl : ResetStatCycleAbstractBuilder<TImpl>
         {
 
 
 
 
 
-            public UpdateStatCycleAbstractBuilder() { }
+            public ResetStatCycleAbstractBuilder() { }
 
-            public UpdateStatCycleAbstractBuilder(IAccelByteSdk sdk)
+            public ResetStatCycleAbstractBuilder(IAccelByteSdk sdk)
             {
                 _Sdk = sdk;
             }
@@ -64,14 +62,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            public UpdateStatCycle Build(
-                StatCycleUpdate body,
+            public ResetStatCycle Build(
                 string cycleId,
                 string namespace_
             )
             {
-                UpdateStatCycle op = new UpdateStatCycle(this,
-                    body,
+                ResetStatCycle op = new ResetStatCycle(this,
                     cycleId,
                     namespace_
                 );
@@ -80,14 +76,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 return op;
             }
 
-            protected UpdateStatCycle.Response InternalExecute(
-                StatCycleUpdate body,
+            protected ResetStatCycle.Response InternalExecute(
                 string cycleId,
                 string namespace_
             )
             {
-                UpdateStatCycle op = Build(
-                    body,
+                ResetStatCycle op = Build(
                     cycleId,
                     namespace_
                 );
@@ -101,14 +95,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
                     response.ContentType,
                     response.Payload);
             }
-            protected async Task<UpdateStatCycle.Response> InternalExecuteAsync(
-                StatCycleUpdate body,
+            protected async Task<ResetStatCycle.Response> InternalExecuteAsync(
                 string cycleId,
                 string namespace_
             )
             {
-                UpdateStatCycle op = Build(
-                    body,
+                ResetStatCycle op = Build(
                     cycleId,
                     namespace_
                 );
@@ -124,32 +116,28 @@ namespace AccelByte.Sdk.Api.Social.Operation
             }
         }
 
-        public class UpdateStatCycleBuilder : UpdateStatCycleAbstractBuilder<UpdateStatCycleBuilder>
+        public class ResetStatCycleBuilder : ResetStatCycleAbstractBuilder<ResetStatCycleBuilder>
         {
-            public UpdateStatCycleBuilder() : base() { }
+            public ResetStatCycleBuilder() : base() { }
 
-            public UpdateStatCycleBuilder(IAccelByteSdk sdk) : base(sdk) { }
+            public ResetStatCycleBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            public UpdateStatCycle.Response Execute(
-                StatCycleUpdate body,
+            public ResetStatCycle.Response Execute(
                 string cycleId,
                 string namespace_
             )
             {
                 return InternalExecute(
-                    body,
                     cycleId,
                     namespace_
                 );
             }
-            public async Task<UpdateStatCycle.Response> ExecuteAsync(
-                StatCycleUpdate body,
+            public async Task<ResetStatCycle.Response> ExecuteAsync(
                 string cycleId,
                 string namespace_
             )
             {
                 return await InternalExecuteAsync(
-                    body,
                     cycleId,
                     namespace_
                 );
@@ -157,8 +145,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         }
 
 
-        public UpdateStatCycle(IUpdateStatCycleBuilder builder,
-            StatCycleUpdate body,
+        public ResetStatCycle(IResetStatCycleBuilder builder,
             string cycleId,
             string namespace_
         )
@@ -170,7 +157,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
@@ -178,10 +164,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         #region Response Part        
-        public class Response : ApiResponse<Model.StatCycleInfo>
+        public class Response : ApiResponse
         {
-
-            public ErrorEntity? Error400 { get; set; } = null;
 
             public ErrorEntity? Error401 { get; set; } = null;
 
@@ -191,20 +175,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public ErrorEntity? Error409 { get; set; } = null;
 
-            public ValidationErrorEntity? Error422 { get; set; } = null;
-
             public ErrorEntity? Error500 { get; set; } = null;
 
 
-            protected override string GetFullOperationId() => "Social::StatCycleConfiguration::UpdateStatCycle";
+            protected override string GetFullOperationId() => "Social::StatCycleConfiguration::ResetStatCycle";
         }
 
         #endregion
 
-        public UpdateStatCycle(
+        public ResetStatCycle(
             string cycleId,
-            string namespace_,
-            Model.StatCycleUpdate body
+            string namespace_
         )
         {
             PathParams["cycleId"] = cycleId;
@@ -214,43 +195,31 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
 
 
-            BodyParams = body;
 
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
 
-        public override string Path => "/social/v1/admin/namespaces/{namespace}/statCycles/{cycleId}";
+        public override string Path => "/social/v1/admin/namespaces/{namespace}/statCycles/{cycleId}/reset";
 
-        public override HttpMethod Method => HttpMethod.Put;
+        public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() { "application/json" };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() { "application/json" };
+        public override List<string> Produces => new() { };
 
-        public UpdateStatCycle.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
+        public ResetStatCycle.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
-            var response = new UpdateStatCycle.Response()
+            var response = new ResetStatCycle.Response()
             {
                 StatusCode = code,
                 ContentType = contentType
             };
 
-            if (code == (HttpStatusCode)204)
+            int statusCode = (int)code;
+            if (statusCode >= 200 && statusCode < 300)
             {
                 response.IsSuccess = true;
-            }
-            else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
-            {
-                response.Payload = payload.ReadToString();
-                response.Data = JsonSerializer.Deserialize<Model.StatCycleInfo>(response.Payload, ResponseJsonOptions);
-                response.IsSuccess = true;
-            }
-            else if (code == (HttpStatusCode)400)
-            {
-                response.Payload = payload.ReadToString();
-                response.Error400 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
-                response.Error = response.Error400!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)401)
             {
@@ -275,12 +244,6 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 response.Payload = payload.ReadToString();
                 response.Error409 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error409!.TranslateToApiError();
-            }
-            else if (code == (HttpStatusCode)422)
-            {
-                response.Payload = payload.ReadToString();
-                response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
-                response.Error = response.Error422!.TranslateToApiError();
             }
             else if (code == (HttpStatusCode)500)
             {

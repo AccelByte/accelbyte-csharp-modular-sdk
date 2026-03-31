@@ -36,6 +36,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
             List<string>? ChallengeCode { get; }
 
+            string? IncludeOneTimeEvent { get; }
+
 
 
 
@@ -48,6 +50,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
 
             public List<string>? ChallengeCode { get; set; }
+
+            public string? IncludeOneTimeEvent { get; set; }
 
 
 
@@ -64,6 +68,12 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             public TImpl SetChallengeCode(List<string> _challengeCode)
             {
                 ChallengeCode = _challengeCode;
+                return (TImpl)this;
+            }
+
+            public TImpl SetIncludeOneTimeEvent(string _includeOneTimeEvent)
+            {
+                IncludeOneTimeEvent = _includeOneTimeEvent;
                 return (TImpl)this;
             }
 
@@ -162,6 +172,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             PathParams["namespace"] = namespace_;
 
             if (builder.ChallengeCode is not null) QueryParams["challengeCode"] = builder.ChallengeCode;
+            if (builder.IncludeOneTimeEvent is not null) QueryParams["includeOneTimeEvent"] = builder.IncludeOneTimeEvent;
 
 
 
@@ -197,12 +208,14 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         public AdminEvaluateProgress(
             string namespace_,
             List<string>? challengeCode,
+            string? includeOneTimeEvent,
             Model.ModelEvaluatePlayerProgressionRequest body
         )
         {
             PathParams["namespace"] = namespace_;
 
             if (challengeCode is not null) QueryParams["challengeCode"] = challengeCode;
+            if (includeOneTimeEvent is not null) QueryParams["includeOneTimeEvent"] = includeOneTimeEvent;
 
 
 

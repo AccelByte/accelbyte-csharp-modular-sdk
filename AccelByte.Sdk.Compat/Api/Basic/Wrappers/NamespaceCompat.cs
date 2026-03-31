@@ -299,6 +299,34 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             }
         }
 
+        public class UpdateTestingFlagBuilderCompat : UpdateTestingFlag.UpdateTestingFlagAbstractBuilder<UpdateTestingFlagBuilderCompat>
+        {
+            internal UpdateTestingFlagBuilderCompat() : base() { }
+
+            internal UpdateTestingFlagBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
+
+            public AccelByte.Sdk.Api.Basic.Model.NamespaceInfo? Execute(
+                string namespace_
+            )
+            {
+                var response = InternalExecute(
+                    namespace_
+                );
+                response.ThrowHttpExceptionIfError();
+                return response.Data;
+            }
+            public async Task<AccelByte.Sdk.Api.Basic.Model.NamespaceInfo?> ExecuteAsync(
+                string namespace_
+            )
+            {
+                var response = await InternalExecuteAsync(
+                    namespace_
+                );
+                response.ThrowHttpExceptionIfError();
+                return response.Data;
+            }
+        }
+
         public class PublicGetNamespacesBuilderCompat : PublicGetNamespaces.PublicGetNamespacesAbstractBuilder<PublicGetNamespacesBuilderCompat>
         {
             internal PublicGetNamespacesBuilderCompat() : base() { }
@@ -458,6 +486,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             get
             {
                 var opBuilder = new ChangeNamespaceStatusBuilderCompat(_sdk);
+                return opBuilder;
+            }
+        }
+        public UpdateTestingFlagBuilderCompat UpdateTestingFlagOp
+        {
+            get
+            {
+                var opBuilder = new UpdateTestingFlagBuilderCompat(_sdk);
                 return opBuilder;
             }
         }

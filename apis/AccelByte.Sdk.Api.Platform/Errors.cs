@@ -335,6 +335,10 @@ namespace AccelByte.Sdk.Api.Platform
         [JsonPropertyName("stateInfo")]
         public FulfillmentStateInfo? StateInfo { get; set; }
 
+        [JsonPropertyName("stateReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? StateReason { get; set; }
+
         [JsonPropertyName("subscriptionSummaries")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<SubscriptionSummary>? SubscriptionSummaries { get; set; }

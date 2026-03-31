@@ -122,6 +122,17 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
+        public ResetStatCycle.ResetStatCycleBuilder ResetStatCycleOp
+        {
+            get
+            {
+                var opBuilder = new Operation.ResetStatCycle.ResetStatCycleBuilder(_sdk);
+                if (_CustomBasePath != "")
+                    return opBuilder.UseCustomBasePath(_CustomBasePath);
+                else
+                    return opBuilder;
+            }
+        }
         public BulkAddStats.BulkAddStatsBuilder BulkAddStatsOp
         {
             get
@@ -300,6 +311,22 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.Payload);
         }
         public async Task<DeleteStatCycle.Response> DeleteStatCycleAsync(DeleteStatCycle input)
+        {
+            var response = await _sdk.RunRequestAsync(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public ResetStatCycle.Response ResetStatCycle(ResetStatCycle input)
+        {
+            var response = _sdk.RunRequest(input);
+            return input.ParseResponse(
+                    response.Code,
+                    response.ContentType,
+                    response.Payload);
+        }
+        public async Task<ResetStatCycle.Response> ResetStatCycleAsync(ResetStatCycle input)
         {
             var response = await _sdk.RunRequestAsync(input);
             return input.ParseResponse(
