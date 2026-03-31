@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Chat.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
 {
-    [SdkConsoleCommand("chat","adminchathistory")]
-    public class AdminChatHistoryCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("chat", "adminchathistory")]
+    public class AdminChatHistoryCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Chat"; } }
+        public string ServiceName { get { return "Chat"; } }
 
-        public string OperationName{ get { return "AdminChatHistory"; } }
+        public string OperationName { get { return "AdminChatHistory"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -111,8 +111,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicChallengeMyMFAV4 op = new PublicChallengeMyMFAV4(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -158,14 +158,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (builder.Code is not null) FormParams["code"] = builder.Code;
             if (builder.Factor is not null) FormParams["factor"] = builder.Factor;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,20 +192,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicChallengeMyMFAV4(
-            string namespace_,            
-            string? code,            
-            string? factor            
+            string namespace_,
+            string? code,
+            string? factor
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (code is not null) FormParams["code"] = code;
             if (factor is not null) FormParams["factor"] = factor;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -217,7 +217,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicChallengeMyMFAV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicChallengeMyMFAV4.Response()

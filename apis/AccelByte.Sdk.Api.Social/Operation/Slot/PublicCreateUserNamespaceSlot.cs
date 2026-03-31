@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///         *  Returns : created slot info
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicCreateUserNamespaceSlot : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -124,15 +124,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicCreateUserNamespaceSlot op = new PublicCreateUserNamespaceSlot(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected PublicCreateUserNamespaceSlot.Response InternalExecute(
                 string namespace_,
                 string userId
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public PublicCreateUserNamespaceSlotBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicCreateUserNamespaceSlot.Response Execute(
                 string namespace_,
                 string userId
@@ -210,18 +210,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.Label is not null) QueryParams["label"] = builder.Label;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
+
             if (builder.Checksum is not null) FormParams["checksum"] = builder.Checksum;
             if (builder.CustomAttribute is not null) FormParams["customAttribute"] = builder.CustomAttribute;
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-            
+
             CollectionFormatMap["tags"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -242,29 +242,29 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public PublicCreateUserNamespaceSlot(
-            string namespace_,            
-            string userId,            
-            string? label,            
-            List<string>? tags,            
-            string? checksum,            
-            string? customAttribute,            
-            Stream? file            
+            string namespace_,
+            string userId,
+            string? label,
+            List<string>? tags,
+            string? checksum,
+            string? customAttribute,
+            Stream? file
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (label is not null) QueryParams["label"] = label;
             if (tags is not null) QueryParams["tags"] = tags;
-            
+
             if (checksum is not null) FormParams["checksum"] = checksum;
             if (customAttribute is not null) FormParams["customAttribute"] = customAttribute;
             if (file is not null) FormParams["file"] = file;
 
-            
+
             CollectionFormatMap["tags"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -276,7 +276,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicCreateUserNamespaceSlot.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicCreateUserNamespaceSlot.Response()

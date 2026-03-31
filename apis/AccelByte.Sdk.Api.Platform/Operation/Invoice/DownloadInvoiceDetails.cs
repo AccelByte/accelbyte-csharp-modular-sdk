@@ -73,12 +73,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DownloadInvoiceDetails op = new DownloadInvoiceDetails(this,
-                    namespace_,                    
-                    endTime,                    
-                    feature,                    
-                    itemId,                    
-                    itemType,                    
-                    startTime                    
+                    namespace_,
+                    endTime,
+                    feature,
+                    itemId,
+                    itemType,
+                    startTime
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -196,17 +196,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (feature is not null) QueryParams["feature"] = feature;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (startTime is not null) QueryParams["startTime"] = startTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,26 +223,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public DownloadInvoiceDetails(
-            string namespace_,            
-            string endTime,            
-            string feature,            
-            string itemId,            
-            DownloadInvoiceDetailsItemType itemType,            
-            string startTime            
+            string namespace_,
+            string endTime,
+            string feature,
+            string itemId,
+            DownloadInvoiceDetailsItemType itemType,
+            string startTime
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (feature is not null) QueryParams["feature"] = feature;
             if (itemId is not null) QueryParams["itemId"] = itemId;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
             if (startTime is not null) QueryParams["startTime"] = startTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -251,10 +251,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "text/csv" };
-        
+
         public DownloadInvoiceDetails.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DownloadInvoiceDetails.Response()

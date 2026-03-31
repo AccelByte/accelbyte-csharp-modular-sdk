@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(this,
-                    body                    
+                    body
 
                 );
 
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost op = Build(
                     body
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 return InternalExecute(
                     body
-                    
+
                 );
             }
             public async Task<ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response> ExecuteAsync(
@@ -187,7 +187,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 return await InternalExecuteAsync(
                     body
-                    
+
                 );
             }
         }
@@ -195,16 +195,16 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(IProtectedSaveEventsGameTelemetryV1ProtectedEventsPostBuilder builder,
             List<TelemetryBody> body
-            
+
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -228,17 +228,17 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost(
-            List<Model.TelemetryBody> body,            
+            List<Model.TelemetryBody> body,
             string accessToken
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -251,7 +251,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost.Response()

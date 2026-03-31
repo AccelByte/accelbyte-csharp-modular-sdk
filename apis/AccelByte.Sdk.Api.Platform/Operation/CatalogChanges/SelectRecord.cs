@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SelectRecord op = new SelectRecord(this,
-                    changeId,                    
-                    namespace_,                    
-                    storeId                    
+                    changeId,
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,12 +162,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["changeId"] = changeId;
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,20 +186,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public SelectRecord(
-            string changeId,            
-            string namespace_,            
-            string storeId            
+            string changeId,
+            string namespace_,
+            string storeId
         )
         {
             PathParams["changeId"] = changeId;
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -211,7 +211,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SelectRecord.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SelectRecord.Response()

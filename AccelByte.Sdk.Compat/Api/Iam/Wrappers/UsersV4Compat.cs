@@ -639,14 +639,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetMyBackupCodesV4BuilderCompat : AdminGetMyBackupCodesV4.AdminGetMyBackupCodesV4AbstractBuilder<AdminGetMyBackupCodesV4BuilderCompat>
         {
             internal AdminGetMyBackupCodesV4BuilderCompat() : base() { }
 
             internal AdminGetMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? Execute(
             )
             {
@@ -665,14 +665,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGenerateMyBackupCodesV4BuilderCompat : AdminGenerateMyBackupCodesV4.AdminGenerateMyBackupCodesV4AbstractBuilder<AdminGenerateMyBackupCodesV4BuilderCompat>
         {
             internal AdminGenerateMyBackupCodesV4BuilderCompat() : base() { }
 
             internal AdminGenerateMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? Execute(
             )
             {
@@ -717,14 +717,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDownloadMyBackupCodesV4BuilderCompat : AdminDownloadMyBackupCodesV4.AdminDownloadMyBackupCodesV4AbstractBuilder<AdminDownloadMyBackupCodesV4BuilderCompat>
         {
             internal AdminDownloadMyBackupCodesV4BuilderCompat() : base() { }
 
             internal AdminDownloadMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Stream? Execute(
             )
             {
@@ -743,14 +743,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminEnableMyBackupCodesV4BuilderCompat : AdminEnableMyBackupCodesV4.AdminEnableMyBackupCodesV4AbstractBuilder<AdminEnableMyBackupCodesV4BuilderCompat>
         {
             internal AdminEnableMyBackupCodesV4BuilderCompat() : base() { }
 
             internal AdminEnableMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? Execute(
             )
             {
@@ -1007,14 +1007,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetMyMFAStatusV4BuilderCompat : AdminGetMyMFAStatusV4.AdminGetMyMFAStatusV4AbstractBuilder<AdminGetMyMFAStatusV4BuilderCompat>
         {
             internal AdminGetMyMFAStatusV4BuilderCompat() : base() { }
 
             internal AdminGetMyMFAStatusV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserMFAStatusResponseV4? Execute(
             )
             {
@@ -1033,14 +1033,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminInviteUserV4BuilderCompat : AdminInviteUserV4.AdminInviteUserV4AbstractBuilder<AdminInviteUserV4BuilderCompat>
         {
             internal AdminInviteUserV4BuilderCompat() : base() { }
 
             internal AdminInviteUserV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelInviteUserResponseV3? Execute(
                 ModelInviteUserRequestV4 body
             )
@@ -1449,14 +1449,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetMyBackupCodesV4BuilderCompat : PublicGetMyBackupCodesV4.PublicGetMyBackupCodesV4AbstractBuilder<PublicGetMyBackupCodesV4BuilderCompat>
         {
             internal PublicGetMyBackupCodesV4BuilderCompat() : base() { }
 
             internal PublicGetMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? Execute(
                 string namespace_
             )
@@ -1479,14 +1479,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGenerateMyBackupCodesV4BuilderCompat : PublicGenerateMyBackupCodesV4.PublicGenerateMyBackupCodesV4AbstractBuilder<PublicGenerateMyBackupCodesV4BuilderCompat>
         {
             internal PublicGenerateMyBackupCodesV4BuilderCompat() : base() { }
 
             internal PublicGenerateMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? Execute(
                 string namespace_
             )
@@ -1539,14 +1539,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicDownloadMyBackupCodesV4BuilderCompat : PublicDownloadMyBackupCodesV4.PublicDownloadMyBackupCodesV4AbstractBuilder<PublicDownloadMyBackupCodesV4BuilderCompat>
         {
             internal PublicDownloadMyBackupCodesV4BuilderCompat() : base() { }
 
             internal PublicDownloadMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Stream? Execute(
                 string namespace_
             )
@@ -1569,14 +1569,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicEnableMyBackupCodesV4BuilderCompat : PublicEnableMyBackupCodesV4.PublicEnableMyBackupCodesV4AbstractBuilder<PublicEnableMyBackupCodesV4BuilderCompat>
         {
             internal PublicEnableMyBackupCodesV4BuilderCompat() : base() { }
 
             internal PublicEnableMyBackupCodesV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelBackupCodesResponseV4? Execute(
                 string namespace_
             )
@@ -1718,7 +1718,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             {
                 var response = InternalExecute(
                     namespace_,
-                    deviceToken                    
+                    deviceToken
                 );
                 response.ThrowHttpExceptionIfError();
             }
@@ -1729,7 +1729,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             {
                 var response = await InternalExecuteAsync(
                     namespace_,
-                    deviceToken                    
+                    deviceToken
                 );
                 response.ThrowHttpExceptionIfError();
             }
@@ -1907,14 +1907,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetMyMFAStatusV4BuilderCompat : PublicGetMyMFAStatusV4.PublicGetMyMFAStatusV4AbstractBuilder<PublicGetMyMFAStatusV4BuilderCompat>
         {
             internal PublicGetMyMFAStatusV4BuilderCompat() : base() { }
 
             internal PublicGetMyMFAStatusV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserMFAStatusResponseV4? Execute(
                 string namespace_
             )
@@ -2187,7 +2187,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetMyBackupCodesV4BuilderCompat AdminGetMyBackupCodesV4Op
         {
             get
@@ -2196,7 +2196,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGenerateMyBackupCodesV4BuilderCompat AdminGenerateMyBackupCodesV4Op
         {
             get
@@ -2213,7 +2213,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDownloadMyBackupCodesV4BuilderCompat AdminDownloadMyBackupCodesV4Op
         {
             get
@@ -2222,7 +2222,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminEnableMyBackupCodesV4BuilderCompat AdminEnableMyBackupCodesV4Op
         {
             get
@@ -2311,7 +2311,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetMyMFAStatusV4BuilderCompat AdminGetMyMFAStatusV4Op
         {
             get
@@ -2320,7 +2320,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminInviteUserV4BuilderCompat AdminInviteUserV4Op
         {
             get
@@ -2425,7 +2425,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMyBackupCodesV4BuilderCompat PublicGetMyBackupCodesV4Op
         {
             get
@@ -2434,7 +2434,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGenerateMyBackupCodesV4BuilderCompat PublicGenerateMyBackupCodesV4Op
         {
             get
@@ -2451,7 +2451,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDownloadMyBackupCodesV4BuilderCompat PublicDownloadMyBackupCodesV4Op
         {
             get
@@ -2460,7 +2460,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicEnableMyBackupCodesV4BuilderCompat PublicEnableMyBackupCodesV4Op
         {
             get
@@ -2557,7 +2557,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetMyMFAStatusV4BuilderCompat PublicGetMyMFAStatusV4Op
         {
             get

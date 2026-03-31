@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Core.Repository
                 RefreshToken = tokenResponse.RefreshToken;
                 if (tokenResponse.RefreshExpiresIn != null)
                     RefreshExpireIn = tokenResponse.RefreshExpiresIn.Value;
-            }            
+            }
         }
 
         public void UpdateToken(ITokenResponse tokenResponse)

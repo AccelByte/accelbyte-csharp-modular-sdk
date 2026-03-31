@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///     *  Returns : updated slot config
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UpdateUserSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -84,15 +84,15 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 UpdateUserSlotConfig op = new UpdateUserSlotConfig(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected UpdateUserSlotConfig.Response InternalExecute(
                 string namespace_,
                 string userId
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public UpdateUserSlotConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public UpdateUserSlotConfig.Response Execute(
                 string namespace_,
                 string userId
@@ -170,13 +170,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,20 +193,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public UpdateUserSlotConfig(
-            string namespace_,            
-            string userId,            
-            Model.SlotConfigUpdate body            
+            string namespace_,
+            string userId,
+            Model.SlotConfigUpdate body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateUserSlotConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateUserSlotConfig.Response()

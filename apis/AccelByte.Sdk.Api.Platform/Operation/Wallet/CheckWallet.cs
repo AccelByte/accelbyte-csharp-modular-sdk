@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     ///
     ///  [SERVICE COMMUNICATION ONLY] Check wallet by balance origin and currency code whether it's inactive.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class CheckWallet : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -69,17 +69,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 CheckWallet op = new CheckWallet(this,
-                    currencyCode,                    
-                    namespace_,                    
-                    userId,                    
-                    origin                    
+                    currencyCode,
+                    namespace_,
+                    userId,
+                    origin
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected CheckWallet.Response InternalExecute(
                 string currencyCode,
                 string namespace_,
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public CheckWalletBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public CheckWallet.Response Execute(
                 string currencyCode,
                 string namespace_,
@@ -176,13 +176,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["currencyCode"] = currencyCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (origin is not null) QueryParams["origin"] = origin.Value;
-            
 
-            
-            
-            
+            if (origin is not null) QueryParams["origin"] = origin.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,22 +205,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public CheckWallet(
-            string currencyCode,            
-            string namespace_,            
-            string userId,            
-            CheckWalletOrigin origin            
+            string currencyCode,
+            string namespace_,
+            string userId,
+            CheckWalletOrigin origin
         )
         {
             PathParams["currencyCode"] = currencyCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (origin is not null) QueryParams["origin"] = origin.Value;
-            
 
-            
-            
-            
+            if (origin is not null) QueryParams["origin"] = origin.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CheckWallet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CheckWallet.Response()

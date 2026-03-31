@@ -71,10 +71,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 Verify2faCodeV4 op = new Verify2faCodeV4(this,
-                    code,                    
-                    factor,                    
-                    mfaToken,                    
-                    rememberDevice                    
+                    code,
+                    factor,
+                    mfaToken,
+                    rememberDevice
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,16 +173,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             bool rememberDevice
         )
         {
-            
-            
+
+
             if (code is not null) FormParams["code"] = code;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
             FormParams["rememberDevice"] = Convert.ToString(rememberDevice)!;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,22 +201,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public Verify2faCodeV4(
-            string code,            
-            string factor,            
-            string mfaToken,            
-            bool rememberDevice            
+            string code,
+            string factor,
+            string mfaToken,
+            bool rememberDevice
         )
         {
-            
-            
+
+
             if (code is not null) FormParams["code"] = code;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
             FormParams["rememberDevice"] = Convert.ToString(rememberDevice)!;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public Verify2faCodeV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new Verify2faCodeV4.Response()

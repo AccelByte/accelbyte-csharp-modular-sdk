@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","admindeleteconfigurationalertv1")]
-    public class AdminDeleteConfigurationAlertV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "admindeleteconfigurationalertv1")]
+    public class AdminDeleteConfigurationAlertV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "AdminDeleteConfigurationAlertV1"; } }
+        public string OperationName { get { return "AdminDeleteConfigurationAlertV1"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

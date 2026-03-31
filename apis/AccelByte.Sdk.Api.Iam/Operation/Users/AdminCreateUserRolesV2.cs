@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/roles [PATCH]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminCreateUserRolesV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,16 +70,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminCreateUserRolesV2 op = new AdminCreateUserRolesV2(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminCreateUserRolesV2.Response InternalExecute(
                 List<string> body,
                 string namespace_,
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public AdminCreateUserRolesV2Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminCreateUserRolesV2.Response Execute(
                 List<string> body,
                 string namespace_,
@@ -166,13 +166,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,20 +199,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminCreateUserRolesV2(
-            string namespace_,            
-            string userId,            
-            List<string> body            
+            string namespace_,
+            string userId,
+            List<string> body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminCreateUserRolesV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminCreateUserRolesV2.Response()

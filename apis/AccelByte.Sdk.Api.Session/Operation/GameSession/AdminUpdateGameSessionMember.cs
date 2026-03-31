@@ -68,10 +68,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminUpdateGameSessionMember op = new AdminUpdateGameSessionMember(this,
-                    memberId,                    
-                    namespace_,                    
-                    sessionId,                    
-                    statusType                    
+                    memberId,
+                    namespace_,
+                    sessionId,
+                    statusType
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -174,12 +174,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["statusType"] = statusType;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,22 +206,22 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminUpdateGameSessionMember(
-            string memberId,            
-            string namespace_,            
-            string sessionId,            
-            string statusType            
+            string memberId,
+            string namespace_,
+            string sessionId,
+            string statusType
         )
         {
             PathParams["memberId"] = memberId;
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
             PathParams["statusType"] = statusType;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -230,10 +230,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateGameSessionMember.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateGameSessionMember.Response()

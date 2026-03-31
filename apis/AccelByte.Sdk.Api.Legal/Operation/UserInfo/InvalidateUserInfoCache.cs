@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
     ///
     /// Invalidate user info cache in agreement service.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class InvalidateUserInfoCache : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -81,7 +81,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected InvalidateUserInfoCache.Response InternalExecute(
             )
             {
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
             public InvalidateUserInfoCacheBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public InvalidateUserInfoCache.Response Execute(
             )
             {
@@ -139,13 +139,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public InvalidateUserInfoCache(IInvalidateUserInfoCacheBuilder builder
         )
         {
-            
-            if (builder.Namespace is not null) QueryParams["namespace"] = builder.Namespace;
-            
 
-            
-            
-            
+            if (builder.Namespace is not null) QueryParams["namespace"] = builder.Namespace;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -162,16 +162,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public InvalidateUserInfoCache(
-            string? namespace_            
+            string? namespace_
         )
         {
-            
-            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
-            
 
-            
-            
-            
+            if (namespace_ is not null) QueryParams["namespace"] = namespace_;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,10 +180,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public InvalidateUserInfoCache.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new InvalidateUserInfoCache.Response()

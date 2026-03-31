@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","restoredlcitemconfighistory")]
-    public class RestoreDLCItemConfigHistoryCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "restoredlcitemconfighistory")]
+    public class RestoreDLCItemConfigHistoryCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "RestoreDLCItemConfigHistory"; } }
+        public string OperationName { get { return "RestoreDLCItemConfigHistory"; } }
 
         [SdkCommandArgument("id")]
         public string Id { get; set; } = String.Empty;

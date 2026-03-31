@@ -76,7 +76,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 Get op = new Get(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,13 +149,13 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Category is not null) QueryParams["category"] = builder.Category.Value;
-            
 
-            
-            
-            
+            if (builder.Category is not null) QueryParams["category"] = builder.Category.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,18 +174,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #endregion
 
         public Get(
-            string namespace_,            
-            GetCategory? category            
+            string namespace_,
+            GetCategory? category
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (category is not null) QueryParams["category"] = category.Value;
-            
 
-            
-            
-            
+            if (category is not null) QueryParams["category"] = category.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public Get.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new Get.Response()

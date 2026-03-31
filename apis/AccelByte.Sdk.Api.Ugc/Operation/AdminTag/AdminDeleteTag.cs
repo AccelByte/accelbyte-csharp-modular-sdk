@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminDeleteTag op = new AdminDeleteTag(this,
-                    namespace_,                    
-                    tagId                    
+                    namespace_,
+                    tagId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["tagId"] = tagId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,18 +178,18 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminDeleteTag(
-            string namespace_,            
-            string tagId            
+            string namespace_,
+            string tagId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["tagId"] = tagId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteTag.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteTag.Response()

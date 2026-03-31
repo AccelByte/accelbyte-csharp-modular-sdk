@@ -103,9 +103,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicPlatformLinkV3 op = new PublicPlatformLinkV3(this,
-                    ticket,                    
-                    namespace_,                    
-                    platformId                    
+                    ticket,
+                    namespace_,
+                    platformId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -197,14 +197,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-            
-            
+
+
             if (builder.RedirectUri is not null) FormParams["redirectUri"] = builder.RedirectUri;
             if (ticket is not null) FormParams["ticket"] = ticket;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -231,22 +231,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicPlatformLinkV3(
-            string namespace_,            
-            string platformId,            
-            string? redirectUri,            
-            string ticket            
+            string namespace_,
+            string platformId,
+            string? redirectUri,
+            string ticket
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
-            
-            
+
+
             if (redirectUri is not null) FormParams["redirectUri"] = redirectUri;
             if (ticket is not null) FormParams["ticket"] = ticket;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -258,7 +258,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicPlatformLinkV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicPlatformLinkV3.Response()

@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 GetTicketDetail op = new GetTicketDetail(this,
-                    namespace_,                    
-                    ticketId                    
+                    namespace_,
+                    ticketId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,18 +176,18 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #endregion
 
         public GetTicketDetail(
-            string namespace_,            
-            string ticketId            
+            string namespace_,
+            string ticketId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["ticketId"] = ticketId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetTicketDetail.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetTicketDetail.Response()

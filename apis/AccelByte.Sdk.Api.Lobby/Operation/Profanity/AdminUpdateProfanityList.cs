@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Update the list
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminUpdateProfanityList : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminUpdateProfanityList op = new AdminUpdateProfanityList(this,
-                    body,                    
-                    list,                    
-                    namespace_                    
+                    body,
+                    list,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminUpdateProfanityList.Response InternalExecute(
                 ModelsAdminUpdateProfanityList body,
                 string list,
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
             public AdminUpdateProfanityListBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminUpdateProfanityList.Response Execute(
                 ModelsAdminUpdateProfanityList body,
                 string list,
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminUpdateProfanityList(
-            string list,            
-            string namespace_,            
-            Model.ModelsAdminUpdateProfanityList body            
+            string list,
+            string namespace_,
+            Model.ModelsAdminUpdateProfanityList body
         )
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateProfanityList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateProfanityList.Response()

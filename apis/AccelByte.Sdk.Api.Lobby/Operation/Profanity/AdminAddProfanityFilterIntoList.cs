@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Add a single filter into the list
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminAddProfanityFilterIntoList : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminAddProfanityFilterIntoList op = new AdminAddProfanityFilterIntoList(this,
-                    body,                    
-                    list,                    
-                    namespace_                    
+                    body,
+                    list,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminAddProfanityFilterIntoList.Response InternalExecute(
                 ModelsAdminAddProfanityFilterIntoListRequest body,
                 string list,
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
             public AdminAddProfanityFilterIntoListBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminAddProfanityFilterIntoList.Response Execute(
                 ModelsAdminAddProfanityFilterIntoListRequest body,
                 string list,
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminAddProfanityFilterIntoList(
-            string list,            
-            string namespace_,            
-            Model.ModelsAdminAddProfanityFilterIntoListRequest body            
+            string list,
+            string namespace_,
+            Model.ModelsAdminAddProfanityFilterIntoListRequest body
         )
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminAddProfanityFilterIntoList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminAddProfanityFilterIntoList.Response()

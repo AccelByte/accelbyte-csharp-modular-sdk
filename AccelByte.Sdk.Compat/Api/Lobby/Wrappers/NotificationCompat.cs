@@ -87,14 +87,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SendPartyFreeformNotificationV1AdminBuilderCompat : SendPartyFreeformNotificationV1Admin.SendPartyFreeformNotificationV1AdminAbstractBuilder<SendPartyFreeformNotificationV1AdminBuilderCompat>
         {
             internal SendPartyFreeformNotificationV1AdminBuilderCompat() : base() { }
 
             internal SendPartyFreeformNotificationV1AdminBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
@@ -123,14 +123,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SendPartyTemplatedNotificationV1AdminBuilderCompat : SendPartyTemplatedNotificationV1Admin.SendPartyTemplatedNotificationV1AdminAbstractBuilder<SendPartyTemplatedNotificationV1AdminBuilderCompat>
         {
             internal SendPartyTemplatedNotificationV1AdminBuilderCompat() : base() { }
 
             internal SendPartyTemplatedNotificationV1AdminBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelNotificationWithTemplateRequestV1 body,
                 string namespace_,
@@ -969,7 +969,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendPartyFreeformNotificationV1AdminBuilderCompat SendPartyFreeformNotificationV1AdminOp
         {
             get
@@ -978,7 +978,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendPartyTemplatedNotificationV1AdminBuilderCompat SendPartyTemplatedNotificationV1AdminOp
         {
             get

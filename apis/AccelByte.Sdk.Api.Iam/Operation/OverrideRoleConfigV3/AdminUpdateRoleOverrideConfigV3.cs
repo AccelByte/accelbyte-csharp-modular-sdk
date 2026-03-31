@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminUpdateRoleOverrideConfigV3 op = new AdminUpdateRoleOverrideConfigV3(this,
-                    body,                    
-                    namespace_,                    
-                    identity                    
+                    body,
+                    namespace_,
+                    identity
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,14 +162,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (identity is not null) QueryParams["identity"] = identity.Value;
-            
 
-            
-            
+            if (identity is not null) QueryParams["identity"] = identity.Value;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminUpdateRoleOverrideConfigV3(
-            string namespace_,            
-            AdminUpdateRoleOverrideConfigV3Identity identity,            
-            Model.ModelRoleOverrideUpdateRequest body            
+            string namespace_,
+            AdminUpdateRoleOverrideConfigV3Identity identity,
+            Model.ModelRoleOverrideUpdateRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (identity is not null) QueryParams["identity"] = identity.Value;
-            
 
-            
-            
+            if (identity is not null) QueryParams["identity"] = identity.Value;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateRoleOverrideConfigV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateRoleOverrideConfigV3.Response()

@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryOrders op = new QueryOrders(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
@@ -230,12 +230,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.WithTotal != null) QueryParams["withTotal"] = Convert.ToString(builder.WithTotal)!;
-            
 
-            
+
+
             CollectionFormatMap["orderNos"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -254,19 +254,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryOrders(
-            string namespace_,            
-            string? endTime,            
-            int? limit,            
-            int? offset,            
-            List<string>? orderNos,            
-            string? sortBy,            
-            string? startTime,            
-            QueryOrdersStatus? status,            
-            bool? withTotal            
+            string namespace_,
+            string? endTime,
+            int? limit,
+            int? offset,
+            List<string>? orderNos,
+            string? sortBy,
+            string? startTime,
+            QueryOrdersStatus? status,
+            bool? withTotal
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
@@ -275,12 +275,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (status is not null) QueryParams["status"] = status.Value;
             if (withTotal != null) QueryParams["withTotal"] = Convert.ToString(withTotal)!;
-            
 
-            
+
+
             CollectionFormatMap["orderNos"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -289,10 +289,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryOrders.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryOrders.Response()

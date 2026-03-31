@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdatePartyAttributesV1BuilderCompat : AdminUpdatePartyAttributesV1.AdminUpdatePartyAttributesV1AbstractBuilder<AdminUpdatePartyAttributesV1BuilderCompat>
         {
             internal AdminUpdatePartyAttributesV1BuilderCompat() : base() { }
 
             internal AdminUpdatePartyAttributesV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsPartyData? Execute(
                 ModelsPartyPUTCustomAttributesRequest body,
                 string namespace_,
@@ -94,14 +94,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminJoinPartyV1BuilderCompat : AdminJoinPartyV1.AdminJoinPartyV1AbstractBuilder<AdminJoinPartyV1BuilderCompat>
         {
             internal AdminJoinPartyV1BuilderCompat() : base() { }
 
             internal AdminJoinPartyV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string partyId,
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdatePartyAttributesV1BuilderCompat AdminUpdatePartyAttributesV1Op
         {
             get
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminJoinPartyV1BuilderCompat AdminJoinPartyV1Op
         {
             get

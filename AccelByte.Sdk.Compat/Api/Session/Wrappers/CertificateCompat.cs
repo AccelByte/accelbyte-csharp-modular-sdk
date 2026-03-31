@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUploadXBoxCertificateBuilderCompat : AdminUploadXBoxCertificate.AdminUploadXBoxCertificateAbstractBuilder<AdminUploadXBoxCertificateBuilderCompat>
         {
             internal AdminUploadXBoxCertificateBuilderCompat() : base() { }
 
             internal AdminUploadXBoxCertificateBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Session.Model.ModelsPlatformCredentials? Execute(
                 string certname,
                 Stream file,
@@ -71,7 +71,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUploadXBoxCertificateBuilderCompat AdminUploadXBoxCertificateOp
         {
             get

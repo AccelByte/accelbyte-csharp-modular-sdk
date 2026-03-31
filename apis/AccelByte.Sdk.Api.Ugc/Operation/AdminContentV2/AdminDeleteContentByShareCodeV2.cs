@@ -68,10 +68,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminDeleteContentByShareCodeV2 op = new AdminDeleteContentByShareCodeV2(this,
-                    channelId,                    
-                    namespace_,                    
-                    shareCode,                    
-                    userId                    
+                    channelId,
+                    namespace_,
+                    shareCode,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -174,12 +174,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["namespace"] = namespace_;
             PathParams["shareCode"] = shareCode;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,22 +202,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminDeleteContentByShareCodeV2(
-            string channelId,            
-            string namespace_,            
-            string shareCode,            
-            string userId            
+            string channelId,
+            string namespace_,
+            string shareCode,
+            string userId
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["namespace"] = namespace_;
             PathParams["shareCode"] = shareCode;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteContentByShareCodeV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteContentByShareCodeV2.Response()

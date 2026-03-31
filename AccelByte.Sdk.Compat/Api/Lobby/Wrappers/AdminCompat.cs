@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetGlobalConfigBuilderCompat : AdminGetGlobalConfig.AdminGetGlobalConfigAbstractBuilder<AdminGetGlobalConfigBuilderCompat>
         {
             internal AdminGetGlobalConfigBuilderCompat() : base() { }
 
             internal AdminGetGlobalConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelGlobalConfiguration? Execute(
             )
             {
@@ -53,14 +53,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdateGlobalConfigBuilderCompat : AdminUpdateGlobalConfig.AdminUpdateGlobalConfigAbstractBuilder<AdminUpdateGlobalConfigBuilderCompat>
         {
             internal AdminUpdateGlobalConfigBuilderCompat() : base() { }
 
             internal AdminUpdateGlobalConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelGlobalConfiguration? Execute(
                 ModelPutGlobalConfigurationRequest body
             )
@@ -83,14 +83,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDeleteGlobalConfigBuilderCompat : AdminDeleteGlobalConfig.AdminDeleteGlobalConfigAbstractBuilder<AdminDeleteGlobalConfigBuilderCompat>
         {
             internal AdminDeleteGlobalConfigBuilderCompat() : base() { }
 
             internal AdminDeleteGlobalConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public string? Execute(
             )
             {
@@ -433,7 +433,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetGlobalConfigBuilderCompat AdminGetGlobalConfigOp
         {
             get
@@ -442,7 +442,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateGlobalConfigBuilderCompat AdminUpdateGlobalConfigOp
         {
             get
@@ -451,7 +451,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteGlobalConfigBuilderCompat AdminDeleteGlobalConfigOp
         {
             get

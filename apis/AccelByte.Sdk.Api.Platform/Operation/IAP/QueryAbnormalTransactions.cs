@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryAbnormalTransactions op = new QueryAbnormalTransactions(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -176,16 +176,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.OrderId is not null) QueryParams["orderId"] = builder.OrderId;
             if (builder.SteamId is not null) QueryParams["steamId"] = builder.SteamId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,24 +202,24 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryAbnormalTransactions(
-            string namespace_,            
-            int? limit,            
-            int? offset,            
-            string? orderId,            
-            string? steamId            
+            string namespace_,
+            int? limit,
+            int? offset,
+            string? orderId,
+            string? steamId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (orderId is not null) QueryParams["orderId"] = orderId;
             if (steamId is not null) QueryParams["steamId"] = steamId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -228,10 +228,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryAbnormalTransactions.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryAbnormalTransactions.Response()

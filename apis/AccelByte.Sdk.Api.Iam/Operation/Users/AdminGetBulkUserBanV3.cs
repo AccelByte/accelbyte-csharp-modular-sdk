@@ -87,8 +87,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetBulkUserBanV3 op = new AdminGetBulkUserBanV3(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -170,15 +170,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.BanType is not null) QueryParams["banType"] = builder.BanType;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,22 +205,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetBulkUserBanV3(
-            string namespace_,            
-            bool? activeOnly,            
-            string? banType,            
-            Model.ModelGetBulkUserBansRequest body            
+            string namespace_,
+            bool? activeOnly,
+            string? banType,
+            Model.ModelGetBulkUserBansRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (banType is not null) QueryParams["banType"] = banType;
-            
 
-            
-            
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetBulkUserBanV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetBulkUserBanV3.Response()

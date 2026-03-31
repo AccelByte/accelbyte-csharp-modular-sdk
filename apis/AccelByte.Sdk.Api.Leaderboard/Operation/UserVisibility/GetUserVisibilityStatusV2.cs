@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 GetUserVisibilityStatusV2 op = new GetUserVisibilityStatusV2(this,
-                    leaderboardCode,                    
-                    namespace_,                    
-                    userId                    
+                    leaderboardCode,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,12 +162,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,20 +192,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #endregion
 
         public GetUserVisibilityStatusV2(
-            string leaderboardCode,            
-            string namespace_,            
-            string userId            
+            string leaderboardCode,
+            string namespace_,
+            string userId
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -214,10 +214,10 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserVisibilityStatusV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserVisibilityStatusV2.Response()

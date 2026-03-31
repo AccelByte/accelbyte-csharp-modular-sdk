@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","qosregionsupdate")]
-    public class QoSRegionsUpdateCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "qosregionsupdate")]
+    public class QoSRegionsUpdateCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "QoSRegionsUpdate"; } }
+        public string OperationName { get { return "QoSRegionsUpdate"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

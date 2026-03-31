@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Group.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Group
 {
-    [SdkConsoleCommand("group","deletegrouppredefinedrulepublicv1")]
-    public class DeleteGroupPredefinedRulePublicV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("group", "deletegrouppredefinedrulepublicv1")]
+    public class DeleteGroupPredefinedRulePublicV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Group"; } }
+        public string ServiceName { get { return "Group"; } }
 
-        public string OperationName{ get { return "DeleteGroupPredefinedRulePublicV1"; } }
+        public string OperationName { get { return "DeleteGroupPredefinedRulePublicV1"; } }
 
         [SdkCommandArgument("allowedAction")]
         public string AllowedAction { get; set; } = String.Empty;

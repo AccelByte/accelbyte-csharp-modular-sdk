@@ -73,10 +73,10 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 PublicGeneratePersonalDataURL op = new PublicGeneratePersonalDataURL(this,
-                    password,                    
-                    namespace_,                    
-                    requestDate,                    
-                    userId                    
+                    password,
+                    namespace_,
+                    requestDate,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -178,13 +178,13 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             PathParams["namespace"] = namespace_;
             PathParams["requestDate"] = requestDate;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,22 +209,22 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #endregion
 
         public PublicGeneratePersonalDataURL(
-            string namespace_,            
-            string requestDate,            
-            string userId,            
-            string password            
+            string namespace_,
+            string requestDate,
+            string userId,
+            string password
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["requestDate"] = requestDate;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,7 +236,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGeneratePersonalDataURL.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGeneratePersonalDataURL.Response()

@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 OldPublicRetrieveSingleLocalizedPolicyVersion op = new OldPublicRetrieveSingleLocalizedPolicyVersion(this,
-                    localizedPolicyVersionId                    
+                    localizedPolicyVersionId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,12 +139,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
         }
         #endregion
@@ -164,16 +164,16 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public OldPublicRetrieveSingleLocalizedPolicyVersion(
-            string localizedPolicyVersionId            
+            string localizedPolicyVersionId
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
         }
 
@@ -181,10 +181,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public OldPublicRetrieveSingleLocalizedPolicyVersion.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new OldPublicRetrieveSingleLocalizedPolicyVersion.Response()

@@ -84,10 +84,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminPlatformLinkV3 op = new AdminPlatformLinkV3(this,
-                    ticket,                    
-                    namespace_,                    
-                    platformId,                    
-                    userId                    
+                    ticket,
+                    namespace_,
+                    platformId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -189,13 +189,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (ticket is not null) FormParams["ticket"] = ticket;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,22 +224,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminPlatformLinkV3(
-            string namespace_,            
-            string platformId,            
-            string userId,            
-            string ticket            
+            string namespace_,
+            string platformId,
+            string userId,
+            string ticket
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
+
+
             if (ticket is not null) FormParams["ticket"] = ticket;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -251,7 +251,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminPlatformLinkV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminPlatformLinkV3.Response()

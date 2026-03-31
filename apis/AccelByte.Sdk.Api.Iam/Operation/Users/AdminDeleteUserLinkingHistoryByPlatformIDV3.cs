@@ -64,7 +64,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ----
     /// **Substitute endpoint**: /v3/admin/namespaces/{namespace}/users/{userId}/platforms/{platformId}/link/restrictions
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminDeleteUserLinkingHistoryByPlatformIDV3 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -107,16 +107,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminDeleteUserLinkingHistoryByPlatformIDV3 op = new AdminDeleteUserLinkingHistoryByPlatformIDV3(this,
-                    namespace_,                    
-                    platformId,                    
-                    userId                    
+                    namespace_,
+                    platformId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminDeleteUserLinkingHistoryByPlatformIDV3.Response InternalExecute(
                 string namespace_,
                 string platformId,
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -167,7 +167,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public AdminDeleteUserLinkingHistoryByPlatformIDV3Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminDeleteUserLinkingHistoryByPlatformIDV3.Response Execute(
                 string namespace_,
                 string platformId,
@@ -204,12 +204,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,20 +236,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminDeleteUserLinkingHistoryByPlatformIDV3(
-            string namespace_,            
-            string platformId,            
-            string userId            
+            string namespace_,
+            string platformId,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -258,10 +258,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteUserLinkingHistoryByPlatformIDV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteUserLinkingHistoryByPlatformIDV3.Response()

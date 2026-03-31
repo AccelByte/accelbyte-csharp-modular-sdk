@@ -78,10 +78,10 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminUploadPlatformCredentials op = new AdminUploadPlatformCredentials(this,
-                    file,                    
-                    password,                    
-                    namespace_,                    
-                    platformId                    
+                    file,
+                    password,
+                    namespace_,
+                    platformId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -182,15 +182,15 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId.Value;
-            
-            
+
+
             if (builder.Description is not null) FormParams["description"] = builder.Description;
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -215,24 +215,24 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminUploadPlatformCredentials(
-            string namespace_,            
-            AdminUploadPlatformCredentialsPlatformId platformId,            
-            string? description,            
-            Stream file,            
-            string password            
+            string namespace_,
+            AdminUploadPlatformCredentialsPlatformId platformId,
+            string? description,
+            Stream file,
+            string password
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId.Value;
-            
-            
+
+
             if (description is not null) FormParams["description"] = description;
             if (file is not null) FormParams["file"] = file;
             if (password is not null) FormParams["password"] = password;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -244,7 +244,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUploadPlatformCredentials.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUploadPlatformCredentials.Response()

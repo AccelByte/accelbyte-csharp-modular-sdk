@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetAppImageListV1BuilderCompat : GetAppImageListV1.GetAppImageListV1AbstractBuilder<GetAppImageListV1BuilderCompat>
         {
             internal GetAppImageListV1BuilderCompat() : base() { }
 
             internal GetAppImageListV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedGetAppImageListV1Response? Execute(
                 string app,
                 string namespace_
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteAppImagesV1BuilderCompat : DeleteAppImagesV1.DeleteAppImagesV1AbstractBuilder<DeleteAppImagesV1BuilderCompat>
         {
             internal DeleteAppImagesV1BuilderCompat() : base() { }
 
             internal DeleteAppImagesV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 GeneratedDeleteAppImagesV1Request body,
                 string app,
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppImageListV1BuilderCompat GetAppImageListV1Op
         {
             get
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteAppImagesV1BuilderCompat DeleteAppImagesV1Op
         {
             get

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gametelemetry.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
 {
-    [SdkConsoleCommand("gametelemetry","protectedsaveeventsgametelemetryv1protectedeventspost")]
-    public class ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("gametelemetry", "protectedsaveeventsgametelemetryv1protectedeventspost")]
+    public class ProtectedSaveEventsGameTelemetryV1ProtectedEventsPostCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Gametelemetry"; } }
+        public string ServiceName { get { return "Gametelemetry"; } }
 
-        public string OperationName{ get { return "ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost"; } }
+        public string OperationName { get { return "ProtectedSaveEventsGameTelemetryV1ProtectedEventsPost"; } }
 
         [SdkCommandData("body")]
         public List<TelemetryBody> Body { get; set; } = new List<TelemetryBody>();

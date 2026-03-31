@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 SetDefaultPolicy op = new SetDefaultPolicy(this,
-                    namespace_,                    
-                    policyId                    
+                    namespace_,
+                    policyId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,18 +174,18 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public SetDefaultPolicy(
-            string namespace_,            
-            string policyId            
+            string namespace_,
+            string policyId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["policyId"] = policyId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,10 +194,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Patch;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SetDefaultPolicy.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SetDefaultPolicy.Response()

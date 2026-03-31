@@ -70,9 +70,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetUserOrder op = new GetUserOrder(this,
-                    namespace_,                    
-                    orderNo,                    
-                    userId                    
+                    namespace_,
+                    orderNo,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -233,12 +233,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -264,20 +264,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetUserOrder(
-            string namespace_,            
-            string orderNo,            
-            string userId            
+            string namespace_,
+            string orderNo,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -289,7 +289,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserOrder.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserOrder.Response()
@@ -329,7 +329,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -342,7 +342,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

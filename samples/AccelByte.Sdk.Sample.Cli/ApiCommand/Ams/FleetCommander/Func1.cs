@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","func1")]
-    public class Func1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "func1")]
+    public class Func1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "Func1"; } }
+        public string OperationName { get { return "Func1"; } }
 
         public Func1Command(IAccelByteSdk sdk)
         {

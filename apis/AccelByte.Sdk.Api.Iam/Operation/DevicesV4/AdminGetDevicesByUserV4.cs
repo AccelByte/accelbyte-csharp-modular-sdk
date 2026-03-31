@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetDevicesByUserV4 op = new AdminGetDevicesByUserV4(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,13 +148,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
-            
-            
+            if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -181,18 +181,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetDevicesByUserV4(
-            string namespace_,            
-            string? userId            
+            string namespace_,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
-            
+            if (userId is not null) QueryParams["userId"] = userId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetDevicesByUserV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetDevicesByUserV4.Response()

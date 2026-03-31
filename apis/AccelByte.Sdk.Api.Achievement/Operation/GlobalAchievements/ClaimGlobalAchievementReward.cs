@@ -80,9 +80,9 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             )
             {
                 ClaimGlobalAchievementReward op = new ClaimGlobalAchievementReward(this,
-                    achievementCode,                    
-                    namespace_,                    
-                    userId                    
+                    achievementCode,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -175,12 +175,12 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             PathParams["achievementCode"] = achievementCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,20 +203,20 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #endregion
 
         public ClaimGlobalAchievementReward(
-            string achievementCode,            
-            string namespace_,            
-            string userId            
+            string achievementCode,
+            string namespace_,
+            string userId
         )
         {
             PathParams["achievementCode"] = achievementCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ClaimGlobalAchievementReward.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ClaimGlobalAchievementReward.Response()

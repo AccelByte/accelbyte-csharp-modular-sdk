@@ -70,8 +70,8 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminDeleteItemType op = new AdminDeleteItemType(this,
-                    itemTypeName,                    
-                    namespace_                    
+                    itemTypeName,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -154,12 +154,12 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["itemTypeName"] = itemTypeName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,18 +180,18 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminDeleteItemType(
-            string itemTypeName,            
-            string namespace_            
+            string itemTypeName,
+            string namespace_
         )
         {
             PathParams["itemTypeName"] = itemTypeName;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,10 +200,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteItemType.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteItemType.Response()

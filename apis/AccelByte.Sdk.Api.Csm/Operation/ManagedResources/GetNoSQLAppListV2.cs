@@ -118,8 +118,8 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 GetNoSQLAppListV2 op = new GetNoSQLAppListV2(this,
-                    resourceId,                    
-                    studioName                    
+                    resourceId,
+                    studioName
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -202,16 +202,16 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["resourceId"] = resourceId;
             PathParams["studioName"] = studioName;
-            
+
             if (builder.AppName is not null) QueryParams["appName"] = builder.AppName;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Namespace is not null) QueryParams["namespace"] = builder.Namespace;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,26 +236,26 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public GetNoSQLAppListV2(
-            string resourceId,            
-            string studioName,            
-            string? appName,            
-            long? limit,            
-            string? namespace_,            
-            long? offset            
+            string resourceId,
+            string studioName,
+            string? appName,
+            long? limit,
+            string? namespace_,
+            long? offset
         )
         {
             PathParams["resourceId"] = resourceId;
             PathParams["studioName"] = studioName;
-            
+
             if (appName is not null) QueryParams["appName"] = appName;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (namespace_ is not null) QueryParams["namespace"] = namespace_;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -267,7 +267,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetNoSQLAppListV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetNoSQLAppListV2.Response()

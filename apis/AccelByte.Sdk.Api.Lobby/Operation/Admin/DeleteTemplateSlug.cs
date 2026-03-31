@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 DeleteTemplateSlug op = new DeleteTemplateSlug(this,
-                    namespace_,                    
-                    templateSlug                    
+                    namespace_,
+                    templateSlug
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,18 +180,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public DeleteTemplateSlug(
-            string namespace_,            
-            string templateSlug            
+            string namespace_,
+            string templateSlug
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateSlug"] = templateSlug;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,7 +203,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteTemplateSlug.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteTemplateSlug.Response()

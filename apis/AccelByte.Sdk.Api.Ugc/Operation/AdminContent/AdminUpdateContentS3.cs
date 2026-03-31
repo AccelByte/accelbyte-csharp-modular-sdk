@@ -87,11 +87,11 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminUpdateContentS3 op = new AdminUpdateContentS3(this,
-                    body,                    
-                    channelId,                    
-                    contentId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    channelId,
+                    contentId,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -287,13 +287,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -339,24 +339,24 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminUpdateContentS3(
-            string channelId,            
-            string contentId,            
-            string namespace_,            
-            string userId,            
-            Model.ModelsAdminUpdateContentRequest body            
+            string channelId,
+            string contentId,
+            string namespace_,
+            string userId,
+            Model.ModelsAdminUpdateContentRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -368,7 +368,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateContentS3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateContentS3.Response()
@@ -438,7 +438,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -481,7 +481,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

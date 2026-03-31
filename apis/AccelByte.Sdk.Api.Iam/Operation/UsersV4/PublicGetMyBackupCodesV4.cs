@@ -26,7 +26,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// This endpoint is used to get 8-digits backup codes.
     /// Each code is a one-time code and will be deleted once used.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetMyBackupCodesV4 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,14 +67,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicGetMyBackupCodesV4 op = new PublicGetMyBackupCodesV4(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected PublicGetMyBackupCodesV4.Response InternalExecute(
                 string namespace_
             )
@@ -88,7 +88,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public PublicGetMyBackupCodesV4Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicGetMyBackupCodesV4.Response Execute(
                 string namespace_
             )
@@ -142,12 +142,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,16 +174,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGetMyBackupCodesV4(
-            string namespace_            
+            string namespace_
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,10 +192,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetMyBackupCodesV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetMyBackupCodesV4.Response()

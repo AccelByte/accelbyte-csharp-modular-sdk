@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
     ///
     /// Get chat history in a namespace.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminTopicChatHistory : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -157,15 +157,15 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminTopicChatHistory op = new AdminTopicChatHistory(this,
-                    namespace_,                    
-                    topic                    
+                    namespace_,
+                    topic
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminTopicChatHistory.Response InternalExecute(
                 string namespace_,
                 string topic
@@ -181,7 +181,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -200,7 +200,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
             public AdminTopicChatHistoryBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminTopicChatHistory.Response Execute(
                 string namespace_,
                 string topic
@@ -243,7 +243,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
+
             if (builder.EndCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(builder.EndCreatedAt)!;
             if (builder.Keyword is not null) QueryParams["keyword"] = builder.Keyword;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -253,11 +253,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.ShardId is not null) QueryParams["shardId"] = builder.ShardId;
             if (builder.StartCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(builder.StartCreatedAt)!;
             if (builder.Unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(builder.Unfiltered)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -282,22 +282,22 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminTopicChatHistory(
-            string namespace_,            
-            string topic,            
-            long? endCreatedAt,            
-            string? keyword,            
-            long? limit,            
-            long? offset,            
-            string? order,            
-            string? senderUserId,            
-            string? shardId,            
-            long? startCreatedAt,            
-            bool? unfiltered            
+            string namespace_,
+            string topic,
+            long? endCreatedAt,
+            string? keyword,
+            long? limit,
+            long? offset,
+            string? order,
+            string? senderUserId,
+            string? shardId,
+            long? startCreatedAt,
+            bool? unfiltered
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
+
             if (endCreatedAt != null) QueryParams["endCreatedAt"] = Convert.ToString(endCreatedAt)!;
             if (keyword is not null) QueryParams["keyword"] = keyword;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -307,11 +307,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (shardId is not null) QueryParams["shardId"] = shardId;
             if (startCreatedAt != null) QueryParams["startCreatedAt"] = Convert.ToString(startCreatedAt)!;
             if (unfiltered != null) QueryParams["unfiltered"] = Convert.ToString(unfiltered)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -323,7 +323,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminTopicChatHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminTopicChatHistory.Response()

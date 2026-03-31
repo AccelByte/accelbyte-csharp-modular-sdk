@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,14 +150,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public AdminSendMyMFAEmailCodeV4(IAdminSendMyMFAEmailCodeV4Builder builder
         )
         {
-            
-            
+
+
             if (builder.Action is not null) FormParams["action"] = builder.Action;
             if (builder.LanguageTag is not null) FormParams["languageTag"] = builder.LanguageTag;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,18 +186,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminSendMyMFAEmailCodeV4(
-            string? action,            
-            string? languageTag            
+            string? action,
+            string? languageTag
         )
         {
-            
-            
+
+
             if (action is not null) FormParams["action"] = action;
             if (languageTag is not null) FormParams["languageTag"] = languageTag;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminSendMyMFAEmailCodeV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSendMyMFAEmailCodeV4.Response()

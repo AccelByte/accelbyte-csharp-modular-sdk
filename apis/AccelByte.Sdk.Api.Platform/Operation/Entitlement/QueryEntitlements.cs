@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryEntitlements op = new QueryEntitlements(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -179,7 +179,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.AppType is not null) QueryParams["appType"] = builder.AppType.Value;
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
@@ -242,12 +242,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Origin is not null) QueryParams["origin"] = builder.Origin.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
+
+
             CollectionFormatMap["itemId"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -264,20 +264,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryEntitlements(
-            string namespace_,            
-            bool? activeOnly,            
-            QueryEntitlementsAppType? appType,            
-            QueryEntitlementsEntitlementClazz? entitlementClazz,            
-            string? entitlementName,            
-            List<string>? itemId,            
-            int? limit,            
-            int? offset,            
-            QueryEntitlementsOrigin? origin,            
-            string? userId            
+            string namespace_,
+            bool? activeOnly,
+            QueryEntitlementsAppType? appType,
+            QueryEntitlementsEntitlementClazz? entitlementClazz,
+            string? entitlementName,
+            List<string>? itemId,
+            int? limit,
+            int? offset,
+            QueryEntitlementsOrigin? origin,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (appType is not null) QueryParams["appType"] = appType.Value;
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
@@ -287,12 +287,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (origin is not null) QueryParams["origin"] = origin.Value;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
+
+
             CollectionFormatMap["itemId"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -301,10 +301,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryEntitlements.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryEntitlements.Response()

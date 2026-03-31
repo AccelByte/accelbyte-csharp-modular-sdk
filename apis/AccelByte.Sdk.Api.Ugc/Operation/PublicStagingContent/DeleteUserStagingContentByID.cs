@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 DeleteUserStagingContentByID op = new DeleteUserStagingContentByID(this,
-                    contentId,                    
-                    namespace_,                    
-                    userId                    
+                    contentId,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,12 +162,12 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,20 +192,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public DeleteUserStagingContentByID(
-            string contentId,            
-            string namespace_,            
-            string userId            
+            string contentId,
+            string namespace_,
+            string userId
         )
         {
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -214,10 +214,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() { "application/json","application/octet-stream" };
+        public override List<string> Consumes => new() { "application/json", "application/octet-stream" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteUserStagingContentByID.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteUserStagingContentByID.Response()

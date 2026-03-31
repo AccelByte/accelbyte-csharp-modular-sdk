@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// 
     ///   *  Returns : updated namespace slot config
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class UpdateNamespaceSlotConfig : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -84,14 +84,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 UpdateNamespaceSlotConfig op = new UpdateNamespaceSlotConfig(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected UpdateNamespaceSlotConfig.Response InternalExecute(
                 string namespace_
             )
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public UpdateNamespaceSlotConfigBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public UpdateNamespaceSlotConfig.Response Execute(
                 string namespace_
             )
@@ -159,13 +159,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,18 +182,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public UpdateNamespaceSlotConfig(
-            string namespace_,            
-            Model.SlotConfigUpdate body            
+            string namespace_,
+            Model.SlotConfigUpdate body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,7 +205,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateNamespaceSlotConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateNamespaceSlotConfig.Response()

@@ -70,9 +70,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 UpdateTopicByTopicName op = new UpdateTopicByTopicName(this,
-                    body,                    
-                    namespace_,                    
-                    topic                    
+                    body,
+                    namespace_,
+                    topic
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,20 +195,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public UpdateTopicByTopicName(
-            string namespace_,            
-            string topic,            
-            Model.ModelUpdateTopicRequest body            
+            string namespace_,
+            string topic,
+            Model.ModelUpdateTopicRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateTopicByTopicName.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateTopicByTopicName.Response()

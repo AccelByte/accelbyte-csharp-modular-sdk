@@ -69,8 +69,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminUpdateConfigurationAlertV1 op = new AdminUpdateConfigurationAlertV1(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,13 +152,13 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,18 +185,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminUpdateConfigurationAlertV1(
-            string namespace_,            
-            Model.ApimodelsConfigAlertRequestCreate body            
+            string namespace_,
+            Model.ApimodelsConfigAlertRequestCreate body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -208,7 +208,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateConfigurationAlertV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateConfigurationAlertV1.Response()

@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminProfanityDelete op = new AdminProfanityDelete(this,
-                    id,                    
-                    namespace_                    
+                    id,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,18 +182,18 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminProfanityDelete(
-            string id,            
-            string namespace_            
+            string id,
+            string namespace_
         )
         {
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,7 +205,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminProfanityDelete.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminProfanityDelete.Response()

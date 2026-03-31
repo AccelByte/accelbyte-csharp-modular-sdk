@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             )
             {
                 BulkCreatePSNEvent op = new BulkCreatePSNEvent(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,13 +149,13 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -178,18 +178,18 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #endregion
 
         public BulkCreatePSNEvent(
-            string namespace_,            
-            Model.ModelsBulkCreatePSNEvents body            
+            string namespace_,
+            Model.ModelsBulkCreatePSNEvents body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,7 +201,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public BulkCreatePSNEvent.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new BulkCreatePSNEvent.Response()

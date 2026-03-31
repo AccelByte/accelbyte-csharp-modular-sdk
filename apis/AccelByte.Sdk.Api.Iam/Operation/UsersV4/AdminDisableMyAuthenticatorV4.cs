@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminDisableMyAuthenticatorV4 op = new AdminDisableMyAuthenticatorV4(this,
-                    body                    
+                    body
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -142,13 +142,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             ModelDisableMFARequest body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -175,16 +175,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminDisableMyAuthenticatorV4(
-            Model.ModelDisableMFARequest body            
+            Model.ModelDisableMFARequest body
         )
         {
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDisableMyAuthenticatorV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDisableMyAuthenticatorV4.Response()

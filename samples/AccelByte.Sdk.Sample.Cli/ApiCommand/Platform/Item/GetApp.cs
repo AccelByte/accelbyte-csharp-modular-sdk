@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","getapp")]
-    public class GetAppCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "getapp")]
+    public class GetAppCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "GetApp"; } }
+        public string OperationName { get { return "GetApp"; } }
 
         [SdkCommandArgument("itemId")]
         public string ItemId { get; set; } = String.Empty;
@@ -70,8 +70,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

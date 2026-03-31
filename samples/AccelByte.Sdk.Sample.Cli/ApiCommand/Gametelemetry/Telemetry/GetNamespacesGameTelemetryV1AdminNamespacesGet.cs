@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Gametelemetry.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
 {
-    [SdkConsoleCommand("gametelemetry","getnamespacesgametelemetryv1adminnamespacesget")]
-    public class GetNamespacesGameTelemetryV1AdminNamespacesGetCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("gametelemetry", "getnamespacesgametelemetryv1adminnamespacesget")]
+    public class GetNamespacesGameTelemetryV1AdminNamespacesGetCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Gametelemetry"; } }
+        public string ServiceName { get { return "Gametelemetry"; } }
 
-        public string OperationName{ get { return "GetNamespacesGameTelemetryV1AdminNamespacesGet"; } }
+        public string OperationName { get { return "GetNamespacesGameTelemetryV1AdminNamespacesGet"; } }
 
         public GetNamespacesGameTelemetryV1AdminNamespacesGetCommand(IAccelByteSdk sdk)
         {
@@ -52,8 +52,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Gametelemetry
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

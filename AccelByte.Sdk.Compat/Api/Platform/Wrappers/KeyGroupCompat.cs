@@ -87,14 +87,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetKeyGroupByBoothNameBuilderCompat : GetKeyGroupByBoothName.GetKeyGroupByBoothNameAbstractBuilder<GetKeyGroupByBoothNameBuilderCompat>
         {
             internal GetKeyGroupByBoothNameBuilderCompat() : base() { }
 
             internal GetKeyGroupByBoothNameBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.KeyGroupInfo? Execute(
                 string namespace_,
                 string boothName
@@ -303,7 +303,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetKeyGroupByBoothNameBuilderCompat GetKeyGroupByBoothNameOp
         {
             get

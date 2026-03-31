@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetMyNotifications op = new GetMyNotifications(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -180,16 +180,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndTime != null) QueryParams["endTime"] = Convert.ToString(builder.EndTime)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.StartTime != null) QueryParams["startTime"] = Convert.ToString(builder.StartTime)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,24 +216,24 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public GetMyNotifications(
-            string namespace_,            
-            long? endTime,            
-            long? limit,            
-            long? offset,            
-            long? startTime            
+            string namespace_,
+            long? endTime,
+            long? limit,
+            long? offset,
+            long? startTime
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime != null) QueryParams["endTime"] = Convert.ToString(endTime)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (startTime != null) QueryParams["startTime"] = Convert.ToString(startTime)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -245,7 +245,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetMyNotifications.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetMyNotifications.Response()

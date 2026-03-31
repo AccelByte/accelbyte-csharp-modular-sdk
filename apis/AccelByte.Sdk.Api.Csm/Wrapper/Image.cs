@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppImageListV1.GetAppImageListV1Builder GetAppImageListV1Op
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteAppImagesV1.DeleteAppImagesV1Builder DeleteAppImagesV1Op
         {
             get
@@ -60,8 +60,8 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
         }
         #endregion
 
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppImageListV1.Response GetAppImageListV1(GetAppImageListV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -78,9 +78,9 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteAppImagesV1.Response DeleteAppImagesV1(DeleteAppImagesV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -97,6 +97,6 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
     }
 }

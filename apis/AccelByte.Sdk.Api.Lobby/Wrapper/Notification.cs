@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendPartyFreeformNotificationV1Admin.SendPartyFreeformNotificationV1AdminBuilder SendPartyFreeformNotificationV1AdminOp
         {
             get
@@ -68,7 +68,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendPartyTemplatedNotificationV1Admin.SendPartyTemplatedNotificationV1AdminBuilder SendPartyTemplatedNotificationV1AdminOp
         {
             get
@@ -389,8 +389,8 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendPartyFreeformNotificationV1Admin.Response SendPartyFreeformNotificationV1Admin(SendPartyFreeformNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
@@ -407,9 +407,9 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendPartyTemplatedNotificationV1Admin.Response SendPartyTemplatedNotificationV1Admin(SendPartyTemplatedNotificationV1Admin input)
         {
             var response = _sdk.RunRequest(input);
@@ -426,7 +426,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public GetAllNotificationTemplatesV1Admin.Response GetAllNotificationTemplatesV1Admin(GetAllNotificationTemplatesV1Admin input)
         {
             var response = _sdk.RunRequest(input);

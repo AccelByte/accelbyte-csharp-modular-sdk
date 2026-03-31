@@ -71,9 +71,9 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminUploadContentScreenshot op = new AdminUploadContentScreenshot(this,
-                    body,                    
-                    contentId,                    
-                    namespace_                    
+                    body,
+                    contentId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -165,13 +165,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         {
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -198,20 +198,20 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminUploadContentScreenshot(
-            string contentId,            
-            string namespace_,            
-            Model.ModelsCreateScreenshotRequest body            
+            string contentId,
+            string namespace_,
+            Model.ModelsCreateScreenshotRequest body
         )
         {
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,7 +223,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUploadContentScreenshot.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUploadContentScreenshot.Response()

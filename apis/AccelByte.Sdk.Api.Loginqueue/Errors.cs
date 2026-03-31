@@ -48,15 +48,15 @@ namespace AccelByte.Sdk.Api.Loginqueue
 
         public ApiError TranslateToApiError()
         {
-            string errorCode = 
+            string errorCode =
                 ErrorCode != null ? ErrorCode.Value.ToString() :
                 "";
-            
-            string errorMessage = 
-                ErrorMessage != null ? ErrorMessage.ToString() :                
-                Message != null ? Message.ToString() :                
+
+            string errorMessage =
+                ErrorMessage != null ? ErrorMessage.ToString() :
+                Message != null ? Message.ToString() :
                 "";
-            
+
             return new ApiError(errorCode, errorMessage);
         }
     }

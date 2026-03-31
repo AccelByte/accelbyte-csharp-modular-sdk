@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admindeleteuserlinkingrestrictionbyplatformidv3")]
-    public class AdminDeleteUserLinkingRestrictionByPlatformIDV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admindeleteuserlinkingrestrictionbyplatformidv3")]
+    public class AdminDeleteUserLinkingRestrictionByPlatformIDV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminDeleteUserLinkingRestrictionByPlatformIDV3"; } }
+        public string OperationName { get { return "AdminDeleteUserLinkingRestrictionByPlatformIDV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminBulkGetAdminPlayerRecordV1 op = new AdminBulkGetAdminPlayerRecordV1(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -161,13 +161,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public AdminBulkGetAdminPlayerRecordV1(
-            string namespace_,            
-            string userId,            
-            Model.ModelsBulkGetAdminPlayerRecordRequest body            
+            string namespace_,
+            string userId,
+            Model.ModelsBulkGetAdminPlayerRecordRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminBulkGetAdminPlayerRecordV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminBulkGetAdminPlayerRecordV1.Response()

@@ -68,9 +68,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 SendMFAAuthenticationCode op = new SendMFAAuthenticationCode(this,
-                    clientId,                    
-                    factor,                    
-                    mfaToken                    
+                    clientId,
+                    factor,
+                    mfaToken
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,15 +160,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string mfaToken
         )
         {
-            
-            
+
+
             if (clientId is not null) FormParams["clientId"] = clientId;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,20 +195,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public SendMFAAuthenticationCode(
-            string clientId,            
-            string factor,            
-            string mfaToken            
+            string clientId,
+            string factor,
+            string mfaToken
         )
         {
-            
-            
+
+
             if (clientId is not null) FormParams["clientId"] = clientId;
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SendMFAAuthenticationCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SendMFAAuthenticationCode.Response()

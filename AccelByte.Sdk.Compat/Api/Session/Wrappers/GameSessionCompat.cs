@@ -1115,14 +1115,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AppendTeamGameSessionBuilderCompat : AppendTeamGameSession.AppendTeamGameSessionAbstractBuilder<AppendTeamGameSessionBuilderCompat>
         {
             internal AppendTeamGameSessionBuilderCompat() : base() { }
 
             internal AppendTeamGameSessionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Session.Model.ApimodelsGameSessionResponse? Execute(
                 ApimodelsAppendTeamGameSessionRequest body,
                 string namespace_,
@@ -1446,7 +1446,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AppendTeamGameSessionBuilderCompat AppendTeamGameSessionOp
         {
             get

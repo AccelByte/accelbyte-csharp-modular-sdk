@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     ///
     /// Get user entitlement by itemId.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetUserEntitlementByItemId : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -78,16 +78,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetUserEntitlementByItemId op = new PublicGetUserEntitlementByItemId(this,
-                    namespace_,                    
-                    userId,                    
-                    itemId                    
+                    namespace_,
+                    userId,
+                    itemId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected PublicGetUserEntitlementByItemId.Response InternalExecute(
                 string namespace_,
                 string userId,
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public PublicGetUserEntitlementByItemIdBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicGetUserEntitlementByItemId.Response Execute(
                 string namespace_,
                 string userId,
@@ -174,14 +174,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
             if (itemId is not null) QueryParams["itemId"] = itemId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,22 +200,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetUserEntitlementByItemId(
-            string namespace_,            
-            string userId,            
-            PublicGetUserEntitlementByItemIdEntitlementClazz? entitlementClazz,            
-            string itemId            
+            string namespace_,
+            string userId,
+            PublicGetUserEntitlementByItemIdEntitlementClazz? entitlementClazz,
+            string itemId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
             if (itemId is not null) QueryParams["itemId"] = itemId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,10 +224,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetUserEntitlementByItemId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetUserEntitlementByItemId.Response()

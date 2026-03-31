@@ -103,9 +103,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminDeleteUserLinkingRestrictionByPlatformIDV3 op = new AdminDeleteUserLinkingRestrictionByPlatformIDV3(this,
-                    namespace_,                    
-                    platformId,                    
-                    userId                    
+                    namespace_,
+                    platformId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -198,12 +198,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -230,20 +230,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminDeleteUserLinkingRestrictionByPlatformIDV3(
-            string namespace_,            
-            string platformId,            
-            string userId            
+            string namespace_,
+            string platformId,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -252,10 +252,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteUserLinkingRestrictionByPlatformIDV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteUserLinkingRestrictionByPlatformIDV3.Response()

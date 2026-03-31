@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Verify a message directly from the UI or other services
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminVerifyMessageProfanityResponse : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -67,15 +67,15 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminVerifyMessageProfanityResponse op = new AdminVerifyMessageProfanityResponse(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminVerifyMessageProfanityResponse.Response InternalExecute(
                 ModelsAdminVerifyMessageProfanityRequest body,
                 string namespace_
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
             public AdminVerifyMessageProfanityResponseBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminVerifyMessageProfanityResponse.Response Execute(
                 ModelsAdminVerifyMessageProfanityRequest body,
                 string namespace_
@@ -152,13 +152,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,18 +185,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminVerifyMessageProfanityResponse(
-            string namespace_,            
-            Model.ModelsAdminVerifyMessageProfanityRequest body            
+            string namespace_,
+            Model.ModelsAdminVerifyMessageProfanityRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -208,7 +208,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminVerifyMessageProfanityResponse.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminVerifyMessageProfanityResponse.Response()

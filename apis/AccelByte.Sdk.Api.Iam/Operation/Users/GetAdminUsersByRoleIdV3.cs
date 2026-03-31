@@ -100,8 +100,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetAdminUsersByRoleIdV3 op = new GetAdminUsersByRoleIdV3(this,
-                    namespace_,                    
-                    roleId                    
+                    namespace_,
+                    roleId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -184,15 +184,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["roleId"] = roleId;
-            
+
             if (builder.After != null) QueryParams["after"] = Convert.ToString(builder.After)!;
             if (builder.Before != null) QueryParams["before"] = Convert.ToString(builder.Before)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,24 +219,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetAdminUsersByRoleIdV3(
-            string namespace_,            
-            string roleId,            
-            long? after,            
-            long? before,            
-            long? limit            
+            string namespace_,
+            string roleId,
+            long? after,
+            long? before,
+            long? limit
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["roleId"] = roleId;
-            
+
             if (after != null) QueryParams["after"] = Convert.ToString(after)!;
             if (before != null) QueryParams["before"] = Convert.ToString(before)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -245,10 +245,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetAdminUsersByRoleIdV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetAdminUsersByRoleIdV3.Response()

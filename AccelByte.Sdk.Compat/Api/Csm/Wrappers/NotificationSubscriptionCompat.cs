@@ -265,14 +265,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteSubscriptionAppNotificationV2BuilderCompat : DeleteSubscriptionAppNotificationV2.DeleteSubscriptionAppNotificationV2AbstractBuilder<DeleteSubscriptionAppNotificationV2BuilderCompat>
         {
             internal DeleteSubscriptionAppNotificationV2BuilderCompat() : base() { }
 
             internal DeleteSubscriptionAppNotificationV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string app,
                 string namespace_,
@@ -359,7 +359,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSubscriptionAppNotificationV2BuilderCompat DeleteSubscriptionAppNotificationV2Op
         {
             get

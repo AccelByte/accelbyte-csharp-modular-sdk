@@ -79,8 +79,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PlatformTokenRefreshV3 op = new PlatformTokenRefreshV3(this,
-                    platformToken,                    
-                    platformId                    
+                    platformToken,
+                    platformId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,13 +162,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["platformId"] = platformId;
-            
-            
+
+
             if (platformToken is not null) FormParams["platform_token"] = platformToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,18 +193,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PlatformTokenRefreshV3(
-            string platformId,            
-            string platformToken            
+            string platformId,
+            string platformToken
         )
         {
             PathParams["platformId"] = platformId;
-            
-            
+
+
             if (platformToken is not null) FormParams["platform_token"] = platformToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,7 +216,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PlatformTokenRefreshV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PlatformTokenRefreshV3.Response()

@@ -79,8 +79,8 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 GetGameSession op = new GetGameSession(this,
-                    namespace_,                    
-                    sessionId                    
+                    namespace_,
+                    sessionId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,7 +160,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -223,12 +223,12 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -270,18 +270,18 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public GetGameSession(
-            string namespace_,            
-            string sessionId            
+            string namespace_,
+            string sessionId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -293,7 +293,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetGameSession.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetGameSession.Response()
@@ -357,7 +357,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -394,7 +394,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

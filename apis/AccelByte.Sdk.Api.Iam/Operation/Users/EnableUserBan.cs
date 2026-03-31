@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans/{banId} [PATCH]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class EnableUserBan : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,16 +70,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 EnableUserBan op = new EnableUserBan(this,
-                    banId,                    
-                    namespace_,                    
-                    userId                    
+                    banId,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected EnableUserBan.Response InternalExecute(
                 string banId,
                 string namespace_,
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public EnableUserBanBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public EnableUserBan.Response Execute(
                 string banId,
                 string namespace_,
@@ -167,12 +167,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["banId"] = banId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public EnableUserBan(
-            string banId,            
-            string namespace_,            
-            string userId            
+            string banId,
+            string namespace_,
+            string userId
         )
         {
             PathParams["banId"] = banId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "*/*" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public EnableUserBan.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new EnableUserBan.Response()

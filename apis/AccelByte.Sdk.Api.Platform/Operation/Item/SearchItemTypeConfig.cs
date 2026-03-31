@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 SearchItemTypeConfig op = new SearchItemTypeConfig(this,
-                    itemType                    
+                    itemType
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,14 +151,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             SearchItemTypeConfigItemType itemType
         )
         {
-            
+
             if (builder.Clazz is not null) QueryParams["clazz"] = builder.Clazz;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,18 +177,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public SearchItemTypeConfig(
-            string? clazz,            
-            SearchItemTypeConfigItemType itemType            
+            string? clazz,
+            SearchItemTypeConfigItemType itemType
         )
         {
-            
+
             if (clazz is not null) QueryParams["clazz"] = clazz;
             if (itemType is not null) QueryParams["itemType"] = itemType.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,10 +197,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SearchItemTypeConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SearchItemTypeConfig.Response()

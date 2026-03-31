@@ -209,14 +209,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class IndirectBulkAcceptVersionedPolicyV2BuilderCompat : IndirectBulkAcceptVersionedPolicyV2.IndirectBulkAcceptVersionedPolicyV2AbstractBuilder<IndirectBulkAcceptVersionedPolicyV2BuilderCompat>
         {
             internal IndirectBulkAcceptVersionedPolicyV2BuilderCompat() : base() { }
 
             internal IndirectBulkAcceptVersionedPolicyV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Legal.Model.AcceptAgreementResponse? Execute(
                 string clientId,
                 string countryCode,
@@ -251,14 +251,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicIndirectBulkAcceptVersionedPolicyBuilderCompat : PublicIndirectBulkAcceptVersionedPolicy.PublicIndirectBulkAcceptVersionedPolicyAbstractBuilder<PublicIndirectBulkAcceptVersionedPolicyBuilderCompat>
         {
             internal PublicIndirectBulkAcceptVersionedPolicyBuilderCompat() : base() { }
 
             internal PublicIndirectBulkAcceptVersionedPolicyBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Legal.Model.AcceptAgreementResponse? Execute(
                 string userId
             )
@@ -339,7 +339,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public IndirectBulkAcceptVersionedPolicyV2BuilderCompat IndirectBulkAcceptVersionedPolicyV2Op
         {
             get
@@ -348,7 +348,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicIndirectBulkAcceptVersionedPolicyBuilderCompat PublicIndirectBulkAcceptVersionedPolicyOp
         {
             get

@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 DeleteSecretV2 op = new DeleteSecretV2(this,
-                    app,                    
-                    configId,                    
-                    namespace_                    
+                    app,
+                    configId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,12 +164,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             PathParams["app"] = app;
             PathParams["configId"] = configId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public DeleteSecretV2(
-            string app,            
-            string configId,            
-            string namespace_            
+            string app,
+            string configId,
+            string namespace_
         )
         {
             PathParams["app"] = app;
             PathParams["configId"] = configId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteSecretV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteSecretV2.Response()

@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Get player's specific session attribute by user id in a namespace.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminGetPlayerSessionAttribute : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminGetPlayerSessionAttribute op = new AdminGetPlayerSessionAttribute(this,
-                    attribute,                    
-                    namespace_,                    
-                    userId                    
+                    attribute,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminGetPlayerSessionAttribute.Response InternalExecute(
                 string attribute,
                 string namespace_,
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
             public AdminGetPlayerSessionAttributeBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminGetPlayerSessionAttribute.Response Execute(
                 string attribute,
                 string namespace_,
@@ -165,12 +165,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             PathParams["attribute"] = attribute;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminGetPlayerSessionAttribute(
-            string attribute,            
-            string namespace_,            
-            string userId            
+            string attribute,
+            string namespace_,
+            string userId
         )
         {
             PathParams["attribute"] = attribute;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetPlayerSessionAttribute.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetPlayerSessionAttribute.Response()

@@ -87,14 +87,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetAllPlayerSessionAttributeBuilderCompat : AdminGetAllPlayerSessionAttribute.AdminGetAllPlayerSessionAttributeAbstractBuilder<AdminGetAllPlayerSessionAttributeBuilderCompat>
         {
             internal AdminGetAllPlayerSessionAttributeBuilderCompat() : base() { }
 
             internal AdminGetAllPlayerSessionAttributeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsGetAllPlayerSessionAttributeResponse? Execute(
                 string namespace_,
                 string userId
@@ -121,14 +121,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminSetPlayerSessionAttributeBuilderCompat : AdminSetPlayerSessionAttribute.AdminSetPlayerSessionAttributeAbstractBuilder<AdminSetPlayerSessionAttributeBuilderCompat>
         {
             internal AdminSetPlayerSessionAttributeBuilderCompat() : base() { }
 
             internal AdminSetPlayerSessionAttributeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsSetPlayerSessionAttributeRequest body,
                 string namespace_,
@@ -157,14 +157,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetPlayerSessionAttributeBuilderCompat : AdminGetPlayerSessionAttribute.AdminGetPlayerSessionAttributeAbstractBuilder<AdminGetPlayerSessionAttributeBuilderCompat>
         {
             internal AdminGetPlayerSessionAttributeBuilderCompat() : base() { }
 
             internal AdminGetPlayerSessionAttributeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsGetPlayerSessionAttributeResponse? Execute(
                 string attribute,
                 string namespace_,
@@ -461,7 +461,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetAllPlayerSessionAttributeBuilderCompat AdminGetAllPlayerSessionAttributeOp
         {
             get
@@ -470,7 +470,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSetPlayerSessionAttributeBuilderCompat AdminSetPlayerSessionAttributeOp
         {
             get
@@ -479,7 +479,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetPlayerSessionAttributeBuilderCompat AdminGetPlayerSessionAttributeOp
         {
             get

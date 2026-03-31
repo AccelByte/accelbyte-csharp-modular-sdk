@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GetCountryGroups op = new GetCountryGroups(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,13 +152,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.GroupCode is not null) QueryParams["groupCode"] = builder.GroupCode;
-            
 
-            
-            
-            
+            if (builder.GroupCode is not null) QueryParams["groupCode"] = builder.GroupCode;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,18 +183,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GetCountryGroups(
-            string namespace_,            
-            string? groupCode            
+            string namespace_,
+            string? groupCode
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (groupCode is not null) QueryParams["groupCode"] = groupCode;
-            
 
-            
-            
-            
+            if (groupCode is not null) QueryParams["groupCode"] = groupCode;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,10 +203,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetCountryGroups.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetCountryGroups.Response()

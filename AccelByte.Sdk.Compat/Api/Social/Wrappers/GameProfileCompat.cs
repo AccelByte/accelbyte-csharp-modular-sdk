@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserProfilesBuilderCompat : GetUserProfiles.GetUserProfilesAbstractBuilder<GetUserProfilesBuilderCompat>
         {
             internal GetUserProfilesBuilderCompat() : base() { }
 
             internal GetUserProfilesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Social.Model.GameProfileHeader>? Execute(
                 string namespace_,
                 string userId
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetProfileBuilderCompat : GetProfile.GetProfileAbstractBuilder<GetProfileBuilderCompat>
         {
             internal GetProfileBuilderCompat() : base() { }
 
             internal GetProfileBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.GameProfileInfo? Execute(
                 string namespace_,
                 string profileId,
@@ -99,14 +99,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserGameProfilesBuilderCompat : PublicGetUserGameProfiles.PublicGetUserGameProfilesAbstractBuilder<PublicGetUserGameProfilesBuilderCompat>
         {
             internal PublicGetUserGameProfilesBuilderCompat() : base() { }
 
             internal PublicGetUserGameProfilesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Social.Model.UserGameProfiles>? Execute(
                 string namespace_,
                 List<string> userIds
@@ -133,14 +133,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserProfilesBuilderCompat : PublicGetUserProfiles.PublicGetUserProfilesAbstractBuilder<PublicGetUserProfilesBuilderCompat>
         {
             internal PublicGetUserProfilesBuilderCompat() : base() { }
 
             internal PublicGetUserProfilesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Social.Model.GameProfileHeader>? Execute(
                 string namespace_,
                 string userId
@@ -167,14 +167,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicCreateProfileBuilderCompat : PublicCreateProfile.PublicCreateProfileAbstractBuilder<PublicCreateProfileBuilderCompat>
         {
             internal PublicCreateProfileBuilderCompat() : base() { }
 
             internal PublicCreateProfileBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -199,14 +199,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetProfileBuilderCompat : PublicGetProfile.PublicGetProfileAbstractBuilder<PublicGetProfileBuilderCompat>
         {
             internal PublicGetProfileBuilderCompat() : base() { }
 
             internal PublicGetProfileBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.GameProfileInfo? Execute(
                 string namespace_,
                 string profileId,
@@ -237,14 +237,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdateProfileBuilderCompat : PublicUpdateProfile.PublicUpdateProfileAbstractBuilder<PublicUpdateProfileBuilderCompat>
         {
             internal PublicUpdateProfileBuilderCompat() : base() { }
 
             internal PublicUpdateProfileBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.GameProfileInfo? Execute(
                 string namespace_,
                 string profileId,
@@ -275,14 +275,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicDeleteProfileBuilderCompat : PublicDeleteProfile.PublicDeleteProfileAbstractBuilder<PublicDeleteProfileBuilderCompat>
         {
             internal PublicDeleteProfileBuilderCompat() : base() { }
 
             internal PublicDeleteProfileBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string profileId,
@@ -311,14 +311,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetProfileAttributeBuilderCompat : PublicGetProfileAttribute.PublicGetProfileAttributeAbstractBuilder<PublicGetProfileAttributeBuilderCompat>
         {
             internal PublicGetProfileAttributeBuilderCompat() : base() { }
 
             internal PublicGetProfileAttributeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.Attribute? Execute(
                 string attributeName,
                 string namespace_,
@@ -353,14 +353,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdateAttributeBuilderCompat : PublicUpdateAttribute.PublicUpdateAttributeAbstractBuilder<PublicUpdateAttributeBuilderCompat>
         {
             internal PublicUpdateAttributeBuilderCompat() : base() { }
 
             internal PublicUpdateAttributeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.GameProfileInfo? Execute(
                 string attributeName,
                 string namespace_,
@@ -397,7 +397,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserProfilesBuilderCompat GetUserProfilesOp
         {
             get
@@ -406,7 +406,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetProfileBuilderCompat GetProfileOp
         {
             get
@@ -415,7 +415,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserGameProfilesBuilderCompat PublicGetUserGameProfilesOp
         {
             get
@@ -424,7 +424,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserProfilesBuilderCompat PublicGetUserProfilesOp
         {
             get
@@ -433,7 +433,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicCreateProfileBuilderCompat PublicCreateProfileOp
         {
             get
@@ -442,7 +442,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetProfileBuilderCompat PublicGetProfileOp
         {
             get
@@ -451,7 +451,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateProfileBuilderCompat PublicUpdateProfileOp
         {
             get
@@ -460,7 +460,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDeleteProfileBuilderCompat PublicDeleteProfileOp
         {
             get
@@ -469,7 +469,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetProfileAttributeBuilderCompat PublicGetProfileAttributeOp
         {
             get
@@ -478,7 +478,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateAttributeBuilderCompat PublicUpdateAttributeOp
         {
             get

@@ -70,9 +70,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 RevokeUserEntitlements op = new RevokeUserEntitlements(this,
-                    namespace_,                    
-                    userId,                    
-                    entitlementIds                    
+                    namespace_,
+                    userId,
+                    entitlementIds
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (entitlementIds is not null) QueryParams["entitlementIds"] = entitlementIds;
-            
 
-            
-            
-            
+            if (entitlementIds is not null) QueryParams["entitlementIds"] = entitlementIds;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -187,20 +187,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public RevokeUserEntitlements(
-            string namespace_,            
-            string userId,            
-            string entitlementIds            
+            string namespace_,
+            string userId,
+            string entitlementIds
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (entitlementIds is not null) QueryParams["entitlementIds"] = entitlementIds;
-            
 
-            
-            
-            
+            if (entitlementIds is not null) QueryParams["entitlementIds"] = entitlementIds;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,10 +209,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RevokeUserEntitlements.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RevokeUserEntitlements.Response()

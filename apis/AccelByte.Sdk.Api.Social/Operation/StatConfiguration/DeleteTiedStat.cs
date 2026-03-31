@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 DeleteTiedStat op = new DeleteTiedStat(this,
-                    namespace_,                    
-                    statCode                    
+                    namespace_,
+                    statCode
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,18 +182,18 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public DeleteTiedStat(
-            string namespace_,            
-            string statCode            
+            string namespace_,
+            string statCode
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["statCode"] = statCode;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,10 +202,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() {  };
-        
+        public override List<string> Produces => new() { };
+
         public DeleteTiedStat.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteTiedStat.Response()

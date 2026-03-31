@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/iam/v3/admin/roles/{roleId} [GET]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetRole : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,14 +68,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetRole op = new GetRole(this,
-                    roleId                    
+                    roleId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected GetRole.Response InternalExecute(
                 string roleId
             )
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public GetRoleBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetRole.Response Execute(
                 string roleId
             )
@@ -143,12 +143,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -171,16 +171,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetRole(
-            string roleId            
+            string roleId
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,7 +192,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetRole.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetRole.Response()

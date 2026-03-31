@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminProfanityQuery op = new AdminProfanityQuery(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -155,7 +155,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -172,7 +172,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -208,7 +208,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.FilterMask is not null) QueryParams["filterMask"] = builder.FilterMask;
             if (builder.IncludeChildren != null) QueryParams["includeChildren"] = Convert.ToString(builder.IncludeChildren)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -216,11 +216,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (builder.ParentId is not null) QueryParams["parentId"] = builder.ParentId;
             if (builder.StartWith is not null) QueryParams["startWith"] = builder.StartWith;
             if (builder.WordType is not null) QueryParams["wordType"] = builder.WordType;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -247,18 +247,18 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminProfanityQuery(
-            string namespace_,            
-            string? filterMask,            
-            bool? includeChildren,            
-            long? limit,            
-            long? offset,            
-            string? parentId,            
-            string? startWith,            
-            string? wordType            
+            string namespace_,
+            string? filterMask,
+            bool? includeChildren,
+            long? limit,
+            long? offset,
+            string? parentId,
+            string? startWith,
+            string? wordType
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (filterMask is not null) QueryParams["filterMask"] = filterMask;
             if (includeChildren != null) QueryParams["includeChildren"] = Convert.ToString(includeChildren)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -266,11 +266,11 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             if (parentId is not null) QueryParams["parentId"] = parentId;
             if (startWith is not null) QueryParams["startWith"] = startWith;
             if (wordType is not null) QueryParams["wordType"] = wordType;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -282,7 +282,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminProfanityQuery.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminProfanityQuery.Response()

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","publicgetusersubscriptionbillinghistories")]
-    public class PublicGetUserSubscriptionBillingHistoriesCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "publicgetusersubscriptionbillinghistories")]
+    public class PublicGetUserSubscriptionBillingHistoriesCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "PublicGetUserSubscriptionBillingHistories"; } }
+        public string OperationName { get { return "PublicGetUserSubscriptionBillingHistories"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;
@@ -79,8 +79,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","bulkacceptversionedpolicy")]
-    public class BulkAcceptVersionedPolicyCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "bulkacceptversionedpolicy")]
+    public class BulkAcceptVersionedPolicyCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "BulkAcceptVersionedPolicy"; } }
+        public string OperationName { get { return "BulkAcceptVersionedPolicy"; } }
 
         [SdkCommandData("body")]
         public List<AcceptAgreementRequest> Body { get; set; } = new List<AcceptAgreementRequest>();
@@ -57,8 +57,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

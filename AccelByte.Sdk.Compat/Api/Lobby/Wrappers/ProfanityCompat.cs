@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDebugProfanityFiltersBuilderCompat : AdminDebugProfanityFilters.AdminDebugProfanityFiltersAbstractBuilder<AdminDebugProfanityFiltersBuilderCompat>
         {
             internal AdminDebugProfanityFiltersBuilderCompat() : base() { }
 
             internal AdminDebugProfanityFiltersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Lobby.Model.ModelsProfanityFilter>? Execute(
                 ModelsDebugProfanityFilterRequest body,
                 string namespace_
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetProfanityListFiltersV1BuilderCompat : AdminGetProfanityListFiltersV1.AdminGetProfanityListFiltersV1AbstractBuilder<AdminGetProfanityListFiltersV1BuilderCompat>
         {
             internal AdminGetProfanityListFiltersV1BuilderCompat() : base() { }
 
             internal AdminGetProfanityListFiltersV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsAdminGetProfanityListFiltersV1Response? Execute(
                 string list,
                 string namespace_
@@ -95,14 +95,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminAddProfanityFilterIntoListBuilderCompat : AdminAddProfanityFilterIntoList.AdminAddProfanityFilterIntoListAbstractBuilder<AdminAddProfanityFilterIntoListBuilderCompat>
         {
             internal AdminAddProfanityFilterIntoListBuilderCompat() : base() { }
 
             internal AdminAddProfanityFilterIntoListBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsAdminAddProfanityFilterIntoListRequest body,
                 string list,
@@ -131,14 +131,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminAddProfanityFiltersBuilderCompat : AdminAddProfanityFilters.AdminAddProfanityFiltersAbstractBuilder<AdminAddProfanityFiltersBuilderCompat>
         {
             internal AdminAddProfanityFiltersBuilderCompat() : base() { }
 
             internal AdminAddProfanityFiltersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsAdminAddProfanityFiltersRequest body,
                 string list,
@@ -167,14 +167,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminImportProfanityFiltersFromFileBuilderCompat : AdminImportProfanityFiltersFromFile.AdminImportProfanityFiltersFromFileAbstractBuilder<AdminImportProfanityFiltersFromFileBuilderCompat>
         {
             internal AdminImportProfanityFiltersFromFileBuilderCompat() : base() { }
 
             internal AdminImportProfanityFiltersFromFileBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 List<long> body,
                 string list,
@@ -203,14 +203,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDeleteProfanityFilterBuilderCompat : AdminDeleteProfanityFilter.AdminDeleteProfanityFilterAbstractBuilder<AdminDeleteProfanityFilterBuilderCompat>
         {
             internal AdminDeleteProfanityFilterBuilderCompat() : base() { }
 
             internal AdminDeleteProfanityFilterBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Lobby.Model.ModelsProfanityFilter>? Execute(
                 ModelsAdminDeleteProfanityFilterRequest body,
                 string list,
@@ -241,14 +241,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetProfanityListsBuilderCompat : AdminGetProfanityLists.AdminGetProfanityListsAbstractBuilder<AdminGetProfanityListsBuilderCompat>
         {
             internal AdminGetProfanityListsBuilderCompat() : base() { }
 
             internal AdminGetProfanityListsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Lobby.Model.ModelsAdminGetProfanityListsListResponse>? Execute(
                 string namespace_
             )
@@ -271,14 +271,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminCreateProfanityListBuilderCompat : AdminCreateProfanityList.AdminCreateProfanityListAbstractBuilder<AdminCreateProfanityListBuilderCompat>
         {
             internal AdminCreateProfanityListBuilderCompat() : base() { }
 
             internal AdminCreateProfanityListBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsAdminCreateProfanityListRequest body,
                 string namespace_
@@ -303,14 +303,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdateProfanityListBuilderCompat : AdminUpdateProfanityList.AdminUpdateProfanityListAbstractBuilder<AdminUpdateProfanityListBuilderCompat>
         {
             internal AdminUpdateProfanityListBuilderCompat() : base() { }
 
             internal AdminUpdateProfanityListBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsAdminUpdateProfanityList body,
                 string list,
@@ -339,14 +339,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDeleteProfanityListBuilderCompat : AdminDeleteProfanityList.AdminDeleteProfanityListAbstractBuilder<AdminDeleteProfanityListBuilderCompat>
         {
             internal AdminDeleteProfanityListBuilderCompat() : base() { }
 
             internal AdminDeleteProfanityListBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string list,
                 string namespace_
@@ -371,14 +371,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetProfanityRuleBuilderCompat : AdminGetProfanityRule.AdminGetProfanityRuleAbstractBuilder<AdminGetProfanityRuleBuilderCompat>
         {
             internal AdminGetProfanityRuleBuilderCompat() : base() { }
 
             internal AdminGetProfanityRuleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsProfanityRule? Execute(
                 string namespace_
             )
@@ -401,14 +401,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminSetProfanityRuleForNamespaceBuilderCompat : AdminSetProfanityRuleForNamespace.AdminSetProfanityRuleForNamespaceAbstractBuilder<AdminSetProfanityRuleForNamespaceBuilderCompat>
         {
             internal AdminSetProfanityRuleForNamespaceBuilderCompat() : base() { }
 
             internal AdminSetProfanityRuleForNamespaceBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsAdminSetProfanityRuleForNamespaceRequest body,
                 string namespace_
@@ -433,14 +433,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminVerifyMessageProfanityResponseBuilderCompat : AdminVerifyMessageProfanityResponse.AdminVerifyMessageProfanityResponseAbstractBuilder<AdminVerifyMessageProfanityResponseBuilderCompat>
         {
             internal AdminVerifyMessageProfanityResponseBuilderCompat() : base() { }
 
             internal AdminVerifyMessageProfanityResponseBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsAdminVerifyMessageProfanityResponse? Execute(
                 ModelsAdminVerifyMessageProfanityRequest body,
                 string namespace_
@@ -469,7 +469,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDebugProfanityFiltersBuilderCompat AdminDebugProfanityFiltersOp
         {
             get
@@ -478,7 +478,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetProfanityListFiltersV1BuilderCompat AdminGetProfanityListFiltersV1Op
         {
             get
@@ -487,7 +487,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminAddProfanityFilterIntoListBuilderCompat AdminAddProfanityFilterIntoListOp
         {
             get
@@ -496,7 +496,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminAddProfanityFiltersBuilderCompat AdminAddProfanityFiltersOp
         {
             get
@@ -505,7 +505,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminImportProfanityFiltersFromFileBuilderCompat AdminImportProfanityFiltersFromFileOp
         {
             get
@@ -514,7 +514,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteProfanityFilterBuilderCompat AdminDeleteProfanityFilterOp
         {
             get
@@ -523,7 +523,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetProfanityListsBuilderCompat AdminGetProfanityListsOp
         {
             get
@@ -532,7 +532,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminCreateProfanityListBuilderCompat AdminCreateProfanityListOp
         {
             get
@@ -541,7 +541,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateProfanityListBuilderCompat AdminUpdateProfanityListOp
         {
             get
@@ -550,7 +550,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteProfanityListBuilderCompat AdminDeleteProfanityListOp
         {
             get
@@ -559,7 +559,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetProfanityRuleBuilderCompat AdminGetProfanityRuleOp
         {
             get
@@ -568,7 +568,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSetProfanityRuleForNamespaceBuilderCompat AdminSetProfanityRuleForNamespaceOp
         {
             get
@@ -577,7 +577,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminVerifyMessageProfanityResponseBuilderCompat AdminVerifyMessageProfanityResponseOp
         {
             get

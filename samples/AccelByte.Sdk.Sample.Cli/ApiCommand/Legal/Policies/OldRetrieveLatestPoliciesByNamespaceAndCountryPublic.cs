@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","oldretrievelatestpoliciesbynamespaceandcountrypublic")]
-    public class OldRetrieveLatestPoliciesByNamespaceAndCountryPublicCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "oldretrievelatestpoliciesbynamespaceandcountrypublic")]
+    public class OldRetrieveLatestPoliciesByNamespaceAndCountryPublicCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "OldRetrieveLatestPoliciesByNamespaceAndCountryPublic"; } }
+        public string OperationName { get { return "OldRetrieveLatestPoliciesByNamespaceAndCountryPublic"; } }
 
         [SdkCommandArgument("countryCode")]
         public string CountryCode { get; set; } = String.Empty;
@@ -85,8 +85,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

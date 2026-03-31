@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// 
     /// Remove a user from the notification subscription.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteSubscriptionAppNotificationV2 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,16 +70,16 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 DeleteSubscriptionAppNotificationV2 op = new DeleteSubscriptionAppNotificationV2(this,
-                    app,                    
-                    namespace_,                    
-                    subscriptionId                    
+                    app,
+                    namespace_,
+                    subscriptionId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected DeleteSubscriptionAppNotificationV2.Response InternalExecute(
                 string app,
                 string namespace_,
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
             public DeleteSubscriptionAppNotificationV2Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public DeleteSubscriptionAppNotificationV2.Response Execute(
                 string app,
                 string namespace_,
@@ -167,12 +167,12 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public DeleteSubscriptionAppNotificationV2(
-            string app,            
-            string namespace_,            
-            string subscriptionId            
+            string app,
+            string namespace_,
+            string subscriptionId
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteSubscriptionAppNotificationV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteSubscriptionAppNotificationV2.Response()

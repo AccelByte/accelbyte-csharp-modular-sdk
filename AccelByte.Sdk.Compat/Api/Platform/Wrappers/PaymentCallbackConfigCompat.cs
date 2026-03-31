@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetPaymentCallbackConfigBuilderCompat : GetPaymentCallbackConfig.GetPaymentCallbackConfigAbstractBuilder<GetPaymentCallbackConfigBuilderCompat>
         {
             internal GetPaymentCallbackConfigBuilderCompat() : base() { }
 
             internal GetPaymentCallbackConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.PaymentCallbackConfigInfo? Execute(
                 string namespace_
             )
@@ -57,14 +57,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdatePaymentCallbackConfigBuilderCompat : UpdatePaymentCallbackConfig.UpdatePaymentCallbackConfigAbstractBuilder<UpdatePaymentCallbackConfigBuilderCompat>
         {
             internal UpdatePaymentCallbackConfigBuilderCompat() : base() { }
 
             internal UpdatePaymentCallbackConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.PaymentCallbackConfigInfo? Execute(
                 PaymentCallbackConfigUpdate body,
                 string namespace_
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetPaymentCallbackConfigBuilderCompat GetPaymentCallbackConfigOp
         {
             get
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdatePaymentCallbackConfigBuilderCompat UpdatePaymentCallbackConfigOp
         {
             get

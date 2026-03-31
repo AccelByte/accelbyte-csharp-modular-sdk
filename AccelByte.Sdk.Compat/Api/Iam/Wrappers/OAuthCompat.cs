@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AuthorizationBuilderCompat : Authorization.AuthorizationAbstractBuilder<AuthorizationBuilderCompat>
         {
             internal AuthorizationBuilderCompat() : base() { }
 
             internal AuthorizationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public string Execute(
                 string clientId,
                 string redirectUri,
@@ -65,14 +65,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetJWKSBuilderCompat : GetJWKS.GetJWKSAbstractBuilder<GetJWKSBuilderCompat>
         {
             internal GetJWKSBuilderCompat() : base() { }
 
             internal GetJWKSBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.OauthcommonJWKSet? Execute(
             )
             {
@@ -91,14 +91,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PlatformTokenRequestHandlerBuilderCompat : PlatformTokenRequestHandler.PlatformTokenRequestHandlerAbstractBuilder<PlatformTokenRequestHandlerBuilderCompat>
         {
             internal PlatformTokenRequestHandlerBuilderCompat() : base() { }
 
             internal PlatformTokenRequestHandlerBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.OauthmodelTokenResponse? Execute(
                 string namespace_,
                 string platformId
@@ -125,14 +125,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RevokeUserBuilderCompat : RevokeUser.RevokeUserAbstractBuilder<RevokeUserBuilderCompat>
         {
             internal RevokeUserBuilderCompat() : base() { }
 
             internal RevokeUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -157,14 +157,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetRevocationListBuilderCompat : GetRevocationList.GetRevocationListAbstractBuilder<GetRevocationListBuilderCompat>
         {
             internal GetRevocationListBuilderCompat() : base() { }
 
             internal GetRevocationListBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.OauthapiRevocationList? Execute(
             )
             {
@@ -183,14 +183,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RevokeTokenBuilderCompat : RevokeToken.RevokeTokenAbstractBuilder<RevokeTokenBuilderCompat>
         {
             internal RevokeTokenBuilderCompat() : base() { }
 
             internal RevokeTokenBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string token
             )
@@ -211,14 +211,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RevokeAUserBuilderCompat : RevokeAUser.RevokeAUserAbstractBuilder<RevokeAUserBuilderCompat>
         {
             internal RevokeAUserBuilderCompat() : base() { }
 
             internal RevokeAUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string userID
             )
@@ -239,14 +239,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class TokenGrantBuilderCompat : TokenGrant.TokenGrantAbstractBuilder<TokenGrantBuilderCompat>
         {
             internal TokenGrantBuilderCompat() : base() { }
 
             internal TokenGrantBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.OauthmodelTokenResponse? Execute(
                 string grantType
             )
@@ -269,14 +269,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class VerifyTokenBuilderCompat : VerifyToken.VerifyTokenAbstractBuilder<VerifyTokenBuilderCompat>
         {
             internal VerifyTokenBuilderCompat() : base() { }
 
             internal VerifyTokenBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.OauthmodelTokenResponse? Execute(
                 string token
             )
@@ -301,7 +301,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AuthorizationBuilderCompat AuthorizationOp
         {
             get
@@ -310,7 +310,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetJWKSBuilderCompat GetJWKSOp
         {
             get
@@ -319,7 +319,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformTokenRequestHandlerBuilderCompat PlatformTokenRequestHandlerOp
         {
             get
@@ -328,7 +328,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeUserBuilderCompat RevokeUserOp
         {
             get
@@ -337,7 +337,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRevocationListBuilderCompat GetRevocationListOp
         {
             get
@@ -346,7 +346,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeTokenBuilderCompat RevokeTokenOp
         {
             get
@@ -355,7 +355,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeAUserBuilderCompat RevokeAUserOp
         {
             get
@@ -364,7 +364,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public TokenGrantBuilderCompat TokenGrantOp
         {
             get
@@ -373,7 +373,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public VerifyTokenBuilderCompat VerifyTokenOp
         {
             get

@@ -86,8 +86,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminProfanityImport op = new AdminProfanityImport(this,
-                    file,                    
-                    namespace_                    
+                    file,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -169,15 +169,15 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Action is not null) QueryParams["action"] = builder.Action.Value;
             if (builder.ShowResult != null) QueryParams["showResult"] = Convert.ToString(builder.ShowResult)!;
-            
+
             if (file is not null) FormParams["file"] = file;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,22 +202,22 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminProfanityImport(
-            string namespace_,            
-            AdminProfanityImportAction? action,            
-            bool? showResult,            
-            Stream file            
+            string namespace_,
+            AdminProfanityImportAction? action,
+            bool? showResult,
+            Stream file
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (action is not null) QueryParams["action"] = action.Value;
             if (showResult != null) QueryParams["showResult"] = Convert.ToString(showResult)!;
-            
+
             if (file is not null) FormParams["file"] = file;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -229,7 +229,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminProfanityImport.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminProfanityImport.Response()

@@ -79,9 +79,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 BulkResetUserStatItemValues op = new BulkResetUserStatItemValues(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -241,14 +241,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
-            
 
-            
-            
+            if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -290,22 +290,22 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public BulkResetUserStatItemValues(
-            string namespace_,            
-            string userId,            
-            string? additionalKey,            
-            List<Model.ADTOObjectForResettingUserStatItems> body            
+            string namespace_,
+            string userId,
+            string? additionalKey,
+            List<Model.ADTOObjectForResettingUserStatItems> body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
-            
 
-            
-            
+            if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -317,7 +317,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public BulkResetUserStatItemValues.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new BulkResetUserStatItemValues.Response()
@@ -381,7 +381,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -418,7 +418,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

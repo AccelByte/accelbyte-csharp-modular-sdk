@@ -77,7 +77,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RequestTargetTokenResponseV3 op = new RequestTargetTokenResponseV3(this,
-                    code                    
+                    code
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,14 +149,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string code
         )
         {
-            
-            
+
+
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (code is not null) FormParams["code"] = code;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -173,18 +173,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RequestTargetTokenResponseV3(
-            string? additionalData,            
-            string code            
+            string? additionalData,
+            string code
         )
         {
-            
-            
+
+
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (code is not null) FormParams["code"] = code;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RequestTargetTokenResponseV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RequestTargetTokenResponseV3.Response()

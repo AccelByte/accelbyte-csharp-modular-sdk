@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Csm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 {
-    [SdkConsoleCommand("csm","deletesubscriptionappnotificationv3")]
-    public class DeleteSubscriptionAppNotificationV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("csm", "deletesubscriptionappnotificationv3")]
+    public class DeleteSubscriptionAppNotificationV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Csm"; } }
+        public string ServiceName { get { return "Csm"; } }
 
-        public string OperationName{ get { return "DeleteSubscriptionAppNotificationV3"; } }
+        public string OperationName { get { return "DeleteSubscriptionAppNotificationV3"; } }
 
         [SdkCommandArgument("app")]
         public string App { get; set; } = String.Empty;

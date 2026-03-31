@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Chat.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Chat
 {
-    [SdkConsoleCommand("chat","publicdeletechat")]
-    public class PublicDeleteChatCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("chat", "publicdeletechat")]
+    public class PublicDeleteChatCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Chat"; } }
+        public string ServiceName { get { return "Chat"; } }
 
-        public string OperationName{ get { return "PublicDeleteChat"; } }
+        public string OperationName { get { return "PublicDeleteChat"; } }
 
         [SdkCommandArgument("chatId")]
         public string ChatId { get; set; } = String.Empty;

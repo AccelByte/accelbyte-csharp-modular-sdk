@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class CreateUserBuilderCompat : CreateUser.CreateUserAbstractBuilder<CreateUserBuilderCompat>
         {
             internal CreateUserBuilderCompat() : base() { }
 
             internal CreateUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserCreateResponse? Execute(
                 ModelUserCreateRequest body,
                 string namespace_
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetAdminUsersByRoleIDBuilderCompat : GetAdminUsersByRoleID.GetAdminUsersByRoleIDAbstractBuilder<GetAdminUsersByRoleIDBuilderCompat>
         {
             internal GetAdminUsersByRoleIDBuilderCompat() : base() { }
 
             internal GetAdminUsersByRoleIDBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelGetAdminUsersResponse? Execute(
                 string namespace_
             )
@@ -91,14 +91,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserByLoginIDBuilderCompat : GetUserByLoginID.GetUserByLoginIDAbstractBuilder<GetUserByLoginIDBuilderCompat>
         {
             internal GetUserByLoginIDBuilderCompat() : base() { }
 
             internal GetUserByLoginIDBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelPublicUserResponse? Execute(
                 string namespace_
             )
@@ -121,14 +121,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserByPlatformUserIDBuilderCompat : GetUserByPlatformUserID.GetUserByPlatformUserIDAbstractBuilder<GetUserByPlatformUserIDBuilderCompat>
         {
             internal GetUserByPlatformUserIDBuilderCompat() : base() { }
 
             internal GetUserByPlatformUserIDBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelPublicUserResponse? Execute(
                 string namespace_,
                 string platformID,
@@ -159,14 +159,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ForgotPasswordBuilderCompat : ForgotPassword.ForgotPasswordAbstractBuilder<ForgotPasswordBuilderCompat>
         {
             internal ForgotPasswordBuilderCompat() : base() { }
 
             internal ForgotPasswordBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
@@ -191,14 +191,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUsersByLoginIdsBuilderCompat : GetUsersByLoginIds.GetUsersByLoginIdsAbstractBuilder<GetUsersByLoginIdsBuilderCompat>
         {
             internal GetUsersByLoginIdsBuilderCompat() : base() { }
 
             internal GetUsersByLoginIdsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelPublicUsersResponse? Execute(
                 string namespace_
             )
@@ -221,14 +221,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ResetPasswordBuilderCompat : ResetPassword.ResetPasswordAbstractBuilder<ResetPasswordBuilderCompat>
         {
             internal ResetPasswordBuilderCompat() : base() { }
 
             internal ResetPasswordBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelResetPasswordRequest body,
                 string namespace_
@@ -253,14 +253,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SearchUserBuilderCompat : SearchUser.SearchUserAbstractBuilder<SearchUserBuilderCompat>
         {
             internal SearchUserBuilderCompat() : base() { }
 
             internal SearchUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelSearchUsersResponse? Execute(
                 string namespace_
             )
@@ -283,14 +283,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserByUserIDBuilderCompat : GetUserByUserID.GetUserByUserIDAbstractBuilder<GetUserByUserIDBuilderCompat>
         {
             internal GetUserByUserIDBuilderCompat() : base() { }
 
             internal GetUserByUserIDBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 string namespace_,
                 string userId
@@ -317,14 +317,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateUserBuilderCompat : UpdateUser.UpdateUserAbstractBuilder<UpdateUserBuilderCompat>
         {
             internal UpdateUserBuilderCompat() : base() { }
 
             internal UpdateUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 ModelUserUpdateRequest body,
                 string namespace_,
@@ -355,14 +355,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteUserBuilderCompat : DeleteUser.DeleteUserAbstractBuilder<DeleteUserBuilderCompat>
         {
             internal DeleteUserBuilderCompat() : base() { }
 
             internal DeleteUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -387,14 +387,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class BanUserBuilderCompat : BanUser.BanUserAbstractBuilder<BanUserBuilderCompat>
         {
             internal BanUserBuilderCompat() : base() { }
 
             internal BanUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse? Execute(
                 ModelBanCreateRequest body,
                 string namespace_,
@@ -425,14 +425,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserBanHistoryBuilderCompat : GetUserBanHistory.GetUserBanHistoryAbstractBuilder<GetUserBanHistoryBuilderCompat>
         {
             internal GetUserBanHistoryBuilderCompat() : base() { }
 
             internal GetUserBanHistoryBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse>? Execute(
                 string namespace_,
                 string userId
@@ -459,14 +459,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DisableUserBanBuilderCompat : DisableUserBan.DisableUserBanAbstractBuilder<DisableUserBanBuilderCompat>
         {
             internal DisableUserBanBuilderCompat() : base() { }
 
             internal DisableUserBanBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse? Execute(
                 string banId,
                 string namespace_,
@@ -497,14 +497,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class EnableUserBanBuilderCompat : EnableUserBan.EnableUserBanAbstractBuilder<EnableUserBanBuilderCompat>
         {
             internal EnableUserBanBuilderCompat() : base() { }
 
             internal EnableUserBanBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse? Execute(
                 string banId,
                 string namespace_,
@@ -535,14 +535,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ListCrossNamespaceAccountLinkBuilderCompat : ListCrossNamespaceAccountLink.ListCrossNamespaceAccountLinkAbstractBuilder<ListCrossNamespaceAccountLinkBuilderCompat>
         {
             internal ListCrossNamespaceAccountLinkBuilderCompat() : base() { }
 
             internal ListCrossNamespaceAccountLinkBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string linkingToken,
                 string namespace_,
@@ -571,14 +571,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DisableUserBuilderCompat : DisableUser.DisableUserAbstractBuilder<DisableUserBuilderCompat>
         {
             internal DisableUserBuilderCompat() : base() { }
 
             internal DisableUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelDisableUserRequest body,
                 string namespace_,
@@ -607,14 +607,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class EnableUserBuilderCompat : EnableUser.EnableUserAbstractBuilder<EnableUserBuilderCompat>
         {
             internal EnableUserBuilderCompat() : base() { }
 
             internal EnableUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -639,14 +639,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserInformationBuilderCompat : GetUserInformation.GetUserInformationAbstractBuilder<GetUserInformationBuilderCompat>
         {
             internal GetUserInformationBuilderCompat() : base() { }
 
             internal GetUserInformationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserInformation? Execute(
                 string namespace_,
                 string userId
@@ -673,14 +673,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteUserInformationBuilderCompat : DeleteUserInformation.DeleteUserInformationAbstractBuilder<DeleteUserInformationBuilderCompat>
         {
             internal DeleteUserInformationBuilderCompat() : base() { }
 
             internal DeleteUserInformationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -705,14 +705,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserLoginHistoriesBuilderCompat : GetUserLoginHistories.GetUserLoginHistoriesAbstractBuilder<GetUserLoginHistoriesBuilderCompat>
         {
             internal GetUserLoginHistoriesBuilderCompat() : base() { }
 
             internal GetUserLoginHistoriesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelLoginHistoriesResponse? Execute(
                 string namespace_,
                 string userId
@@ -739,14 +739,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdatePasswordBuilderCompat : UpdatePassword.UpdatePasswordAbstractBuilder<UpdatePasswordBuilderCompat>
         {
             internal UpdatePasswordBuilderCompat() : base() { }
 
             internal UpdatePasswordBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
@@ -775,14 +775,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SaveUserPermissionBuilderCompat : SaveUserPermission.SaveUserPermissionAbstractBuilder<SaveUserPermissionBuilderCompat>
         {
             internal SaveUserPermissionBuilderCompat() : base() { }
 
             internal SaveUserPermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 AccountcommonPermissions body,
                 string namespace_,
@@ -811,14 +811,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AddUserPermissionBuilderCompat : AddUserPermission.AddUserPermissionAbstractBuilder<AddUserPermissionBuilderCompat>
         {
             internal AddUserPermissionBuilderCompat() : base() { }
 
             internal AddUserPermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUpdatePermissionScheduleRequest body,
                 long action,
@@ -855,14 +855,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteUserPermissionBuilderCompat : DeleteUserPermission.DeleteUserPermissionAbstractBuilder<DeleteUserPermissionBuilderCompat>
         {
             internal DeleteUserPermissionBuilderCompat() : base() { }
 
             internal DeleteUserPermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 long action,
                 string namespace_,
@@ -895,14 +895,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserPlatformAccountsBuilderCompat : GetUserPlatformAccounts.GetUserPlatformAccountsAbstractBuilder<GetUserPlatformAccountsBuilderCompat>
         {
             internal GetUserPlatformAccountsBuilderCompat() : base() { }
 
             internal GetUserPlatformAccountsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.AccountcommonUserLinkedPlatform>? Execute(
                 string namespace_,
                 string userId
@@ -929,14 +929,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserMappingBuilderCompat : GetUserMapping.GetUserMappingAbstractBuilder<GetUserMappingBuilderCompat>
         {
             internal GetUserMappingBuilderCompat() : base() { }
 
             internal GetUserMappingBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelGetUserMapping? Execute(
                 string namespace_,
                 string targetNamespace,
@@ -967,14 +967,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserJusticePlatformAccountBuilderCompat : GetUserJusticePlatformAccount.GetUserJusticePlatformAccountAbstractBuilder<GetUserJusticePlatformAccountBuilderCompat>
         {
             internal GetUserJusticePlatformAccountBuilderCompat() : base() { }
 
             internal GetUserJusticePlatformAccountBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelGetUserJusticePlatformAccountResponse? Execute(
                 string namespace_,
                 string targetNamespace,
@@ -1005,14 +1005,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PlatformLinkBuilderCompat : PlatformLink.PlatformLinkAbstractBuilder<PlatformLinkBuilderCompat>
         {
             internal PlatformLinkBuilderCompat() : base() { }
 
             internal PlatformLinkBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string ticket,
                 string namespace_,
@@ -1045,14 +1045,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PlatformUnlinkBuilderCompat : PlatformUnlink.PlatformUnlinkAbstractBuilder<PlatformUnlinkBuilderCompat>
         {
             internal PlatformUnlinkBuilderCompat() : base() { }
 
             internal PlatformUnlinkBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string platformId,
@@ -1081,14 +1081,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetPublisherUserBuilderCompat : GetPublisherUser.GetPublisherUserAbstractBuilder<GetPublisherUserBuilderCompat>
         {
             internal GetPublisherUserBuilderCompat() : base() { }
 
             internal GetPublisherUserBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelGetPublisherUserResponse? Execute(
                 string namespace_,
                 string userId
@@ -1115,14 +1115,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SaveUserRolesBuilderCompat : SaveUserRoles.SaveUserRolesAbstractBuilder<SaveUserRolesBuilderCompat>
         {
             internal SaveUserRolesBuilderCompat() : base() { }
 
             internal SaveUserRolesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 List<string> body,
                 string namespace_,
@@ -1151,14 +1151,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AddUserRoleBuilderCompat : AddUserRole.AddUserRoleAbstractBuilder<AddUserRoleBuilderCompat>
         {
             internal AddUserRoleBuilderCompat() : base() { }
 
             internal AddUserRoleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string roleId,
@@ -1187,14 +1187,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteUserRoleBuilderCompat : DeleteUserRole.DeleteUserRoleAbstractBuilder<DeleteUserRoleBuilderCompat>
         {
             internal DeleteUserRoleBuilderCompat() : base() { }
 
             internal DeleteUserRoleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string roleId,
@@ -1223,14 +1223,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpgradeHeadlessAccountBuilderCompat : UpgradeHeadlessAccount.UpgradeHeadlessAccountAbstractBuilder<UpgradeHeadlessAccountBuilderCompat>
         {
             internal UpgradeHeadlessAccountBuilderCompat() : base() { }
 
             internal UpgradeHeadlessAccountBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 ModelUpgradeHeadlessAccountRequest body,
                 string namespace_,
@@ -1261,14 +1261,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpgradeHeadlessAccountWithVerificationCodeBuilderCompat : UpgradeHeadlessAccountWithVerificationCode.UpgradeHeadlessAccountWithVerificationCodeAbstractBuilder<UpgradeHeadlessAccountWithVerificationCodeBuilderCompat>
         {
             internal UpgradeHeadlessAccountWithVerificationCodeBuilderCompat() : base() { }
 
             internal UpgradeHeadlessAccountWithVerificationCodeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 ModelUpgradeHeadlessAccountWithVerificationCodeRequest body,
                 string namespace_,
@@ -1299,14 +1299,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UserVerificationBuilderCompat : UserVerification.UserVerificationAbstractBuilder<UserVerificationBuilderCompat>
         {
             internal UserVerificationBuilderCompat() : base() { }
 
             internal UserVerificationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUserVerificationRequest body,
                 string namespace_,
@@ -1335,14 +1335,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SendVerificationCodeBuilderCompat : SendVerificationCode.SendVerificationCodeAbstractBuilder<SendVerificationCodeBuilderCompat>
         {
             internal SendVerificationCodeBuilderCompat() : base() { }
 
             internal SendVerificationCodeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_,
@@ -1371,14 +1371,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetAgeRestrictionStatusV2BuilderCompat : AdminGetAgeRestrictionStatusV2.AdminGetAgeRestrictionStatusV2AbstractBuilder<AdminGetAgeRestrictionStatusV2BuilderCompat>
         {
             internal AdminGetAgeRestrictionStatusV2BuilderCompat() : base() { }
 
             internal AdminGetAgeRestrictionStatusV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelAgeRestrictionResponse? Execute(
                 string namespace_
             )
@@ -1401,14 +1401,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdateAgeRestrictionConfigV2BuilderCompat : AdminUpdateAgeRestrictionConfigV2.AdminUpdateAgeRestrictionConfigV2AbstractBuilder<AdminUpdateAgeRestrictionConfigV2BuilderCompat>
         {
             internal AdminUpdateAgeRestrictionConfigV2BuilderCompat() : base() { }
 
             internal AdminUpdateAgeRestrictionConfigV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelAgeRestrictionResponse? Execute(
                 ModelAgeRestrictionRequest body,
                 string namespace_
@@ -1435,14 +1435,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetListCountryAgeRestrictionBuilderCompat : GetListCountryAgeRestriction.GetListCountryAgeRestrictionAbstractBuilder<GetListCountryAgeRestrictionBuilderCompat>
         {
             internal GetListCountryAgeRestrictionBuilderCompat() : base() { }
 
             internal GetListCountryAgeRestrictionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.AccountcommonCountryAgeRestriction>? Execute(
                 string namespace_
             )
@@ -1465,14 +1465,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateCountryAgeRestrictionBuilderCompat : UpdateCountryAgeRestriction.UpdateCountryAgeRestrictionAbstractBuilder<UpdateCountryAgeRestrictionBuilderCompat>
         {
             internal UpdateCountryAgeRestrictionBuilderCompat() : base() { }
 
             internal UpdateCountryAgeRestrictionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelCountry? Execute(
                 ModelCountryAgeRestrictionRequest body,
                 string countryCode,
@@ -1503,14 +1503,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminSearchUsersV2BuilderCompat : AdminSearchUsersV2.AdminSearchUsersV2AbstractBuilder<AdminSearchUsersV2BuilderCompat>
         {
             internal AdminSearchUsersV2BuilderCompat() : base() { }
 
             internal AdminSearchUsersV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelSearchUsersByPlatformIDResponse? Execute(
                 string namespace_,
                 string platformId
@@ -1537,14 +1537,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetUserByUserIdV2BuilderCompat : AdminGetUserByUserIdV2.AdminGetUserByUserIdV2AbstractBuilder<AdminGetUserByUserIdV2BuilderCompat>
         {
             internal AdminGetUserByUserIdV2BuilderCompat() : base() { }
 
             internal AdminGetUserByUserIdV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 string namespace_,
                 string userId
@@ -1571,14 +1571,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdateUserV2BuilderCompat : AdminUpdateUserV2.AdminUpdateUserV2AbstractBuilder<AdminUpdateUserV2BuilderCompat>
         {
             internal AdminUpdateUserV2BuilderCompat() : base() { }
 
             internal AdminUpdateUserV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 ModelUserUpdateRequest body,
                 string namespace_,
@@ -1609,14 +1609,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminBanUserV2BuilderCompat : AdminBanUserV2.AdminBanUserV2AbstractBuilder<AdminBanUserV2BuilderCompat>
         {
             internal AdminBanUserV2BuilderCompat() : base() { }
 
             internal AdminBanUserV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse? Execute(
                 ModelBanCreateRequest body,
                 string namespace_,
@@ -1647,14 +1647,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetUserBanV2BuilderCompat : AdminGetUserBanV2.AdminGetUserBanV2AbstractBuilder<AdminGetUserBanV2BuilderCompat>
         {
             internal AdminGetUserBanV2BuilderCompat() : base() { }
 
             internal AdminGetUserBanV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse>? Execute(
                 string namespace_,
                 string userId
@@ -1681,14 +1681,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDisableUserV2BuilderCompat : AdminDisableUserV2.AdminDisableUserV2AbstractBuilder<AdminDisableUserV2BuilderCompat>
         {
             internal AdminDisableUserV2BuilderCompat() : base() { }
 
             internal AdminDisableUserV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelDisableUserRequest body,
                 string namespace_,
@@ -1717,14 +1717,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminEnableUserV2BuilderCompat : AdminEnableUserV2.AdminEnableUserV2AbstractBuilder<AdminEnableUserV2BuilderCompat>
         {
             internal AdminEnableUserV2BuilderCompat() : base() { }
 
             internal AdminEnableUserV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -1749,14 +1749,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminResetPasswordV2BuilderCompat : AdminResetPasswordV2.AdminResetPasswordV2AbstractBuilder<AdminResetPasswordV2BuilderCompat>
         {
             internal AdminResetPasswordV2BuilderCompat() : base() { }
 
             internal AdminResetPasswordV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
@@ -1785,14 +1785,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDeletePlatformLinkV2BuilderCompat : AdminDeletePlatformLinkV2.AdminDeletePlatformLinkV2AbstractBuilder<AdminDeletePlatformLinkV2BuilderCompat>
         {
             internal AdminDeletePlatformLinkV2BuilderCompat() : base() { }
 
             internal AdminDeletePlatformLinkV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string platformId,
@@ -1821,14 +1821,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminPutUserRolesV2BuilderCompat : AdminPutUserRolesV2.AdminPutUserRolesV2AbstractBuilder<AdminPutUserRolesV2BuilderCompat>
         {
             internal AdminPutUserRolesV2BuilderCompat() : base() { }
 
             internal AdminPutUserRolesV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 List<string> body,
                 string namespace_,
@@ -1857,14 +1857,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminCreateUserRolesV2BuilderCompat : AdminCreateUserRolesV2.AdminCreateUserRolesV2AbstractBuilder<AdminCreateUserRolesV2BuilderCompat>
         {
             internal AdminCreateUserRolesV2BuilderCompat() : base() { }
 
             internal AdminCreateUserRolesV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 List<string> body,
                 string namespace_,
@@ -1893,14 +1893,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetCountryAgeRestrictionBuilderCompat : PublicGetCountryAgeRestriction.PublicGetCountryAgeRestrictionAbstractBuilder<PublicGetCountryAgeRestrictionBuilderCompat>
         {
             internal PublicGetCountryAgeRestrictionBuilderCompat() : base() { }
 
             internal PublicGetCountryAgeRestrictionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.AccountcommonCountry? Execute(
                 string countryCode,
                 string namespace_
@@ -1927,14 +1927,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicCreateUserV2BuilderCompat : PublicCreateUserV2.PublicCreateUserV2AbstractBuilder<PublicCreateUserV2BuilderCompat>
         {
             internal PublicCreateUserV2BuilderCompat() : base() { }
 
             internal PublicCreateUserV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserCreateResponse? Execute(
                 ModelUserCreateRequest body,
                 string namespace_
@@ -1961,14 +1961,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicForgotPasswordV2BuilderCompat : PublicForgotPasswordV2.PublicForgotPasswordV2AbstractBuilder<PublicForgotPasswordV2BuilderCompat>
         {
             internal PublicForgotPasswordV2BuilderCompat() : base() { }
 
             internal PublicForgotPasswordV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
@@ -1993,14 +1993,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicResetPasswordV2BuilderCompat : PublicResetPasswordV2.PublicResetPasswordV2AbstractBuilder<PublicResetPasswordV2BuilderCompat>
         {
             internal PublicResetPasswordV2BuilderCompat() : base() { }
 
             internal PublicResetPasswordV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelResetPasswordRequest body,
                 string namespace_
@@ -2025,14 +2025,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserByUserIDV2BuilderCompat : PublicGetUserByUserIDV2.PublicGetUserByUserIDV2AbstractBuilder<PublicGetUserByUserIDV2BuilderCompat>
         {
             internal PublicGetUserByUserIDV2BuilderCompat() : base() { }
 
             internal PublicGetUserByUserIDV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponse? Execute(
                 string namespace_,
                 string userId
@@ -2059,14 +2059,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdateUserV2BuilderCompat : PublicUpdateUserV2.PublicUpdateUserV2AbstractBuilder<PublicUpdateUserV2BuilderCompat>
         {
             internal PublicUpdateUserV2BuilderCompat() : base() { }
 
             internal PublicUpdateUserV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ModelUserResponse>? Execute(
                 ModelUserUpdateRequest body,
                 string namespace_,
@@ -2097,14 +2097,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserBanBuilderCompat : PublicGetUserBan.PublicGetUserBanAbstractBuilder<PublicGetUserBanBuilderCompat>
         {
             internal PublicGetUserBanBuilderCompat() : base() { }
 
             internal PublicGetUserBanBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ModelUserBanResponse>? Execute(
                 string namespace_,
                 string userId
@@ -2131,14 +2131,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdatePasswordV2BuilderCompat : PublicUpdatePasswordV2.PublicUpdatePasswordV2AbstractBuilder<PublicUpdatePasswordV2BuilderCompat>
         {
             internal PublicUpdatePasswordV2BuilderCompat() : base() { }
 
             internal PublicUpdatePasswordV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUserPasswordUpdateRequest body,
                 string namespace_,
@@ -2167,14 +2167,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetListJusticePlatformAccountsBuilderCompat : GetListJusticePlatformAccounts.GetListJusticePlatformAccountsAbstractBuilder<GetListJusticePlatformAccountsBuilderCompat>
         {
             internal GetListJusticePlatformAccountsBuilderCompat() : base() { }
 
             internal GetListJusticePlatformAccountsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ModelGetUserMapping>? Execute(
                 string namespace_,
                 string userId
@@ -2201,14 +2201,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicPlatformLinkV2BuilderCompat : PublicPlatformLinkV2.PublicPlatformLinkV2AbstractBuilder<PublicPlatformLinkV2BuilderCompat>
         {
             internal PublicPlatformLinkV2BuilderCompat() : base() { }
 
             internal PublicPlatformLinkV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string ticket,
                 string namespace_,
@@ -2241,14 +2241,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicDeletePlatformLinkV2BuilderCompat : PublicDeletePlatformLinkV2.PublicDeletePlatformLinkV2AbstractBuilder<PublicDeletePlatformLinkV2BuilderCompat>
         {
             internal PublicDeletePlatformLinkV2BuilderCompat() : base() { }
 
             internal PublicDeletePlatformLinkV2BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string platformId,
@@ -3787,14 +3787,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminPlatformUnlinkV3BuilderCompat : AdminPlatformUnlinkV3.AdminPlatformUnlinkV3AbstractBuilder<AdminPlatformUnlinkV3BuilderCompat>
         {
             internal AdminPlatformUnlinkV3BuilderCompat() : base() { }
 
             internal AdminPlatformUnlinkV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUnlinkUserPlatformRequest body,
                 string namespace_,
@@ -3899,14 +3899,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDeleteUserLinkingHistoryByPlatformIDV3BuilderCompat : AdminDeleteUserLinkingHistoryByPlatformIDV3.AdminDeleteUserLinkingHistoryByPlatformIDV3AbstractBuilder<AdminDeleteUserLinkingHistoryByPlatformIDV3BuilderCompat>
         {
             internal AdminDeleteUserLinkingHistoryByPlatformIDV3BuilderCompat() : base() { }
 
             internal AdminDeleteUserLinkingHistoryByPlatformIDV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string platformId,
@@ -4396,14 +4396,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicListUserIDByPlatformUserIDsV3BuilderCompat : PublicListUserIDByPlatformUserIDsV3.PublicListUserIDByPlatformUserIDsV3AbstractBuilder<PublicListUserIDByPlatformUserIDsV3BuilderCompat>
         {
             internal PublicListUserIDByPlatformUserIDsV3BuilderCompat() : base() { }
 
             internal PublicListUserIDByPlatformUserIDsV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.AccountcommonUserPlatforms? Execute(
                 ModelPlatformUserIDRequest body,
                 string namespace_,
@@ -4434,14 +4434,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserByPlatformUserIDV3BuilderCompat : PublicGetUserByPlatformUserIDV3.PublicGetUserByPlatformUserIDV3AbstractBuilder<PublicGetUserByPlatformUserIDV3BuilderCompat>
         {
             internal PublicGetUserByPlatformUserIDV3BuilderCompat() : base() { }
 
             internal PublicGetUserByPlatformUserIDV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelUserResponseV3? Execute(
                 string namespace_,
                 string platformId,
@@ -4623,14 +4623,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicBulkGetUsersBuilderCompat : PublicBulkGetUsers.PublicBulkGetUsersAbstractBuilder<PublicBulkGetUsersBuilderCompat>
         {
             internal PublicBulkGetUsersBuilderCompat() : base() { }
 
             internal PublicBulkGetUsersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelListBulkUserResponse? Execute(
                 ModelUserIDsRequest body,
                 string namespace_
@@ -5131,14 +5131,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicPlatformUnlinkV3BuilderCompat : PublicPlatformUnlinkV3.PublicPlatformUnlinkV3AbstractBuilder<PublicPlatformUnlinkV3BuilderCompat>
         {
             internal PublicPlatformUnlinkV3BuilderCompat() : base() { }
 
             internal PublicPlatformUnlinkV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUnlinkUserPlatformRequest body,
                 string namespace_,
@@ -5426,14 +5426,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserByUserIdV3BuilderCompat : PublicGetUserByUserIdV3.PublicGetUserByUserIdV3AbstractBuilder<PublicGetUserByUserIdV3BuilderCompat>
         {
             internal PublicGetUserByUserIdV3BuilderCompat() : base() { }
 
             internal PublicGetUserByUserIdV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelPublicUserResponseV3? Execute(
                 string namespace_,
                 string userId
@@ -6048,7 +6048,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateUserBuilderCompat CreateUserOp
         {
             get
@@ -6057,7 +6057,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAdminUsersByRoleIDBuilderCompat GetAdminUsersByRoleIDOp
         {
             get
@@ -6066,7 +6066,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserByLoginIDBuilderCompat GetUserByLoginIDOp
         {
             get
@@ -6075,7 +6075,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserByPlatformUserIDBuilderCompat GetUserByPlatformUserIDOp
         {
             get
@@ -6084,7 +6084,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ForgotPasswordBuilderCompat ForgotPasswordOp
         {
             get
@@ -6093,7 +6093,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUsersByLoginIdsBuilderCompat GetUsersByLoginIdsOp
         {
             get
@@ -6102,7 +6102,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ResetPasswordBuilderCompat ResetPasswordOp
         {
             get
@@ -6111,7 +6111,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SearchUserBuilderCompat SearchUserOp
         {
             get
@@ -6120,7 +6120,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserByUserIDBuilderCompat GetUserByUserIDOp
         {
             get
@@ -6129,7 +6129,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateUserBuilderCompat UpdateUserOp
         {
             get
@@ -6138,7 +6138,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserBuilderCompat DeleteUserOp
         {
             get
@@ -6147,7 +6147,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public BanUserBuilderCompat BanUserOp
         {
             get
@@ -6156,7 +6156,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserBanHistoryBuilderCompat GetUserBanHistoryOp
         {
             get
@@ -6165,7 +6165,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DisableUserBanBuilderCompat DisableUserBanOp
         {
             get
@@ -6174,7 +6174,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EnableUserBanBuilderCompat EnableUserBanOp
         {
             get
@@ -6183,7 +6183,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListCrossNamespaceAccountLinkBuilderCompat ListCrossNamespaceAccountLinkOp
         {
             get
@@ -6192,7 +6192,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DisableUserBuilderCompat DisableUserOp
         {
             get
@@ -6201,7 +6201,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EnableUserBuilderCompat EnableUserOp
         {
             get
@@ -6210,7 +6210,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserInformationBuilderCompat GetUserInformationOp
         {
             get
@@ -6219,7 +6219,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserInformationBuilderCompat DeleteUserInformationOp
         {
             get
@@ -6228,7 +6228,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserLoginHistoriesBuilderCompat GetUserLoginHistoriesOp
         {
             get
@@ -6237,7 +6237,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdatePasswordBuilderCompat UpdatePasswordOp
         {
             get
@@ -6246,7 +6246,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveUserPermissionBuilderCompat SaveUserPermissionOp
         {
             get
@@ -6255,7 +6255,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddUserPermissionBuilderCompat AddUserPermissionOp
         {
             get
@@ -6264,7 +6264,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserPermissionBuilderCompat DeleteUserPermissionOp
         {
             get
@@ -6273,7 +6273,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserPlatformAccountsBuilderCompat GetUserPlatformAccountsOp
         {
             get
@@ -6282,7 +6282,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserMappingBuilderCompat GetUserMappingOp
         {
             get
@@ -6291,7 +6291,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserJusticePlatformAccountBuilderCompat GetUserJusticePlatformAccountOp
         {
             get
@@ -6300,7 +6300,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformLinkBuilderCompat PlatformLinkOp
         {
             get
@@ -6309,7 +6309,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PlatformUnlinkBuilderCompat PlatformUnlinkOp
         {
             get
@@ -6318,7 +6318,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetPublisherUserBuilderCompat GetPublisherUserOp
         {
             get
@@ -6327,7 +6327,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveUserRolesBuilderCompat SaveUserRolesOp
         {
             get
@@ -6336,7 +6336,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddUserRoleBuilderCompat AddUserRoleOp
         {
             get
@@ -6345,7 +6345,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserRoleBuilderCompat DeleteUserRoleOp
         {
             get
@@ -6354,7 +6354,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpgradeHeadlessAccountBuilderCompat UpgradeHeadlessAccountOp
         {
             get
@@ -6363,7 +6363,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpgradeHeadlessAccountWithVerificationCodeBuilderCompat UpgradeHeadlessAccountWithVerificationCodeOp
         {
             get
@@ -6372,7 +6372,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UserVerificationBuilderCompat UserVerificationOp
         {
             get
@@ -6381,7 +6381,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SendVerificationCodeBuilderCompat SendVerificationCodeOp
         {
             get
@@ -6390,7 +6390,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetAgeRestrictionStatusV2BuilderCompat AdminGetAgeRestrictionStatusV2Op
         {
             get
@@ -6399,7 +6399,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateAgeRestrictionConfigV2BuilderCompat AdminUpdateAgeRestrictionConfigV2Op
         {
             get
@@ -6408,7 +6408,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListCountryAgeRestrictionBuilderCompat GetListCountryAgeRestrictionOp
         {
             get
@@ -6417,7 +6417,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateCountryAgeRestrictionBuilderCompat UpdateCountryAgeRestrictionOp
         {
             get
@@ -6426,7 +6426,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSearchUsersV2BuilderCompat AdminSearchUsersV2Op
         {
             get
@@ -6435,7 +6435,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetUserByUserIdV2BuilderCompat AdminGetUserByUserIdV2Op
         {
             get
@@ -6444,7 +6444,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateUserV2BuilderCompat AdminUpdateUserV2Op
         {
             get
@@ -6453,7 +6453,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminBanUserV2BuilderCompat AdminBanUserV2Op
         {
             get
@@ -6462,7 +6462,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetUserBanV2BuilderCompat AdminGetUserBanV2Op
         {
             get
@@ -6471,7 +6471,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDisableUserV2BuilderCompat AdminDisableUserV2Op
         {
             get
@@ -6480,7 +6480,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminEnableUserV2BuilderCompat AdminEnableUserV2Op
         {
             get
@@ -6489,7 +6489,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminResetPasswordV2BuilderCompat AdminResetPasswordV2Op
         {
             get
@@ -6498,7 +6498,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeletePlatformLinkV2BuilderCompat AdminDeletePlatformLinkV2Op
         {
             get
@@ -6507,7 +6507,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminPutUserRolesV2BuilderCompat AdminPutUserRolesV2Op
         {
             get
@@ -6516,7 +6516,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminCreateUserRolesV2BuilderCompat AdminCreateUserRolesV2Op
         {
             get
@@ -6525,7 +6525,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetCountryAgeRestrictionBuilderCompat PublicGetCountryAgeRestrictionOp
         {
             get
@@ -6534,7 +6534,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicCreateUserV2BuilderCompat PublicCreateUserV2Op
         {
             get
@@ -6543,7 +6543,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicForgotPasswordV2BuilderCompat PublicForgotPasswordV2Op
         {
             get
@@ -6552,7 +6552,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicResetPasswordV2BuilderCompat PublicResetPasswordV2Op
         {
             get
@@ -6561,7 +6561,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByUserIDV2BuilderCompat PublicGetUserByUserIDV2Op
         {
             get
@@ -6570,7 +6570,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateUserV2BuilderCompat PublicUpdateUserV2Op
         {
             get
@@ -6579,7 +6579,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserBanBuilderCompat PublicGetUserBanOp
         {
             get
@@ -6588,7 +6588,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdatePasswordV2BuilderCompat PublicUpdatePasswordV2Op
         {
             get
@@ -6597,7 +6597,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListJusticePlatformAccountsBuilderCompat GetListJusticePlatformAccountsOp
         {
             get
@@ -6606,7 +6606,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicPlatformLinkV2BuilderCompat PublicPlatformLinkV2Op
         {
             get
@@ -6615,7 +6615,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDeletePlatformLinkV2BuilderCompat PublicDeletePlatformLinkV2Op
         {
             get
@@ -6992,7 +6992,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminPlatformUnlinkV3BuilderCompat AdminPlatformUnlinkV3Op
         {
             get
@@ -7017,7 +7017,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteUserLinkingHistoryByPlatformIDV3BuilderCompat AdminDeleteUserLinkingHistoryByPlatformIDV3Op
         {
             get
@@ -7130,7 +7130,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicListUserIDByPlatformUserIDsV3BuilderCompat PublicListUserIDByPlatformUserIDsV3Op
         {
             get
@@ -7139,7 +7139,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByPlatformUserIDV3BuilderCompat PublicGetUserByPlatformUserIDV3Op
         {
             get
@@ -7180,7 +7180,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicBulkGetUsersBuilderCompat PublicBulkGetUsersOp
         {
             get
@@ -7309,7 +7309,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicPlatformUnlinkV3BuilderCompat PublicPlatformUnlinkV3Op
         {
             get
@@ -7374,7 +7374,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserByUserIdV3BuilderCompat PublicGetUserByUserIdV3Op
         {
             get

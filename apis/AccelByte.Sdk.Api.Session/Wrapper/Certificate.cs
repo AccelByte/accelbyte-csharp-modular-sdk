@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUploadXBoxCertificate.AdminUploadXBoxCertificateBuilder AdminUploadXBoxCertificateOp
         {
             get
@@ -48,8 +48,8 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         }
         #endregion
 
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUploadXBoxCertificate.Response AdminUploadXBoxCertificate(AdminUploadXBoxCertificate input)
         {
             var response = _sdk.RunRequest(input);
@@ -66,6 +66,6 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
     }
 }

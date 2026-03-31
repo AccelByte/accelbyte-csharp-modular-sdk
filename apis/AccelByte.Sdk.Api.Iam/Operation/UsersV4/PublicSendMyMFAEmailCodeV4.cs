@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicSendMyMFAEmailCodeV4 op = new PublicSendMyMFAEmailCodeV4(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,14 +162,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (builder.Action is not null) FormParams["action"] = builder.Action;
             if (builder.LanguageTag is not null) FormParams["languageTag"] = builder.LanguageTag;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -198,20 +198,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicSendMyMFAEmailCodeV4(
-            string namespace_,            
-            string? action,            
-            string? languageTag            
+            string namespace_,
+            string? action,
+            string? languageTag
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
+
+
             if (action is not null) FormParams["action"] = action;
             if (languageTag is not null) FormParams["languageTag"] = languageTag;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,7 +223,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicSendMyMFAEmailCodeV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicSendMyMFAEmailCodeV4.Response()

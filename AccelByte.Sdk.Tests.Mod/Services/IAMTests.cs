@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Tests.Mod.Services
         {
             Assert.IsNotNull(_Sdk);
             if (_Sdk == null)
-                return;            
+                return;
 
             string roleIdentityToUpdate = "USER";
             string resourceToCheck = "NAMESPACE:{namespace}:PROFILE";

@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryIAPClawbackHistory op = new QueryIAPClawbackHistory(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -168,7 +168,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -185,7 +185,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndTime is not null) QueryParams["endTime"] = builder.EndTime;
             if (builder.EventType is not null) QueryParams["eventType"] = builder.EventType.Value;
             if (builder.ExternalOrderId is not null) QueryParams["externalOrderId"] = builder.ExternalOrderId;
@@ -230,11 +230,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.StartTime is not null) QueryParams["startTime"] = builder.StartTime;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -251,19 +251,19 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryIAPClawbackHistory(
-            string namespace_,            
-            string? endTime,            
-            QueryIAPClawbackHistoryEventType? eventType,            
-            string? externalOrderId,            
-            int? limit,            
-            int? offset,            
-            string? startTime,            
-            QueryIAPClawbackHistoryStatus? status,            
-            string? userId            
+            string namespace_,
+            string? endTime,
+            QueryIAPClawbackHistoryEventType? eventType,
+            string? externalOrderId,
+            int? limit,
+            int? offset,
+            string? startTime,
+            QueryIAPClawbackHistoryStatus? status,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endTime is not null) QueryParams["endTime"] = endTime;
             if (eventType is not null) QueryParams["eventType"] = eventType.Value;
             if (externalOrderId is not null) QueryParams["externalOrderId"] = externalOrderId;
@@ -272,11 +272,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (startTime is not null) QueryParams["startTime"] = startTime;
             if (status is not null) QueryParams["status"] = status.Value;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -285,10 +285,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryIAPClawbackHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryIAPClawbackHistory.Response()

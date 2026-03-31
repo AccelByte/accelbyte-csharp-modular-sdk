@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Csm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 {
-    [SdkConsoleCommand("csm","subscribev2handler")]
-    public class SubscribeV2HandlerCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("csm", "subscribev2handler")]
+    public class SubscribeV2HandlerCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Csm"; } }
+        public string ServiceName { get { return "Csm"; } }
 
-        public string OperationName{ get { return "SubscribeV2Handler"; } }
+        public string OperationName { get { return "SubscribeV2Handler"; } }
 
         [SdkCommandArgument("app")]
         public string App { get; set; } = String.Empty;

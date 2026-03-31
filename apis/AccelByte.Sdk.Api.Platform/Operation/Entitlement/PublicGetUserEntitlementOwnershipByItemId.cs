@@ -77,9 +77,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetUserEntitlementOwnershipByItemId op = new PublicGetUserEntitlementOwnershipByItemId(this,
-                    namespace_,                    
-                    userId,                    
-                    itemId                    
+                    namespace_,
+                    userId,
+                    itemId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -171,14 +171,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.EntitlementClazz is not null) QueryParams["entitlementClazz"] = builder.EntitlementClazz.Value;
             if (itemId is not null) QueryParams["itemId"] = itemId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,22 +195,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetUserEntitlementOwnershipByItemId(
-            string namespace_,            
-            string userId,            
-            PublicGetUserEntitlementOwnershipByItemIdEntitlementClazz? entitlementClazz,            
-            string itemId            
+            string namespace_,
+            string userId,
+            PublicGetUserEntitlementOwnershipByItemIdEntitlementClazz? entitlementClazz,
+            string itemId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (entitlementClazz is not null) QueryParams["entitlementClazz"] = entitlementClazz.Value;
             if (itemId is not null) QueryParams["itemId"] = itemId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,10 +219,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetUserEntitlementOwnershipByItemId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetUserEntitlementOwnershipByItemId.Response()

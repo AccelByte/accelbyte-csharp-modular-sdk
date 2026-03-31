@@ -71,10 +71,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateUserOrderStatus op = new UpdateUserOrderStatus(this,
-                    body,                    
-                    namespace_,                    
-                    orderNo,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    orderNo,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -252,13 +252,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -292,22 +292,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdateUserOrderStatus(
-            string namespace_,            
-            string orderNo,            
-            string userId,            
-            Model.OrderUpdate body            
+            string namespace_,
+            string orderNo,
+            string userId,
+            Model.OrderUpdate body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["orderNo"] = orderNo;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -319,7 +319,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateUserOrderStatus.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateUserOrderStatus.Response()
@@ -371,7 +371,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -396,7 +396,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error422 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error422!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

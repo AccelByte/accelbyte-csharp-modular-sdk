@@ -80,8 +80,8 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 QueryRewards op = new QueryRewards(this,
-                    namespace_,                    
-                    seasonId                    
+                    namespace_,
+                    seasonId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            if (builder.Q is not null) QueryParams["q"] = builder.Q;
-            
 
-            
-            
-            
+            if (builder.Q is not null) QueryParams["q"] = builder.Q;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -191,20 +191,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public QueryRewards(
-            string namespace_,            
-            string seasonId,            
-            string? q            
+            string namespace_,
+            string seasonId,
+            string? q
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            if (q is not null) QueryParams["q"] = q;
-            
 
-            
-            
-            
+            if (q is not null) QueryParams["q"] = q;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -213,10 +213,10 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryRewards.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryRewards.Response()

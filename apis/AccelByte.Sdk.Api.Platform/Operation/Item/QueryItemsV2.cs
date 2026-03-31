@@ -253,7 +253,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryItemsV2 op = new QueryItemsV2(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -273,7 +273,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -290,7 +290,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -326,7 +326,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.AppType is not null) QueryParams["appType"] = builder.AppType.Value;
             if (builder.AvailableDate is not null) QueryParams["availableDate"] = builder.AvailableDate;
             if (builder.BaseAppId is not null) QueryParams["baseAppId"] = builder.BaseAppId;
@@ -345,13 +345,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.TargetNamespace is not null) QueryParams["targetNamespace"] = builder.TargetNamespace;
             if (builder.WithTotal != null) QueryParams["withTotal"] = Convert.ToString(builder.WithTotal)!;
-            
 
-            
+
+
             CollectionFormatMap["itemType"] = "multi";
             CollectionFormatMap["sortBy"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -372,29 +372,29 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryItemsV2(
-            string namespace_,            
-            QueryItemsV2AppType? appType,            
-            string? availableDate,            
-            string? baseAppId,            
-            string? categoryPath,            
-            string? features,            
-            bool? includeSubCategoryItem,            
-            string? itemName,            
-            QueryItemsV2ItemStatus? itemStatus,            
-            List<QueryItemsV2ItemType>? itemType,            
-            int? limit,            
-            int? offset,            
-            string? region,            
-            bool? sectionExclusive,            
-            List<QueryItemsV2SortBy>? sortBy,            
-            string? storeId,            
-            string? tags,            
-            string? targetNamespace,            
-            bool? withTotal            
+            string namespace_,
+            QueryItemsV2AppType? appType,
+            string? availableDate,
+            string? baseAppId,
+            string? categoryPath,
+            string? features,
+            bool? includeSubCategoryItem,
+            string? itemName,
+            QueryItemsV2ItemStatus? itemStatus,
+            List<QueryItemsV2ItemType>? itemType,
+            int? limit,
+            int? offset,
+            string? region,
+            bool? sectionExclusive,
+            List<QueryItemsV2SortBy>? sortBy,
+            string? storeId,
+            string? tags,
+            string? targetNamespace,
+            bool? withTotal
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (appType is not null) QueryParams["appType"] = appType.Value;
             if (availableDate is not null) QueryParams["availableDate"] = availableDate;
             if (baseAppId is not null) QueryParams["baseAppId"] = baseAppId;
@@ -413,13 +413,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (tags is not null) QueryParams["tags"] = tags;
             if (targetNamespace is not null) QueryParams["targetNamespace"] = targetNamespace;
             if (withTotal != null) QueryParams["withTotal"] = Convert.ToString(withTotal)!;
-            
 
-            
+
+
             CollectionFormatMap["itemType"] = "multi";
             CollectionFormatMap["sortBy"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -428,10 +428,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryItemsV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryItemsV2.Response()

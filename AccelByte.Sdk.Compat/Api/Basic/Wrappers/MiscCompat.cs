@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetCountriesBuilderCompat : GetCountries.GetCountriesAbstractBuilder<GetCountriesBuilderCompat>
         {
             internal GetCountriesBuilderCompat() : base() { }
 
             internal GetCountriesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Basic.Model.CountryObject>? Execute(
                 string namespace_
             )
@@ -255,14 +255,14 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetCountriesBuilderCompat : PublicGetCountries.PublicGetCountriesAbstractBuilder<PublicGetCountriesBuilderCompat>
         {
             internal PublicGetCountriesBuilderCompat() : base() { }
 
             internal PublicGetCountriesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Basic.Model.CountryObject>? Execute(
                 string namespace_
             )
@@ -343,7 +343,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetCountriesBuilderCompat GetCountriesOp
         {
             get
@@ -408,7 +408,7 @@ namespace AccelByte.Sdk.Api.Basic.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetCountriesBuilderCompat PublicGetCountriesOp
         {
             get

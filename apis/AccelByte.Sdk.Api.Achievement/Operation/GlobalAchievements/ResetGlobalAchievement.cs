@@ -74,8 +74,8 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
             )
             {
                 ResetGlobalAchievement op = new ResetGlobalAchievement(this,
-                    achievementCode,                    
-                    namespace_                    
+                    achievementCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -158,12 +158,12 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         {
             PathParams["achievementCode"] = achievementCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,18 +186,18 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         #endregion
 
         public ResetGlobalAchievement(
-            string achievementCode,            
-            string namespace_            
+            string achievementCode,
+            string namespace_
         )
         {
             PathParams["achievementCode"] = achievementCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Achievement.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ResetGlobalAchievement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ResetGlobalAchievement.Response()

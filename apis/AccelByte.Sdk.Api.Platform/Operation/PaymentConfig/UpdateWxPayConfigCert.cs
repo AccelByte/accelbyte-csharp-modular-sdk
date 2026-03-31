@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateWxPayConfigCert op = new UpdateWxPayConfigCert(this,
-                    id                    
+                    id
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,13 +151,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["id"] = id;
-            
-            
+
+
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -176,18 +176,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdateWxPayConfigCert(
-            string id,            
-            Stream? file            
+            string id,
+            Stream? file
         )
         {
             PathParams["id"] = id;
-            
-            
+
+
             if (file is not null) FormParams["file"] = file;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,7 +199,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateWxPayConfigCert.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateWxPayConfigCert.Response()

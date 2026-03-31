@@ -51,14 +51,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SyncUserInfoBuilderCompat : SyncUserInfo.SyncUserInfoAbstractBuilder<SyncUserInfoBuilderCompat>
         {
             internal SyncUserInfoBuilderCompat() : base() { }
 
             internal SyncUserInfoBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_
             )
@@ -79,14 +79,14 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class InvalidateUserInfoCacheBuilderCompat : InvalidateUserInfoCache.InvalidateUserInfoCacheAbstractBuilder<InvalidateUserInfoCacheBuilderCompat>
         {
             internal InvalidateUserInfoCacheBuilderCompat() : base() { }
 
             internal InvalidateUserInfoCacheBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
             )
             {
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SyncUserInfoBuilderCompat SyncUserInfoOp
         {
             get
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public InvalidateUserInfoCacheBuilderCompat InvalidateUserInfoCacheOp
         {
             get

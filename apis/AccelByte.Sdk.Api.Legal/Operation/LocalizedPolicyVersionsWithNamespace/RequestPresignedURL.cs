@@ -76,8 +76,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 RequestPresignedURL op = new RequestPresignedURL(this,
-                    localizedPolicyVersionId,                    
-                    namespace_                    
+                    localizedPolicyVersionId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,13 +160,13 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -185,20 +185,20 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public RequestPresignedURL(
-            string localizedPolicyVersionId,            
-            string namespace_,            
-            Model.UploadPolicyVersionAttachmentRequest body            
+            string localizedPolicyVersionId,
+            string namespace_,
+            Model.UploadPolicyVersionAttachmentRequest body
         )
         {
             PathParams["localizedPolicyVersionId"] = localizedPolicyVersionId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,7 +210,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RequestPresignedURL.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RequestPresignedURL.Response()

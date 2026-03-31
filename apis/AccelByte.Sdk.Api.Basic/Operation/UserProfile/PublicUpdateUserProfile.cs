@@ -82,8 +82,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicUpdateUserProfile op = new PublicUpdateUserProfile(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -226,13 +226,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -270,20 +270,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public PublicUpdateUserProfile(
-            string namespace_,            
-            string userId,            
-            Model.UserProfileUpdate body            
+            string namespace_,
+            string userId,
+            Model.UserProfileUpdate body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -295,7 +295,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicUpdateUserProfile.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicUpdateUserProfile.Response()
@@ -353,7 +353,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -384,7 +384,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

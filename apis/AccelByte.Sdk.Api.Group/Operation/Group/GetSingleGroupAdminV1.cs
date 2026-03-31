@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 GetSingleGroupAdminV1 op = new GetSingleGroupAdminV1(this,
-                    groupId,                    
-                    namespace_                    
+                    groupId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -212,12 +212,12 @@ namespace AccelByte.Sdk.Api.Group.Operation
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -259,18 +259,18 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public GetSingleGroupAdminV1(
-            string groupId,            
-            string namespace_            
+            string groupId,
+            string namespace_
         )
         {
             PathParams["groupId"] = groupId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -279,10 +279,10 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetSingleGroupAdminV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetSingleGroupAdminV1.Response()
@@ -346,7 +346,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -383,7 +383,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

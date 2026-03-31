@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// 
     /// Deletes the images uploaded to the repository
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteAppImagesV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,16 +70,16 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 DeleteAppImagesV1 op = new DeleteAppImagesV1(this,
-                    body,                    
-                    app,                    
-                    namespace_                    
+                    body,
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected DeleteAppImagesV1.Response InternalExecute(
                 GeneratedDeleteAppImagesV1Request body,
                 string app,
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
             public DeleteAppImagesV1Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public DeleteAppImagesV1.Response Execute(
                 GeneratedDeleteAppImagesV1Request body,
                 string app,
@@ -166,13 +166,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public DeleteAppImagesV1(
-            string app,            
-            string namespace_,            
-            Model.GeneratedDeleteAppImagesV1Request body            
+            string app,
+            string namespace_,
+            Model.GeneratedDeleteAppImagesV1Request body
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteAppImagesV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteAppImagesV1.Response()

@@ -70,8 +70,8 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 UserGetFriendshipStatus op = new UserGetFriendshipStatus(this,
-                    friendId,                    
-                    namespace_                    
+                    friendId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -154,12 +154,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["friendId"] = friendId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -184,18 +184,18 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public UserGetFriendshipStatus(
-            string friendId,            
-            string namespace_            
+            string friendId,
+            string namespace_
         )
         {
             PathParams["friendId"] = friendId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -204,10 +204,10 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UserGetFriendshipStatus.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UserGetFriendshipStatus.Response()

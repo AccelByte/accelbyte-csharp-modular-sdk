@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 ListTopicsHandler op = new ListTopicsHandler(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -190,17 +190,17 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.FuzzyTopicName is not null) QueryParams["fuzzyTopicName"] = builder.FuzzyTopicName;
             if (builder.IsSubscribedByAppName is not null) QueryParams["isSubscribedByAppName"] = builder.IsSubscribedByAppName;
             if (builder.IsUnsubscribedByAppName is not null) QueryParams["isUnsubscribedByAppName"] = builder.IsUnsubscribedByAppName;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -225,26 +225,26 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public ListTopicsHandler(
-            string namespace_,            
-            string? fuzzyTopicName,            
-            string? isSubscribedByAppName,            
-            string? isUnsubscribedByAppName,            
-            long? limit,            
-            long? offset            
+            string namespace_,
+            string? fuzzyTopicName,
+            string? isSubscribedByAppName,
+            string? isUnsubscribedByAppName,
+            long? limit,
+            long? offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (fuzzyTopicName is not null) QueryParams["fuzzyTopicName"] = fuzzyTopicName;
             if (isSubscribedByAppName is not null) QueryParams["isSubscribedByAppName"] = isSubscribedByAppName;
             if (isUnsubscribedByAppName is not null) QueryParams["isUnsubscribedByAppName"] = isUnsubscribedByAppName;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -256,7 +256,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ListTopicsHandler.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListTopicsHandler.Response()

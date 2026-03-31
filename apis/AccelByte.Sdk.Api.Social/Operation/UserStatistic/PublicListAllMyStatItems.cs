@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicListAllMyStatItems op = new PublicListAllMyStatItems(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,17 +173,17 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.AdditionalKey is not null) QueryParams["additionalKey"] = builder.AdditionalKey;
             if (builder.StatCodes is not null) QueryParams["statCodes"] = builder.StatCodes;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
 
-            
+
+
             CollectionFormatMap["statCodes"] = "multi";
             CollectionFormatMap["tags"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -208,24 +208,24 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public PublicListAllMyStatItems(
-            string namespace_,            
-            string? additionalKey,            
-            List<string>? statCodes,            
-            List<string>? tags            
+            string namespace_,
+            string? additionalKey,
+            List<string>? statCodes,
+            List<string>? tags
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (additionalKey is not null) QueryParams["additionalKey"] = additionalKey;
             if (statCodes is not null) QueryParams["statCodes"] = statCodes;
             if (tags is not null) QueryParams["tags"] = tags;
-            
 
-            
+
+
             CollectionFormatMap["statCodes"] = "multi";
             CollectionFormatMap["tags"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -234,10 +234,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicListAllMyStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicListAllMyStatItems.Response()

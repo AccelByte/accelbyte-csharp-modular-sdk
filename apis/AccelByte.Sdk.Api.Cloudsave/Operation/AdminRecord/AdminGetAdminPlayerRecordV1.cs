@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminGetAdminPlayerRecordV1 op = new AdminGetAdminPlayerRecordV1(this,
-                    key,                    
-                    namespace_,                    
-                    userId                    
+                    key,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -230,12 +230,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -273,20 +273,20 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public AdminGetAdminPlayerRecordV1(
-            string key,            
-            string namespace_,            
-            string userId            
+            string key,
+            string namespace_,
+            string userId
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -298,7 +298,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetAdminPlayerRecordV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetAdminPlayerRecordV1.Response()
@@ -356,7 +356,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -387,7 +387,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

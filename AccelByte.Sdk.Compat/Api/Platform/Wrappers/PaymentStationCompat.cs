@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetPaymentCustomizationBuilderCompat : GetPaymentCustomization.GetPaymentCustomizationAbstractBuilder<GetPaymentCustomizationBuilderCompat>
         {
             internal GetPaymentCustomizationBuilderCompat() : base() { }
 
             internal GetPaymentCustomizationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.Customization? Execute(
                 string namespace_,
                 string paymentProvider,
@@ -377,7 +377,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetPaymentCustomizationBuilderCompat GetPaymentCustomizationOp
         {
             get

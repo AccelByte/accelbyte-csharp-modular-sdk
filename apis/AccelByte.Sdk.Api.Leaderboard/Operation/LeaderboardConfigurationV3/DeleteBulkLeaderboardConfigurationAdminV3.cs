@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 DeleteBulkLeaderboardConfigurationAdminV3 op = new DeleteBulkLeaderboardConfigurationAdminV3(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,13 +151,13 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,18 +182,18 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #endregion
 
         public DeleteBulkLeaderboardConfigurationAdminV3(
-            string namespace_,            
-            Model.ModelsDeleteBulkLeaderboardsReq body            
+            string namespace_,
+            Model.ModelsDeleteBulkLeaderboardsReq body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,7 +205,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteBulkLeaderboardConfigurationAdminV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteBulkLeaderboardConfigurationAdminV3.Response()

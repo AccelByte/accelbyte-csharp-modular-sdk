@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///         *  Returns : updated slot
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicUpdateUserNamespaceSlotMetadata : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -85,16 +85,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicUpdateUserNamespaceSlotMetadata op = new PublicUpdateUserNamespaceSlotMetadata(this,
-                    namespace_,                    
-                    slotId,                    
-                    userId                    
+                    namespace_,
+                    slotId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected PublicUpdateUserNamespaceSlotMetadata.Response InternalExecute(
                 string namespace_,
                 string slotId,
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public PublicUpdateUserNamespaceSlotMetadataBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicUpdateUserNamespaceSlotMetadata.Response Execute(
                 string namespace_,
                 string slotId,
@@ -182,13 +182,13 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -207,22 +207,22 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public PublicUpdateUserNamespaceSlotMetadata(
-            string namespace_,            
-            string slotId,            
-            string userId,            
-            Model.SlotMetadataUpdate body            
+            string namespace_,
+            string slotId,
+            string userId,
+            Model.SlotMetadataUpdate body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["slotId"] = slotId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -234,7 +234,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicUpdateUserNamespaceSlotMetadata.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicUpdateUserNamespaceSlotMetadata.Response()

@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// **Endpoint migration guide**
     /// - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DeleteClientByNamespace : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -69,15 +69,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 DeleteClientByNamespace op = new DeleteClientByNamespace(this,
-                    clientId,                    
-                    namespace_                    
+                    clientId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected DeleteClientByNamespace.Response InternalExecute(
                 string clientId,
                 string namespace_
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public DeleteClientByNamespaceBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public DeleteClientByNamespace.Response Execute(
                 string clientId,
                 string namespace_
@@ -155,12 +155,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["clientId"] = clientId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,18 +183,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public DeleteClientByNamespace(
-            string clientId,            
-            string namespace_            
+            string clientId,
+            string namespace_
         )
         {
             PathParams["clientId"] = clientId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteClientByNamespace.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteClientByNamespace.Response()

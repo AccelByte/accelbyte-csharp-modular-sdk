@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **Result will include displayName(if it exists)**
     /// - **Substitute endpoint:** /iam/v3/public/namespaces/{namespace}/users/platforms [POST]
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicBulkGetUsers : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -71,15 +71,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicBulkGetUsers op = new PublicBulkGetUsers(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected PublicBulkGetUsers.Response InternalExecute(
                 ModelUserIDsRequest body,
                 string namespace_
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public PublicBulkGetUsersBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicBulkGetUsers.Response Execute(
                 ModelUserIDsRequest body,
                 string namespace_
@@ -156,13 +156,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,18 +183,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicBulkGetUsers(
-            string namespace_,            
-            Model.ModelUserIDsRequest body            
+            string namespace_,
+            Model.ModelUserIDsRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicBulkGetUsers.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicBulkGetUsers.Response()

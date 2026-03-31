@@ -158,7 +158,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryPaymentNotifications op = new QueryPaymentNotifications(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -178,7 +178,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -231,7 +231,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.EndDate is not null) QueryParams["endDate"] = builder.EndDate;
             if (builder.ExternalId is not null) QueryParams["externalId"] = builder.ExternalId;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
@@ -241,11 +241,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (builder.PaymentOrderNo is not null) QueryParams["paymentOrderNo"] = builder.PaymentOrderNo;
             if (builder.StartDate is not null) QueryParams["startDate"] = builder.StartDate;
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -262,20 +262,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryPaymentNotifications(
-            string namespace_,            
-            string? endDate,            
-            string? externalId,            
-            int? limit,            
-            QueryPaymentNotificationsNotificationSource? notificationSource,            
-            string? notificationType,            
-            int? offset,            
-            string? paymentOrderNo,            
-            string? startDate,            
-            QueryPaymentNotificationsStatus? status            
+            string namespace_,
+            string? endDate,
+            string? externalId,
+            int? limit,
+            QueryPaymentNotificationsNotificationSource? notificationSource,
+            string? notificationType,
+            int? offset,
+            string? paymentOrderNo,
+            string? startDate,
+            QueryPaymentNotificationsStatus? status
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (endDate is not null) QueryParams["endDate"] = endDate;
             if (externalId is not null) QueryParams["externalId"] = externalId;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
@@ -285,11 +285,11 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (paymentOrderNo is not null) QueryParams["paymentOrderNo"] = paymentOrderNo;
             if (startDate is not null) QueryParams["startDate"] = startDate;
             if (status is not null) QueryParams["status"] = status.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -298,10 +298,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryPaymentNotifications.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryPaymentNotifications.Response()

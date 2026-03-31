@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminRemoveTopicMember op = new AdminRemoveTopicMember(this,
-                    namespace_,                    
-                    topic,                    
-                    userId                    
+                    namespace_,
+                    topic,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,12 +162,12 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -192,20 +192,20 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminRemoveTopicMember(
-            string namespace_,            
-            string topic,            
-            string userId            
+            string namespace_,
+            string topic,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topic"] = topic;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -217,7 +217,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminRemoveTopicMember.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminRemoveTopicMember.Response()

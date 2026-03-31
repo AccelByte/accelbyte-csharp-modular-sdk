@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetDSMCConfigurationDefaultBuilderCompat : AdminGetDSMCConfigurationDefault.AdminGetDSMCConfigurationDefaultAbstractBuilder<AdminGetDSMCConfigurationDefaultBuilderCompat>
         {
             internal AdminGetDSMCConfigurationDefaultBuilderCompat() : base() { }
 
             internal AdminGetDSMCConfigurationDefaultBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Session.Model.ModelsDefaultDSMCConfig? Execute(
             )
             {
@@ -55,7 +55,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetDSMCConfigurationDefaultBuilderCompat AdminGetDSMCConfigurationDefaultOp
         {
             get

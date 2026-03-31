@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUploadContentDirectBuilderCompat : AdminUploadContentDirect.AdminUploadContentDirectAbstractBuilder<AdminUploadContentDirectBuilderCompat>
         {
             internal AdminUploadContentDirectBuilderCompat() : base() { }
 
             internal AdminUploadContentDirectBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Ugc.Model.ModelsCreateContentResponse? Execute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -264,14 +264,14 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SingleAdminUpdateContentDirectBuilderCompat : SingleAdminUpdateContentDirect.SingleAdminUpdateContentDirectAbstractBuilder<SingleAdminUpdateContentDirectBuilderCompat>
         {
             internal SingleAdminUpdateContentDirectBuilderCompat() : base() { }
 
             internal SingleAdminUpdateContentDirectBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Ugc.Model.ModelsCreateContentResponse? Execute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -1092,14 +1092,14 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdateContentDirectBuilderCompat : AdminUpdateContentDirect.AdminUpdateContentDirectAbstractBuilder<AdminUpdateContentDirectBuilderCompat>
         {
             internal AdminUpdateContentDirectBuilderCompat() : base() { }
 
             internal AdminUpdateContentDirectBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Ugc.Model.ModelsCreateContentResponse? Execute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -1320,7 +1320,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUploadContentDirectBuilderCompat AdminUploadContentDirectOp
         {
             get
@@ -1353,7 +1353,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SingleAdminUpdateContentDirectBuilderCompat SingleAdminUpdateContentDirectOp
         {
             get
@@ -1490,7 +1490,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateContentDirectBuilderCompat AdminUpdateContentDirectOp
         {
             get

@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetThirdPartyConfigBuilderCompat : AdminGetThirdPartyConfig.AdminGetThirdPartyConfigAbstractBuilder<AdminGetThirdPartyConfigBuilderCompat>
         {
             internal AdminGetThirdPartyConfigBuilderCompat() : base() { }
 
             internal AdminGetThirdPartyConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsGetConfigResponse? Execute(
                 string namespace_
             )
@@ -57,14 +57,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminUpdateThirdPartyConfigBuilderCompat : AdminUpdateThirdPartyConfig.AdminUpdateThirdPartyConfigAbstractBuilder<AdminUpdateThirdPartyConfigBuilderCompat>
         {
             internal AdminUpdateThirdPartyConfigBuilderCompat() : base() { }
 
             internal AdminUpdateThirdPartyConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsUpdateConfigResponse? Execute(
                 ModelsUpdateConfigRequest body,
                 string namespace_
@@ -91,14 +91,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminCreateThirdPartyConfigBuilderCompat : AdminCreateThirdPartyConfig.AdminCreateThirdPartyConfigAbstractBuilder<AdminCreateThirdPartyConfigBuilderCompat>
         {
             internal AdminCreateThirdPartyConfigBuilderCompat() : base() { }
 
             internal AdminCreateThirdPartyConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsCreateConfigResponse? Execute(
                 ModelsCreateConfigRequest body,
                 string namespace_
@@ -125,14 +125,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDeleteThirdPartyConfigBuilderCompat : AdminDeleteThirdPartyConfig.AdminDeleteThirdPartyConfigAbstractBuilder<AdminDeleteThirdPartyConfigBuilderCompat>
         {
             internal AdminDeleteThirdPartyConfigBuilderCompat() : base() { }
 
             internal AdminDeleteThirdPartyConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public string? Execute(
                 string namespace_
             )
@@ -157,7 +157,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetThirdPartyConfigBuilderCompat AdminGetThirdPartyConfigOp
         {
             get
@@ -166,7 +166,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateThirdPartyConfigBuilderCompat AdminUpdateThirdPartyConfigOp
         {
             get
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminCreateThirdPartyConfigBuilderCompat AdminCreateThirdPartyConfigOp
         {
             get
@@ -184,7 +184,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDeleteThirdPartyConfigBuilderCompat AdminDeleteThirdPartyConfigOp
         {
             get

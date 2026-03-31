@@ -77,9 +77,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ExistsAnyUserActiveEntitlementByItemIds op = new ExistsAnyUserActiveEntitlementByItemIds(this,
-                    namespace_,                    
-                    userId,                    
-                    itemIds                    
+                    namespace_,
+                    userId,
+                    itemIds
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -171,15 +171,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.Platform is not null) QueryParams["platform"] = builder.Platform;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
-            
 
-            
+
+
             CollectionFormatMap["itemIds"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,23 +196,23 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public ExistsAnyUserActiveEntitlementByItemIds(
-            string namespace_,            
-            string userId,            
-            string? platform,            
-            List<string> itemIds            
+            string namespace_,
+            string userId,
+            string? platform,
+            List<string> itemIds
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (platform is not null) QueryParams["platform"] = platform;
             if (itemIds is not null) QueryParams["itemIds"] = itemIds;
-            
 
-            
+
+
             CollectionFormatMap["itemIds"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,10 +221,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ExistsAnyUserActiveEntitlementByItemIds.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ExistsAnyUserActiveEntitlementByItemIds.Response()

@@ -56,7 +56,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetKeyGroupByBoothName.GetKeyGroupByBoothNameBuilder GetKeyGroupByBoothNameOp
         {
             get
@@ -157,8 +157,8 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetKeyGroupByBoothName.Response GetKeyGroupByBoothName(GetKeyGroupByBoothName input)
         {
             var response = _sdk.RunRequest(input);
@@ -175,7 +175,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public GetKeyGroup.Response GetKeyGroup(GetKeyGroup input)
         {
             var response = _sdk.RunRequest(input);

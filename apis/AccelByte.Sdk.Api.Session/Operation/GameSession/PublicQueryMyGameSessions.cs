@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicQueryMyGameSessions op = new PublicQueryMyGameSessions(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -129,7 +129,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -146,7 +146,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -182,15 +182,15 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Order is not null) QueryParams["order"] = builder.Order;
             if (builder.OrderBy is not null) QueryParams["orderBy"] = builder.OrderBy;
             if (builder.Status is not null) QueryParams["status"] = builder.Status;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -213,22 +213,22 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public PublicQueryMyGameSessions(
-            string namespace_,            
-            string? order,            
-            string? orderBy,            
-            string? status            
+            string namespace_,
+            string? order,
+            string? orderBy,
+            string? status
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (order is not null) QueryParams["order"] = order;
             if (orderBy is not null) QueryParams["orderBy"] = orderBy;
             if (status is not null) QueryParams["status"] = status;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -240,7 +240,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicQueryMyGameSessions.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicQueryMyGameSessions.Response()

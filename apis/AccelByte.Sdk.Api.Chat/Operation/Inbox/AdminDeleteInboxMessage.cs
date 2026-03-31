@@ -76,8 +76,8 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminDeleteInboxMessage op = new AdminDeleteInboxMessage(this,
-                    messageId,                    
-                    namespace_                    
+                    messageId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -99,7 +99,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -160,13 +160,13 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         {
             PathParams["messageId"] = messageId;
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
-            
 
-            
-            
-            
+            if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -191,20 +191,20 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminDeleteInboxMessage(
-            string messageId,            
-            string namespace_,            
-            bool? force            
+            string messageId,
+            string namespace_,
+            bool? force
         )
         {
             PathParams["messageId"] = messageId;
             PathParams["namespace"] = namespace_;
-            
-            if (force != null) QueryParams["force"] = Convert.ToString(force)!;
-            
 
-            
-            
-            
+            if (force != null) QueryParams["force"] = Convert.ToString(force)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,7 +216,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteInboxMessage.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteInboxMessage.Response()

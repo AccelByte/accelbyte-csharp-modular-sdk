@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminListInventories op = new AdminListInventories(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -156,7 +156,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -192,17 +192,17 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.InventoryConfigurationCode is not null) QueryParams["inventoryConfigurationCode"] = builder.InventoryConfigurationCode;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.UserId is not null) QueryParams["userId"] = builder.UserId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,26 +223,26 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminListInventories(
-            string namespace_,            
-            string? inventoryConfigurationCode,            
-            long? limit,            
-            long? offset,            
-            AdminListInventoriesSortBy? sortBy,            
-            string? userId            
+            string namespace_,
+            string? inventoryConfigurationCode,
+            long? limit,
+            long? offset,
+            AdminListInventoriesSortBy? sortBy,
+            string? userId
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (inventoryConfigurationCode is not null) QueryParams["inventoryConfigurationCode"] = inventoryConfigurationCode;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (userId is not null) QueryParams["userId"] = userId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -251,10 +251,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminListInventories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminListInventories.Response()

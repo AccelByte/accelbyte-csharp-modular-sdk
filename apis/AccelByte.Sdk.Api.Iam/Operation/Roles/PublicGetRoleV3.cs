@@ -66,7 +66,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 PublicGetRoleV3 op = new PublicGetRoleV3(this,
-                    roleId                    
+                    roleId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -86,7 +86,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,12 +139,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -165,16 +165,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public PublicGetRoleV3(
-            string roleId            
+            string roleId
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,7 +186,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetRoleV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetRoleV3.Response()

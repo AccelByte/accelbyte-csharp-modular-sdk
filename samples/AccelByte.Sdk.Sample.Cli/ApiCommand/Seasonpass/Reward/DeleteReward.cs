@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Seasonpass.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Seasonpass
 {
-    [SdkConsoleCommand("seasonpass","deletereward")]
-    public class DeleteRewardCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("seasonpass", "deletereward")]
+    public class DeleteRewardCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Seasonpass"; } }
+        public string ServiceName { get { return "Seasonpass"; } }
 
-        public string OperationName{ get { return "DeleteReward"; } }
+        public string OperationName { get { return "DeleteReward"; } }
 
         [SdkCommandArgument("code")]
         public string Code { get; set; } = String.Empty;

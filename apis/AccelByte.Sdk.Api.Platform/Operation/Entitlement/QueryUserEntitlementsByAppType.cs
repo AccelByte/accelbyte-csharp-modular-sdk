@@ -101,9 +101,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryUserEntitlementsByAppType op = new QueryUserEntitlementsByAppType(this,
-                    namespace_,                    
-                    userId,                    
-                    appType                    
+                    namespace_,
+                    userId,
+                    appType
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -195,16 +195,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (appType is not null) QueryParams["appType"] = appType.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,26 +221,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryUserEntitlementsByAppType(
-            string namespace_,            
-            string userId,            
-            bool? activeOnly,            
-            int? limit,            
-            int? offset,            
-            QueryUserEntitlementsByAppTypeAppType appType            
+            string namespace_,
+            string userId,
+            bool? activeOnly,
+            int? limit,
+            int? offset,
+            QueryUserEntitlementsByAppTypeAppType appType
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (appType is not null) QueryParams["appType"] = appType.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -249,10 +249,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryUserEntitlementsByAppType.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryUserEntitlementsByAppType.Response()

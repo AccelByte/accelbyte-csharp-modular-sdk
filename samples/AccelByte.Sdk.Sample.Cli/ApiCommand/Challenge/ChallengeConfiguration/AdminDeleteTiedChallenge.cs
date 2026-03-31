@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Challenge.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Challenge
 {
-    [SdkConsoleCommand("challenge","admindeletetiedchallenge")]
-    public class AdminDeleteTiedChallengeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("challenge", "admindeletetiedchallenge")]
+    public class AdminDeleteTiedChallengeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Challenge"; } }
+        public string ServiceName { get { return "Challenge"; } }
 
-        public string OperationName{ get { return "AdminDeleteTiedChallenge"; } }
+        public string OperationName { get { return "AdminDeleteTiedChallenge"; } }
 
         [SdkCommandArgument("challengeCode")]
         public string ChallengeCode { get; set; } = String.Empty;

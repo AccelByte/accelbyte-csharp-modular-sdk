@@ -79,10 +79,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 AdminRetrieveEligibilities op = new AdminRetrieveEligibilities(this,
-                    namespace_,                    
-                    userId,                    
-                    clientId,                    
-                    countryCode                    
+                    namespace_,
+                    userId,
+                    clientId,
+                    countryCode
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -183,15 +183,15 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.PublisherUserId is not null) QueryParams["publisherUserId"] = builder.PublisherUserId;
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (countryCode is not null) QueryParams["countryCode"] = countryCode;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -210,24 +210,24 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public AdminRetrieveEligibilities(
-            string namespace_,            
-            string userId,            
-            string? publisherUserId,            
-            string clientId,            
-            string countryCode            
+            string namespace_,
+            string userId,
+            string? publisherUserId,
+            string clientId,
+            string countryCode
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (publisherUserId is not null) QueryParams["publisherUserId"] = publisherUserId;
             if (clientId is not null) QueryParams["clientId"] = clientId;
             if (countryCode is not null) QueryParams["countryCode"] = countryCode;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,10 +236,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminRetrieveEligibilities.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminRetrieveEligibilities.Response()

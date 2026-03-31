@@ -297,14 +297,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class FulfillItemsBuilderCompat : FulfillItems.FulfillItemsAbstractBuilder<FulfillItemsBuilderCompat>
         {
             internal FulfillItemsBuilderCompat() : base() { }
 
             internal FulfillItemsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.FulfillmentV2Result? Execute(
                 FulfillmentV2Request body,
                 string namespace_,
@@ -339,14 +339,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RetryFulfillItemsBuilderCompat : RetryFulfillItems.RetryFulfillItemsAbstractBuilder<RetryFulfillItemsBuilderCompat>
         {
             internal RetryFulfillItemsBuilderCompat() : base() { }
 
             internal RetryFulfillItemsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.FulfillmentV2Result? Execute(
                 string namespace_,
                 string transactionId,
@@ -377,14 +377,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RevokeItemsBuilderCompat : RevokeItems.RevokeItemsAbstractBuilder<RevokeItemsBuilderCompat>
         {
             internal RevokeItemsBuilderCompat() : base() { }
 
             internal RevokeItemsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.RevokeFulfillmentV2Result? Execute(
                 string namespace_,
                 string transactionId,
@@ -593,7 +593,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public FulfillItemsBuilderCompat FulfillItemsOp
         {
             get
@@ -602,7 +602,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RetryFulfillItemsBuilderCompat RetryFulfillItemsOp
         {
             get
@@ -611,7 +611,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeItemsBuilderCompat RevokeItemsOp
         {
             get

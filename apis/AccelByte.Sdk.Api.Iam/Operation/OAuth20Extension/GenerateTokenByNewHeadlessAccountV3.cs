@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GenerateTokenByNewHeadlessAccountV3 op = new GenerateTokenByNewHeadlessAccountV3(this,
-                    linkingToken                    
+                    linkingToken
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -159,15 +159,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string linkingToken
         )
         {
-            
-            
+
+
             if (builder.AdditionalData is not null) FormParams["additionalData"] = builder.AdditionalData;
             if (builder.ExtendExp != null) FormParams["extend_exp"] = Convert.ToString(builder.ExtendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -190,20 +190,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GenerateTokenByNewHeadlessAccountV3(
-            string? additionalData,            
-            bool? extendExp,            
-            string linkingToken            
+            string? additionalData,
+            bool? extendExp,
+            string linkingToken
         )
         {
-            
-            
+
+
             if (additionalData is not null) FormParams["additionalData"] = additionalData;
             if (extendExp != null) FormParams["extend_exp"] = Convert.ToString(extendExp)!;
             if (linkingToken is not null) FormParams["linkingToken"] = linkingToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
         }
@@ -215,7 +215,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GenerateTokenByNewHeadlessAccountV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GenerateTokenByNewHeadlessAccountV3.Response()

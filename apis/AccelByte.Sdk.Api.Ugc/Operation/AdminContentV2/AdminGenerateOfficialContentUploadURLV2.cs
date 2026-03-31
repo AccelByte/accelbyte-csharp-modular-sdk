@@ -68,10 +68,10 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 AdminGenerateOfficialContentUploadURLV2 op = new AdminGenerateOfficialContentUploadURLV2(this,
-                    body,                    
-                    channelId,                    
-                    contentId,                    
-                    namespace_                    
+                    body,
+                    channelId,
+                    contentId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,13 +173,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -204,22 +204,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public AdminGenerateOfficialContentUploadURLV2(
-            string channelId,            
-            string contentId,            
-            string namespace_,            
-            Model.ModelsGenerateContentUploadURLRequest body            
+            string channelId,
+            string contentId,
+            string namespace_,
+            Model.ModelsGenerateContentUploadURLRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -231,7 +231,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGenerateOfficialContentUploadURLV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGenerateOfficialContentUploadURLV2.Response()

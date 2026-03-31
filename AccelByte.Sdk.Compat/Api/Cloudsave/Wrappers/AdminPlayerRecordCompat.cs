@@ -59,14 +59,14 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ListPlayerRecordHandlerV1BuilderCompat : ListPlayerRecordHandlerV1.ListPlayerRecordHandlerV1AbstractBuilder<ListPlayerRecordHandlerV1BuilderCompat>
         {
             internal ListPlayerRecordHandlerV1BuilderCompat() : base() { }
 
             internal ListPlayerRecordHandlerV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Cloudsave.Model.ModelsListPlayerRecordKeysResponse? Execute(
                 string namespace_
             )
@@ -859,7 +859,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListPlayerRecordHandlerV1BuilderCompat ListPlayerRecordHandlerV1Op
         {
             get

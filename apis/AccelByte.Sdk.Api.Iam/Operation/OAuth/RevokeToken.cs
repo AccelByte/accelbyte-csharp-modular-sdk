@@ -30,7 +30,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ### Endpoint migration guide
     /// - **Substitute endpoint: _/v3/oauth/revoke [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class RevokeToken : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -71,14 +71,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 RevokeToken op = new RevokeToken(this,
-                    token                    
+                    token
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected RevokeToken.Response InternalExecute(
                 string token
             )
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public RevokeTokenBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public RevokeToken.Response Execute(
                 string token
             )
@@ -145,13 +145,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-            
-            
+
+
             if (token is not null) FormParams["token"] = token;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -172,16 +172,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public RevokeToken(
-            string token            
+            string token
         )
         {
-            
-            
+
+
             if (token is not null) FormParams["token"] = token;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,7 +193,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RevokeToken.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RevokeToken.Response()

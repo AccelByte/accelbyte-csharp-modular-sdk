@@ -69,8 +69,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetCampaignDynamic op = new GetCampaignDynamic(this,
-                    campaignId,                    
-                    namespace_                    
+                    campaignId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -92,7 +92,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -111,7 +111,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -153,12 +153,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,18 +177,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetCampaignDynamic(
-            string campaignId,            
-            string namespace_            
+            string campaignId,
+            string namespace_
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,10 +197,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetCampaignDynamic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetCampaignDynamic.Response()

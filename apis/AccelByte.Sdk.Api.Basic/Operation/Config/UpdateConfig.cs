@@ -79,8 +79,8 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 UpdateConfig op = new UpdateConfig(this,
-                    configKey,                    
-                    namespace_                    
+                    configKey,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -163,13 +163,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         {
             PathParams["configKey"] = configKey;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public UpdateConfig(
-            string configKey,            
-            string namespace_,            
-            Model.ConfigUpdate body            
+            string configKey,
+            string namespace_,
+            Model.ConfigUpdate body
         )
         {
             PathParams["configKey"] = configKey;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateConfig.Response()

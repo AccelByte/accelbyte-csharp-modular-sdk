@@ -79,9 +79,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 GetUserRankingPublicV3 op = new GetUserRankingPublicV3(this,
-                    leaderboardCode,                    
-                    namespace_,                    
-                    userId                    
+                    leaderboardCode,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -174,13 +174,13 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
-            
 
-            
-            
-            
+            if (builder.PreviousVersion != null) QueryParams["previousVersion"] = Convert.ToString(builder.PreviousVersion)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -207,22 +207,22 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #endregion
 
         public GetUserRankingPublicV3(
-            string leaderboardCode,            
-            string namespace_,            
-            string userId,            
-            long? previousVersion            
+            string leaderboardCode,
+            string namespace_,
+            string userId,
+            long? previousVersion
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
-            
 
-            
-            
-            
+            if (previousVersion != null) QueryParams["previousVersion"] = Convert.ToString(previousVersion)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -231,10 +231,10 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserRankingPublicV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserRankingPublicV3.Response()

@@ -382,14 +382,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetDSMCConfigurationBuilderCompat : AdminGetDSMCConfiguration.AdminGetDSMCConfigurationAbstractBuilder<AdminGetDSMCConfigurationBuilderCompat>
         {
             internal AdminGetDSMCConfigurationBuilderCompat() : base() { }
 
             internal AdminGetDSMCConfigurationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Session.Model.ModelsDSMConfigRecord? Execute(
                 string namespace_
             )
@@ -412,14 +412,14 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminSyncDSMCConfigurationBuilderCompat : AdminSyncDSMCConfiguration.AdminSyncDSMCConfigurationAbstractBuilder<AdminSyncDSMCConfigurationBuilderCompat>
         {
             internal AdminSyncDSMCConfigurationBuilderCompat() : base() { }
 
             internal AdminSyncDSMCConfigurationBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Session.Model.ModelsDSMConfigRecord? Execute(
                 string namespace_
             )
@@ -516,7 +516,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetDSMCConfigurationBuilderCompat AdminGetDSMCConfigurationOp
         {
             get
@@ -525,7 +525,7 @@ namespace AccelByte.Sdk.Api.Session.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminSyncDSMCConfigurationBuilderCompat AdminSyncDSMCConfigurationOp
         {
             get

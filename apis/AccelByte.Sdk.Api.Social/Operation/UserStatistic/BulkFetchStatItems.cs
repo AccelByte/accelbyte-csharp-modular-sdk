@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 BulkFetchStatItems op = new BulkFetchStatItems(this,
-                    namespace_,                    
-                    statCode,                    
-                    userIds                    
+                    namespace_,
+                    statCode,
+                    userIds
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -138,7 +138,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -159,7 +159,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -230,14 +230,14 @@ namespace AccelByte.Sdk.Api.Social.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (statCode is not null) QueryParams["statCode"] = statCode;
             if (userIds is not null) QueryParams["userIds"] = userIds;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -275,20 +275,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public BulkFetchStatItems(
-            string namespace_,            
-            string statCode,            
-            string userIds            
+            string namespace_,
+            string statCode,
+            string userIds
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (statCode is not null) QueryParams["statCode"] = statCode;
             if (userIds is not null) QueryParams["userIds"] = userIds;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -297,10 +297,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public BulkFetchStatItems.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new BulkFetchStatItems.Response()
@@ -358,7 +358,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -389,7 +389,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
                 response.Error500 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

@@ -74,9 +74,9 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             )
             {
                 S2SGeneratePersonalDataURL op = new S2SGeneratePersonalDataURL(this,
-                    namespace_,                    
-                    requestDate,                    
-                    userId                    
+                    namespace_,
+                    requestDate,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -169,12 +169,12 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
             PathParams["namespace"] = namespace_;
             PathParams["requestDate"] = requestDate;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,20 +199,20 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         #endregion
 
         public S2SGeneratePersonalDataURL(
-            string namespace_,            
-            string requestDate,            
-            string userId            
+            string namespace_,
+            string requestDate,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["requestDate"] = requestDate;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Gdpr.Operation
         public override List<string> Consumes => new() { "*/*" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public S2SGeneratePersonalDataURL.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new S2SGeneratePersonalDataURL.Response()

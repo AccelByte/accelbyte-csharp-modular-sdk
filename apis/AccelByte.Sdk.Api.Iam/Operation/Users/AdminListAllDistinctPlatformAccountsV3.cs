@@ -83,8 +83,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminListAllDistinctPlatformAccountsV3 op = new AdminListAllDistinctPlatformAccountsV3(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -167,13 +167,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (builder.Status is not null) QueryParams["status"] = builder.Status;
-            
 
-            
-            
-            
+            if (builder.Status is not null) QueryParams["status"] = builder.Status;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,20 +200,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminListAllDistinctPlatformAccountsV3(
-            string namespace_,            
-            string userId,            
-            string? status            
+            string namespace_,
+            string userId,
+            string? status
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            if (status is not null) QueryParams["status"] = status;
-            
 
-            
-            
-            
+            if (status is not null) QueryParams["status"] = status;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,10 +222,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminListAllDistinctPlatformAccountsV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminListAllDistinctPlatformAccountsV3.Response()

@@ -71,8 +71,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 Change2faMethod op = new Change2faMethod(this,
-                    factor,                    
-                    mfaToken                    
+                    factor,
+                    mfaToken
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -153,14 +153,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string mfaToken
         )
         {
-            
-            
+
+
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,18 +183,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public Change2faMethod(
-            string factor,            
-            string mfaToken            
+            string factor,
+            string mfaToken
         )
         {
-            
-            
+
+
             if (factor is not null) FormParams["factor"] = factor;
             if (mfaToken is not null) FormParams["mfaToken"] = mfaToken;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -206,7 +206,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public Change2faMethod.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new Change2faMethod.Response()

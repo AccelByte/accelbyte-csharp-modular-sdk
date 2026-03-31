@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Legal.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Legal
 {
-    [SdkConsoleCommand("legal","oldsetdefaultlocalizedpolicy")]
-    public class OldSetDefaultLocalizedPolicyCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("legal", "oldsetdefaultlocalizedpolicy")]
+    public class OldSetDefaultLocalizedPolicyCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Legal"; } }
+        public string ServiceName { get { return "Legal"; } }
 
-        public string OperationName{ get { return "OldSetDefaultLocalizedPolicy"; } }
+        public string OperationName { get { return "OldSetDefaultLocalizedPolicy"; } }
 
         [SdkCommandArgument("localizedPolicyVersionId")]
         public string LocalizedPolicyVersionId { get; set; } = String.Empty;

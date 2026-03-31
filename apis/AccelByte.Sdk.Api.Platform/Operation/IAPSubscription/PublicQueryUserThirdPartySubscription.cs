@@ -118,9 +118,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicQueryUserThirdPartySubscription op = new PublicQueryUserThirdPartySubscription(this,
-                    namespace_,                    
-                    platform,                    
-                    userId                    
+                    namespace_,
+                    platform,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -144,7 +144,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -165,7 +165,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -213,17 +213,17 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
             PathParams["userId"] = userId;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.GroupId is not null) QueryParams["groupId"] = builder.GroupId;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.ProductId is not null) QueryParams["productId"] = builder.ProductId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -240,30 +240,30 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicQueryUserThirdPartySubscription(
-            string namespace_,            
-            PublicQueryUserThirdPartySubscriptionPlatform platform,            
-            string userId,            
-            bool? activeOnly,            
-            string? groupId,            
-            int? limit,            
-            int? offset,            
-            string? productId            
+            string namespace_,
+            PublicQueryUserThirdPartySubscriptionPlatform platform,
+            string userId,
+            bool? activeOnly,
+            string? groupId,
+            int? limit,
+            int? offset,
+            string? productId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
             PathParams["userId"] = userId;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (groupId is not null) QueryParams["groupId"] = groupId;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (productId is not null) QueryParams["productId"] = productId;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -272,10 +272,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicQueryUserThirdPartySubscription.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicQueryUserThirdPartySubscription.Response()

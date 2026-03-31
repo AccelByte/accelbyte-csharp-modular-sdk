@@ -54,7 +54,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **Substitute endpoint(update): _/iam/v3/admin/roles/{roleId}/permissions [PUT]_**
     /// - **Substitute endpoint(create): _/iam/v3/admin/roles/{roleId}/permissions [POST]_**
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AddRolePermission : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -98,17 +98,17 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AddRolePermission op = new AddRolePermission(this,
-                    body,                    
-                    action,                    
-                    resource,                    
-                    roleId                    
+                    body,
+                    action,
+                    resource,
+                    roleId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AddRolePermission.Response InternalExecute(
                 ModelUpdatePermissionScheduleRequest body,
                 long action,
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -163,7 +163,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public AddRolePermissionBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AddRolePermission.Response Execute(
                 ModelUpdatePermissionScheduleRequest body,
                 long action,
@@ -205,13 +205,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["action"] = Convert.ToString(action);
             PathParams["resource"] = resource;
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -236,22 +236,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AddRolePermission(
-            long action,            
-            string resource,            
-            string roleId,            
-            Model.ModelUpdatePermissionScheduleRequest body            
+            long action,
+            string resource,
+            string roleId,
+            Model.ModelUpdatePermissionScheduleRequest body
         )
         {
             PathParams["action"] = Convert.ToString(action);
             PathParams["resource"] = resource;
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -263,7 +263,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AddRolePermission.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AddRolePermission.Response()

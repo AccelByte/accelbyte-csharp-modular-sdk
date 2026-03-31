@@ -89,8 +89,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 QueryCampaignBatchNames op = new QueryCampaignBatchNames(this,
-                    campaignId,                    
-                    namespace_                    
+                    campaignId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,14 +173,14 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.BatchName is not null) QueryParams["batchName"] = builder.BatchName;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,22 +197,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public QueryCampaignBatchNames(
-            string campaignId,            
-            string namespace_,            
-            string? batchName,            
-            int? limit            
+            string campaignId,
+            string namespace_,
+            string? batchName,
+            int? limit
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
+
             if (batchName is not null) QueryParams["batchName"] = batchName;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,10 +221,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public QueryCampaignBatchNames.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new QueryCampaignBatchNames.Response()

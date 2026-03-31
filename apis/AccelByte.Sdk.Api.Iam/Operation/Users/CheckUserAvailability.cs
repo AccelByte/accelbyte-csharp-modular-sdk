@@ -78,9 +78,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 CheckUserAvailability op = new CheckUserAvailability(this,
-                    namespace_,                    
-                    field,                    
-                    query                    
+                    namespace_,
+                    field,
+                    query
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -171,14 +171,14 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (field is not null) QueryParams["field"] = field;
             if (query is not null) QueryParams["query"] = query;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -201,20 +201,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public CheckUserAvailability(
-            string namespace_,            
-            string field,            
-            string query            
+            string namespace_,
+            string field,
+            string query
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (field is not null) QueryParams["field"] = field;
             if (query is not null) QueryParams["query"] = query;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,10 +223,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CheckUserAvailability.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CheckUserAvailability.Response()

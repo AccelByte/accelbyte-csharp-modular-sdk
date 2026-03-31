@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// ------------
     /// **Substitute endpoint**: /iam/v4/admin/users/me/mfa/status [GET]
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminGetMyMFAStatusV4 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -73,7 +73,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminGetMyMFAStatusV4.Response InternalExecute(
             )
             {
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public AdminGetMyMFAStatusV4Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminGetMyMFAStatusV4.Response Execute(
             )
             {
@@ -131,12 +131,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public AdminGetMyMFAStatusV4(IAdminGetMyMFAStatusV4Builder builder
         )
         {
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -163,12 +163,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public AdminGetMyMFAStatusV4(
         )
         {
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -177,10 +177,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetMyMFAStatusV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetMyMFAStatusV4.Response()

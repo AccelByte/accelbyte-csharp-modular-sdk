@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// Only Super admin can set permission with resource & action.
     /// Studio admin & game admin need set permission with permission module in _/v3/admin/namespaces/{namespace}/clients [POST]_.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class CreateClientByNamespace : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -73,15 +73,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 CreateClientByNamespace op = new CreateClientByNamespace(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected CreateClientByNamespace.Response InternalExecute(
                 ClientmodelClientCreateRequest body,
                 string namespace_
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public CreateClientByNamespaceBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public CreateClientByNamespace.Response Execute(
                 ClientmodelClientCreateRequest body,
                 string namespace_
@@ -158,13 +158,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,18 +189,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public CreateClientByNamespace(
-            string namespace_,            
-            Model.ClientmodelClientCreateRequest body            
+            string namespace_,
+            Model.ClientmodelClientCreateRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CreateClientByNamespace.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreateClientByNamespace.Response()

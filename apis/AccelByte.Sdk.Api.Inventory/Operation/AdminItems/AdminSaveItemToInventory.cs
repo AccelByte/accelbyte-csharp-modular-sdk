@@ -78,10 +78,10 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminSaveItemToInventory op = new AdminSaveItemToInventory(this,
-                    body,                    
-                    inventoryId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    inventoryId,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -107,7 +107,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -154,7 +154,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2, T3>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -177,7 +177,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2, T3>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -259,13 +259,13 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             PathParams["inventoryId"] = inventoryId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -307,22 +307,22 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminSaveItemToInventory(
-            string inventoryId,            
-            string namespace_,            
-            string userId,            
-            Model.ApimodelsSaveItemToInventoryReq body            
+            string inventoryId,
+            string namespace_,
+            string userId,
+            Model.ApimodelsSaveItemToInventoryReq body
         )
         {
             PathParams["inventoryId"] = inventoryId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -334,7 +334,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminSaveItemToInventory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminSaveItemToInventory.Response()
@@ -398,7 +398,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -435,7 +435,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
                 response.Error500 = JsonSerializer.Deserialize<ApimodelsErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

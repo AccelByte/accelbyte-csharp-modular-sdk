@@ -48,7 +48,7 @@ namespace AccelByte.Sdk.Tests.Mod.Features
                 .EnsureSuccess();
 
             //force expiry in 5 seconds
-            sdk.Configuration.TokenRepository.SetTokenExpiry(5); 
+            sdk.Configuration.TokenRepository.SetTokenExpiry(5);
 
             //wait for 5 seconds
             Thread.Sleep(5000);

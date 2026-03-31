@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet op = new ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(this,
-                    steamId                    
+                    steamId
 
                 );
 
@@ -85,7 +85,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet op = Build(
                     steamId
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet op = Build(
                     steamId
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -131,7 +131,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 return InternalExecute(
                     steamId
-                    
+
                 );
             }
             public async Task<ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response> ExecuteAsync(
@@ -141,7 +141,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             {
                 return await InternalExecuteAsync(
                     steamId
-                    
+
                 );
             }
         }
@@ -149,16 +149,16 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(IProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGetBuilder builder,
             string steamId
-            
+
         )
         {
             PathParams["steamId"] = steamId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -182,17 +182,17 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet(
-            string steamId,            
+            string steamId,
             string accessToken
         )
         {
             PathParams["steamId"] = steamId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -202,10 +202,10 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ProtectedGetPlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimeGet.Response()

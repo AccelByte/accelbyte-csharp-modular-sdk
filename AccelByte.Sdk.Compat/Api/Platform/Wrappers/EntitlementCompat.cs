@@ -1191,14 +1191,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RevokeUseCountBuilderCompat : RevokeUseCount.RevokeUseCountAbstractBuilder<RevokeUseCountBuilderCompat>
         {
             internal RevokeUseCountBuilderCompat() : base() { }
 
             internal RevokeUseCountBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.EntitlementInfo? Execute(
                 RevokeUseCountRequest body,
                 string entitlementId,
@@ -1561,14 +1561,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserEntitlementByItemIdBuilderCompat : PublicGetUserEntitlementByItemId.PublicGetUserEntitlementByItemIdAbstractBuilder<PublicGetUserEntitlementByItemIdBuilderCompat>
         {
             internal PublicGetUserEntitlementByItemIdBuilderCompat() : base() { }
 
             internal PublicGetUserEntitlementByItemIdBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.EntitlementInfo? Execute(
                 string namespace_,
                 string userId,
@@ -1599,14 +1599,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserEntitlementBySkuBuilderCompat : PublicGetUserEntitlementBySku.PublicGetUserEntitlementBySkuAbstractBuilder<PublicGetUserEntitlementBySkuBuilderCompat>
         {
             internal PublicGetUserEntitlementBySkuBuilderCompat() : base() { }
 
             internal PublicGetUserEntitlementBySkuBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.EntitlementInfo? Execute(
                 string namespace_,
                 string userId,
@@ -2311,7 +2311,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RevokeUseCountBuilderCompat RevokeUseCountOp
         {
             get
@@ -2400,7 +2400,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserEntitlementByItemIdBuilderCompat PublicGetUserEntitlementByItemIdOp
         {
             get
@@ -2409,7 +2409,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserEntitlementBySkuBuilderCompat PublicGetUserEntitlementBySkuOp
         {
             get

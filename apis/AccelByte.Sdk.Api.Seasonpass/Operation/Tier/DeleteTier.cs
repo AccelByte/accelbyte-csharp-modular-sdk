@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             )
             {
                 DeleteTier op = new DeleteTier(this,
-                    id,                    
-                    namespace_,                    
-                    seasonId                    
+                    id,
+                    namespace_,
+                    seasonId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,12 +162,12 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -190,20 +190,20 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
         #endregion
 
         public DeleteTier(
-            string id,            
-            string namespace_,            
-            string seasonId            
+            string id,
+            string namespace_,
+            string seasonId
         )
         {
             PathParams["id"] = id;
             PathParams["namespace"] = namespace_;
             PathParams["seasonId"] = seasonId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -212,10 +212,10 @@ namespace AccelByte.Sdk.Api.Seasonpass.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteTier.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteTier.Response()

@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GeDLCDurableRewardShortMap op = new GeDLCDurableRewardShortMap(this,
-                    namespace_,                    
-                    dlcType                    
+                    namespace_,
+                    dlcType
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,13 +149,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (dlcType is not null) QueryParams["dlcType"] = dlcType.Value;
-            
 
-            
-            
-            
+            if (dlcType is not null) QueryParams["dlcType"] = dlcType.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,18 +174,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GeDLCDurableRewardShortMap(
-            string namespace_,            
-            GeDLCDurableRewardShortMapDlcType dlcType            
+            string namespace_,
+            GeDLCDurableRewardShortMapDlcType dlcType
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (dlcType is not null) QueryParams["dlcType"] = dlcType.Value;
-            
 
-            
-            
-            
+            if (dlcType is not null) QueryParams["dlcType"] = dlcType.Value;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,10 +194,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() {  };
-        
+        public override List<string> Produces => new() { };
+
         public GeDLCDurableRewardShortMap.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GeDLCDurableRewardShortMap.Response()

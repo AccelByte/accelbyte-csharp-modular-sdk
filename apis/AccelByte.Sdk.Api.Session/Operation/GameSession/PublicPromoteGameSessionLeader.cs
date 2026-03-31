@@ -79,9 +79,9 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 PublicPromoteGameSessionLeader op = new PublicPromoteGameSessionLeader(this,
-                    body,                    
-                    namespace_,                    
-                    sessionId                    
+                    body,
+                    namespace_,
+                    sessionId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -169,7 +169,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1, T2>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -241,13 +241,13 @@ namespace AccelByte.Sdk.Api.Session.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -289,20 +289,20 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public PublicPromoteGameSessionLeader(
-            string namespace_,            
-            string sessionId,            
-            Model.ApimodelsPromoteLeaderRequest body            
+            string namespace_,
+            string sessionId,
+            Model.ApimodelsPromoteLeaderRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["sessionId"] = sessionId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -314,7 +314,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicPromoteGameSessionLeader.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicPromoteGameSessionLeader.Response()
@@ -378,7 +378,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -415,7 +415,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

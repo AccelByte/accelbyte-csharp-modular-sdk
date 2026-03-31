@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetNamespaceSlotConfig.GetNamespaceSlotConfigBuilder GetNamespaceSlotConfigOp
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateNamespaceSlotConfig.UpdateNamespaceSlotConfigBuilder UpdateNamespaceSlotConfigOp
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteNamespaceSlotConfig.DeleteNamespaceSlotConfigBuilder DeleteNamespaceSlotConfigOp
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserSlotConfig.GetUserSlotConfigBuilder GetUserSlotConfigOp
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateUserSlotConfig.UpdateUserSlotConfigBuilder UpdateUserSlotConfigOp
         {
             get
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserSlotConfig.DeleteUserSlotConfigBuilder DeleteUserSlotConfigOp
         {
             get
@@ -108,8 +108,8 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         }
         #endregion
 
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetNamespaceSlotConfig.Response GetNamespaceSlotConfig(GetNamespaceSlotConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -126,9 +126,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateNamespaceSlotConfig.Response UpdateNamespaceSlotConfig(UpdateNamespaceSlotConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -145,9 +145,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteNamespaceSlotConfig.Response DeleteNamespaceSlotConfig(DeleteNamespaceSlotConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -164,9 +164,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserSlotConfig.Response GetUserSlotConfig(GetUserSlotConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -183,9 +183,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateUserSlotConfig.Response UpdateUserSlotConfig(UpdateUserSlotConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -202,9 +202,9 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteUserSlotConfig.Response DeleteUserSlotConfig(DeleteUserSlotConfig input)
         {
             var response = _sdk.RunRequest(input);
@@ -221,6 +221,6 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
     }
 }

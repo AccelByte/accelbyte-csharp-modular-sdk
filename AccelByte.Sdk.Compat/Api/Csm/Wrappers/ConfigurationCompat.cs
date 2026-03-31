@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetListOfSecretsV1BuilderCompat : GetListOfSecretsV1.GetListOfSecretsV1AbstractBuilder<GetListOfSecretsV1BuilderCompat>
         {
             internal GetListOfSecretsV1BuilderCompat() : base() { }
 
             internal GetListOfSecretsV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedGetListOfConfigurationsV1Response? Execute(
                 string app,
                 string namespace_
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SaveSecretV1BuilderCompat : SaveSecretV1.SaveSecretV1AbstractBuilder<SaveSecretV1BuilderCompat>
         {
             internal SaveSecretV1BuilderCompat() : base() { }
 
             internal SaveSecretV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedSaveConfigurationV1Response? Execute(
                 GeneratedSaveConfigurationV1Request body,
                 string app,
@@ -99,14 +99,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateSecretV1BuilderCompat : UpdateSecretV1.UpdateSecretV1AbstractBuilder<UpdateSecretV1BuilderCompat>
         {
             internal UpdateSecretV1BuilderCompat() : base() { }
 
             internal UpdateSecretV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedUpdateConfigurationV1Response? Execute(
                 GeneratedUpdateConfigurationV1Request body,
                 string app,
@@ -141,14 +141,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteSecretV1BuilderCompat : DeleteSecretV1.DeleteSecretV1AbstractBuilder<DeleteSecretV1BuilderCompat>
         {
             internal DeleteSecretV1BuilderCompat() : base() { }
 
             internal DeleteSecretV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string app,
                 string configId,
@@ -177,14 +177,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetListOfVariablesV1BuilderCompat : GetListOfVariablesV1.GetListOfVariablesV1AbstractBuilder<GetListOfVariablesV1BuilderCompat>
         {
             internal GetListOfVariablesV1BuilderCompat() : base() { }
 
             internal GetListOfVariablesV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedGetListOfConfigurationsV1Response? Execute(
                 string app,
                 string namespace_
@@ -211,14 +211,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SaveVariableV1BuilderCompat : SaveVariableV1.SaveVariableV1AbstractBuilder<SaveVariableV1BuilderCompat>
         {
             internal SaveVariableV1BuilderCompat() : base() { }
 
             internal SaveVariableV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedSaveConfigurationV1Response? Execute(
                 GeneratedSaveConfigurationV1Request body,
                 string app,
@@ -249,14 +249,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateVariableV1BuilderCompat : UpdateVariableV1.UpdateVariableV1AbstractBuilder<UpdateVariableV1BuilderCompat>
         {
             internal UpdateVariableV1BuilderCompat() : base() { }
 
             internal UpdateVariableV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Csm.Model.GeneratedUpdateConfigurationV1Response? Execute(
                 GeneratedUpdateConfigurationV1Request body,
                 string app,
@@ -291,14 +291,14 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteVariableV1BuilderCompat : DeleteVariableV1.DeleteVariableV1AbstractBuilder<DeleteVariableV1BuilderCompat>
         {
             internal DeleteVariableV1BuilderCompat() : base() { }
 
             internal DeleteVariableV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string app,
                 string configId,
@@ -329,7 +329,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListOfSecretsV1BuilderCompat GetListOfSecretsV1Op
         {
             get
@@ -338,7 +338,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveSecretV1BuilderCompat SaveSecretV1Op
         {
             get
@@ -347,7 +347,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateSecretV1BuilderCompat UpdateSecretV1Op
         {
             get
@@ -356,7 +356,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteSecretV1BuilderCompat DeleteSecretV1Op
         {
             get
@@ -365,7 +365,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListOfVariablesV1BuilderCompat GetListOfVariablesV1Op
         {
             get
@@ -374,7 +374,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SaveVariableV1BuilderCompat SaveVariableV1Op
         {
             get
@@ -383,7 +383,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateVariableV1BuilderCompat UpdateVariableV1Op
         {
             get
@@ -392,7 +392,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteVariableV1BuilderCompat DeleteVariableV1Op
         {
             get

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","deleteusersubscription")]
-    public class DeleteUserSubscriptionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "deleteusersubscription")]
+    public class DeleteUserSubscriptionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DeleteUserSubscription"; } }
+        public string OperationName { get { return "DeleteUserSubscription"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

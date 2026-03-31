@@ -80,8 +80,8 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 GetAppImageListV2 op = new GetAppImageListV2(this,
-                    app,                    
-                    namespace_                    
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Cached is not null) QueryParams["cached"] = builder.Cached;
-            
 
-            
-            
-            
+            if (builder.Cached is not null) QueryParams["cached"] = builder.Cached;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,20 +195,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public GetAppImageListV2(
-            string app,            
-            string namespace_,            
-            string? cached            
+            string app,
+            string namespace_,
+            string? cached
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            if (cached is not null) QueryParams["cached"] = cached;
-            
 
-            
-            
-            
+            if (cached is not null) QueryParams["cached"] = cached;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetAppImageListV2.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetAppImageListV2.Response()

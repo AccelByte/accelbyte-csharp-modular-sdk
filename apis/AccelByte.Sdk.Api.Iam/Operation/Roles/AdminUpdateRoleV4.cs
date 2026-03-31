@@ -72,8 +72,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminUpdateRoleV4 op = new AdminUpdateRoleV4(this,
-                    body,                    
-                    roleId                    
+                    body,
+                    roleId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -155,13 +155,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -186,18 +186,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminUpdateRoleV4(
-            string roleId,            
-            Model.ModelRoleV4Request body            
+            string roleId,
+            Model.ModelRoleV4Request body
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -209,7 +209,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateRoleV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateRoleV4.Response()

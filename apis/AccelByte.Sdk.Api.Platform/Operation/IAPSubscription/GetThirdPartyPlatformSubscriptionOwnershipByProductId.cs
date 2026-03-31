@@ -68,10 +68,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetThirdPartyPlatformSubscriptionOwnershipByProductId op = new GetThirdPartyPlatformSubscriptionOwnershipByProductId(this,
-                    namespace_,                    
-                    platform,                    
-                    userId,                    
-                    productId                    
+                    namespace_,
+                    platform,
+                    userId,
+                    productId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -120,7 +120,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,13 +173,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
             PathParams["userId"] = userId;
-            
-            if (productId is not null) QueryParams["productId"] = productId;
-            
 
-            
-            
-            
+            if (productId is not null) QueryParams["productId"] = productId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,22 +196,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetThirdPartyPlatformSubscriptionOwnershipByProductId(
-            string namespace_,            
-            GetThirdPartyPlatformSubscriptionOwnershipByProductIdPlatform platform,            
-            string userId,            
-            string productId            
+            string namespace_,
+            GetThirdPartyPlatformSubscriptionOwnershipByProductIdPlatform platform,
+            string userId,
+            string productId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platform"] = platform.Value;
             PathParams["userId"] = userId;
-            
-            if (productId is not null) QueryParams["productId"] = productId;
-            
 
-            
-            
-            
+            if (productId is not null) QueryParams["productId"] = productId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,10 +220,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetThirdPartyPlatformSubscriptionOwnershipByProductId.Response()

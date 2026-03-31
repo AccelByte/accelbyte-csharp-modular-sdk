@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Session.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Session
 {
-    [SdkConsoleCommand("session","adminreconcilemaxactivesession")]
-    public class AdminReconcileMaxActiveSessionCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("session", "adminreconcilemaxactivesession")]
+    public class AdminReconcileMaxActiveSessionCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Session"; } }
+        public string ServiceName { get { return "Session"; } }
 
-        public string OperationName{ get { return "AdminReconcileMaxActiveSession"; } }
+        public string OperationName { get { return "AdminReconcileMaxActiveSession"; } }
 
         [SdkCommandArgument("name")]
         public string Name { get; set; } = String.Empty;

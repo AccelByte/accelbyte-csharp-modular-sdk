@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - This endpoint retrieve the next page of the data if we provide 'after' parameters with valid Unix timestamp.
     /// - This endpoint retrieve the previous page of the data if we provide 'before' parameter with valid data Unix timestamp.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetUserLoginHistories : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -106,15 +106,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 GetUserLoginHistories op = new GetUserLoginHistories(this,
-                    namespace_,                    
-                    userId                    
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected GetUserLoginHistories.Response InternalExecute(
                 string namespace_,
                 string userId
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public GetUserLoginHistoriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetUserLoginHistories.Response Execute(
                 string namespace_,
                 string userId
@@ -192,15 +192,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (builder.After != null) QueryParams["after"] = Convert.ToString(builder.After)!;
             if (builder.Before != null) QueryParams["before"] = Convert.ToString(builder.Before)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -223,24 +223,24 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public GetUserLoginHistories(
-            string namespace_,            
-            string userId,            
-            double? after,            
-            double? before,            
-            long? limit            
+            string namespace_,
+            string userId,
+            double? after,
+            double? before,
+            long? limit
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
+
             if (after != null) QueryParams["after"] = Convert.ToString(after)!;
             if (before != null) QueryParams["before"] = Convert.ToString(before)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -252,7 +252,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetUserLoginHistories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetUserLoginHistories.Response()

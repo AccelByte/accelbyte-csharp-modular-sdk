@@ -70,9 +70,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UpdateCampaign op = new UpdateCampaign(this,
-                    body,                    
-                    campaignId,                    
-                    namespace_                    
+                    body,
+                    campaignId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -193,20 +193,20 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UpdateCampaign(
-            string campaignId,            
-            string namespace_,            
-            Model.CampaignUpdate body            
+            string campaignId,
+            string namespace_,
+            Model.CampaignUpdate body
         )
         {
             PathParams["campaignId"] = campaignId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -218,7 +218,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateCampaign.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateCampaign.Response()

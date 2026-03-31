@@ -97,10 +97,10 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 AdminPutPlayerPublicRecordHandlerV1 op = new AdminPutPlayerPublicRecordHandlerV1(this,
-                    body,                    
-                    key,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    key,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,7 +173,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -196,7 +196,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -278,13 +278,13 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -322,22 +322,22 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public AdminPutPlayerPublicRecordHandlerV1(
-            string key,            
-            string namespace_,            
-            string userId,            
-            Model.ModelsPlayerRecordRequest body            
+            string key,
+            string namespace_,
+            string userId,
+            Model.ModelsPlayerRecordRequest body
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -349,7 +349,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminPutPlayerPublicRecordHandlerV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminPutPlayerPublicRecordHandlerV1.Response()
@@ -407,7 +407,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -438,7 +438,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
                 response.Error500 = JsonSerializer.Deserialize<ModelsResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

@@ -36,7 +36,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 3. **upgradeHeadlessAccount**
     /// The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the loginId field's value is already used by others by returning HTTP Status Code 409.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SendVerificationCode : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -79,16 +79,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 SendVerificationCode op = new SendVerificationCode(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected SendVerificationCode.Response InternalExecute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_,
@@ -106,7 +106,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -127,7 +127,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,7 +139,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public SendVerificationCodeBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SendVerificationCode.Response Execute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_,
@@ -175,13 +175,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -212,20 +212,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public SendVerificationCode(
-            string namespace_,            
-            string userId,            
-            Model.ModelSendVerificationCodeRequest body            
+            string namespace_,
+            string userId,
+            Model.ModelSendVerificationCodeRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -237,7 +237,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SendVerificationCode.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SendVerificationCode.Response()

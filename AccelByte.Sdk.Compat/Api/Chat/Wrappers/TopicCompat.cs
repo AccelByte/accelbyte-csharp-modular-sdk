@@ -424,14 +424,14 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminTopicChatHistoryBuilderCompat : AdminTopicChatHistory.AdminTopicChatHistoryAbstractBuilder<AdminTopicChatHistoryBuilderCompat>
         {
             internal AdminTopicChatHistoryBuilderCompat() : base() { }
 
             internal AdminTopicChatHistoryBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Chat.Model.ModelsChatMessageWithPaginationResponse? Execute(
                 string namespace_,
                 string topic
@@ -1124,7 +1124,7 @@ namespace AccelByte.Sdk.Api.Chat.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminTopicChatHistoryBuilderCompat AdminTopicChatHistoryOp
         {
             get

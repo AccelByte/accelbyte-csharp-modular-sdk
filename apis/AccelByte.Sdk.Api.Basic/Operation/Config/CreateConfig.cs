@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 CreateConfig op = new CreateConfig(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,13 +151,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,18 +182,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public CreateConfig(
-            string namespace_,            
-            Model.ConfigCreate body            
+            string namespace_,
+            Model.ConfigCreate body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,7 +205,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CreateConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreateConfig.Response()

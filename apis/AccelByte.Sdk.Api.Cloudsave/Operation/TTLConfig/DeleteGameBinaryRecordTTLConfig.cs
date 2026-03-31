@@ -68,8 +68,8 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 DeleteGameBinaryRecordTTLConfig op = new DeleteGameBinaryRecordTTLConfig(this,
-                    key,                    
-                    namespace_                    
+                    key,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -91,7 +91,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -110,7 +110,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,12 +152,12 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -184,18 +184,18 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public DeleteGameBinaryRecordTTLConfig(
-            string key,            
-            string namespace_            
+            string key,
+            string namespace_
         )
         {
             PathParams["key"] = key;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -207,7 +207,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteGameBinaryRecordTTLConfig.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteGameBinaryRecordTTLConfig.Response()

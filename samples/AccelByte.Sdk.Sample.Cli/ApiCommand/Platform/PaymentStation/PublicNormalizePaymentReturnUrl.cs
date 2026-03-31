@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","publicnormalizepaymentreturnurl")]
-    public class PublicNormalizePaymentReturnUrlCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "publicnormalizepaymentreturnurl")]
+    public class PublicNormalizePaymentReturnUrlCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "PublicNormalizePaymentReturnUrl"; } }
+        public string OperationName { get { return "PublicNormalizePaymentReturnUrl"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

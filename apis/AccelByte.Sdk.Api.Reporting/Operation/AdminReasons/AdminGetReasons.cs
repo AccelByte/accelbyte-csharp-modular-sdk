@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
             )
             {
                 AdminGetReasons op = new AdminGetReasons(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -178,16 +178,16 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Group is not null) QueryParams["group"] = builder.Group;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.Title is not null) QueryParams["title"] = builder.Title;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -208,24 +208,24 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         #endregion
 
         public AdminGetReasons(
-            string namespace_,            
-            string? group,            
-            long? limit,            
-            long? offset,            
-            string? title            
+            string namespace_,
+            string? group,
+            long? limit,
+            long? offset,
+            string? title
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (group is not null) QueryParams["group"] = group;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (title is not null) QueryParams["title"] = title;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -237,7 +237,7 @@ namespace AccelByte.Sdk.Api.Reporting.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetReasons.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetReasons.Response()

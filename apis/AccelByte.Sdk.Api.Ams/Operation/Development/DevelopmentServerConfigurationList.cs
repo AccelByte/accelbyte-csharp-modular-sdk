@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
             )
             {
                 DevelopmentServerConfigurationList op = new DevelopmentServerConfigurationList(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -145,7 +145,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,7 +162,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -198,18 +198,18 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Count != null) QueryParams["count"] = Convert.ToString(builder.Count)!;
             if (builder.ImageId is not null) QueryParams["imageId"] = builder.ImageId;
             if (builder.Name is not null) QueryParams["name"] = builder.Name;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
             if (builder.SortBy is not null) QueryParams["sortBy"] = builder.SortBy.Value;
             if (builder.SortDirection is not null) QueryParams["sortDirection"] = builder.SortDirection.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,28 +232,28 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         #endregion
 
         public DevelopmentServerConfigurationList(
-            string namespace_,            
-            long? count,            
-            string? imageId,            
-            string? name,            
-            long? offset,            
-            DevelopmentServerConfigurationListSortBy? sortBy,            
-            DevelopmentServerConfigurationListSortDirection? sortDirection            
+            string namespace_,
+            long? count,
+            string? imageId,
+            string? name,
+            long? offset,
+            DevelopmentServerConfigurationListSortBy? sortBy,
+            DevelopmentServerConfigurationListSortDirection? sortDirection
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (count != null) QueryParams["count"] = Convert.ToString(count)!;
             if (imageId is not null) QueryParams["imageId"] = imageId;
             if (name is not null) QueryParams["name"] = name;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
             if (sortBy is not null) QueryParams["sortBy"] = sortBy.Value;
             if (sortDirection is not null) QueryParams["sortDirection"] = sortDirection.Value;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -265,7 +265,7 @@ namespace AccelByte.Sdk.Api.Ams.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DevelopmentServerConfigurationList.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DevelopmentServerConfigurationList.Response()

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Reporting.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
 {
-    [SdkConsoleCommand("reporting","adminfindextensioncategorylist")]
-    public class AdminFindExtensionCategoryListCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("reporting", "adminfindextensioncategorylist")]
+    public class AdminFindExtensionCategoryListCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Reporting"; } }
+        public string ServiceName { get { return "Reporting"; } }
 
-        public string OperationName{ get { return "AdminFindExtensionCategoryList"; } }
+        public string OperationName { get { return "AdminFindExtensionCategoryList"; } }
 
         [SdkCommandArgument("order")]
         public string? Order { get; set; }
@@ -62,8 +62,8 @@ namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Reporting
                 if (response.Data != null)
                     return CommandResult.Success(SdkHelper.SerializeToJson(response.Data));
                 else
-                    return CommandResult.Fail("-","response data is null.");
-            }   
+                    return CommandResult.Fail("-", "response data is null.");
+            }
             else if (!response.Error.IsAvailable)
                 return CommandResult.Fail(response.Error.Code, response.Error.Message);
             else

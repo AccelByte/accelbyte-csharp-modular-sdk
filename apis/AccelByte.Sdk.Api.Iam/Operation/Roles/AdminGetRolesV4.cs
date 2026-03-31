@@ -121,7 +121,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -166,16 +166,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public AdminGetRolesV4(IAdminGetRolesV4Builder builder
         )
         {
-            
+
             if (builder.AdminRole != null) QueryParams["adminRole"] = Convert.ToString(builder.AdminRole)!;
             if (builder.IsWildcard != null) QueryParams["isWildcard"] = Convert.ToString(builder.IsWildcard)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,22 +200,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetRolesV4(
-            bool? adminRole,            
-            bool? isWildcard,            
-            long? limit,            
-            long? offset            
+            bool? adminRole,
+            bool? isWildcard,
+            long? limit,
+            long? offset
         )
         {
-            
+
             if (adminRole != null) QueryParams["adminRole"] = Convert.ToString(adminRole)!;
             if (isWildcard != null) QueryParams["isWildcard"] = Convert.ToString(isWildcard)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,10 +224,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetRolesV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetRolesV4.Response()

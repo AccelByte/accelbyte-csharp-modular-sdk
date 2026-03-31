@@ -67,7 +67,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 TokenIntrospectionV3 op = new TokenIntrospectionV3(this,
-                    token                    
+                    token
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -139,13 +139,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string token
         )
         {
-            
-            
+
+
             if (token is not null) FormParams["token"] = token;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -167,16 +167,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public TokenIntrospectionV3(
-            string token            
+            string token
         )
         {
-            
-            
+
+
             if (token is not null) FormParams["token"] = token;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -189,7 +189,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public TokenIntrospectionV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new TokenIntrospectionV3.Response()

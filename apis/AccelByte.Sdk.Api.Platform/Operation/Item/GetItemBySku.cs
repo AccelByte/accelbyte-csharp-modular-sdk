@@ -90,8 +90,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetItemBySku op = new GetItemBySku(this,
-                    namespace_,                    
-                    sku                    
+                    namespace_,
+                    sku
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -152,7 +152,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -233,15 +233,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ActiveOnly != null) QueryParams["activeOnly"] = Convert.ToString(builder.ActiveOnly)!;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (sku is not null) QueryParams["sku"] = sku;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -267,22 +267,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetItemBySku(
-            string namespace_,            
-            bool? activeOnly,            
-            string? storeId,            
-            string sku            
+            string namespace_,
+            bool? activeOnly,
+            string? storeId,
+            string sku
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (activeOnly != null) QueryParams["activeOnly"] = Convert.ToString(activeOnly)!;
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (sku is not null) QueryParams["sku"] = sku;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -291,10 +291,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetItemBySku.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetItemBySku.Response()
@@ -334,7 +334,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -347,7 +347,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
                 response.Error404 = JsonSerializer.Deserialize<ErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error404!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

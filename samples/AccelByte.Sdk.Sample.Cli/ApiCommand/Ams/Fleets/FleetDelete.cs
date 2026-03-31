@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","fleetdelete")]
-    public class FleetDeleteCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "fleetdelete")]
+    public class FleetDeleteCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "FleetDelete"; } }
+        public string OperationName { get { return "FleetDelete"; } }
 
         [SdkCommandArgument("fleetID")]
         public string FleetID { get; set; } = String.Empty;

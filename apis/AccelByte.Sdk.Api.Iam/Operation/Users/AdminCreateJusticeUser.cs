@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminCreateJusticeUser op = new AdminCreateJusticeUser(this,
-                    namespace_,                    
-                    targetNamespace,                    
-                    userId                    
+                    namespace_,
+                    targetNamespace,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -162,12 +162,12 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminCreateJusticeUser(
-            string namespace_,            
-            string targetNamespace,            
-            string userId            
+            string namespace_,
+            string targetNamespace,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["targetNamespace"] = targetNamespace;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -216,10 +216,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Post;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminCreateJusticeUser.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminCreateJusticeUser.Response()

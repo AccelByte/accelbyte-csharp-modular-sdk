@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 ImportStore1 op = new ImportStore1(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -168,15 +168,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
             if (builder.StrictMode != null) QueryParams["strictMode"] = Convert.ToString(builder.StrictMode)!;
-            
+
             if (builder.File is not null) FormParams["file"] = builder.File;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,22 +197,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public ImportStore1(
-            string namespace_,            
-            string? storeId,            
-            bool? strictMode,            
-            Stream? file            
+            string namespace_,
+            string? storeId,
+            bool? strictMode,
+            Stream? file
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (storeId is not null) QueryParams["storeId"] = storeId;
             if (strictMode != null) QueryParams["strictMode"] = Convert.ToString(strictMode)!;
-            
+
             if (file is not null) FormParams["file"] = file;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "multipart/form-data" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ImportStore1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ImportStore1.Response()

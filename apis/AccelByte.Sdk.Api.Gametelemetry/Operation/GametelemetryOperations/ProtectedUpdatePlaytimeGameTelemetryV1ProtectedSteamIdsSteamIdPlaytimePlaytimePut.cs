@@ -69,8 +69,8 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
             )
             {
                 ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut op = new ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut(this,
-                    playtime,                    
-                    steamId                    
+                    playtime,
+                    steamId
 
                 );
 
@@ -87,7 +87,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut op = Build(
                     playtime,
                     steamId
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut op = Build(
                     playtime,
                     steamId
-                    
+
                 );
 
                 if (_Sdk == null)
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -137,7 +137,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return InternalExecute(
                     playtime,
                     steamId
-                    
+
                 );
             }
             public async Task<ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut.Response> ExecuteAsync(
@@ -149,7 +149,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
                 return await InternalExecuteAsync(
                     playtime,
                     steamId
-                    
+
                 );
             }
         }
@@ -158,17 +158,17 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         public ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut(IProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePutBuilder builder,
             string playtime,
             string steamId
-            
+
         )
         {
             PathParams["playtime"] = playtime;
             PathParams["steamId"] = steamId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -192,19 +192,19 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
         #endregion
 
         public ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut(
-            string playtime,            
-            string steamId,            
+            string playtime,
+            string steamId,
             string accessToken
         )
         {
             PathParams["playtime"] = playtime;
             PathParams["steamId"] = steamId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_COOKIE);
@@ -214,10 +214,10 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Operation
 
         public override HttpMethod Method => HttpMethod.Put;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ProtectedUpdatePlaytimeGameTelemetryV1ProtectedSteamIdsSteamIdPlaytimePlaytimePut.Response()

@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 UnselectAllRecords op = new UnselectAllRecords(this,
-                    namespace_,                    
-                    storeId                    
+                    namespace_,
+                    storeId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,12 +150,12 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,18 +174,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public UnselectAllRecords(
-            string namespace_,            
-            string storeId            
+            string namespace_,
+            string storeId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["storeId"] = storeId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,7 +197,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UnselectAllRecords.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UnselectAllRecords.Response()

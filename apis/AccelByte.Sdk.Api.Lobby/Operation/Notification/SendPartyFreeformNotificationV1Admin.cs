@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Sends notification to a party.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SendPartyFreeformNotificationV1Admin : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 SendPartyFreeformNotificationV1Admin op = new SendPartyFreeformNotificationV1Admin(this,
-                    body,                    
-                    namespace_,                    
-                    partyId                    
+                    body,
+                    namespace_,
+                    partyId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected SendPartyFreeformNotificationV1Admin.Response InternalExecute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
             public SendPartyFreeformNotificationV1AdminBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SendPartyFreeformNotificationV1Admin.Response Execute(
                 ModelFreeFormNotificationRequestV1 body,
                 string namespace_,
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -195,20 +195,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public SendPartyFreeformNotificationV1Admin(
-            string namespace_,            
-            string partyId,            
-            Model.ModelFreeFormNotificationRequestV1 body            
+            string namespace_,
+            string partyId,
+            Model.ModelFreeFormNotificationRequestV1 body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["partyId"] = partyId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,7 +220,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SendPartyFreeformNotificationV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SendPartyFreeformNotificationV1Admin.Response()

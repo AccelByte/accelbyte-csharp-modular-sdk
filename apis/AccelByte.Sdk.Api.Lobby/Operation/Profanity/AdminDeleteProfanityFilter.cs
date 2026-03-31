@@ -25,7 +25,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
     ///
     /// Delete the filter from the list
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class AdminDeleteProfanityFilter : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -68,16 +68,16 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 AdminDeleteProfanityFilter op = new AdminDeleteProfanityFilter(this,
-                    body,                    
-                    list,                    
-                    namespace_                    
+                    body,
+                    list,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected AdminDeleteProfanityFilter.Response InternalExecute(
                 ModelsAdminDeleteProfanityFilterRequest body,
                 string list,
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
             public AdminDeleteProfanityFilterBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AdminDeleteProfanityFilter.Response Execute(
                 ModelsAdminDeleteProfanityFilterRequest body,
                 string list,
@@ -164,13 +164,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -197,20 +197,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public AdminDeleteProfanityFilter(
-            string list,            
-            string namespace_,            
-            Model.ModelsAdminDeleteProfanityFilterRequest body            
+            string list,
+            string namespace_,
+            Model.ModelsAdminDeleteProfanityFilterRequest body
         )
         {
             PathParams["list"] = list;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -222,7 +222,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteProfanityFilter.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteProfanityFilter.Response()

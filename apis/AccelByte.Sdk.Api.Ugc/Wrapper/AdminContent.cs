@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUploadContentDirect.AdminUploadContentDirectBuilder AdminUploadContentDirectOp
         {
             get
@@ -79,7 +79,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SingleAdminUpdateContentDirect.SingleAdminUpdateContentDirectBuilder SingleAdminUpdateContentDirectOp
         {
             get
@@ -267,7 +267,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateContentDirect.AdminUpdateContentDirectBuilder AdminUpdateContentDirectOp
         {
             get
@@ -314,8 +314,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
         }
         #endregion
 
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUploadContentDirect.Response AdminUploadContentDirect(AdminUploadContentDirect input)
         {
             var response = _sdk.RunRequest(input);
@@ -349,7 +349,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public AdminUploadContentS3.Response AdminUploadContentS3(AdminUploadContentS3 input)
         {
             var response = _sdk.RunRequest(input);
@@ -432,8 +432,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SingleAdminUpdateContentDirect.Response SingleAdminUpdateContentDirect(SingleAdminUpdateContentDirect input)
         {
             var response = _sdk.RunRequest(input);
@@ -467,7 +467,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public SingleAdminDeleteContent.Response SingleAdminDeleteContent(SingleAdminDeleteContent input)
         {
             var response = _sdk.RunRequest(input);
@@ -843,8 +843,8 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminUpdateContentDirect.Response AdminUpdateContentDirect(AdminUpdateContentDirect input)
         {
             var response = _sdk.RunRequest(input);
@@ -878,7 +878,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public AdminDeleteContent.Response AdminDeleteContent(AdminDeleteContent input)
         {
             var response = _sdk.RunRequest(input);

@@ -273,14 +273,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class CheckWalletBuilderCompat : CheckWallet.CheckWalletAbstractBuilder<CheckWalletBuilderCompat>
         {
             internal CheckWalletBuilderCompat() : base() { }
 
             internal CheckWalletBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string currencyCode,
                 string namespace_,
@@ -433,14 +433,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserWalletBuilderCompat : GetUserWallet.GetUserWalletAbstractBuilder<GetUserWalletBuilderCompat>
         {
             internal GetUserWalletBuilderCompat() : base() { }
 
             internal GetUserWalletBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.WalletInfo? Execute(
                 string namespace_,
                 string userId,
@@ -471,14 +471,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DebitUserWalletBuilderCompat : DebitUserWallet.DebitUserWalletAbstractBuilder<DebitUserWalletBuilderCompat>
         {
             internal DebitUserWalletBuilderCompat() : base() { }
 
             internal DebitUserWalletBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.WalletInfo? Execute(
                 DebitRequest body,
                 string namespace_,
@@ -513,14 +513,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DisableUserWalletBuilderCompat : DisableUserWallet.DisableUserWalletAbstractBuilder<DisableUserWalletBuilderCompat>
         {
             internal DisableUserWalletBuilderCompat() : base() { }
 
             internal DisableUserWalletBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId,
@@ -549,14 +549,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class EnableUserWalletBuilderCompat : EnableUserWallet.EnableUserWalletAbstractBuilder<EnableUserWalletBuilderCompat>
         {
             internal EnableUserWalletBuilderCompat() : base() { }
 
             internal EnableUserWalletBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId,
@@ -585,14 +585,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ListUserWalletTransactionsBuilderCompat : ListUserWalletTransactions.ListUserWalletTransactionsAbstractBuilder<ListUserWalletTransactionsBuilderCompat>
         {
             internal ListUserWalletTransactionsBuilderCompat() : base() { }
 
             internal ListUserWalletTransactionsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.DetailedWalletTransactionPagingSlicedResult? Execute(
                 string namespace_,
                 string userId,
@@ -683,14 +683,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class QueryWalletsBuilderCompat : QueryWallets.QueryWalletsAbstractBuilder<QueryWalletsBuilderCompat>
         {
             internal QueryWalletsBuilderCompat() : base() { }
 
             internal QueryWalletsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.WalletPagingSlicedResult? Execute(
                 string namespace_
             )
@@ -777,14 +777,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetWalletBuilderCompat : GetWallet.GetWalletAbstractBuilder<GetWalletBuilderCompat>
         {
             internal GetWalletBuilderCompat() : base() { }
 
             internal GetWalletBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.WalletInfo? Execute(
                 string namespace_,
                 string walletId
@@ -973,7 +973,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CheckWalletBuilderCompat CheckWalletOp
         {
             get
@@ -1006,7 +1006,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserWalletBuilderCompat GetUserWalletOp
         {
             get
@@ -1015,7 +1015,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DebitUserWalletBuilderCompat DebitUserWalletOp
         {
             get
@@ -1024,7 +1024,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DisableUserWalletBuilderCompat DisableUserWalletOp
         {
             get
@@ -1033,7 +1033,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public EnableUserWalletBuilderCompat EnableUserWalletOp
         {
             get
@@ -1042,7 +1042,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ListUserWalletTransactionsBuilderCompat ListUserWalletTransactionsOp
         {
             get
@@ -1067,7 +1067,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public QueryWalletsBuilderCompat QueryWalletsOp
         {
             get
@@ -1092,7 +1092,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetWalletBuilderCompat GetWalletOp
         {
             get

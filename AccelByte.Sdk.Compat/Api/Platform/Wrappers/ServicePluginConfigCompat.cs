@@ -283,14 +283,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetServicePluginConfigBuilderCompat : GetServicePluginConfig.GetServicePluginConfigAbstractBuilder<GetServicePluginConfigBuilderCompat>
         {
             internal GetServicePluginConfigBuilderCompat() : base() { }
 
             internal GetServicePluginConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.ServicePluginConfigInfo? Execute(
                 string namespace_
             )
@@ -313,14 +313,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateServicePluginConfigBuilderCompat : UpdateServicePluginConfig.UpdateServicePluginConfigAbstractBuilder<UpdateServicePluginConfigBuilderCompat>
         {
             internal UpdateServicePluginConfigBuilderCompat() : base() { }
 
             internal UpdateServicePluginConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.ServicePluginConfigInfo? Execute(
                 ServicePluginConfigUpdate body,
                 string namespace_
@@ -347,14 +347,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteServicePluginConfigBuilderCompat : DeleteServicePluginConfig.DeleteServicePluginConfigAbstractBuilder<DeleteServicePluginConfigBuilderCompat>
         {
             internal DeleteServicePluginConfigBuilderCompat() : base() { }
 
             internal DeleteServicePluginConfigBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_
             )
@@ -563,7 +563,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetServicePluginConfigBuilderCompat GetServicePluginConfigOp
         {
             get
@@ -572,7 +572,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateServicePluginConfigBuilderCompat UpdateServicePluginConfigOp
         {
             get
@@ -581,7 +581,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteServicePluginConfigBuilderCompat DeleteServicePluginConfigOp
         {
             get

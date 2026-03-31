@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 PublicBulkGetUserProfilePublicInfo op = new PublicBulkGetUserProfilePublicInfo(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -133,7 +133,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -150,7 +150,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -203,13 +203,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = builder.Body;
-            
+
 
         }
         #endregion
@@ -234,18 +234,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public PublicBulkGetUserProfilePublicInfo(
-            string namespace_,            
-            Model.UserProfileBulkRequest body            
+            string namespace_,
+            Model.UserProfileBulkRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
         }
 
@@ -256,7 +256,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicBulkGetUserProfilePublicInfo.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicBulkGetUserProfilePublicInfo.Response()
@@ -296,7 +296,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -309,7 +309,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
                 response.Error400 = JsonSerializer.Deserialize<ValidationErrorEntity>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error400!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

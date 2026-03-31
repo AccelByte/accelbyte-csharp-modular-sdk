@@ -235,7 +235,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
             )
             {
                 AdminQueryGameSessions op = new AdminQueryGameSessions(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -255,7 +255,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -272,7 +272,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -308,7 +308,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.ConfigurationName is not null) QueryParams["configurationName"] = builder.ConfigurationName;
             if (builder.DsPodName is not null) QueryParams["dsPodName"] = builder.DsPodName;
             if (builder.FromTime is not null) QueryParams["fromTime"] = builder.FromTime;
@@ -326,11 +326,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (builder.Status is not null) QueryParams["status"] = builder.Status.Value;
             if (builder.StatusV2 is not null) QueryParams["statusV2"] = builder.StatusV2.Value;
             if (builder.ToTime is not null) QueryParams["toTime"] = builder.ToTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -355,28 +355,28 @@ namespace AccelByte.Sdk.Api.Session.Operation
         #endregion
 
         public AdminQueryGameSessions(
-            string namespace_,            
-            string? configurationName,            
-            string? dsPodName,            
-            string? fromTime,            
-            string? gameMode,            
-            string? isPersistent,            
-            string? isSoftDeleted,            
-            AdminQueryGameSessionsJoinability? joinability,            
-            long? limit,            
-            string? matchPool,            
-            string? memberID,            
-            long? offset,            
-            string? order,            
-            string? orderBy,            
-            string? sessionID,            
-            AdminQueryGameSessionsStatus? status,            
-            AdminQueryGameSessionsStatusV2? statusV2,            
-            string? toTime            
+            string namespace_,
+            string? configurationName,
+            string? dsPodName,
+            string? fromTime,
+            string? gameMode,
+            string? isPersistent,
+            string? isSoftDeleted,
+            AdminQueryGameSessionsJoinability? joinability,
+            long? limit,
+            string? matchPool,
+            string? memberID,
+            long? offset,
+            string? order,
+            string? orderBy,
+            string? sessionID,
+            AdminQueryGameSessionsStatus? status,
+            AdminQueryGameSessionsStatusV2? statusV2,
+            string? toTime
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (configurationName is not null) QueryParams["configurationName"] = configurationName;
             if (dsPodName is not null) QueryParams["dsPodName"] = dsPodName;
             if (fromTime is not null) QueryParams["fromTime"] = fromTime;
@@ -394,11 +394,11 @@ namespace AccelByte.Sdk.Api.Session.Operation
             if (status is not null) QueryParams["status"] = status.Value;
             if (statusV2 is not null) QueryParams["statusV2"] = statusV2.Value;
             if (toTime is not null) QueryParams["toTime"] = toTime;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -410,7 +410,7 @@ namespace AccelByte.Sdk.Api.Session.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminQueryGameSessions.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminQueryGameSessions.Response()

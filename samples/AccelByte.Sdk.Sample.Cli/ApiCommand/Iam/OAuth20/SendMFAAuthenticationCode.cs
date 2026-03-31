@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","sendmfaauthenticationcode")]
-    public class SendMFAAuthenticationCodeCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "sendmfaauthenticationcode")]
+    public class SendMFAAuthenticationCodeCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "SendMFAAuthenticationCode"; } }
+        public string OperationName { get { return "SendMFAAuthenticationCode"; } }
 
         [SdkCommandArgument("clientId")]
         public string ClientId { get; set; } = String.Empty;

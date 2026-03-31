@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","developmentserverconfigurationpatch")]
-    public class DevelopmentServerConfigurationPatchCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "developmentserverconfigurationpatch")]
+    public class DevelopmentServerConfigurationPatchCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "DevelopmentServerConfigurationPatch"; } }
+        public string OperationName { get { return "DevelopmentServerConfigurationPatch"; } }
 
         [SdkCommandArgument("developmentServerConfigID")]
         public string DevelopmentServerConfigID { get; set; } = String.Empty;

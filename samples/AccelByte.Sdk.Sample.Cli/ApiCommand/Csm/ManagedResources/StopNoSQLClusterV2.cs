@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Csm.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Csm
 {
-    [SdkConsoleCommand("csm","stopnosqlclusterv2")]
-    public class StopNoSQLClusterV2Command: ISdkConsoleCommand
+    [SdkConsoleCommand("csm", "stopnosqlclusterv2")]
+    public class StopNoSQLClusterV2Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Csm"; } }
+        public string ServiceName { get { return "Csm"; } }
 
-        public string OperationName{ get { return "StopNoSQLClusterV2"; } }
+        public string OperationName { get { return "StopNoSQLClusterV2"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

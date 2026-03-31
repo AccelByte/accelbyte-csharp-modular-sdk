@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// 
     /// The password reset code will be sent to the publisher account's email address.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class ForgotPassword : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -73,15 +73,15 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 ForgotPassword op = new ForgotPassword(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected ForgotPassword.Response InternalExecute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -128,7 +128,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public ForgotPasswordBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public ForgotPassword.Response Execute(
                 ModelSendVerificationCodeRequest body,
                 string namespace_
@@ -158,13 +158,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -190,18 +190,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public ForgotPassword(
-            string namespace_,            
-            Model.ModelSendVerificationCodeRequest body            
+            string namespace_,
+            Model.ModelSendVerificationCodeRequest body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BASIC);
@@ -214,7 +214,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ForgotPassword.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ForgotPassword.Response()

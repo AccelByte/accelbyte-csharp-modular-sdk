@@ -71,9 +71,9 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
             )
             {
                 AdminUpdateInventoryConfiguration op = new AdminUpdateInventoryConfiguration(this,
-                    body,                    
-                    inventoryConfigurationId,                    
-                    namespace_                    
+                    body,
+                    inventoryConfigurationId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -165,13 +165,13 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         {
             PathParams["inventoryConfigurationId"] = inventoryConfigurationId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,20 +196,20 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         #endregion
 
         public AdminUpdateInventoryConfiguration(
-            string inventoryConfigurationId,            
-            string namespace_,            
-            Model.ApimodelsInventoryConfigurationReq body            
+            string inventoryConfigurationId,
+            string namespace_,
+            Model.ApimodelsInventoryConfigurationReq body
         )
         {
             PathParams["inventoryConfigurationId"] = inventoryConfigurationId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Inventory.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminUpdateInventoryConfiguration.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminUpdateInventoryConfiguration.Response()

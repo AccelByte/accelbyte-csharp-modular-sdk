@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","deleteoculussubscriptiongroup")]
-    public class DeleteOculusSubscriptionGroupCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "deleteoculussubscriptiongroup")]
+    public class DeleteOculusSubscriptionGroupCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "DeleteOculusSubscriptionGroup"; } }
+        public string OperationName { get { return "DeleteOculusSubscriptionGroup"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

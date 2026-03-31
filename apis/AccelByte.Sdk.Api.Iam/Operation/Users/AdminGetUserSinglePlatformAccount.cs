@@ -114,9 +114,9 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminGetUserSinglePlatformAccount op = new AdminGetUserSinglePlatformAccount(this,
-                    namespace_,                    
-                    platformId,                    
-                    userId                    
+                    namespace_,
+                    platformId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -140,7 +140,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -161,7 +161,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -277,13 +277,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            if (builder.CrossNamespace != null) QueryParams["crossNamespace"] = Convert.ToString(builder.CrossNamespace)!;
-            
 
-            
-            
-            
+            if (builder.CrossNamespace != null) QueryParams["crossNamespace"] = Convert.ToString(builder.CrossNamespace)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -325,22 +325,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminGetUserSinglePlatformAccount(
-            string namespace_,            
-            string platformId,            
-            string userId,            
-            bool? crossNamespace            
+            string namespace_,
+            string platformId,
+            string userId,
+            bool? crossNamespace
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["platformId"] = platformId;
             PathParams["userId"] = userId;
-            
-            if (crossNamespace != null) QueryParams["crossNamespace"] = Convert.ToString(crossNamespace)!;
-            
 
-            
-            
-            
+            if (crossNamespace != null) QueryParams["crossNamespace"] = Convert.ToString(crossNamespace)!;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -349,10 +349,10 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetUserSinglePlatformAccount.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetUserSinglePlatformAccount.Response()
@@ -416,7 +416,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -453,7 +453,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
                 response.Error500 = JsonSerializer.Deserialize<RestErrorResponse>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

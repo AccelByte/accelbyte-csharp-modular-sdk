@@ -67,8 +67,8 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
             )
             {
                 AdminDeleteTiedChallenge op = new AdminDeleteTiedChallenge(this,
-                    challengeCode,                    
-                    namespace_                    
+                    challengeCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -90,7 +90,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -109,7 +109,7 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,12 +151,12 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -183,18 +183,18 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
         #endregion
 
         public AdminDeleteTiedChallenge(
-            string challengeCode,            
-            string namespace_            
+            string challengeCode,
+            string namespace_
         )
         {
             PathParams["challengeCode"] = challengeCode;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,10 +203,10 @@ namespace AccelByte.Sdk.Api.Challenge.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminDeleteTiedChallenge.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminDeleteTiedChallenge.Response()

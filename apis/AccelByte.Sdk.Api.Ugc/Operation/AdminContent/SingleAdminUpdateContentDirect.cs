@@ -27,7 +27,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
     /// 
     /// All request body are required except preview, tags and customAttributes.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SingleAdminUpdateContentDirect : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -71,17 +71,17 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             )
             {
                 SingleAdminUpdateContentDirect op = new SingleAdminUpdateContentDirect(this,
-                    body,                    
-                    channelId,                    
-                    contentId,                    
-                    namespace_                    
+                    body,
+                    channelId,
+                    contentId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected SingleAdminUpdateContentDirect.Response InternalExecute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,7 +148,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -171,7 +171,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse<T1>(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -183,7 +183,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
 
             public SingleAdminUpdateContentDirectBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SingleAdminUpdateContentDirect.Response Execute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -254,13 +254,13 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -302,22 +302,22 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         #endregion
 
         public SingleAdminUpdateContentDirect(
-            string channelId,            
-            string contentId,            
-            string namespace_,            
-            Model.ModelsCreateContentRequest body            
+            string channelId,
+            string contentId,
+            string namespace_,
+            Model.ModelsCreateContentRequest body
         )
         {
             PathParams["channelId"] = channelId;
             PathParams["contentId"] = contentId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -329,7 +329,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SingleAdminUpdateContentDirect.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SingleAdminUpdateContentDirect.Response()
@@ -393,7 +393,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
             if (code == (HttpStatusCode)204)
             {
                 response.IsSuccess = true;
-            }            
+            }
             else if ((code == (HttpStatusCode)201) || (code == (HttpStatusCode)202) || (code == (HttpStatusCode)200))
             {
                 response.Payload = payload.ReadToString();
@@ -430,7 +430,7 @@ namespace AccelByte.Sdk.Api.Ugc.Operation
                 response.Error500 = JsonSerializer.Deserialize<ResponseError>(response.Payload, ResponseJsonOptions);
                 response.Error = response.Error500!.TranslateToApiError();
             }
-            
+
             return response;
         }
     }

@@ -100,8 +100,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 DeleteItem op = new DeleteItem(this,
-                    itemId,                    
-                    namespace_                    
+                    itemId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -142,7 +142,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -184,16 +184,16 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.FeaturesToCheck is not null) QueryParams["featuresToCheck"] = builder.FeaturesToCheck;
             if (builder.Force != null) QueryParams["force"] = Convert.ToString(builder.Force)!;
             if (builder.StoreId is not null) QueryParams["storeId"] = builder.StoreId;
-            
 
-            
+
+
             CollectionFormatMap["featuresToCheck"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -214,25 +214,25 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public DeleteItem(
-            string itemId,            
-            string namespace_,            
-            List<DeleteItemFeaturesToCheck>? featuresToCheck,            
-            bool? force,            
-            string? storeId            
+            string itemId,
+            string namespace_,
+            List<DeleteItemFeaturesToCheck>? featuresToCheck,
+            bool? force,
+            string? storeId
         )
         {
             PathParams["itemId"] = itemId;
             PathParams["namespace"] = namespace_;
-            
+
             if (featuresToCheck is not null) QueryParams["featuresToCheck"] = featuresToCheck;
             if (force != null) QueryParams["force"] = Convert.ToString(force)!;
             if (storeId is not null) QueryParams["storeId"] = storeId;
-            
 
-            
+
+
             CollectionFormatMap["featuresToCheck"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -241,10 +241,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Delete;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteItem.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteItem.Response()

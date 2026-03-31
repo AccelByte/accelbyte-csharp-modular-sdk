@@ -73,8 +73,8 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 CreateRuleSet op = new CreateRuleSet(this,
-                    body,                    
-                    namespace_                    
+                    body,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -96,7 +96,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -156,13 +156,13 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -189,18 +189,18 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #endregion
 
         public CreateRuleSet(
-            string namespace_,            
-            Model.ApiRuleSetPayload body            
+            string namespace_,
+            Model.ApiRuleSetPayload body
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -212,7 +212,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public CreateRuleSet.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new CreateRuleSet.Response()

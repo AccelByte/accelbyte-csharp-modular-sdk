@@ -69,9 +69,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 GetSingleTemplateLocalizationV1Admin op = new GetSingleTemplateLocalizationV1Admin(this,
-                    namespace_,                    
-                    templateLanguage,                    
-                    templateSlug                    
+                    namespace_,
+                    templateLanguage,
+                    templateSlug
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -116,7 +116,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -164,12 +164,12 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             PathParams["namespace"] = namespace_;
             PathParams["templateLanguage"] = templateLanguage;
             PathParams["templateSlug"] = templateSlug;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public GetSingleTemplateLocalizationV1Admin(
-            string namespace_,            
-            string templateLanguage,            
-            string templateSlug            
+            string namespace_,
+            string templateLanguage,
+            string templateSlug
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["templateLanguage"] = templateLanguage;
             PathParams["templateSlug"] = templateSlug;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetSingleTemplateLocalizationV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetSingleTemplateLocalizationV1Admin.Response()

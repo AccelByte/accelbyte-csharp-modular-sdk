@@ -239,14 +239,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ImportStoreBuilderCompat : ImportStore.ImportStoreAbstractBuilder<ImportStoreBuilderCompat>
         {
             internal ImportStoreBuilderCompat() : base() { }
 
             internal ImportStoreBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.StoreInfo? Execute(
                 string namespace_
             )
@@ -513,14 +513,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class ExportStoreBuilderCompat : ExportStore.ExportStoreAbstractBuilder<ExportStoreBuilderCompat>
         {
             internal ExportStoreBuilderCompat() : base() { }
 
             internal ExportStoreBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public Stream? Execute(
                 string namespace_,
                 string storeId
@@ -757,7 +757,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ImportStoreBuilderCompat ImportStoreOp
         {
             get
@@ -830,7 +830,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public ExportStoreBuilderCompat ExportStoreOp
         {
             get

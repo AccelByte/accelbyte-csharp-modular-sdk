@@ -45,7 +45,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SyncUserInfo.SyncUserInfoBuilder SyncUserInfoOp
         {
             get
@@ -57,7 +57,7 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public InvalidateUserInfoCache.InvalidateUserInfoCacheBuilder InvalidateUserInfoCacheOp
         {
             get
@@ -87,8 +87,8 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SyncUserInfo.Response SyncUserInfo(SyncUserInfo input)
         {
             var response = _sdk.RunRequest(input);
@@ -105,9 +105,9 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public InvalidateUserInfoCache.Response InvalidateUserInfoCache(InvalidateUserInfoCache input)
         {
             var response = _sdk.RunRequest(input);
@@ -124,6 +124,6 @@ namespace AccelByte.Sdk.Api.Legal.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
     }
 }

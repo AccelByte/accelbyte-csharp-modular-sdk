@@ -40,7 +40,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
             {
                 var response = InternalExecute(
                     body
-                    
+
                 );
                 response.ThrowHttpExceptionIfError();
             }
@@ -51,7 +51,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
             {
                 var response = await InternalExecuteAsync(
                     body
-                    
+
                 );
                 response.ThrowHttpExceptionIfError();
             }
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
             {
                 var response = InternalExecute(
                     steamId
-                    
+
                 );
                 response.ThrowHttpExceptionIfError();
                 return response.Data;
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
             {
                 var response = await InternalExecuteAsync(
                     steamId
-                    
+
                 );
                 response.ThrowHttpExceptionIfError();
                 return response.Data;
@@ -104,7 +104,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
                 var response = InternalExecute(
                     playtime,
                     steamId
-                    
+
                 );
                 response.ThrowHttpExceptionIfError();
                 return response.Data;
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Gametelemetry.Wrapper
                 var response = await InternalExecuteAsync(
                     playtime,
                     steamId
-                    
+
                 );
                 response.ThrowHttpExceptionIfError();
                 return response.Data;

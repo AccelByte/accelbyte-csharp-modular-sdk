@@ -111,8 +111,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 SimultaneousLoginV3 op = new SimultaneousLoginV3(this,
-                    nativePlatform,                    
-                    nativePlatformTicket                    
+                    nativePlatform,
+                    nativePlatformTicket
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -153,7 +153,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -193,16 +193,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             string nativePlatformTicket
         )
         {
-            
-            
+
+
             if (builder.SimultaneousPlatform is not null) FormParams["simultaneousPlatform"] = builder.SimultaneousPlatform;
             if (builder.SimultaneousTicket is not null) FormParams["simultaneousTicket"] = builder.SimultaneousTicket;
             if (nativePlatform is not null) FormParams["nativePlatform"] = nativePlatform.Value;
             if (nativePlatformTicket is not null) FormParams["nativePlatformTicket"] = nativePlatformTicket;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -227,22 +227,22 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public SimultaneousLoginV3(
-            string? simultaneousPlatform,            
-            string? simultaneousTicket,            
-            SimultaneousLoginV3NativePlatform nativePlatform,            
-            string nativePlatformTicket            
+            string? simultaneousPlatform,
+            string? simultaneousTicket,
+            SimultaneousLoginV3NativePlatform nativePlatform,
+            string nativePlatformTicket
         )
         {
-            
-            
+
+
             if (simultaneousPlatform is not null) FormParams["simultaneousPlatform"] = simultaneousPlatform;
             if (simultaneousTicket is not null) FormParams["simultaneousTicket"] = simultaneousTicket;
             if (nativePlatform is not null) FormParams["nativePlatform"] = nativePlatform.Value;
             if (nativePlatformTicket is not null) FormParams["nativePlatformTicket"] = nativePlatformTicket;
 
-            
-            
-            
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -254,7 +254,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/x-www-form-urlencoded" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SimultaneousLoginV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SimultaneousLoginV3.Response()

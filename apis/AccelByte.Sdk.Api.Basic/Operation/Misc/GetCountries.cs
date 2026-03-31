@@ -29,7 +29,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
     ///   * Action code : 11204
     ///   *  Returns : country code list
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetCountries : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -80,14 +80,14 @@ namespace AccelByte.Sdk.Api.Basic.Operation
             )
             {
                 GetCountries op = new GetCountries(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected GetCountries.Response InternalExecute(
                 string namespace_
             )
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -130,7 +130,7 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
             public GetCountriesBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetCountries.Response Execute(
                 string namespace_
             )
@@ -155,13 +155,13 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.Lang is not null) QueryParams["lang"] = builder.Lang;
-            
 
-            
-            
-            
+            if (builder.Lang is not null) QueryParams["lang"] = builder.Lang;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -182,18 +182,18 @@ namespace AccelByte.Sdk.Api.Basic.Operation
         #endregion
 
         public GetCountries(
-            string namespace_,            
-            string? lang            
+            string namespace_,
+            string? lang
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (lang is not null) QueryParams["lang"] = lang;
-            
 
-            
-            
-            
+            if (lang is not null) QueryParams["lang"] = lang;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,10 +202,10 @@ namespace AccelByte.Sdk.Api.Basic.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetCountries.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetCountries.Response()

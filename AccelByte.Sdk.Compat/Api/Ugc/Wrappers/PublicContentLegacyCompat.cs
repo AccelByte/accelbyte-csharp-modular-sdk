@@ -347,14 +347,14 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class CreateContentDirectBuilderCompat : CreateContentDirect.CreateContentDirectAbstractBuilder<CreateContentDirectBuilderCompat>
         {
             internal CreateContentDirectBuilderCompat() : base() { }
 
             internal CreateContentDirectBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Ugc.Model.ModelsCreateContentResponse? Execute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -695,14 +695,14 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateContentDirectBuilderCompat : UpdateContentDirect.UpdateContentDirectAbstractBuilder<UpdateContentDirectBuilderCompat>
         {
             internal UpdateContentDirectBuilderCompat() : base() { }
 
             internal UpdateContentDirectBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Ugc.Model.ModelsCreateContentResponse? Execute(
                 ModelsCreateContentRequest body,
                 string channelId,
@@ -1105,7 +1105,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateContentDirectBuilderCompat CreateContentDirectOp
         {
             get
@@ -1146,7 +1146,7 @@ namespace AccelByte.Sdk.Api.Ugc.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateContentDirectBuilderCompat UpdateContentDirectOp
         {
             get

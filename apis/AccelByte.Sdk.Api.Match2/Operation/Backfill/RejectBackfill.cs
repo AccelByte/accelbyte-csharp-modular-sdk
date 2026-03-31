@@ -67,9 +67,9 @@ namespace AccelByte.Sdk.Api.Match2.Operation
             )
             {
                 RejectBackfill op = new RejectBackfill(this,
-                    body,                    
-                    backfillID,                    
-                    namespace_                    
+                    body,
+                    backfillID,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -93,7 +93,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -114,7 +114,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -161,13 +161,13 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         {
             PathParams["backfillID"] = backfillID;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,20 +194,20 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         #endregion
 
         public RejectBackfill(
-            string backfillID,            
-            string namespace_,            
-            Model.ApiBackFillRejectRequest body            
+            string backfillID,
+            string namespace_,
+            Model.ApiBackFillRejectRequest body
         )
         {
             PathParams["backfillID"] = backfillID;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -219,7 +219,7 @@ namespace AccelByte.Sdk.Api.Match2.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public RejectBackfill.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new RejectBackfill.Response()

@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetPartyDataV1BuilderCompat : AdminGetPartyDataV1.AdminGetPartyDataV1AbstractBuilder<AdminGetPartyDataV1BuilderCompat>
         {
             internal AdminGetPartyDataV1BuilderCompat() : base() { }
 
             internal AdminGetPartyDataV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsPartyData? Execute(
                 string namespace_,
                 string partyId
@@ -86,14 +86,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminGetUserPartyV1BuilderCompat : AdminGetUserPartyV1.AdminGetUserPartyV1AbstractBuilder<AdminGetUserPartyV1BuilderCompat>
         {
             internal AdminGetUserPartyV1BuilderCompat() : base() { }
 
             internal AdminGetUserPartyV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsPartyData? Execute(
                 string namespace_,
                 string userId
@@ -145,14 +145,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetPartyDataV1BuilderCompat : PublicGetPartyDataV1.PublicGetPartyDataV1AbstractBuilder<PublicGetPartyDataV1BuilderCompat>
         {
             internal PublicGetPartyDataV1BuilderCompat() : base() { }
 
             internal PublicGetPartyDataV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsPartyData? Execute(
                 string namespace_,
                 string partyId
@@ -204,14 +204,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdatePartyAttributesV1BuilderCompat : PublicUpdatePartyAttributesV1.PublicUpdatePartyAttributesV1AbstractBuilder<PublicUpdatePartyAttributesV1BuilderCompat>
         {
             internal PublicUpdatePartyAttributesV1BuilderCompat() : base() { }
 
             internal PublicUpdatePartyAttributesV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Lobby.Model.ModelsPartyData? Execute(
                 ModelsPartyPUTCustomAttributesRequest body,
                 string namespace_,
@@ -271,14 +271,14 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicSetPartyLimitV1BuilderCompat : PublicSetPartyLimitV1.PublicSetPartyLimitV1AbstractBuilder<PublicSetPartyLimitV1BuilderCompat>
         {
             internal PublicSetPartyLimitV1BuilderCompat() : base() { }
 
             internal PublicSetPartyLimitV1BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelsPartyPUTLimitSizeRequest body,
                 string namespace_,
@@ -309,7 +309,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetPartyDataV1BuilderCompat AdminGetPartyDataV1Op
         {
             get
@@ -318,7 +318,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminGetUserPartyV1BuilderCompat AdminGetUserPartyV1Op
         {
             get
@@ -327,7 +327,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetPartyDataV1BuilderCompat PublicGetPartyDataV1Op
         {
             get
@@ -336,7 +336,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdatePartyAttributesV1BuilderCompat PublicUpdatePartyAttributesV1Op
         {
             get
@@ -345,7 +345,7 @@ namespace AccelByte.Sdk.Api.Lobby.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicSetPartyLimitV1BuilderCompat PublicSetPartyLimitV1Op
         {
             get

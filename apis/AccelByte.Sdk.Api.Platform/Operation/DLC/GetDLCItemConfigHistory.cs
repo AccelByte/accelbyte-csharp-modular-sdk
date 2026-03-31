@@ -66,8 +66,8 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetDLCItemConfigHistory op = new GetDLCItemConfigHistory(this,
-                    namespace_,                    
-                    dlcId                    
+                    namespace_,
+                    dlcId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -89,7 +89,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -108,7 +108,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -149,13 +149,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (dlcId is not null) QueryParams["dlcId"] = dlcId;
-            
 
-            
-            
-            
+            if (dlcId is not null) QueryParams["dlcId"] = dlcId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -174,18 +174,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetDLCItemConfigHistory(
-            string namespace_,            
-            string dlcId            
+            string namespace_,
+            string dlcId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (dlcId is not null) QueryParams["dlcId"] = dlcId;
-            
 
-            
-            
-            
+            if (dlcId is not null) QueryParams["dlcId"] = dlcId;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -194,10 +194,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
-        public override List<string> Produces => new() {  };
-        
+        public override List<string> Produces => new() { };
+
         public GetDLCItemConfigHistory.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetDLCItemConfigHistory.Response()

@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetClientsBuilderCompat : GetClients.GetClientsAbstractBuilder<GetClientsBuilderCompat>
         {
             internal GetClientsBuilderCompat() : base() { }
 
             internal GetClientsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ClientmodelClientResponse>? Execute(
             )
             {
@@ -53,14 +53,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class CreateClientBuilderCompat : CreateClient.CreateClientAbstractBuilder<CreateClientBuilderCompat>
         {
             internal CreateClientBuilderCompat() : base() { }
 
             internal CreateClientBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ClientmodelClientCreationResponse? Execute(
                 ClientmodelClientCreateRequest body
             )
@@ -83,14 +83,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetClientBuilderCompat : GetClient.GetClientAbstractBuilder<GetClientBuilderCompat>
         {
             internal GetClientBuilderCompat() : base() { }
 
             internal GetClientBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ClientmodelClientResponse? Execute(
                 string clientId
             )
@@ -113,14 +113,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateClientBuilderCompat : UpdateClient.UpdateClientAbstractBuilder<UpdateClientBuilderCompat>
         {
             internal UpdateClientBuilderCompat() : base() { }
 
             internal UpdateClientBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ClientmodelClientResponse? Execute(
                 ClientmodelClientUpdateRequest body,
                 string clientId
@@ -147,14 +147,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteClientBuilderCompat : DeleteClient.DeleteClientAbstractBuilder<DeleteClientBuilderCompat>
         {
             internal DeleteClientBuilderCompat() : base() { }
 
             internal DeleteClientBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string clientId
             )
@@ -175,14 +175,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateClientPermissionBuilderCompat : UpdateClientPermission.UpdateClientPermissionAbstractBuilder<UpdateClientPermissionBuilderCompat>
         {
             internal UpdateClientPermissionBuilderCompat() : base() { }
 
             internal UpdateClientPermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 AccountcommonClientPermissions body,
                 string clientId
@@ -207,14 +207,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AddClientPermissionBuilderCompat : AddClientPermission.AddClientPermissionAbstractBuilder<AddClientPermissionBuilderCompat>
         {
             internal AddClientPermissionBuilderCompat() : base() { }
 
             internal AddClientPermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 long action,
                 string clientId,
@@ -243,14 +243,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteClientPermissionBuilderCompat : DeleteClientPermission.DeleteClientPermissionAbstractBuilder<DeleteClientPermissionBuilderCompat>
         {
             internal DeleteClientPermissionBuilderCompat() : base() { }
 
             internal DeleteClientPermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 long action,
                 string clientId,
@@ -279,14 +279,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateClientSecretBuilderCompat : UpdateClientSecret.UpdateClientSecretAbstractBuilder<UpdateClientSecretBuilderCompat>
         {
             internal UpdateClientSecretBuilderCompat() : base() { }
 
             internal UpdateClientSecretBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ClientmodelClientUpdateSecretRequest body,
                 string clientId
@@ -311,14 +311,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetClientsbyNamespaceBuilderCompat : GetClientsbyNamespace.GetClientsbyNamespaceAbstractBuilder<GetClientsbyNamespaceBuilderCompat>
         {
             internal GetClientsbyNamespaceBuilderCompat() : base() { }
 
             internal GetClientsbyNamespaceBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ClientmodelClientResponse>? Execute(
                 string namespace_
             )
@@ -341,14 +341,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class CreateClientByNamespaceBuilderCompat : CreateClientByNamespace.CreateClientByNamespaceAbstractBuilder<CreateClientByNamespaceBuilderCompat>
         {
             internal CreateClientByNamespaceBuilderCompat() : base() { }
 
             internal CreateClientByNamespaceBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ClientmodelClientCreationResponse? Execute(
                 ClientmodelClientCreateRequest body,
                 string namespace_
@@ -375,14 +375,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteClientByNamespaceBuilderCompat : DeleteClientByNamespace.DeleteClientByNamespaceAbstractBuilder<DeleteClientByNamespaceBuilderCompat>
         {
             internal DeleteClientByNamespaceBuilderCompat() : base() { }
 
             internal DeleteClientByNamespaceBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string clientId,
                 string namespace_
@@ -737,7 +737,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetClientsBuilderCompat GetClientsOp
         {
             get
@@ -746,7 +746,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateClientBuilderCompat CreateClientOp
         {
             get
@@ -755,7 +755,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetClientBuilderCompat GetClientOp
         {
             get
@@ -764,7 +764,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateClientBuilderCompat UpdateClientOp
         {
             get
@@ -773,7 +773,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteClientBuilderCompat DeleteClientOp
         {
             get
@@ -782,7 +782,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateClientPermissionBuilderCompat UpdateClientPermissionOp
         {
             get
@@ -791,7 +791,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddClientPermissionBuilderCompat AddClientPermissionOp
         {
             get
@@ -800,7 +800,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteClientPermissionBuilderCompat DeleteClientPermissionOp
         {
             get
@@ -809,7 +809,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateClientSecretBuilderCompat UpdateClientSecretOp
         {
             get
@@ -818,7 +818,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetClientsbyNamespaceBuilderCompat GetClientsbyNamespaceOp
         {
             get
@@ -827,7 +827,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateClientByNamespaceBuilderCompat CreateClientByNamespaceOp
         {
             get
@@ -836,7 +836,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteClientByNamespaceBuilderCompat DeleteClientByNamespaceOp
         {
             get

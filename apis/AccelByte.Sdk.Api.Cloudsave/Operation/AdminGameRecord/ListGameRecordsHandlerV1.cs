@@ -87,9 +87,9 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
             )
             {
                 ListGameRecordsHandlerV1 op = new ListGameRecordsHandlerV1(this,
-                    namespace_,                    
-                    limit,                    
-                    offset                    
+                    namespace_,
+                    limit,
+                    offset
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -180,19 +180,19 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.Query is not null) QueryParams["query"] = builder.Query;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
-            QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+            QueryParams["offset"] = Convert.ToString(offset)!;
+
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -217,27 +217,27 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         #endregion
 
         public ListGameRecordsHandlerV1(
-            string namespace_,            
-            string? query,            
-            List<string>? tags,            
-            long limit,            
-            long offset            
+            string namespace_,
+            string? query,
+            List<string>? tags,
+            long limit,
+            long offset
         )
         {
             PathParams["namespace"] = namespace_;
-            
+
             if (query is not null) QueryParams["query"] = query;
             if (tags is not null) QueryParams["tags"] = tags;
-            
-            QueryParams["limit"] = Convert.ToString(limit)!;
-            
-            QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
+            QueryParams["limit"] = Convert.ToString(limit)!;
+
+            QueryParams["offset"] = Convert.ToString(offset)!;
+
+
+
             CollectionFormatMap["tags"] = "csv";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -249,7 +249,7 @@ namespace AccelByte.Sdk.Api.Cloudsave.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public ListGameRecordsHandlerV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new ListGameRecordsHandlerV1.Response()

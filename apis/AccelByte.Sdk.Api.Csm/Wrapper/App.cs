@@ -34,7 +34,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
         }
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppListV1.GetAppListV1Builder GetAppListV1Op
         {
             get
@@ -46,7 +46,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppV1.GetAppV1Builder GetAppV1Op
         {
             get
@@ -58,7 +58,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateAppV1.CreateAppV1Builder CreateAppV1Op
         {
             get
@@ -70,7 +70,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteAppV1.DeleteAppV1Builder DeleteAppV1Op
         {
             get
@@ -82,7 +82,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateAppV1.UpdateAppV1Builder UpdateAppV1Op
         {
             get
@@ -105,7 +105,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public StartAppV1.StartAppV1Builder StartAppV1Op
         {
             get
@@ -117,7 +117,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public StopAppV1.StopAppV1Builder StopAppV1Op
         {
             get
@@ -131,8 +131,8 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
         }
         #endregion
 
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppListV1.Response GetAppListV1(GetAppListV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -149,9 +149,9 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetAppV1.Response GetAppV1(GetAppV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -168,9 +168,9 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateAppV1.Response CreateAppV1(CreateAppV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -187,9 +187,9 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteAppV1.Response DeleteAppV1(DeleteAppV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -206,9 +206,9 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateAppV1.Response UpdateAppV1(UpdateAppV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -225,7 +225,7 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
         public GetAppReleaseV1.Response GetAppReleaseV1(GetAppReleaseV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -242,8 +242,8 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public StartAppV1.Response StartAppV1(StartAppV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -260,9 +260,9 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
-        #pragma warning disable ab_deprecated_operation
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+#pragma warning restore ab_deprecated_operation
+#pragma warning disable ab_deprecated_operation
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public StopAppV1.Response StopAppV1(StopAppV1 input)
         {
             var response = _sdk.RunRequest(input);
@@ -279,6 +279,6 @@ namespace AccelByte.Sdk.Api.Csm.Wrapper
                     response.ContentType,
                     response.Payload);
         }
-        #pragma warning restore ab_deprecated_operation
+#pragma warning restore ab_deprecated_operation
     }
 }

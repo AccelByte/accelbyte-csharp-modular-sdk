@@ -71,9 +71,9 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             )
             {
                 DeleteUserRankingAdminV3 op = new DeleteUserRankingAdminV3(this,
-                    leaderboardCode,                    
-                    namespace_,                    
-                    userId                    
+                    leaderboardCode,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -166,12 +166,12 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -196,20 +196,20 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         #endregion
 
         public DeleteUserRankingAdminV3(
-            string leaderboardCode,            
-            string namespace_,            
-            string userId            
+            string leaderboardCode,
+            string namespace_,
+            string userId
         )
         {
             PathParams["leaderboardCode"] = leaderboardCode;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -221,7 +221,7 @@ namespace AccelByte.Sdk.Api.Leaderboard.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteUserRankingAdminV3.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteUserRankingAdminV3.Response()

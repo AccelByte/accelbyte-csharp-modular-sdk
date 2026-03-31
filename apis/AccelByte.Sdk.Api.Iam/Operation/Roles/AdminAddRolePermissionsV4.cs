@@ -90,8 +90,8 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 AdminAddRolePermissionsV4 op = new AdminAddRolePermissionsV4(this,
-                    body,                    
-                    roleId                    
+                    body,
+                    roleId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -132,7 +132,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -173,13 +173,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -204,18 +204,18 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public AdminAddRolePermissionsV4(
-            string roleId,            
-            Model.AccountcommonPermissionsV3 body            
+            string roleId,
+            Model.AccountcommonPermissionsV3 body
         )
         {
             PathParams["roleId"] = roleId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -227,7 +227,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminAddRolePermissionsV4.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminAddRolePermissionsV4.Response()

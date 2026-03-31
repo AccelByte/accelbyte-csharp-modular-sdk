@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserNamespaceSlotsBuilderCompat : GetUserNamespaceSlots.GetUserNamespaceSlotsAbstractBuilder<GetUserNamespaceSlotsBuilderCompat>
         {
             internal GetUserNamespaceSlotsBuilderCompat() : base() { }
 
             internal GetUserNamespaceSlotsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Social.Model.SlotInfo>? Execute(
                 string namespace_,
                 string userId
@@ -61,14 +61,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetSlotDataBuilderCompat : GetSlotData.GetSlotDataAbstractBuilder<GetSlotDataBuilderCompat>
         {
             internal GetSlotDataBuilderCompat() : base() { }
 
             internal GetSlotDataBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public byte[]? Execute(
                 string namespace_,
                 string slotId,
@@ -99,14 +99,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetUserNamespaceSlotsBuilderCompat : PublicGetUserNamespaceSlots.PublicGetUserNamespaceSlotsAbstractBuilder<PublicGetUserNamespaceSlotsBuilderCompat>
         {
             internal PublicGetUserNamespaceSlotsBuilderCompat() : base() { }
 
             internal PublicGetUserNamespaceSlotsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Social.Model.SlotInfo>? Execute(
                 string namespace_,
                 string userId
@@ -133,14 +133,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicCreateUserNamespaceSlotBuilderCompat : PublicCreateUserNamespaceSlot.PublicCreateUserNamespaceSlotAbstractBuilder<PublicCreateUserNamespaceSlotBuilderCompat>
         {
             internal PublicCreateUserNamespaceSlotBuilderCompat() : base() { }
 
             internal PublicCreateUserNamespaceSlotBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string userId
@@ -165,14 +165,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicGetSlotDataBuilderCompat : PublicGetSlotData.PublicGetSlotDataAbstractBuilder<PublicGetSlotDataBuilderCompat>
         {
             internal PublicGetSlotDataBuilderCompat() : base() { }
 
             internal PublicGetSlotDataBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public byte[]? Execute(
                 string namespace_,
                 string slotId,
@@ -203,14 +203,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdateUserNamespaceSlotBuilderCompat : PublicUpdateUserNamespaceSlot.PublicUpdateUserNamespaceSlotAbstractBuilder<PublicUpdateUserNamespaceSlotBuilderCompat>
         {
             internal PublicUpdateUserNamespaceSlotBuilderCompat() : base() { }
 
             internal PublicUpdateUserNamespaceSlotBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.SlotInfo? Execute(
                 string namespace_,
                 string slotId,
@@ -241,14 +241,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicDeleteUserNamespaceSlotBuilderCompat : PublicDeleteUserNamespaceSlot.PublicDeleteUserNamespaceSlotAbstractBuilder<PublicDeleteUserNamespaceSlotBuilderCompat>
         {
             internal PublicDeleteUserNamespaceSlotBuilderCompat() : base() { }
 
             internal PublicDeleteUserNamespaceSlotBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string namespace_,
                 string slotId,
@@ -277,14 +277,14 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class PublicUpdateUserNamespaceSlotMetadataBuilderCompat : PublicUpdateUserNamespaceSlotMetadata.PublicUpdateUserNamespaceSlotMetadataAbstractBuilder<PublicUpdateUserNamespaceSlotMetadataBuilderCompat>
         {
             internal PublicUpdateUserNamespaceSlotMetadataBuilderCompat() : base() { }
 
             internal PublicUpdateUserNamespaceSlotMetadataBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Social.Model.SlotInfo? Execute(
                 string namespace_,
                 string slotId,
@@ -317,7 +317,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserNamespaceSlotsBuilderCompat GetUserNamespaceSlotsOp
         {
             get
@@ -326,7 +326,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetSlotDataBuilderCompat GetSlotDataOp
         {
             get
@@ -335,7 +335,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetUserNamespaceSlotsBuilderCompat PublicGetUserNamespaceSlotsOp
         {
             get
@@ -344,7 +344,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicCreateUserNamespaceSlotBuilderCompat PublicCreateUserNamespaceSlotOp
         {
             get
@@ -353,7 +353,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicGetSlotDataBuilderCompat PublicGetSlotDataOp
         {
             get
@@ -362,7 +362,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateUserNamespaceSlotBuilderCompat PublicUpdateUserNamespaceSlotOp
         {
             get
@@ -371,7 +371,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicDeleteUserNamespaceSlotBuilderCompat PublicDeleteUserNamespaceSlotOp
         {
             get
@@ -380,7 +380,7 @@ namespace AccelByte.Sdk.Api.Social.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public PublicUpdateUserNamespaceSlotMetadataBuilderCompat PublicUpdateUserNamespaceSlotMetadataOp
         {
             get

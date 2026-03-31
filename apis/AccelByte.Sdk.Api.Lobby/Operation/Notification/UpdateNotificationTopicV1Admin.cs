@@ -72,9 +72,9 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
             )
             {
                 UpdateNotificationTopicV1Admin op = new UpdateNotificationTopicV1Admin(this,
-                    body,                    
-                    namespace_,                    
-                    topicName                    
+                    body,
+                    namespace_,
+                    topicName
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -119,7 +119,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -166,13 +166,13 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["topicName"] = topicName;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -199,20 +199,20 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         #endregion
 
         public UpdateNotificationTopicV1Admin(
-            string namespace_,            
-            string topicName,            
-            Model.ModelUpdateTopicRequest body            
+            string namespace_,
+            string topicName,
+            Model.ModelUpdateTopicRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["topicName"] = topicName;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,7 +224,7 @@ namespace AccelByte.Sdk.Api.Lobby.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public UpdateNotificationTopicV1Admin.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new UpdateNotificationTopicV1Admin.Response()

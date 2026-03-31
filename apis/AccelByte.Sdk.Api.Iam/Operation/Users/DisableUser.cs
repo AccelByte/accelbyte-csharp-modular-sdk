@@ -31,7 +31,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
     /// - **DeactivateAccount** : if your deletion request comes from user
     /// - **AdminDeactivateAccount** : if your deletion request comes from admin
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class DisableUser : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -74,16 +74,16 @@ namespace AccelByte.Sdk.Api.Iam.Operation
             )
             {
                 DisableUser op = new DisableUser(this,
-                    body,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected DisableUser.Response InternalExecute(
                 ModelDisableUserRequest body,
                 string namespace_,
@@ -101,7 +101,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -122,7 +122,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -134,7 +134,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
 
             public DisableUserBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public DisableUser.Response Execute(
                 ModelDisableUserRequest body,
                 string namespace_,
@@ -170,13 +170,13 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,20 +203,20 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         #endregion
 
         public DisableUser(
-            string namespace_,            
-            string userId,            
-            Model.ModelDisableUserRequest body            
+            string namespace_,
+            string userId,
+            Model.ModelDisableUserRequest body
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Iam.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DisableUser.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DisableUser.Response()

@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetBansTypeBuilderCompat : GetBansType.GetBansTypeAbstractBuilder<GetBansTypeBuilderCompat>
         {
             internal GetBansTypeBuilderCompat() : base() { }
 
             internal GetBansTypeBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.AccountcommonBans? Execute(
             )
             {
@@ -53,14 +53,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetListBanReasonBuilderCompat : GetListBanReason.GetListBanReasonAbstractBuilder<GetListBanReasonBuilderCompat>
         {
             internal GetListBanReasonBuilderCompat() : base() { }
 
             internal GetListBanReasonBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.AccountcommonBanReasons? Execute(
             )
             {
@@ -249,7 +249,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetBansTypeBuilderCompat GetBansTypeOp
         {
             get
@@ -258,7 +258,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetListBanReasonBuilderCompat GetListBanReasonOp
         {
             get

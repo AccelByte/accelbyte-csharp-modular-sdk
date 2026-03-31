@@ -301,14 +301,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminDecryptDeviceV4BuilderCompat : AdminDecryptDeviceV4.AdminDecryptDeviceV4AbstractBuilder<AdminDecryptDeviceV4BuilderCompat>
         {
             internal AdminDecryptDeviceV4BuilderCompat() : base() { }
 
             internal AdminDecryptDeviceV4BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelDeviceIDDecryptResponseV4? Execute(
                 string deviceId,
                 string namespace_
@@ -471,7 +471,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminDecryptDeviceV4BuilderCompat AdminDecryptDeviceV4Op
         {
             get

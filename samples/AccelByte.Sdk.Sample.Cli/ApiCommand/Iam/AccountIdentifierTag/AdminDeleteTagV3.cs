@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Iam.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Iam
 {
-    [SdkConsoleCommand("iam","admindeletetagv3")]
-    public class AdminDeleteTagV3Command: ISdkConsoleCommand
+    [SdkConsoleCommand("iam", "admindeletetagv3")]
+    public class AdminDeleteTagV3Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Iam"; } }
+        public string ServiceName { get { return "Iam"; } }
 
-        public string OperationName{ get { return "AdminDeleteTagV3"; } }
+        public string OperationName { get { return "AdminDeleteTagV3"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

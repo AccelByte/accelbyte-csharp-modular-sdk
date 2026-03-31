@@ -71,9 +71,9 @@ namespace AccelByte.Sdk.Api.Group.Operation
             )
             {
                 DeleteMemberRolePublicV1 op = new DeleteMemberRolePublicV1(this,
-                    body,                    
-                    memberRoleId,                    
-                    namespace_                    
+                    body,
+                    memberRoleId,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -97,7 +97,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -118,7 +118,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -165,13 +165,13 @@ namespace AccelByte.Sdk.Api.Group.Operation
         {
             PathParams["memberRoleId"] = memberRoleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,20 +200,20 @@ namespace AccelByte.Sdk.Api.Group.Operation
         #endregion
 
         public DeleteMemberRolePublicV1(
-            string memberRoleId,            
-            string namespace_,            
-            Model.ModelsRemoveRoleFromMemberRequestV1 body            
+            string memberRoleId,
+            string namespace_,
+            Model.ModelsRemoveRoleFromMemberRequestV1 body
         )
         {
             PathParams["memberRoleId"] = memberRoleId;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -225,7 +225,7 @@ namespace AccelByte.Sdk.Api.Group.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public DeleteMemberRolePublicV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new DeleteMemberRolePublicV1.Response()

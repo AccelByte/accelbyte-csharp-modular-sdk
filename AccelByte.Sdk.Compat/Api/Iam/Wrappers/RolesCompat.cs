@@ -27,14 +27,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
 
         #region Compat Operation Builders
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetRolesBuilderCompat : GetRoles.GetRolesAbstractBuilder<GetRolesBuilderCompat>
         {
             internal GetRolesBuilderCompat() : base() { }
 
             internal GetRolesBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public List<AccelByte.Sdk.Api.Iam.Model.ModelRoleResponseWithManagers>? Execute(
             )
             {
@@ -53,14 +53,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class CreateRoleBuilderCompat : CreateRole.CreateRoleAbstractBuilder<CreateRoleBuilderCompat>
         {
             internal CreateRoleBuilderCompat() : base() { }
 
             internal CreateRoleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.AccountcommonRole? Execute(
                 ModelRoleCreateRequest body
             )
@@ -83,14 +83,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetRoleBuilderCompat : GetRole.GetRoleAbstractBuilder<GetRoleBuilderCompat>
         {
             internal GetRoleBuilderCompat() : base() { }
 
             internal GetRoleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelRoleResponse? Execute(
                 string roleId
             )
@@ -113,14 +113,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateRoleBuilderCompat : UpdateRole.UpdateRoleAbstractBuilder<UpdateRoleBuilderCompat>
         {
             internal UpdateRoleBuilderCompat() : base() { }
 
             internal UpdateRoleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelRoleResponse? Execute(
                 ModelRoleUpdateRequest body,
                 string roleId
@@ -147,14 +147,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteRoleBuilderCompat : DeleteRole.DeleteRoleAbstractBuilder<DeleteRoleBuilderCompat>
         {
             internal DeleteRoleBuilderCompat() : base() { }
 
             internal DeleteRoleBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string roleId
             )
@@ -175,14 +175,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetRoleAdminStatusBuilderCompat : GetRoleAdminStatus.GetRoleAdminStatusAbstractBuilder<GetRoleAdminStatusBuilderCompat>
         {
             internal GetRoleAdminStatusBuilderCompat() : base() { }
 
             internal GetRoleAdminStatusBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelRoleAdminStatusResponse? Execute(
                 string roleId
             )
@@ -205,14 +205,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class SetRoleAsAdminBuilderCompat : SetRoleAsAdmin.SetRoleAsAdminAbstractBuilder<SetRoleAsAdminBuilderCompat>
         {
             internal SetRoleAsAdminBuilderCompat() : base() { }
 
             internal SetRoleAsAdminBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string roleId
             )
@@ -233,14 +233,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RemoveRoleAdminBuilderCompat : RemoveRoleAdmin.RemoveRoleAdminAbstractBuilder<RemoveRoleAdminBuilderCompat>
         {
             internal RemoveRoleAdminBuilderCompat() : base() { }
 
             internal RemoveRoleAdminBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 string roleId
             )
@@ -261,14 +261,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetRoleManagersBuilderCompat : GetRoleManagers.GetRoleManagersAbstractBuilder<GetRoleManagersBuilderCompat>
         {
             internal GetRoleManagersBuilderCompat() : base() { }
 
             internal GetRoleManagersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelRoleManagersResponse? Execute(
                 string roleId
             )
@@ -291,14 +291,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AddRoleManagersBuilderCompat : AddRoleManagers.AddRoleManagersAbstractBuilder<AddRoleManagersBuilderCompat>
         {
             internal AddRoleManagersBuilderCompat() : base() { }
 
             internal AddRoleManagersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleManagersRequest body,
                 string roleId
@@ -323,14 +323,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RemoveRoleManagersBuilderCompat : RemoveRoleManagers.RemoveRoleManagersAbstractBuilder<RemoveRoleManagersBuilderCompat>
         {
             internal RemoveRoleManagersBuilderCompat() : base() { }
 
             internal RemoveRoleManagersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleManagersRequest body,
                 string roleId
@@ -355,14 +355,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetRoleMembersBuilderCompat : GetRoleMembers.GetRoleMembersAbstractBuilder<GetRoleMembersBuilderCompat>
         {
             internal GetRoleMembersBuilderCompat() : base() { }
 
             internal GetRoleMembersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Iam.Model.ModelRoleMembersResponse? Execute(
                 string roleId
             )
@@ -385,14 +385,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AddRoleMembersBuilderCompat : AddRoleMembers.AddRoleMembersAbstractBuilder<AddRoleMembersBuilderCompat>
         {
             internal AddRoleMembersBuilderCompat() : base() { }
 
             internal AddRoleMembersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleMembersRequest body,
                 string roleId
@@ -417,14 +417,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class RemoveRoleMembersBuilderCompat : RemoveRoleMembers.RemoveRoleMembersAbstractBuilder<RemoveRoleMembersBuilderCompat>
         {
             internal RemoveRoleMembersBuilderCompat() : base() { }
 
             internal RemoveRoleMembersBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleMembersRequest body,
                 string roleId
@@ -449,14 +449,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class UpdateRolePermissionsBuilderCompat : UpdateRolePermissions.UpdateRolePermissionsAbstractBuilder<UpdateRolePermissionsBuilderCompat>
         {
             internal UpdateRolePermissionsBuilderCompat() : base() { }
 
             internal UpdateRolePermissionsBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 AccountcommonPermissions body,
                 string roleId
@@ -481,14 +481,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AddRolePermissionBuilderCompat : AddRolePermission.AddRolePermissionAbstractBuilder<AddRolePermissionBuilderCompat>
         {
             internal AddRolePermissionBuilderCompat() : base() { }
 
             internal AddRolePermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelUpdatePermissionScheduleRequest body,
                 long action,
@@ -521,14 +521,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class DeleteRolePermissionBuilderCompat : DeleteRolePermission.DeleteRolePermissionAbstractBuilder<DeleteRolePermissionBuilderCompat>
         {
             internal DeleteRolePermissionBuilderCompat() : base() { }
 
             internal DeleteRolePermissionBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 long action,
                 string resource,
@@ -921,14 +921,14 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class AdminRemoveRoleMembersV3BuilderCompat : AdminRemoveRoleMembersV3.AdminRemoveRoleMembersV3AbstractBuilder<AdminRemoveRoleMembersV3BuilderCompat>
         {
             internal AdminRemoveRoleMembersV3BuilderCompat() : base() { }
 
             internal AdminRemoveRoleMembersV3BuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public void Execute(
                 ModelRoleMembersRequestV3 body,
                 string roleId
@@ -1453,7 +1453,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
         #endregion
 
         #region Operation Builders
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRolesBuilderCompat GetRolesOp
         {
             get
@@ -1462,7 +1462,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public CreateRoleBuilderCompat CreateRoleOp
         {
             get
@@ -1471,7 +1471,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRoleBuilderCompat GetRoleOp
         {
             get
@@ -1480,7 +1480,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateRoleBuilderCompat UpdateRoleOp
         {
             get
@@ -1489,7 +1489,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteRoleBuilderCompat DeleteRoleOp
         {
             get
@@ -1498,7 +1498,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRoleAdminStatusBuilderCompat GetRoleAdminStatusOp
         {
             get
@@ -1507,7 +1507,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public SetRoleAsAdminBuilderCompat SetRoleAsAdminOp
         {
             get
@@ -1516,7 +1516,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RemoveRoleAdminBuilderCompat RemoveRoleAdminOp
         {
             get
@@ -1525,7 +1525,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRoleManagersBuilderCompat GetRoleManagersOp
         {
             get
@@ -1534,7 +1534,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddRoleManagersBuilderCompat AddRoleManagersOp
         {
             get
@@ -1543,7 +1543,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RemoveRoleManagersBuilderCompat RemoveRoleManagersOp
         {
             get
@@ -1552,7 +1552,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetRoleMembersBuilderCompat GetRoleMembersOp
         {
             get
@@ -1561,7 +1561,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddRoleMembersBuilderCompat AddRoleMembersOp
         {
             get
@@ -1570,7 +1570,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public RemoveRoleMembersBuilderCompat RemoveRoleMembersOp
         {
             get
@@ -1579,7 +1579,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public UpdateRolePermissionsBuilderCompat UpdateRolePermissionsOp
         {
             get
@@ -1588,7 +1588,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AddRolePermissionBuilderCompat AddRolePermissionOp
         {
             get
@@ -1597,7 +1597,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public DeleteRolePermissionBuilderCompat DeleteRolePermissionOp
         {
             get
@@ -1710,7 +1710,7 @@ namespace AccelByte.Sdk.Api.Iam.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public AdminRemoveRoleMembersV3BuilderCompat AdminRemoveRoleMembersV3Op
         {
             get

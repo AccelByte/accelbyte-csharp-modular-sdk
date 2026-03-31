@@ -100,9 +100,9 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicGetUserSubscriptionBillingHistories op = new PublicGetUserSubscriptionBillingHistories(this,
-                    namespace_,                    
-                    subscriptionId,                    
-                    userId                    
+                    namespace_,
+                    subscriptionId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -126,7 +126,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -147,7 +147,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -195,15 +195,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
-            
+
             if (builder.ExcludeFree != null) QueryParams["excludeFree"] = Convert.ToString(builder.ExcludeFree)!;
             if (builder.Limit != null) QueryParams["limit"] = Convert.ToString(builder.Limit)!;
             if (builder.Offset != null) QueryParams["offset"] = Convert.ToString(builder.Offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -220,26 +220,26 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicGetUserSubscriptionBillingHistories(
-            string namespace_,            
-            string subscriptionId,            
-            string userId,            
-            bool? excludeFree,            
-            int? limit,            
-            int? offset            
+            string namespace_,
+            string subscriptionId,
+            string userId,
+            bool? excludeFree,
+            int? limit,
+            int? offset
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["subscriptionId"] = subscriptionId;
             PathParams["userId"] = userId;
-            
+
             if (excludeFree != null) QueryParams["excludeFree"] = Convert.ToString(excludeFree)!;
             if (limit != null) QueryParams["limit"] = Convert.ToString(limit)!;
             if (offset != null) QueryParams["offset"] = Convert.ToString(offset)!;
-            
 
-            
-            
-            
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -248,10 +248,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetUserSubscriptionBillingHistories.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetUserSubscriptionBillingHistories.Response()

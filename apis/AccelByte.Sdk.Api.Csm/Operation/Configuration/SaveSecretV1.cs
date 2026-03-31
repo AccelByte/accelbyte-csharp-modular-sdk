@@ -33,7 +33,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
     /// - description : description of the configuration - Optional.
     /// - applyMask : mask the value in the Helm manifest for sensitive information (true or false) - Optional.
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class SaveSecretV1 : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -76,16 +76,16 @@ namespace AccelByte.Sdk.Api.Csm.Operation
             )
             {
                 SaveSecretV1 op = new SaveSecretV1(this,
-                    body,                    
-                    app,                    
-                    namespace_                    
+                    body,
+                    app,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected SaveSecretV1.Response InternalExecute(
                 GeneratedSaveConfigurationV1Request body,
                 string app,
@@ -103,7 +103,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -124,7 +124,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -136,7 +136,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
 
             public SaveSecretV1Builder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public SaveSecretV1.Response Execute(
                 GeneratedSaveConfigurationV1Request body,
                 string app,
@@ -172,13 +172,13 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -203,20 +203,20 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         #endregion
 
         public SaveSecretV1(
-            string app,            
-            string namespace_,            
-            Model.GeneratedSaveConfigurationV1Request body            
+            string app,
+            string namespace_,
+            Model.GeneratedSaveConfigurationV1Request body
         )
         {
             PathParams["app"] = app;
             PathParams["namespace"] = namespace_;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -228,7 +228,7 @@ namespace AccelByte.Sdk.Api.Csm.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public SaveSecretV1.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new SaveSecretV1.Response()

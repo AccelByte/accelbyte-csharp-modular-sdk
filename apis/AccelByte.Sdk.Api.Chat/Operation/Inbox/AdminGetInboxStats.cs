@@ -75,7 +75,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
             )
             {
                 AdminGetInboxStats op = new AdminGetInboxStats(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -95,7 +95,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -112,7 +112,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -148,14 +148,14 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.MessageId is not null) QueryParams["messageId"] = builder.MessageId;
-            
 
-            
+            if (builder.MessageId is not null) QueryParams["messageId"] = builder.MessageId;
+
+
+
             CollectionFormatMap["messageId"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,19 +180,19 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         #endregion
 
         public AdminGetInboxStats(
-            string namespace_,            
-            List<string>? messageId            
+            string namespace_,
+            List<string>? messageId
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (messageId is not null) QueryParams["messageId"] = messageId;
-            
 
-            
+            if (messageId is not null) QueryParams["messageId"] = messageId;
+
+
+
             CollectionFormatMap["messageId"] = "multi";
-            
-            
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -204,7 +204,7 @@ namespace AccelByte.Sdk.Api.Chat.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public AdminGetInboxStats.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new AdminGetInboxStats.Response()

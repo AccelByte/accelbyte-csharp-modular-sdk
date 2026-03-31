@@ -32,7 +32,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
     /// Other detail info:
     ///         *  Returns : game profile info
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class PublicGetProfile : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -75,16 +75,16 @@ namespace AccelByte.Sdk.Api.Social.Operation
             )
             {
                 PublicGetProfile op = new PublicGetProfile(this,
-                    namespace_,                    
-                    profileId,                    
-                    userId                    
+                    namespace_,
+                    profileId,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected PublicGetProfile.Response InternalExecute(
                 string namespace_,
                 string profileId,
@@ -102,7 +102,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -135,7 +135,7 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
             public PublicGetProfileBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public PublicGetProfile.Response Execute(
                 string namespace_,
                 string profileId,
@@ -172,12 +172,12 @@ namespace AccelByte.Sdk.Api.Social.Operation
             PathParams["namespace"] = namespace_;
             PathParams["profileId"] = profileId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -202,20 +202,20 @@ namespace AccelByte.Sdk.Api.Social.Operation
         #endregion
 
         public PublicGetProfile(
-            string namespace_,            
-            string profileId,            
-            string userId            
+            string namespace_,
+            string profileId,
+            string userId
         )
         {
             PathParams["namespace"] = namespace_;
             PathParams["profileId"] = profileId;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
-            
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -224,10 +224,10 @@ namespace AccelByte.Sdk.Api.Social.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicGetProfile.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicGetProfile.Response()

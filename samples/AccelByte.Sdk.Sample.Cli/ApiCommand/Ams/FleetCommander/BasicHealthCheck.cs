@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Ams.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Ams
 {
-    [SdkConsoleCommand("ams","basichealthcheck")]
-    public class BasicHealthCheckCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("ams", "basichealthcheck")]
+    public class BasicHealthCheckCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Ams"; } }
+        public string ServiceName { get { return "Ams"; } }
 
-        public string OperationName{ get { return "BasicHealthCheck"; } }
+        public string OperationName { get { return "BasicHealthCheck"; } }
 
         public BasicHealthCheckCommand(IAccelByteSdk sdk)
         {

@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Platform.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Platform
 {
-    [SdkConsoleCommand("platform","syncxboxdlc")]
-    public class SyncXboxDLCCommand: ISdkConsoleCommand
+    [SdkConsoleCommand("platform", "syncxboxdlc")]
+    public class SyncXboxDLCCommand : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Platform"; } }
+        public string ServiceName { get { return "Platform"; } }
 
-        public string OperationName{ get { return "SyncXboxDLC"; } }
+        public string OperationName { get { return "SyncXboxDLC"; } }
 
         [SdkCommandArgument("namespace")]
         public string Namespace { get; set; } = String.Empty;

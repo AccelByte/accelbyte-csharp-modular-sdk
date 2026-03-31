@@ -128,8 +128,8 @@ namespace AccelByte.Sdk.Api.Legal.Operation
             )
             {
                 OldRetrieveLatestPoliciesByNamespaceAndCountryPublic op = new OldRetrieveLatestPoliciesByNamespaceAndCountryPublic(this,
-                    countryCode,                    
-                    namespace_                    
+                    countryCode,
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -151,7 +151,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -170,7 +170,7 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -212,17 +212,17 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-            
+
             if (builder.AlwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(builder.AlwaysIncludeDefault)!;
             if (builder.DefaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(builder.DefaultOnEmpty)!;
             if (builder.PolicyType is not null) QueryParams["policyType"] = builder.PolicyType.Value;
             if (builder.Tags is not null) QueryParams["tags"] = builder.Tags;
             if (builder.VisibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(builder.VisibleOnly)!;
-            
 
-            
-            
-            
+
+
+
+
 
         }
         #endregion
@@ -238,28 +238,28 @@ namespace AccelByte.Sdk.Api.Legal.Operation
         #endregion
 
         public OldRetrieveLatestPoliciesByNamespaceAndCountryPublic(
-            string countryCode,            
-            string namespace_,            
-            bool? alwaysIncludeDefault,            
-            bool? defaultOnEmpty,            
-            OldRetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? policyType,            
-            string? tags,            
-            bool? visibleOnly            
+            string countryCode,
+            string namespace_,
+            bool? alwaysIncludeDefault,
+            bool? defaultOnEmpty,
+            OldRetrieveLatestPoliciesByNamespaceAndCountryPublicPolicyType? policyType,
+            string? tags,
+            bool? visibleOnly
         )
         {
             PathParams["countryCode"] = countryCode;
             PathParams["namespace"] = namespace_;
-            
+
             if (alwaysIncludeDefault != null) QueryParams["alwaysIncludeDefault"] = Convert.ToString(alwaysIncludeDefault)!;
             if (defaultOnEmpty != null) QueryParams["defaultOnEmpty"] = Convert.ToString(defaultOnEmpty)!;
             if (policyType is not null) QueryParams["policyType"] = policyType.Value;
             if (tags is not null) QueryParams["tags"] = tags;
             if (visibleOnly != null) QueryParams["visibleOnly"] = Convert.ToString(visibleOnly)!;
-            
 
-            
-            
-            
+
+
+
+
 
         }
 
@@ -267,10 +267,10 @@ namespace AccelByte.Sdk.Api.Legal.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new OldRetrieveLatestPoliciesByNamespaceAndCountryPublic.Response()

@@ -541,14 +541,14 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
             }
         }
 
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public class GetUserOrderGrantBuilderCompat : GetUserOrderGrant.GetUserOrderGrantAbstractBuilder<GetUserOrderGrantBuilderCompat>
         {
             internal GetUserOrderGrantBuilderCompat() : base() { }
 
             internal GetUserOrderGrantBuilderCompat(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public AccelByte.Sdk.Api.Platform.Model.OrderGrantInfo? Execute(
                 string namespace_,
                 string orderNo,
@@ -1106,7 +1106,7 @@ namespace AccelByte.Sdk.Api.Platform.Wrapper
                 return opBuilder;
             }
         }
-        [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+        [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
         public GetUserOrderGrantBuilderCompat GetUserOrderGrantOp
         {
             get

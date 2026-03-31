@@ -18,14 +18,14 @@ using AccelByte.Sdk.Api.Match2.Operation;
 
 namespace AccelByte.Sdk.Sample.Cli.ApiCommand.Match2
 {
-    [SdkConsoleCommand("match2","gethealthcheckinfov1")]
-    public class GetHealthcheckInfoV1Command: ISdkConsoleCommand
+    [SdkConsoleCommand("match2", "gethealthcheckinfov1")]
+    public class GetHealthcheckInfoV1Command : ISdkConsoleCommand
     {
         private IAccelByteSdk _SDK;
 
-        public string ServiceName{ get { return "Match2"; } }
+        public string ServiceName { get { return "Match2"; } }
 
-        public string OperationName{ get { return "GetHealthcheckInfoV1"; } }
+        public string OperationName { get { return "GetHealthcheckInfoV1"; } }
 
         public GetHealthcheckInfoV1Command(IAccelByteSdk sdk)
         {

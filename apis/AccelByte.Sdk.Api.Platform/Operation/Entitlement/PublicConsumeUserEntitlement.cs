@@ -71,10 +71,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicConsumeUserEntitlement op = new PublicConsumeUserEntitlement(this,
-                    body,                    
-                    entitlementId,                    
-                    namespace_,                    
-                    userId                    
+                    body,
+                    entitlementId,
+                    namespace_,
+                    userId
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -100,7 +100,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -123,7 +123,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -176,13 +176,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -205,22 +205,22 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicConsumeUserEntitlement(
-            string entitlementId,            
-            string namespace_,            
-            string userId,            
-            Model.PublicEntitlementDecrement body            
+            string entitlementId,
+            string namespace_,
+            string userId,
+            Model.PublicEntitlementDecrement body
         )
         {
             PathParams["entitlementId"] = entitlementId;
             PathParams["namespace"] = namespace_;
             PathParams["userId"] = userId;
-            
-            
 
-            
-            
+
+
+
+
             BodyParams = body;
-            
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -232,7 +232,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicConsumeUserEntitlement.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicConsumeUserEntitlement.Response()

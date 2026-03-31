@@ -28,7 +28,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
     /// 
     ///   * Returns : key group info
     /// </summary>
-    [Obsolete(DiagnosticId ="ab_deprecated_operation")]
+    [Obsolete(DiagnosticId = "ab_deprecated_operation")]
     public class GetKeyGroupByBoothName : AccelByte.Sdk.Core.Operation
     {
         #region Builder Part
@@ -70,15 +70,15 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 GetKeyGroupByBoothName op = new GetKeyGroupByBoothName(this,
-                    namespace_,                    
-                    boothName                    
+                    namespace_,
+                    boothName
                 );
 
                 op.SetBaseFields<TImpl>(this);
                 return op;
             }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             protected GetKeyGroupByBoothName.Response InternalExecute(
                 string namespace_,
                 string boothName
@@ -94,7 +94,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -113,7 +113,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -125,7 +125,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
             public GetKeyGroupByBoothNameBuilder(IAccelByteSdk sdk) : base(sdk) { }
 
-            [Obsolete(DiagnosticId ="ab_deprecated_operation_wrapper")]
+            [Obsolete(DiagnosticId = "ab_deprecated_operation_wrapper")]
             public GetKeyGroupByBoothName.Response Execute(
                 string namespace_,
                 string boothName
@@ -155,13 +155,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (boothName is not null) QueryParams["boothName"] = boothName;
-            
 
-            
-            
-            
+            if (boothName is not null) QueryParams["boothName"] = boothName;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -180,18 +180,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public GetKeyGroupByBoothName(
-            string namespace_,            
-            string boothName            
+            string namespace_,
+            string boothName
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (boothName is not null) QueryParams["boothName"] = boothName;
-            
 
-            
-            
-            
+            if (boothName is not null) QueryParams["boothName"] = boothName;
+
+
+
+
+
 
             Securities.Add(AccelByte.Sdk.Core.Operation.SECURITY_BEARER);
         }
@@ -200,10 +200,10 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
         public override HttpMethod Method => HttpMethod.Get;
 
-        public override List<string> Consumes => new() {  };
+        public override List<string> Consumes => new() { };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public GetKeyGroupByBoothName.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new GetKeyGroupByBoothName.Response()

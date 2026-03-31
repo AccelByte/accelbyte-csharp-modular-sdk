@@ -78,7 +78,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
             )
             {
                 PublicListCurrencies op = new PublicListCurrencies(this,
-                    namespace_                    
+                    namespace_
                 );
 
                 op.SetBaseFields<TImpl>(this);
@@ -98,7 +98,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = _Sdk.RunRequest(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -115,7 +115,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
 
                 var response = await _Sdk.RunRequestAsync(op);
                 return op.ParseResponse(
-                    response.Code, 
+                    response.Code,
                     response.ContentType,
                     response.Payload);
             }
@@ -151,13 +151,13 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (builder.CurrencyType is not null) QueryParams["currencyType"] = builder.CurrencyType.Value;
-            
 
-            
-            
-            
+            if (builder.CurrencyType is not null) QueryParams["currencyType"] = builder.CurrencyType.Value;
+
+
+
+
+
 
         }
         #endregion
@@ -173,18 +173,18 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         #endregion
 
         public PublicListCurrencies(
-            string namespace_,            
-            PublicListCurrenciesCurrencyType? currencyType            
+            string namespace_,
+            PublicListCurrenciesCurrencyType? currencyType
         )
         {
             PathParams["namespace"] = namespace_;
-            
-            if (currencyType is not null) QueryParams["currencyType"] = currencyType.Value;
-            
 
-            
-            
-            
+            if (currencyType is not null) QueryParams["currencyType"] = currencyType.Value;
+
+
+
+
+
 
         }
 
@@ -195,7 +195,7 @@ namespace AccelByte.Sdk.Api.Platform.Operation
         public override List<string> Consumes => new() { "application/json" };
 
         public override List<string> Produces => new() { "application/json" };
-        
+
         public PublicListCurrencies.Response ParseResponse(HttpStatusCode code, string contentType, Stream payload)
         {
             var response = new PublicListCurrencies.Response()
